@@ -373,7 +373,19 @@
   var wash = document.getElementById('wash');
   var player = document.getElementById('player');
 
-  var current = 0, playing = !reduceMotion, elapsed = 0, rafId = null, lastTs = null;
+  // Wall-clock-based progress, not a tick counter: sceneStartTime is the real
+  // timestamp the current scene began. Elapsed is always (Date.now() -
+  // sceneStartTime), recomputed fresh on every tick — so if ticks get delayed
+  // or skipped (backgrounded tab, occluded iframe, whatever), the very next
+  // tick that DOES fire immediately knows the true elapsed time and catches
+  // up or advances, instead of needing N precise ticks to have landed.
+  var current = 0, playing = !reduceMotion, intervalId = null;
+  var sceneStartTime = Date.now();
+  var pausedElapsed = 0;
+
+  function computeElapsed() {
+    return playing ? (Date.now() - sceneStartTime) : pausedElapsed;
+  }
   var muted = true; // start muted: browser autoplay policy + courtesy on page load
   bgAudio.muted = true;
   bgAudio.volume = 0.55;
@@ -501,35 +513,53 @@
     triggerSceneEffects(current);
   }
 
-  function goTo(i) { current = Math.max(0, Math.min(scenes.length - 1, i)); elapsed = 0; render(); }
+  function goTo(i) {
+    current = Math.max(0, Math.min(scenes.length - 1, i));
+    sceneStartTime = Date.now();
+    pausedElapsed = 0;
+    render();
+  }
   function next() { if (current >= scenes.length - 1) { goTo(0); return; } goTo(current + 1); }
   function prev() { goTo(Math.max(0, current - 1)); }
 
-  function tick(ts) {
+  // setInterval (not requestAnimationFrame — rAF is spec'd to pause whenever the
+  // document isn't actively composited, e.g. a backgrounded tab or occluded
+  // iframe) drives the tick, but the tick itself never trusts "how many ticks
+  // fired" — background tabs throttle setInterval too, sometimes to 1/minute or
+  // less. Instead every tick recomputes elapsed from Date.now() - sceneStartTime,
+  // so however long the browser slept between ticks, the very next one that
+  // fires lands on the true elapsed time and can jump straight to the right
+  // scene instead of needing every intermediate tick to have landed on schedule.
+  var TICK_MS = 100;
+
+  function tick() {
     if (!playing) return;
-    if (lastTs === null) lastTs = ts;
-    var dt = ts - lastTs; lastTs = ts; elapsed += dt;
     var dur = SCENE_DURATIONS[current];
+    var elapsed = computeElapsed();
     var frac = Math.min(1, elapsed / dur);
     segs[current].querySelector('.progress-fill').style.width = (frac * 100) + '%';
     var before = SCENE_DURATIONS.slice(0, current).reduce(function (a, b) { return a + b; }, 0);
-    timeLabel.textContent = fmt(before + elapsed) + ' / ' + fmt(TOTAL);
-    if (elapsed >= dur) next(); else rafId = requestAnimationFrame(tick);
+    timeLabel.textContent = fmt(before + Math.min(elapsed, dur)) + ' / ' + fmt(TOTAL);
+    if (elapsed >= dur) next();
   }
 
   function play() {
     if (playing) return;
-    playing = true; lastTs = null;
+    sceneStartTime = Date.now() - pausedElapsed;
+    playing = true;
     playIcon.innerHTML = '<rect x="4" y="4" width="4" height="12" rx="1"/><rect x="12" y="4" width="4" height="12" rx="1"/>';
     playBtn.setAttribute('aria-label', 'Pause');
-    rafId = requestAnimationFrame(tick);
+    if (intervalId) clearInterval(intervalId);
+    intervalId = setInterval(tick, TICK_MS);
     if (!muted) { bgAudio.play().catch(function () {}); }
   }
   function pause() {
+    if (!playing) return;
+    pausedElapsed = computeElapsed();
     playing = false;
     playIcon.innerHTML = '<path d="M6 4l11 6-11 6V4z"/>';
     playBtn.setAttribute('aria-label', 'Play');
-    if (rafId) cancelAnimationFrame(rafId);
+    if (intervalId) { clearInterval(intervalId); intervalId = null; }
     bgAudio.pause();
   }
 
@@ -540,9 +570,17 @@
     if (e.code === 'ArrowLeft') prev();
   });
 
+  // Belt-and-suspenders: when the tab/iframe becomes visible again after being
+  // backgrounded, force an immediate tick rather than waiting up to TICK_MS for
+  // the throttled interval to resume — makes the catch-up feel instant.
+  document.addEventListener('visibilitychange', function () {
+    if (!document.hidden && playing) tick();
+  });
+
   render();
   if (playing) {
-    rafId = requestAnimationFrame(tick);
+    sceneStartTime = Date.now();
+    intervalId = setInterval(tick, TICK_MS);
     bgAudio.play().catch(function () {}); // muted autoplay is allowed; keeps audio in sync from t=0
   }
 })();
