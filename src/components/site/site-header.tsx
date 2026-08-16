@@ -5,8 +5,10 @@ import { Button } from "@/components/ui/button";
 import { Logo } from "./logo";
 
 const NAV = [
-  { label: "Product", to: "/product" },
+  { label: "Evaluation", to: "/product" },
+  { label: "Security", to: "/security" },
   { label: "Pricing", to: "/pricing" },
+  { label: "Services", to: "/services" },
   { label: "Docs", to: "/docs" },
   { label: "Blog", to: "/blog" },
   { label: "About", to: "/about" },

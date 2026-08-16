@@ -4,12 +4,12 @@ import { Logo } from "./logo";
 
 const COLUMNS: { title: string; links: { label: string; to: string }[] }[] = [
   {
-    title: "Product",
+    title: "Products",
     links: [
-      { label: "Overview", to: "/product" },
+      { label: "Evaluation", to: "/product" },
+      { label: "Security (Ziran)", to: "/security" },
       { label: "Pricing", to: "/pricing" },
-      { label: "Evaluation metrics", to: "/docs" },
-      { label: "Integrity gate", to: "/product" },
+      { label: "Expert Services", to: "/services" },
     ],
   },
   {
@@ -35,7 +35,7 @@ const COLUMNS: { title: string; links: { label: string; to: string }[] }[] = [
     links: [
       { label: "Privacy", to: "/about" },
       { label: "Terms", to: "/about" },
-      { label: "Security", to: "/about" },
+      { label: "Security Policy", to: "/about" },
       { label: "DPA", to: "/about" },
     ],
   },

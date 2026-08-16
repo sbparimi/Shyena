@@ -344,6 +344,46 @@ function Index() {
         </div>
       </section>
 
+      {/* Platforms */}
+      <section className="mx-auto w-full max-w-7xl px-5 py-14 sm:px-8">
+        <div className="grid gap-8 sm:grid-cols-2">
+          <div>
+            <p className="text-sm font-semibold text-foreground">
+              Evaluation —{" "}
+              <Link to="/product" className="text-primary hover:underline">
+                live today
+              </Link>
+            </p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              <span className="rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground">
+                Cognigy
+              </span>
+              <span className="rounded-full border border-dashed border-border bg-transparent px-3 py-1.5 text-xs font-medium text-muted-foreground">
+                More platforms next
+              </span>
+            </div>
+          </div>
+          <div>
+            <p className="text-sm font-semibold text-foreground">
+              Security —{" "}
+              <Link to="/security" className="text-primary hover:underline">
+                live today, via Ziran
+              </Link>
+            </p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {["LangChain", "CrewAI", "Bedrock", "MCP", "Browser & HTTPS agents"].map((platform) => (
+                <span
+                  key={platform}
+                  className="rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground"
+                >
+                  {platform}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Problem */}
       <section className="mx-auto w-full max-w-7xl px-5 py-24 sm:px-8">
         <div className="max-w-2xl">
