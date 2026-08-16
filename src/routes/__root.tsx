@@ -83,12 +83,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "Shyena runs real agent-driven conversations against your live bot and gates every release verdict.",
+          "Shyena is an AI evaluation platform built to test any AI system before it ships. Live today for conversational and voice AI — real agent-driven conversations, judged and gated so a broken run can never report a false pass. RAG evaluation is next.",
       },
       { property: "og:title", content: "Shyena — Automated AI Evaluation. Trusted Every Time." },
       {
         property: "og:description",
-        content: "Testing and AI evaluation for conversational agents.",
+        content: "The AI evaluation platform. Live for conversational and voice AI, RAG is next.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -120,7 +120,7 @@ const ORGANIZATION_SCHEMA = {
   applicationCategory: "BusinessApplication",
   operatingSystem: "Web",
   description:
-    "Shyena is an AI agent testing and evaluation platform for conversational AI. It runs real, agent-driven conversations against live chat and voice bots, scores every turn with LLM-as-judge evaluation and deterministic assertions, and gates releases so a broken conversation can never report a false pass.",
+    "Shyena is an AI evaluation platform built to test any AI system before it ships — live today for conversational and voice AI, with RAG evaluation next. It runs real, agent-driven conversations against live chat and voice bots, scores every turn with LLM-as-judge evaluation and deterministic assertions, and gates releases so a broken conversation can never report a false pass.",
   offers: {
     "@type": "Offer",
     price: "750",

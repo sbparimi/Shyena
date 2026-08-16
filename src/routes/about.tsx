@@ -10,10 +10,10 @@ export const Route = createFileRoute("/about")({
       {
         name: "description",
         content:
-          "Why we built an evaluation platform that refuses to report a false green pass for conversational AI releases.",
+          "Why we built an evaluation platform that refuses to report a false green pass for AI system releases — starting with conversational and voice AI.",
       },
       { property: "og:title", content: "About — Shyena" },
-      { property: "og:description", content: "The team building trustworthy release gates for conversational AI." },
+      { property: "og:description", content: "The team building trustworthy release gates for AI systems." },
     ],
     links: [{ rel: "canonical", href: "https://shyena.ai/about" }],
   }),
@@ -52,7 +52,7 @@ function AboutPage() {
               About
             </span>
             <h1 className="mt-6 text-4xl font-bold leading-[1.08] sm:text-6xl">
-              We build the evidence layer for conversational AI
+              We build the evidence layer for AI systems
             </h1>
           </div>
         </div>
@@ -62,26 +62,29 @@ function AboutPage() {
       <section className="mx-auto w-full max-w-4xl px-5 py-16 sm:px-8">
         <div className="space-y-5 text-lg leading-relaxed text-muted-foreground">
           <p>
-            We built Shyena because we kept seeing the same failure mode: a conversational AI
-            release ships with a clean dashboard full of green checkmarks, and the regression
-            reaches customers anyway. The tools weren't lying, exactly — they were scoring
-            whatever transcript they happened to collect, even when the conversation broke down
-            partway through. Nothing crashed loudly, so nothing looked wrong.
+            We built Shyena because we kept seeing the same failure mode: an AI system ships with a
+            clean dashboard full of green checkmarks, and the regression reaches customers anyway.
+            The tools weren't lying, exactly — they were scoring whatever output they happened to
+            collect, even when the underlying run broke down partway through. Nothing crashed
+            loudly, so nothing looked wrong.
           </p>
           <p>
-            Testing tools built for scripted, deterministic UIs don't hold up against agents that
-            reason and respond differently on every run. Two runs of the same test persona can take
+            Testing tools built for scripted, deterministic software don't hold up against AI that
+            reasons and responds differently on every run. Two runs of the same test can take
             different but equally valid paths to the same correct outcome — and a script that
-            hardcodes one path calls the other a failure. That's not a bug in the agent. It's a
-            testing model built for the wrong kind of software.
+            hardcodes one path calls the other a failure. That's not a bug in the AI. It's a testing
+            model built for the wrong kind of software, and it's the same structural gap whether
+            the system is a conversational agent, a voice bot, or a RAG pipeline.
           </p>
           <p>
-            So we built something else: agentic personas that pursue a goal instead of replaying a
-            script, evaluation that combines LLM judgment with deterministic hard-fact checks, and
-            a gate that treats a broken execution as disqualifying — before any quality score gets
-            the chance to look better than it should. The goal isn't a prettier dashboard. It's a
-            verdict you can actually trust before a release goes out, not after a customer tells you
-            it was wrong.
+            So we're building an evaluation platform for AI systems generally — starting with
+            conversational and voice AI, where we could prove the model against real, live agents:
+            agentic personas that pursue a goal instead of replaying a script, evaluation that
+            combines LLM judgment with deterministic hard-fact checks, and a gate that treats a
+            broken execution as disqualifying before any quality score gets the chance to look
+            better than it should. The goal isn't a prettier dashboard. It's a verdict you can
+            actually trust before a release goes out, not after a customer tells you it was wrong —
+            for whatever kind of AI system you're shipping.
           </p>
         </div>
       </section>

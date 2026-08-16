@@ -22,7 +22,7 @@ export const Route = createFileRoute("/contact")({
         content: "Book a demo and watch Shyena evaluate a real conversation against your own agent.",
       },
       { property: "og:title", content: "Contact & Demo — Shyena" },
-      { property: "og:description", content: "Book a demo of Shyena for your conversational AI team." },
+      { property: "og:description", content: "Book a demo of Shyena for your AI team." },
     ],
     links: [{ rel: "canonical", href: "https://shyena.ai/contact" }],
   }),

@@ -29,8 +29,7 @@ export const Route = createFileRoute("/docs")({
       { property: "og:title", content: "Documentation — Shyena" },
       {
         property: "og:description",
-        content:
-          "Guides, API references, and evaluation model docs for conversational AI quality testing.",
+        content: "Guides, API references, and evaluation model docs for AI system quality testing.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -75,7 +74,7 @@ const CATEGORIES: {
   {
     id: "integrations",
     title: "Integrations",
-    description: "Connect Shyena to your conversational AI platform, CI/CD, and alerting channels.",
+    description: "Connect Shyena to your AI platform, CI/CD, and alerting channels.",
     icon: Plug,
   },
   {

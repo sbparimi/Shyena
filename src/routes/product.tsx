@@ -159,12 +159,13 @@ function ProductPage() {
               Product
             </span>
             <h1 className="mt-6 text-4xl font-bold leading-[1.08] sm:text-6xl">
-              One platform. Every layer of conversational AI quality.
+              One platform. Every layer of AI system quality.
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-              Shyena covers the full stack of conversational AI quality: from the personas that
-              generate the test signal, to the execution that keeps it real, to the verdict that
-              can't be gamed.
+              Shyena is built to evaluate any AI system — live today for conversational and voice
+              AI, covering the full stack from the personas that generate the test signal, to the
+              execution that keeps it real, to the verdict that can't be gamed. RAG is next; see
+              what's already built for it below.
             </p>
             <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
               <Button asChild size="lg">

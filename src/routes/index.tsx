@@ -28,13 +28,13 @@ import { PipelineTerminal } from "@/components/home/pipeline-terminal";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Shyena — AI Agent Testing & Conversational AI Evaluation Platform" },
+      { title: "Shyena — The AI Evaluation Platform for Conversational & Voice AI" },
       {
         name: "description",
         content:
-          "Shyena is an AI agent testing and evaluation platform for conversational AI. It runs real, agent-driven conversations against your live chatbot or voice bot, scores every turn with LLM-as-judge evaluation and deterministic assertions, and gates releases so a broken conversation can never report a false pass.",
+          "Shyena is an AI evaluation platform built to test any AI system before it ships — live today for conversational and voice AI, RAG next. It runs real, agent-driven conversations against your live chatbot or voice bot, scores every turn with LLM-as-judge evaluation and deterministic assertions, and gates releases so a broken conversation can never report a false pass.",
       },
-      { property: "og:title", content: "Shyena — AI Agent Testing & Conversational AI Evaluation Platform" },
+      { property: "og:title", content: "Shyena — The AI Evaluation Platform for Conversational & Voice AI" },
       {
         property: "og:description",
         content:
@@ -293,16 +293,18 @@ function Index() {
           <div className="mx-auto max-w-3xl text-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary px-3.5 py-1.5 text-xs font-medium text-muted-foreground">
               <Sparkles className="h-3.5 w-3.5 text-primary" />
-              AI Evaluation for Conversational Agents
+              The AI Evaluation Platform
             </span>
             <h1 className="mt-6 text-4xl font-bold leading-[1.08] sm:text-6xl">
               Automated AI Evaluation.{" "}
               <span className="text-gradient-brand">Trusted Every Time.</span>
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-              Shyena runs real, agent-driven conversations against your live bot, judges the
-              quality of every turn with LLM-based evaluation and deterministic checks, and makes it
-              structurally impossible for a broken conversation to report a green pass.
+              Shyena is built to evaluate any AI system before it ships — live today for
+              conversational and voice AI. It runs real, agent-driven conversations against your
+              live bot, judges the quality of every turn with LLM-based evaluation and deterministic
+              checks, and makes it structurally impossible for a broken conversation to report a
+              green pass.
             </p>
             <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
               <Button asChild size="lg">

@@ -13,13 +13,13 @@ export const Route = createFileRoute("/pricing")({
       {
         name: "description",
         content:
-          "Pricing for Shyena's AI agent testing and conversational AI evaluation platform. Starter from $750/mo, Growth from $3,500/mo, Enterprise custom-scoped — evaluated-conversation volume included in every plan.",
+          "Pricing for Shyena's AI evaluation platform — live today for conversational and voice AI testing. Starter from $750/mo, Growth from $3,500/mo, Enterprise custom-scoped — evaluated-conversation volume included in every plan.",
       },
       { property: "og:title", content: "AI Agent Testing Pricing — Shyena" },
       {
         property: "og:description",
         content:
-          "Simple, flexible pricing for conversational AI evaluation. From a single-agent pilot to enterprise-wide release gating.",
+          "Simple, flexible pricing for AI evaluation. From a single-agent pilot to enterprise-wide release gating.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

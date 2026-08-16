@@ -49,8 +49,8 @@ export function SiteFooter() {
           <div className="lg:col-span-1">
             <Logo />
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
-              End-to-end testing and AI evaluation for conversational agents. Evidence for every
-              turn, a verdict you can release on.
+              The AI evaluation platform — live for conversational and voice AI, RAG is next.
+              Evidence for every turn, a verdict you can release on.
             </p>
           </div>
 
