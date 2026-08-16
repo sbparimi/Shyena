@@ -35,8 +35,12 @@ const TIERS = [
     tag: null,
     description: "Piloting evaluation on one agent with core quality metrics.",
     icon: Zap,
+    price: "$750",
+    priceUnit: "/mo",
+    priceNote: "2,000 evaluated conversations included · $0.20 per conversation after",
     features: [
       "One agent / one environment",
+      "2,000 evaluated conversations / mo",
       "Core LLM-as-judge metrics",
       "Deterministic assertion contracts",
       "Execution-integrity hard gate",
@@ -51,8 +55,12 @@ const TIERS = [
     tag: "Most Popular",
     description: "Multi-agent teams that need scheduled regression runs and richer quality gates.",
     icon: MessageCircle,
+    price: "$3,500",
+    priceUnit: "/mo",
+    priceNote: "Starting price · 15,000 conversations included · $0.15 per conversation after",
     features: [
-      "Multiple agents & environments",
+      "Up to 5 agents & environments",
+      "15,000 evaluated conversations / mo",
       "Full metric suite (semantic assurance, accessibility gates, orchestrator quality)",
       "Scheduled regression runs",
       "Slack & webhook alerts",
@@ -67,8 +75,12 @@ const TIERS = [
     tag: null,
     description: "Organization-wide deployment with custom metrics and enterprise controls.",
     icon: Building2,
+    price: "Custom",
+    priceUnit: "",
+    priceNote: "Typically $75k–150k+/yr, scoped to your deployment and volume",
     features: [
       "Unlimited agents & environments",
+      "Negotiated evaluation volume",
       "SSO / SAML and role-scoped access",
       "Dedicated success engineer",
       "Custom metric development",
@@ -97,7 +109,7 @@ const FAQS = [
   {
     question: "How is pricing calculated?",
     answer:
-      "Shyena is priced on a combination of seats and evaluation volume. We count monthly evaluated conversations, not just users, so teams that run heavy regression suites get predictable costs without per-seat penalties for read-only reviewers.",
+      "Two axes: how many agents and environments you're covering, and how many conversations you evaluate per month. Each plan includes a set volume — 2,000/mo on Starter, 15,000/mo on Growth — with straightforward overage pricing beyond that. We count evaluated conversations, not seats, so teams with read-only reviewers aren't penalized for adding people.",
   },
   {
     question: "What platforms do you support?",
@@ -147,8 +159,8 @@ function PricingPage() {
               gating.
             </p>
             <div className="mx-auto mt-6 inline-flex items-center gap-2 rounded-full border border-border bg-secondary/60 px-4 py-2 text-sm text-muted-foreground">
-              <span className="inline-flex h-2 w-2 rounded-full bg-warning" />
-              Final figures are being set — all CTAs route to our team for a scoped quote.
+              <span className="inline-flex h-2 w-2 rounded-full bg-accent" />
+              Starter and Growth prices are list price. Enterprise is scoped to your deployment.
             </div>
           </div>
         </div>
@@ -189,9 +201,13 @@ function PricingPage() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="flex flex-1 flex-col">
-                  <div className="rounded-lg border border-border bg-secondary/40 px-4 py-3 text-sm font-medium text-muted-foreground">
-                    Pricing being finalized
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-4xl font-bold text-foreground">{tier.price}</span>
+                    {tier.priceUnit && (
+                      <span className="text-base font-medium text-muted-foreground">{tier.priceUnit}</span>
+                    )}
                   </div>
+                  <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{tier.priceNote}</p>
                   <ul className="mt-6 flex-1 space-y-3">
                     {tier.features.map((feature) => (
                       <li key={feature} className="flex items-start gap-3">
