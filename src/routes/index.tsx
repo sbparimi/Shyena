@@ -12,6 +12,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { CtaBand } from "@/components/site/cta-band";
 import { PipelineTerminal } from "@/components/home/pipeline-terminal";
 
 export const Route = createFileRoute("/")({
