@@ -104,6 +104,27 @@ const STATS = [
   { value: "0", label: "false green passes on failed executions" },
 ];
 
+const LANDSCAPE_COLUMNS = ["Prompt/Output Testers", "Observability", "Scripted Chatbot Testers", "Shyena"] as const;
+
+const LANDSCAPE_ROWS = [
+  {
+    label: "What it tests",
+    values: ["One prompt or LLM call", "Traces already captured", "Scripted conversation flows", "A full live conversation, turn by turn"],
+  },
+  {
+    label: "Execution surface",
+    values: ["Direct API call", "None — post-hoc traces", "Simulated / API-level", "Real browser or voice session"],
+  },
+  {
+    label: "Handles conversation non-determinism",
+    values: ["N/A", "Observes it after the fact", "Brittle on path deviation", "Built around it — personas improvise"],
+  },
+  {
+    label: "Execution-integrity gating",
+    values: ["No", "No", "No", "Yes — capped at FAIL before scoring counts"],
+  },
+] as const;
+
 const STEPS = [
   {
     icon: Users,
@@ -254,6 +275,62 @@ function Index() {
             Illustrative figures from a representative enterprise regression suite.
           </p>
         </div>
+      </section>
+
+      {/* Landscape */}
+      <section className="mx-auto w-full max-w-7xl px-5 pb-24 sm:px-8">
+        <div className="max-w-2xl">
+          <p className="font-mono text-xs uppercase tracking-[0.18em] text-primary">Where Shyena fits</p>
+          <h2 className="mt-4 text-3xl font-bold sm:text-4xl">
+            Not a prompt tester. Not an observability tool.
+          </h2>
+          <p className="mt-4 text-muted-foreground">
+            Tools like Promptfoo and DeepEval test a single prompt. Arize Phoenix watches what
+            already happened in production. Botium scripts a chatbot's expected path. None of them
+            drive a real, adaptive conversation end to end — or refuse to call a broken run a pass.
+          </p>
+        </div>
+
+        <div className="mt-10 overflow-x-auto rounded-2xl border border-border bg-card shadow-card">
+          <div className="min-w-[720px]">
+            <div className="grid grid-cols-[1.3fr_repeat(4,1fr)] items-start gap-4 border-b border-border bg-secondary/40 px-6 py-4 text-sm font-semibold">
+              <span className="text-foreground">&nbsp;</span>
+              {LANDSCAPE_COLUMNS.map((col, i) => (
+                <span
+                  key={col}
+                  className={i === LANDSCAPE_COLUMNS.length - 1 ? "text-primary" : "text-muted-foreground"}
+                >
+                  {col}
+                </span>
+              ))}
+            </div>
+            {LANDSCAPE_ROWS.map((row, i) => (
+              <div
+                key={row.label}
+                className={`grid grid-cols-[1.3fr_repeat(4,1fr)] items-start gap-4 px-6 py-4 text-sm last:rounded-b-2xl ${i % 2 === 1 ? "bg-secondary/20" : ""}`}
+              >
+                <span className="font-medium text-foreground">{row.label}</span>
+                {row.values.map((value, j) => (
+                  <span
+                    key={j}
+                    className={
+                      j === row.values.length - 1
+                        ? "font-medium text-primary"
+                        : "text-muted-foreground"
+                    }
+                  >
+                    {value}
+                  </span>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <p className="mt-6 text-sm text-muted-foreground">
+          They're not mutually exclusive — teams often unit-test prompts with tools like these
+          before Shyena runs the full conversation as the release gate none of them cover.
+        </p>
       </section>
 
       {/* How it works */}
