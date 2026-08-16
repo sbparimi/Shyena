@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Check, RefreshCw, ShieldCheck, Activity, Sparkles, Wand2 } from "lucide-react";
+import { ArrowRight, Check, RefreshCw, ShieldCheck, Activity, Sparkles, Wand2, Layers } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CtaBand } from "@/components/site/cta-band";
 import { cn } from "@/lib/utils";
@@ -117,6 +117,12 @@ const ROADMAP_CARDS = [
     title: "Automatic scenario generation",
     description:
       "Generating candidate test scenarios and personas from your agent's real conversation logs, for your team to review and approve before they run — human sign-off stays in the loop, but the first draft won't be a blank page.",
+  },
+  {
+    icon: Layers,
+    title: "RAG evaluation",
+    description:
+      "The same LLM-judge model already includes five RAG-specific dimensions — faithfulness, retrieval quality, calibration, multi-document coherence, and answer completeness. We're finishing the direct-API execution path so you can run them against a RAG pipeline without a live conversational UI.",
   },
 ];
 

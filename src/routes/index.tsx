@@ -482,6 +482,13 @@ function Index() {
           <h2 className="mt-4 text-3xl font-bold sm:text-4xl">
             Everything a release gate for conversational AI needs.
           </h2>
+          <p className="mt-4 text-sm text-muted-foreground">
+            Built first for conversational and voice AI.{" "}
+            <Link to="/product" className="font-medium text-primary hover:underline">
+              RAG evaluation is next
+            </Link>{" "}
+            — the judge model already includes five RAG-specific quality dimensions.
+          </p>
         </div>
 
         <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
