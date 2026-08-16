@@ -230,54 +230,59 @@ function PricingPage() {
           </p>
         </div>
 
-        <div className="mt-12 overflow-hidden rounded-2xl border border-border bg-card shadow-card">
-          <div className="grid grid-cols-[1fr_100px_100px_100px] items-center gap-4 border-b border-border bg-secondary/40 px-6 py-4 text-sm font-semibold sm:grid-cols-[1fr_120px_120px_120px]">
-            <span className="text-foreground">Capability</span>
-            <span className="text-center text-muted-foreground">Starter</span>
-            <span className="text-center text-primary">Growth</span>
-            <span className="text-center text-muted-foreground">Enterprise</span>
-          </div>
-          {COMPARISON_ROWS.map((row) => (
-            <div
-              key={row.feature}
-              className="grid grid-cols-[1fr_100px_100px_100px] items-center gap-4 px-6 py-4 text-sm last:rounded-b-2xl sm:grid-cols-[1fr_120px_120px_120px]"
-            >
-              <span className="text-foreground">{row.feature}</span>
-              <span className="flex justify-center">
-                {row.starter ? (
-                  <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-primary">
-                    <Check className="h-3.5 w-3.5" />
-                  </span>
-                ) : (
-                  <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-muted text-muted-foreground">
-                    <X className="h-3.5 w-3.5" />
-                  </span>
-                )}
-              </span>
-              <span className="flex justify-center">
-                {row.growth ? (
-                  <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-primary">
-                    <Check className="h-3.5 w-3.5" />
-                  </span>
-                ) : (
-                  <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-muted text-muted-foreground">
-                    <X className="h-3.5 w-3.5" />
-                  </span>
-                )}
-              </span>
-              <span className="flex justify-center">
-                {row.enterprise ? (
-                  <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-primary">
-                    <Check className="h-3.5 w-3.5" />
-                  </span>
-                ) : (
-                  <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-muted text-muted-foreground">
-                    <X className="h-3.5 w-3.5" />
-                  </span>
-                )}
-              </span>
+        <div className="mt-12 overflow-x-auto rounded-2xl border border-border bg-card shadow-card">
+          <div className="min-w-[540px]">
+            <div className="grid grid-cols-[1fr_100px_100px_100px] items-center gap-4 border-b border-border bg-secondary/40 px-6 py-4 text-sm font-semibold sm:grid-cols-[1fr_120px_120px_120px]">
+              <span className="text-foreground">Capability</span>
+              <span className="text-center text-muted-foreground">Starter</span>
+              <span className="text-center text-primary">Growth</span>
+              <span className="text-center text-muted-foreground">Enterprise</span>
             </div>
-          ))}
+            {COMPARISON_ROWS.map((row, i) => (
+              <div
+                key={row.feature}
+                className={cn(
+                  "grid grid-cols-[1fr_100px_100px_100px] items-center gap-4 px-6 py-4 text-sm last:rounded-b-2xl sm:grid-cols-[1fr_120px_120px_120px]",
+                  i % 2 === 1 && "bg-secondary/20",
+                )}
+              >
+                <span className="text-foreground">{row.feature}</span>
+                <span className="flex justify-center">
+                  {row.starter ? (
+                    <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-primary">
+                      <Check className="h-3.5 w-3.5" />
+                    </span>
+                  ) : (
+                    <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-muted text-muted-foreground">
+                      <X className="h-3.5 w-3.5" />
+                    </span>
+                  )}
+                </span>
+                <span className="flex justify-center">
+                  {row.growth ? (
+                    <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-primary">
+                      <Check className="h-3.5 w-3.5" />
+                    </span>
+                  ) : (
+                    <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-muted text-muted-foreground">
+                      <X className="h-3.5 w-3.5" />
+                    </span>
+                  )}
+                </span>
+                <span className="flex justify-center">
+                  {row.enterprise ? (
+                    <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-primary">
+                      <Check className="h-3.5 w-3.5" />
+                    </span>
+                  ) : (
+                    <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-muted text-muted-foreground">
+                      <X className="h-3.5 w-3.5" />
+                    </span>
+                  )}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
