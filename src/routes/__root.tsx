@@ -79,13 +79,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Verdikt — Evaluation for Conversational AI" },
+      { title: "Shyena — Automated AI Evaluation. Trusted Every Time." },
       {
         name: "description",
         content:
-          "Verdikt runs real agent-driven conversations against your live bot and gates every release verdict.",
+          "Shyena runs real agent-driven conversations against your live bot and gates every release verdict.",
       },
-      { property: "og:title", content: "Verdikt — Evaluation for Conversational AI" },
+      { property: "og:title", content: "Shyena — Automated AI Evaluation. Trusted Every Time." },
       {
         property: "og:description",
         content: "Testing and AI evaluation for conversational agents.",
@@ -104,7 +104,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap",
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/favicon.png", type: "image/png" },
     ],
   }),
   shellComponent: RootShell,

@@ -5,13 +5,13 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/blog/")({
   head: () => ({
     meta: [
-      { title: "Blog — Verdikt" },
+      { title: "Blog — Shyena" },
       {
         name: "description",
         content:
           "Field notes on testing conversational AI at scale: evaluation models, judge design, and release gating.",
       },
-      { property: "og:title", content: "Blog — Verdikt" },
+      { property: "og:title", content: "Blog — Shyena" },
       {
         property: "og:description",
         content:

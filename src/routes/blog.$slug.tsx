@@ -8,7 +8,7 @@ export const Route = createFileRoute("/blog/$slug")({
     return {
       meta: isArticle
         ? [
-            { title: "Why Conversational AI Needs a Different Testing Model — Verdikt Blog" },
+            { title: "Why Conversational AI Needs a Different Testing Model — Shyena Blog" },
             {
               name: "description",
               content:
@@ -16,7 +16,7 @@ export const Route = createFileRoute("/blog/$slug")({
             },
             {
               property: "og:title",
-              content: "Why Conversational AI Needs a Different Testing Model — Verdikt Blog",
+              content: "Why Conversational AI Needs a Different Testing Model — Shyena Blog",
             },
             {
               property: "og:description",
@@ -27,15 +27,15 @@ export const Route = createFileRoute("/blog/$slug")({
             { name: "twitter:card", content: "summary_large_image" },
           ]
         : [
-            { title: "Article — Verdikt Blog" },
+            { title: "Article — Shyena Blog" },
             {
               name: "description",
-              content: "An article from the Verdikt blog on conversational AI evaluation.",
+              content: "An article from the Shyena blog on conversational AI evaluation.",
             },
-            { property: "og:title", content: "Article — Verdikt Blog" },
+            { property: "og:title", content: "Article — Shyena Blog" },
             {
               property: "og:description",
-              content: "An article from the Verdikt blog on conversational AI evaluation.",
+              content: "An article from the Shyena blog on conversational AI evaluation.",
             },
             { property: "og:type", content: "article" },
             { name: "twitter:card", content: "summary_large_image" },
@@ -87,7 +87,7 @@ function FullArticle() {
               Why Conversational AI Needs a Different Testing Model
             </h1>
             <p className="mt-6 text-base text-muted-foreground sm:text-lg">
-              6 min read · Published on the Verdikt blog
+              6 min read · Published on the Shyena blog
             </p>
           </div>
         </div>
@@ -208,7 +208,7 @@ function FullArticle() {
           <h2>See it against your own agent</h2>
 
           <p>
-            Verdikt is built around this model. It runs real conversations against live agents, judges
+            Shyena is built around this model. It runs real conversations against live agents, judges
             them with LLM-based quality scoring and deterministic assertions, and refuses to report a green
             verdict on a run that never completed. If you are shipping a conversational agent, that is the
             kind of testing your users deserve.

@@ -75,7 +75,7 @@ export function SiteFooter() {
 
         <div className="mt-14 flex flex-col-reverse items-start justify-between gap-6 border-t border-border pt-6 sm:flex-row sm:items-center">
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} Verdikt Labs B.V. All rights reserved.
+            © {new Date().getFullYear()} Shyena Labs B.V. All rights reserved.
           </p>
           <div className="flex items-center gap-2">
             {[

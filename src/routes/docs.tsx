@@ -20,13 +20,13 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/docs")({
   head: () => ({
     meta: [
-      { title: "Documentation — Verdikt" },
+      { title: "Documentation — Shyena" },
       {
         name: "description",
         content:
-          "Everything you need to write test specs, understand the evaluation model, and integrate Verdikt into your release process.",
+          "Everything you need to write test specs, understand the evaluation model, and integrate Shyena into your release process.",
       },
-      { property: "og:title", content: "Documentation — Verdikt" },
+      { property: "og:title", content: "Documentation — Shyena" },
       {
         property: "og:description",
         content:
@@ -43,7 +43,7 @@ const CATEGORIES = [
   {
     id: "getting-started",
     title: "Getting Started",
-    description: "Install Verdikt, run your first regression, and read your first verdict.",
+    description: "Install Shyena, run your first regression, and read your first verdict.",
     icon: BookOpen,
   },
   {
@@ -67,7 +67,7 @@ const CATEGORIES = [
   {
     id: "integrations",
     title: "Integrations",
-    description: "Connect Verdikt to your conversational AI platform, CI/CD, and alerting channels.",
+    description: "Connect Shyena to your conversational AI platform, CI/CD, and alerting channels.",
     icon: Plug,
   },
   {
@@ -105,7 +105,7 @@ function DocsPage() {
             <h1 className="mt-6 text-4xl font-bold leading-[1.08] sm:text-6xl">Documentation</h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
               Everything you need to write test specs, understand the evaluation model, and integrate
-              Verdikt into your release process.
+              Shyena into your release process.
             </p>
 
             {/* Search placeholder */}

@@ -15,13 +15,13 @@ import {
 export const Route = createFileRoute("/product")({
   head: () => ({
     meta: [
-      { title: "Product — Verdikt AI Evaluation Platform" },
+      { title: "Product — Shyena AI Evaluation Platform" },
       {
         name: "description",
         content:
-          "How Verdikt runs agent-driven conversations, evaluates every turn, and gates release verdicts for conversational AI.",
+          "How Shyena runs agent-driven conversations, evaluates every turn, and gates release verdicts for conversational AI.",
       },
-      { property: "og:title", content: "Product — Verdikt AI Evaluation Platform" },
+      { property: "og:title", content: "Product — Shyena AI Evaluation Platform" },
       {
         property: "og:description",
         content:
@@ -145,7 +145,7 @@ function ProductPage() {
               One platform. Every layer of conversational AI quality.
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-              Verdikt covers the full stack of conversational AI quality: from the personas that
+              Shyena covers the full stack of conversational AI quality: from the personas that
               generate the test signal, to the execution that keeps it real, to the verdict that
               can't be gamed.
             </p>
@@ -213,7 +213,7 @@ function ProductPage() {
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-navy-muted">
               A quality platform is only useful if it runs consistently across thousands of
-              conversations. Verdikt's job architecture is designed for large regression suites
+              conversations. Shyena's job architecture is designed for large regression suites
               without overwhelming the agent under test.
             </p>
           </div>

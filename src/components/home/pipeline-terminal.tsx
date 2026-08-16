@@ -8,7 +8,7 @@ const LOG_LINES: { time: string; tag: string; tone: "plan" | "run" | "eval" | "g
 ];
 
 const TONES: Record<string, string> = {
-  PLAN: "bg-primary/15 text-[oklch(0.78_0.12_274)] ring-primary/30",
+  PLAN: "bg-primary/15 text-primary ring-primary/30",
   RUN: "bg-white/8 text-navy-muted ring-white/15",
   EVAL: "bg-accent/15 text-accent ring-accent/30",
   GATE: "bg-destructive/15 text-destructive ring-destructive/30",
@@ -26,7 +26,7 @@ export function PipelineTerminal() {
           <span className="h-2.5 w-2.5 rounded-full bg-accent/70" />
         </div>
         <p className="font-mono text-xs text-navy-muted">
-          verdikt run --suite billing-voice --release 2026.8.14
+          shyena run --suite billing-voice --release 2026.8.14
         </p>
       </div>
 

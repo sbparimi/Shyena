@@ -9,13 +9,13 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/pricing")({
   head: () => ({
     meta: [
-      { title: "Pricing — Verdikt" },
+      { title: "Pricing — Shyena" },
       {
         name: "description",
         content:
           "Simple, flexible pricing for conversational AI evaluation. From a single-agent pilot to enterprise-wide release gating.",
       },
-      { property: "og:title", content: "Pricing — Verdikt" },
+      { property: "og:title", content: "Pricing — Shyena" },
       {
         property: "og:description",
         content:
@@ -97,12 +97,12 @@ const FAQS = [
   {
     question: "How is pricing calculated?",
     answer:
-      "Verdikt is priced on a combination of seats and evaluation volume. We count monthly evaluated conversations, not just users, so teams that run heavy regression suites get predictable costs without per-seat penalties for read-only reviewers.",
+      "Shyena is priced on a combination of seats and evaluation volume. We count monthly evaluated conversations, not just users, so teams that run heavy regression suites get predictable costs without per-seat penalties for read-only reviewers.",
   },
   {
     question: "What platforms do you support?",
     answer:
-      "Verdikt drives conversations through the same surface your customers use: web chat, voice calls, SMS, and common messaging channels. We integrate with the major conversational AI platforms and can add new channel adapters on request.",
+      "Shyena drives conversations through the same surface your customers use: web chat, voice calls, SMS, and common messaging channels. We integrate with the major conversational AI platforms and can add new channel adapters on request.",
   },
   {
     question: "Can we run this in our own cloud or VPC?",

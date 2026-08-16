@@ -4,9 +4,9 @@ import { PlaceholderPage } from "@/components/site/placeholder-page";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About — Verdikt" },
+      { title: "About — Shyena" },
       { name: "description", content: "Why we built an evaluation platform that refuses to report a false green pass for conversational AI releases." },
-      { property: "og:title", content: "About — Verdikt" },
+      { property: "og:title", content: "About — Shyena" },
       { property: "og:description", content: "The team building trustworthy release gates for conversational AI." },
     ],
   }),

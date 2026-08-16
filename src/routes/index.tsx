@@ -10,6 +10,12 @@ import {
   CheckCircle2,
   XCircle,
   Sparkles,
+  Target,
+  RefreshCw,
+  Bot,
+  BarChart3,
+  Search,
+  Infinity as InfinityIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CtaBand } from "@/components/site/cta-band";
@@ -18,13 +24,13 @@ import { PipelineTerminal } from "@/components/home/pipeline-terminal";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Verdikt — Ship conversational AI you can trust" },
+      { title: "Shyena — Automated AI Evaluation. Trusted Every Time." },
       {
         name: "description",
         content:
-          "Verdikt runs real agent-driven conversations against your live bot, judges every turn with LLM evaluation plus deterministic checks, and blocks false green passes.",
+          "Shyena runs real agent-driven conversations against your live bot, judges every turn with LLM evaluation plus deterministic checks, and blocks false green passes.",
       },
-      { property: "og:title", content: "Verdikt — Ship conversational AI you can trust" },
+      { property: "og:title", content: "Shyena — Automated AI Evaluation. Trusted Every Time." },
       {
         property: "og:description",
         content:
@@ -35,13 +41,47 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const BADGES = [
-  "Audited LLM calls",
-  "Retry & backpressure at scale",
-  "Accessibility gates",
-  "Enterprise-grade job architecture",
-  "SSO & role-scoped access",
-];
+const PILLARS = [
+  {
+    icon: Target,
+    title: "Automated",
+    body: "End-to-end automated AI evaluation at scale.",
+    tone: "primary",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Accurate",
+    body: "Precise, consistent and unbiased results.",
+    tone: "accent",
+  },
+  {
+    icon: RefreshCw,
+    title: "Trusted",
+    body: "Reliable insights. Confident decisions.",
+    tone: "primary",
+  },
+] as const;
+
+const ATTRIBUTES = [
+  { icon: Bot, title: "Automated", body: "No manual effort, continuous evaluation.", tone: "purple" },
+  { icon: BarChart3, title: "Measurable", body: "Quantitative metrics that matter.", tone: "accent" },
+  { icon: ShieldCheck, title: "Reliable", body: "Consistent, repeatable and unbiased.", tone: "primary" },
+  { icon: Search, title: "Explainable", body: "Transparent results with clear evidence.", tone: "purple" },
+  { icon: CheckCircle2, title: "Actionable", body: "Insights that drive real improvement.", tone: "accent" },
+  { icon: InfinityIcon, title: "Continuous", body: "Always learning, always improving.", tone: "primary" },
+] as const;
+
+const TONE_CLASSES: Record<string, string> = {
+  primary: "bg-primary/10 text-primary",
+  accent: "bg-accent/10 text-accent",
+  purple: "bg-purple/10 text-purple",
+};
+
+const TONE_TEXT: Record<string, string> = {
+  primary: "text-primary",
+  accent: "text-accent",
+  purple: "text-purple",
+};
 
 const PROBLEMS = [
   {
@@ -68,7 +108,7 @@ const STEPS = [
   {
     icon: Users,
     title: "Define agentic test personas",
-    body: "Describe a goal, a persona and a playbook — not brittle scripted steps. Verdikt improvises like a real customer would.",
+    body: "Describe a goal, a persona and a playbook — not brittle scripted steps. Shyena improvises like a real customer would.",
   },
   {
     icon: PlayCircle,
@@ -133,11 +173,11 @@ function Index() {
               AI Evaluation for Conversational Agents
             </span>
             <h1 className="mt-6 text-4xl font-bold leading-[1.08] sm:text-6xl">
-              Ship conversational AI you can{" "}
-              <span className="text-gradient-brand">actually trust.</span>
+              Automated AI Evaluation.{" "}
+              <span className="text-gradient-brand">Trusted Every Time.</span>
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-              Verdikt runs real, agent-driven conversations against your live bot, judges the
+              Shyena runs real, agent-driven conversations against your live bot, judges the
               quality of every turn with LLM-based evaluation and deterministic checks, and makes it
               structurally impossible for a broken conversation to report a green pass.
             </p>
@@ -160,22 +200,22 @@ function Index() {
         </div>
       </section>
 
-      {/* Trust strip */}
+      {/* Pillars */}
       <section className="border-y border-border bg-secondary/40">
-        <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-5 px-5 py-8 sm:px-8 lg:flex-row lg:justify-between">
-          <p className="text-sm font-medium text-muted-foreground">
-            Built for enterprise conversational AI teams
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-2">
-            {BADGES.map((badge) => (
+        <div className="mx-auto grid w-full max-w-7xl gap-6 px-5 py-10 sm:px-8 sm:grid-cols-3">
+          {PILLARS.map((pillar) => (
+            <div key={pillar.title} className="flex items-start gap-3.5">
               <span
-                key={badge}
-                className="rounded-full border border-border bg-background px-3 py-1.5 text-xs font-medium text-muted-foreground"
+                className={`inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${TONE_CLASSES[pillar.tone]}`}
               >
-                {badge}
+                <pillar.icon className="h-5 w-5" />
               </span>
-            ))}
-          </div>
+              <div>
+                <p className={`text-sm font-semibold ${TONE_TEXT[pillar.tone]}`}>{pillar.title}</p>
+                <p className="mt-0.5 text-sm text-muted-foreground">{pillar.body}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -237,7 +277,7 @@ function Index() {
                 className="relative rounded-xl border border-navy-border bg-white/[0.03] p-6"
               >
                 <div className="flex items-center justify-between">
-                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-primary/20 text-[oklch(0.8_0.12_274)]">
+                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-primary/20 text-primary">
                     <step.icon className="h-5 w-5" />
                   </span>
                   <span className="font-mono text-xs text-navy-muted">0{i + 1}</span>
@@ -286,7 +326,7 @@ function Index() {
           </h2>
           <p className="mt-4 max-w-2xl text-muted-foreground">
             Most tools score whatever transcript they collected. If the agent stalled at turn 17,
-            they grade the first sixteen turns and call it green. Verdikt evaluates execution
+            they grade the first sixteen turns and call it green. Shyena evaluates execution
             integrity first.
           </p>
 
@@ -294,7 +334,7 @@ function Index() {
             <div className="rounded-xl border border-destructive/30 bg-card p-7 shadow-card">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                  Verdikt
+                  Shyena
                 </span>
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-destructive/10 px-3 py-1 text-xs font-semibold text-destructive">
                   <XCircle className="h-3.5 w-3.5" /> FAIL
@@ -335,6 +375,23 @@ function Index() {
               </p>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Attributes */}
+      <section className="mx-auto w-full max-w-7xl px-5 pb-24 sm:px-8">
+        <div className="grid gap-8 rounded-3xl border border-border bg-card p-8 shadow-card sm:grid-cols-2 sm:p-10 lg:grid-cols-6">
+          {ATTRIBUTES.map((attr) => (
+            <div key={attr.title}>
+              <span
+                className={`inline-flex h-10 w-10 items-center justify-center rounded-lg ${TONE_CLASSES[attr.tone]}`}
+              >
+                <attr.icon className="h-5 w-5" />
+              </span>
+              <p className={`mt-3 text-sm font-semibold ${TONE_TEXT[attr.tone]}`}>{attr.title}</p>
+              <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{attr.body}</p>
+            </div>
+          ))}
         </div>
       </section>
 
