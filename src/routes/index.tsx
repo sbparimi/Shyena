@@ -109,19 +109,96 @@ const LANDSCAPE_COLUMNS = ["Prompt/Output Testers", "Observability", "Scripted C
 const LANDSCAPE_ROWS = [
   {
     label: "What it tests",
-    values: ["One prompt or LLM call", "Traces already captured", "Scripted conversation flows", "A full live conversation, turn by turn"],
+    values: [
+      "One prompt or LLM call",
+      "Traces already captured",
+      "Scripted conversation flows",
+      "A full live conversation, turn by turn",
+    ],
   },
   {
     label: "Execution surface",
-    values: ["Direct API call", "None — post-hoc traces", "Simulated / API-level", "Real browser or voice session"],
+    values: [
+      "Direct API call",
+      "None — post-hoc traces",
+      "Simulated / API-level",
+      "Real browser or voice session — the same surface your customers use",
+    ],
+  },
+  {
+    label: "Test authoring",
+    values: [
+      "Input → expected-output test cases",
+      "N/A — instrumentation, not authoring",
+      "Scripted conversation trees",
+      "Goal + persona + playbook — the agent improvises like a real customer",
+    ],
   },
   {
     label: "Handles conversation non-determinism",
-    values: ["N/A", "Observes it after the fact", "Brittle on path deviation", "Built around it — personas improvise"],
+    values: [
+      "N/A — single call, not a conversation",
+      "Observes it after the fact",
+      "Brittle — fails on any path deviation",
+      "Built around it — the same goal reaches the outcome via a different valid path every run",
+    ],
+  },
+  {
+    label: "LLM-judged + deterministic scoring, combined",
+    values: [
+      "LLM-judged only",
+      "Neither — it's observability, not scoring",
+      "Deterministic only",
+      "Both, natively combined in one verdict",
+    ],
   },
   {
     label: "Execution-integrity gating",
-    values: ["No", "No", "No", "Yes — capped at FAIL before scoring counts"],
+    values: [
+      "No concept of this",
+      "No concept of this",
+      "No concept of this",
+      "Yes — a broken or incomplete run is capped at FAIL before quality is even scored",
+    ],
+  },
+  {
+    label: "Semantic / state-transition validity model",
+    values: ["No", "No", "No", "Yes — six-construct verdict validates state transitions, not just wording"],
+  },
+  {
+    label: "Orchestrator-level decision & dispatch analysis",
+    values: [
+      "No",
+      "Partial — manual trace inspection",
+      "No",
+      "Yes — per-turn analysis of whether the agent dispatched correctly, not just replied well",
+    ],
+  },
+  {
+    label: "Accessibility scanning",
+    values: ["No", "No", "No", "Yes — gated a11y scans on smoke and pre-production runs"],
+  },
+  {
+    label: "Voice + chat channel coverage",
+    values: [
+      "Text/API only",
+      "Depends on instrumentation",
+      "Chat-only, typically",
+      "Both — the same execution engine drives voice and chat",
+    ],
+  },
+  {
+    label: "Full audit trail for compliance review",
+    values: [
+      "Limited run logs",
+      "Yes — that's its core purpose",
+      "Limited",
+      "Yes — every prompt, judge call, assertion and retry recorded and exportable",
+    ],
+  },
+  {
+    label: "Scale architecture (retry, backpressure, DLQ)",
+    values: ["N/A — single calls", "N/A", "Varies by vendor", "Built in, tuned to not overwhelm the agent under test"],
   },
 ] as const;
 
@@ -286,8 +363,9 @@ function Index() {
           </h2>
           <p className="mt-4 text-muted-foreground">
             Tools like Promptfoo and DeepEval test a single prompt. Arize Phoenix watches what
-            already happened in production. Botium scripts a chatbot's expected path. None of them
-            drive a real, adaptive conversation end to end — or refuse to call a broken run a pass.
+            already happened in production. Botium scripts a chatbot's expected path. Shyena is the
+            only one that executes a full live conversation, judges it on semantics and orchestration
+            as well as wording, and refuses to let a broken run report a pass.
           </p>
         </div>
 
