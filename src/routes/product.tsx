@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Check, RefreshCw, ShieldCheck, Activity } from "lucide-react";
+import { ArrowRight, Check, RefreshCw, ShieldCheck, Activity, Sparkles, Wand2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CtaBand } from "@/components/site/cta-band";
 import { cn } from "@/lib/utils";
@@ -49,11 +49,12 @@ const CAPABILITIES = [
   },
   {
     id: "execution",
-    title: "Real Conversation Execution",
+    title: "Real Conversation Execution & Dynamic Generation",
     description:
-      "A real browser or voice session drives your production agent over the same channel your customers use. No mocked APIs, no fake states: every run is a genuine end-to-end conversation.",
+      "A real browser or voice session drives your production agent over the same channel your customers use — and the conversation itself is generated live, turn by turn. Within the goal and persona you define, the executor decides what the simulated customer says next based on how the agent actually responded, not a fixed script.",
     checks: [
-      "Live agent, real channel",
+      "Live agent, real channel — no mocked APIs, no fake states",
+      "Every turn generated in response to the agent's actual reply",
       "Retry and backpressure built in",
       "Captures full transcript and metadata",
     ],
@@ -106,6 +107,15 @@ const CAPABILITIES = [
       "Exportable for compliance reviews",
     ],
     mock: AuditMock,
+  },
+];
+
+const ROADMAP_CARDS = [
+  {
+    icon: Wand2,
+    title: "Automatic scenario generation",
+    description:
+      "Generating candidate test scenarios and personas from your agent's real conversation logs, for your team to review and approve before they run — human sign-off stays in the loop, but the first draft won't be a blank page.",
   },
 ];
 
@@ -200,6 +210,45 @@ function ProductPage() {
           </section>
         );
       })}
+
+      {/* Roadmap */}
+      <section className="mx-auto w-full max-w-7xl px-5 pb-20 sm:px-8">
+        <div className="max-w-2xl">
+          <p className="font-mono text-xs uppercase tracking-[0.18em] text-primary">On the roadmap</p>
+          <h2 className="mt-4 text-3xl font-bold sm:text-4xl">What's coming next</h2>
+          <p className="mt-4 text-muted-foreground">
+            Test specs are hand-written today, deliberately — an agent's behavior is too important
+            to hand entirely to a generator. Here's what we're building to make writing them faster
+            without giving that up.
+          </p>
+        </div>
+
+        <div className="mt-10 grid gap-6 md:grid-cols-2">
+          {ROADMAP_CARDS.map((card) => {
+            const Icon = card.icon;
+            return (
+              <div
+                key={card.title}
+                className="rounded-xl border border-dashed border-border bg-secondary/20 p-7"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <Icon className="h-5 w-5" />
+                  </span>
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-2.5 py-1 text-xs font-medium text-muted-foreground">
+                    <Sparkles className="h-3 w-3 text-primary" />
+                    Coming Soon
+                  </span>
+                </div>
+                <h3 className="mt-5 text-base font-semibold">{card.title}</h3>
+                <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">
+                  {card.description}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+      </section>
 
       {/* Built for scale */}
       <section className="bg-navy py-24">
