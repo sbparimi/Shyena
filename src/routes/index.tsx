@@ -16,6 +16,10 @@ import {
   BarChart3,
   Search,
   Infinity as InfinityIcon,
+  Layers,
+  GitBranch,
+  Bug,
+  SlidersHorizontal,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CtaBand } from "@/components/site/cta-band";
@@ -100,9 +104,9 @@ const PROBLEMS = [
 ];
 
 const STATS = [
-  { value: "1,400+", label: "evaluation checks per regression run" },
-  { value: "3", label: "concurrent conversation runners" },
-  { value: "0", label: "false green passes on failed executions" },
+  { value: "31", label: "metrics evaluated on every case, by default" },
+  { value: "117", label: "metrics in the full catalog, including custom ones you define" },
+  { value: "0", label: "false green passes — the gate structurally prevents it" },
 ];
 
 const LANDSCAPE_COLUMNS = ["Prompt/Output Testers", "Observability", "Scripted Chatbot Testers", "Shyena"] as const;
@@ -216,8 +220,8 @@ const STEPS = [
   },
   {
     icon: Gauge,
-    title: "Evaluate every turn",
-    body: "LLM-as-judge scoring across quality pillars, plus deterministic assertions for hard facts like amounts, policies and PII handling.",
+    title: "Evaluate against 31 metrics",
+    body: "LLM-as-judge scoring, deterministic assertions, six-construct semantic assurance, and orchestrator-level decision analysis — 31 metrics evaluated by default, from your quality pillars down to whether the agent dispatched the right tool call.",
   },
   {
     icon: ShieldCheck,
@@ -248,9 +252,29 @@ const FEATURES = [
     body: "Hard checks for the things that must never be fuzzy: refund amounts, disclosure text, redaction, handoff targets and latency budgets.",
   },
   {
+    icon: Layers,
+    title: "Semantic Assurance",
+    body: "Six-construct state-transition validity model — intent integrity, context memory, dialogue state correctness, business compliance, tool decisions, and recovery — with a causal root-cause taxonomy behind every violation.",
+  },
+  {
+    icon: GitBranch,
+    title: "Orchestrator Quality",
+    body: "Scores the agent's internal decisions, not just its replies: correct tool/route dispatch, missed invocations, and decision oscillation across a conversation — weighted and traceable to the exact turn.",
+  },
+  {
     icon: ShieldCheck,
     title: "Execution-Integrity Gate",
     body: "Incomplete, timed-out or errored runs can never be scored into a pass. Integrity is evaluated before quality, not after.",
+  },
+  {
+    icon: Bug,
+    title: "Automated Bug Report Generation",
+    body: "Every FAIL gets an LLM-generated root-cause report — a 5-Whys chain, severity, and duplicate detection — rendered as Jira-ready markdown, automatically, no manual write-up required.",
+  },
+  {
+    icon: SlidersHorizontal,
+    title: "Custom Metrics",
+    body: "Extend the 31-metric default catalog with your own — subclass a documented SDK, register it, and it runs alongside the built-ins with the same exception isolation and latency tracking.",
   },
   {
     icon: ScrollText,
@@ -350,7 +374,7 @@ function Index() {
             ))}
           </div>
           <p className="mt-6 text-xs text-muted-foreground">
-            Illustrative figures from a representative enterprise regression suite.
+            Default depth for a standard case; accessibility-gated runs evaluate more.
           </p>
         </div>
       </section>
@@ -418,11 +442,13 @@ function Index() {
           <div className="max-w-2xl">
             <p className="font-mono text-xs uppercase tracking-[0.18em] text-accent">How it works</p>
             <h2 className="mt-4 text-3xl font-bold text-navy-foreground sm:text-4xl">
-              From persona to verdict in a single run.
+              One run. 31 metrics. A verdict you can defend.
             </h2>
             <p className="mt-4 text-navy-muted">
               Every regression run follows the same four stages, and each stage produces evidence the
-              next one is allowed to trust.
+              next one is allowed to trust — from a single persona definition to a case scored against
+              31 metrics by default, spanning LLM-judged quality, deterministic assertions, semantic
+              state-transition validity, and orchestrator-level decision analysis.
             </p>
           </div>
 
