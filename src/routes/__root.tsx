@@ -118,6 +118,12 @@ function RootShell({ children }: { children: ReactNode }) {
     <html lang="en">
       <head>
         <HeadContent />
+        {/*
+          TODO: analytics is not wired up yet. Sign up at https://plausible.io (or swap
+          for your analytics tool of choice), create a site, and replace the
+          data-domain placeholder below with your real domain to start tracking.
+        */}
+        <script defer data-domain="shyena.ai" src="https://plausible.io/js/script.js" />
       </head>
       <body>
         {children}

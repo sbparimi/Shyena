@@ -42,7 +42,7 @@ const ARTICLES = [
     excerpt:
       "When a test runner reports success on a conversation that never reached its goal, your metrics are lying to you.",
     readTime: "5 min read",
-    status: "coming-soon",
+    status: "published",
     gradient: "from-navy via-primary/60 to-primary",
   },
   {
@@ -105,7 +105,7 @@ function BlogIndexPage() {
                   )}
                 >
                   <div className="flex h-full items-center justify-center rounded-xl border border-white/20 bg-white/10 backdrop-blur-sm">
-                    <span className="font-display text-2xl font-bold text-white/90">V</span>
+                    <span className="font-display text-2xl font-bold text-white/90">S</span>
                   </div>
                 </div>
 

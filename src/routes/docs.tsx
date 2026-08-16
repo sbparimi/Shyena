@@ -39,7 +39,13 @@ export const Route = createFileRoute("/docs")({
   component: DocsPage,
 });
 
-const CATEGORIES = [
+const CATEGORIES: {
+  id: string;
+  title: string;
+  description: string;
+  icon: typeof BookOpen;
+  to?: string;
+}[] = [
   {
     id: "getting-started",
     title: "Getting Started",
@@ -57,6 +63,7 @@ const CATEGORIES = [
     title: "The Evaluation Model",
     description: "How LLM-as-judge scoring, deterministic assertions, and the integrity gate combine.",
     icon: Scale,
+    to: "/docs/evaluation-model",
   },
   {
     id: "environments",
@@ -144,11 +151,11 @@ function DocsPage() {
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {CATEGORIES.map((category) => {
             const Icon = category.icon;
-            return (
+            const card = (
               <Card
-                key={category.id}
                 className={cn(
-                  "group relative flex h-full flex-col overflow-hidden border-border bg-card shadow-card transition-all hover:-translate-y-0.5 hover:border-primary/30",
+                  "group relative flex h-full flex-col overflow-hidden border-border bg-card shadow-card transition-all",
+                  category.to ? "hover:-translate-y-0.5 hover:border-primary/40" : "hover:-translate-y-0.5 hover:border-primary/30",
                 )}
               >
                 <CardHeader className="pb-3">
@@ -161,12 +168,29 @@ function DocsPage() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="mt-auto pt-0">
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-2.5 py-1 text-xs font-medium text-muted-foreground">
-                    <Sparkles className="h-3 w-3 text-primary" />
-                    Coming Soon
-                  </span>
+                  {category.to ? (
+                    <span className="inline-flex items-center gap-1 text-sm font-medium text-primary transition-colors group-hover:text-primary/80">
+                      Read guide
+                      <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                    </span>
+                  ) : (
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-2.5 py-1 text-xs font-medium text-muted-foreground">
+                      <Sparkles className="h-3 w-3 text-primary" />
+                      Coming Soon
+                    </span>
+                  )}
                 </CardContent>
               </Card>
+            );
+
+            return category.to ? (
+              <Link key={category.id} to={category.to} className="block h-full">
+                {card}
+              </Link>
+            ) : (
+              <div key={category.id} className="h-full">
+                {card}
+              </div>
             );
           })}
         </div>

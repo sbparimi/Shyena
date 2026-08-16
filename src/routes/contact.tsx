@@ -28,9 +28,7 @@ export const Route = createFileRoute("/contact")({
   component: ContactPage,
 });
 
-// TODO: replace with your real Formspree form ID (sign up at https://formspree.io,
-// create a form, and swap the placeholder below) before this goes live.
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/mljrpeep";
 
 const NEXT_STEPS = [
   {
@@ -68,6 +66,10 @@ function ContactPage() {
       if (response.ok) {
         setStatus("success");
         form.reset();
+        // Fires once Plausible is actually configured (see __root.tsx); no-op until then.
+        (window as unknown as { plausible?: (event: string) => void }).plausible?.(
+          "Demo Request Submitted",
+        );
       } else {
         setStatus("error");
       }
