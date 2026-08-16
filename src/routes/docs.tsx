@@ -102,9 +102,7 @@ function DocsPage() {
               <BookOpen className="h-3.5 w-3.5 text-primary" />
               Documentation
             </span>
-            <h1 className="mt-6 text-4xl font-bold leading-[1.08] sm:text-6xl">
-              Ship conversational AI with confidence
-            </h1>
+            <h1 className="mt-6 text-4xl font-bold leading-[1.08] sm:text-6xl">Documentation</h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
               Everything you need to write test specs, understand the evaluation model, and integrate
               Verdikt into your release process.
