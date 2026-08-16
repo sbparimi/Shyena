@@ -113,6 +113,22 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   errorComponent: ErrorComponent,
 });
 
+const ORGANIZATION_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "Shyena",
+  applicationCategory: "BusinessApplication",
+  operatingSystem: "Web",
+  description:
+    "Shyena is an AI agent testing and evaluation platform for conversational AI. It runs real, agent-driven conversations against live chat and voice bots, scores every turn with LLM-as-judge evaluation and deterministic assertions, and gates releases so a broken conversation can never report a false pass.",
+  offers: {
+    "@type": "Offer",
+    price: "750",
+    priceCurrency: "USD",
+    priceValidUntil: "2027-12-31",
+  },
+};
+
 function RootShell({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
@@ -124,6 +140,11 @@ function RootShell({ children }: { children: ReactNode }) {
           data-domain placeholder below with your real domain to start tracking.
         */}
         <script defer data-domain="shyena.ai" src="https://plausible.io/js/script.js" />
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(ORGANIZATION_SCHEMA) }}
+        />
       </head>
       <body>
         {children}

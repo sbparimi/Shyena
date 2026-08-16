@@ -15,13 +15,13 @@ import {
 export const Route = createFileRoute("/product")({
   head: () => ({
     meta: [
-      { title: "Product — Shyena AI Evaluation Platform" },
+      { title: "AI Agent Testing Platform Features — Shyena" },
       {
         name: "description",
         content:
-          "How Shyena runs agent-driven conversations, evaluates every turn, and gates release verdicts for conversational AI.",
+          "See how Shyena's AI agent testing platform works: agentic test personas, real conversation execution across chat and voice, LLM-as-judge evaluation, deterministic assertions, and the execution-integrity gate that stops broken conversations from reporting a pass.",
       },
-      { property: "og:title", content: "Product — Shyena AI Evaluation Platform" },
+      { property: "og:title", content: "AI Agent Testing Platform Features — Shyena" },
       {
         property: "og:description",
         content:
@@ -30,6 +30,7 @@ export const Route = createFileRoute("/product")({
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: "https://shyena.ai/product" }],
   }),
   component: ProductPage,
 });

@@ -24,19 +24,20 @@ import { PipelineTerminal } from "@/components/home/pipeline-terminal";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Shyena — Automated AI Evaluation. Trusted Every Time." },
+      { title: "Shyena — AI Agent Testing & Conversational AI Evaluation Platform" },
       {
         name: "description",
         content:
-          "Shyena runs real agent-driven conversations against your live bot, judges every turn with LLM evaluation plus deterministic checks, and blocks false green passes.",
+          "Shyena is an AI agent testing and evaluation platform for conversational AI. It runs real, agent-driven conversations against your live chatbot or voice bot, scores every turn with LLM-as-judge evaluation and deterministic assertions, and gates releases so a broken conversation can never report a false pass.",
       },
-      { property: "og:title", content: "Shyena — Automated AI Evaluation. Trusted Every Time." },
+      { property: "og:title", content: "Shyena — AI Agent Testing & Conversational AI Evaluation Platform" },
       {
         property: "og:description",
         content:
           "End-to-end testing and AI evaluation for chat and voice agents, with gated verdicts your release process can rely on.",
       },
     ],
+    links: [{ rel: "canonical", href: "https://shyena.ai/" }],
   }),
   component: Index,
 });

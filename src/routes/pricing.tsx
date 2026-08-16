@@ -9,13 +9,13 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/pricing")({
   head: () => ({
     meta: [
-      { title: "Pricing — Shyena" },
+      { title: "AI Agent Testing Pricing — Shyena" },
       {
         name: "description",
         content:
-          "Simple, flexible pricing for conversational AI evaluation. From a single-agent pilot to enterprise-wide release gating.",
+          "Pricing for Shyena's AI agent testing and conversational AI evaluation platform. Starter from $750/mo, Growth from $3,500/mo, Enterprise custom-scoped — evaluated-conversation volume included in every plan.",
       },
-      { property: "og:title", content: "Pricing — Shyena" },
+      { property: "og:title", content: "AI Agent Testing Pricing — Shyena" },
       {
         property: "og:description",
         content:
@@ -24,6 +24,7 @@ export const Route = createFileRoute("/pricing")({
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: "https://shyena.ai/pricing" }],
   }),
   component: PricingPage,
 });
@@ -138,9 +139,24 @@ const FAQS = [
   },
 ];
 
+const FAQ_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQS.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: { "@type": "Answer", text: faq.answer },
+  })),
+};
+
 function PricingPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_SCHEMA) }}
+      />
       {/* Hero */}
       <section className="relative overflow-hidden">
         <div className="pointer-events-none absolute inset-x-0 -top-40 h-[420px] bg-[radial-gradient(60%_60%_at_50%_50%,var(--color-primary)_0%,transparent_70%)] opacity-[0.13]" />

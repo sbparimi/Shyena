@@ -45,6 +45,7 @@ export const Route = createFileRoute("/blog/$slug")({
         { property: "og:type", content: "article" },
         { name: "twitter:card", content: "summary_large_image" },
       ],
+      links: [{ rel: "canonical", href: `https://shyena.ai/blog/${params.slug}` }],
     };
   },
   component: ArticlePage,
