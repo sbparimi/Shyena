@@ -23,7 +23,6 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CtaBand } from "@/components/site/cta-band";
-import { PipelineTerminal } from "@/components/home/pipeline-terminal";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -319,8 +318,19 @@ function Index() {
             </div>
           </div>
 
-          <div className="mx-auto mt-16 max-w-5xl">
-            <PipelineTerminal />
+          <div className="mx-auto mt-16 max-w-4xl">
+            <div
+              className="w-full overflow-hidden rounded-[20px] shadow-elevated"
+              style={{ aspectRatio: "16 / 10" }}
+            >
+              <iframe
+                src="/explainer.html"
+                title="How Shyena evaluates a conversational AI agent"
+                className="h-full w-full border-0"
+                loading="lazy"
+                allow="autoplay"
+              />
+            </div>
           </div>
         </div>
       </section>
