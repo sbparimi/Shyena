@@ -125,7 +125,7 @@ const LANDSCAPE_ROWS = [
     label: "Execution surface",
     values: [
       "Direct API call",
-      "None — post-hoc traces",
+      "Dataset replay or post-hoc production traces — not your live customer-facing channel",
       "Simulated / API-level",
       "Real browser or voice session — the same surface your customers use",
     ],
@@ -134,7 +134,7 @@ const LANDSCAPE_ROWS = [
     label: "Test authoring",
     values: [
       "Input → expected-output test cases",
-      "N/A — instrumentation, not authoring",
+      "Fixed input → expected-output dataset examples — not a live, improvised conversation",
       "Scripted conversation trees",
       "Goal + persona + playbook — the agent improvises like a real customer",
     ],
@@ -143,7 +143,7 @@ const LANDSCAPE_ROWS = [
     label: "Handles conversation non-determinism",
     values: [
       "N/A — single call, not a conversation",
-      "Observes it after the fact",
+      "Fixed dataset inputs per run, or observes production after the fact",
       "Brittle — fails on any path deviation",
       "Built around it — the same goal reaches the outcome via a different valid path every run",
     ],
@@ -152,7 +152,7 @@ const LANDSCAPE_ROWS = [
     label: "LLM-judged + deterministic scoring, combined",
     values: [
       "LLM-judged only",
-      "Neither — it's observability, not scoring",
+      "Both exist as evaluator types, but as separate experiments — not fused into one gated verdict",
       "Deterministic only",
       "Both, natively combined in one verdict",
     ],
