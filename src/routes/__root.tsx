@@ -131,7 +131,7 @@ const ORGANIZATION_SCHEMA = {
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <head>
         <HeadContent />
         {/*

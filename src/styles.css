@@ -190,3 +190,80 @@
   background-clip: text;
   color: transparent;
 }
+
+/*
+ * Cinematic dark-mode-first design layer.
+ *
+ * .glass-card formalizes the frosted-glass pattern already used ad hoc for
+ * navy sections (bg-white/[0.03] + border-navy-border) into one reusable
+ * class, so it reads consistently everywhere instead of only in isolated
+ * dark bands.
+ */
+@utility glass-card {
+  background: color-mix(in oklch, var(--color-card) 55%, transparent);
+  border: 1px solid var(--color-border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: var(--shadow-card);
+}
+
+@utility glow-primary {
+  box-shadow: 0 0 0 1px oklch(0.75 0.163 59.8 / 25%), 0 0 40px -8px oklch(0.75 0.163 59.8 / 35%);
+}
+
+@utility bg-grid {
+  background-image: linear-gradient(to right, var(--color-border) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--color-border) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, black 40%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, black 40%, transparent 100%);
+}
+
+@utility bg-mesh {
+  background-image: radial-gradient(38% 45% at 18% 12%, oklch(0.75 0.163 59.8 / 22%) 0%, transparent 70%),
+    radial-gradient(42% 50% at 85% 8%, oklch(0.642 0.114 182.7 / 18%) 0%, transparent 70%),
+    radial-gradient(45% 55% at 50% 100%, oklch(0.462 0.239 280.1 / 20%) 0%, transparent 70%);
+  animation: mesh-drift 18s ease-in-out infinite alternate;
+}
+
+@keyframes mesh-drift {
+  0% {
+    background-position: 0% 0%, 0% 0%, 0% 0%;
+  }
+  100% {
+    background-position: 3% 4%, -3% 3%, 2% -3%;
+  }
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+[data-reveal="hidden"] {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+[data-reveal="shown"] {
+  animation: reveal-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-mesh {
+    animation: none;
+  }
+  [data-reveal="hidden"] {
+    opacity: 1;
+    transform: none;
+  }
+  [data-reveal="shown"] {
+    animation: none;
+  }
+}

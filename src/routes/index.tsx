@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CtaBand } from "@/components/site/cta-band";
+import { Reveal } from "@/components/site/reveal";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -287,10 +288,13 @@ function Index() {
     <>
       {/* Hero */}
       <section className="relative overflow-hidden">
-        <div className="pointer-events-none absolute inset-x-0 -top-40 h-[420px] bg-[radial-gradient(60%_60%_at_50%_50%,var(--color-primary)_0%,transparent_70%)] opacity-[0.13]" />
+        <div className="pointer-events-none absolute inset-0 bg-mesh" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-[560px] bg-grid" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-background to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-background to-transparent" />
         <div className="relative mx-auto w-full max-w-7xl px-5 pb-4 pt-20 sm:px-8 sm:pt-28">
           <div className="mx-auto max-w-3xl text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary px-3.5 py-1.5 text-xs font-medium text-muted-foreground">
+            <span className="glass-card inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-medium text-muted-foreground">
               <Sparkles className="h-3.5 w-3.5 text-primary" />
               AI Evaluation for Cognigy Conversational Agents
             </span>
@@ -320,7 +324,7 @@ function Index() {
 
           <div className="mx-auto mt-16 max-w-4xl">
             <div
-              className="w-full overflow-hidden rounded-[20px] shadow-elevated"
+              className="glow-primary w-full overflow-hidden rounded-[20px] shadow-elevated"
               style={{ aspectRatio: "16 / 10" }}
             >
               <iframe
@@ -410,30 +414,31 @@ function Index() {
 
         <div className="mt-12 grid gap-6 md:grid-cols-3">
           {PROBLEMS.map((item, i) => (
-            <div
-              key={item.title}
-              className="rounded-xl border border-border bg-card p-7 shadow-card"
-            >
-              <span className="font-mono text-xs text-muted-foreground">0{i + 1}</span>
-              <h3 className="mt-3 text-lg font-semibold">{item.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{item.body}</p>
-            </div>
+            <Reveal key={item.title} delay={i * 80}>
+              <div className="glass-card h-full rounded-xl p-7 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40">
+                <span className="font-mono text-xs text-muted-foreground">0{i + 1}</span>
+                <h3 className="mt-3 text-lg font-semibold">{item.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{item.body}</p>
+              </div>
+            </Reveal>
           ))}
         </div>
 
-        <div className="mt-10 rounded-xl border border-border bg-secondary/40 p-8">
-          <div className="grid gap-8 sm:grid-cols-3">
-            {STATS.map((stat) => (
-              <div key={stat.label}>
-                <p className="font-display text-4xl font-bold text-primary">{stat.value}</p>
-                <p className="mt-2 text-sm text-muted-foreground">{stat.label}</p>
-              </div>
-            ))}
+        <Reveal className="mt-10">
+          <div className="glass-card rounded-xl p-8">
+            <div className="grid gap-8 sm:grid-cols-3">
+              {STATS.map((stat) => (
+                <div key={stat.label}>
+                  <p className="font-display text-4xl font-bold text-gradient-brand">{stat.value}</p>
+                  <p className="mt-2 text-sm text-muted-foreground">{stat.label}</p>
+                </div>
+              ))}
+            </div>
+            <p className="mt-6 text-xs text-muted-foreground">
+              Default depth for a standard case; accessibility-gated runs evaluate more.
+            </p>
           </div>
-          <p className="mt-6 text-xs text-muted-foreground">
-            Default depth for a standard case; accessibility-gated runs evaluate more.
-          </p>
-        </div>
+        </Reveal>
       </section>
 
       {/* Landscape */}
@@ -451,41 +456,43 @@ function Index() {
           </p>
         </div>
 
-        <div className="mt-10 overflow-x-auto rounded-2xl border border-border bg-card shadow-card">
-          <div className="min-w-[720px]">
-            <div className="grid grid-cols-[1.3fr_repeat(4,1fr)] items-start gap-4 border-b border-border bg-secondary/40 px-6 py-4 text-sm font-semibold">
-              <span className="text-foreground">&nbsp;</span>
-              {LANDSCAPE_COLUMNS.map((col, i) => (
-                <span
-                  key={col}
-                  className={i === LANDSCAPE_COLUMNS.length - 1 ? "text-primary" : "text-muted-foreground"}
-                >
-                  {col}
-                </span>
-              ))}
-            </div>
-            {LANDSCAPE_ROWS.map((row, i) => (
-              <div
-                key={row.label}
-                className={`grid grid-cols-[1.3fr_repeat(4,1fr)] items-start gap-4 px-6 py-4 text-sm last:rounded-b-2xl ${i % 2 === 1 ? "bg-secondary/20" : ""}`}
-              >
-                <span className="font-medium text-foreground">{row.label}</span>
-                {row.values.map((value, j) => (
+        <Reveal>
+          <div className="glow-primary mt-10 overflow-x-auto rounded-2xl border border-primary/30 bg-card shadow-card">
+            <div className="min-w-[720px]">
+              <div className="grid grid-cols-[1.3fr_repeat(4,1fr)] items-start gap-4 border-b border-border bg-secondary/40 px-6 py-4 text-sm font-semibold">
+                <span className="text-foreground">&nbsp;</span>
+                {LANDSCAPE_COLUMNS.map((col, i) => (
                   <span
-                    key={j}
-                    className={
-                      j === row.values.length - 1
-                        ? "font-medium text-primary"
-                        : "text-muted-foreground"
-                    }
+                    key={col}
+                    className={i === LANDSCAPE_COLUMNS.length - 1 ? "text-primary" : "text-muted-foreground"}
                   >
-                    {value}
+                    {col}
                   </span>
                 ))}
               </div>
-            ))}
+              {LANDSCAPE_ROWS.map((row, i) => (
+                <div
+                  key={row.label}
+                  className={`grid grid-cols-[1.3fr_repeat(4,1fr)] items-start gap-4 px-6 py-4 text-sm last:rounded-b-2xl ${i % 2 === 1 ? "bg-secondary/20" : ""}`}
+                >
+                  <span className="font-medium text-foreground">{row.label}</span>
+                  {row.values.map((value, j) => (
+                    <span
+                      key={j}
+                      className={
+                        j === row.values.length - 1
+                          ? "rounded-md bg-primary/10 px-2 py-1 font-medium text-primary"
+                          : "text-muted-foreground"
+                      }
+                    >
+                      {value}
+                    </span>
+                  ))}
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
+        </Reveal>
 
         <p className="mt-6 text-sm text-muted-foreground">
           They're not mutually exclusive — teams often unit-test prompts with tools like these
@@ -511,22 +518,21 @@ function Index() {
 
           <div className="mt-14 grid gap-6 lg:grid-cols-4">
             {STEPS.map((step, i) => (
-              <div
-                key={step.title}
-                className="relative rounded-xl border border-navy-border bg-white/[0.03] p-6"
-              >
-                <div className="flex items-center justify-between">
-                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-primary/20 text-primary">
-                    <step.icon className="h-5 w-5" />
-                  </span>
-                  <span className="font-mono text-xs text-navy-muted">0{i + 1}</span>
+              <Reveal key={step.title} delay={i * 90}>
+                <div className="relative h-full rounded-xl border border-navy-border bg-white/[0.03] p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:bg-white/[0.06]">
+                  <div className="flex items-center justify-between">
+                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-primary/20 text-primary shadow-[0_0_24px_-6px_var(--color-primary)]">
+                      <step.icon className="h-5 w-5" />
+                    </span>
+                    <span className="font-mono text-xs text-navy-muted">0{i + 1}</span>
+                  </div>
+                  <h3 className="mt-5 text-base font-semibold text-navy-foreground">{step.title}</h3>
+                  <p className="mt-2.5 text-sm leading-relaxed text-navy-muted">{step.body}</p>
+                  {i < STEPS.length - 1 && (
+                    <ArrowRight className="absolute -right-[19px] top-1/2 hidden h-5 w-5 -translate-y-1/2 text-navy-border lg:block" />
+                  )}
                 </div>
-                <h3 className="mt-5 text-base font-semibold text-navy-foreground">{step.title}</h3>
-                <p className="mt-2.5 text-sm leading-relaxed text-navy-muted">{step.body}</p>
-                {i < STEPS.length - 1 && (
-                  <ArrowRight className="absolute -right-[19px] top-1/2 hidden h-5 w-5 -translate-y-1/2 text-navy-border lg:block" />
-                )}
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -549,17 +555,17 @@ function Index() {
         </div>
 
         <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {FEATURES.map((feature) => (
-            <div
-              key={feature.title}
-              className="group rounded-xl border border-border bg-card p-7 shadow-card transition-all hover:-translate-y-0.5 hover:border-primary/40"
-            >
-              <span className="inline-flex h-11 w-11 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                <feature.icon className="h-5 w-5" />
-              </span>
-              <h3 className="mt-5 text-base font-semibold">{feature.title}</h3>
-              <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">{feature.body}</p>
-            </div>
+          {FEATURES.map((feature, i) => (
+            <Reveal key={feature.title} delay={(i % 3) * 80} className={i === 0 ? "lg:col-span-2" : undefined}>
+              <div className="group glass-card relative h-full overflow-hidden rounded-xl p-7 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40">
+                <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-primary/10 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-100" />
+                <span className="relative inline-flex h-11 w-11 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                  <feature.icon className="h-5 w-5" />
+                </span>
+                <h3 className="relative mt-5 text-base font-semibold">{feature.title}</h3>
+                <p className="relative mt-2.5 text-sm leading-relaxed text-muted-foreground">{feature.body}</p>
+              </div>
+            </Reveal>
           ))}
         </div>
       </section>
@@ -577,49 +583,53 @@ function Index() {
           </p>
 
           <div className="mt-10 grid gap-6 lg:grid-cols-2">
-            <div className="rounded-xl border border-destructive/30 bg-card p-7 shadow-card">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                  Shyena
-                </span>
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-destructive/10 px-3 py-1 text-xs font-semibold text-destructive">
-                  <XCircle className="h-3.5 w-3.5" /> FAIL
-                </span>
+            <Reveal>
+              <div className="h-full rounded-xl border border-destructive/40 bg-card p-7 shadow-[0_0_0_1px_oklch(0.577_0.245_27.325_/_20%),0_24px_60px_-32px_oklch(0.577_0.245_27.325_/_40%)]">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                    Shyena
+                  </span>
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-destructive/10 px-3 py-1 text-xs font-semibold text-destructive">
+                    <XCircle className="h-3.5 w-3.5" /> FAIL
+                  </span>
+                </div>
+                <p className="mt-5 font-mono text-xs leading-relaxed text-muted-foreground">
+                  turn 17 · session terminated before goal resolution
+                  <br />
+                  quality score 0.81 · integrity check FAILED
+                  <br />
+                  verdict capped → FAIL (execution incomplete)
+                </p>
+                <p className="mt-5 text-sm leading-relaxed text-foreground">
+                  Scored honestly and capped. The team sees exactly which turn broke, with the full
+                  judge reasoning attached.
+                </p>
               </div>
-              <p className="mt-5 font-mono text-xs leading-relaxed text-muted-foreground">
-                turn 17 · session terminated before goal resolution
-                <br />
-                quality score 0.81 · integrity check FAILED
-                <br />
-                verdict capped → FAIL (execution incomplete)
-              </p>
-              <p className="mt-5 text-sm leading-relaxed text-foreground">
-                Scored honestly and capped. The team sees exactly which turn broke, with the full
-                judge reasoning attached.
-              </p>
-            </div>
+            </Reveal>
 
-            <div className="rounded-xl border border-border bg-card p-7 shadow-card">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                  A lesser tool
-                </span>
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-success/10 px-3 py-1 text-xs font-semibold text-success">
-                  <CheckCircle2 className="h-3.5 w-3.5" /> PASS
-                </span>
+            <Reveal delay={100}>
+              <div className="h-full rounded-xl border border-border bg-secondary/30 p-7 opacity-80">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                    A lesser tool
+                  </span>
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-success/10 px-3 py-1 text-xs font-semibold text-success">
+                    <CheckCircle2 className="h-3.5 w-3.5" /> PASS
+                  </span>
+                </div>
+                <p className="mt-5 font-mono text-xs leading-relaxed text-muted-foreground">
+                  16 turns collected · no assertion errors raised
+                  <br />
+                  average score 0.81 → threshold 0.75
+                  <br />
+                  verdict → PASS
+                </p>
+                <p className="mt-5 text-sm leading-relaxed text-foreground">
+                  A false green: nothing crashed loudly, so the run reports healthy — and the
+                  regression reaches production.
+                </p>
               </div>
-              <p className="mt-5 font-mono text-xs leading-relaxed text-muted-foreground">
-                16 turns collected · no assertion errors raised
-                <br />
-                average score 0.81 → threshold 0.75
-                <br />
-                verdict → PASS
-              </p>
-              <p className="mt-5 text-sm leading-relaxed text-foreground">
-                A false green: nothing crashed loudly, so the run reports healthy — and the
-                regression reaches production.
-              </p>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
