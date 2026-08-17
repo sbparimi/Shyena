@@ -29,6 +29,7 @@ import {
   SecurityIllustration,
   IntelligenceIllustration,
 } from "@/components/product/platform-illustrations";
+import { ExpandableIllustration } from "@/components/product/expandable-illustration";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -397,7 +398,12 @@ function Index() {
           <Reveal>
             <div className="glass-card flex h-full flex-col overflow-hidden rounded-2xl">
               <div className="aspect-[1200/340] w-full border-b border-navy-border bg-navy">
-                <EvaluationIllustration />
+                <ExpandableIllustration
+                  title="Execution-Integrity Gate: Honest Score vs. False Green"
+                  description="A broken conversation should never look like a passing one — Shyena evaluates execution completeness before quality."
+                >
+                  <EvaluationIllustration />
+                </ExpandableIllustration>
               </div>
               <div className="p-6">
                 <p className="text-sm font-semibold text-foreground">
@@ -426,7 +432,12 @@ function Index() {
           <Reveal delay={100}>
             <div className="glass-card flex h-full flex-col overflow-hidden rounded-2xl">
               <div className="aspect-[1200/340] w-full border-b border-navy-border bg-navy">
-                <SecurityIllustration />
+                <ExpandableIllustration
+                  title="ZIRAN Tool-Chain Discovery: Graph Beats List"
+                  description="Individually-safe tools can form dangerous attack paths when chained — Ziran's graph analysis surfaces them; a list-based scanner won't."
+                >
+                  <SecurityIllustration />
+                </ExpandableIllustration>
               </div>
               <div className="p-6">
                 <p className="text-sm font-semibold text-foreground">
@@ -452,7 +463,12 @@ function Index() {
           <Reveal delay={200}>
             <div className="glass-card flex h-full flex-col overflow-hidden rounded-2xl">
               <div className="aspect-[1200/340] w-full border-b border-navy-border bg-navy">
-                <IntelligenceIllustration />
+                <ExpandableIllustration
+                  title="CIS: One Rule, Thousands of Conversations"
+                  description="Business rules understood once — thousands of test conversations generated from that understanding."
+                >
+                  <IntelligenceIllustration />
+                </ExpandableIllustration>
               </div>
               <div className="p-6">
                 <p className="text-sm font-semibold text-foreground">
