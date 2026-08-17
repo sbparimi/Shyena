@@ -148,9 +148,9 @@ const CAPABILITIES = [
 const ROADMAP_CARDS = [
   {
     icon: Wand2,
-    title: "Automatic scenario generation",
+    title: "Richer scenarios via CIS",
     description:
-      "Generating candidate test scenarios and personas from your agent's real conversation logs, for your team to review and approve before they run — human sign-off stays in the loop, but the first draft won't be a blank page.",
+      "CIS — our conversation intelligence system — produces structured journey contracts covering decision provenance, counterfactual boundary cases, and tool, memory and orchestrator checks, not just a scripted happy path. Candidates are generated for your team to review and approve before they run; human sign-off stays in the loop, so the first draft won't be a blank page.",
   },
   {
     icon: Layers,
