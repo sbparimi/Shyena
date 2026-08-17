@@ -109,51 +109,56 @@ const STATS = [
   { value: "0", label: "false green passes — the gate structurally prevents it" },
 ];
 
-const LANDSCAPE_COLUMNS = ["Prompt/Output Testers", "Observability", "Scripted Chatbot Testers", "Shyena"] as const;
+const LANDSCAPE_COLUMNS = ["Promptfoo", "Arize Phoenix", "DeepEval", "Ragas", "Shyena"] as const;
 
 const LANDSCAPE_ROWS = [
   {
     label: "What it tests",
     values: [
-      "One prompt or LLM call",
-      "Traces already captured",
-      "Scripted conversation flows",
+      "Prompts, models and RAG pipelines via direct API calls; a separate module red-teams for jailbreaks",
+      "Traces already captured from an instrumented app",
+      "Single-turn outputs, multi-turn conversations, and agent traces",
+      "RAG, workflow and agent outputs you provide as a dataset",
       "A full live conversation, turn by turn",
     ],
   },
   {
     label: "Execution surface",
     values: [
-      "Direct API call",
+      "Direct API/HTTP calls — not your live customer-facing channel",
       "Dataset replay or post-hoc production traces — not your live customer-facing channel",
-      "Simulated / API-level",
+      "A callback to your app's code, or post-hoc traces — not your live customer-facing channel",
+      "None — scores the dataset you give it",
       "Real browser or voice session — the same surface your customers use",
     ],
   },
   {
     label: "Test authoring",
     values: [
-      "Input → expected-output test cases",
-      "Fixed input → expected-output dataset examples — not a live, improvised conversation",
-      "Scripted conversation trees",
+      "Declarative config test cases with assertions; red-team prompts are generated, not authored",
+      "Group captured traces into datasets, rerun through app versions",
+      "Fixed input/output datasets, or a goal + persona + expected-outcome golden the simulator role-plays from",
+      "Question / context / answer / ground-truth dataset rows",
       "Goal + persona + playbook — the agent improvises like a real customer",
     ],
   },
   {
     label: "Handles conversation non-determinism",
     values: [
-      "N/A — single call, not a conversation",
+      "Red-team strategies adapt and backtrack to find a jailbreak — not general goal completion",
       "Fixed dataset inputs per run, or observes production after the fact",
-      "Brittle — fails on any path deviation",
+      "Its conversation simulator adapts toward a stated goal — but via a callback, not your live channel",
+      "N/A — scores conversations that already happened",
       "Built around it — the same goal reaches the outcome via a different valid path every run",
     ],
   },
   {
     label: "LLM-judged + deterministic scoring, combined",
     values: [
-      "LLM-judged only",
+      "Both exist as assertion types, evaluated per-assertion — not fused into one gated verdict",
       "Both exist as evaluator types, but as separate experiments — not fused into one gated verdict",
-      "Deterministic only",
+      "Both exist as metric types — G-Eval plus deterministic scorers like tool correctness — not fused into one gated verdict",
+      "Both exist as metric types, computed independently per row",
       "Both, natively combined in one verdict",
     ],
   },
@@ -163,47 +168,63 @@ const LANDSCAPE_ROWS = [
       "No concept of this",
       "No concept of this",
       "No concept of this",
+      "No concept of this",
       "Yes — a broken or incomplete run is capped at FAIL before quality is even scored",
     ],
   },
   {
     label: "Semantic / state-transition validity model",
-    values: ["No", "No", "No", "Yes — six-construct verdict validates state transitions, not just wording"],
+    values: [
+      "No",
+      "No",
+      "No named equivalent",
+      "No",
+      "Yes — six-construct verdict validates state transitions, not just wording",
+    ],
   },
   {
     label: "Orchestrator-level decision & dispatch analysis",
     values: [
       "No",
       "Partial — manual trace inspection",
+      "Partial — tool-correctness and agent-trajectory metrics, not a weighted per-turn model",
       "No",
       "Yes — per-turn analysis of whether the agent dispatched correctly, not just replied well",
     ],
   },
   {
     label: "Accessibility scanning",
-    values: ["No", "No", "No", "Yes — gated a11y scans on smoke and pre-production runs"],
+    values: ["No", "No", "No", "No", "Yes — gated a11y scans on smoke and pre-production runs"],
   },
   {
     label: "Voice + chat channel coverage",
     values: [
       "Text/API only",
       "Depends on instrumentation",
-      "Chat-only, typically",
+      "Text/API only",
+      "N/A — not a channel-execution tool",
       "Both — the same execution engine drives voice and chat",
     ],
   },
   {
     label: "Full audit trail for compliance review",
     values: [
-      "Limited run logs",
+      "Eval run logs and CI history",
       "Yes — that's its core purpose",
-      "Limited",
+      "Test run reports; deeper history via its hosted platform integration",
+      "Whatever you log around the scoring run yourself",
       "Yes — every prompt, judge call, assertion and retry recorded and exportable",
     ],
   },
   {
     label: "Scale architecture (retry, backpressure, DLQ)",
-    values: ["N/A — single calls", "N/A", "Varies by vendor", "Built in, tuned to not overwhelm the agent under test"],
+    values: [
+      "Caching and concurrency controls; CI-oriented",
+      "N/A — ingests traces, doesn't execute runs",
+      "Pytest-native parallelization; CI-oriented",
+      "N/A — a single scoring pass over your dataset",
+      "Built in, tuned to not overwhelm the agent under test",
+    ],
   },
 ] as const;
 
@@ -449,17 +470,18 @@ function Index() {
             Not a prompt tester. Not an observability tool.
           </h2>
           <p className="mt-4 text-muted-foreground">
-            Tools like Promptfoo and DeepEval test a single prompt. Arize Phoenix watches what
-            already happened in production. Botium scripts a chatbot's expected path. Shyena is the
-            only one that executes a full live conversation, judges it on semantics and orchestration
-            as well as wording, and refuses to let a broken run report a pass.
+            Tools like Promptfoo and DeepEval test prompts and outputs against datasets you define.
+            Arize Phoenix observes traces after the fact. Ragas scores whatever dataset you hand it.
+            None of them drives a live conversation through your actual customer-facing channel.
+            Shyena is the only one that executes a full live conversation, judges it on semantics and
+            orchestration as well as wording, and refuses to let a broken run report a pass.
           </p>
         </div>
 
         <Reveal>
           <div className="glow-primary mt-10 overflow-x-auto rounded-2xl border border-primary/30 bg-card shadow-card">
-            <div className="min-w-[720px]">
-              <div className="grid grid-cols-[1.3fr_repeat(4,1fr)] items-start gap-4 border-b border-border bg-secondary/40 px-6 py-4 text-sm font-semibold">
+            <div className="min-w-[920px]">
+              <div className="grid grid-cols-[1.3fr_repeat(5,1fr)] items-start gap-4 border-b border-border bg-secondary/40 px-6 py-4 text-sm font-semibold">
                 <span className="text-foreground">&nbsp;</span>
                 {LANDSCAPE_COLUMNS.map((col, i) => (
                   <span
@@ -473,7 +495,7 @@ function Index() {
               {LANDSCAPE_ROWS.map((row, i) => (
                 <div
                   key={row.label}
-                  className={`grid grid-cols-[1.3fr_repeat(4,1fr)] items-start gap-4 px-6 py-4 text-sm last:rounded-b-2xl ${i % 2 === 1 ? "bg-secondary/20" : ""}`}
+                  className={`grid grid-cols-[1.3fr_repeat(5,1fr)] items-start gap-4 px-6 py-4 text-sm last:rounded-b-2xl ${i % 2 === 1 ? "bg-secondary/20" : ""}`}
                 >
                   <span className="font-medium text-foreground">{row.label}</span>
                   {row.values.map((value, j) => (
