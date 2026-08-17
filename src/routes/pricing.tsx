@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Check, X, HelpCircle, Mail, MessageCircle, Shield, Zap, Building2 } from "lucide-react";
+import { ArrowRight, Check, X, HelpCircle, Mail, MessageCircle, PlayCircle, Shield, Zap, Building2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -13,7 +13,7 @@ export const Route = createFileRoute("/pricing")({
       {
         name: "description",
         content:
-          "Pricing for Shyena's AI evaluation platform — live today for conversational and voice AI testing. Starter from $750/mo, Growth from $3,500/mo, Enterprise custom-scoped — evaluated-conversation volume included in every plan.",
+          "Pricing for Shyena's AI evaluation platform — live today for conversational and voice AI testing. Start with a free pilot on your own agent, then Starter from $750/mo, Growth from $3,500/mo, Enterprise custom-scoped — evaluated-conversation volume included in every plan.",
       },
       { property: "og:title", content: "AI Agent Testing Pricing — Shyena" },
       {
@@ -31,6 +31,25 @@ export const Route = createFileRoute("/pricing")({
 
 const TIERS = [
   {
+    id: "pilot",
+    name: "Free Pilot",
+    tag: null,
+    description: "See a real verdict against your own live Cognigy agent before you pay anything.",
+    icon: PlayCircle,
+    price: "$0",
+    priceUnit: "",
+    priceNote: "One real scenario, run against your live agent — no commitment",
+    features: [
+      "One scenario, one agent",
+      "Full evaluation pipeline — not a stripped-down demo",
+      "Real verdict: LLM-as-judge scoring, deterministic assertions, execution-integrity gate",
+      "Guided setup with our team",
+      "No credit card, no contract",
+    ],
+    cta: "Start a free pilot",
+    highlighted: false,
+  },
+  {
     id: "starter",
     name: "Starter",
     tag: null,
@@ -47,7 +66,7 @@ const TIERS = [
       "Execution-integrity hard gate",
       "Email support",
     ],
-    cta: "Start a pilot",
+    cta: "Get Started",
     highlighted: false,
   },
   {
@@ -184,7 +203,7 @@ function PricingPage() {
 
       {/* Tier cards */}
       <section className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8">
-        <div className="grid gap-6 lg:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {TIERS.map((tier) => {
             const Icon = tier.icon;
             return (
@@ -249,6 +268,13 @@ function PricingPage() {
             );
           })}
         </div>
+        <p className="mt-8 text-center text-sm text-muted-foreground">
+          Want hands-on help designing personas and quality gates on Starter or Growth?{" "}
+          <Link to="/services" className="font-medium text-primary hover:underline">
+            Our team offers that as a separate engagement
+          </Link>{" "}
+          — Enterprise is the only plan with a dedicated engineer included.
+        </p>
       </section>
 
       {/* Comparison table */}
