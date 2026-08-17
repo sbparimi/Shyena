@@ -27,20 +27,20 @@ import { CtaBand } from "@/components/site/cta-band";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Shyena — The AI Evaluation Platform for Conversational & Voice AI" },
+      { title: "Shyena — AI Evaluation & Testing Platform for Cognigy Conversational Agents" },
       {
         name: "description",
         content:
-          "Shyena is an AI evaluation platform built to test any AI system before it ships — live today for conversational and voice AI, RAG next. It runs real, agent-driven conversations against your live chatbot or voice bot, scores every turn with LLM-as-judge evaluation and deterministic assertions, and gates releases so a broken conversation can never report a false pass.",
+          "Shyena is an AI evaluation platform built to test any AI system before it ships — live today for testing and evaluating Cognigy-built conversational and voice AI agents, RAG next. It runs real, agent-driven conversations against your live Cognigy chatbot or voice bot, scores every turn with LLM-as-judge evaluation and deterministic assertions, and gates releases so a broken conversation can never report a false pass.",
       },
-      { property: "og:title", content: "Shyena — The AI Evaluation Platform for Conversational & Voice AI" },
+      { property: "og:title", content: "Shyena — AI Evaluation & Testing Platform for Cognigy Conversational Agents" },
       {
         property: "og:description",
         content:
-          "End-to-end testing and AI evaluation for chat and voice agents, with gated verdicts your release process can rely on.",
+          "End-to-end testing and AI evaluation for Cognigy chat and voice agents, with gated verdicts your release process can rely on.",
       },
     ],
-    links: [{ rel: "canonical", href: "https://shyena.ai/" }],
+    links: [{ rel: "canonical", href: "https://shyena.eu/" }],
   }),
   component: Index,
 });
@@ -292,7 +292,7 @@ function Index() {
           <div className="mx-auto max-w-3xl text-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary px-3.5 py-1.5 text-xs font-medium text-muted-foreground">
               <Sparkles className="h-3.5 w-3.5 text-primary" />
-              The AI Evaluation Platform
+              AI Evaluation for Cognigy Conversational Agents
             </span>
             <h1 className="mt-6 text-4xl font-bold leading-[1.08] sm:text-6xl">
               Automated AI Evaluation.{" "}
@@ -363,6 +363,11 @@ function Index() {
               <Link to="/product" className="text-primary hover:underline">
                 live today
               </Link>
+            </p>
+            <p className="mt-2 max-w-sm text-sm leading-relaxed text-muted-foreground">
+              Shyena tests and evaluates Cognigy-built conversational and voice AI agents —
+              driving real chat and voice sessions against your live Cognigy bot and judging
+              every turn.
             </p>
             <div className="mt-3 flex flex-wrap gap-2">
               <span className="rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground">

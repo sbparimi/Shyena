@@ -24,7 +24,7 @@ export const Route = createFileRoute("/pricing")({
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://shyena.ai/pricing" }],
+    links: [{ rel: "canonical", href: "https://shyena.eu/pricing" }],
   }),
   component: PricingPage,
 });
@@ -115,7 +115,7 @@ const FAQS = [
   {
     question: "What platforms do you support?",
     answer:
-      "Shyena drives conversations through the same surface your customers use: web chat, voice calls, SMS, and common messaging channels. We integrate with the major conversational AI platforms and can add new channel adapters on request.",
+      "Cognigy is Shyena's live platform integration today — Shyena drives real chat and voice conversations against your live Cognigy agent through the same surface your customers use: web chat, voice calls, SMS, and common messaging channels. We can add new platform and channel adapters on request.",
   },
   {
     question: "Can we run this in our own cloud or VPC?",

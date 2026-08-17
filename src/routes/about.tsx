@@ -15,7 +15,7 @@ export const Route = createFileRoute("/about")({
       { property: "og:title", content: "About — Shyena" },
       { property: "og:description", content: "The team building trustworthy release gates for AI systems." },
     ],
-    links: [{ rel: "canonical", href: "https://shyena.ai/about" }],
+    links: [{ rel: "canonical", href: "https://shyena.eu/about" }],
   }),
   component: AboutPage,
 });

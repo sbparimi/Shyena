@@ -24,7 +24,7 @@ export const Route = createFileRoute("/contact")({
       { property: "og:title", content: "Contact & Demo — Shyena" },
       { property: "og:description", content: "Book a demo of Shyena for your AI team." },
     ],
-    links: [{ rel: "canonical", href: "https://shyena.ai/contact" }],
+    links: [{ rel: "canonical", href: "https://shyena.eu/contact" }],
   }),
   component: ContactPage,
 });

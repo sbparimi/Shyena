@@ -83,7 +83,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "Shyena is an AI evaluation platform built to test any AI system before it ships. Live today for conversational and voice AI — real agent-driven conversations, judged and gated so a broken run can never report a false pass. RAG evaluation is next.",
+          "Shyena is an AI evaluation platform built to test any AI system before it ships. Live today for testing and evaluating Cognigy-built conversational and voice AI agents — real agent-driven conversations, judged and gated so a broken run can never report a false pass. RAG evaluation is next.",
       },
       { property: "og:title", content: "Shyena — Automated AI Evaluation. Trusted Every Time." },
       {
@@ -120,7 +120,7 @@ const ORGANIZATION_SCHEMA = {
   applicationCategory: "BusinessApplication",
   operatingSystem: "Web",
   description:
-    "Shyena is an AI evaluation platform built to test any AI system before it ships — live today for conversational and voice AI, with RAG evaluation next. It runs real, agent-driven conversations against live chat and voice bots, scores every turn with LLM-as-judge evaluation and deterministic assertions, and gates releases so a broken conversation can never report a false pass.",
+    "Shyena is an AI evaluation platform built to test any AI system before it ships. It is live today for testing and evaluating Cognigy-built conversational and voice AI agents, with RAG evaluation next. It runs real, agent-driven conversations against live Cognigy chat and voice bots, scores every turn with LLM-as-judge evaluation and deterministic assertions, and gates releases so a broken conversation can never report a false pass.",
   offers: {
     "@type": "Offer",
     price: "750",
@@ -139,7 +139,7 @@ function RootShell({ children }: { children: ReactNode }) {
           for your analytics tool of choice), create a site, and replace the
           data-domain placeholder below with your real domain to start tracking.
         */}
-        <script defer data-domain="shyena.ai" src="https://plausible.io/js/script.js" />
+        <script defer data-domain="shyena.eu" src="https://plausible.io/js/script.js" />
         <script
           type="application/ld+json"
           // eslint-disable-next-line react/no-danger

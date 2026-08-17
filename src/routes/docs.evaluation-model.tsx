@@ -19,7 +19,7 @@ export const Route = createFileRoute("/docs/evaluation-model")({
       },
       { property: "og:type", content: "article" },
     ],
-    links: [{ rel: "canonical", href: "https://shyena.ai/docs/evaluation-model" }],
+    links: [{ rel: "canonical", href: "https://shyena.eu/docs/evaluation-model" }],
   }),
   component: EvaluationModelDoc,
 });

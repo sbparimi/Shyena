@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Check, RefreshCw, ShieldCheck, Activity, Sparkles, Wand2, Layers } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { CtaBand } from "@/components/site/cta-band";
 import { cn } from "@/lib/utils";
 import {
@@ -15,25 +16,58 @@ import {
 export const Route = createFileRoute("/product")({
   head: () => ({
     meta: [
-      { title: "AI Agent Testing Platform Features — Shyena" },
+      { title: "Cognigy Agent Testing & Evaluation Platform Features — Shyena" },
       {
         name: "description",
         content:
-          "See how Shyena's AI agent testing platform works: agentic test personas, real conversation execution across chat and voice, LLM-as-judge evaluation, deterministic assertions, and the execution-integrity gate that stops broken conversations from reporting a pass.",
+          "See how Shyena tests and evaluates Cognigy-built conversational and voice AI agents: agentic test personas, real conversation execution across chat and voice, LLM-as-judge evaluation, deterministic assertions, and the execution-integrity gate that stops broken conversations from reporting a pass.",
       },
-      { property: "og:title", content: "AI Agent Testing Platform Features — Shyena" },
+      { property: "og:title", content: "Cognigy Agent Testing & Evaluation Platform Features — Shyena" },
       {
         property: "og:description",
         content:
-          "Agentic test personas, real conversation execution, LLM-as-judge metrics, and execution-integrity gating.",
+          "Agentic test personas, real conversation execution against your live Cognigy bot, LLM-as-judge metrics, and execution-integrity gating.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://shyena.ai/product" }],
+    links: [{ rel: "canonical", href: "https://shyena.eu/product" }],
   }),
   component: ProductPage,
 });
+
+const COGNIGY_FAQS = [
+  {
+    question: "Can Shyena test a Cognigy-built conversational AI agent?",
+    answer:
+      "Yes. Cognigy is Shyena's live platform integration today. Shyena drives a real browser or voice session against your live Cognigy agent over the same channel your customers use, generates the conversation turn-by-turn based on how the agent actually responds, and scores every turn.",
+  },
+  {
+    question: "How does Shyena evaluate a Cognigy chatbot or voice bot?",
+    answer:
+      "Each test is an agentic persona with a goal, personality, and behavioral playbook — not a fixed script. The executor improvises the next message based on what your Cognigy agent actually said, so it exercises the same open-ended paths real customers take. Every turn is scored with LLM-as-judge evaluation and deterministic assertions, then rolled up into a case verdict.",
+  },
+  {
+    question: "What happens if a Cognigy agent conversation fails or times out mid-test?",
+    answer:
+      "The execution-integrity gate caps that case at FAIL regardless of how well the earlier turns scored. A truncated conversation can't report a false green pass just because it stopped before reaching a forbidden state — the raw quality score stays visible for debugging, but the verdict reflects the real outcome.",
+  },
+  {
+    question: "Does Shyena support Cognigy voice agents, or only chat?",
+    answer:
+      "Both. Shyena runs real chat and voice sessions against your live Cognigy agent, using the same evaluation pipeline — agentic personas, LLM-as-judge scoring, deterministic assertions, and the execution-integrity gate — across both channels.",
+  },
+] as const;
+
+const COGNIGY_FAQ_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: COGNIGY_FAQS.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: { "@type": "Answer", text: faq.answer },
+  })),
+};
 
 const CAPABILITIES = [
   {
@@ -150,13 +184,18 @@ const SCALE_CARDS = [
 function ProductPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(COGNIGY_FAQ_SCHEMA) }}
+      />
       {/* Hero */}
       <section className="relative overflow-hidden">
         <div className="pointer-events-none absolute inset-x-0 -top-40 h-[420px] bg-[radial-gradient(60%_60%_at_50%_50%,var(--color-primary)_0%,transparent_70%)] opacity-[0.13]" />
         <div className="relative mx-auto w-full max-w-7xl px-5 pb-4 pt-20 sm:px-8 sm:pt-28">
           <div className="mx-auto max-w-3xl text-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary px-3.5 py-1.5 text-xs font-medium text-muted-foreground">
-              Product
+              Product — Cognigy Agent Testing
             </span>
             <h1 className="mt-6 text-4xl font-bold leading-[1.08] sm:text-6xl">
               One platform. Every layer of AI system quality.
@@ -295,6 +334,30 @@ function ProductPage() {
             })}
           </div>
         </div>
+      </section>
+
+      {/* Cognigy FAQ */}
+      <section className="mx-auto w-full max-w-4xl px-5 py-24 sm:px-8">
+        <div className="max-w-2xl">
+          <p className="font-mono text-xs uppercase tracking-[0.18em] text-primary">
+            Cognigy Agent Testing FAQ
+          </p>
+          <h2 className="mt-4 text-3xl font-bold sm:text-4xl">
+            Testing &amp; evaluating Cognigy conversational agents
+          </h2>
+        </div>
+        <Accordion type="single" collapsible className="mt-10 w-full">
+          {COGNIGY_FAQS.map((faq, i) => (
+            <AccordionItem key={faq.question} value={`cognigy-faq-${i}`}>
+              <AccordionTrigger className="text-left text-base font-semibold">
+                {faq.question}
+              </AccordionTrigger>
+              <AccordionContent className="text-sm leading-relaxed text-muted-foreground">
+                {faq.answer}
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
       </section>
 
       <CtaBand />
