@@ -381,7 +381,7 @@ function Index() {
 
       {/* Platforms */}
       <section className="mx-auto w-full max-w-7xl px-5 py-14 sm:px-8">
-        <div className="grid gap-8 sm:grid-cols-2">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           <div>
             <p className="text-sm font-semibold text-foreground">
               Evaluation —{" "}
@@ -419,6 +419,23 @@ function Index() {
                   {platform}
                 </span>
               ))}
+            </div>
+          </div>
+          <div>
+            <p className="text-sm font-semibold text-foreground">
+              Intelligence —{" "}
+              <span className="text-primary">CIS</span>
+            </p>
+            <p className="mt-2 max-w-sm text-sm leading-relaxed text-muted-foreground">
+              CIS is Shyena's proprietary conversation intelligence system — it understands your
+              agent's business rules and logic on its own and generates thousands of test
+              conversations from that understanding, so coverage grows with your agent instead of
+              your team's authoring time.
+            </p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              <span className="rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground">
+                Proprietary
+              </span>
             </div>
           </div>
         </div>
