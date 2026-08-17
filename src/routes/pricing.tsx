@@ -38,10 +38,10 @@ const TIERS = [
     icon: Zap,
     price: "$750",
     priceUnit: "/mo",
-    priceNote: "2,000 evaluated conversations included · $0.20 per conversation after",
+    priceNote: "500 evaluated conversations included · $0.20 per conversation after",
     features: [
       "One agent / one environment",
-      "2,000 evaluated conversations / mo",
+      "500 evaluated conversations / mo",
       "Core LLM-as-judge metrics",
       "Deterministic assertion contracts",
       "Execution-integrity hard gate",
@@ -58,10 +58,10 @@ const TIERS = [
     icon: MessageCircle,
     price: "$3,500",
     priceUnit: "/mo",
-    priceNote: "Starting price · 15,000 conversations included · $0.15 per conversation after",
+    priceNote: "Starting price · 1,000 conversations included · $0.15 per conversation after",
     features: [
       "Up to 5 agents & environments",
-      "15,000 evaluated conversations / mo",
+      "1,000 evaluated conversations / mo",
       "Full metric suite (semantic assurance, accessibility gates, orchestrator quality)",
       "Scheduled regression runs",
       "Slack & webhook alerts",
@@ -81,7 +81,7 @@ const TIERS = [
     priceNote: "Typically $75k–150k+/yr, scoped to your deployment and volume",
     features: [
       "Unlimited agents & environments",
-      "Negotiated evaluation volume",
+      "2,000 evaluated conversations / mo included, negotiable beyond that",
       "SSO / SAML and role-scoped access",
       "Dedicated success engineer",
       "Custom metric development",
@@ -110,7 +110,7 @@ const FAQS = [
   {
     question: "How is pricing calculated?",
     answer:
-      "Two axes: how many agents and environments you're covering, and how many conversations you evaluate per month. Each plan includes a set volume — 2,000/mo on Starter, 15,000/mo on Growth — with straightforward overage pricing beyond that. We count evaluated conversations, not seats, so teams with read-only reviewers aren't penalized for adding people.",
+      "Two axes: how many agents and environments you're covering, and how many conversations you evaluate per month. Each plan includes a set volume — 500/mo on Starter, 1,000/mo on Growth, 2,000/mo on Enterprise — with straightforward overage pricing beyond that. We count evaluated conversations, not seats, so teams with read-only reviewers aren't penalized for adding people.",
   },
   {
     question: "What platforms do you support?",
