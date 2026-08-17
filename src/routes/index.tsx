@@ -24,6 +24,11 @@ import {
 import { Button } from "@/components/ui/button";
 import { CtaBand } from "@/components/site/cta-band";
 import { Reveal } from "@/components/site/reveal";
+import {
+  EvaluationIllustration,
+  SecurityIllustration,
+  IntelligenceIllustration,
+} from "@/components/product/platform-illustrations";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -380,64 +385,94 @@ function Index() {
       </section>
 
       {/* Platforms */}
-      <section className="mx-auto w-full max-w-7xl px-5 py-14 sm:px-8">
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          <div>
-            <p className="text-sm font-semibold text-foreground">
-              Evaluation —{" "}
-              <Link to="/product" className="text-primary hover:underline">
-                live today
-              </Link>
-            </p>
-            <p className="mt-2 max-w-sm text-sm leading-relaxed text-muted-foreground">
-              Shyena tests and evaluates Cognigy-built conversational and voice AI agents —
-              driving real chat and voice sessions against your live Cognigy bot and judging
-              every turn.
-            </p>
-            <div className="mt-3 flex flex-wrap gap-2">
-              <span className="rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground">
-                Cognigy
-              </span>
-              <span className="rounded-full border border-dashed border-border bg-transparent px-3 py-1.5 text-xs font-medium text-muted-foreground">
-                More platforms next
-              </span>
+      <section className="mx-auto w-full max-w-7xl px-5 py-20 sm:px-8">
+        <div className="max-w-2xl">
+          <p className="font-mono text-xs uppercase tracking-[0.18em] text-primary">The platform</p>
+          <h2 className="mt-4 text-3xl font-bold sm:text-4xl">
+            Three engines. One release gate.
+          </h2>
+        </div>
+
+        <div className="mt-10 grid gap-6 lg:grid-cols-3">
+          <Reveal>
+            <div className="glass-card flex h-full flex-col overflow-hidden rounded-2xl">
+              <div className="aspect-[1200/340] w-full border-b border-navy-border bg-navy">
+                <EvaluationIllustration />
+              </div>
+              <div className="p-6">
+                <p className="text-sm font-semibold text-foreground">
+                  Evaluation —{" "}
+                  <Link to="/product" className="text-primary hover:underline">
+                    live today
+                  </Link>
+                </p>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                  Shyena tests and evaluates Cognigy-built conversational and voice AI agents —
+                  driving real chat and voice sessions against your live Cognigy bot and judging
+                  every turn.
+                </p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  <span className="rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground">
+                    Cognigy
+                  </span>
+                  <span className="rounded-full border border-dashed border-border bg-transparent px-3 py-1.5 text-xs font-medium text-muted-foreground">
+                    More platforms next
+                  </span>
+                </div>
+              </div>
             </div>
-          </div>
-          <div>
-            <p className="text-sm font-semibold text-foreground">
-              Security —{" "}
-              <Link to="/security" className="text-primary hover:underline">
-                live today, via Ziran
-              </Link>
-            </p>
-            <div className="mt-3 flex flex-wrap gap-2">
-              {["LangChain", "CrewAI", "Bedrock", "MCP", "Browser & HTTPS agents"].map((platform) => (
-                <span
-                  key={platform}
-                  className="rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground"
-                >
-                  {platform}
-                </span>
-              ))}
+          </Reveal>
+
+          <Reveal delay={100}>
+            <div className="glass-card flex h-full flex-col overflow-hidden rounded-2xl">
+              <div className="aspect-[1200/340] w-full border-b border-navy-border bg-navy">
+                <SecurityIllustration />
+              </div>
+              <div className="p-6">
+                <p className="text-sm font-semibold text-foreground">
+                  Security —{" "}
+                  <Link to="/security" className="text-primary hover:underline">
+                    live today, via Ziran
+                  </Link>
+                </p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {["LangChain", "CrewAI", "Bedrock", "MCP", "Browser & HTTPS agents"].map((platform) => (
+                    <span
+                      key={platform}
+                      className="rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground"
+                    >
+                      {platform}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </div>
-          </div>
-          <div>
-            <p className="text-sm font-semibold text-foreground">
-              Intelligence —{" "}
-              <span className="text-primary">CIS</span>
-            </p>
-            <p className="mt-2 max-w-sm text-sm leading-relaxed text-muted-foreground">
-              CIS is Shyena's proprietary conversation intelligence system — it understands your
-              agent's business rules and logic on its own and generates thousands of test
-              conversations from that understanding, so coverage grows with your agent instead of
-              your team's authoring time.
-            </p>
-            <div className="mt-3 flex flex-wrap gap-2">
-              <span className="rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground">
-                Proprietary
-              </span>
+          </Reveal>
+
+          <Reveal delay={200}>
+            <div className="glass-card flex h-full flex-col overflow-hidden rounded-2xl">
+              <div className="aspect-[1200/340] w-full border-b border-navy-border bg-navy">
+                <IntelligenceIllustration />
+              </div>
+              <div className="p-6">
+                <p className="text-sm font-semibold text-foreground">
+                  Intelligence —{" "}
+                  <span className="text-primary">CIS</span>
+                </p>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                  CIS is Shyena's proprietary conversation intelligence system — it understands
+                  your agent's business rules and logic on its own and generates thousands of test
+                  conversations from that understanding, so coverage grows with your agent instead
+                  of your team's authoring time.
+                </p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  <span className="rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground">
+                    Proprietary
+                  </span>
+                </div>
+              </div>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
