@@ -20,6 +20,8 @@ import {
   GitBranch,
   Bug,
   SlidersHorizontal,
+  Github,
+  ArrowUpRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CtaBand } from "@/components/site/cta-band";
@@ -737,6 +739,128 @@ function Index() {
               <p className={`mt-3 text-sm font-semibold ${TONE_TEXT[attr.tone]}`}>{attr.title}</p>
               <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{attr.body}</p>
             </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Trust, sized to reality */}
+      <section className="mx-auto w-full max-w-7xl px-5 pb-24 sm:px-8">
+        <div className="grid gap-10 overflow-hidden rounded-3xl border border-border bg-card p-8 shadow-card lg:grid-cols-2 lg:p-0">
+          <div className="lg:p-10">
+            <p className="font-mono text-xs uppercase tracking-[0.18em] text-primary">Trust</p>
+            <h2 className="mt-4 text-3xl font-bold sm:text-4xl">Nothing here asks you to take our word for it.</h2>
+            <p className="mt-4 text-muted-foreground">
+              We're early — no wall of customer logos, no analyst quadrant, on purpose: we'd rather
+              get the evaluation model right first. Here's what you can actually check yourself
+              today, not what we claim.
+            </p>
+            <ul className="mt-6 space-y-4">
+              <li className="flex items-start gap-3">
+                <span className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                  <Github className="h-4 w-4" />
+                </span>
+                <div>
+                  <p className="text-sm font-semibold text-foreground">Ziran is fully open source</p>
+                  <p className="mt-0.5 text-sm text-muted-foreground">
+                    Read the actual detection logic on GitHub — not a description of it.{" "}
+                    <a
+                      href="https://github.com/taoq-ai/ziran"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-0.5 font-medium text-primary hover:underline"
+                    >
+                      github.com/taoq-ai/ziran <ArrowUpRight className="h-3 w-3" />
+                    </a>
+                  </p>
+                </div>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-accent/10 text-accent">
+                  <ScrollText className="h-4 w-4" />
+                </span>
+                <div>
+                  <p className="text-sm font-semibold text-foreground">The metric catalog is documented, not just claimed</p>
+                  <p className="mt-0.5 text-sm text-muted-foreground">
+                    31 metrics run by default, 117 in the full catalog — see exactly what each one
+                    scores in the docs.
+                  </p>
+                </div>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                  <ShieldCheck className="h-4 w-4" />
+                </span>
+                <div>
+                  <p className="text-sm font-semibold text-foreground">The gate is checkable on your very first run</p>
+                  <p className="mt-0.5 text-sm text-muted-foreground">
+                    Bring one real scenario to a free pilot. If a run breaks mid-conversation,
+                    watch it get capped at FAIL yourself — nothing to take on faith.
+                  </p>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div className="grid grid-cols-2 gap-1 lg:gap-2">
+            <img
+              src="/images/team-collab-1.jpg"
+              alt="A team collaborating around a laptop"
+              className="h-full w-full object-cover"
+              loading="lazy"
+            />
+            <img
+              src="/images/team-diverse-1.jpg"
+              alt="Colleagues talking in an office hallway"
+              className="h-full w-full object-cover"
+              loading="lazy"
+            />
+            <img
+              src="/images/team-professionals-1.jpg"
+              alt="Two colleagues in a professional setting"
+              className="col-span-2 h-full w-full object-cover"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Resources */}
+      <section className="mx-auto w-full max-w-7xl px-5 pb-24 sm:px-8">
+        <div className="max-w-2xl">
+          <p className="font-mono text-xs uppercase tracking-[0.18em] text-primary">Resources</p>
+          <h2 className="mt-4 text-3xl font-bold sm:text-4xl">Field notes on testing conversational AI</h2>
+        </div>
+        <div className="mt-10 grid gap-6 sm:grid-cols-2">
+          {[
+            {
+              id: "why-conversational-ai-needs-a-different-testing-model",
+              title: "Why Conversational AI Needs a Different Testing Model",
+              category: "Testing Strategy",
+              excerpt:
+                "The same test persona can take a different but equally valid path every run. That breaks the assumptions conventional QA is built on.",
+              readTime: "6 min read",
+            },
+            {
+              id: "the-problem-with-green-checkmarks-on-broken-conversations",
+              title: "The Problem With Green Checkmarks on Broken Conversations",
+              category: "Quality Assurance",
+              excerpt:
+                "When a test runner reports success on a conversation that never reached its goal, your metrics are lying to you.",
+              readTime: "5 min read",
+            },
+          ].map((post) => (
+            <Link
+              key={post.id}
+              to="/blog/$slug"
+              params={{ slug: post.id }}
+              className="group flex flex-col rounded-2xl border border-border bg-card p-7 shadow-card transition-all hover:-translate-y-0.5 hover:border-primary/30"
+            >
+              <span className="w-fit rounded-full bg-primary/10 px-2.5 py-1 text-xs font-medium text-primary">
+                {post.category}
+              </span>
+              <h3 className="mt-4 text-lg font-semibold group-hover:text-primary">{post.title}</h3>
+              <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{post.excerpt}</p>
+              <p className="mt-4 text-xs font-medium text-muted-foreground">{post.readTime}</p>
+            </Link>
           ))}
         </div>
       </section>
