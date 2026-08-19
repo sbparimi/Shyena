@@ -57,6 +57,16 @@ const ARTICLES = [
     gradient: "from-purple via-accent/70 to-primary",
   },
   {
+    id: "cognigy-agent-security-testing-with-ziran",
+    title: "Cognigy Agent Security Testing: Red-Teaming with Ziran",
+    category: "Security",
+    excerpt:
+      "Inside the pipeline we use to red-team Cognigy agents: risk-scored campaign selection, adaptive execution with Ziran, and honest scoring.",
+    readTime: "7 min read",
+    status: "published",
+    gradient: "from-destructive via-warning/70 to-navy",
+  },
+  {
     id: "what-llm-as-judge-actually-means-in-practice",
     title: "What 'LLM-as-Judge' Actually Means in Practice",
     category: "Evaluation Model",

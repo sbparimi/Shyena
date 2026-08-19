@@ -3,7 +3,7 @@ import { ArrowLeft, ArrowRight, Users, Briefcase, BookOpen } from "lucide-react"
 import type { ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { EvaluationIllustration } from "@/components/product/platform-illustrations";
+import { EvaluationIllustration, SecurityIllustration } from "@/components/product/platform-illustrations";
 
 const ARTICLE_META: Record<string, { title: string; description: string }> = {
   "why-conversational-ai-needs-a-different-testing-model": {
@@ -20,6 +20,11 @@ const ARTICLE_META: Record<string, { title: string; description: string }> = {
     title: "How to Test a Cognigy Agent: A Practical Guide — Shyena Blog",
     description:
       "Learn how Shyena tests Cognigy agents: goal-driven cases, deterministic checks, LLM judging, and an execution-integrity gate that stops false passes.",
+  },
+  "cognigy-agent-security-testing-with-ziran": {
+    title: "Cognigy Agent Security Testing: Red-Teaming with Ziran — Shyena Blog",
+    description:
+      "How we red-team Cognigy agents: a risk-scored pipeline that prioritizes attacks, executes them adaptively with Ziran, then scores the results.",
   },
 };
 
@@ -80,6 +85,17 @@ function ArticlePage() {
     return (
       <ArticleShell category="Testing Strategy" title="How to Test a Cognigy Agent" readTime="7 min read">
         <CognigyTestingBody />
+      </ArticleShell>
+    );
+  }
+  if (slug === "cognigy-agent-security-testing-with-ziran") {
+    return (
+      <ArticleShell
+        category="Security"
+        title="How We Red-Team Cognigy Agents for Security, Using Ziran"
+        readTime="7 min read"
+      >
+        <ZiranPipelineBody />
       </ArticleShell>
     );
   }
@@ -169,6 +185,17 @@ function ArticleFigure({ caption }: { caption: string }) {
     <figure className="my-10">
       <div className="aspect-[1200/340] w-full overflow-hidden rounded-2xl border border-navy-border bg-navy">
         <EvaluationIllustration />
+      </div>
+      <figcaption className="mt-3 text-center text-xs text-muted-foreground">{caption}</figcaption>
+    </figure>
+  );
+}
+
+function SecurityArticleFigure({ caption }: { caption: string }) {
+  return (
+    <figure className="my-10">
+      <div className="aspect-[1200/340] w-full overflow-hidden rounded-2xl border border-navy-border bg-navy">
+        <SecurityIllustration />
       </div>
       <figcaption className="mt-3 text-center text-xs text-muted-foreground">{caption}</figcaption>
     </figure>
@@ -802,6 +829,256 @@ function CognigyTestingBody() {
       <Accordion type="single" collapsible className="mt-6 w-full">
         {COGNIGY_TESTING_FAQS.map((faq, i) => (
           <AccordionItem key={faq.question} value={`cognigy-testing-faq-${i}`}>
+            <AccordionTrigger className="text-left text-base font-semibold">
+              {faq.question}
+            </AccordionTrigger>
+            <AccordionContent className="text-sm leading-relaxed text-muted-foreground">
+              {faq.answer}
+            </AccordionContent>
+          </AccordionItem>
+        ))}
+      </Accordion>
+    </>
+  );
+}
+
+/* ── Article 4 body ───────────────────────────────────────────────────── */
+
+const ZIRAN_PIPELINE_FAQS = [
+  {
+    question: "How do you red-team a Cognigy agent?",
+    answer:
+      "The pipeline runs in three phases. A seven-stage planning phase decides what's worth testing — research, threat modeling, a knowledge graph of the agent's flows and tool chains, hypothesis generation, risk scoring, and cost optimization — and outputs a bounded set of attack campaigns. Ziran, an independent adaptive red-teaming engine, then executes those campaigns as multi-turn adversarial conversations. Finally, a security analysis and scoring stage turns the resulting transcripts into a categorized, actionable verdict.",
+  },
+  {
+    question: "Why not run every security test on every change?",
+    answer:
+      "Because a security probe against a live conversational agent is a real session — real inference calls, sometimes real backend integrations, real wall-clock time to play out a multi-turn attack. Running a comprehensive attack library on every change turns testing into a cost and latency problem: teams either stop running the checks on every change, or thin them down until they're too shallow to catch anything real. Prioritizing which attacks run against which changes, at which cadence, avoids both failure modes.",
+  },
+  {
+    question: "What is Ziran used for in AI agent security testing?",
+    answer:
+      "Ziran is an independent open-source project for adaptive AI red-teaming — not something built in-house. In this pipeline, it's the execution engine: once the planning phase selects a bounded set of campaigns, Ziran runs the actual adversarial conversations against the live agent, adjusting its approach mid-conversation based on how the agent responds, rather than replaying a fixed script.",
+  },
+  {
+    question: "How do you decide which security campaigns to run?",
+    answer:
+      "Hypotheses about how an attacker might manipulate the agent are generated from a knowledge graph of its flows and tool chains, then scored for likelihood and potential impact. Those scored hypotheses are weighed against the cost of actually testing them — session time, inference spend, execution complexity — to find the campaigns that give the best signal for the resources spent. The result is a bounded, prioritized set sized to the moment: small for a routine change, larger for a scheduled deep assessment.",
+  },
+] as const;
+
+const ZIRAN_PIPELINE_FAQ_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: ZIRAN_PIPELINE_FAQS.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: { "@type": "Answer", text: faq.answer },
+  })),
+};
+
+function ZiranPipelineBody() {
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(ZIRAN_PIPELINE_FAQ_SCHEMA) }}
+      />
+      <Lead>
+        Conversational AI agents built on platforms like Cognigy don't sit still. Every prompt
+        tweak, every new flow, every added tool integration changes the agent's attack surface.
+        The instinctive response is to treat security testing like unit testing: run the full
+        suite on every change, catch regressions immediately, sleep well.
+      </Lead>
+      <P>
+        That instinct breaks down fast once the "test" is an adversarial conversation against a
+        live conversational AI platform. Unlike a unit test, a security probe against a deployed
+        agent isn't free or instantaneous — it's a real session, consuming real inference calls,
+        sometimes touching real backend integrations, taking real wall-clock time to play out a
+        multi-turn manipulation attempt. Multiply that by a comprehensive attack library — prompt
+        injection variants, jailbreak patterns, tool-misuse attempts, data exfiltration probes,
+        social-engineering flows — and running the entire catalog on every change stops being a
+        testing strategy and starts being a cost and latency problem. This is the core tension in
+        Cognigy agent security testing: the same probes that make a test meaningful are the ones
+        that make running all of them, always, unaffordable.
+      </P>
+      <P>
+        The failure mode isn't subtle. Run everything, every time, and one of two things happens:
+        the checks get so slow and expensive that teams quietly stop running them on every
+        change, or the checks get quietly thinned down to something fast and shallow enough to
+        survive CI — at which point they stop catching anything real. Neither outcome is
+        acceptable for something as consequential as agent security.
+      </P>
+      <Pullquote>
+        A security check that's too slow to run often, or too shallow to catch anything real, is
+        the same failure wearing two different costumes.
+      </Pullquote>
+      <P>
+        What's actually needed is prioritization — a system that decides which attacks are worth
+        running, against which changes, at which cadence, before anything touches the live
+        platform. That's the problem the pipeline below is built to solve.
+      </P>
+
+      <H2>The architecture: deciding what's worth testing</H2>
+      <P>
+        The pipeline for red-teaming Cognigy agents has three conceptual phases. The first — and
+        largest — is entirely about triage: figuring out what's worth attacking before any attack
+        actually runs.
+      </P>
+      <P>
+        Change Implemented is the trigger: something about the agent changed — a flow, a prompt,
+        an integration, a permission — and that change is what the rest of the pipeline reasons
+        about. Nothing downstream runs in a vacuum; it runs in the context of what just moved.
+        From there, seven planning stages decide what's worth testing:
+      </P>
+      <NumberedList
+        items={[
+          {
+            label: "Security Research Agent.",
+            body: "Gathers context before deciding what to test — what kinds of weaknesses are known to affect systems like this one, what's changed about the threat landscape, what classes of failure are relevant to a conversational agent with this one's capabilities.",
+          },
+          {
+            label: "Threat Modeling.",
+            body: "Turns that research into a structured picture of what could go wrong — not a generic checklist, but a model of this agent's specific exposure: what it can do, what it's connected to, where an adversarial conversation could push it somewhere it shouldn't go.",
+          },
+          {
+            label: "Knowledge Graph.",
+            body: "Maps the threat model onto a structural representation of the agent itself — its flows, its tool chains, its decision points — so \"what's exposed\" is a queryable graph the rest of the pipeline can reason over, not a paragraph of prose.",
+          },
+          {
+            label: "Hypothesis Generation.",
+            body: "Generates concrete hypotheses from that graph: specific ways an attacker might try to manipulate this specific agent, given its specific structure. This is where \"prompt injection is a risk category\" becomes \"here are the particular paths through this agent where it might matter.\"",
+          },
+          {
+            label: "Risk Scoring.",
+            body: "Scores each hypothesis — likelihood, potential impact, how directly it connects to something the agent can actually do — so the pipeline can tell a high-value target apart from a theoretical curiosity.",
+          },
+          {
+            label: "Cost Optimization.",
+            body: "Weighs scored hypotheses against the cost of actually testing them — session time, inference spend, execution complexity — to find the set of campaigns that gives the best signal for the resources spent.",
+          },
+          {
+            label: "Campaign Selection.",
+            body: "The output of the planning phase: a concrete, bounded set of attack campaigns to actually run, sized appropriately for the moment — a small set for a routine change, a larger set for a scheduled deep assessment.",
+          },
+        ]}
+      />
+      <P>
+        Everything from Security Research Agent through Campaign Selection is offline,
+        planning-stage work — it decides what to test, before anything touches the live agent.
+        Whether that planning phase is itself LLM-driven end-to-end is still an open, actively
+        evaluated design question, not a settled answer. It would be easy to write this section as
+        though the reasoning chain from research to campaign selection is already a proven,
+        autonomous pipeline; it isn't yet. What's settled is the shape — research feeds threat
+        modeling feeds a structural graph feeds hypotheses feeds scoring feeds cost-aware
+        selection. How much of that reasoning is automated versus assisted is still being worked
+        out.
+      </P>
+
+      <H2>Actually attacking it: Ziran in action</H2>
+      <P>
+        Once a bounded, prioritized set of campaigns is selected, execution happens using{" "}
+        <Link to="/security">adaptive AI red-teaming</Link> — Ziran, an independent open-source
+        project. Ziran isn't something built in-house — it's a third-party engine, and campaigns
+        selected upstream are handed to it as the thing that actually runs the adversarial
+        conversations: multi-turn, adaptive attacks that can adjust their approach mid-conversation
+        based on how the agent responds, rather than replaying a fixed script.
+      </P>
+      <P>
+        This is the one stage in the pipeline that's genuinely execution, not planning — real
+        sessions against a real agent, driven by real (if adversarial) conversational turns. It's
+        also exactly why the upstream prioritization work matters so much: this is the expensive,
+        slow part, and the entire point of the planning phase is to make sure only the campaigns
+        worth running actually get here.
+      </P>
+      <CompareCallout
+        left={{
+          label: "Campaign Selection",
+          body: "Decides what to attack — which hypotheses, against which parts of the agent, within what budget.",
+        }}
+        right={{
+          label: "Ziran Execution",
+          body: "Decides, adaptively, how to carry out each selected attack — adjusting its approach turn by turn based on how the agent actually responds.",
+        }}
+      />
+      <SecurityArticleFigure caption="Individually-safe tools can form dangerous attack paths when chained — graph-based discovery is what surfaces them." />
+
+      <H2>Turning results into a verdict: security analysis and scoring</H2>
+      <P>
+        A completed adversarial campaign produces a transcript, not a verdict. The final stage's
+        job is to close that gap: take what happened during execution — what the agent revealed,
+        what it refused, where it deviated from expected behavior — and turn it into something a
+        team can act on, a scored, categorized read on what the campaign actually demonstrated.
+      </P>
+      <P>
+        The tooling and metrics meant to do that are still under investigation, not finalized.
+        Turning an adversarial transcript into a reliable, well-calibrated verdict is a hard
+        problem in its own right, and it's being treated as one rather than assumed away. What's
+        fixed is the role this stage plays in the pipeline — the boundary between "a campaign ran"
+        and "here's what it means" — not yet the mechanism that fills it.
+      </P>
+
+      <H2>Why this is worth building: matching test depth to cadence</H2>
+      <P>
+        The payoff of this structure isn't any single stage — it's what the separation between
+        planning and execution makes possible. Because campaign selection is cost-aware and
+        risk-scored, the same pipeline can support genuinely different testing cadences without
+        needing different tooling for each:
+      </P>
+      <NumberedList
+        items={[
+          {
+            label: "PR-level check.",
+            body: "A small, cheap, high-confidence set of campaigns scoped tightly to what actually changed — fast enough to sit in a normal review loop.",
+          },
+          {
+            label: "Nightly run.",
+            body: "A wider net, catching things too expensive to check on every single change.",
+          },
+          {
+            label: "Weekly or release-gated assessment.",
+            body: "Goes deep — larger campaigns, more adversarial variety, closer to exhaustive within a still-bounded budget.",
+          },
+        ]}
+      />
+      <P>
+        That's the actual alternative to "run everything, every time." Instead of one scan that's
+        forced to be either too slow to run often or too shallow to catch anything real, the
+        cost-optimization and campaign-selection stages let the same pipeline dial its depth to
+        match the moment — cheap and fast where speed matters, deep and expensive where
+        thoroughness matters, without maintaining two separate systems to get there.
+      </P>
+      <P>
+        There's a longer-term shape to this too: as agentic AI systems increasingly talk to other
+        agentic systems — MCP-style tool access, agent-to-agent coordination — the attack surface
+        stops being "one conversational agent" and starts being a graph of interacting systems. A
+        pipeline that already reasons about an agent's structure as a knowledge graph, and already
+        separates "what's worth testing" from "how to attack it," has real room to extend in that
+        direction rather than needing to be rebuilt for it.
+      </P>
+
+      <H2>Where this fits at Shyena: Cognigy red team vs. quality testing</H2>
+      <P>
+        Shyena's core evaluation product tests Cognigy conversational and voice agents for
+        correctness and quality. Security red-teaming, using Ziran as the execution engine, is a
+        related but distinct capability — one built around graph-based discovery of an agent's
+        tool chains, detection of execution-level side effects, and adaptive multi-phase campaigns
+        rather than fixed attack scripts. Read more about how this Cognigy red team capability
+        works on <Link to="/security">our security page</Link>. The pipeline described here is the
+        architecture we're building toward to make that capability practical to run continuously,
+        not a system we're claiming is fully proven end to end today — the planning-phase
+        automation and the analysis/scoring tooling are both still active work. What's settled is
+        the shape: prioritize before you attack, attack adaptively using Ziran as the engine, and
+        score honestly before drawing conclusions. Teams that want this pipeline run as a managed
+        engagement rather than built and operated in-house can see how that works on{" "}
+        <Link to="/services">our services page</Link>.
+      </P>
+
+      <H2>Frequently Asked Questions</H2>
+      <Accordion type="single" collapsible className="mt-6 w-full">
+        {ZIRAN_PIPELINE_FAQS.map((faq, i) => (
+          <AccordionItem key={faq.question} value={`ziran-pipeline-faq-${i}`}>
             <AccordionTrigger className="text-left text-base font-semibold">
               {faq.question}
             </AccordionTrigger>
