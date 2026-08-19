@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight, Gauge, Ruler, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { H2, P, Ul } from "@/components/docs/doc-prose";
 
 export const Route = createFileRoute("/docs/evaluation-model")({
   head: () => ({
@@ -45,13 +46,11 @@ function EvaluationModelDoc() {
       </section>
 
       <article className="mx-auto w-full max-w-3xl px-5 pb-24 sm:px-8">
-        <div className="prose prose-lg max-w-none dark:prose-invert">
-          <h2>The three layers</h2>
-          <p>
-            A single verdict is built from three distinct checks. Each answers a different kind of
-            question, and they are deliberately not averaged together into one blended score.
-          </p>
-        </div>
+        <H2>The three layers</H2>
+        <P>
+          A single verdict is built from three distinct checks. Each answers a different kind of
+          question, and they are deliberately not averaged together into one blended score.
+        </P>
 
         <div className="mt-8 grid gap-5 sm:grid-cols-3">
           <div className="rounded-xl border border-border bg-card p-6 shadow-card">
@@ -83,63 +82,70 @@ function EvaluationModelDoc() {
           </div>
         </div>
 
-        <div className="prose prose-lg max-w-none dark:prose-invert">
-          <h2>Why the order is the whole point</h2>
-          <p>
-            Execution integrity is checked first because it's a gate, not a metric. If a conversation
-            timed out, errored, or never reached a resolution state, the verdict is capped at{" "}
-            <strong>FAIL</strong> immediately — regardless of how well the turns that did happen
-            scored. A truncated run doesn't get averaged in with the complete ones; it's disqualified
-            before scoring is even relevant.
-          </p>
-          <p>
-            This matters because a short, broken conversation often scores deceptively well on quality
-            alone — fewer turns means fewer chances to say something wrong. Gating on completion first
-            is what prevents that from turning into a false pass. (We wrote more about why this
-            specific failure mode is so common in{" "}
-            <Link to="/blog/$slug" params={{ slug: "the-problem-with-green-checkmarks-on-broken-conversations" }}>
-              a separate post
-            </Link>
-            .)
-          </p>
-          <p>
-            Deterministic assertions and LLM-as-judge scoring only run their full weight once
-            execution integrity has passed. They answer different questions and stay separate rather
-            than blending into one number:
-          </p>
-          <ul>
-            <li>
-              <strong>Deterministic assertions</strong> check things that must be exactly right, not
-              approximately right — a refund amount, a required disclosure, whether PII was redacted,
-              whether a state machine transitioned correctly. These are boolean by nature: they pass or
-              they don't, and there's no LLM judgment involved in evaluating them.
-            </li>
-            <li>
-              <strong>LLM-as-judge scoring</strong> handles everything that isn't a hard fact — was the
-              agent's tone appropriate for a frustrated customer, did it stay grounded in what the user
-              actually said, did it resolve the underlying request rather than just responding
-              politely. A language model scores each dimension against a defined rubric and returns its
-              reasoning alongside the score, so a low score is debuggable, not just a number to dispute.
-            </li>
-          </ul>
+        <H2>Why the order is the whole point</H2>
+        <P>
+          Execution integrity is checked first because it's a gate, not a metric. If a conversation
+          timed out, errored, or never reached a resolution state, the verdict is capped at{" "}
+          <strong className="font-semibold text-foreground">FAIL</strong> immediately — regardless of
+          how well the turns that did happen scored. A truncated run doesn't get averaged in with the
+          complete ones; it's disqualified before scoring is even relevant.
+        </P>
+        <P>
+          This matters because a short, broken conversation often scores deceptively well on quality
+          alone — fewer turns means fewer chances to say something wrong. Gating on completion first
+          is what prevents that from turning into a false pass. (We wrote more about why this
+          specific failure mode is so common in{" "}
+          <Link
+            to="/blog/$slug"
+            params={{ slug: "the-problem-with-green-checkmarks-on-broken-conversations" }}
+            className="text-primary underline underline-offset-4 hover:text-primary/80"
+          >
+            a separate post
+          </Link>
+          .)
+        </P>
+        <P>
+          Deterministic assertions and LLM-as-judge scoring only run their full weight once
+          execution integrity has passed. They answer different questions and stay separate rather
+          than blending into one number:
+        </P>
+        <Ul
+          items={[
+            <>
+              <strong className="font-semibold text-foreground">Deterministic assertions</strong>{" "}
+              check things that must be exactly right, not approximately right — a refund amount, a
+              required disclosure, whether PII was redacted, whether a state machine transitioned
+              correctly. These are boolean by nature: they pass or they don't, and there's no LLM
+              judgment involved in evaluating them.
+            </>,
+            <>
+              <strong className="font-semibold text-foreground">LLM-as-judge scoring</strong> handles
+              everything that isn't a hard fact — was the agent's tone appropriate for a frustrated
+              customer, did it stay grounded in what the user actually said, did it resolve the
+              underlying request rather than just responding politely. A language model scores each
+              dimension against a defined rubric and returns its reasoning alongside the score, so a
+              low score is debuggable, not just a number to dispute.
+            </>,
+          ]}
+        />
 
-          <h2>What you get back</h2>
-          <p>
-            The final verdict reflects the gate: PASS only if execution completed <em>and</em> the
-            deterministic and judged scores clear their thresholds. But the raw, pre-gate score is
-            preserved and stays visible even on a failed run — because knowing exactly how the agent
-            behaved in the turns it did complete is often the fastest way to diagnose what went wrong,
-            even though that score can never stand in for a pass on its own.
-          </p>
+        <H2>What you get back</H2>
+        <P>
+          The final verdict reflects the gate: PASS only if execution completed{" "}
+          <em className="italic">and</em> the deterministic and judged scores clear their thresholds.
+          But the raw, pre-gate score is preserved and stays visible even on a failed run — because
+          knowing exactly how the agent behaved in the turns it did complete is often the fastest way
+          to diagnose what went wrong, even though that score can never stand in for a pass on its
+          own.
+        </P>
 
-          <h2>What's configurable</h2>
-          <p>
-            Quality pillars for LLM-as-judge scoring, deterministic assertion contracts, and completion
-            criteria for execution integrity are all defined per test spec — there's no fixed universal
-            rubric. What's fixed is the order: integrity, then assertions and judgment together, never
-            the reverse.
-          </p>
-        </div>
+        <H2>What's configurable</H2>
+        <P>
+          Quality pillars for LLM-as-judge scoring, deterministic assertion contracts, and completion
+          criteria for execution integrity are all defined per test spec — there's no fixed universal
+          rubric. What's fixed is the order: integrity, then assertions and judgment together, never
+          the reverse.
+        </P>
 
         <div className="mt-16 rounded-2xl border border-navy-border bg-navy px-6 py-10 text-center sm:px-10">
           <h3 className="text-xl font-bold text-navy-foreground sm:text-2xl">

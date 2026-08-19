@@ -51,12 +51,14 @@ const CATEGORIES: {
     title: "Getting Started",
     description: "Install Shyena, run your first regression, and read your first verdict.",
     icon: BookOpen,
+    to: "/docs/getting-started",
   },
   {
     id: "writing-test-specs",
     title: "Writing Test Specs",
     description: "Define personas, goals, playbooks, and success criteria as code.",
     icon: FileText,
+    to: "/docs/writing-test-specs",
   },
   {
     id: "evaluation-model",
@@ -88,12 +90,14 @@ const CATEGORIES: {
     title: "Reporting & Dashboards",
     description: "Track regression health, drill into runs, and share verdicts with stakeholders.",
     icon: LayoutDashboard,
+    to: "/docs/reporting",
   },
   {
     id: "troubleshooting",
     title: "Troubleshooting",
     description: "Debug failing runs, tune judge prompts, and interpret edge-case verdicts.",
     icon: LifeBuoy,
+    to: "/docs/troubleshooting",
   },
 ];
 

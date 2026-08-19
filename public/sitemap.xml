@@ -29,6 +29,22 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://shyena.eu/docs/getting-started</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://shyena.eu/docs/writing-test-specs</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://shyena.eu/docs/reporting</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://shyena.eu/docs/troubleshooting</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://shyena.eu/blog</loc>
     <priority>0.7</priority>
   </url>
