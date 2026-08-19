@@ -808,9 +808,12 @@ function Index() {
                   <Github className="h-4 w-4" />
                 </span>
                 <div>
-                  <p className="text-sm font-semibold text-foreground">Ziran is fully open source</p>
+                  <p className="text-sm font-semibold text-foreground">
+                    Our red-teaming engine is fully open source
+                  </p>
                   <p className="mt-0.5 text-sm text-muted-foreground">
-                    Read the actual detection logic on GitHub — not a description of it.{" "}
+                    Our red-teaming service is built on Ziran, an open-source project — read the
+                    actual detection logic on GitHub, not a description of it.{" "}
                     <a
                       href="https://github.com/taoq-ai/ziran"
                       target="_blank"

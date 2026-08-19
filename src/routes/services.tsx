@@ -5,16 +5,16 @@ import { Button } from "@/components/ui/button";
 export const Route = createFileRoute("/services")({
   head: () => ({
     meta: [
-      { title: "Expert Services — Shyena & Ziran Implementation" },
+      { title: "Expert Services — Shyena Evaluation & Red-Teaming Implementation" },
       {
         name: "description",
         content:
-          "Hire the team that builds Shyena and Ziran to implement your AI evaluation and security testing program — persona and judge design, red-team campaigns, and CI/CD integration.",
+          "Hire the team that builds Shyena to implement your AI evaluation and security testing program — persona and judge design, red-team campaigns built on the open-source Ziran engine, and CI/CD integration.",
       },
-      { property: "og:title", content: "Expert Services — Shyena & Ziran Implementation" },
+      { property: "og:title", content: "Expert Services — Shyena Evaluation & Red-Teaming Implementation" },
       {
         property: "og:description",
-        content: "Our team implements evaluation and security testing for your AI systems, using our own tools.",
+        content: "Our team implements evaluation and red-teaming for your AI systems, using Shyena and the open-source Ziran engine.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -40,7 +40,7 @@ const ENGAGEMENTS = [
     icon: ShieldAlert,
     title: "Managed Red-Teaming",
     description:
-      "We run scoped Ziran campaigns against your real agent — tool-chain discovery, execution-level side-effect detection, adaptive multi-phase attacks — and walk your team through every finding, prioritized by actual severity, not a raw vulnerability dump.",
+      "We run scoped red-team campaigns, built on the open-source Ziran engine, against your real agent — tool-chain discovery, execution-level side-effect detection, adaptive multi-phase attacks — and walk your team through every finding, prioritized by actual severity, not a raw vulnerability dump.",
     deliverables: [
       "A scoped campaign against one or more of your agents",
       "Findings walkthrough with remediation guidance",
@@ -93,11 +93,12 @@ function ServicesPage() {
               Services
             </span>
             <h1 className="mt-6 text-4xl font-bold leading-[1.08] sm:text-6xl">
-              Hire the team that builds these tools
+              Hire the team that builds Shyena
             </h1>
             <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-              We built Shyena and Ziran. If you'd rather have us implement your evaluation or
-              security testing program directly than run it yourself, that's what this is.
+              We built Shyena, and we run our red-teaming service on the open-source Ziran engine.
+              If you'd rather have us implement your evaluation or security testing program
+              directly than run it yourself, that's what this is.
             </p>
             <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
               <Button asChild size="lg">

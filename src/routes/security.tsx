@@ -16,13 +16,13 @@ import { Button } from "@/components/ui/button";
 export const Route = createFileRoute("/security")({
   head: () => ({
     meta: [
-      { title: "Ziran — Agentic AI Security Testing & Red-Teaming — Shyena" },
+      { title: "Agentic AI Red-Teaming, Built on Ziran — Shyena" },
       {
         name: "description",
         content:
-          "Ziran is an open-source agent security scanner from the Shyena team. Graph-based tool-chain discovery, execution-level side-effect detection, and adaptive multi-phase red-team campaigns for LangChain, CrewAI, Bedrock, MCP, and custom agents.",
+          "Shyena runs custom red-team campaigns against agentic AI systems, built on Ziran, the open-source agent security engine. Graph-based tool-chain discovery, execution-level side-effect detection, and adaptive multi-phase campaigns for LangChain, CrewAI, Bedrock, MCP, and custom agents.",
       },
-      { property: "og:title", content: "Ziran — Agentic AI Security Testing & Red-Teaming — Shyena" },
+      { property: "og:title", content: "Agentic AI Red-Teaming, Built on Ziran — Shyena" },
       {
         property: "og:description",
         content: "Find vulnerabilities in your AI agents before attackers do.",
@@ -112,17 +112,27 @@ function SecurityPage() {
           <div className="mx-auto max-w-3xl text-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary px-3.5 py-1.5 text-xs font-medium text-muted-foreground">
               <ShieldAlert className="h-3.5 w-3.5 text-primary" />
-              Security · Ziran
+              Security · Red-Teaming, built on Ziran
             </span>
             <h1 className="mt-6 text-4xl font-bold leading-[1.08] sm:text-6xl">
               Find vulnerabilities in your{" "}
               <span className="text-gradient-brand">AI agents.</span>
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-              Ziran is our open-source agent security scanner. It models your AI agent as a graph
-              of capabilities and tests what happens when they combine — surfacing dangerous tool
-              chains, execution-level side effects, and multi-phase exploits that single-prompt
-              scanners miss.
+              Shyena runs red-team campaigns against your agentic AI systems, built on{" "}
+              <a
+                href="https://github.com/taoq-ai/ziran"
+                target="_blank"
+                rel="noreferrer"
+                className="font-medium text-primary hover:underline"
+              >
+                Ziran
+              </a>
+              , the open-source agent security engine — we design and prioritize the campaign, run
+              it against your live agent, and walk your team through every finding. Ziran models
+              your AI agent as a graph of capabilities and tests what happens when they combine —
+              surfacing dangerous tool chains, execution-level side effects, and multi-phase
+              exploits that single-prompt scanners miss.
             </p>
             <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
               <Button asChild size="lg">
@@ -154,8 +164,9 @@ function SecurityPage() {
             ))}
           </div>
           <p className="mt-6 text-xs text-muted-foreground">
-            Also benchmarked against AgentHarm, JailbreakBench, Agent Security Bench, HarmBench,
-            R-Judge, and ALERT. Open source, Apache 2.0, published on PyPI.
+            Ziran, the underlying engine, is also benchmarked against AgentHarm, JailbreakBench,
+            Agent Security Bench, HarmBench, R-Judge, and ALERT. Open source, Apache 2.0, published
+            on PyPI — Shyena is not its author, we build our red-teaming service on top of it.
           </p>
         </div>
       </section>
@@ -164,7 +175,7 @@ function SecurityPage() {
       <section className="bg-navy py-24">
         <div className="mx-auto w-full max-w-7xl px-5 sm:px-8">
           <div className="max-w-2xl">
-            <p className="font-mono text-xs uppercase tracking-[0.18em] text-accent">Why Ziran</p>
+            <p className="font-mono text-xs uppercase tracking-[0.18em] text-accent">Why we build on Ziran</p>
             <h2 className="mt-4 text-3xl font-bold text-navy-foreground sm:text-4xl">
               Most security tools test prompts and tools in isolation.
             </h2>
@@ -197,11 +208,12 @@ function SecurityPage() {
       {/* Comparison */}
       <section className="mx-auto w-full max-w-7xl px-5 py-24 sm:px-8">
         <div className="max-w-2xl">
-          <p className="font-mono text-xs uppercase tracking-[0.18em] text-primary">How it compares</p>
+          <p className="font-mono text-xs uppercase tracking-[0.18em] text-primary">How the engine compares</p>
           <h2 className="mt-4 text-3xl font-bold sm:text-4xl">Built for agents, not just prompts.</h2>
           <p className="mt-4 text-muted-foreground">
-            Prompt-injection scanners test single turns. Ziran is agent-aware — it understands
-            tools, memory, and multi-step execution.
+            Prompt-injection scanners test single turns. Ziran, the open-source engine Shyena's
+            red-teaming service is built on, is agent-aware — it understands tools, memory, and
+            multi-step execution.
           </p>
         </div>
 
@@ -241,15 +253,17 @@ function SecurityPage() {
         <div className="rounded-3xl border border-border bg-secondary/40 p-8 sm:p-12">
           <div className="grid gap-8 lg:grid-cols-2">
             <div>
-              <h3 className="text-lg font-bold text-foreground">Ziran is</h3>
+              <h3 className="text-lg font-bold text-foreground">Ziran (the engine) is</h3>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                An agent security scanner that discovers dangerous tool compositions via graph
-                analysis, detects execution-level side effects, and runs multi-phase campaigns that
-                model real attacker behavior.
+                An open-source agent security scanner, built and maintained by the Ziran project,
+                that discovers dangerous tool compositions via graph analysis, detects
+                execution-level side effects, and runs multi-phase campaigns that model real
+                attacker behavior. Shyena's red-teaming service runs it against your agent, designs
+                and prioritizes the campaign, and reports the findings.
               </p>
             </div>
             <div>
-              <h3 className="text-lg font-bold text-foreground">Ziran is not</h3>
+              <h3 className="text-lg font-bold text-foreground">It is not</h3>
               <ul className="mt-3 space-y-2 text-sm leading-relaxed text-muted-foreground">
                 <li>
                   An LLM safety/alignment tool — for prompt injection breadth and jailbreak
@@ -261,7 +275,7 @@ function SecurityPage() {
                 </li>
                 <li>
                   A general-purpose eval framework — for model quality evaluation, that's what
-                  Shyena is for.
+                  Shyena's evaluation product is for.
                 </li>
               </ul>
             </div>
@@ -276,8 +290,8 @@ function SecurityPage() {
             Run a real campaign against your own agent
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-navy-muted">
-            Bring one real agent. We'll run a scoped Ziran campaign against it and walk through
-            every finding — tool chains, side effects, and all — with you.
+            Bring one real agent. We'll run a scoped red-team campaign, built on Ziran, against it
+            and walk through every finding — tool chains, side effects, and all — with you.
           </p>
           <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
             <Button asChild size="lg">
