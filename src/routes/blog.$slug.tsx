@@ -1,9 +1,15 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight, Users, Briefcase, BookOpen } from "lucide-react";
-import type { ReactNode } from "react";
+import type { ComponentType, ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { EvaluationIllustration, SecurityIllustration } from "@/components/product/platform-illustrations";
+import {
+  DivergentPathsCover,
+  FalsePassCover,
+  MethodologyCover,
+  SecurityGraphCover,
+} from "@/components/blog/blog-cover-art";
 
 const ARTICLE_META: Record<string, { title: string; description: string }> = {
   "why-conversational-ai-needs-a-different-testing-model": {
@@ -69,21 +75,36 @@ function ArticlePage() {
 
   if (slug === "why-conversational-ai-needs-a-different-testing-model") {
     return (
-      <ArticleShell category="Testing Strategy" title="Why Conversational AI Needs a Different Testing Model" readTime="6 min read">
+      <ArticleShell
+        category="Testing Strategy"
+        title="Why Conversational AI Needs a Different Testing Model"
+        readTime="6 min read"
+        cover={DivergentPathsCover}
+      >
         <FullArticleBody />
       </ArticleShell>
     );
   }
   if (slug === "the-problem-with-green-checkmarks-on-broken-conversations") {
     return (
-      <ArticleShell category="Quality Assurance" title="The Problem With Green Checkmarks on Broken Conversations" readTime="5 min read">
+      <ArticleShell
+        category="Quality Assurance"
+        title="The Problem With Green Checkmarks on Broken Conversations"
+        readTime="5 min read"
+        cover={FalsePassCover}
+      >
         <GreenCheckmarksBody />
       </ArticleShell>
     );
   }
   if (slug === "how-to-test-a-cognigy-agent") {
     return (
-      <ArticleShell category="Testing Strategy" title="How to Test a Cognigy Agent" readTime="7 min read">
+      <ArticleShell
+        category="Testing Strategy"
+        title="How to Test a Cognigy Agent"
+        readTime="7 min read"
+        cover={MethodologyCover}
+      >
         <CognigyTestingBody />
       </ArticleShell>
     );
@@ -94,6 +115,7 @@ function ArticlePage() {
         category="Security"
         title="How We Red-Team Cognigy Agents for Security, Using Ziran"
         readTime="7 min read"
+        cover={SecurityGraphCover}
       >
         <ZiranPipelineBody />
       </ArticleShell>
@@ -273,11 +295,13 @@ function ArticleShell({
   category,
   title,
   readTime,
+  cover: Cover,
   children,
 }: {
   category: string;
   title: string;
   readTime: string;
+  cover: ComponentType;
   children: ReactNode;
 }) {
   return (
@@ -294,6 +318,9 @@ function ArticleShell({
             <p className="mt-6 text-base text-muted-foreground sm:text-lg">
               {readTime} · Published on the Shyena blog
             </p>
+          </div>
+          <div className="mx-auto mt-10 aspect-[1200/420] w-full overflow-hidden rounded-2xl border border-navy-border">
+            <Cover />
           </div>
         </div>
       </section>

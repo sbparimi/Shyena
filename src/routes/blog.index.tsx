@@ -1,6 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Clock, ArrowRight, Newspaper } from "lucide-react";
 import { cn } from "@/lib/utils";
+import {
+  DivergentPathsCover,
+  FalsePassCover,
+  MethodologyCover,
+  SecurityGraphCover,
+  JudgeGaugeCover,
+} from "@/components/blog/blog-cover-art";
 
 export const Route = createFileRoute("/blog/")({
   head: () => ({
@@ -34,7 +41,7 @@ const ARTICLES = [
       "The same test persona can take a different but equally valid path every run. That breaks the assumptions conventional QA is built on.",
     readTime: "6 min read",
     status: "published",
-    gradient: "from-primary via-primary/80 to-accent",
+    cover: DivergentPathsCover,
   },
   {
     id: "the-problem-with-green-checkmarks-on-broken-conversations",
@@ -44,7 +51,7 @@ const ARTICLES = [
       "When a test runner reports success on a conversation that never reached its goal, your metrics are lying to you.",
     readTime: "5 min read",
     status: "published",
-    gradient: "from-navy via-primary/60 to-primary",
+    cover: FalsePassCover,
   },
   {
     id: "how-to-test-a-cognigy-agent",
@@ -54,7 +61,7 @@ const ARTICLES = [
       "A practical framework for testing Cognigy conversational and voice agents — from goal-driven test design to catching false passes before they ship.",
     readTime: "7 min read",
     status: "published",
-    gradient: "from-purple via-accent/70 to-primary",
+    cover: MethodologyCover,
   },
   {
     id: "cognigy-agent-security-testing-with-ziran",
@@ -64,7 +71,7 @@ const ARTICLES = [
       "Inside the pipeline we use to red-team Cognigy agents: risk-scored campaign selection, adaptive execution with Ziran, and honest scoring.",
     readTime: "7 min read",
     status: "published",
-    gradient: "from-destructive via-warning/70 to-navy",
+    cover: SecurityGraphCover,
   },
   {
     id: "what-llm-as-judge-actually-means-in-practice",
@@ -74,7 +81,7 @@ const ARTICLES = [
       "Subjective quality is not a bug. It is a dimension that deterministic assertions were never designed to capture.",
     readTime: "7 min read",
     status: "coming-soon",
-    gradient: "from-accent via-primary/70 to-primary",
+    cover: JudgeGaugeCover,
   },
 ];
 
@@ -108,6 +115,7 @@ function BlogIndexPage() {
             const wrapperProps = isComingSoon
               ? {}
               : { to: "/blog/$slug", params: { slug: article.id } };
+            const Cover = article.cover;
 
             return (
               <CardWrapper
@@ -118,16 +126,8 @@ function BlogIndexPage() {
                   isComingSoon ? "opacity-70" : "hover:-translate-y-0.5 hover:border-primary/30",
                 )}
               >
-                {/* Gradient thumbnail placeholder */}
-                <div
-                  className={cn(
-                    "h-40 w-full bg-gradient-to-br p-6",
-                    article.gradient,
-                  )}
-                >
-                  <div className="flex h-full items-center justify-center rounded-xl border border-white/20 bg-white/10 backdrop-blur-sm">
-                    <span className="font-display text-2xl font-bold text-white/90">S</span>
-                  </div>
+                <div className="h-40 w-full overflow-hidden border-b border-navy-border">
+                  <Cover />
                 </div>
 
                 <div className="flex flex-1 flex-col p-6">
