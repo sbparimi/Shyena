@@ -368,6 +368,54 @@ function Index() {
         </div>
       </section>
 
+      {/* Built for Cognigy customers */}
+      <section className="relative overflow-hidden bg-navy py-16">
+        <div className="pointer-events-none absolute inset-0 bg-mesh opacity-60" />
+        <div className="relative mx-auto grid w-full max-w-7xl items-center gap-10 px-5 sm:px-8 lg:grid-cols-[1.4fr_1fr]">
+          <div>
+            <span className="inline-flex items-center gap-2 rounded-full border border-navy-border bg-white/[0.03] px-3.5 py-1.5 text-xs font-medium text-navy-muted">
+              <Sparkles className="h-3.5 w-3.5 text-primary" />
+              Built for Cognigy customers
+            </span>
+            <h2 className="mt-5 text-3xl font-bold text-navy-foreground sm:text-4xl">
+              Already running Cognigy? This is the evaluation layer built for you.
+            </h2>
+            <p className="mt-4 max-w-2xl text-navy-muted">
+              Shyena isn't a generic testing tool with a Cognigy integration bolted on — Cognigy is
+              our live, flagship platform. Agentic personas, real conversation execution over the
+              same channel your customers use, and the execution-integrity gate all run against
+              your actual Cognigy agent today.
+            </p>
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <Button asChild size="lg">
+                <Link to="/contact">
+                  Request a Cognigy Demo
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </Button>
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="border-navy-border bg-transparent text-navy-foreground hover:bg-white/10 hover:text-navy-foreground"
+              >
+                <Link to="/product">See Cognigy capabilities</Link>
+              </Button>
+            </div>
+          </div>
+          <div className="flex flex-wrap items-center gap-3 lg:justify-end">
+            <span className="glass-card rounded-2xl px-5 py-4 text-center">
+              <span className="block text-2xl font-bold text-gradient-brand">Cognigy</span>
+              <span className="mt-1 block text-xs text-navy-muted">live platform, today</span>
+            </span>
+            <span className="glass-card rounded-2xl px-5 py-4 text-center">
+              <span className="block text-2xl font-bold text-gradient-brand">31 / 117</span>
+              <span className="mt-1 block text-xs text-navy-muted">metrics, default / full</span>
+            </span>
+          </div>
+        </div>
+      </section>
+
       {/* Pillars */}
       <section className="border-y border-border bg-secondary/40">
         <div className="mx-auto grid w-full max-w-7xl gap-6 px-5 py-10 sm:px-8 sm:grid-cols-3">
