@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight, Users, Briefcase, BookOpen } from "lucide-react";
 import type { ReactNode } from "react";
 import { Button } from "@/components/ui/button";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { EvaluationIllustration } from "@/components/product/platform-illustrations";
 
 const ARTICLE_META: Record<string, { title: string; description: string }> = {
@@ -14,6 +15,11 @@ const ARTICLE_META: Record<string, { title: string; description: string }> = {
     title: "The Problem With Green Checkmarks on Broken Conversations — Shyena Blog",
     description:
       "When a test runner reports success on a conversation that never reached its goal, your metrics are lying to you.",
+  },
+  "how-to-test-a-cognigy-agent": {
+    title: "How to Test a Cognigy Agent: A Practical Guide — Shyena Blog",
+    description:
+      "Learn how Shyena tests Cognigy agents: goal-driven cases, deterministic checks, LLM judging, and an execution-integrity gate that stops false passes.",
   },
 };
 
@@ -67,6 +73,13 @@ function ArticlePage() {
     return (
       <ArticleShell category="Quality Assurance" title="The Problem With Green Checkmarks on Broken Conversations" readTime="5 min read">
         <GreenCheckmarksBody />
+      </ArticleShell>
+    );
+  }
+  if (slug === "how-to-test-a-cognigy-agent") {
+    return (
+      <ArticleShell category="Testing Strategy" title="How to Test a Cognigy Agent" readTime="7 min read">
+        <CognigyTestingBody />
       </ArticleShell>
     );
   }
@@ -543,6 +556,261 @@ function GreenCheckmarksBody() {
         see what your current pipeline would say about a run like this, we'll run one against
         your live agent and show you.
       </P>
+    </>
+  );
+}
+
+/* ── Article 3 body ───────────────────────────────────────────────────── */
+
+const COGNIGY_TESTING_FAQS = [
+  {
+    question: "How do you test a Cognigy agent?",
+    answer:
+      "Write test cases as a goal, a persona, and a playbook rather than a fixed script, then have an agentic executor drive a real browser or voice session against the live agent, improvising turns within those boundaries. Check the conversation against deterministic assertions for facts that must never be fuzzy (refund amounts, required disclosures, PII redaction, routing, latency), and use LLM-as-judge scoring with recorded reasoning for everything else — tone, groundedness, whether the customer's actual problem got resolved. Run an execution-integrity check before any of that quality scoring, so a conversation that never finished can't still pass.",
+  },
+  {
+    question: "What's different about testing a Cognigy conversational AI agent vs. a traditional app?",
+    answer:
+      "A traditional app test targets a closed, deterministic interface — fixed buttons and fields, scripted clicks, exact-match assertions. A Cognigy agent breaks all three assumptions: the input space is unbounded (customers phrase the same request a hundred ways), the output is intentionally non-deterministic (the same input can produce differently worded replies without that being a bug), and state persists across turns rather than resetting per screen, so the test also has to check memory, recovery from contradictions, and mid-conversation topic changes.",
+  },
+  {
+    question: "What should a Cognigy test case include?",
+    answer:
+      "Three things instead of a scripted line-by-line transcript: a goal (the outcome the test represents), a persona (who's asking, their tone and patience), and a playbook (behavioral boundaries — what to volunteer, what to withhold until asked). Across a suite, cases should cover three layers: happy paths, edge cases (missing info, out-of-policy requests, escalations), and boundary conditions sitting right at a policy threshold, since that's where flow logic bugs actually live.",
+  },
+  {
+    question: "Why do Cognigy test suites report false passes?",
+    answer:
+      "Because a conversation that times out or gets cut short still looks good in isolation — it simply never had the chance to say anything wrong. A three-turn transcript that ends abruptly can score higher than a full ten-turn one that actually finished, purely for having fewer opportunities to violate anything. The fix is to gate on execution integrity first: a conversation that didn't complete is capped as a failure regardless of what its partial quality score would have been.",
+  },
+] as const;
+
+const COGNIGY_TESTING_FAQ_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: COGNIGY_TESTING_FAQS.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: { "@type": "Answer", text: faq.answer },
+  })),
+};
+
+function CognigyTestingBody() {
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(COGNIGY_TESTING_FAQ_SCHEMA) }}
+      />
+      <Lead>
+        A Cognigy flow that passed every design review can still fail its first real
+        conversation. Not because the flow logic is wrong, but because a customer phrased their
+        problem in a way nobody scripted for, or the agent handled turn four correctly and then
+        lost the thread by turn seven. Testing a conversational agent is a different discipline
+        from testing a web form, and treating it like one is the single most common reason
+        Cognigy QA programs stall out at "looks fine in the demo, breaks in production."
+      </Lead>
+      <P>
+        This is a practical guide to actually testing a Cognigy agent: what to test, how to
+        structure test cases, what to check deterministically versus what to judge, and the
+        order those checks have to happen in so your results are trustworthy rather than just
+        green.
+      </P>
+
+      <H2>Why Traditional Test Automation Breaks Here</H2>
+      <P>
+        Most test automation assumes a closed, deterministic interface: a fixed set of buttons,
+        fields, and states, and a script that clicks through them in the same order every run.
+        Cognigy agents violate every one of those assumptions.
+      </P>
+      <P>
+        The input space is unbounded. A user can ask for the same thing a hundred different
+        ways, and your agent has to handle all of them, not just the one your test script types.
+        A click-path test that submits "I want to cancel my order" and checks for a specific
+        reply string tells you nothing about what happens when the same customer instead types
+        "can u stop that delivery its still not out for shipment right".
+      </P>
+      <P>
+        The output is non-deterministic by design. The same input, run twice, can produce
+        differently worded — sometimes differently structured — responses, especially once an
+        LLM is anywhere in the flow. A test that asserts exact string equality on the bot's
+        reply will flake constantly, and that flakiness is the wrong thing to chase: the
+        variation isn't a bug, it's the agent behaving normally. If there's a bug, it's in what
+        the reply means, not in its exact phrasing.
+      </P>
+      <P>
+        State lives across turns, not within a single request. A traditional UI test verifies
+        one screen at a time. A conversational test has to track what the agent has already been
+        told, whether it remembers it three turns later, whether it asks for information it was
+        already given, and whether it can recover gracefully when the user contradicts
+        themselves or changes the subject mid-flow.
+      </P>
+      <Pullquote>
+        A conversational agent is not a form with more steps. It's a system with memory, and
+        memory is exactly what most test suites forget to check.
+      </Pullquote>
+      <P>
+        None of this means Cognigy agents are untestable — it means the testing model has to
+        shift from exact-match scripting to goal-directed evaluation: does the agent get the
+        customer to the right outcome, through a coherent conversation, regardless of the
+        specific words either side used to get there.
+      </P>
+
+      <H2>A Concrete Methodology for Testing a Cognigy Agent</H2>
+
+      <H2>1. Write test cases as a goal, a persona, and a playbook — not a script</H2>
+      <P>
+        Instead of hard-coding "the tester says X, then Y, then Z," define three things: the
+        goal (what outcome does this test represent), the persona (who is asking — tone,
+        patience, how much they already know), and the playbook (behavioral boundaries — what to
+        volunteer, what to hold back until asked, how to react to being asked for something it
+        doesn't have).
+      </P>
+      <P>
+        The executor then improvises the actual turns inside those boundaries, reacting to what
+        the agent really says rather than following a pre-written line. That's what produces
+        conversations resembling what real customers actually do, because real customers don't
+        follow your script either.
+      </P>
+
+      <H2>2. Define coverage the way a conversation earns it</H2>
+      <P>
+        "Coverage" for a conversational flow isn't line coverage or button coverage. Think in
+        three layers:
+      </P>
+      <NumberedList
+        items={[
+          {
+            label: "Happy path.",
+            body: "the customer has everything the agent needs, states their intent clearly, and the flow should resolve cleanly in a small number of turns.",
+          },
+          {
+            label: "Edge cases.",
+            body: "missing information, out-of-policy requests, mid-conversation topic changes, the customer asking for something the agent has to explicitly decline, escalation triggers.",
+          },
+          {
+            label: "Boundary conditions.",
+            body: "the values right at a policy threshold — the return window's last valid day, the exact refund cutoff amount, an order that's almost eligible but not quite. These are where flow logic bugs actually live.",
+          },
+        ]}
+      />
+      <P>
+        A test suite that only covers happy paths will pass consistently and tell you almost
+        nothing.
+      </P>
+
+      <H2>3. Separate what you assert from what you judge</H2>
+      <CompareCallout
+        left={{
+          label: "Deterministic assertions",
+          body: "Facts that are unambiguous and must never be fuzzy: the refund amount quoted, whether a required disclosure was actually said, whether PII got redacted before being logged, whether a handoff routed to the correct queue, whether the response came back inside a latency budget. Exact checks, pass or fail, no interpretation.",
+        }}
+        right={{
+          label: "Judged evaluation",
+          body: "Everything else — was the tone appropriate, did the agent stay grounded rather than confabulating, did it resolve the customer's actual problem. No single correct string to match against; score against defined quality dimensions, with the reasoning behind each score recorded.",
+        }}
+      />
+
+      <H2>4. Check that the conversation actually completed before you score its quality</H2>
+      <P>
+        If a conversation times out or gets stuck and the run is truncated, everything that did
+        happen before the cutoff can still look good in isolation — because a conversation that
+        stops early has had fewer opportunities to say anything wrong. A three-turn transcript
+        that ends abruptly can score better than a full ten-turn transcript that actually
+        finished, purely because it never got far enough to violate anything.
+      </P>
+      <Pullquote>
+        A conversation that stops early has had fewer opportunities to say anything wrong. Score
+        it before checking whether it finished, and you're rewarding failure for quitting early.
+      </Pullquote>
+      <P>
+        The fix is to make execution integrity a gate that runs before quality scoring: a
+        conversation that didn't complete is capped as a failure regardless of what its partial
+        score would have been.
+      </P>
+
+      <H2>Common Pitfalls Teams Hit</H2>
+      <NumberedList
+        items={[
+          {
+            label: "Treating non-determinism as a bug to eliminate.",
+            body: "Test the meaning, not the phrasing.",
+          },
+          {
+            label: "Carrying over click-path thinking.",
+            body: "A test plan built around \"the user clicks button A, then button B\" under-tests a system where the user can say the equivalent of both in one sentence.",
+          },
+          {
+            label: "False green on truncated runs.",
+            body: "A test suite with a high pass rate on a flow that's actually crashing mid-conversation is worse than no test suite, because it hides the problem.",
+          },
+          {
+            label: "Testing the reply and ignoring the decision behind it.",
+            body: "A response can read correctly while the agent got there by the wrong route.",
+          },
+          {
+            label: "Skipping boundary conditions because they're tedious to write.",
+            body: "They're tedious because they require knowing the flow's actual thresholds, not because they're unimportant.",
+          },
+        ]}
+      />
+
+      <H2>How Shyena Tests Cognigy Agents Today</H2>
+      <P>
+        This methodology is the actual shape of how <Link to="/product">Shyena tests Cognigy agents</Link>{" "}
+        today — Cognigy is Shyena's live, flagship integration. Test cases are written as a goal,
+        a persona, and a behavioral playbook, and an agentic executor drives a real browser or
+        voice session against the live Cognigy agent — the same channel real customers use, chat
+        or voice, no mocks.
+      </P>
+      <P>
+        Each conversation is checked against deterministic assertions for facts that must never
+        be fuzzy, and{" "}
+        <Link to="/docs/evaluation-model">
+          LLM-as-judge scoring across quality pillars, with reasoning kept alongside every score
+        </Link>
+        . A six-construct semantic model checks whether the conversation's state transitions were
+        valid — intent integrity, context memory, dialogue state correctness, business
+        compliance, tool decisions, and recovery. A separate layer scores the agent's internal
+        decisions: the tool and routing choices behind each reply, not just the reply's wording —
+        the exact gap pitfall #4 above describes.
+      </P>
+      <ArticleFigure caption="Execution integrity is checked before quality is scored — a conversation that failed, timed out, or was cut short is capped at FAIL regardless of how its surviving turns scored." />
+      <P>
+        Execution integrity is checked before quality is scored, not folded into the same
+        number. A conversation that failed, timed out, or was cut short is capped at fail no
+        matter how well its surviving turns would otherwise have scored. When something does
+        fail, the platform generates a root-cause report automatically — a 5-Whys chain per
+        finding, output as Jira-ready markdown.
+      </P>
+      <P>
+        By default, Shyena evaluates 31 metrics per conversation, drawn from a full catalog of
+        117 — enough to score deterministic facts, quality dimensions, semantic validity, and
+        decision correctness in a single run, without hand-assembling that coverage yourself.
+      </P>
+      <P>
+        None of this replaces judgment. What it changes, when you're testing a Cognigy agent, is
+        whether the results you get back are ones you can trust.
+      </P>
+      <P>
+        Ready to see it against your own agent? Shyena offers a <Link to="/pricing">free pilot</Link>{" "}
+        to run this evaluation model on your Cognigy build before you commit to anything.
+      </P>
+
+      <H2>Frequently Asked Questions</H2>
+      <Accordion type="single" collapsible className="mt-6 w-full">
+        {COGNIGY_TESTING_FAQS.map((faq, i) => (
+          <AccordionItem key={faq.question} value={`cognigy-testing-faq-${i}`}>
+            <AccordionTrigger className="text-left text-base font-semibold">
+              {faq.question}
+            </AccordionTrigger>
+            <AccordionContent className="text-sm leading-relaxed text-muted-foreground">
+              {faq.answer}
+            </AccordionContent>
+          </AccordionItem>
+        ))}
+      </Accordion>
     </>
   );
 }

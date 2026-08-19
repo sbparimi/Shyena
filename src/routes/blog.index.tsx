@@ -47,6 +47,16 @@ const ARTICLES = [
     gradient: "from-navy via-primary/60 to-primary",
   },
   {
+    id: "how-to-test-a-cognigy-agent",
+    title: "How to Test a Cognigy Agent: A Practical Guide",
+    category: "Testing Strategy",
+    excerpt:
+      "A practical framework for testing Cognigy conversational and voice agents — from goal-driven test design to catching false passes before they ship.",
+    readTime: "7 min read",
+    status: "published",
+    gradient: "from-purple via-accent/70 to-primary",
+  },
+  {
     id: "what-llm-as-judge-actually-means-in-practice",
     title: "What 'LLM-as-Judge' Actually Means in Practice",
     category: "Evaluation Model",

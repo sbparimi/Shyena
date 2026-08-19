@@ -41,6 +41,10 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://shyena.eu/blog/how-to-test-a-cognigy-agent</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://shyena.eu/about</loc>
     <priority>0.5</priority>
   </url>
