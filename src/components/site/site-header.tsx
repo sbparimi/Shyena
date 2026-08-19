@@ -37,7 +37,7 @@ const PRODUCTS = [
     icon: ShieldAlert,
     title: "Security",
     description:
-      "Find vulnerabilities in your AI agents — graph-based red-teaming, built on Ziran, for LangChain, CrewAI, MCP, and more.",
+      "Find vulnerabilities in your AI agents — graph-based red-teaming using the independent Ziran engine, for LangChain, CrewAI, MCP, and more.",
   },
 ] as const;
 

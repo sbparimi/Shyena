@@ -809,11 +809,12 @@ function Index() {
                 </span>
                 <div>
                   <p className="text-sm font-semibold text-foreground">
-                    Our red-teaming engine is fully open source
+                    We use an independent, open-source red-teaming engine
                   </p>
                   <p className="mt-0.5 text-sm text-muted-foreground">
-                    Our red-teaming service is built on Ziran, an open-source project — read the
-                    actual detection logic on GitHub, not a description of it.{" "}
+                    Our red-teaming service runs on Ziran — an independent open-source project we
+                    have no role in developing. Read the actual detection logic on GitHub, not a
+                    description of it.{" "}
                     <a
                       href="https://github.com/taoq-ai/ziran"
                       target="_blank"

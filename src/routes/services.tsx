@@ -9,12 +9,12 @@ export const Route = createFileRoute("/services")({
       {
         name: "description",
         content:
-          "Hire the team that builds Shyena to implement your AI evaluation and security testing program — persona and judge design, red-team campaigns built on the open-source Ziran engine, and CI/CD integration.",
+          "Hire the team that builds Shyena to implement your AI evaluation and security testing program — persona and judge design, red-team campaigns using the independent Ziran engine, and CI/CD integration.",
       },
       { property: "og:title", content: "Expert Services — Shyena Evaluation & Red-Teaming Implementation" },
       {
         property: "og:description",
-        content: "Our team implements evaluation and red-teaming for your AI systems, using Shyena and the open-source Ziran engine.",
+        content: "Our team implements evaluation and red-teaming for your AI systems, using Shyena and the independent, third-party Ziran engine.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -40,7 +40,7 @@ const ENGAGEMENTS = [
     icon: ShieldAlert,
     title: "Managed Red-Teaming",
     description:
-      "We run scoped red-team campaigns, built on the open-source Ziran engine, against your real agent — tool-chain discovery, execution-level side-effect detection, adaptive multi-phase attacks — and walk your team through every finding, prioritized by actual severity, not a raw vulnerability dump.",
+      "We run scoped red-team campaigns using Ziran, an independent open-source engine we have no role in developing, against your real agent — tool-chain discovery, execution-level side-effect detection, adaptive multi-phase attacks — and walk your team through every finding, prioritized by actual severity, not a raw vulnerability dump.",
     deliverables: [
       "A scoped campaign against one or more of your agents",
       "Findings walkthrough with remediation guidance",
@@ -96,7 +96,8 @@ function ServicesPage() {
               Hire the team that builds Shyena
             </h1>
             <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-              We built Shyena, and we run our red-teaming service on the open-source Ziran engine.
+              We built Shyena. Our red-teaming service uses Ziran, an independent open-source
+              project we have no role in developing, as its engine.
               If you'd rather have us implement your evaluation or security testing program
               directly than run it yourself, that's what this is.
             </p>
