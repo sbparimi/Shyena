@@ -47,8 +47,11 @@ export function SiteFooter() {
       <div className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-5">
           <div className="lg:col-span-1">
-            <Logo />
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
+            <Logo withTagline />
+            <p className="mt-5 max-w-xs font-display text-sm font-semibold leading-relaxed text-foreground">
+              Intelligence today. Confidence always. Impact for tomorrow.
+            </p>
+            <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted-foreground">
               The AI evaluation platform — live for conversational and voice AI, RAG is next.
               Evidence for every turn, a verdict you can release on.
             </p>
