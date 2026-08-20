@@ -213,7 +213,7 @@
 }
 
 @utility glow-primary {
-  box-shadow: 0 0 0 1px oklch(0.75 0.163 59.8 / 25%), 0 0 40px -8px oklch(0.75 0.163 59.8 / 35%);
+  box-shadow: 0 0 0 1px oklch(0.75 0.163 55 / 25%), 0 0 40px -8px oklch(0.75 0.163 55 / 35%);
 }
 
 @utility bg-grid {
@@ -225,9 +225,9 @@
 }
 
 @utility bg-mesh {
-  background-image: radial-gradient(38% 45% at 18% 12%, oklch(0.75 0.163 59.8 / 22%) 0%, transparent 70%),
-    radial-gradient(42% 50% at 85% 8%, oklch(0.642 0.114 182.7 / 18%) 0%, transparent 70%),
-    radial-gradient(45% 55% at 50% 100%, oklch(0.462 0.239 280.1 / 20%) 0%, transparent 70%);
+  background-image: radial-gradient(38% 45% at 18% 12%, oklch(0.75 0.163 55 / 24%) 0%, transparent 70%),
+    radial-gradient(42% 50% at 85% 8%, oklch(0.86 0.14 80 / 16%) 0%, transparent 70%),
+    radial-gradient(45% 55% at 50% 100%, oklch(0.72 0.02 250 / 14%) 0%, transparent 70%);
   animation: mesh-drift 18s ease-in-out infinite alternate;
 }
 
