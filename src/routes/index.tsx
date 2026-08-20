@@ -22,6 +22,9 @@ import {
   SlidersHorizontal,
   Github,
   ArrowUpRight,
+  Eye,
+  Zap,
+  Flag,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CtaBand } from "@/components/site/cta-band";
@@ -56,21 +59,27 @@ export const Route = createFileRoute("/")({
 
 const PILLARS = [
   {
-    icon: Target,
-    title: "Automated",
-    body: "End-to-end automated AI evaluation at scale.",
+    icon: Eye,
+    title: "See Clearly",
+    body: "Deep insights across every conversation.",
     tone: "primary",
   },
   {
     icon: ShieldCheck,
-    title: "Accurate",
-    body: "Precise, consistent and unbiased results.",
-    tone: "accent",
+    title: "Assure Confidence",
+    body: "Quality you can trust. Every time.",
+    tone: "primary",
   },
   {
-    icon: RefreshCw,
-    title: "Trusted",
-    body: "Reliable insights. Confident decisions.",
+    icon: Zap,
+    title: "Move Faster",
+    body: "Intelligence in action. Decisions in real time.",
+    tone: "primary",
+  },
+  {
+    icon: Flag,
+    title: "Deliver Impact",
+    body: "Outcomes that matter. Results that scale.",
     tone: "primary",
   },
 ] as const;
@@ -417,21 +426,41 @@ function Index() {
       </section>
 
       {/* Pillars */}
-      <section className="border-y border-border bg-secondary/40">
-        <div className="mx-auto grid w-full max-w-7xl gap-6 px-5 py-10 sm:px-8 sm:grid-cols-3">
-          {PILLARS.map((pillar) => (
-            <div key={pillar.title} className="flex items-start gap-3.5">
-              <span
-                className={`inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${TONE_CLASSES[pillar.tone]}`}
-              >
-                <pillar.icon className="h-5 w-5" />
-              </span>
-              <div>
-                <p className={`text-sm font-semibold ${TONE_TEXT[pillar.tone]}`}>{pillar.title}</p>
-                <p className="mt-0.5 text-sm text-muted-foreground">{pillar.body}</p>
+      <section className="relative overflow-hidden border-y border-navy-border bg-navy py-16">
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-mesh opacity-40" />
+        <div className="relative mx-auto w-full max-w-7xl px-5 sm:px-8">
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-navy-muted">
+              AI Testing &amp; Assurance
+            </p>
+            <p className="mt-3 text-lg text-navy-foreground">
+              Intelligence today. Confidence always. Impact for{" "}
+              <span className="text-primary">tomorrow.</span>
+            </p>
+          </div>
+
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {PILLARS.map((pillar) => (
+              <div key={pillar.title} className="flex items-start gap-3.5">
+                <span
+                  className={`inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${TONE_CLASSES[pillar.tone]}`}
+                >
+                  <pillar.icon className="h-5 w-5" />
+                </span>
+                <div>
+                  <p className={`text-sm font-semibold uppercase tracking-wide ${TONE_TEXT[pillar.tone]}`}>
+                    {pillar.title}
+                  </p>
+                  <p className="mt-0.5 text-sm text-navy-muted">{pillar.body}</p>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+
+          <p className="mt-14 text-center text-xs font-semibold uppercase tracking-[0.3em] text-navy-muted">
+            Intelligence <span className="text-primary">•</span> Assurance{" "}
+            <span className="text-primary">•</span> Impact
+          </p>
         </div>
       </section>
 
