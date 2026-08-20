@@ -15,8 +15,15 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as DocsRouteImport } from './routes/docs'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as ProductRouteImport } from './routes/product'
+import { Route as SecurityRouteImport } from './routes/security'
+import { Route as ServicesRouteImport } from './routes/services'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
+import { Route as DocsEvaluationModelRouteImport } from './routes/docs.evaluation-model'
+import { Route as DocsGettingStartedRouteImport } from './routes/docs.getting-started'
+import { Route as DocsReportingRouteImport } from './routes/docs.reporting'
+import { Route as DocsTroubleshootingRouteImport } from './routes/docs.troubleshooting'
+import { Route as DocsWritingTestSpecsRouteImport } from './routes/docs.writing-test-specs'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -48,6 +55,16 @@ const ProductRoute = ProductRouteImport.update({
   path: '/product',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SecurityRoute = SecurityRouteImport.update({
+  id: '/security',
+  path: '/security',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesRoute = ServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogIndexRoute = BlogIndexRouteImport.update({
   id: '/blog/',
   path: '/blog/',
@@ -58,25 +75,64 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
   path: '/blog/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DocsEvaluationModelRoute = DocsEvaluationModelRouteImport.update({
+  id: '/evaluation-model',
+  path: '/evaluation-model',
+  getParentRoute: () => DocsRoute,
+} as any)
+const DocsGettingStartedRoute = DocsGettingStartedRouteImport.update({
+  id: '/getting-started',
+  path: '/getting-started',
+  getParentRoute: () => DocsRoute,
+} as any)
+const DocsReportingRoute = DocsReportingRouteImport.update({
+  id: '/reporting',
+  path: '/reporting',
+  getParentRoute: () => DocsRoute,
+} as any)
+const DocsTroubleshootingRoute = DocsTroubleshootingRouteImport.update({
+  id: '/troubleshooting',
+  path: '/troubleshooting',
+  getParentRoute: () => DocsRoute,
+} as any)
+const DocsWritingTestSpecsRoute = DocsWritingTestSpecsRouteImport.update({
+  id: '/writing-test-specs',
+  path: '/writing-test-specs',
+  getParentRoute: () => DocsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
-  '/docs': typeof DocsRoute
+  '/docs': typeof DocsRouteWithChildren
   '/pricing': typeof PricingRoute
   '/product': typeof ProductRoute
+  '/security': typeof SecurityRoute
+  '/services': typeof ServicesRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/docs/evaluation-model': typeof DocsEvaluationModelRoute
+  '/docs/getting-started': typeof DocsGettingStartedRoute
+  '/docs/reporting': typeof DocsReportingRoute
+  '/docs/troubleshooting': typeof DocsTroubleshootingRoute
+  '/docs/writing-test-specs': typeof DocsWritingTestSpecsRoute
   '/blog/': typeof BlogIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
-  '/docs': typeof DocsRoute
+  '/docs': typeof DocsRouteWithChildren
   '/pricing': typeof PricingRoute
   '/product': typeof ProductRoute
+  '/security': typeof SecurityRoute
+  '/services': typeof ServicesRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/docs/evaluation-model': typeof DocsEvaluationModelRoute
+  '/docs/getting-started': typeof DocsGettingStartedRoute
+  '/docs/reporting': typeof DocsReportingRoute
+  '/docs/troubleshooting': typeof DocsTroubleshootingRoute
+  '/docs/writing-test-specs': typeof DocsWritingTestSpecsRoute
   '/blog': typeof BlogIndexRoute
 }
 export interface FileRoutesById {
@@ -84,10 +140,17 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
-  '/docs': typeof DocsRoute
+  '/docs': typeof DocsRouteWithChildren
   '/pricing': typeof PricingRoute
   '/product': typeof ProductRoute
+  '/security': typeof SecurityRoute
+  '/services': typeof ServicesRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/docs/evaluation-model': typeof DocsEvaluationModelRoute
+  '/docs/getting-started': typeof DocsGettingStartedRoute
+  '/docs/reporting': typeof DocsReportingRoute
+  '/docs/troubleshooting': typeof DocsTroubleshootingRoute
+  '/docs/writing-test-specs': typeof DocsWritingTestSpecsRoute
   '/blog/': typeof BlogIndexRoute
 }
 export interface FileRouteTypes {
@@ -99,7 +162,14 @@ export interface FileRouteTypes {
     | '/docs'
     | '/pricing'
     | '/product'
+    | '/security'
+    | '/services'
     | '/blog/$slug'
+    | '/docs/evaluation-model'
+    | '/docs/getting-started'
+    | '/docs/reporting'
+    | '/docs/troubleshooting'
+    | '/docs/writing-test-specs'
     | '/blog/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -109,7 +179,14 @@ export interface FileRouteTypes {
     | '/docs'
     | '/pricing'
     | '/product'
+    | '/security'
+    | '/services'
     | '/blog/$slug'
+    | '/docs/evaluation-model'
+    | '/docs/getting-started'
+    | '/docs/reporting'
+    | '/docs/troubleshooting'
+    | '/docs/writing-test-specs'
     | '/blog'
   id:
     | '__root__'
@@ -119,7 +196,14 @@ export interface FileRouteTypes {
     | '/docs'
     | '/pricing'
     | '/product'
+    | '/security'
+    | '/services'
     | '/blog/$slug'
+    | '/docs/evaluation-model'
+    | '/docs/getting-started'
+    | '/docs/reporting'
+    | '/docs/troubleshooting'
+    | '/docs/writing-test-specs'
     | '/blog/'
   fileRoutesById: FileRoutesById
 }
@@ -127,9 +211,11 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
-  DocsRoute: typeof DocsRoute
+  DocsRoute: typeof DocsRouteWithChildren
   PricingRoute: typeof PricingRoute
   ProductRoute: typeof ProductRoute
+  SecurityRoute: typeof SecurityRoute
+  ServicesRoute: typeof ServicesRoute
   BlogSlugRoute: typeof BlogSlugRoute
   BlogIndexRoute: typeof BlogIndexRoute
 }
@@ -178,6 +264,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/security': {
+      id: '/security'
+      path: '/security'
+      fullPath: '/security'
+      preLoaderRoute: typeof SecurityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services': {
+      id: '/services'
+      path: '/services'
+      fullPath: '/services'
+      preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog/': {
       id: '/blog/'
       path: '/blog'
@@ -192,16 +292,71 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/docs/evaluation-model': {
+      id: '/docs/evaluation-model'
+      path: '/evaluation-model'
+      fullPath: '/docs/evaluation-model'
+      preLoaderRoute: typeof DocsEvaluationModelRouteImport
+      parentRoute: typeof DocsRoute
+    }
+    '/docs/getting-started': {
+      id: '/docs/getting-started'
+      path: '/getting-started'
+      fullPath: '/docs/getting-started'
+      preLoaderRoute: typeof DocsGettingStartedRouteImport
+      parentRoute: typeof DocsRoute
+    }
+    '/docs/reporting': {
+      id: '/docs/reporting'
+      path: '/reporting'
+      fullPath: '/docs/reporting'
+      preLoaderRoute: typeof DocsReportingRouteImport
+      parentRoute: typeof DocsRoute
+    }
+    '/docs/troubleshooting': {
+      id: '/docs/troubleshooting'
+      path: '/troubleshooting'
+      fullPath: '/docs/troubleshooting'
+      preLoaderRoute: typeof DocsTroubleshootingRouteImport
+      parentRoute: typeof DocsRoute
+    }
+    '/docs/writing-test-specs': {
+      id: '/docs/writing-test-specs'
+      path: '/writing-test-specs'
+      fullPath: '/docs/writing-test-specs'
+      preLoaderRoute: typeof DocsWritingTestSpecsRouteImport
+      parentRoute: typeof DocsRoute
+    }
   }
 }
+
+interface DocsRouteChildren {
+  DocsEvaluationModelRoute: typeof DocsEvaluationModelRoute
+  DocsGettingStartedRoute: typeof DocsGettingStartedRoute
+  DocsReportingRoute: typeof DocsReportingRoute
+  DocsTroubleshootingRoute: typeof DocsTroubleshootingRoute
+  DocsWritingTestSpecsRoute: typeof DocsWritingTestSpecsRoute
+}
+
+const DocsRouteChildren: DocsRouteChildren = {
+  DocsEvaluationModelRoute: DocsEvaluationModelRoute,
+  DocsGettingStartedRoute: DocsGettingStartedRoute,
+  DocsReportingRoute: DocsReportingRoute,
+  DocsTroubleshootingRoute: DocsTroubleshootingRoute,
+  DocsWritingTestSpecsRoute: DocsWritingTestSpecsRoute,
+}
+
+const DocsRouteWithChildren = DocsRoute._addFileChildren(DocsRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
-  DocsRoute: DocsRoute,
+  DocsRoute: DocsRouteWithChildren,
   PricingRoute: PricingRoute,
   ProductRoute: ProductRoute,
+  SecurityRoute: SecurityRoute,
+  ServicesRoute: ServicesRoute,
   BlogSlugRoute: BlogSlugRoute,
   BlogIndexRoute: BlogIndexRoute,
 }
