@@ -725,7 +725,7 @@ function Index() {
 
         <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {FEATURES.map((feature, i) => (
-            <Reveal key={feature.title} delay={(i % 3) * 80} className={i === 0 ? "lg:col-span-2" : undefined}>
+            <Reveal key={feature.title} delay={(i % 3) * 80} className={i === 0 ? "lg:col-span-2" : ""}>
               <div className="group glass-card relative h-full overflow-hidden rounded-xl p-7 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40">
                 <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-primary/10 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-100" />
                 <span className="relative inline-flex h-11 w-11 items-center justify-center rounded-lg bg-primary/10 text-primary">
