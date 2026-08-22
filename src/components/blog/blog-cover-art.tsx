@@ -136,10 +136,10 @@ export function SecurityGraphCover() {
       {edges.map(([a, b, flagged], i) => (
         <line
           key={i}
-          x1={nodes[a].x}
-          y1={nodes[a].y}
-          x2={nodes[b].x}
-          y2={nodes[b].y}
+          x1={nodes[a]?.x}
+          y1={nodes[a]?.y}
+          x2={nodes[b]?.x}
+          y2={nodes[b]?.y}
           stroke={flagged ? "var(--color-destructive)" : "var(--color-navy-border)"}
           strokeWidth={flagged ? 3 : 1.5}
           opacity={flagged ? 1 : 0.6}
