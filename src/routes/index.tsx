@@ -35,6 +35,7 @@ import {
   IntelligenceIllustration,
 } from "@/components/product/platform-illustrations";
 import { ExpandableIllustration } from "@/components/product/expandable-illustration";
+import heroFilm from "@/assets/hero-film.mp4.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -359,15 +360,19 @@ function Index() {
 
           <div className="mx-auto mt-16 max-w-4xl">
             <div
-              className="glow-primary w-full overflow-hidden rounded-[20px] shadow-elevated"
-              style={{ aspectRatio: "16 / 10" }}
+              className="w-full overflow-hidden rounded-[20px] border border-border shadow-elevated"
+              style={{ aspectRatio: "16 / 9" }}
             >
-              <iframe
-                src="/explainer.html"
-                title="How Shyena evaluates a conversational AI agent"
-                className="h-full w-full border-0"
-                loading="lazy"
-                allow="autoplay"
+              <video
+                src={heroFilm.url}
+                className="h-full w-full object-cover"
+                autoPlay
+                muted
+                loop
+                playsInline
+                controls
+                preload="metadata"
+                aria-label="Shyena evaluating a live conversational AI agent"
               />
             </div>
           </div>
@@ -623,40 +628,54 @@ function Index() {
         </div>
 
         <Reveal>
-          <div className="glow-primary mt-10 overflow-x-auto rounded-2xl border border-primary/30 bg-card shadow-card">
-            <div className="min-w-[920px]">
-              <div className="grid grid-cols-[1.3fr_repeat(5,1fr)] items-start gap-4 border-b border-border bg-secondary/40 px-6 py-4 text-sm font-semibold">
-                <span className="text-foreground">&nbsp;</span>
-                {LANDSCAPE_COLUMNS.map((col, i) => (
-                  <span
-                    key={col}
-                    className={i === LANDSCAPE_COLUMNS.length - 1 ? "text-primary" : "text-muted-foreground"}
-                  >
-                    {col}
-                  </span>
-                ))}
-              </div>
-              {LANDSCAPE_ROWS.map((row, i) => (
-                <div
-                  key={row.label}
-                  className={`grid grid-cols-[1.3fr_repeat(5,1fr)] items-start gap-4 px-6 py-4 text-sm last:rounded-b-2xl ${i % 2 === 1 ? "bg-secondary/20" : ""}`}
-                >
-                  <span className="font-medium text-foreground">{row.label}</span>
-                  {row.values.map((value, j) => (
-                    <span
-                      key={j}
-                      className={
-                        j === row.values.length - 1
-                          ? "rounded-md bg-primary/10 px-2 py-1 font-medium text-primary"
-                          : "text-muted-foreground"
-                      }
+          <div className="mt-10 overflow-x-auto rounded-xl border border-border bg-card">
+            <table className="w-full min-w-[920px] border-collapse text-left text-sm">
+              <caption className="sr-only">
+                How Shyena compares with prompt-testing and observability tools
+              </caption>
+              <thead>
+                <tr className="bg-secondary">
+                  <th scope="col" className="border border-border px-5 py-3 font-semibold text-foreground">
+                    Capability
+                  </th>
+                  {LANDSCAPE_COLUMNS.map((col, i) => (
+                    <th
+                      key={col}
+                      scope="col"
+                      className={`border border-border px-5 py-3 font-semibold ${
+                        i === LANDSCAPE_COLUMNS.length - 1 ? "text-primary" : "text-foreground"
+                      }`}
                     >
-                      {value}
-                    </span>
+                      {col}
+                    </th>
                   ))}
-                </div>
-              ))}
-            </div>
+                </tr>
+              </thead>
+              <tbody>
+                {LANDSCAPE_ROWS.map((row) => (
+                  <tr key={row.label}>
+                    <th
+                      scope="row"
+                      className="border border-border px-5 py-3 align-top font-medium text-foreground"
+                    >
+                      {row.label}
+                    </th>
+                    {row.values.map((value, j) => (
+                      <td
+                        key={j}
+                        className={`border border-border px-5 py-3 align-top ${
+                          j === row.values.length - 1
+                            ? "bg-primary/5 font-medium text-primary"
+                            : "text-muted-foreground"
+                        }`}
+                      >
+                        {value}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </Reveal>
 
