@@ -549,17 +549,21 @@ function Index() {
               <div className="p-6">
                 <p className="text-sm font-semibold text-foreground">
                   Intelligence —{" "}
-                  <span className="text-primary">CIS</span>
+                  <Link to="/cis" className="text-primary hover:underline">
+                    CIS, live today
+                  </Link>
                 </p>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  CIS is Shyena's proprietary conversation intelligence system — it understands
-                  your agent's business rules and logic on its own and generates thousands of test
-                  conversations from that understanding, so coverage grows with your agent instead
-                  of your team's authoring time.
+                  CIS reads your live Cognigy agent, builds a structural model of its logic, and
+                  drafts high-coverage test specs from that model — every generated spec passes
+                  semantic review and carries full provenance before it's marked ready.
                 </p>
                 <div className="mt-3 flex flex-wrap gap-2">
                   <span className="rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground">
-                    Proprietary
+                    Cognigy
+                  </span>
+                  <span className="rounded-full border border-dashed border-border bg-transparent px-3 py-1.5 text-xs font-medium text-muted-foreground">
+                    More platforms next
                   </span>
                 </div>
               </div>

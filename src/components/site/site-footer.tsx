@@ -8,6 +8,7 @@ const COLUMNS: { title: string; links: { label: string; to: string }[] }[] = [
     links: [
       { label: "Evaluation", to: "/product" },
       { label: "Security", to: "/security" },
+      { label: "Intelligence (CIS)", to: "/cis" },
       { label: "Pricing", to: "/pricing" },
       { label: "Expert Services", to: "/services" },
     ],

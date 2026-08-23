@@ -5,6 +5,7 @@ import {
   X,
   Gauge,
   ShieldAlert,
+  Network,
   BookOpen,
   Scale,
   Newspaper,
@@ -38,6 +39,13 @@ const PRODUCTS = [
     title: "Security",
     description:
       "Find vulnerabilities in your AI agents — graph-based red-teaming using the independent Ziran engine, for LangChain, CrewAI, MCP, and more.",
+  },
+  {
+    to: "/cis",
+    icon: Network,
+    title: "Intelligence (CIS)",
+    description:
+      "Reads your live Cognigy agent and drafts high-coverage test specs from a structural model of its logic — with full provenance.",
   },
 ] as const;
 
@@ -86,6 +94,7 @@ const COMPANY = [
 const MOBILE_NAV = [
   { label: "Evaluation", to: "/product" },
   { label: "Security", to: "/security" },
+  { label: "Intelligence (CIS)", to: "/cis" },
   { label: "Pricing", to: "/pricing" },
   { label: "Services", to: "/services" },
   { label: "Docs", to: "/docs" },
