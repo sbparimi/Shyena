@@ -105,15 +105,14 @@ function DocsPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden">
-        <div className="pointer-events-none absolute inset-x-0 -top-40 h-[420px] bg-[radial-gradient(60%_60%_at_50%_50%,var(--color-primary)_0%,transparent_70%)] opacity-[0.13]" />
+      <section className="relative overflow-hidden bg-lavender text-lavender-foreground">
         <div className="relative mx-auto w-full max-w-7xl px-5 pb-6 pt-20 sm:px-8 sm:pt-28">
           <div className="mx-auto max-w-3xl text-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary px-3.5 py-1.5 text-xs font-medium text-muted-foreground">
               <BookOpen className="h-3.5 w-3.5 text-primary" />
               Documentation
             </span>
-            <h1 className="mt-6 text-4xl font-bold leading-[1.08] sm:text-6xl">Documentation</h1>
+            <h1 className="mt-6 text-5xl leading-[1.05] sm:text-7xl">Documentation</h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
               Everything you need to write test specs, understand the evaluation model, and integrate
               Shyena into your release process.

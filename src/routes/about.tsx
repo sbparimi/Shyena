@@ -44,14 +44,13 @@ const VALUES = [
 function AboutPage() {
   return (
     <>
-      <section className="relative overflow-hidden">
-        <div className="pointer-events-none absolute inset-x-0 -top-40 h-[420px] bg-[radial-gradient(60%_60%_at_50%_50%,var(--color-primary)_0%,transparent_70%)] opacity-[0.13]" />
+      <section className="relative overflow-hidden bg-lavender text-lavender-foreground">
         <div className="relative mx-auto w-full max-w-7xl px-5 pb-4 pt-20 sm:px-8 sm:pt-28">
           <div className="mx-auto max-w-2xl text-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary px-3.5 py-1.5 text-xs font-medium text-muted-foreground">
               About
             </span>
-            <h1 className="mt-6 text-4xl font-bold leading-[1.08] sm:text-6xl">
+            <h1 className="mt-6 text-5xl leading-[1.05] sm:text-7xl">
               We build the evidence layer for AI systems
             </h1>
           </div>

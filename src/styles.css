@@ -64,6 +64,8 @@
   --color-navy-muted: var(--navy-muted);
   --color-navy-border: var(--navy-border);
   --color-purple: var(--purple);
+  --color-lavender: var(--lavender);
+  --color-lavender-foreground: var(--lavender-foreground);
   --color-purple-foreground: var(--purple-foreground);
   --color-success: var(--success);
   --color-warning: var(--warning);
@@ -101,6 +103,8 @@
   --navy-border: oklch(0.33 0.075 303);
   --purple: oklch(0.45 0.245 295);
   --purple-foreground: oklch(1 0 0);
+  --lavender: oklch(0.9 0.06 296);
+  --lavender-foreground: oklch(0.24 0.086 305);
   --success: oklch(0.52 0.13 158);
   --warning: oklch(0.78 0.15 78);
   --gradient-primary: linear-gradient(135deg, oklch(0.34 0.15 303), oklch(0.45 0.245 295));
@@ -149,6 +153,8 @@
   --navy-border: oklch(0.36 0.08 303);
   --purple: oklch(0.75 0.15 297);
   --purple-foreground: oklch(0.19 0.085 305);
+  --lavender: oklch(0.29 0.085 303);
+  --lavender-foreground: oklch(0.97 0.012 300);
   --shadow-card: 0 1px 2px oklch(0 0 0 / 40%), 0 12px 32px -18px oklch(0 0 0 / 60%);
   --chart-1: oklch(0.68 0.19 295);
   --chart-2: oklch(0.78 0.13 300);
