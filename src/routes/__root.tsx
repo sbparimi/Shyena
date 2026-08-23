@@ -124,8 +124,8 @@ const ORGANIZATION_SCHEMA = {
     "Shyena is an AI evaluation platform built to test any AI system before it ships. It is live today for testing and evaluating Cognigy-built conversational and voice AI agents, with RAG evaluation next. It runs real, agent-driven conversations against live Cognigy chat and voice bots, scores every turn with LLM-as-judge evaluation and deterministic assertions, and gates releases so a broken conversation can never report a false pass.",
   offers: {
     "@type": "Offer",
-    price: "750",
-    priceCurrency: "USD",
+    price: "30000",
+    priceCurrency: "EUR",
     priceValidUntil: "2027-12-31",
   },
 };
