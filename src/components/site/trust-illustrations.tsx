@@ -17,16 +17,10 @@ export function RedTeamEngineIllustration() {
     <svg
       viewBox="0 0 400 300"
       role="img"
-      aria-labelledby="rt-title rt-desc"
+      aria-label="Ziran graph-based tool-chain discovery: four agent tools shown as a graph, with read_file connected to http_request along a highlighted critical path labeled data exfiltration risk — the composition Ziran's graph analysis surfaces that a list-based scanner would miss."
       preserveAspectRatio="xMidYMid meet"
       className="h-full w-full"
     >
-      <title id="rt-title">Ziran graph-based tool-chain discovery</title>
-      <desc id="rt-desc">
-        Four agent tools shown as a graph. read_file connects to http_request along a highlighted
-        critical path labeled data exfiltration risk, the composition Ziran's graph analysis
-        surfaces that a list-based scanner would miss.
-      </desc>
 
       <rect width="400" height="300" fill="var(--color-secondary)" rx="20" />
       <rect x="0.5" y="0.5" width="399" height="299" fill="none" stroke="var(--color-border)" rx="20" />
@@ -80,16 +74,10 @@ export function MetricCatalogIllustration() {
     <svg
       viewBox="0 0 400 300"
       role="img"
-      aria-labelledby="mc-title mc-desc"
+      aria-label="Shyena's documented metric catalog: a short list of scored metrics — grounding, tone and empathy, policy adherence, escalation quality, and redaction — each with a filled progress bar, next to a counter reading 31 run by default out of 117 in the full catalog."
       preserveAspectRatio="xMidYMid meet"
       className="h-full w-full"
     >
-      <title id="mc-title">Shyena's documented metric catalog</title>
-      <desc id="mc-desc">
-        A short list of scored metrics — grounding, tone and empathy, policy adherence, escalation
-        quality, and redaction — each with a filled progress bar, next to a counter reading 31 run
-        by default out of 117 in the full catalog.
-      </desc>
 
       <rect width="400" height="300" fill="var(--color-secondary)" rx="20" />
       <rect x="0.5" y="0.5" width="399" height="299" fill="none" stroke="var(--color-border)" rx="20" />
@@ -138,18 +126,10 @@ export function GateCheckIllustration() {
     <svg
       viewBox="0 0 800 350"
       role="img"
-      aria-labelledby="gc-title gc-desc"
+      aria-label="The execution-integrity gate, checkable on your first run: a lesser tool reports PASS on a truncated conversation, while Shyena detects the session terminated before the goal was reached and caps the verdict at FAIL regardless of the quality score."
       preserveAspectRatio="xMidYMid meet"
       className="h-full w-full"
     >
-      <title id="gc-title">The execution-integrity gate, checkable on your first run</title>
-      <desc id="gc-desc">
-        A side-by-side comparison. On the left, a lesser tool collects sixteen turns of a truncated
-        conversation, scores it 0.81 against a 0.75 threshold, and reports PASS. On the right,
-        Shyena evaluates the same run, detects the session terminated before the goal was reached,
-        and caps the verdict at FAIL regardless of the quality score.
-      </desc>
-
       <rect width="800" height="350" fill="var(--color-secondary)" rx="20" />
       <rect x="0.5" y="0.5" width="799" height="349" fill="none" stroke="var(--color-border)" rx="20" />
 
@@ -158,55 +138,55 @@ export function GateCheckIllustration() {
       </text>
 
       {/* LEFT: a lesser tool */}
-      <g transform="translate(60, 72)">
-        <text x="220" y="14" textAnchor="middle" fill="var(--color-muted-foreground)" fontFamily="ui-sans-serif, system-ui, sans-serif" fontSize="12" fontWeight="600">
+      <g transform="translate(20, 68)">
+        <text x="165" y="14" textAnchor="middle" fill="var(--color-muted-foreground)" fontFamily="ui-sans-serif, system-ui, sans-serif" fontSize="11.5" fontWeight="600">
           A lesser tool scores what it collected
         </text>
-        <rect x="20" y="32" width="400" height="110" rx="12" fill="var(--color-card)" stroke="var(--color-border)" />
-        <text x="44" y="60" fill="var(--color-foreground)" fontFamily="ui-monospace, monospace" fontSize="12">
-          16 turns collected · no assertion errors raised
+        <rect x="0" y="30" width="330" height="118" rx="12" fill="var(--color-card)" stroke="var(--color-border)" />
+        <text x="20" y="58" fill="var(--color-foreground)" fontFamily="ui-monospace, monospace" fontSize="10.5">
+          16 turns collected
         </text>
-        <text x="44" y="82" fill="var(--color-foreground)" fontFamily="ui-monospace, monospace" fontSize="12">
-          average score 0.81 → threshold 0.75
+        <text x="20" y="76" fill="var(--color-foreground)" fontFamily="ui-monospace, monospace" fontSize="10.5">
+          avg score 0.81 → threshold 0.75
         </text>
-        <rect x="44" y="98" width="92" height="26" rx="13" fill="var(--color-success)" opacity="0.16" />
-        <text x="90" y="115" textAnchor="middle" fill="var(--color-success)" fontFamily="ui-sans-serif, system-ui, sans-serif" fontSize="11" fontWeight="700">
+        <rect x="20" y="94" width="92" height="26" rx="13" fill="var(--color-success)" opacity="0.16" />
+        <text x="66" y="111" textAnchor="middle" fill="var(--color-success)" fontFamily="ui-sans-serif, system-ui, sans-serif" fontSize="11" fontWeight="700">
           ✓ PASS
         </text>
-        <text x="220" y="170" textAnchor="middle" fill="var(--color-muted-foreground)" fontFamily="ui-sans-serif, system-ui, sans-serif" fontSize="11" fontStyle="italic">
+        <text x="165" y="176" textAnchor="middle" fill="var(--color-muted-foreground)" fontFamily="ui-sans-serif, system-ui, sans-serif" fontSize="11" fontStyle="italic">
           a false green — nothing crashed loudly
         </text>
       </g>
 
       {/* Divider */}
-      <g transform="translate(360, 200)">
-        <line x1="0" y1="0" x2="76" y2="0" stroke="var(--color-border)" strokeWidth="2" strokeDasharray="5 5" />
-        <polygon points="80,0 70,-5 70,5" fill="var(--color-border)" />
+      <g transform="translate(350, 200)">
+        <line x1="0" y1="0" x2="84" y2="0" stroke="var(--color-border)" strokeWidth="2" strokeDasharray="5 5" />
+        <polygon points="88,0 78,-5 78,5" fill="var(--color-border)" />
         <circle r="4" fill="var(--color-primary)">
-          <animate attributeName="cx" values="0;76" dur="2s" repeatCount="indefinite" />
+          <animate attributeName="cx" values="0;84" dur="2s" repeatCount="indefinite" />
           <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.15;0.85;1" dur="2s" repeatCount="indefinite" />
         </circle>
       </g>
 
       {/* RIGHT: Shyena */}
-      <g transform="translate(440, 72)">
-        <text x="220" y="14" textAnchor="middle" fill="var(--color-muted-foreground)" fontFamily="ui-sans-serif, system-ui, sans-serif" fontSize="12" fontWeight="600">
+      <g transform="translate(450, 68)">
+        <text x="165" y="14" textAnchor="middle" fill="var(--color-muted-foreground)" fontFamily="ui-sans-serif, system-ui, sans-serif" fontSize="11.5" fontWeight="600">
           Shyena evaluates execution before quality
         </text>
-        <rect x="20" y="32" width="400" height="110" rx="12" fill="var(--color-card)" stroke="var(--color-destructive)" strokeWidth="1.5" />
-        <text x="44" y="60" fill="var(--color-foreground)" fontFamily="ui-monospace, monospace" fontSize="12">
-          turn 17 · session terminated before goal resolution
+        <rect x="0" y="30" width="330" height="118" rx="12" fill="var(--color-card)" stroke="var(--color-destructive)" strokeWidth="1.5" />
+        <text x="20" y="58" fill="var(--color-foreground)" fontFamily="ui-monospace, monospace" fontSize="10.5">
+          turn 17 · terminated early
         </text>
-        <text x="44" y="82" fill="var(--color-foreground)" fontFamily="ui-monospace, monospace" fontSize="12">
-          quality score 0.81 · integrity check FAILED
+        <text x="20" y="76" fill="var(--color-foreground)" fontFamily="ui-monospace, monospace" fontSize="10.5">
+          score 0.81 · integrity FAILED
         </text>
-        <rect x="44" y="98" width="92" height="26" rx="13" fill="var(--color-destructive)" opacity="0.16">
+        <rect x="20" y="94" width="92" height="26" rx="13" fill="var(--color-destructive)" opacity="0.16">
           <animate attributeName="opacity" values="0.12;0.28;0.12" dur="1.8s" repeatCount="indefinite" />
         </rect>
-        <text x="90" y="115" textAnchor="middle" fill="var(--color-destructive)" fontFamily="ui-sans-serif, system-ui, sans-serif" fontSize="11" fontWeight="700">
+        <text x="66" y="111" textAnchor="middle" fill="var(--color-destructive)" fontFamily="ui-sans-serif, system-ui, sans-serif" fontSize="11" fontWeight="700">
           ✕ FAIL
         </text>
-        <text x="220" y="170" textAnchor="middle" fill="var(--color-muted-foreground)" fontFamily="ui-sans-serif, system-ui, sans-serif" fontSize="11" fontStyle="italic">
+        <text x="165" y="176" textAnchor="middle" fill="var(--color-muted-foreground)" fontFamily="ui-sans-serif, system-ui, sans-serif" fontSize="11" fontStyle="italic">
           capped before quality is even scored
         </text>
       </g>
