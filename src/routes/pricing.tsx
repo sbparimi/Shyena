@@ -20,7 +20,7 @@ export const Route = createFileRoute("/pricing")({
       {
         name: "description",
         content:
-          "One plan: Shyena Enterprise at €30,000 annually — unlimited use of CIS, ECAAP and Chakra, backed by a named technical assurance lead, an AI-first support engine, and 24/7 critical-incident response.",
+          "One plan: Shyena Enterprise at €30,000 annually (excl. VAT) — unlimited use of CIS, ECAAP and Chakra, backed by a named technical assurance lead, an AI-first support engine, and 24/7 critical-incident response.",
       },
       { property: "og:title", content: "Pricing — Shyena" },
       {
@@ -153,7 +153,7 @@ function PricingPage() {
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">Shyena Enterprise</p>
             <div className="mt-3 flex items-baseline justify-center gap-2">
               <span className="text-5xl font-bold text-foreground">€30,000</span>
-              <span className="text-base font-medium text-muted-foreground">/year</span>
+              <span className="text-base font-medium text-muted-foreground">/year, excl. VAT</span>
             </div>
             <p className="mt-2 text-sm text-muted-foreground">Unlimited enterprise use</p>
           </div>

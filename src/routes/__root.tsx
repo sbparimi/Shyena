@@ -127,6 +127,12 @@ const ORGANIZATION_SCHEMA = {
     price: "30000",
     priceCurrency: "EUR",
     priceValidUntil: "2027-12-31",
+    priceSpecification: {
+      "@type": "UnitPriceSpecification",
+      price: "30000",
+      priceCurrency: "EUR",
+      valueAddedTaxIncluded: false,
+    },
   },
 };
 
