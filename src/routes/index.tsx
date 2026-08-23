@@ -35,6 +35,11 @@ import {
   IntelligenceIllustration,
 } from "@/components/product/platform-illustrations";
 import { ExpandableIllustration } from "@/components/product/expandable-illustration";
+import {
+  RedTeamEngineIllustration,
+  MetricCatalogIllustration,
+  GateCheckIllustration,
+} from "@/components/site/trust-illustrations";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -897,24 +902,15 @@ function Index() {
             </ul>
           </div>
           <div className="grid grid-cols-2 gap-2 p-2 lg:gap-3 lg:p-3">
-            <img
-              src="/images/team-collab-1.jpg"
-              alt="A team collaborating around a laptop"
-              className="aspect-[4/3] w-full rounded-2xl object-cover"
-              loading="lazy"
-            />
-            <img
-              src="/images/team-diverse-1.jpg"
-              alt="Colleagues talking in an office hallway"
-              className="aspect-[4/3] w-full rounded-2xl object-cover"
-              loading="lazy"
-            />
-            <img
-              src="/images/team-professionals-1.jpg"
-              alt="Two colleagues in a professional setting"
-              className="col-span-2 aspect-[16/7] w-full rounded-2xl object-cover object-top"
-              loading="lazy"
-            />
+            <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl border border-border">
+              <RedTeamEngineIllustration />
+            </div>
+            <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl border border-border">
+              <MetricCatalogIllustration />
+            </div>
+            <div className="col-span-2 aspect-[16/7] w-full overflow-hidden rounded-2xl border border-border">
+              <GateCheckIllustration />
+            </div>
           </div>
         </div>
       </section>
