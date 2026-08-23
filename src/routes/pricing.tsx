@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Check, X, HelpCircle, Mail, MessageCircle, PlayCircle, Shield, Zap, Building2 } from "lucide-react";
+import { ArrowRight, Check, X, HelpCircle, Mail, MessageCircle, Shield, Zap, Building2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
