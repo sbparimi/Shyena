@@ -152,6 +152,22 @@ function SecurityPage() {
         </div>
       </section>
 
+      {/* Product visual */}
+      <section className="mx-auto w-full max-w-7xl px-5 pb-4 sm:px-8">
+        <div
+          className="relative overflow-hidden rounded-3xl shadow-elevated"
+          style={{ aspectRatio: "16 / 8" }}
+        >
+          <img
+            src="/images/security-hero.jpg"
+            alt="A graph of agent tools — read_file, http_request, sql_query, exec_code — with two dangerous connecting paths flagged in red, the compositions a list-based scanner would miss"
+            className="absolute inset-0 h-full w-full object-cover"
+            loading="lazy"
+          />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-navy/90 via-navy/30 to-transparent" />
+        </div>
+      </section>
+
       {/* Stats */}
       <section className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8">
         <div className="rounded-xl border border-border bg-secondary/40 p-8">
