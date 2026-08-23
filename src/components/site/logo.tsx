@@ -7,7 +7,7 @@ export function Logo({ tone = "default" }: { tone?: "default" | "navy" }) {
         src="/shyena-icon.png"
         alt=""
         aria-hidden="true"
-        width={42}
+        width={24}
         height={36}
         className="h-9 w-auto"
       />

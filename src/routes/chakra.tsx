@@ -13,7 +13,6 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/site/reveal";
-import { ChakraLogo } from "@/components/product/chakra-logo";
 
 export const Route = createFileRoute("/chakra")({
   head: () => ({
@@ -128,7 +127,7 @@ function ChakraPage() {
         <div className="relative mx-auto w-full max-w-7xl px-5 pb-4 pt-20 sm:px-8 sm:pt-28">
           <div className="mx-auto max-w-3xl text-center">
             <div className="flex justify-center">
-              <ChakraLogo className="h-16 w-16" />
+              <img src="/shyena-icon.png" alt="" aria-hidden="true" className="h-16 w-auto" />
             </div>
             <span className="mt-5 glass-card inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-medium text-muted-foreground">
               Chakra · A Shyena product
@@ -340,7 +339,7 @@ function ChakraPage() {
       <section className="mx-auto w-full max-w-7xl px-5 pb-24 sm:px-8">
         <div className="overflow-hidden rounded-3xl border border-navy-border bg-navy px-8 py-16 text-center shadow-elevated sm:px-16">
           <div className="flex justify-center">
-            <ChakraLogo className="h-12 w-12" />
+            <img src="/shyena-icon.png" alt="" aria-hidden="true" className="h-12 w-auto" />
           </div>
           <h2 className="mx-auto mt-6 max-w-2xl text-3xl font-bold text-navy-foreground sm:text-4xl">
             Bring one real agent. See its digital twin, attacked.
