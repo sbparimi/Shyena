@@ -40,6 +40,7 @@ import {
   MetricCatalogIllustration,
   GateCheckIllustration,
 } from "@/components/site/trust-illustrations";
+import { HeroSceneIllustration } from "@/components/site/hero-scene-illustration";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -377,6 +378,33 @@ function Index() {
             </div>
           </div>
         </div>
+      </section>
+
+      {/* Product visual: the evidence engine */}
+      <section className="mx-auto w-full max-w-7xl px-5 pb-20 sm:px-8">
+        <Reveal>
+          <div
+            className="relative overflow-hidden rounded-3xl shadow-elevated"
+            style={{ aspectRatio: "16 / 8" }}
+          >
+            <div className="absolute inset-0">
+              <HeroSceneIllustration />
+            </div>
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-navy/90 via-navy/40 to-transparent" />
+            <div className="relative flex h-full max-w-lg flex-col justify-center px-8 sm:px-14">
+              <p className="font-mono text-xs uppercase tracking-[0.18em] text-accent">
+                Shyena · The evidence engine
+              </p>
+              <h2 className="mt-4 text-2xl font-bold text-navy-foreground sm:text-3xl">
+                The control tower for enterprise conversational AI.
+              </h2>
+              <p className="mt-3 max-w-md text-sm leading-relaxed text-navy-muted">
+                One stable core, reading every trace, decision, and evaluation signal your agents
+                produce — a lit, gated pathway from black-box uncertainty to a confident release.
+              </p>
+            </div>
+          </div>
+        </Reveal>
       </section>
 
       {/* Built for Cognigy customers */}
