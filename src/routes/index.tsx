@@ -44,13 +44,13 @@ import {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Shyena — AI Evaluation & Testing Platform for Cognigy Conversational Agents" },
+      { title: "Shyena — Enterprise Assurance for Agentic AI" },
       {
         name: "description",
         content:
-          "Shyena is an AI evaluation platform built to test any AI system before it ships — live today for testing and evaluating Cognigy-built conversational and voice AI agents, RAG next. It runs real, agent-driven conversations against your live Cognigy chatbot or voice bot, scores every turn with LLM-as-judge evaluation and deterministic assertions, and gates releases so a broken conversation can never report a false pass.",
+          "Shyena is enterprise assurance for agentic AI, built from three products: Vera (quality & evaluation), Chakra (adversarial security), and Nexus (system-map intelligence) — live today for testing and evaluating Cognigy-built conversational and voice AI agents, RAG next. It runs real, agent-driven conversations against your live Cognigy chatbot or voice bot, scores every turn with LLM-as-judge evaluation and deterministic assertions, and gates releases so a broken conversation can never report a false pass.",
       },
-      { property: "og:title", content: "Shyena — AI Evaluation & Testing Platform for Cognigy Conversational Agents" },
+      { property: "og:title", content: "Shyena — Enterprise Assurance for Agentic AI" },
       {
         property: "og:description",
         content:
@@ -441,7 +441,7 @@ function Index() {
                 variant="outline"
                 className="border-navy-border bg-transparent text-navy-foreground hover:bg-white/10 hover:text-navy-foreground"
               >
-                <Link to="/product">See Cognigy capabilities</Link>
+                <Link to="/vera">See Cognigy capabilities</Link>
               </Button>
             </div>
           </div>
@@ -519,8 +519,8 @@ function Index() {
               </div>
               <div className="p-6">
                 <p className="text-sm font-semibold text-foreground">
-                  Evaluation —{" "}
-                  <Link to="/product" className="text-primary hover:underline">
+                  Vera · Assure —{" "}
+                  <Link to="/vera" className="text-primary hover:underline">
                     live today
                   </Link>
                 </p>
@@ -553,7 +553,7 @@ function Index() {
               </div>
               <div className="p-6">
                 <p className="text-sm font-semibold text-foreground">
-                  Chakra —{" "}
+                  Chakra · Defend —{" "}
                   <Link to="/chakra" className="text-primary hover:underline">
                     continuous assurance
                   </Link>
@@ -580,7 +580,7 @@ function Index() {
             <div className="glass-card flex h-full flex-col overflow-hidden rounded-2xl">
               <div className="aspect-[1200/340] w-full border-b border-navy-border bg-navy">
                 <ExpandableIllustration
-                  title="CIS: One Rule, Thousands of Conversations"
+                  title="Nexus: One Rule, Thousands of Conversations"
                   description="Business rules understood once — thousands of test conversations generated from that understanding."
                 >
                   <IntelligenceIllustration />
@@ -588,15 +588,15 @@ function Index() {
               </div>
               <div className="p-6">
                 <p className="text-sm font-semibold text-foreground">
-                  Intelligence —{" "}
-                  <Link to="/cis" className="text-primary hover:underline">
-                    CIS, live today
+                  Nexus · Understand —{" "}
+                  <Link to="/nexus" className="text-primary hover:underline">
+                    live today
                   </Link>
                 </p>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  CIS reads your live Cognigy agent, builds a structural model of its logic, and
-                  drafts high-coverage test specs from that model — every generated spec passes
-                  semantic review and carries full provenance before it's marked ready.
+                  Nexus, powered by CIS, reads your live Cognigy agent, builds a structural model of
+                  its logic, and drafts high-coverage test specs from that model — every generated
+                  spec passes semantic review and carries full provenance before it's marked ready.
                 </p>
                 <div className="mt-3 flex flex-wrap gap-2">
                   <span className="rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground">
@@ -771,7 +771,7 @@ function Index() {
           </h2>
           <p className="mt-4 text-sm text-muted-foreground">
             Built first for conversational and voice AI.{" "}
-            <Link to="/product" className="font-medium text-primary hover:underline">
+            <Link to="/vera" className="font-medium text-primary hover:underline">
               RAG evaluation is next
             </Link>{" "}
             — the judge model already includes five RAG-specific quality dimensions.

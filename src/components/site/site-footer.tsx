@@ -6,9 +6,9 @@ const COLUMNS: { title: string; links: { label: string; to: string }[] }[] = [
   {
     title: "Products",
     links: [
-      { label: "Evaluation", to: "/product" },
+      { label: "Vera", to: "/vera" },
       { label: "Chakra", to: "/chakra" },
-      { label: "Intelligence (CIS)", to: "/cis" },
+      { label: "Nexus", to: "/nexus" },
       { label: "Pricing", to: "/pricing" },
       { label: "Expert Services", to: "/services" },
     ],
@@ -50,8 +50,8 @@ export function SiteFooter() {
           <div className="lg:col-span-1">
             <Logo />
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
-              The AI evaluation platform — live for conversational and voice AI, RAG is next.
-              Evidence for every turn, a verdict you can release on.
+              Enterprise assurance for agentic AI — Vera, Chakra and Nexus. Evidence for every turn,
+              a verdict you can release on.
             </p>
           </div>
 

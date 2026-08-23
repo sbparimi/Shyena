@@ -27,25 +27,25 @@ import { Logo } from "./logo";
 
 const PRODUCTS = [
   {
-    to: "/product",
+    to: "/vera",
     icon: Gauge,
-    title: "Evaluation",
+    title: "Vera",
     description:
-      "Evaluate conversational and voice AI before it ships — LLM-judged quality, deterministic checks, and a release gate that can't be gamed.",
+      "Assure — quality & evaluation. Evaluate conversational and voice AI before it ships, powered by ECAAP — LLM-judged quality, deterministic checks, and a release gate that can't be gamed.",
   },
   {
     to: "/chakra",
     icon: ShieldAlert,
     title: "Chakra",
     description:
-      "Continuous assurance for agentic AI — a live digital twin, an attack-engine marketplace (including Ziran), and a native AI Red Team, orchestrated end to end.",
+      "Defend — adversarial security. Continuous assurance for agentic AI: a live digital twin, an attack-engine marketplace (including Ziran), and a native AI Red Team.",
   },
   {
-    to: "/cis",
+    to: "/nexus",
     icon: Network,
-    title: "Intelligence (CIS)",
+    title: "Nexus",
     description:
-      "Reads your live Cognigy agent and drafts high-coverage test specs from a structural model of its logic — with full provenance.",
+      "Understand — system map intelligence. Reads your live Cognigy agent and drafts high-coverage test specs from a structural model of its logic, powered by CIS.",
   },
 ] as const;
 
@@ -92,9 +92,9 @@ const COMPANY = [
 ] as const;
 
 const MOBILE_NAV = [
-  { label: "Evaluation", to: "/product" },
+  { label: "Vera", to: "/vera" },
   { label: "Chakra", to: "/chakra" },
-  { label: "Intelligence (CIS)", to: "/cis" },
+  { label: "Nexus", to: "/nexus" },
   { label: "Pricing", to: "/pricing" },
   { label: "Services", to: "/services" },
   { label: "Docs", to: "/docs" },

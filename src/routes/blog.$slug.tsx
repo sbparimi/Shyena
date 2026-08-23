@@ -811,7 +811,7 @@ function CognigyTestingBody() {
 
       <H2>How Shyena Tests Cognigy Agents Today</H2>
       <P>
-        This methodology is the actual shape of how <Link to="/product">Shyena tests Cognigy agents</Link>{" "}
+        This methodology is the actual shape of how <Link to="/vera">Shyena tests Cognigy agents</Link>{" "}
         today — Cognigy is Shyena's live, flagship integration. Test cases are written as a goal,
         a persona, and a behavioral playbook, and an agentic executor drives a real browser or
         voice session against the live Cognigy agent — the same channel real customers use, chat
