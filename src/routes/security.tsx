@@ -160,7 +160,7 @@ function SecurityPage() {
         >
           <img
             src="/images/security-hero.jpg"
-            alt="A graph of agent tools — read_file, http_request, sql_query, exec_code — with two dangerous connecting paths flagged in red, the compositions a list-based scanner would miss"
+            alt="A graph of agentic AI risk categories from the OWASP Top 10 for Agentic Applications — goal hijack, tool misuse, privilege abuse, memory poisoning — with dangerous connecting paths flagged in red, converging into excessive agency"
             className="absolute inset-0 h-full w-full object-cover"
             loading="lazy"
           />
