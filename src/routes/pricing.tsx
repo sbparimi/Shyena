@@ -1,25 +1,31 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Check, X, HelpCircle, Mail, MessageCircle, Shield, Zap, Building2 } from "lucide-react";
+import {
+  ArrowRight,
+  Check,
+  HelpCircle,
+  GraduationCap,
+  Rocket,
+  Code2,
+  Puzzle,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { CtaBand } from "@/components/site/cta-band";
-import { cn } from "@/lib/utils";
+import { Reveal } from "@/components/site/reveal";
 
 export const Route = createFileRoute("/pricing")({
   head: () => ({
     meta: [
-      { title: "AI Agent Testing Pricing — Shyena" },
+      { title: "Pricing — Shyena" },
       {
         name: "description",
         content:
-          "Pricing for Shyena's AI evaluation platform — live today for conversational and voice AI testing. Start with a free pilot on your own agent, then Starter from $750/mo, Growth from $3,500/mo, Enterprise custom-scoped — evaluated-conversation volume included in every plan.",
+          "One plan: Shyena Enterprise at €30,000 annually — unlimited use of CIS, ECAAP and Chakra, backed by a named technical assurance lead, an AI-first support engine, and 24/7 critical-incident response.",
       },
-      { property: "og:title", content: "AI Agent Testing Pricing — Shyena" },
+      { property: "og:title", content: "Pricing — Shyena" },
       {
         property: "og:description",
-        content:
-          "Simple, flexible pricing for AI evaluation. From a single-agent pilot to enterprise-wide release gating.",
+        content: "One plan. Unlimited platform use. Named ownership, not a headcount promise.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -29,108 +35,74 @@ export const Route = createFileRoute("/pricing")({
   component: PricingPage,
 });
 
-const TIERS = [
-  {
-    id: "starter",
-    name: "Starter",
-    tag: null,
-    description: "Piloting evaluation on one agent with core quality metrics.",
-    icon: Zap,
-    price: "$750",
-    priceUnit: "/mo",
-    priceNote: "500 evaluated conversations included · $0.20 per conversation after",
-    features: [
-      "One agent / one environment",
-      "500 evaluated conversations / mo",
-      "Core LLM-as-judge metrics",
-      "Deterministic assertion contracts",
-      "Execution-integrity hard gate",
-      "Email support",
-    ],
-    cta: "Get Started",
-    highlighted: false,
-  },
-  {
-    id: "growth",
-    name: "Growth",
-    tag: "Most Popular",
-    description: "Multi-agent teams that need scheduled regression runs and richer quality gates.",
-    icon: MessageCircle,
-    price: "$3,500",
-    priceUnit: "/mo",
-    priceNote: "Starting price · 1,000 conversations included · $0.15 per conversation after",
-    features: [
-      "Up to 5 agents & environments",
-      "1,000 evaluated conversations / mo",
-      "Full metric suite (semantic assurance, accessibility gates, orchestrator quality)",
-      "Scheduled regression runs",
-      "Slack & webhook alerts",
-      "Priority support",
-    ],
-    cta: "Talk to Sales",
-    highlighted: true,
-  },
-  {
-    id: "enterprise",
-    name: "Enterprise",
-    tag: null,
-    description: "Organization-wide deployment with custom metrics and enterprise controls.",
-    icon: Building2,
-    price: "Custom",
-    priceUnit: "",
-    priceNote: "Typically $75k–150k+/yr, scoped to your deployment and volume",
-    features: [
-      "Unlimited agents & environments",
-      "2,000 evaluated conversations / mo included, negotiable beyond that",
-      "SSO / SAML and role-scoped access",
-      "Dedicated success engineer",
-      "Custom metric development",
-      "VPC / on-prem deployment option",
-      "Contractual SLAs",
-    ],
-    cta: "Request a quote",
-    highlighted: false,
-  },
-];
+const PLATFORM_INCLUDES = [
+  "CIS",
+  "ECAAP",
+  "Chakra",
+  "Unlimited users",
+  "Unlimited AI systems",
+  "Unlimited agents",
+  "Unlimited executions",
+  "Unlimited security testing",
+] as const;
 
-const COMPARISON_ROWS = [
-  { feature: "Agentic test personas", starter: true, growth: true, enterprise: true },
-  { feature: "LLM-as-judge metrics", starter: true, growth: true, enterprise: true },
-  { feature: "Deterministic assertions", starter: true, growth: true, enterprise: true },
-  { feature: "Execution-integrity gate", starter: true, growth: true, enterprise: true },
-  { feature: "Semantic assurance", starter: false, growth: true, enterprise: true },
-  { feature: "Accessibility scanning", starter: false, growth: true, enterprise: true },
-  { feature: "Full audit trail", starter: true, growth: true, enterprise: true },
-  { feature: "SSO / SAML", starter: false, growth: false, enterprise: true },
-  { feature: "Dedicated support", starter: false, growth: true, enterprise: true },
-  { feature: "Custom integrations", starter: false, growth: false, enterprise: true },
-];
+const SUPPORT_INCLUDES = [
+  "One-week implementation onboarding",
+  "Named Technical Assurance Lead",
+  "Named Customer Assurance Manager",
+  "AI-powered support and diagnostics",
+  "Shared expert escalation team",
+  "24/7 P1 and P2 incident response",
+  "Business-hours support for P3 and P4",
+  "Quarterly assurance review",
+] as const;
+
+const ADD_ONS = [
+  { icon: GraduationCap, title: "Training", body: "Team onboarding and enablement, priced separately." },
+  { icon: Rocket, title: "Pilot projects", body: "Scoped proof-of-value engagements, priced separately." },
+  { icon: Code2, title: "Custom development", body: "Bespoke platform work, priced separately." },
+  { icon: Puzzle, title: "Bespoke framework adapters", body: "New platform integrations, priced separately." },
+] as const;
+
+const SUPPORT_FLOW = [
+  { title: "Customer", body: "A question, an incident, or a diagnostic need comes in." },
+  { title: "Shyena support engine", body: "Draws on product docs, release notes, known issues, your deployment's logs, test failures, CIS system maps and Chakra findings." },
+  { title: "Automated diagnosis", body: "Resolved outright, a recommended fix, or a clear reason to escalate — never a dead end." },
+  { title: "Human expert", body: "The shared expert pool or your Named Technical Assurance Lead picks up what the engine can't resolve." },
+] as const;
+
+const SEVERITY_ROWS = [
+  { severity: "P1 Critical", example: "Platform unavailable / security incident", response: "24/7" },
+  { severity: "P2 High", example: "Major production capability impacted", response: "24/7" },
+  { severity: "P3 Normal", example: "Functional issue / degraded capability", response: "Business hours" },
+  { severity: "P4 Request", example: "Configuration / guidance", response: "Business hours" },
+] as const;
 
 const FAQS = [
   {
-    question: "How is pricing calculated?",
+    question: "Why one plan instead of tiers?",
     answer:
-      "Two axes: how many agents and environments you're covering, and how many conversations you evaluate per month. Each plan includes a set volume — 500/mo on Starter, 1,000/mo on Growth, 2,000/mo on Enterprise — with straightforward overage pricing beyond that. We count evaluated conversations, not seats, so teams with read-only reviewers aren't penalized for adding people.",
+      "Usage-based tiers penalize the teams that adopt fastest. One plan means unlimited agents, executions and security testing across CIS, ECAAP and Chakra from day one, with support that scales operationally instead of a per-seat pricing ladder.",
+  },
+  {
+    question: "What does a Named Technical Assurance Lead actually do?",
+    answer:
+      "They're your single accountable technical owner — architecture, platform adoption, technical strategy, integration oversight, escalation ownership, and quarterly assurance reviews. They're not a full-time engineer embedded in your team; the model is accountable ownership backed by a shared expert pool, not headcount allocated to you alone.",
+  },
+  {
+    question: "How does 24/7 support work without a dedicated engineer per customer?",
+    answer:
+      "Shyena's own AI support engine is the first line — it has access to product documentation, release notes, known defects, your deployment's metadata, test failures, CIS system maps and Chakra findings, so it understands your actual implementation, not a generic FAQ. It resolves what it can and routes the rest to a follow-the-sun expert pool, with your Named Technical Assurance Lead as the accountable escalation point.",
+  },
+  {
+    question: "What's the difference between P1/P2 and P3/P4 response times?",
+    answer:
+      "P1 (platform unavailable, security incident) and P2 (major production capability impacted) get 24/7 response. P3 (a functional issue or degraded capability) and P4 (configuration or guidance) are handled during business hours. The commercial promise is 24/7 coverage for business-critical incidents — not 24/7 access to one specific engineer.",
   },
   {
     question: "What platforms do you support?",
     answer:
-      "Cognigy is Shyena's live platform integration today — Shyena drives real chat and voice conversations against your live Cognigy agent through the same surface your customers use: web chat, voice calls, SMS, and common messaging channels. We can add new platform and channel adapters on request.",
-  },
-  {
-    question: "Can we run this in our own cloud or VPC?",
-    answer:
-      "Yes. Enterprise plans include a VPC or on-prem deployment option with contractual SLAs. We also offer a managed SaaS deployment for teams that want to get started immediately.",
-  },
-  {
-    question: "How does the execution-integrity gate work?",
-    answer:
-      "If a conversation fails, truncates, or times out, the run is capped at FAIL regardless of how well the earlier turns scored. The raw quality score remains visible for debugging, but it cannot be reported as a pass.",
-  },
-  {
-    question: "What does onboarding look like?",
-    answer:
-      "We start with a pilot scenario against your live agent. Growth customers get onboarding documentation and priority Slack support; Enterprise customers get a dedicated success engineer who helps design personas, quality pillars, and regression schedules.",
+      "Cognigy is Shyena's live platform integration today — Shyena drives real chat and voice conversations against your live Cognigy agent through the same surface your customers use. New platform and channel adapters are available as bespoke work, priced separately.",
   },
   {
     question: "Is there a free pilot?",
@@ -165,161 +137,142 @@ function PricingPage() {
               <HelpCircle className="h-3.5 w-3.5 text-primary" />
               Pricing
             </span>
-            <h1 className="mt-6 text-5xl leading-[1.05] sm:text-7xl">
-              Simple pricing for serious testing
-            </h1>
+            <h1 className="mt-6 text-5xl leading-[1.05] sm:text-7xl">One plan. Unlimited assurance.</h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-              Flexible seat and usage-based pricing that scales from your first pilot to a
-              company-wide release gate. Every plan includes core evaluation and execution-integrity
-              gating.
+              No usage tiers, no per-conversation metering. Unlimited use of CIS, ECAAP and Chakra,
+              backed by named ownership and a support model built into the platform itself.
             </p>
-            <div className="mx-auto mt-6 inline-flex items-center gap-2 rounded-full border border-border bg-secondary/60 px-4 py-2 text-sm text-muted-foreground">
-              <span className="inline-flex h-2 w-2 rounded-full bg-accent" />
-              Starter and Growth prices are list price. Enterprise is scoped to your deployment.
-            </div>
           </div>
         </div>
       </section>
 
-      {/* Tier cards */}
-      <section className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8">
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {TIERS.map((tier) => {
-            const Icon = tier.icon;
-            return (
-              <Card
-                key={tier.id}
-                className={cn(
-                  "relative flex flex-col overflow-hidden shadow-card transition-all hover:-translate-y-0.5",
-                  tier.highlighted
-                    ? "border-primary/40 ring-1 ring-primary/30"
-                    : "border-border",
-                )}
-              >
-                {tier.tag && (
-                  <div className="absolute right-0 top-0 rounded-bl-xl bg-primary px-3 py-1 text-xs font-semibold text-primary-foreground">
-                    {tier.tag}
-                  </div>
-                )}
-                <CardHeader className="pb-4">
-                  <span
-                    className={cn(
-                      "inline-flex h-10 w-10 items-center justify-center rounded-lg",
-                      tier.highlighted ? "bg-primary text-primary-foreground" : "bg-primary/10 text-primary",
-                    )}
-                  >
-                    <Icon className="h-5 w-5" />
-                  </span>
-                  <CardTitle className="mt-5 text-2xl font-bold">{tier.name}</CardTitle>
-                  <CardDescription className="mt-2 text-sm leading-relaxed">
-                    {tier.description}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="flex flex-1 flex-col">
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-4xl font-bold text-foreground">{tier.price}</span>
-                    {tier.priceUnit && (
-                      <span className="text-base font-medium text-muted-foreground">{tier.priceUnit}</span>
-                    )}
-                  </div>
-                  <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{tier.priceNote}</p>
-                  <ul className="mt-6 flex-1 space-y-3">
-                    {tier.features.map((feature) => (
-                      <li key={feature} className="flex items-start gap-3">
-                        <span className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
-                          <Check className="h-3 w-3" />
-                        </span>
-                        <span className="text-sm leading-relaxed text-foreground">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <Button
-                    asChild
-                    className="mt-8 w-full"
-                    variant={tier.highlighted ? "default" : "outline"}
-                  >
-                    <Link to="/contact">
-                      {tier.cta}
-                      <ArrowRight className="h-4 w-4" />
-                    </Link>
-                  </Button>
-                </CardContent>
-              </Card>
-            );
-          })}
+      {/* The plan */}
+      <section className="mx-auto w-full max-w-5xl px-5 py-16 sm:px-8">
+        <div className="overflow-hidden rounded-3xl border border-primary/30 bg-card shadow-elevated ring-1 ring-primary/20">
+          <div className="border-b border-border bg-secondary/40 px-8 py-10 text-center sm:px-16">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">Shyena Enterprise</p>
+            <div className="mt-3 flex items-baseline justify-center gap-2">
+              <span className="text-5xl font-bold text-foreground">€30,000</span>
+              <span className="text-base font-medium text-muted-foreground">/year</span>
+            </div>
+            <p className="mt-2 text-sm text-muted-foreground">Unlimited enterprise use</p>
+          </div>
+          <div className="grid gap-10 p-8 sm:p-12 lg:grid-cols-2">
+            <div>
+              <p className="text-sm font-semibold text-foreground">Platform</p>
+              <ul className="mt-4 space-y-3">
+                {PLATFORM_INCLUDES.map((item) => (
+                  <li key={item} className="flex items-start gap-3">
+                    <span className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                      <Check className="h-3 w-3" />
+                    </span>
+                    <span className="text-sm leading-relaxed text-foreground">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <p className="text-sm font-semibold text-foreground">Success and support</p>
+              <ul className="mt-4 space-y-3">
+                {SUPPORT_INCLUDES.map((item) => (
+                  <li key={item} className="flex items-start gap-3">
+                    <span className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent/10 text-accent">
+                      <Check className="h-3 w-3" />
+                    </span>
+                    <span className="text-sm leading-relaxed text-foreground">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          <div className="border-t border-border px-8 py-8 text-center sm:px-16">
+            <Button asChild size="lg">
+              <Link to="/contact">
+                Talk to Sales
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
         </div>
-        <p className="mt-8 text-center text-sm text-muted-foreground">
-          Want hands-on help designing personas and quality gates on Starter or Growth?{" "}
-          <Link to="/services" className="font-medium text-primary hover:underline">
-            Our team offers that as a separate engagement
-          </Link>{" "}
-          — Enterprise is the only plan with a dedicated engineer included.
-        </p>
+
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {ADD_ONS.map((addon) => (
+            <div key={addon.title} className="rounded-xl border border-border bg-card p-5 shadow-card">
+              <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                <addon.icon className="h-4 w-4" />
+              </span>
+              <p className="mt-3 text-sm font-semibold text-foreground">{addon.title}</p>
+              <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{addon.body}</p>
+            </div>
+          ))}
+        </div>
       </section>
 
-      {/* Comparison table */}
+      {/* Named ownership, not a headcount promise */}
       <section className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8">
         <div className="max-w-2xl">
-          <p className="font-mono text-xs uppercase tracking-[0.18em] text-primary">Compare plans</p>
-          <h2 className="mt-4 text-3xl font-bold sm:text-4xl">What's included in each tier</h2>
+          <p className="font-mono text-xs uppercase tracking-[0.18em] text-primary">The support model</p>
+          <h2 className="mt-4 text-3xl font-bold sm:text-4xl">
+            Named ownership, not "one engineer, always available."
+          </h2>
           <p className="mt-4 text-muted-foreground">
-            All plans include the core evaluation engine. The differences are in scale, advanced
-            quality gates, and enterprise controls.
+            "One dedicated engineer, 24/7" doesn't scale honestly. Shyena separates{" "}
+            <strong className="font-semibold text-foreground">customer ownership</strong> from{" "}
+            <strong className="font-semibold text-foreground">human availability</strong>: a Named
+            Technical Assurance Lead is accountable for your architecture, adoption and escalation
+            path — backed by an AI-first support engine and a shared, follow-the-sun expert pool,
+            not one person's calendar.
           </p>
         </div>
 
-        <div className="mt-12 overflow-x-auto rounded-2xl border border-border bg-card shadow-card">
-          <div className="min-w-[540px]">
-            <div className="grid grid-cols-[1fr_100px_100px_100px] items-center gap-4 border-b border-border bg-secondary/40 px-6 py-4 text-sm font-semibold sm:grid-cols-[1fr_120px_120px_120px]">
-              <span className="text-foreground">Capability</span>
-              <span className="text-center text-muted-foreground">Starter</span>
-              <span className="text-center text-primary">Growth</span>
-              <span className="text-center text-muted-foreground">Enterprise</span>
-            </div>
-            {COMPARISON_ROWS.map((row, i) => (
-              <div
-                key={row.feature}
-                className={cn(
-                  "grid grid-cols-[1fr_100px_100px_100px] items-center gap-4 px-6 py-4 text-sm last:rounded-b-2xl sm:grid-cols-[1fr_120px_120px_120px]",
-                  i % 2 === 1 && "bg-secondary/20",
+        <div className="mt-12 grid gap-6 lg:grid-cols-4">
+          {SUPPORT_FLOW.map((step, i) => (
+            <Reveal key={step.title} delay={i * 90}>
+              <div className="relative h-full rounded-xl border border-border bg-card p-6 shadow-card">
+                <span className="font-mono text-xs text-muted-foreground">0{i + 1}</span>
+                <h3 className="mt-3 text-sm font-semibold text-foreground">{step.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{step.body}</p>
+                {i < SUPPORT_FLOW.length - 1 && (
+                  <ArrowRight className="absolute -right-[19px] top-1/2 hidden h-5 w-5 -translate-y-1/2 text-border lg:block" />
                 )}
-              >
-                <span className="text-foreground">{row.feature}</span>
-                <span className="flex justify-center">
-                  {row.starter ? (
-                    <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-primary">
-                      <Check className="h-3.5 w-3.5" />
-                    </span>
-                  ) : (
-                    <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-muted text-muted-foreground">
-                      <X className="h-3.5 w-3.5" />
-                    </span>
-                  )}
-                </span>
-                <span className="flex justify-center">
-                  {row.growth ? (
-                    <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-primary">
-                      <Check className="h-3.5 w-3.5" />
-                    </span>
-                  ) : (
-                    <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-muted text-muted-foreground">
-                      <X className="h-3.5 w-3.5" />
-                    </span>
-                  )}
-                </span>
-                <span className="flex justify-center">
-                  {row.enterprise ? (
-                    <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-primary">
-                      <Check className="h-3.5 w-3.5" />
-                    </span>
-                  ) : (
-                    <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-muted text-muted-foreground">
-                      <X className="h-3.5 w-3.5" />
-                    </span>
-                  )}
-                </span>
               </div>
-            ))}
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* Severity model */}
+      <section className="bg-navy py-24">
+        <div className="mx-auto w-full max-w-7xl px-5 sm:px-8">
+          <div className="max-w-2xl">
+            <p className="font-mono text-xs uppercase tracking-[0.18em] text-accent">Response times</p>
+            <h2 className="mt-4 text-3xl font-bold text-navy-foreground sm:text-4xl">
+              24/7 for what's actually critical.
+            </h2>
+            <p className="mt-4 text-navy-muted">
+              The commercial promise is 24/7 coverage for business-critical incidents — not 24/7
+              access to one specific engineer.
+            </p>
+          </div>
+
+          <div className="mt-10 overflow-x-auto rounded-2xl border border-navy-border bg-white/[0.03]">
+            <div className="min-w-[560px]">
+              <div className="grid grid-cols-[140px_1fr_160px] items-center gap-4 border-b border-navy-border px-6 py-4 text-sm font-semibold">
+                <span className="text-navy-foreground">Severity</span>
+                <span className="text-navy-foreground">Example</span>
+                <span className="text-right text-navy-foreground">Initial response</span>
+              </div>
+              {SEVERITY_ROWS.map((row, i) => (
+                <div
+                  key={row.severity}
+                  className={`grid grid-cols-[140px_1fr_160px] items-center gap-4 px-6 py-4 text-sm last:rounded-b-2xl ${i % 2 === 1 ? "bg-white/[0.02]" : ""}`}
+                >
+                  <span className="font-semibold text-navy-foreground">{row.severity}</span>
+                  <span className="text-navy-muted">{row.example}</span>
+                  <span className="text-right font-medium text-accent">{row.response}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -328,7 +281,7 @@ function PricingPage() {
       <section className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8">
         <div className="max-w-2xl">
           <p className="font-mono text-xs uppercase tracking-[0.18em] text-primary">FAQ</p>
-          <h2 className="mt-4 text-3xl font-bold sm:text-4xl">Questions about pricing and plans</h2>
+          <h2 className="mt-4 text-3xl font-bold sm:text-4xl">Questions about pricing and support</h2>
         </div>
 
         <div className="mt-12 max-w-3xl">
