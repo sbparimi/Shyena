@@ -325,22 +325,19 @@ function Index() {
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden">
-        <div className="pointer-events-none absolute inset-0 bg-mesh" />
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-[560px] bg-grid" />
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-background to-transparent" />
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-background to-transparent" />
+      <section className="relative overflow-hidden bg-lavender text-lavender-foreground">
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-background to-transparent" />
         <div className="relative mx-auto w-full max-w-7xl px-5 pb-4 pt-20 sm:px-8 sm:pt-28">
           <div className="mx-auto max-w-3xl text-center">
             <span className="glass-card inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-medium text-muted-foreground">
               <Sparkles className="h-3.5 w-3.5 text-primary" />
               AI Evaluation for Cognigy Conversational Agents
             </span>
-            <h1 className="mt-6 text-4xl font-bold leading-[1.08] sm:text-6xl">
+            <h1 className="mt-6 text-5xl leading-[1.05] sm:text-7xl">
               Automated AI Evaluation.{" "}
               <span className="text-gradient-brand">Trusted Every Time.</span>
             </h1>
-            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
+            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-lavender-foreground/75">
               Shyena is built to evaluate any AI system before it ships — live today for
               conversational and voice AI. It runs real, agent-driven conversations against your
               live bot, judges the quality of every turn with LLM-based evaluation and deterministic
