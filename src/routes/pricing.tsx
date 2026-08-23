@@ -31,25 +31,6 @@ export const Route = createFileRoute("/pricing")({
 
 const TIERS = [
   {
-    id: "pilot",
-    name: "Free Pilot",
-    tag: null,
-    description: "See a real verdict against your own live Cognigy agent before you pay anything.",
-    icon: PlayCircle,
-    price: "$0",
-    priceUnit: "",
-    priceNote: "One real scenario, run against your live agent — no commitment",
-    features: [
-      "One scenario, one agent",
-      "Full evaluation pipeline — not a stripped-down demo",
-      "Real verdict: LLM-as-judge scoring, deterministic assertions, execution-integrity gate",
-      "Guided setup with our team",
-      "No credit card, no contract",
-    ],
-    cta: "Start a free pilot",
-    highlighted: false,
-  },
-  {
     id: "starter",
     name: "Starter",
     tag: null,
@@ -202,7 +183,7 @@ function PricingPage() {
 
       {/* Tier cards */}
       <section className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8">
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {TIERS.map((tier) => {
             const Icon = tier.icon;
             return (
