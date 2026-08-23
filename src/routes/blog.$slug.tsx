@@ -1005,7 +1005,7 @@ function ZiranPipelineBody() {
       <H2>Actually attacking it: Ziran in action</H2>
       <P>
         Once a bounded, prioritized set of campaigns is selected, execution happens using{" "}
-        <Link to="/security">adaptive AI red-teaming</Link> — Ziran, an independent open-source
+        <Link to="/chakra">adaptive AI red-teaming</Link> — Ziran, an independent open-source
         project. Ziran isn't something built in-house — it's a third-party engine, and campaigns
         selected upstream are handed to it as the thing that actually runs the adversarial
         conversations: multi-turn, adaptive attacks that can adjust their approach mid-conversation
@@ -1091,7 +1091,7 @@ function ZiranPipelineBody() {
         related but distinct capability — one built around graph-based discovery of an agent's
         tool chains, detection of execution-level side effects, and adaptive multi-phase campaigns
         rather than fixed attack scripts. Read more about how this Cognigy red team capability
-        works on <Link to="/security">our security page</Link>. The pipeline described here is the
+        works on <Link to="/chakra">Chakra, our security assurance product</Link>. The pipeline described here is the
         architecture we're building toward to make that capability practical to run continuously,
         not a system we're claiming is fully proven end to end today — the planning-phase
         automation and the analysis/scoring tooling are both still active work. What's settled is

@@ -553,10 +553,14 @@ function Index() {
               </div>
               <div className="p-6">
                 <p className="text-sm font-semibold text-foreground">
-                  Security —{" "}
-                  <Link to="/security" className="text-primary hover:underline">
-                    live today, via Ziran
+                  Chakra —{" "}
+                  <Link to="/chakra" className="text-primary hover:underline">
+                    continuous assurance
                   </Link>
+                </p>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                  A digital twin of your agent's tools and trust boundaries, an attack-engine
+                  marketplace including Ziran, and a native AI Red Team — orchestrated end to end.
                 </p>
                 <div className="mt-3 flex flex-wrap gap-2">
                   {["LangChain", "CrewAI", "Bedrock", "MCP", "Browser & HTTPS agents"].map((platform) => (

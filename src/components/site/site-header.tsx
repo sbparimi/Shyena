@@ -34,11 +34,11 @@ const PRODUCTS = [
       "Evaluate conversational and voice AI before it ships — LLM-judged quality, deterministic checks, and a release gate that can't be gamed.",
   },
   {
-    to: "/security",
+    to: "/chakra",
     icon: ShieldAlert,
-    title: "Security",
+    title: "Chakra",
     description:
-      "Find vulnerabilities in your AI agents — graph-based red-teaming using the independent Ziran engine, for LangChain, CrewAI, MCP, and more.",
+      "Continuous assurance for agentic AI — a live digital twin, an attack-engine marketplace (including Ziran), and a native AI Red Team, orchestrated end to end.",
   },
   {
     to: "/cis",
@@ -93,7 +93,7 @@ const COMPANY = [
 
 const MOBILE_NAV = [
   { label: "Evaluation", to: "/product" },
-  { label: "Security", to: "/security" },
+  { label: "Chakra", to: "/chakra" },
   { label: "Intelligence (CIS)", to: "/cis" },
   { label: "Pricing", to: "/pricing" },
   { label: "Services", to: "/services" },
