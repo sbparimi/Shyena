@@ -40,7 +40,6 @@ import {
   MetricCatalogIllustration,
   GateCheckIllustration,
 } from "@/components/site/trust-illustrations";
-import { HeroSceneIllustration } from "@/components/site/hero-scene-illustration";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -387,9 +386,13 @@ function Index() {
             className="relative overflow-hidden rounded-3xl shadow-elevated"
             style={{ aspectRatio: "16 / 8" }}
           >
-            <div className="absolute inset-0">
-              <HeroSceneIllustration />
-            </div>
+            <img
+              src="/images/hero-evidence-engine.jpg"
+              alt=""
+              aria-hidden="true"
+              className="absolute inset-0 h-full w-full object-cover"
+              loading="eager"
+            />
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-navy/90 via-navy/40 to-transparent" />
             <div className="relative flex h-full max-w-lg flex-col justify-center px-8 sm:px-14">
               <p className="font-mono text-xs uppercase tracking-[0.18em] text-accent">
