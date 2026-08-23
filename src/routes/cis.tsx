@@ -111,6 +111,24 @@ function CisPage() {
         </div>
       </section>
 
+      {/* Product visual */}
+      <section className="mx-auto w-full max-w-7xl px-5 pb-16 sm:px-8">
+        <Reveal>
+          <div
+            className="relative overflow-hidden rounded-3xl shadow-elevated"
+            style={{ aspectRatio: "16 / 8" }}
+          >
+            <img
+              src="/images/cis-hero.jpg"
+              alt="One business rule flowing into many labeled, validated test-conversation paths — happy path, edge case, boundary, multilingual"
+              className="absolute inset-0 h-full w-full object-cover"
+              loading="lazy"
+            />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-navy/90 via-navy/30 to-transparent" />
+          </div>
+        </Reveal>
+      </section>
+
       {/* Pipeline */}
       <section id="pipeline" className="bg-navy py-24">
         <div className="mx-auto w-full max-w-7xl px-5 sm:px-8">
