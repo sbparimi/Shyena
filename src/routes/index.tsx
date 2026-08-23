@@ -896,23 +896,23 @@ function Index() {
               </li>
             </ul>
           </div>
-          <div className="grid grid-cols-2 gap-1 lg:gap-2">
+          <div className="grid grid-cols-2 gap-2 p-2 lg:gap-3 lg:p-3">
             <img
               src="/images/team-collab-1.jpg"
               alt="A team collaborating around a laptop"
-              className="h-full w-full object-cover"
+              className="aspect-[4/3] w-full rounded-2xl object-cover"
               loading="lazy"
             />
             <img
               src="/images/team-diverse-1.jpg"
               alt="Colleagues talking in an office hallway"
-              className="h-full w-full object-cover"
+              className="aspect-[4/3] w-full rounded-2xl object-cover"
               loading="lazy"
             />
             <img
               src="/images/team-professionals-1.jpg"
               alt="Two colleagues in a professional setting"
-              className="col-span-2 h-full w-full object-cover"
+              className="col-span-2 aspect-[16/7] w-full rounded-2xl object-cover object-top"
               loading="lazy"
             />
           </div>
