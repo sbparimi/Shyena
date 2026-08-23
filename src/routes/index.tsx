@@ -35,6 +35,7 @@ import {
   IntelligenceIllustration,
 } from "@/components/product/platform-illustrations";
 import { ExpandableIllustration } from "@/components/product/expandable-illustration";
+import heroFilm from "@/assets/hero-film.mp4.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -359,15 +360,19 @@ function Index() {
 
           <div className="mx-auto mt-16 max-w-4xl">
             <div
-              className="glow-primary w-full overflow-hidden rounded-[20px] shadow-elevated"
-              style={{ aspectRatio: "16 / 10" }}
+              className="w-full overflow-hidden rounded-[20px] border border-border shadow-elevated"
+              style={{ aspectRatio: "16 / 9" }}
             >
-              <iframe
-                src="/explainer.html"
-                title="How Shyena evaluates a conversational AI agent"
-                className="h-full w-full border-0"
-                loading="lazy"
-                allow="autoplay"
+              <video
+                src={heroFilm.url}
+                className="h-full w-full object-cover"
+                autoPlay
+                muted
+                loop
+                playsInline
+                controls
+                preload="metadata"
+                aria-label="Shyena evaluating a live conversational AI agent"
               />
             </div>
           </div>
