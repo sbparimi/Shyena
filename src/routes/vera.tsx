@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Check, RefreshCw, ShieldCheck, Activity, Sparkles, Wand2, Layers } from "lucide-react";
+import { ArrowRight, Check, RefreshCw, ShieldCheck, Activity, Sparkles, Wand2, Layers, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { CtaBand } from "@/components/site/cta-band";
@@ -145,6 +145,41 @@ const CAPABILITIES = [
   },
 ];
 
+// Category-level positioning, not a named-vendor comparison — deliberately.
+// "Legacy" here describes the well-established scripted/record-replay
+// automation paradigm (author or record a fixed step sequence, assert
+// against the DOM) that most browser/device test-automation platforms are
+// built on, even as they bolt on AI-assisted authoring or self-healing
+// selectors. Every row below is a structural, industry-level distinction —
+// none of it depends on or references any specific product.
+const PARADIGM_ROWS = [
+  {
+    label: "What a test is",
+    legacy: "A fixed sequence of clicks, keystrokes and assertions, authored or recorded per UI path.",
+    shyena: "A goal, a persona and a playbook — the agent improvises the actual conversation path.",
+  },
+  {
+    label: "Handling non-determinism",
+    legacy: "Brittle by default. AI-assisted \"self-healing\" patches broken selectors, but still replays one fixed path.",
+    shyena: "Built for it from the ground up — the same goal reaches its outcome via a different valid path every run.",
+  },
+  {
+    label: "What gets judged",
+    legacy: "Did the expected element appear and respond the way the script said it would.",
+    shyena: "Did the conversation actually resolve the goal — judged semantically, not just structurally.",
+  },
+  {
+    label: "When a run breaks partway",
+    legacy: "Reported however far the script's own assertions got — nothing stops a partial run from reading as a pass.",
+    shyena: "Capped at FAIL, structurally, before quality is even scored — the execution-integrity gate.",
+  },
+  {
+    label: "Growing coverage",
+    legacy: "Author or record a new script for every additional path you want covered.",
+    shyena: "One understood business rule expands into many test conversations, via Nexus.",
+  },
+] as const;
+
 const ROADMAP_CARDS = [
   {
     icon: Wand2,
@@ -256,6 +291,50 @@ function ProductPage() {
           </section>
         );
       })}
+
+      {/* Legacy automation vs. agentic testing */}
+      <section className="bg-navy py-24">
+        <div className="mx-auto w-full max-w-7xl px-5 sm:px-8">
+          <div className="max-w-2xl">
+            <p className="font-mono text-xs uppercase tracking-[0.18em] text-accent">Not another automation grid</p>
+            <h2 className="mt-4 text-3xl font-bold text-navy-foreground sm:text-4xl">
+              Adding AI to a scripted test isn't the same as agentic testing.
+            </h2>
+            <p className="mt-4 text-navy-muted">
+              Most browser and device test-automation platforms are still built on the same
+              record-and-replay foundation they always were — a fixed sequence of steps, now with
+              AI-assisted authoring or self-healing selectors bolted on top. Vera starts from a
+              different premise: the test is a goal, not a script.
+            </p>
+          </div>
+
+          <div className="mt-10 overflow-x-auto rounded-2xl border border-navy-border bg-white/[0.03]">
+            <div className="min-w-[720px]">
+              <div className="grid grid-cols-[1fr_1.4fr_1.4fr] items-center gap-6 border-b border-navy-border px-6 py-4 text-sm font-semibold">
+                <span className="text-navy-foreground">&nbsp;</span>
+                <span className="flex items-center gap-2 text-navy-muted">
+                  <X className="h-4 w-4 text-navy-muted" />
+                  Legacy test automation
+                </span>
+                <span className="flex items-center gap-2 text-primary">
+                  <Check className="h-4 w-4 text-primary" />
+                  Vera
+                </span>
+              </div>
+              {PARADIGM_ROWS.map((row, i) => (
+                <div
+                  key={row.label}
+                  className={`grid grid-cols-[1fr_1.4fr_1.4fr] items-start gap-6 px-6 py-5 text-sm last:rounded-b-2xl ${i % 2 === 1 ? "bg-white/[0.02]" : ""}`}
+                >
+                  <span className="font-semibold text-navy-foreground">{row.label}</span>
+                  <span className="leading-relaxed text-navy-muted">{row.legacy}</span>
+                  <span className="leading-relaxed text-navy-foreground">{row.shyena}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Roadmap */}
       <section className="mx-auto w-full max-w-7xl px-5 pb-20 sm:px-8">
