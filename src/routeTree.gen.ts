@@ -11,12 +11,16 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as ChakraRouteImport } from './routes/chakra'
+import { Route as CisRouteImport } from './routes/cis'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as DocsRouteImport } from './routes/docs'
+import { Route as NexusRouteImport } from './routes/nexus'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as ProductRouteImport } from './routes/product'
 import { Route as SecurityRouteImport } from './routes/security'
 import { Route as ServicesRouteImport } from './routes/services'
+import { Route as VeraRouteImport } from './routes/vera'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as DocsEvaluationModelRouteImport } from './routes/docs.evaluation-model'
@@ -35,6 +39,16 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ChakraRoute = ChakraRouteImport.update({
+  id: '/chakra',
+  path: '/chakra',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CisRoute = CisRouteImport.update({
+  id: '/cis',
+  path: '/cis',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
@@ -43,6 +57,11 @@ const ContactRoute = ContactRouteImport.update({
 const DocsRoute = DocsRouteImport.update({
   id: '/docs',
   path: '/docs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NexusRoute = NexusRouteImport.update({
+  id: '/nexus',
+  path: '/nexus',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PricingRoute = PricingRouteImport.update({
@@ -63,6 +82,11 @@ const SecurityRoute = SecurityRouteImport.update({
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
   path: '/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VeraRoute = VeraRouteImport.update({
+  id: '/vera',
+  path: '/vera',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogIndexRoute = BlogIndexRouteImport.update({
@@ -104,12 +128,16 @@ const DocsWritingTestSpecsRoute = DocsWritingTestSpecsRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/chakra': typeof ChakraRoute
+  '/cis': typeof CisRoute
   '/contact': typeof ContactRoute
   '/docs': typeof DocsRouteWithChildren
+  '/nexus': typeof NexusRoute
   '/pricing': typeof PricingRoute
   '/product': typeof ProductRoute
   '/security': typeof SecurityRoute
   '/services': typeof ServicesRoute
+  '/vera': typeof VeraRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/docs/evaluation-model': typeof DocsEvaluationModelRoute
   '/docs/getting-started': typeof DocsGettingStartedRoute
@@ -121,12 +149,16 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/chakra': typeof ChakraRoute
+  '/cis': typeof CisRoute
   '/contact': typeof ContactRoute
   '/docs': typeof DocsRouteWithChildren
+  '/nexus': typeof NexusRoute
   '/pricing': typeof PricingRoute
   '/product': typeof ProductRoute
   '/security': typeof SecurityRoute
   '/services': typeof ServicesRoute
+  '/vera': typeof VeraRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/docs/evaluation-model': typeof DocsEvaluationModelRoute
   '/docs/getting-started': typeof DocsGettingStartedRoute
@@ -139,12 +171,16 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/chakra': typeof ChakraRoute
+  '/cis': typeof CisRoute
   '/contact': typeof ContactRoute
   '/docs': typeof DocsRouteWithChildren
+  '/nexus': typeof NexusRoute
   '/pricing': typeof PricingRoute
   '/product': typeof ProductRoute
   '/security': typeof SecurityRoute
   '/services': typeof ServicesRoute
+  '/vera': typeof VeraRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/docs/evaluation-model': typeof DocsEvaluationModelRoute
   '/docs/getting-started': typeof DocsGettingStartedRoute
@@ -158,12 +194,16 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/chakra'
+    | '/cis'
     | '/contact'
     | '/docs'
+    | '/nexus'
     | '/pricing'
     | '/product'
     | '/security'
     | '/services'
+    | '/vera'
     | '/blog/$slug'
     | '/docs/evaluation-model'
     | '/docs/getting-started'
@@ -175,12 +215,16 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/chakra'
+    | '/cis'
     | '/contact'
     | '/docs'
+    | '/nexus'
     | '/pricing'
     | '/product'
     | '/security'
     | '/services'
+    | '/vera'
     | '/blog/$slug'
     | '/docs/evaluation-model'
     | '/docs/getting-started'
@@ -192,12 +236,16 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/about'
+    | '/chakra'
+    | '/cis'
     | '/contact'
     | '/docs'
+    | '/nexus'
     | '/pricing'
     | '/product'
     | '/security'
     | '/services'
+    | '/vera'
     | '/blog/$slug'
     | '/docs/evaluation-model'
     | '/docs/getting-started'
@@ -210,12 +258,16 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  ChakraRoute: typeof ChakraRoute
+  CisRoute: typeof CisRoute
   ContactRoute: typeof ContactRoute
   DocsRoute: typeof DocsRouteWithChildren
+  NexusRoute: typeof NexusRoute
   PricingRoute: typeof PricingRoute
   ProductRoute: typeof ProductRoute
   SecurityRoute: typeof SecurityRoute
   ServicesRoute: typeof ServicesRoute
+  VeraRoute: typeof VeraRoute
   BlogSlugRoute: typeof BlogSlugRoute
   BlogIndexRoute: typeof BlogIndexRoute
 }
@@ -236,6 +288,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/chakra': {
+      id: '/chakra'
+      path: '/chakra'
+      fullPath: '/chakra'
+      preLoaderRoute: typeof ChakraRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cis': {
+      id: '/cis'
+      path: '/cis'
+      fullPath: '/cis'
+      preLoaderRoute: typeof CisRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact': {
       id: '/contact'
       path: '/contact'
@@ -248,6 +314,13 @@ declare module '@tanstack/react-router' {
       path: '/docs'
       fullPath: '/docs'
       preLoaderRoute: typeof DocsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/nexus': {
+      id: '/nexus'
+      path: '/nexus'
+      fullPath: '/nexus'
+      preLoaderRoute: typeof NexusRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/pricing': {
@@ -276,6 +349,13 @@ declare module '@tanstack/react-router' {
       path: '/services'
       fullPath: '/services'
       preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/vera': {
+      id: '/vera'
+      path: '/vera'
+      fullPath: '/vera'
+      preLoaderRoute: typeof VeraRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog/': {
@@ -351,12 +431,16 @@ const DocsRouteWithChildren = DocsRoute._addFileChildren(DocsRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  ChakraRoute: ChakraRoute,
+  CisRoute: CisRoute,
   ContactRoute: ContactRoute,
   DocsRoute: DocsRouteWithChildren,
+  NexusRoute: NexusRoute,
   PricingRoute: PricingRoute,
   ProductRoute: ProductRoute,
   SecurityRoute: SecurityRoute,
   ServicesRoute: ServicesRoute,
+  VeraRoute: VeraRoute,
   BlogSlugRoute: BlogSlugRoute,
   BlogIndexRoute: BlogIndexRoute,
 }
