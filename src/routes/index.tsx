@@ -336,18 +336,17 @@ function Index() {
           <div className="mx-auto max-w-3xl text-center">
             <span className="glass-card inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-medium text-muted-foreground">
               <Sparkles className="h-3.5 w-3.5 text-primary" />
-              AI Evaluation for Cognigy Conversational Agents
+              Enterprise Assurance for Agentic AI
             </span>
             <h1 className="mt-6 text-5xl leading-[1.05] sm:text-7xl">
-              Automated AI Evaluation.{" "}
-              <span className="text-gradient-brand">Trusted Every Time.</span>
+              Stop shipping AI agents{" "}
+              <span className="text-gradient-brand">on hope.</span>
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-lavender-foreground/75">
-              Shyena is built to evaluate any AI system before it ships — live today for
-              conversational and voice AI. It runs real, agent-driven conversations against your
-              live bot, judges the quality of every turn with LLM-based evaluation and deterministic
-              checks, and makes it structurally impossible for a broken conversation to report a
-              green pass.
+              One broken conversation should never look like a passing one. Vera assures quality,
+              Chakra defends against attacks, and Nexus understands your agent's logic — live today
+              for Cognigy conversational and voice agents. See a real verdict on your own agent
+              before it reaches a customer.
             </p>
             <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
               <Button asChild size="lg">
