@@ -1,4 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import promoVideo from "@/assets/shyena-promo.mp4.asset.json";
+
 import {
   ArrowRight,
   Users,
