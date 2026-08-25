@@ -367,14 +367,14 @@ function Index() {
               style={{ aspectRatio: "16 / 9" }}
             >
               <video
-                src="/hero-office.mp4"
+                src="/hero-video.mp4"
                 className="h-full w-full object-cover"
                 autoPlay
                 muted
                 loop
                 playsInline
                 preload="metadata"
-                aria-label="Shyena's evaluation platform at work in a live engineering environment"
+                aria-label="Shyena's evaluation platform catching a failing AI agent conversation and surfacing the verdict"
               />
             </div>
           </div>
