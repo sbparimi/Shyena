@@ -12,12 +12,7 @@ import { BRAND } from "./theme";
 loadInter("normal", { weights: ["400", "500", "700", "800"], subsets: ["latin"] });
 loadSerif("normal", { weights: ["400"], subsets: ["latin"] });
 
-const T = () => (
-  <TransitionSeries.Transition
-    presentation={fade()}
-    timing={springTiming({ config: { damping: 200 }, durationInFrames: 20 })}
-  />
-);
+const timing = springTiming({ config: { damping: 200 }, durationInFrames: 20 });
 
 export const MainVideo: React.FC = () => (
   <AbsoluteFill style={{ backgroundColor: BRAND.ink }}>
@@ -25,18 +20,19 @@ export const MainVideo: React.FC = () => (
       <TransitionSeries.Sequence durationInFrames={210}>
         <SceneOffice />
       </TransitionSeries.Sequence>
-      <T />
+      <TransitionSeries.Transition presentation={fade()} timing={timing} />
       <TransitionSeries.Sequence durationInFrames={300}>
         <SceneExpert />
       </TransitionSeries.Sequence>
-      <T />
+      <TransitionSeries.Transition presentation={fade()} timing={timing} />
       <TransitionSeries.Sequence durationInFrames={180}>
         <SceneVerdict />
       </TransitionSeries.Sequence>
-      <T />
+      <TransitionSeries.Transition presentation={fade()} timing={timing} />
       <TransitionSeries.Sequence durationInFrames={180}>
         <SceneEnd />
       </TransitionSeries.Sequence>
     </TransitionSeries>
   </AbsoluteFill>
 );
+
