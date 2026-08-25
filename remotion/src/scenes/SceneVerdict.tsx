@@ -16,17 +16,31 @@ export const SceneVerdict: React.FC = () => {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
+  // Slow continuous drift across the full (now much longer) scene for a
+  // cinematic feel, matching SceneOffice's camera movement.
+  const push = interpolate(frame, [0, 411], [1, 1.07]);
+  const drift = interpolate(frame, [0, 411], [0, -1.4]);
+  const gate = interpolate(frame, [140, 165], [0, 1], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
 
   return (
     <AbsoluteFill
       style={{
         background: `radial-gradient(120% 90% at 20% 0%, ${BRAND.purpleDeep} 0%, ${BRAND.ink} 60%, #0C0518 100%)`,
-        padding: "0 10%",
-        justifyContent: "center",
+        overflow: "hidden",
         fontFamily: "Inter, sans-serif",
       }}
     >
       <Audio src={staticFile("audio/verdict.m4a")} />
+      <AbsoluteFill
+        style={{
+          padding: "0 10%",
+          justifyContent: "center",
+          transform: `scale(${push}) translateX(${drift}%)`,
+        }}
+      >
       <div
         style={{
           opacity: title,
@@ -100,6 +114,25 @@ export const SceneVerdict: React.FC = () => {
       <div
         style={{
           position: "absolute",
+          right: "10%",
+          top: "34%",
+          marginTop: 128,
+          opacity: gate,
+          transform: `translateY(${(1 - gate) * 10}px)`,
+          fontSize: 18,
+          letterSpacing: 2,
+          textTransform: "uppercase",
+          color: "rgba(255,255,255,0.55)",
+          textAlign: "center",
+          width: 260,
+        }}
+      >
+        Gate: Execution Integrity
+      </div>
+
+      <div
+        style={{
+          position: "absolute",
           left: "10%",
           bottom: "12%",
           opacity: interpolate(frame, [130, 155], [0, 1], {
@@ -112,6 +145,15 @@ export const SceneVerdict: React.FC = () => {
       >
         A broken conversation never gets a passing grade.
       </div>
+      </AbsoluteFill>
+
+      {/* Cinematic vignette */}
+      <AbsoluteFill
+        style={{
+          background:
+            "radial-gradient(120% 100% at 50% 50%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.55) 100%)",
+        }}
+      />
     </AbsoluteFill>
   );
 };

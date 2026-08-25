@@ -8,6 +8,7 @@ export const SceneEnd: React.FC = () => {
   const logo = spring({ frame, fps, config: { damping: 200 } });
   const line = spring({ frame: frame - 22, fps, config: { damping: 200 } });
   const glow = interpolate(Math.sin(frame / 18), [-1, 1], [0.35, 0.7]);
+  const zoom = interpolate(frame, [0, 312], [1, 1.05]);
 
   return (
     <AbsoluteFill
@@ -16,12 +17,20 @@ export const SceneEnd: React.FC = () => {
         alignItems: "center",
         justifyContent: "center",
         fontFamily: "Inter, sans-serif",
+        overflow: "hidden",
+        transform: `scale(${zoom})`,
       }}
     >
       <Audio src={staticFile("audio/end.m4a")} />
       <AbsoluteFill
         style={{
           background: `radial-gradient(45% 40% at 50% 45%, rgba(124,58,237,${glow}) 0%, rgba(0,0,0,0) 70%)`,
+        }}
+      />
+      <AbsoluteFill
+        style={{
+          background:
+            "radial-gradient(120% 100% at 50% 50%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.5) 100%)",
         }}
       />
       <div style={{ opacity: logo, transform: `scale(${0.9 + logo * 0.1})` }}>

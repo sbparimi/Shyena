@@ -27,17 +27,21 @@ export const SceneExpert: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const lowerThird = spring({ frame: frame - 20, fps, config: { damping: 200 } });
+  // Slow continuous push-in across the full (now much longer) scene.
+  const push = interpolate(frame, [0, 752], [1, 1.05]);
 
   return (
     <AbsoluteFill style={{ backgroundColor: BRAND.ink, overflow: "hidden" }}>
       <Audio src={staticFile("audio/expert.m4a")} />
-      <Loop durationInFrames={304}>
-        <OffthreadVideo
-          muted
-          src={staticFile("video/expert.mp4")}
-          style={{ width: "100%", height: "100%", objectFit: "cover" }}
-        />
-      </Loop>
+      <AbsoluteFill style={{ transform: `scale(${push})` }}>
+        <Loop durationInFrames={304}>
+          <OffthreadVideo
+            muted
+            src={staticFile("video/expert.mp4")}
+            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+          />
+        </Loop>
+      </AbsoluteFill>
 
       {/* Live SHYENA dashboard on the studio wall screen */}
       <ScreenOverlay left={0} top={11} width={42.5} height={73} opacity={0.92}>
@@ -53,6 +57,12 @@ export const SceneExpert: React.FC = () => {
         style={{
           background:
             "linear-gradient(180deg, rgba(20,10,40,0.25) 0%, rgba(20,10,40,0) 45%, rgba(20,10,40,0.9) 100%)",
+        }}
+      />
+      <AbsoluteFill
+        style={{
+          background:
+            "radial-gradient(120% 100% at 50% 50%, rgba(0,0,0,0) 60%, rgba(0,0,0,0.45) 100%)",
         }}
       />
 

@@ -2,11 +2,20 @@ import { useCurrentFrame, interpolate } from "remotion";
 import { BRAND } from "../theme";
 import { LogoLockup } from "./LogoLockup";
 
+// Pillars mirror Shyena's own root-cause categories (behavioral / security /
+// platform health) so the on-screen report reads like a real evaluation run
+// -- all case labels and numbers below are invented, not customer data.
+const PILLAR_COLOR: Record<string, string> = {
+  Behavioral: "#8B5CF6",
+  Security: "#F59E0B",
+  "Platform Health": "#38BDF8",
+};
+
 const rows = [
-  { label: "Refund policy · escalation", score: 94, ok: true },
-  { label: "Billing dispute · frustrated user", score: 88, ok: true },
-  { label: "Plan upgrade · multi-intent", score: 41, ok: false },
-  { label: "Account recovery · edge case", score: 91, ok: true },
+  { label: "Refund policy · escalation", score: 94, ok: true, pillar: "Behavioral" },
+  { label: "Billing dispute · frustrated user", score: 88, ok: true, pillar: "Behavioral" },
+  { label: "Plan upgrade · multi-intent", score: 41, ok: false, pillar: "Security" },
+  { label: "Account recovery · edge case", score: 91, ok: true, pillar: "Platform Health" },
 ];
 
 const Spark: React.FC<{ frame: number; seed: number; color: string }> = ({
@@ -56,10 +65,11 @@ export const Dashboard: React.FC = () => {
         </div>
       </div>
 
-      <div style={{ display: "flex", gap: "2.5%" }}>
+      <div style={{ display: "flex", gap: "2%" }}>
         {[
           { k: "Pass rate", v: `${(88 + Math.sin(frame / 22) * 1.6).toFixed(1)}%`, c: BRAND.green },
           { k: "Judge score", v: `${(8.4 + Math.sin(frame / 17) * 0.2).toFixed(2)}`, c: BRAND.lavender },
+          { k: "Metrics", v: "31", c: "#38BDF8" },
           { k: "Hard gate fails", v: `${3 + (Math.floor(frame / 90) % 3)}`, c: BRAND.red },
         ].map((m) => (
           <div
@@ -75,7 +85,7 @@ export const Dashboard: React.FC = () => {
             <div style={{ fontSize: 15, color: "rgba(255,255,255,0.6)", letterSpacing: 1 }}>
               {m.k.toUpperCase()}
             </div>
-            <div style={{ fontSize: 40, fontWeight: 700, color: m.c, lineHeight: 1.2 }}>{m.v}</div>
+            <div style={{ fontSize: 36, fontWeight: 700, color: m.c, lineHeight: 1.2 }}>{m.v}</div>
           </div>
         ))}
       </div>
@@ -123,6 +133,9 @@ export const Dashboard: React.FC = () => {
             gap: 12,
           }}
         >
+          <div style={{ fontSize: 15, color: "rgba(255,255,255,0.6)", letterSpacing: 1 }}>
+            EVIDENCE-LINKED FAILURES
+          </div>
           {rows.map((r, i) => {
             const appear = interpolate(frame, [i * 18, i * 18 + 20], [0, 1], {
               extrapolateLeft: "clamp",
@@ -134,8 +147,20 @@ export const Dashboard: React.FC = () => {
             });
             return (
               <div key={r.label} style={{ opacity: appear }}>
-                <div style={{ display: "flex", justifyContent: "space-between", fontSize: 16 }}>
-                  <span style={{ color: "rgba(255,255,255,0.85)" }}>{r.label}</span>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: 16 }}>
+                  <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    <span
+                      style={{
+                        width: 8,
+                        height: 8,
+                        borderRadius: 99,
+                        background: PILLAR_COLOR[r.pillar],
+                        boxShadow: `0 0 8px ${PILLAR_COLOR[r.pillar]}`,
+                        flexShrink: 0,
+                      }}
+                    />
+                    <span style={{ color: "rgba(255,255,255,0.85)" }}>{r.label}</span>
+                  </span>
                   <span style={{ color: r.ok ? BRAND.green : BRAND.red, fontWeight: 700 }}>
                     {r.ok ? "PASS" : "FAIL"} · {Math.round(w)}
                   </span>
