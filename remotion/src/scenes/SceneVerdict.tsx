@@ -12,7 +12,7 @@ export const SceneVerdict: React.FC = () => {
   const { fps } = useVideoConfig();
   const title = spring({ frame, fps, config: { damping: 200 } });
   const stampX = spring({ frame: frame - 110, fps, config: { damping: 9, stiffness: 120 } });
-  const fade = interpolate(frame, [100, 125], [1, 0.25], {
+  const fade = interpolate(frame, [100, 125], [1, 0.65], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
