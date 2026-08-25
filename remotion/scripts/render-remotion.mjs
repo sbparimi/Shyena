@@ -51,7 +51,6 @@ async function main() {
       codec: "h264",
       outputLocation: OUTPUT,
       puppeteerInstance: browser,
-      muted: true,
       concurrency: 1,
     });
   } finally {

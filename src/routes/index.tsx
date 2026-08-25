@@ -1,3 +1,4 @@
+import { useRef, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight,
@@ -25,6 +26,8 @@ import {
   Eye,
   Zap,
   Flag,
+  Volume2,
+  VolumeX,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CtaBand } from "@/components/site/cta-band";
@@ -327,6 +330,16 @@ const FEATURES = [
 ];
 
 function Index() {
+  const heroVideoRef = useRef<HTMLVideoElement>(null);
+  const [heroMuted, setHeroMuted] = useState(true);
+
+  const toggleHeroSound = () => {
+    const video = heroVideoRef.current;
+    if (!video) return;
+    video.muted = !video.muted;
+    setHeroMuted(video.muted);
+  };
+
   return (
     <>
       {/* Hero */}
@@ -363,10 +376,11 @@ function Index() {
 
           <div className="mx-auto mt-16 max-w-4xl">
             <div
-              className="glow-primary w-full overflow-hidden rounded-[20px] shadow-elevated"
+              className="glow-primary relative w-full overflow-hidden rounded-[20px] shadow-elevated"
               style={{ aspectRatio: "16 / 9" }}
             >
               <video
+                ref={heroVideoRef}
                 src="/hero-video.mp4"
                 className="h-full w-full object-cover"
                 autoPlay
@@ -374,8 +388,16 @@ function Index() {
                 loop
                 playsInline
                 preload="metadata"
-                aria-label="Shyena's evaluation platform catching a failing AI agent conversation and surfacing the verdict"
+                aria-label="Shyena's evaluation platform catching a failing AI agent conversation and surfacing the verdict, narrated by an evaluation expert"
               />
+              <button
+                type="button"
+                onClick={toggleHeroSound}
+                aria-label={heroMuted ? "Unmute video" : "Mute video"}
+                className="absolute bottom-4 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-sm transition-colors hover:bg-black/70"
+              >
+                {heroMuted ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
+              </button>
             </div>
           </div>
 
