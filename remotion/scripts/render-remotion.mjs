@@ -1,16 +1,15 @@
-// Renders the branded hero video during the Vercel build step and writes it
-// straight into the site's public/ directory as a normal static asset — no
-// Lovable asset-proxy dependency (see git history for why that mattered:
-// videos referenced through Lovable's own hosting 404 on this git-synced
-// deployment, twice).
+// Renders the branded hero video and writes it straight into the site's
+// public/ directory as a normal static asset — no Lovable asset-proxy
+// dependency (see git history for why that mattered: videos referenced
+// through Lovable's own hosting 404 on this git-synced deployment, twice).
 //
-// This is a best-effort, non-fatal step. It's invoked from the root
-// package.json build script as `... || echo 'skipped'; vite build`, so a
-// failure here (a Google Fonts fetch hiccup, a first-run browser download
-// timing out, etc.) never blocks the actual site deploy — Vercel's atomic
-// deployment model means the previous working deployment just stays live
-// until the next successful build. Exits non-zero on any failure so that
-// shell-level fallback can catch it; never throws uncaught.
+// Invoked from .github/workflows/render-hero-video.yml on a GitHub Actions
+// ubuntu-latest runner, NOT from Vercel's build step — Vercel's build image
+// (Amazon Linux 2023) is missing shared libraries headless Chrome needs at
+// runtime (libnspr4 and friends) and its build sandbox has no root access
+// to install them, which makes build-time rendering there a dead end.
+// ubuntu-latest ships Chrome preinstalled, so this runs there instead and
+// commits the output; Vercel just serves the resulting static file.
 import { bundle } from "@remotion/bundler";
 import { renderMedia, selectComposition, openBrowser } from "@remotion/renderer";
 import path from "path";

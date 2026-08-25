@@ -1,0 +1,56 @@
+name: Render Hero Video
+
+# Vercel's build image (Amazon Linux 2023) can't launch headless Chrome --
+# it's missing shared libraries (libnspr4 and friends) that Chrome needs at
+# runtime, and the Vercel build sandbox has no root access to install them.
+# ubuntu-latest runners ship Chrome preinstalled, so its full dependency set
+# is already satisfied here. This workflow renders the branded Remotion
+# video and commits it as a normal static asset -- Vercel then just serves
+# it, no rendering at deploy time.
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches: [main]
+    paths:
+      - "remotion/src/**"
+      - "remotion/public/**"
+
+permissions:
+  contents: write
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+
+      - name: Install remotion dependencies
+        working-directory: remotion
+        run: bun install
+
+      - name: Ensure Chrome runtime libraries are present
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            libnspr4 libnss3 libatk1.0-0 libatk-bridge2.0-0 libcups2 \
+            libxkbcommon0 libxcomposite1 libxdamage1 libxfixes3 \
+            libxrandr2 libgbm1 libasound2t64 || true
+
+      - name: Render branded hero video
+        working-directory: remotion
+        run: node scripts/render-remotion.mjs
+
+      - name: Commit rendered video
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add public/hero-video.mp4
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Render branded hero video via Remotion (automated)"
+            git push
+          fi
