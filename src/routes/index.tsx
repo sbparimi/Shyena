@@ -1,6 +1,4 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import promoVideo from "@/assets/shyena-promo.mp4.asset.json";
-
 import {
   ArrowRight,
   Users,
@@ -366,17 +364,14 @@ function Index() {
           <div className="mx-auto mt-16 max-w-4xl">
             <div
               className="glow-primary w-full overflow-hidden rounded-[20px] shadow-elevated"
-              style={{ aspectRatio: "16 / 9" }}
+              style={{ aspectRatio: "16 / 10" }}
             >
-              <video
-                src={promoVideo.url}
-                className="h-full w-full object-cover"
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="metadata"
-                aria-label="Shyena brand film: how Shyena tests conversational AI agents"
+              <iframe
+                src="/explainer.html"
+                title="How Shyena evaluates a conversational AI agent"
+                className="h-full w-full border-0"
+                loading="lazy"
+                allow="autoplay"
               />
             </div>
           </div>
