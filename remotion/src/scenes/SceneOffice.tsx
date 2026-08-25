@@ -31,11 +31,13 @@ export const SceneOffice: React.FC = () => {
         >
           <LogoLockup size={30} tagline />
         </div>
-        {/* Live dashboard on the wall-mounted TV */}
-        <ScreenOverlay left={69} top={6} width={27} height={62} rotateY={-14} opacity={0.9}>
-          <Dashboard />
-        </ScreenOverlay>
       </AbsoluteFill>
+
+      {/* Live dashboard on the wall-mounted TV */}
+      <ScreenOverlay left={67} top={8} width={26} height={58} rotateY={-14} opacity={0.9}>
+        <Dashboard />
+      </ScreenOverlay>
+
 
       <AbsoluteFill
         style={{
