@@ -1,13 +1,12 @@
 import {
   AbsoluteFill,
-  OffthreadVideo,
-  staticFile,
-  useCurrentFrame,
+    useCurrentFrame,
   interpolate,
   spring,
   useVideoConfig,
 } from "remotion";
 import { BRAND } from "../theme";
+import { FrameClip } from "../components/FrameClip";
 import { Dashboard } from "../components/Dashboard";
 import { ScreenOverlay } from "../components/ScreenOverlay";
 import { LogoLockup } from "../components/LogoLockup";
@@ -26,11 +25,7 @@ export const SceneExpert: React.FC = () => {
 
   return (
     <AbsoluteFill style={{ backgroundColor: BRAND.ink, overflow: "hidden" }}>
-      <OffthreadVideo
-        src={staticFile("video/expert.mp4")}
-        muted
-        style={{ width: "100%", height: "100%", objectFit: "cover" }}
-      />
+      <FrameClip name="expert" total={304} />
 
       {/* Live SHYENA dashboard on the studio wall screen */}
       <ScreenOverlay left={0} top={11} width={42.5} height={73} opacity={0.92}>

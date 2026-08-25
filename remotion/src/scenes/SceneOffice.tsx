@@ -1,5 +1,6 @@
-import { AbsoluteFill, OffthreadVideo, staticFile, useCurrentFrame, interpolate, spring, useVideoConfig } from "remotion";
+import { AbsoluteFill, useCurrentFrame, interpolate, spring, useVideoConfig } from "remotion";
 import { BRAND } from "../theme";
+import { FrameClip } from "../components/FrameClip";
 import { Dashboard } from "../components/Dashboard";
 import { ScreenOverlay } from "../components/ScreenOverlay";
 import { LogoLockup } from "../components/LogoLockup";
@@ -15,11 +16,7 @@ export const SceneOffice: React.FC = () => {
   return (
     <AbsoluteFill style={{ backgroundColor: BRAND.ink, overflow: "hidden" }}>
       <AbsoluteFill style={{ transform: `scale(${push}) translateX(${drift}%)` }}>
-        <OffthreadVideo
-          src={staticFile("video/office.mp4")}
-          muted
-          style={{ width: "100%", height: "100%", objectFit: "cover" }}
-        />
+        <FrameClip name="office" total={304} />
         {/* SHYENA sign on the office wall */}
         <div
           style={{
