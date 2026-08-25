@@ -14,13 +14,13 @@ import { Dashboard } from "../components/Dashboard";
 import { ScreenOverlay } from "../components/ScreenOverlay";
 import { LogoLockup } from "../components/LogoLockup";
 
-// Timed to match narration/expert.m4a (~21.7s at 30fps) so each caption is on
+// Timed to match audio/expert.m4a (~24.2s at 30fps) so each caption is on
 // screen for exactly the span in which the voiceover speaks it.
 const CAPTIONS: { from: number; to: number; text: string }[] = [
-  { from: 76, to: 228, text: "Shyena has real conversations with your AI agent — the same way your customers do." },
-  { from: 228, to: 370, text: "Every test is a goal and a persona, not a scripted click path." },
-  { from: 370, to: 500, text: "An LLM judge scores each turn; deterministic assertions check the hard facts." },
-  { from: 500, to: 652, text: "If the run broke down, the execution-integrity gate caps it at FAIL." },
+  { from: 98, to: 250, text: "Shyena has real conversations with your AI agent — the same way your customers do." },
+  { from: 250, to: 412, text: "Every test is built around a goal and a persona, never a scripted click path." },
+  { from: 412, to: 553, text: "An LLM judge scores each turn; deterministic assertions check the hard facts." },
+  { from: 553, to: 727, text: "If the run breaks down, the execution-integrity gate caps it at FAIL." },
 ];
 
 export const SceneExpert: React.FC = () => {
