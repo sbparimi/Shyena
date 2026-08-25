@@ -1,4 +1,4 @@
-import { AbsoluteFill, useCurrentFrame, interpolate, spring, useVideoConfig } from "remotion";
+import { AbsoluteFill, Audio, staticFile, useCurrentFrame, interpolate, spring, useVideoConfig } from "remotion";
 import { BRAND } from "../theme";
 import { FrameClip } from "../components/FrameClip";
 import { Dashboard } from "../components/Dashboard";
@@ -15,6 +15,7 @@ export const SceneOffice: React.FC = () => {
 
   return (
     <AbsoluteFill style={{ backgroundColor: BRAND.ink, overflow: "hidden" }}>
+      <Audio src={staticFile("audio/office.m4a")} />
       <AbsoluteFill style={{ transform: `scale(${push}) translateX(${drift}%)` }}>
         <FrameClip name="office" total={304} />
         {/* SHYENA sign on the office wall */}

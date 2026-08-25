@@ -1,4 +1,4 @@
-import { AbsoluteFill, useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
+import { AbsoluteFill, Audio, staticFile, useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { BRAND } from "../theme";
 import { LogoLockup } from "../components/LogoLockup";
 
@@ -18,6 +18,7 @@ export const SceneEnd: React.FC = () => {
         fontFamily: "Inter, sans-serif",
       }}
     >
+      <Audio src={staticFile("audio/end.m4a")} />
       <AbsoluteFill
         style={{
           background: `radial-gradient(45% 40% at 50% 45%, rgba(124,58,237,${glow}) 0%, rgba(0,0,0,0) 70%)`,

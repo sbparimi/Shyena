@@ -1,4 +1,4 @@
-import { AbsoluteFill, useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
+import { AbsoluteFill, Audio, staticFile, useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { BRAND } from "../theme";
 
 const CHECKS = [
@@ -26,6 +26,7 @@ export const SceneVerdict: React.FC = () => {
         fontFamily: "Inter, sans-serif",
       }}
     >
+      <Audio src={staticFile("audio/verdict.m4a")} />
       <div
         style={{
           opacity: title,
