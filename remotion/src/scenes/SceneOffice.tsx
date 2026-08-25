@@ -1,5 +1,6 @@
-import { AbsoluteFill, OffthreadVideo, staticFile, useCurrentFrame, interpolate, spring, useVideoConfig } from "remotion";
+import { AbsoluteFill, useCurrentFrame, interpolate, spring, useVideoConfig } from "remotion";
 import { BRAND } from "../theme";
+import { FrameClip } from "../components/FrameClip";
 import { Dashboard } from "../components/Dashboard";
 import { ScreenOverlay } from "../components/ScreenOverlay";
 import { LogoLockup } from "../components/LogoLockup";
@@ -15,11 +16,7 @@ export const SceneOffice: React.FC = () => {
   return (
     <AbsoluteFill style={{ backgroundColor: BRAND.ink, overflow: "hidden" }}>
       <AbsoluteFill style={{ transform: `scale(${push}) translateX(${drift}%)` }}>
-        <OffthreadVideo
-          src={staticFile("video/office.mp4")}
-          muted
-          style={{ width: "100%", height: "100%", objectFit: "cover" }}
-        />
+        <FrameClip name="office" total={304} />
         {/* SHYENA sign on the office wall */}
         <div
           style={{
@@ -34,11 +31,13 @@ export const SceneOffice: React.FC = () => {
         >
           <LogoLockup size={30} tagline />
         </div>
-        {/* Live dashboard on the wall-mounted TV */}
-        <ScreenOverlay left={73.5} top={2} width={30} height={71} rotateY={-14} opacity={0.9}>
-          <Dashboard />
-        </ScreenOverlay>
       </AbsoluteFill>
+
+      {/* Live dashboard on the wall-mounted TV */}
+      <ScreenOverlay left={67} top={8} width={26} height={58} rotateY={-14} opacity={0.9}>
+        <Dashboard />
+      </ScreenOverlay>
+
 
       <AbsoluteFill
         style={{
