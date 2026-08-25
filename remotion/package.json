@@ -12,7 +12,6 @@
   "dependencies": {
     "@remotion/bundler": "^4.0.516",
     "@remotion/cli": "^4.0.516",
-    "@remotion/compositor-linux-x64-musl": "^4.0.516",
     "@remotion/google-fonts": "^4.0.516",
     "@remotion/renderer": "^4.0.516",
     "@remotion/transitions": "^4.0.516",

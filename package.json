@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite dev",
-    "build": "vite build",
+    "build": "(cd remotion && bun install --no-save && node scripts/render-remotion.mjs) || echo 'Remotion video render skipped (non-fatal) — continuing with existing public assets'; vite build",
     "build:dev": "vite build --mode development",
     "preview": "vite preview",
     "lint": "eslint .",
