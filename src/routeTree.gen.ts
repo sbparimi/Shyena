@@ -21,6 +21,7 @@ import { Route as ProductRouteImport } from './routes/product'
 import { Route as SecurityRouteImport } from './routes/security'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as VeraRouteImport } from './routes/vera'
+import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as DocsEvaluationModelRouteImport } from './routes/docs.evaluation-model'
@@ -89,6 +90,11 @@ const VeraRoute = VeraRouteImport.update({
   path: '/vera',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiChatRoute = ApiChatRouteImport.update({
+  id: '/api/chat',
+  path: '/api/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogIndexRoute = BlogIndexRouteImport.update({
   id: '/blog/',
   path: '/blog/',
@@ -138,6 +144,7 @@ export interface FileRoutesByFullPath {
   '/security': typeof SecurityRoute
   '/services': typeof ServicesRoute
   '/vera': typeof VeraRoute
+  '/api/chat': typeof ApiChatRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/docs/evaluation-model': typeof DocsEvaluationModelRoute
   '/docs/getting-started': typeof DocsGettingStartedRoute
@@ -159,6 +166,7 @@ export interface FileRoutesByTo {
   '/security': typeof SecurityRoute
   '/services': typeof ServicesRoute
   '/vera': typeof VeraRoute
+  '/api/chat': typeof ApiChatRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/docs/evaluation-model': typeof DocsEvaluationModelRoute
   '/docs/getting-started': typeof DocsGettingStartedRoute
@@ -181,6 +189,7 @@ export interface FileRoutesById {
   '/security': typeof SecurityRoute
   '/services': typeof ServicesRoute
   '/vera': typeof VeraRoute
+  '/api/chat': typeof ApiChatRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/docs/evaluation-model': typeof DocsEvaluationModelRoute
   '/docs/getting-started': typeof DocsGettingStartedRoute
@@ -204,6 +213,7 @@ export interface FileRouteTypes {
     | '/security'
     | '/services'
     | '/vera'
+    | '/api/chat'
     | '/blog/$slug'
     | '/docs/evaluation-model'
     | '/docs/getting-started'
@@ -225,6 +235,7 @@ export interface FileRouteTypes {
     | '/security'
     | '/services'
     | '/vera'
+    | '/api/chat'
     | '/blog/$slug'
     | '/docs/evaluation-model'
     | '/docs/getting-started'
@@ -246,6 +257,7 @@ export interface FileRouteTypes {
     | '/security'
     | '/services'
     | '/vera'
+    | '/api/chat'
     | '/blog/$slug'
     | '/docs/evaluation-model'
     | '/docs/getting-started'
@@ -268,6 +280,7 @@ export interface RootRouteChildren {
   SecurityRoute: typeof SecurityRoute
   ServicesRoute: typeof ServicesRoute
   VeraRoute: typeof VeraRoute
+  ApiChatRoute: typeof ApiChatRoute
   BlogSlugRoute: typeof BlogSlugRoute
   BlogIndexRoute: typeof BlogIndexRoute
 }
@@ -358,6 +371,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VeraRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/chat': {
+      id: '/api/chat'
+      path: '/api/chat'
+      fullPath: '/api/chat'
+      preLoaderRoute: typeof ApiChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog/': {
       id: '/blog/'
       path: '/blog'
@@ -441,6 +461,7 @@ const rootRouteChildren: RootRouteChildren = {
   SecurityRoute: SecurityRoute,
   ServicesRoute: ServicesRoute,
   VeraRoute: VeraRoute,
+  ApiChatRoute: ApiChatRoute,
   BlogSlugRoute: BlogSlugRoute,
   BlogIndexRoute: BlogIndexRoute,
 }

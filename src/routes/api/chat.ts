@@ -44,7 +44,7 @@ export const Route = createFileRoute("/api/chat")({
         const result = streamText({
           model: lovable.responses("openai/gpt-5.6-sol"),
           system: SHYENA_SYSTEM_PROMPT,
-          messages: convertToModelMessages(uiMessages),
+          messages: await convertToModelMessages(uiMessages),
           abortSignal: request.signal,
           providerOptions: {
             openai: {
