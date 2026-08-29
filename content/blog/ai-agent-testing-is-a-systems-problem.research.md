@@ -1,3 +1,15 @@
+---
+title: "Research Brief: AI Agent Testing Is a Systems Problem"
+description: "Research brief supporting the Shyena technical article on AI agent testing, orchestration, deterministic assurance, semantic evaluation, and security."
+slug: "ai-agent-testing-is-a-systems-problem-research"
+content_type: "research-brief"
+category: "AI Agent Assurance"
+primary_keyword: "AI agent testing"
+search_intent: "informational"
+author: "Shyena Engineering"
+published: false
+---
+
 # Research brief
 
 ## Thesis
