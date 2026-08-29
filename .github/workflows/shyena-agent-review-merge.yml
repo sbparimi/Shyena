@@ -1,0 +1,100 @@
+name: Shyena Agent - Review Approve Merge
+
+on:
+  pull_request_target:
+    types: [opened, reopened, synchronize]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  forensic-review:
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install GitHub Copilot CLI
+        run: npm install -g @github/copilot
+
+      - name: Collect PR context without checking out PR code
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+        run: |
+          gh pr view "$PR_NUMBER" --repo "$REPO" --json title,body,baseRefName,headRefName > /tmp/pr.json
+          gh pr diff "$PR_NUMBER" --repo "$REPO" > /tmp/pr.diff
+          head -c 120000 /tmp/pr.diff > /tmp/pr-truncated.diff
+
+      - name: AI forensic PR review
+        id: review
+        uses: actions/ai-inference@v3
+        with:
+          model: gpt-4.1
+          file_input: |
+            pr: /tmp/pr.json
+            diff: /tmp/pr-truncated.diff
+          prompt: |
+            You are the Shyena Independent PR Review Agent.
+            Perform a forensic review of the pull request and its diff. Do not trust the author's claims.
+
+            Release criteria:
+            - Public product names are Nexus, Vera and Chakra. CIS/ECAAP can remain only as underlying technology references.
+            - Pricing must be a credible SaaS model: recurring platform subscription plus measured assurance/security consumption.
+            - No unlimited execution, security testing, integration or bespoke engineering promises in the recurring license.
+            - Pilots, training, custom development and bespoke adapters must be explicitly separate professional services.
+            - Existing Shyena visual theme must be preserved.
+            - Check for broken routes, misleading claims, React/TypeScript issues, accessibility regressions, SEO problems, security issues and accidental removal of existing functionality.
+            - Reject if any material release-blocking issue remains.
+
+            Return exactly:
+            DECISION: APPROVE
+            or
+            DECISION: REJECT
+
+            Then list findings with severity and evidence from the diff.
+
+            PR metadata:
+            {{pr}}
+
+            PR diff:
+            {{diff}}
+        env:
+          COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
+
+      - name: Save review
+        env:
+          REVIEW: ${{ steps.review.outputs.response }}
+        run: printf '%s\n' "$REVIEW" > /tmp/ai-review.md
+
+      - name: Publish review
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+          REVIEW: /tmp/ai-review.md
+        run: gh pr comment "$PR_NUMBER" --repo "$REPO" --body-file "$REVIEW"
+
+      - name: Approve PR
+        if: startsWith(steps.review.outputs.response, 'DECISION: APPROVE')
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+        run: gh pr review "$PR_NUMBER" --repo "$REPO" --approve --body "Approved by the Shyena Independent PR Review Agent after forensic review."
+
+      - name: Request changes
+        if: startsWith(steps.review.outputs.response, 'DECISION: REJECT')
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+        run: gh pr review "$PR_NUMBER" --repo "$REPO" --request-changes --body "Rejected by the Shyena Independent PR Review Agent. See the forensic findings above."
+
+      - name: Merge approved PR
+        if: startsWith(steps.review.outputs.response, 'DECISION: APPROVE')
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+        run: gh pr merge "$PR_NUMBER" --repo "$REPO" --squash --delete-branch
