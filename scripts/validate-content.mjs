@@ -7,7 +7,9 @@ const DOCS = join(ROOT, "content", "docs");
 
 function files(dir, suffix) {
   if (!existsSync(dir)) return [];
-  return readdirSync(dir).filter((name) => name.endsWith(suffix));
+  return readdirSync(dir).filter(
+    (name) => name.endsWith(suffix) && !name.endsWith(".research.md"),
+  );
 }
 
 function frontmatter(source, file) {
