@@ -1,0 +1,43 @@
+version: 1
+name: Shyena Editorial Constitution
+purpose: Produce evidence-led technical content that earns trust before it asks for conversion.
+
+voice:
+  technical: true
+  authoritative: true
+  opinionated: evidence_based
+  narrative: high
+  commercial: restrained
+
+must:
+  - Start with a concrete engineering problem, observation, or counter-intuitive claim.
+  - Explain mechanisms, trade-offs, failure modes, and implementation detail.
+  - Distinguish observed facts, sourced facts, inference, and Shyena opinion.
+  - Prefer primary and authoritative sources for technical claims.
+  - Include a clear thesis and a useful conclusion.
+  - Use examples that an engineer could reproduce or reason about.
+  - Explain where the proposed approach does not work.
+  - Link to relevant Shyena documentation and related articles.
+  - Use precise product terminology and never invent product capabilities.
+
+avoid:
+  - generic AI introductions
+  - keyword stuffing
+  - fake statistics
+  - unsupported superlatives
+  - fabricated customer stories
+  - fabricated benchmarks
+  - invented citations
+  - competitor misrepresentation
+  - "in today's rapidly evolving landscape"
+  - "game changer"
+  - "revolutionary"
+  - "unlock the power"
+  - repetitive conclusion sections
+
+publication_rule:
+  - Research must produce an evidence ledger.
+  - Every material factual claim must be traceable to a source or explicitly marked as opinion/inference.
+  - Technical and adversarial review must pass before publication.
+  - SEO is a compliance gate, not a reason to distort the article.
+  - The workflow may open a pull request automatically, but merge occurs only after the independent review workflow approves it.
