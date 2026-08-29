@@ -39,13 +39,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-
       - name: Install Copilot CLI
         run: npm install -g @github/copilot
-
       - name: Create research workspace
         run: mkdir -p /tmp/sage
-
       - name: Research Agent
         env:
           COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
@@ -73,7 +70,6 @@ jobs:
             --allow-all-tools \
             --allow-all-urls \
             --no-ask-user
-
       - name: Upload research artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -89,10 +85,8 @@ jobs:
         with:
           name: sage-research
           path: /tmp/sage
-
       - name: Install Copilot CLI
         run: npm install -g @github/copilot
-
       - name: Writer Agent
         env:
           COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
@@ -124,7 +118,6 @@ jobs:
             --allow-all-tools \
             --allow-all-urls \
             --no-ask-user
-
       - name: Upload draft
         uses: actions/upload-artifact@v4
         with:
@@ -144,15 +137,19 @@ jobs:
         with:
           name: sage-draft
           path: content/blog
-
       - name: Install Copilot CLI
         run: npm install -g @github/copilot
-
+      - name: Identify generated article
+        id: article
+        run: |
+          ARTICLE=$(find content/blog -maxdepth 1 -type f -name '*.md' ! -name '*.review.md' -print -quit)
+          test -n "$ARTICLE"
+          echo "path=$ARTICLE" >> "$GITHUB_OUTPUT"
       - name: Independent Technical Reviewer
         env:
           COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
+          ARTICLE: ${{ steps.article.outputs.path }}
         run: |
-          ARTICLE=$(find content/blog -maxdepth 1 -type f -name '*.md' | head -1)
           copilot -p "You are the independent SAGE Technical Reviewer.
 
           Read the article at ${ARTICLE}, its SEO artifact, /tmp/sage/research.md, /tmp/sage/evidence.yaml, and the Shyena editorial constitution.
@@ -171,17 +168,15 @@ jobs:
             --allow-all-tools \
             --allow-all-urls \
             --no-ask-user
-
           if grep -q '^DECISION: REJECT' "${ARTICLE%.md}.review.md"; then
             echo "Technical review rejected the article."
             exit 1
           fi
-
       - name: Adversarial Deep Review
         env:
           COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
+          ARTICLE: ${{ steps.article.outputs.path }}
         run: |
-          ARTICLE=$(find content/blog -maxdepth 1 -type f -name '*.md' | head -1)
           copilot -p "You are the SAGE Adversarial Reviewer.
 
           Read the article, evidence ledger, SEO artifact, and previous technical review.
@@ -198,18 +193,16 @@ jobs:
             --allow-all-tools \
             --allow-all-urls \
             --no-ask-user
-
           if grep -q '^ADVERSARIAL: FAIL' "${ARTICLE%.md}.review.md"; then
             echo "Adversarial review rejected the article."
             exit 1
           fi
-
       - name: SEO and publication gate
         run: |
+          npm install
           npm run content:validate
           npm run content:generate
           npm run build
-
       - name: Upload approved content
         uses: actions/upload-artifact@v4
         with:
@@ -226,15 +219,23 @@ jobs:
         with:
           name: sage-approved-content
           path: content/blog
-
+      - name: Generate content registry
+        run: |
+          npm install
+          npm run content:generate
       - name: Install Copilot CLI
         run: npm install -g @github/copilot
-
+      - name: Identify generated article
+        id: article
+        run: |
+          ARTICLE=$(git status --porcelain | awk '$1 == "??" && $2 ~ /^content\/blog\/.*\.md$/ && $2 !~ /\.review\.md$/ {print $2; exit}')
+          test -n "$ARTICLE"
+          echo "path=$ARTICLE" >> "$GITHUB_OUTPUT"
       - name: Final Publication Agent
         env:
           COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
+          ARTICLE: ${{ steps.article.outputs.path }}
         run: |
-          ARTICLE=$(find content/blog -maxdepth 1 -type f -name '*.md' | head -1)
           REVIEW="${ARTICLE%.md}.review.md"
           copilot -p "You are the SAGE Publication Agent.
 
@@ -248,14 +249,12 @@ jobs:
             --allow-all-tools \
             --allow-all-urls \
             --no-ask-user | tee /tmp/sage-final.txt
-
           grep -q '^PUBLISH: PASS' /tmp/sage-final.txt
-
       - name: Create publication branch and PR
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ARTICLE: ${{ steps.article.outputs.path }}
         run: |
-          ARTICLE=$(find content/blog -maxdepth 1 -type f -name '*.md' | head -1)
           SLUG=$(basename "$ARTICLE" .md)
           BRANCH="sage/${SLUG}-${GITHUB_RUN_ID}"
           git config user.name "Shyena SAGE"
