@@ -1,13 +1,13 @@
 import { Markdown, type MarkdownComponents } from "@tanstack/markdown/react";
 import { generatedContent } from "@/content/generated-content";
 
-const blogSources = import.meta.glob("../../content/blog/*.md", {
+const blogSources = import.meta.glob("../../content/blog/**/*.md", {
   query: "?raw",
   import: "default",
   eager: true,
 }) as Record<string, string>;
 
-const docSources = import.meta.glob("../../content/docs/*.md", {
+const docSources = import.meta.glob("../../content/docs/**/*.md", {
   query: "?raw",
   import: "default",
   eager: true,
