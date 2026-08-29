@@ -4,8 +4,10 @@ import path from "node:path";
 const root = path.resolve("content");
 const failures = [];
 
-// Content directories may also contain SAGE working artifacts and repository
-// READMEs. Only plain Markdown content files are publishable.
+// Only content published by the site belongs to this gate. content/sage is the
+// SAGE control plane and contains internal contracts, schemas, research, and logs.
+const publishRoots = [path.join(root, "blog"), path.join(root, "docs")];
+
 function isPublishableContent(name) {
   return /\.mdx?$/i.test(name) && name !== "README.md" && !/\.(research|review)\.mdx?$/i.test(name);
 }
@@ -28,7 +30,7 @@ function validate(file) {
   if (/lorem ipsum|TODO: publish|fabricated citation/i.test(text)) failures.push(`${file}: blocked placeholder content`);
 }
 
-walk(root);
+publishRoots.forEach(walk);
 
 if (failures.length) {
   console.error("SAGE content validation failed:");
