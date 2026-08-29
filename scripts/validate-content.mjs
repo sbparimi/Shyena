@@ -5,9 +5,19 @@ const ROOT = process.cwd();
 const BLOG = join(ROOT, "content", "blog");
 const DOCS = join(ROOT, "content", "docs");
 
+function isPublishableMarkdown(name) {
+  return (
+    name.endsWith(".md") &&
+    name !== "README.md" &&
+    !/\.(research|review|draft|brief)\.md$/i.test(name)
+  );
+}
+
 function files(dir, suffix) {
   if (!existsSync(dir)) return [];
-  return readdirSync(dir).filter((name) => name.endsWith(suffix));
+  return readdirSync(dir).filter(
+    (name) => name.endsWith(suffix) && (suffix !== ".md" || isPublishableMarkdown(name)),
+  );
 }
 
 function frontmatter(source, file) {

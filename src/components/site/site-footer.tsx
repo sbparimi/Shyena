@@ -71,7 +71,7 @@ export function SiteFooter() {
             <span>Conversational AI</span>
             <span>Security assurance</span>
           </div>
-          <a href="https://github.com/sbparimi/bot-verdict" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 font-medium text-navy-muted hover:text-navy-foreground">
+          <a href="https://github.com/sbparimi/Shyena" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 font-medium text-navy-muted hover:text-navy-foreground">
             Engineering on GitHub <Github className="h-3.5 w-3.5" /><ArrowUpRight className="h-3 w-3" />
           </a>
         </div>

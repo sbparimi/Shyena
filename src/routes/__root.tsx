@@ -56,6 +56,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "theme-color", content: "#10072f" },
       { title: "Shyena — The AI Agent Assurance Platform" },
       {
         name: "description",
@@ -96,7 +97,7 @@ const ORGANIZATION_SCHEMA = {
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <head>
         <HeadContent />
         <script defer data-domain="shyena.eu" src="https://plausible.io/js/script.js" />

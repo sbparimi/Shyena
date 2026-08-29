@@ -1,5 +1,5 @@
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
-import { join, relative, basename } from "node:path";
+import { join, relative } from "node:path";
 
 const ROOT = process.cwd();
 const contentRoot = join(ROOT, "content");
@@ -22,12 +22,25 @@ function parseFrontmatter(source) {
   return result;
 }
 
+function isPublishableMarkdown(name) {
+  return (
+    name.endsWith(".md") &&
+    name !== "README.md" &&
+    !/\.(research|review|draft|brief)\.md$/i.test(name)
+  );
+}
+
 function walk(dir, extension, files = []) {
   if (!existsSync(dir)) return files;
   for (const entry of readdirSync(dir, { withFileTypes: true })) {
     const full = join(dir, entry.name);
     if (entry.isDirectory()) walk(full, extension, files);
-    else if (entry.name.endsWith(extension)) files.push(full);
+    else if (
+      entry.name.endsWith(extension) &&
+      (extension !== ".md" || isPublishableMarkdown(entry.name))
+    ) {
+      files.push(full);
+    }
   }
   return files;
 }
