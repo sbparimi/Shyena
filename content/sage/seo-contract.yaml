@@ -1,0 +1,28 @@
+version: "1.0"
+required:
+  - unique_title
+  - meta_description
+  - canonical
+  - h1
+  - semantic_heading_hierarchy
+  - search_intent_satisfied
+  - entity_coverage
+  - internal_links
+  - authoritative_external_sources
+  - verified_citations
+  - structured_data
+  - sitemap_eligibility
+  - robots_compatibility
+  - open_graph
+  - twitter_metadata
+  - image_alt_text
+  - stable_slug
+  - duplicate_content_check
+  - build_pass
+  - link_validation
+thresholds:
+  evidence_coverage: 0.95
+  technical_review: 0.90
+  editorial_review: 0.85
+  seo_compliance: 1.00
+  critical_findings: 0

@@ -1,0 +1,24 @@
+version: 1
+article: ai-agent-testing-is-a-systems-problem
+claims:
+  - id: CLM-001
+    claim: "An AI agent is a system composed of multiple interacting components rather than only a language model."
+    status: inferred
+    basis: "The article explicitly describes model, orchestrator, tools, retrieval, deterministic services, and user-facing behavior as separate system layers."
+    source_required: true
+  - id: CLM-002
+    claim: "Deterministic assertions and semantic evaluation answer different classes of questions."
+    status: opinion
+    basis: "Shyena engineering position; deterministic checks are authoritative for exact values and semantic evaluation is appropriate for judgment-based qualities."
+    source_required: false
+  - id: CLM-003
+    claim: "A release verdict should preserve evidence from execution rather than reduce the run to an opaque score."
+    status: opinion
+    basis: "Shyena engineering design principle."
+    source_required: false
+  - id: CLM-004
+    claim: "Security should remain a distinct evidence stream in an agent assurance pipeline."
+    status: opinion
+    basis: "Shyena engineering design principle."
+    source_required: false
+unverified_material_claims: 0

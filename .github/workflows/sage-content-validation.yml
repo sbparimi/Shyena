@@ -1,0 +1,25 @@
+name: SAGE Content Validation
+
+on:
+  pull_request:
+    paths:
+      - "content/**"
+      - "src/lib/sage/**"
+      - "scripts/validate-sage-content.mjs"
+      - "scripts/validate-content.mjs"
+      - "scripts/generate-content.mjs"
+      - "package.json"
+      - "package-lock.json"
+
+jobs:
+  content-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: npm install
+      - run: node scripts/validate-sage-content.mjs
+      - run: npm run content:validate
+      - run: npm run build

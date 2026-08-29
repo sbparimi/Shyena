@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Clock, ArrowRight, Newspaper } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { generatedContent } from "@/content/generated-content";
 import {
   DivergentPathsCover,
   FalsePassCover,
@@ -88,7 +89,6 @@ const ARTICLES = [
 function BlogIndexPage() {
   return (
     <>
-      {/* Hero */}
       <section className="relative overflow-hidden bg-lavender text-lavender-foreground">
         <div className="relative mx-auto w-full max-w-7xl px-5 pb-6 pt-20 sm:px-8 sm:pt-28">
           <div className="mx-auto max-w-3xl text-center">
@@ -98,16 +98,47 @@ function BlogIndexPage() {
             </span>
             <h1 className="mt-6 text-5xl leading-[1.05] sm:text-7xl">Blog</h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-              Notes on testing conversational AI at scale: what we have learned about evaluation models,
-              judge design, and the difference between a passing metric and a release-worthy agent.
+              Deep engineering notes on AI agent assurance, evaluation, security, orchestration, and
+              the difference between a passing metric and a release-worthy system.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Article grid */}
       <section className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8">
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {generatedContent.articles.map((article) => (
+            <Link
+              key={article.slug}
+              to="/blog/generated/$slug"
+              params={{ slug: article.slug }}
+              className="group flex flex-col overflow-hidden rounded-2xl border border-primary/20 bg-card shadow-card transition-all hover:-translate-y-0.5 hover:border-primary/40"
+            >
+              <div className="border-b border-border bg-primary/5 px-6 py-8">
+                <span className="font-mono text-xs uppercase tracking-[0.18em] text-primary">
+                  {article.category || "Engineering"}
+                </span>
+              </div>
+              <div className="flex flex-1 flex-col p-6">
+                <div className="flex items-center justify-between gap-3">
+                  <span className="rounded-full bg-primary/10 px-2.5 py-1 text-xs font-medium text-primary">
+                    SAGE
+                  </span>
+                  <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
+                    <Clock className="h-3 w-3" />
+                    Published
+                  </span>
+                </div>
+                <h2 className="mt-4 text-xl font-bold leading-snug text-foreground">{article.title}</h2>
+                <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{article.description}</p>
+                <div className="mt-5 flex items-center gap-2 text-sm font-medium text-primary">
+                  Read article
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                </div>
+              </div>
+            </Link>
+          ))}
+
           {ARTICLES.map((article) => {
             const isComingSoon = article.status === "coming-soon";
             const CardWrapper = isComingSoon ? "div" : Link;
@@ -149,21 +180,15 @@ function BlogIndexPage() {
                     )}
                   </div>
 
-                  <h2 className="mt-4 text-xl font-bold leading-snug text-foreground">
-                    {article.title}
-                  </h2>
-                  <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
-                    {article.excerpt}
-                  </p>
+                  <h2 className="mt-4 text-xl font-bold leading-snug text-foreground">{article.title}</h2>
+                  <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{article.excerpt}</p>
 
                   <div className="mt-5 flex items-center gap-2 text-sm font-medium">
                     {isComingSoon ? (
                       <span className="text-muted-foreground">Coming soon</span>
                     ) : (
                       <>
-                        <span className="text-primary transition-colors group-hover:text-primary/80">
-                          Read article
-                        </span>
+                        <span className="text-primary transition-colors group-hover:text-primary/80">Read article</span>
                         <ArrowRight className="h-4 w-4 text-primary transition-transform group-hover:translate-x-0.5" />
                       </>
                     )}

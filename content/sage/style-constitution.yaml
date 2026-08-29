@@ -1,0 +1,31 @@
+version: "1.0"
+voice:
+  technical: true
+  authoritative: true
+  conversational: controlled
+  opinionated: evidence_based
+  narrative: high
+writing:
+  require:
+    - strong thesis
+    - concrete examples
+    - technical depth
+    - failure modes
+    - tradeoffs
+    - implementation detail
+    - original synthesis
+    - explicit limitations
+  avoid:
+    - generic AI introductions
+    - hype language
+    - keyword stuffing
+    - unsupported superlatives
+    - repetitive conclusions
+    - fabricated citations
+    - product claims without approved evidence
+quality:
+  no_direct_main_writes: true
+  citation_verification_required: true
+  seo_contract_required: true
+  technical_review_required: true
+  adversarial_review_required: true
