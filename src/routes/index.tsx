@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Bot, CheckCircle2, Eye, Flag, Gauge, GitBranch, Layers, PlayCircle, ShieldCheck, Sparkles, Target, Users, Zap } from "lucide-react";
+import { ArrowRight, Bot, Eye, Gauge, GitBranch, Layers, PlayCircle, ShieldCheck, Sparkles, Target, Users, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CtaBand } from "@/components/site/cta-band";
 import { Reveal } from "@/components/site/reveal";
@@ -33,8 +33,8 @@ const PILLARS = [
 ] as const;
 
 const PLATFORM = [
-  [Layers, "CIS", "Understand the agent", "Discover flows, intents, conditions and orchestration paths.", "/cis"],
-  [Gauge, "ECAAP", "Evaluate the agent", "Run real conversations and evaluate quality, behavior and orchestration.", "/docs/evaluation-model"],
+  [Layers, "Nexus", "Understand the agent", "Discover flows, intents, conditions and orchestration paths. Powered by CIS.", "/nexus"],
+  [Gauge, "Vera", "Evaluate the agent", "Run real conversations and evaluate quality, behavior and orchestration. Powered by ECAAP.", "/vera"],
   [ShieldCheck, "Chakra", "Attack the agent", "Probe agent behavior for adversarial and security weaknesses.", "/chakra"],
 ] as const;
 
