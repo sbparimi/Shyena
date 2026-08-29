@@ -11,9 +11,14 @@ function isPublishableMarkdown(name) {
   return name.endsWith(".md") && name !== "README.md" && !/\.(research|review)\.md$/i.test(name);
 }
 
-function files(dir) {
-  if (!existsSync(dir)) return [];
-  return readdirSync(dir).filter(isPublishableMarkdown);
+function files(dir, result = []) {
+  if (!existsSync(dir)) return result;
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    const file = join(dir, entry.name);
+    if (entry.isDirectory()) files(file, result);
+    else if (isPublishableMarkdown(entry.name)) result.push(file);
+  }
+  return result;
 }
 
 function frontmatter(source, file) {
@@ -33,8 +38,7 @@ const seenSlugs = new Set();
 const seenTitles = new Set();
 
 for (const [type, dir] of [["blog", BLOG], ["docs", DOCS]]) {
-  for (const name of files(dir)) {
-    const file = join(dir, name);
+  for (const file of files(dir)) {
     const meta = frontmatter(readFileSync(file, "utf8"), file);
     for (const required of ["title", "description", "slug"]) {
       if (!meta[required]) errors.push(`${file}: missing ${required}`);
