@@ -1,3 +1,15 @@
+---
+title: "SAGE Review: AI Agent Testing Is a Systems Problem"
+description: "Editorial, technical, and adversarial review record for the Shyena AI agent testing article."
+slug: "ai-agent-testing-is-a-systems-problem-review"
+content_type: "review-record"
+category: "AI Agent Assurance"
+primary_keyword: "AI agent testing"
+search_intent: "informational"
+author: "Shyena Engineering"
+published: false
+---
+
 # SAGE review record
 
 ## Editorial review
