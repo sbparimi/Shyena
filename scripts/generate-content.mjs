@@ -23,7 +23,11 @@ function parseFrontmatter(source) {
 }
 
 function isPublishableMarkdown(name) {
-  return name.endsWith(".md") && !/\.(research|review|draft|brief)\.md$/i.test(name);
+  return (
+    name.endsWith(".md") &&
+    name !== "README.md" &&
+    !/\.(research|review|draft|brief)\.md$/i.test(name)
+  );
 }
 
 function walk(dir, extension, files = []) {
