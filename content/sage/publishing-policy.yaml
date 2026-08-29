@@ -1,0 +1,20 @@
+version: "1.0"
+source_of_truth: github
+branch_policy:
+  target: main
+  autonomous_write: false
+  pull_request_required: true
+  required_checks:
+    - typecheck
+    - build
+    - content-validation
+    - link-validation
+    - seo-contract
+merge_policy:
+  autonomous_merge: false
+  minimum_approvals: 1
+  block_on_failed_quality_gate: true
+publication:
+  format: mdx
+  production_environment: vercel
+  require_clean_build: true

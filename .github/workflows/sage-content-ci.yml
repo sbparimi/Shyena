@@ -1,0 +1,26 @@
+name: SAGE Content CI
+
+on:
+  push:
+    branches: [main, 'feat/**', 'sage/**']
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Install dependencies
+        run: npm install
+      - name: Validate content contract
+        run: npm run content:validate
+      - name: Generate content registry
+        run: npm run content:generate
+      - name: Lint
+        run: npm run lint
+      - name: Production build
+        run: npm run build

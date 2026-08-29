@@ -1,0 +1,271 @@
+name: SAGE Content Engineering Pipeline
+
+on:
+  workflow_dispatch:
+    inputs:
+      topic:
+        description: "Article topic or engineering problem"
+        required: true
+        type: string
+      primary_keyword:
+        description: "Primary search phrase"
+        required: true
+        type: string
+      audience:
+        description: "Target reader / ICP"
+        required: true
+        default: "AI engineering and QA leaders"
+        type: string
+      source_urls:
+        description: "Optional authoritative URLs, one per line"
+        required: false
+        type: string
+      publish:
+        description: "Create a PR after all quality gates pass"
+        required: true
+        default: true
+        type: boolean
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: sage-content-${{ inputs.primary_keyword }}
+  cancel-in-progress: false
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Install Copilot CLI
+        run: npm install -g @github/copilot
+      - name: Create research workspace
+        run: mkdir -p /tmp/sage
+      - name: Research Agent
+        env:
+          COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
+          TOPIC: ${{ inputs.topic }}
+          KEYWORD: ${{ inputs.primary_keyword }}
+          AUDIENCE: ${{ inputs.audience }}
+          SOURCE_URLS: ${{ inputs.source_urls }}
+        run: |
+          copilot -p "You are the SAGE Research Agent for Shyena.
+
+          Topic: ${TOPIC}
+          Primary keyword: ${KEYWORD}
+          Audience: ${AUDIENCE}
+          Supplied source URLs:
+          ${SOURCE_URLS}
+
+          Perform deep research using web search and web fetch. Research the technical problem, search intent, competing explanations, primary documentation, standards, papers, maintainer material, and high-quality practitioner evidence. Prefer primary sources. Do not invent facts.
+
+          Create exactly two artifacts in /tmp/sage:
+          1. research.md — research questions, findings, source summaries, competing viewpoints, content gaps, and a proposed thesis.
+          2. evidence.yaml — a claim ledger. Each material external claim must have a source URL, source title, source type, evidence summary, and status: verified, inferred, opinion, or unverified.
+
+          Explicitly mark claims that cannot be verified. Do not modify repository files. Do not commit or push anything." \
+            --model gpt-5.2 \
+            --allow-all-tools \
+            --allow-all-urls \
+            --no-ask-user
+      - name: Upload research artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: sage-research
+          path: /tmp/sage/
+
+  write:
+    needs: research
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/download-artifact@v4
+        with:
+          name: sage-research
+          path: /tmp/sage
+      - name: Install Copilot CLI
+        run: npm install -g @github/copilot
+      - name: Writer Agent
+        env:
+          COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
+          TOPIC: ${{ inputs.topic }}
+          KEYWORD: ${{ inputs.primary_keyword }}
+          AUDIENCE: ${{ inputs.audience }}
+        run: |
+          mkdir -p content/blog
+          copilot -p "You are the SAGE Content Architect and Writer.
+
+          Topic: ${TOPIC}
+          Primary keyword: ${KEYWORD}
+          Audience: ${AUDIENCE}
+
+          Read content/sage/editorial-constitution.yaml, content/sage/content-contract.md, /tmp/sage/research.md and /tmp/sage/evidence.yaml.
+
+          Write a deep technical article that feels like a strong engineering Substack essay: a concrete opening, strong thesis, technical mechanism, examples, trade-offs, failure modes, counterarguments, and a useful conclusion. The article must solve the reader's problem before mentioning Shyena. Never fabricate data, benchmarks, customers, citations, or product capabilities.
+
+          Create exactly these files:
+          content/blog/<slug>.md
+          content/blog/<slug>.seo.yaml
+
+          The Markdown frontmatter must contain title, description, slug, content_type, category, primary_keyword, search_intent, author, and published. Use author: Shyena Engineering. The article should normally be 1800-3000 words unless the topic genuinely requires less.
+
+          SEO metadata must cover intent, semantic topics, internal-link opportunities, entity coverage, canonical readiness, and a compliance score. Do not claim that any score guarantees ranking.
+
+          Do not modify workflow files. Do not commit or push." \
+            --model claude-sonnet-4.6 \
+            --allow-all-tools \
+            --allow-all-urls \
+            --no-ask-user
+      - name: Upload draft
+        uses: actions/upload-artifact@v4
+        with:
+          name: sage-draft
+          path: content/blog/
+
+  review:
+    needs: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/download-artifact@v4
+        with:
+          name: sage-research
+          path: /tmp/sage
+      - uses: actions/download-artifact@v4
+        with:
+          name: sage-draft
+          path: content/blog
+      - name: Install Copilot CLI
+        run: npm install -g @github/copilot
+      - name: Identify generated article
+        id: article
+        run: |
+          ARTICLE=$(find content/blog -maxdepth 1 -type f -name '*.md' ! -name '*.review.md' -print -quit)
+          test -n "$ARTICLE"
+          echo "path=$ARTICLE" >> "$GITHUB_OUTPUT"
+      - name: Independent Technical Reviewer
+        env:
+          COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
+          ARTICLE: ${{ steps.article.outputs.path }}
+        run: |
+          copilot -p "You are the independent SAGE Technical Reviewer.
+
+          Read the article at ${ARTICLE}, its SEO artifact, /tmp/sage/research.md, /tmp/sage/evidence.yaml, and the Shyena editorial constitution.
+
+          Try to reject the article. Check technical correctness, unsupported claims, source quality, logical gaps, misleading simplifications, product overclaims, competitor claims, invented evidence, and whether the article actually teaches an engineer something useful.
+
+          Write a review to ${ARTICLE%.md}.review.md.
+          Start the file with exactly one of:
+          DECISION: APPROVE
+          DECISION: REJECT
+
+          Then list findings with severity and evidence. Any unverified material factual claim is a blocker. Opinions must be clearly distinguishable from sourced facts.
+
+          Do not modify the article itself. Do not commit or push." \
+            --model gpt-5.2 \
+            --allow-all-tools \
+            --allow-all-urls \
+            --no-ask-user
+          if grep -q '^DECISION: REJECT' "${ARTICLE%.md}.review.md"; then
+            echo "Technical review rejected the article."
+            exit 1
+          fi
+      - name: Adversarial Deep Review
+        env:
+          COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
+          ARTICLE: ${{ steps.article.outputs.path }}
+        run: |
+          copilot -p "You are the SAGE Adversarial Reviewer.
+
+          Read the article, evidence ledger, SEO artifact, and previous technical review.
+
+          Attack the article from five directions: hallucination, weak evidence, SEO manipulation, AI-generated writing patterns, and commercial overclaiming. Check every material claim against the evidence ledger. Identify anything that sounds plausible but is not actually established.
+
+          Append a section named '## Adversarial Review' to the review file. Include a final line exactly:
+          ADVERSARIAL: PASS
+          or
+          ADVERSARIAL: FAIL
+
+          Do not rewrite the article. Do not commit or push." \
+            --model gpt-5.2 \
+            --allow-all-tools \
+            --allow-all-urls \
+            --no-ask-user
+          if grep -q '^ADVERSARIAL: FAIL' "${ARTICLE%.md}.review.md"; then
+            echo "Adversarial review rejected the article."
+            exit 1
+          fi
+      - name: SEO and publication gate
+        run: |
+          npm install
+          npm run content:validate
+          npm run content:generate
+          npm run build
+      - name: Upload approved content
+        uses: actions/upload-artifact@v4
+        with:
+          name: sage-approved-content
+          path: content/blog/
+
+  publish:
+    needs: review
+    if: ${{ inputs.publish }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/download-artifact@v4
+        with:
+          name: sage-approved-content
+          path: content/blog
+      - name: Generate content registry
+        run: |
+          npm install
+          npm run content:generate
+      - name: Install Copilot CLI
+        run: npm install -g @github/copilot
+      - name: Identify generated article
+        id: article
+        run: |
+          ARTICLE=$(git status --porcelain | awk '$1 == "??" && $2 ~ /^content\/blog\/.*\.md$/ && $2 !~ /\.review\.md$/ {print $2; exit}')
+          test -n "$ARTICLE"
+          echo "path=$ARTICLE" >> "$GITHUB_OUTPUT"
+      - name: Final Publication Agent
+        env:
+          COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
+          ARTICLE: ${{ steps.article.outputs.path }}
+        run: |
+          REVIEW="${ARTICLE%.md}.review.md"
+          copilot -p "You are the SAGE Publication Agent.
+
+          Perform one final read-only publication check over the article, research, evidence, SEO artifact and review. Confirm that the article is publishable, technically defensible, evidence-aware, SEO-compliant, and free of material product overclaims.
+
+          If and only if all gates pass, output exactly: PUBLISH: PASS
+          Otherwise output exactly: PUBLISH: FAIL
+
+          Do not modify files." \
+            --model gpt-5.2 \
+            --allow-all-tools \
+            --allow-all-urls \
+            --no-ask-user | tee /tmp/sage-final.txt
+          grep -q '^PUBLISH: PASS' /tmp/sage-final.txt
+      - name: Create publication branch and PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ARTICLE: ${{ steps.article.outputs.path }}
+        run: |
+          SLUG=$(basename "$ARTICLE" .md)
+          BRANCH="sage/${SLUG}-${GITHUB_RUN_ID}"
+          git config user.name "Shyena SAGE"
+          git config user.email "sage@shyena.eu"
+          git checkout -b "$BRANCH"
+          git add content/blog scripts src/content/generated-content.ts package.json
+          git commit -m "content: publish ${SLUG} via SAGE"
+          git push --set-upstream origin "$BRANCH"
+          gh pr create \
+            --repo "$GITHUB_REPOSITORY" \
+            --head "$BRANCH" \
+            --base main \
+            --title "content: ${SLUG}" \
+            --body "Generated by SAGE. Research, evidence, technical review, adversarial review, SEO validation, content validation, and production build passed. The independent Shyena PR Review Agent remains the final merge gate."

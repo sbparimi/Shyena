@@ -11,6 +11,7 @@ import {
   Search,
   ArrowRight,
   Sparkles,
+  Workflow,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -24,12 +25,12 @@ export const Route = createFileRoute("/docs")({
       {
         name: "description",
         content:
-          "Everything you need to write test specs, understand the evaluation model, and integrate Shyena into your release process.",
+          "Engineering documentation for Shyena: test specifications, evaluation, reporting, integrations, and the SAGE content engineering pipeline.",
       },
       { property: "og:title", content: "Documentation — Shyena" },
       {
         property: "og:description",
-        content: "Guides, API references, and evaluation model docs for AI system quality testing.",
+        content: "Guides, evaluation model, reporting, and engineering documentation for Shyena.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -99,12 +100,18 @@ const CATEGORIES: {
     icon: LifeBuoy,
     to: "/docs/troubleshooting",
   },
+  {
+    id: "sage-content-engineering",
+    title: "SAGE Content Engineering",
+    description: "How Shyena researches, writes, reviews, verifies, optimizes, and publishes technical content.",
+    icon: Workflow,
+    to: "/docs/sage-content-engineering",
+  },
 ];
 
 function DocsPage() {
   return (
     <>
-      {/* Hero */}
       <section className="relative overflow-hidden bg-lavender text-lavender-foreground">
         <div className="relative mx-auto w-full max-w-7xl px-5 pb-6 pt-20 sm:px-8 sm:pt-28">
           <div className="mx-auto max-w-3xl text-center">
@@ -114,17 +121,16 @@ function DocsPage() {
             </span>
             <h1 className="mt-6 text-5xl leading-[1.05] sm:text-7xl">Documentation</h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-              Everything you need to write test specs, understand the evaluation model, and integrate
-              Shyena into your release process.
+              Engineering documentation for writing test specifications, understanding the evaluation model,
+              integrating Shyena, and operating the content engineering pipeline.
             </p>
 
-            {/* Search placeholder */}
             <div className="mx-auto mt-10 max-w-xl">
               <div className="group relative">
                 <div className="absolute inset-y-0 left-0 flex items-center pl-4">
-                  <Search className="h-4 w-4 text-muted-foreground transition-colors group-focus-within:text-primary" />
+                  <Search className="h-4 w-4 text-muted-foreground" />
                 </div>
-                <div className="flex h-12 items-center rounded-full border border-border bg-secondary/60 px-4 pl-11 text-sm text-muted-foreground transition-colors focus-within:border-primary/40 focus-within:bg-background">
+                <div className="flex h-12 items-center rounded-full border border-border bg-secondary/60 px-4 pl-11 text-sm text-muted-foreground">
                   <span className="select-none">Search documentation...</span>
                 </div>
                 <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
@@ -134,20 +140,19 @@ function DocsPage() {
                 </div>
               </div>
               <p className="mt-3 text-xs text-muted-foreground">
-                Search is coming soon. Browse the categories below in the meantime.
+                Documentation search is not yet interactive. All published guides are listed below.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Category grid */}
       <section className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8">
         <div className="max-w-2xl">
           <p className="font-mono text-xs uppercase tracking-[0.18em] text-primary">Browse by topic</p>
           <h2 className="mt-4 text-3xl font-bold sm:text-4xl">Docs categories</h2>
           <p className="mt-4 text-muted-foreground">
-            Each section below is being written around the workflow we see in production deployments.
+            Published engineering documentation is version-controlled with the product and can be extended by the SAGE content pipeline.
           </p>
         </div>
 
@@ -158,7 +163,9 @@ function DocsPage() {
               <Card
                 className={cn(
                   "group relative flex h-full flex-col overflow-hidden border-border bg-card shadow-card transition-all",
-                  category.to ? "hover:-translate-y-0.5 hover:border-primary/40" : "hover:-translate-y-0.5 hover:border-primary/30",
+                  category.to
+                    ? "hover:-translate-y-0.5 hover:border-primary/40"
+                    : "opacity-70",
                 )}
               >
                 <CardHeader className="pb-3">
@@ -179,7 +186,7 @@ function DocsPage() {
                   ) : (
                     <span className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-2.5 py-1 text-xs font-medium text-muted-foreground">
                       <Sparkles className="h-3 w-3 text-primary" />
-                      Coming Soon
+                      Planned
                     </span>
                   )}
                 </CardContent>
@@ -199,21 +206,17 @@ function DocsPage() {
         </div>
       </section>
 
-      {/* Callout banner */}
       <section className="mx-auto w-full max-w-7xl px-5 py-8 sm:px-8">
         <div className="flex flex-col items-start justify-between gap-6 rounded-2xl border border-primary/20 bg-primary/5 px-6 py-8 sm:flex-row sm:items-center sm:px-10 sm:py-10">
           <div className="max-w-2xl">
-            <h3 className="text-xl font-bold text-foreground sm:text-2xl">
-              Docs are still being written
-            </h3>
+            <h3 className="text-xl font-bold text-foreground sm:text-2xl">Documentation is now content-as-code</h3>
             <p className="mt-2 text-muted-foreground">
-              Want early access, a guided walkthrough, or a detailed workflow doc instead? Our team is
-              happy to share what we have.
+              SAGE can research, draft, review, validate, and publish future technical documentation through the same GitHub and Vercel release path used for software changes.
             </p>
           </div>
           <Button asChild size="lg" className="shrink-0">
-            <Link to="/contact">
-              Talk to Us
+            <Link to="/docs/sage-content-engineering">
+              View SAGE architecture
               <ArrowRight className="h-4 w-4" />
             </Link>
           </Button>

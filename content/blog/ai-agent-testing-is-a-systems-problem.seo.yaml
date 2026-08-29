@@ -1,0 +1,28 @@
+version: 1
+article: ai-agent-testing-is-a-systems-problem
+primary_keyword: AI agent testing
+search_intent: informational
+secondary_topics:
+  - AI agent assurance
+  - agentic AI testing
+  - LLM evaluation
+  - AI agent security testing
+  - orchestration testing
+  - deterministic AI testing
+seo_contract:
+  unique_title: true
+  meta_description: true
+  canonical: true
+  single_h1: true
+  semantic_headings: true
+  intent_satisfied: true
+  internal_links: true
+  authoritative_external_sources: false
+  citation_verification: pass
+  structured_data_ready: true
+  crawlable: true
+  no_keyword_stuffing: true
+  no_duplicate_content: true
+  product_claims_reviewed: true
+score: 92
+score_note: "Compliance-oriented pilot score. It is not a ranking prediction."
