@@ -27,7 +27,7 @@ const SERVICES = [
 ];
 
 const FAQS = [
- ["What is the actual starting price?", "Foundation is €12,000 per year and includes 1,000 evaluated conversations per month. Scale is €30,000 per year and includes 5,000 evaluated conversations per month. Enterprise is negotiated because deployment, governance, security and committed volume vary materially. Prices exclude VAT."],
+ ["What is the actual starting price?", "Foundation is €12,000 per year and includes 1,000 evaluated conversations per month. Scale is €30,000 per year and includes 5,000 evaluated conversations per month. Enterprise pricing is negotiated because deployment, governance, security and committed volume vary materially. Prices exclude VAT."],
  ["What counts as a conversation?", "A conversation is one executed AI customer or business journey evaluated by the Shyena platform. The applicable order form defines the exact consumption measurement and any technical exclusions."],
  ["Is onboarding included?", "Yes. Foundation, Scale and Enterprise include a free one-week onboarding period with a dedicated Shyena engineer to help establish the initial assurance setup. Extended implementation, training and custom engineering are separate services."],
  ["Are users and agents charged separately?", "No. Shyena does not use per-user or per-agent licensing in these plans. The commercial model is based on the platform subscription and contracted assurance/security consumption."],
