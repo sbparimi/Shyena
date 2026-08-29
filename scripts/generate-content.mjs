@@ -1,10 +1,16 @@
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
-import { join, relative, basename } from "node:path";
+import { join, relative } from "node:path";
 
 const ROOT = process.cwd();
 const contentRoot = join(ROOT, "content");
 const generatedDir = join(ROOT, "src", "content");
 const output = join(generatedDir, "generated-content.ts");
+
+// Keep the generated registry limited to publishable content. SAGE research,
+// review, evidence, SEO, and repository README artifacts are not application pages.
+function isPublishableMarkdown(name) {
+  return name.endsWith(".md") && name !== "README.md" && !/\.(research|review)\.md$/i.test(name);
+}
 
 function parseFrontmatter(source) {
   if (!source.startsWith("---\n")) return {};
@@ -22,41 +28,33 @@ function parseFrontmatter(source) {
   return result;
 }
 
-function walk(dir, extension, files = []) {
+function walk(dir, files = []) {
   if (!existsSync(dir)) return files;
   for (const entry of readdirSync(dir, { withFileTypes: true })) {
     const full = join(dir, entry.name);
-    if (entry.isDirectory()) walk(full, extension, files);
-    else if (entry.name.endsWith(extension)) files.push(full);
+    if (entry.isDirectory()) walk(full, files);
+    else if (isPublishableMarkdown(entry.name)) files.push(full);
   }
   return files;
 }
 
-const articles = walk(join(contentRoot, "blog"), ".md").map((file) => {
-  const source = readFileSync(file, "utf8");
-  const meta = parseFrontmatter(source);
-  if (!meta.title || !meta.slug || !meta.description) {
-    throw new Error(`Invalid content frontmatter: ${relative(ROOT, file)}`);
-  }
-  return {
-    type: "blog",
-    sourcePath: relative(ROOT, file).replaceAll("\\", "/"),
-    ...meta,
-  };
-});
+function loadContent(type, dir) {
+  return walk(dir).map((file) => {
+    const source = readFileSync(file, "utf8");
+    const meta = parseFrontmatter(source);
+    if (!meta.title || !meta.slug || !meta.description) {
+      throw new Error(`Invalid content frontmatter: ${relative(ROOT, file)}`);
+    }
+    return {
+      type,
+      sourcePath: relative(ROOT, file).replaceAll("\\", "/"),
+      ...meta,
+    };
+  });
+}
 
-const docs = walk(join(contentRoot, "docs"), ".md").map((file) => {
-  const source = readFileSync(file, "utf8");
-  const meta = parseFrontmatter(source);
-  if (!meta.title || !meta.slug || !meta.description) {
-    throw new Error(`Invalid content frontmatter: ${relative(ROOT, file)}`);
-  }
-  return {
-    type: "docs",
-    sourcePath: relative(ROOT, file).replaceAll("\\", "/"),
-    ...meta,
-  };
-});
+const articles = loadContent("blog", join(contentRoot, "blog"));
+const docs = loadContent("docs", join(contentRoot, "docs"));
 
 mkdirSync(generatedDir, { recursive: true });
 
