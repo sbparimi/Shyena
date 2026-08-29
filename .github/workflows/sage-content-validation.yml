@@ -6,21 +6,20 @@ on:
       - "content/**"
       - "src/lib/sage/**"
       - "scripts/validate-sage-content.mjs"
+      - "scripts/validate-content.mjs"
+      - "scripts/generate-content.mjs"
       - "package.json"
-      - "pnpm-lock.yaml"
+      - "package-lock.json"
 
 jobs:
   content-contract:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-          cache: pnpm
-      - run: pnpm install --frozen-lockfile
+      - run: npm install
       - run: node scripts/validate-sage-content.mjs
-      - run: pnpm build
+      - run: npm run content:validate
+      - run: npm run build
