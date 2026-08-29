@@ -29,5 +29,19 @@ export const generatedContent = {
       published: "true",
     },
   ],
-  docs: [],
+  docs: [
+    {
+      type: "docs",
+      sourcePath: "content/docs/sage-content-engineering.md",
+      title: "SAGE Content Engineering",
+      description:
+        "How Shyena researches, writes, reviews, verifies, optimizes, and publishes technical content through a multi-agent assurance pipeline.",
+      slug: "sage-content-engineering",
+      category: "Content Engineering",
+      primary_keyword: "AI content engineering",
+      search_intent: "informational",
+      author: "Shyena Engineering",
+      published: "true",
+    },
+  ],
 } as const;
