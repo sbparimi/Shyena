@@ -6,7 +6,11 @@ const BLOG = join(ROOT, "content", "blog");
 const DOCS = join(ROOT, "content", "docs");
 
 function isPublishableMarkdown(name) {
-  return name.endsWith(".md") && !/\.(research|review|draft|brief)\.md$/i.test(name);
+  return (
+    name.endsWith(".md") &&
+    name !== "README.md" &&
+    !/\.(research|review|draft|brief)\.md$/i.test(name)
+  );
 }
 
 function files(dir, suffix) {
