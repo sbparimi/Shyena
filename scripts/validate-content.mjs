@@ -5,9 +5,15 @@ const ROOT = process.cwd();
 const BLOG = join(ROOT, "content", "blog");
 const DOCS = join(ROOT, "content", "docs");
 
-function files(dir, suffix) {
+// Only plain Markdown files are publishable content. SAGE working artifacts
+// (for example *.research.md and *.review.md) must never enter the publish gate.
+function isPublishableMarkdown(name) {
+  return name.endsWith(".md") && name !== "README.md" && !/\.(research|review)\.md$/i.test(name);
+}
+
+function files(dir) {
   if (!existsSync(dir)) return [];
-  return readdirSync(dir).filter((name) => name.endsWith(suffix));
+  return readdirSync(dir).filter(isPublishableMarkdown);
 }
 
 function frontmatter(source, file) {
@@ -27,7 +33,7 @@ const seenSlugs = new Set();
 const seenTitles = new Set();
 
 for (const [type, dir] of [["blog", BLOG], ["docs", DOCS]]) {
-  for (const name of files(dir, ".md")) {
+  for (const name of files(dir)) {
     const file = join(dir, name);
     const meta = frontmatter(readFileSync(file, "utf8"), file);
     for (const required of ["title", "description", "slug"]) {
