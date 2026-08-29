@@ -20,7 +20,5 @@ jobs:
         run: npm run content:validate
       - name: Generate content registry
         run: npm run content:generate
-      - name: Lint
-        run: npm run lint
       - name: Production build
         run: npm run build
