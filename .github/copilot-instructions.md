@@ -53,6 +53,8 @@ For a code change, run the repository's applicable checks before opening or upda
 5. relevant Playwright/end-to-end tests
 6. security/dependency checks when available
 
+Before merge, validate the actual deployed application at the preview URL for changed routes. A green build is not sufficient; route-level runtime smoke checks must pass.
+
 Review the complete diff for regressions, dead links, broken routes, accessibility issues, security risks, and accidental product-claim changes before declaring the work complete.
 
 ## PR discipline
