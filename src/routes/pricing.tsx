@@ -38,19 +38,77 @@ function formatEuro(value: number) {
 }
 
 function PricingCalculator() {
-  const [flows, setFlows] = useState(100);
-  const [conversations, setConversations] = useState(1000);
-  const [security, setSecurity] = useState(250);
+  const [flows, setFlows] = useState("100");
+  const [conversations, setConversations] = useState("1000");
+  const [security, setSecurity] = useState("250");
+
+  const parseUsage = (value: string) => Number(value || "0");
+
   const estimate = useMemo(() => {
-    const flowCost = flows * RATE;
-    const conversationCost = conversations * RATE;
-    const securityCost = security * RATE;
+    const flowCost = parseUsage(flows) * RATE;
+    const conversationCost = parseUsage(conversations) * RATE;
+    const securityCost = parseUsage(security) * RATE;
     return { flowCost, conversationCost, securityCost, monthly: flowCost + conversationCost + securityCost };
   }, [flows, conversations, security]);
 
-  const field = (label: string, value: number, setter: (value: number) => void, note: string) => <label className="text-sm font-medium text-slate-700">{label}<input type="number" min={0} step={1} value={value} onChange={(e) => setter(Math.max(0, Number(e.target.value) || 0))} className="mt-2 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-lg font-semibold text-slate-950 outline-none focus:border-violet-500 focus:ring-2 focus:ring-violet-100" /><span className="mt-2 block text-xs font-normal text-slate-500">{note}</span></label>;
+  const updateInteger = (rawValue: string, setter: (value: string) => void) => {
+    if (rawValue === "") {
+      setter("");
+      return;
+    }
+    if (!/^\d+$/.test(rawValue)) return;
+    setter(rawValue.replace(/^0+(?=\d)/, ""));
+  };
 
-  return <section id="calculator" className="border-y border-slate-200 bg-slate-50 py-20 sm:py-24"><div className="mx-auto max-w-7xl px-5 sm:px-8"><div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-start"><div><div className="flex h-11 w-11 items-center justify-center rounded-xl bg-violet-100 text-violet-700"><Calculator className="h-5 w-5" /></div><p className="mt-6 font-mono text-xs uppercase tracking-[0.18em] text-violet-600">Pricing calculator</p><h2 className="mt-3 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">Calculate your own monthly usage.</h2><p className="mt-5 text-base leading-relaxed text-slate-600">Enter the activity you expect to generate and execute. The calculator applies the public €0.05 usage rates so your team can estimate cost before speaking with sales.</p><div className="mt-6 rounded-2xl border border-slate-200 bg-white p-5 text-sm text-slate-600"><p className="font-semibold text-slate-950">Three independent usage units</p><p className="mt-2 leading-relaxed">CIS generation, Vera conversations and Chakra security interactions are measured separately. One unit is never converted into another.</p></div></div><div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-xl sm:p-8"><div className="grid gap-7 md:grid-cols-3">{field("CIS test journeys generated", flows, setFlows, "€0.05 each")}{field("Vera AI conversations", conversations, setConversations, "€0.05 each")}{field("Chakra security interactions", security, setSecurity, "€0.05 each")}</div><div className="mt-8 grid gap-3 border-t border-slate-200 pt-7 sm:grid-cols-3"><div><p className="text-xs uppercase tracking-wider text-slate-500">CIS</p><p className="mt-1 text-xl font-bold text-slate-950">{formatEuro(estimate.flowCost)}</p></div><div><p className="text-xs uppercase tracking-wider text-slate-500">Vera</p><p className="mt-1 text-xl font-bold text-slate-950">{formatEuro(estimate.conversationCost)}</p></div><div><p className="text-xs uppercase tracking-wider text-slate-500">Chakra</p><p className="mt-1 text-xl font-bold text-slate-950">{formatEuro(estimate.securityCost)}</p></div></div><div className="mt-7 rounded-2xl bg-slate-950 p-6 text-white"><p className="text-xs uppercase tracking-[0.18em] text-slate-400">Estimated monthly usage</p><p className="mt-2 text-4xl font-bold tracking-tight">{formatEuro(estimate.monthly)}</p><p className="mt-2 text-xs text-slate-400">Usage estimate only. VAT and separately scoped professional services are excluded.</p></div><div className="mt-6 flex flex-wrap gap-3"><Button asChild><Link to="/contact">Discuss this estimate <ArrowRight className="h-4 w-4" /></Link></Button><a href="#pricing-details" className="inline-flex h-10 items-center rounded-md border border-slate-300 px-4 text-sm font-medium text-slate-700">See pricing details</a></div></div></div></div></section>;
+  const field = (id: string, label: string, value: string, setter: (value: string) => void, note: string) => (
+    <div>
+      <label htmlFor={id} className="text-sm font-medium text-slate-700">{label}</label>
+      <input
+        id={id}
+        type="text"
+        inputMode="numeric"
+        pattern="[0-9]*"
+        value={value}
+        onChange={(event) => updateInteger(event.target.value, setter)}
+        onBlur={() => { if (value === "") setter("0"); }}
+        aria-describedby={`${id}-note`}
+        autoComplete="off"
+        spellCheck={false}
+        className="mt-2 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-lg font-semibold text-slate-950 outline-none transition focus:border-violet-500 focus:ring-2 focus:ring-violet-100"
+      />
+      <span id={`${id}-note`} className="mt-2 block text-xs font-normal text-slate-500">{note} · Whole numbers only</span>
+    </div>
+  );
+
+  return (
+    <section id="calculator" className="border-y border-slate-200 bg-slate-50 py-20 sm:py-24">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8">
+        <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+          <div>
+            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-violet-100 text-violet-700"><Calculator className="h-5 w-5" /></div>
+            <p className="mt-6 font-mono text-xs uppercase tracking-[0.18em] text-violet-600">Pricing calculator</p>
+            <h2 className="mt-3 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">Calculate your own monthly usage.</h2>
+            <p className="mt-5 text-base leading-relaxed text-slate-600">Enter the activity you expect to generate and execute. The calculator applies the public €0.05 usage rates so your team can estimate cost before speaking with sales.</p>
+            <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-5 text-sm text-slate-600"><p className="font-semibold text-slate-950">Three independent usage units</p><p className="mt-2 leading-relaxed">CIS generation, Vera conversations and Chakra security interactions are measured separately. One unit is never converted into another.</p></div>
+          </div>
+          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-xl sm:p-8">
+            <div className="grid gap-7 md:grid-cols-3">
+              {field("cis-usage", "CIS test journeys generated", flows, setFlows, "€0.05 each")}
+              {field("vera-usage", "Vera AI conversations", conversations, setConversations, "€0.05 each")}
+              {field("chakra-usage", "Chakra security interactions", security, setSecurity, "€0.05 each")}
+            </div>
+            <div className="mt-8 grid gap-3 border-t border-slate-200 pt-7 sm:grid-cols-3">
+              <div><p className="text-xs uppercase tracking-wider text-slate-500">CIS</p><p className="mt-1 text-xl font-bold text-slate-950">{formatEuro(estimate.flowCost)}</p></div>
+              <div><p className="text-xs uppercase tracking-wider text-slate-500">Vera</p><p className="mt-1 text-xl font-bold text-slate-950">{formatEuro(estimate.conversationCost)}</p></div>
+              <div><p className="text-xs uppercase tracking-wider text-slate-500">Chakra</p><p className="mt-1 text-xl font-bold text-slate-950">{formatEuro(estimate.securityCost)}</p></div>
+            </div>
+            <div className="mt-7 rounded-2xl bg-slate-950 p-6 text-white"><p className="text-xs uppercase tracking-[0.18em] text-slate-400">Estimated monthly usage</p><p className="mt-2 text-4xl font-bold tracking-tight">{formatEuro(estimate.monthly)}</p><p className="mt-2 text-xs text-slate-400">Usage estimate only. VAT and separately scoped professional services are excluded.</p></div>
+            <div className="mt-6 flex flex-wrap gap-3"><Button asChild><Link to="/contact">Discuss this estimate <ArrowRight className="h-4 w-4" /></Link></Button><a href="#pricing-details" className="inline-flex h-10 items-center rounded-md border border-slate-300 px-4 text-sm font-medium text-slate-700">See pricing details</a></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }
 
 function PricingPage() {
