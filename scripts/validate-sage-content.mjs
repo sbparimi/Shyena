@@ -4,12 +4,18 @@ import path from "node:path";
 const root = path.resolve("content");
 const failures = [];
 
+// Content directories may also contain SAGE working artifacts and repository
+// READMEs. Only plain Markdown content files are publishable.
+function isPublishableContent(name) {
+  return /\.mdx?$/i.test(name) && name !== "README.md" && !/\.(research|review)\.mdx?$/i.test(name);
+}
+
 function walk(dir) {
   if (!fs.existsSync(dir)) return;
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     const file = path.join(dir, entry.name);
     if (entry.isDirectory()) walk(file);
-    else if (/\.(md|mdx)$/i.test(entry.name)) validate(file);
+    else if (isPublishableContent(entry.name)) validate(file);
   }
 }
 
