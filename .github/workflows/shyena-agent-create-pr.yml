@@ -48,6 +48,9 @@ jobs:
         uses: actions/ai-inference@v3
         with:
           model: gpt-4.1
+          file_input: |
+            diff_stat: /tmp/diff-stat.txt
+            diff: /tmp/change-truncated.diff
           prompt: |
             You are the Shyena Release Review Agent.
             Review the proposed feature branch against the target branch as a senior product, UX, TypeScript/React, accessibility, SEO, security and pricing reviewer.
@@ -73,10 +76,6 @@ jobs:
             {{diff}}
         env:
           COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
-        with:
-          file_input: |
-            diff_stat: /tmp/diff-stat.txt
-            diff: /tmp/change-truncated.diff
 
       - name: Save review
         env:
