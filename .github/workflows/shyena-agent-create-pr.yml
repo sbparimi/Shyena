@@ -1,0 +1,102 @@
+name: Shyena Agent - Review and Create PR
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_branch:
+        description: Feature branch to review and propose for merge
+        required: true
+        default: feat/shyena-assurance-refresh
+      base_branch:
+        description: Target branch
+        required: true
+        default: main
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  review-and-create-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Install GitHub Copilot CLI
+        run: npm install -g @github/copilot
+
+      - name: Fetch source branch
+        env:
+          SOURCE_BRANCH: ${{ inputs.source_branch }}
+        run: git fetch origin "${SOURCE_BRANCH}:${SOURCE_BRANCH}"
+
+      - name: Build review context
+        env:
+          SOURCE_BRANCH: ${{ inputs.source_branch }}
+          BASE_BRANCH: ${{ inputs.base_branch }}
+        run: |
+          git diff --stat "origin/${BASE_BRANCH}...${SOURCE_BRANCH}" > /tmp/diff-stat.txt
+          git diff --no-ext-diff "origin/${BASE_BRANCH}...${SOURCE_BRANCH}" > /tmp/change.diff
+          head -c 120000 /tmp/change.diff > /tmp/change-truncated.diff
+          cat /tmp/diff-stat.txt
+
+      - name: AI forensic review
+        id: review
+        uses: actions/ai-inference@v3
+        with:
+          model: gpt-4.1
+          prompt: |
+            You are the Shyena Release Review Agent.
+            Review the proposed feature branch against the target branch as a senior product, UX, TypeScript/React, accessibility, SEO, security and pricing reviewer.
+
+            Requirements for this change:
+            1. Public product names must be Nexus, Vera and Chakra. CIS and ECAAP may only appear as underlying technology references such as "powered by CIS" or "powered by ECAAP".
+            2. Pricing must be SaaS-style: recurring platform subscription plus metered assurance/security consumption. Do not promise unlimited executions, unlimited security testing, unlimited engineering, or bundled bespoke services.
+            3. Pilots, training, custom development and bespoke framework adapters must be separately priced professional services.
+            4. Preserve the existing Shyena visual theme.
+            5. Reject misleading claims, broken routes, dead links, regressions, obvious TypeScript/React errors, accessibility problems, and security risks.
+
+            Return exactly this first line:
+            DECISION: APPROVE
+            or
+            DECISION: REJECT
+
+            Then provide a concise forensic report with severity, findings and required corrections.
+
+            Change statistics:
+            {{diff_stat}}
+
+            Proposed change:
+            {{diff}}
+        env:
+          COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
+        with:
+          file_input: |
+            diff_stat: /tmp/diff-stat.txt
+            diff: /tmp/change-truncated.diff
+
+      - name: Save review
+        env:
+          REVIEW: ${{ steps.review.outputs.response }}
+        run: printf '%s\n' "$REVIEW" > /tmp/ai-review.md
+
+      - name: Create pull request when approved
+        env:
+          REVIEW: /tmp/ai-review.md
+          SOURCE_BRANCH: ${{ inputs.source_branch }}
+          BASE_BRANCH: ${{ inputs.base_branch }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if ! grep -q '^DECISION: APPROVE' "$REVIEW"; then
+            echo "AI reviewer rejected the change. No PR created."
+            cat "$REVIEW"
+            exit 1
+          fi
+          gh pr create \
+            --head "$SOURCE_BRANCH" \
+            --base "$BASE_BRANCH" \
+            --title "Shyena assurance and commercial model refresh" \
+            --body-file "$REVIEW"
