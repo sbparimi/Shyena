@@ -37,7 +37,7 @@ export function SiteFooter() {
       <div className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
         <div className="grid gap-12 lg:grid-cols-[1.35fr_2fr]">
           <div>
-            <Logo />
+            <Logo tone="navy" />
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-navy-muted">
               The AI agent assurance platform for teams that need evidence before they release.
               Understand the system. Evaluate the behavior. Defend the release.
