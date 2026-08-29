@@ -1,444 +1,74 @@
+import { Activity, ArrowRight, Check, ChevronRight, CircleCheck, GitBranch, LockKeyhole, Network, ShieldCheck, Target, Workflow, X } from "lucide-react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Check, RefreshCw, ShieldCheck, Activity, Sparkles, Wand2, Layers, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { CtaBand } from "@/components/site/cta-band";
-import { cn } from "@/lib/utils";
-import {
-  PersonaMock,
-  ConversationMock,
-  JudgeMock,
-  AssertionMock,
-  IntegrityMock,
-  AuditMock,
-} from "@/components/product/capability-mocks";
 
 export const Route = createFileRoute("/vera")({
   head: () => ({
     meta: [
-      { title: "Vera — Quality & Evaluation for Cognigy Agents — Shyena" },
-      {
-        name: "description",
-        content:
-          "Vera is Shyena's quality and evaluation product, powered by ECAAP: agentic test personas, real conversation execution across chat and voice, LLM-as-judge evaluation, deterministic assertions, and the execution-integrity gate that stops broken conversations from reporting a pass.",
-      },
-      { property: "og:title", content: "Vera — Quality & Evaluation for Cognigy Agents — Shyena" },
-      {
-        property: "og:description",
-        content:
-          "Agentic test personas, real conversation execution against your live Cognigy bot, LLM-as-judge metrics, and execution-integrity gating.",
-      },
+      { title: "AI Agent Testing & Evaluation Platform | Vera by Shyena" },
+      { name: "description", content: "Vera is an AI agent testing and evaluation platform for conversational AI, voice AI and multi-turn agent workflows. Run realistic scenarios, combine LLM-as-a-judge with deterministic checks, enforce execution integrity and produce evidence-backed release verdicts." },
+      { name: "keywords", content: "AI agent testing, AI agent evaluation, agentic AI testing, LLM evaluation, LLM testing, conversational AI testing, voice AI testing, multi-turn AI testing, AI quality assurance, AI release gate, LLM as a judge, deterministic evaluation, Cognigy testing" },
+      { property: "og:title", content: "Vera — AI Agent Testing & Evaluation | Shyena" },
+      { property: "og:description", content: "Test real AI agent conversations, evaluate behavior, enforce execution integrity and turn every result into evidence-backed release decisions." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://shyena.eu/vera" }],
+    links: [{ rel: "canonical", href: "https://www.shyena.eu/vera" }],
   }),
   component: ProductPage,
 });
 
-const COGNIGY_FAQS = [
-  {
-    question: "Can Shyena test a Cognigy-built conversational AI agent?",
-    answer:
-      "Yes. Cognigy is Shyena's live platform integration today. Shyena drives a real browser or voice session against your live Cognigy agent over the same channel your customers use, generates the conversation turn-by-turn based on how the agent actually responds, and scores every turn.",
-  },
-  {
-    question: "How does Shyena evaluate a Cognigy chatbot or voice bot?",
-    answer:
-      "Each test is an agentic persona with a goal, personality, and behavioral playbook — not a fixed script. The executor improvises the next message based on what your Cognigy agent actually said, so it exercises the same open-ended paths real customers take. Every turn is scored with LLM-as-judge evaluation and deterministic assertions, then rolled up into a case verdict.",
-  },
-  {
-    question: "What happens if a Cognigy agent conversation fails or times out mid-test?",
-    answer:
-      "The execution-integrity gate caps that case at FAIL regardless of how well the earlier turns scored. A truncated conversation can't report a false green pass just because it stopped before reaching a forbidden state — the raw quality score stays visible for debugging, but the verdict reflects the real outcome.",
-  },
-  {
-    question: "Does Shyena support Cognigy voice agents, or only chat?",
-    answer:
-      "Both. Shyena runs real chat and voice sessions against your live Cognigy agent, using the same evaluation pipeline — agentic personas, LLM-as-judge scoring, deterministic assertions, and the execution-integrity gate — across both channels.",
-  },
+const FAQS = [
+  { question: "What is AI agent testing?", answer: "AI agent testing validates whether an autonomous or conversational AI system can complete real user goals across multi-turn interactions, tool calls, orchestration paths and edge cases. Vera combines realistic agentic scenarios with semantic evaluation, deterministic assertions and execution-integrity checks." },
+  { question: "How is Vera different from LLM evaluation tools?", answer: "Vera evaluates the complete agent execution rather than treating a single model response as the whole test. It combines real conversation execution, LLM-as-a-judge scoring, deterministic business-rule checks and an execution-integrity gate before producing the final verdict." },
+  { question: "Can Vera test conversational AI and voice AI?", answer: "Yes. Vera is designed for multi-turn conversational AI testing and voice AI testing. The same assurance model can evaluate goal completion, behavior, quality, deterministic conditions and execution integrity across supported channels." },
+  { question: "Can Vera test Cognigy agents?", answer: "Yes. Cognigy is a live Shyena integration. Vera can drive real conversational or voice sessions against a Cognigy agent and evaluate the resulting conversation, assertions and execution outcome." },
+  { question: "What happens when an AI agent test stops unexpectedly?", answer: "The execution-integrity gate prevents an incomplete or failed run from becoming a false pass. The quality score remains available for diagnosis, but the release verdict reflects the actual execution outcome." },
 ] as const;
 
-const COGNIGY_FAQ_SCHEMA = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: COGNIGY_FAQS.map((faq) => ({
-    "@type": "Question",
-    name: faq.question,
-    acceptedAnswer: { "@type": "Answer", text: faq.answer },
-  })),
-};
+const FAQ_SCHEMA = { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: FAQS.map((faq) => ({ "@type": "Question", name: faq.question, acceptedAnswer: { "@type": "Answer", text: faq.answer } })) };
 
-const CAPABILITIES = [
-  {
-    id: "personas",
-    title: "Agentic Test Personas",
-    description:
-      "Tests are written as a user goal, a persona, and a behavioral playbook. The executor improvises turn-by-turn, choosing the next message based on what the agent actually said — not a fixed script.",
-    checks: [
-      "Goal-driven scenarios, not brittle click paths",
-      "Personas carry emotion, language, and intent",
-      "Playbooks adapt when the agent goes off-script",
-    ],
-    mock: PersonaMock,
-  },
-  {
-    id: "execution",
-    title: "Real Conversation Execution & Dynamic Generation",
-    description:
-      "A real browser or voice session drives your production agent over the same channel your customers use — and the conversation itself is generated live, turn by turn. Within the goal and persona you define, the executor decides what the simulated customer says next based on how the agent actually responded, not a fixed script.",
-    checks: [
-      "Live agent, real channel — no mocked APIs, no fake states",
-      "Every turn generated in response to the agent's actual reply",
-      "Retry and backpressure built in",
-      "Captures full transcript and metadata",
-    ],
-    mock: ConversationMock,
-  },
-  {
-    id: "judge",
-    title: "LLM-as-Judge Evaluation",
-    description:
-      "Every turn and the full conversation are scored against your quality pillars by an LLM judge. The reasoning is stored alongside the score, so you can debug a verdict instead of debating it.",
-    checks: [
-      "Turn-level and full-run scoring",
-      "Customizable quality pillars",
-      "Reasoning attached to every score",
-    ],
-    mock: JudgeMock,
-  },
-  {
-    id: "assertions",
-    title: "Deterministic Assertion Contracts",
-    description:
-      "Hard-fact checks that must be true regardless of how friendly the conversation felt. Expected fields, exact values, state transitions, and policy clauses are validated deterministically.",
-    checks: [
-      "Field presence and value matching",
-      "State machine transitions",
-      "Redaction and compliance checks",
-    ],
-    mock: AssertionMock,
-  },
-  {
-    id: "integrity",
-    title: "Execution-Integrity Hard Gate",
-    description:
-      "A failed, truncated, or timed-out conversation is capped at FAIL no matter how well it scored on the turns it completed. The raw score stays visible for diagnosis, but it can never be reported as a pass.",
-    checks: [
-      "Integrity evaluated before quality",
-      "Truncated runs cannot pass",
-      "Raw score preserved for debugging",
-    ],
-    mock: IntegrityMock,
-  },
-  {
-    id: "audit",
-    title: "Full Audit Trail",
-    description:
-      "Every LLM call, assertion, retry, and judge decision is logged and retrievable. A verdict is always explainable, never a black box, and ready for a release review or audit.",
-    checks: [
-      "Full prompt and response history",
-      "Retrievable by run, turn, and verdict",
-      "Exportable for compliance reviews",
-    ],
-    mock: AuditMock,
-  },
+const ASSURANCE_LAYERS = [
+  { number: "01", icon: Target, title: "Generate realistic test signal", description: "Define a business goal, persona and behavioral playbook. The simulated user adapts its next turn to the agent's actual response instead of replaying one brittle script.", items: ["Goal-driven scenarios", "Multi-turn conversations", "Edge and recovery paths"] },
+  { number: "02", icon: Activity, title: "Evaluate the agent behavior", description: "Score the complete interaction using LLM-as-a-judge evaluation and deterministic assertions. Quality, business rules and system behavior are evaluated together.", items: ["Semantic conversation quality", "Deterministic business rules", "Turn and run-level evidence"] },
+  { number: "03", icon: ShieldCheck, title: "Prove the verdict", description: "Execution integrity is evaluated before a result can become a pass. Failed, truncated or timed-out runs cannot hide behind a high quality score.", items: ["Integrity-gated verdict", "Full audit evidence", "Release decision support"] },
 ];
 
-// Category-level positioning, not a named-vendor comparison — deliberately.
-// "Legacy" here describes the well-established scripted/record-replay
-// automation paradigm (author or record a fixed step sequence, assert
-// against the DOM) that most browser/device test-automation platforms are
-// built on, even as they bolt on AI-assisted authoring or self-healing
-// selectors. Every row below is a structural, industry-level distinction —
-// none of it depends on or references any specific product.
-const PARADIGM_ROWS = [
-  {
-    label: "What a test is",
-    legacy: "A fixed sequence of clicks, keystrokes and assertions, authored or recorded per UI path.",
-    shyena: "A goal, a persona and a playbook — the agent improvises the actual conversation path.",
-  },
-  {
-    label: "Handling non-determinism",
-    legacy: "Brittle by default. AI-assisted \"self-healing\" patches broken selectors, but still replays one fixed path.",
-    shyena: "Built for it from the ground up — the same goal reaches its outcome via a different valid path every run.",
-  },
-  {
-    label: "What gets judged",
-    legacy: "Did the expected element appear and respond the way the script said it would.",
-    shyena: "Did the conversation actually resolve the goal — judged semantically, not just structurally.",
-  },
-  {
-    label: "When a run breaks partway",
-    legacy: "Reported however far the script's own assertions got — nothing stops a partial run from reading as a pass.",
-    shyena: "Capped at FAIL, structurally, before quality is even scored — the execution-integrity gate.",
-  },
-  {
-    label: "Growing coverage",
-    legacy: "Author or record a new script for every additional path you want covered.",
-    shyena: "One understood business rule expands into many test conversations, via Nexus.",
-  },
-] as const;
-
-const ROADMAP_CARDS = [
-  {
-    icon: Wand2,
-    title: "Richer scenarios via Nexus",
-    description:
-      "Nexus — Shyena's system-map intelligence product, powered by CIS — produces structured journey contracts covering decision provenance, counterfactual boundary cases, and tool, memory and orchestrator checks, not just a scripted happy path. Candidates are generated for your team to review and approve before they run; human sign-off stays in the loop, so the first draft won't be a blank page.",
-  },
-  {
-    icon: Layers,
-    title: "RAG evaluation",
-    description:
-      "The same LLM-judge model already includes five RAG-specific dimensions — faithfulness, retrieval quality, calibration, multi-document coherence, and answer completeness. We're finishing the direct-API execution path so you can run them against a RAG pipeline without a live conversational UI.",
-  },
-];
-
-const SCALE_CARDS = [
-  {
-    icon: RefreshCw,
-    title: "Retries & resilience",
-    description:
-      "Transient failures are retried with exponential backoff and circuit-breaker logic. Runs that cannot succeed are routed to a dead-letter queue for inspection, not silently dropped.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Backpressure-controlled concurrency",
-    description:
-      "The runner adapts its concurrency to the target environment's latency and rate limits, so large regression suites don't overwhelm your agent or infrastructure.",
-  },
-  {
-    icon: Activity,
-    title: "Observable job architecture",
-    description:
-      "Every job, worker, and queue is observable by design. You can trace a run from schedule to verdict, identify bottlenecks, and tune throughput without guessing.",
-  },
+const EVALUATION_DIMENSIONS = ["Goal achievement", "Context retention", "Intent and requirement handling", "Response relevance and completeness", "Tool and state behavior", "Business-rule adherence", "Policy and compliance assertions", "Conversation completion", "Timeout and error handling"];
+const DIFFERENCES = [["Test definition", "Fixed path and assertions", "Goal, persona and behavioral playbook"], ["Conversation path", "Predetermined", "Dynamically generated from the live response"], ["Evaluation", "Mostly structural", "Semantic + deterministic + integrity"], ["Partial execution", "Depends on test implementation", "Cannot become a passing verdict"], ["Evidence", "Test result", "Conversation → finding → component → verdict"]];
+const ENTERPRISE_POINTS = [
+  { icon: Workflow, title: "CI/CD release gates", text: "Run AI agent regression tests before release and make assurance outcomes part of engineering workflows." },
+  { icon: Network, title: "Observable execution", text: "Trace a journey from scenario through conversation, evaluation and final verdict." },
+  { icon: LockKeyhole, title: "Governed evidence", text: "Keep the reasoning, assertions and execution outcome together for review and audit." },
+  { icon: GitBranch, title: "Engineering workflow", text: "Turn failures into actionable evidence that can be connected to components and release decisions." },
 ];
 
 function ProductPage() {
-  return (
-    <>
-      <script
-        type="application/ld+json"
-        // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(COGNIGY_FAQ_SCHEMA) }}
-      />
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-lavender text-lavender-foreground">
-        <div className="relative mx-auto w-full max-w-7xl px-5 pb-4 pt-20 sm:px-8 sm:pt-28">
-          <div className="mx-auto max-w-3xl text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary px-3.5 py-1.5 text-xs font-medium text-muted-foreground">
-              Vera · Assure — Quality &amp; Evaluation
-            </span>
-            <h1 className="mt-6 text-5xl leading-[1.05] sm:text-7xl">
-              Vera. Every layer of AI system quality, assured.
-            </h1>
-            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-              Shyena is built to evaluate any AI system — live today for conversational and voice
-              AI, covering the full stack from the personas that generate the test signal, to the
-              execution that keeps it real, to the verdict that can't be gamed. RAG is next; see
-              what's already built for it below.
-            </p>
-            <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-              <Button asChild size="lg">
-                <Link to="/contact">
-                  Request a Demo
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </Button>
-              <Button asChild size="lg" variant="outline">
-                <Link to="/docs">Read the docs</Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
+  return <>
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_SCHEMA) }} />
+    <main>
+      <section className="relative overflow-hidden bg-[#07111F] text-white"><div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_20%,rgba(124,58,237,0.22),transparent_34%),radial-gradient(circle_at_15%_80%,rgba(37,99,235,0.12),transparent_30%)]" /><div className="relative mx-auto grid w-full max-w-7xl gap-14 px-5 pb-20 pt-20 sm:px-8 sm:pb-28 sm:pt-28 lg:grid-cols-[1.02fr_.98fr] lg:items-center"><div><div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-3.5 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-violet-200">Vera · AI Agent Assurance</div><h1 className="mt-7 max-w-3xl text-5xl font-semibold leading-[1.02] tracking-[-0.04em] sm:text-6xl lg:text-7xl">Test the conversation. Evaluate the behavior. Prove the result.</h1><p className="mt-7 max-w-2xl text-lg leading-8 text-slate-300 sm:text-xl">Vera is an enterprise AI agent testing and evaluation platform for conversational AI, voice AI and multi-turn agent workflows. Run realistic journeys, evaluate quality and system behavior, and enforce a release verdict backed by evidence.</p><div className="mt-9 flex flex-wrap gap-3"><Button asChild size="lg" className="bg-violet-600 text-white hover:bg-violet-500"><Link to="/contact">See Vera in action <ArrowRight className="h-4 w-4" /></Link></Button><Button asChild size="lg" variant="outline" className="border-white/20 bg-transparent text-white hover:bg-white/10 hover:text-white"><Link to="/docs">Explore the evaluation model</Link></Button></div><div className="mt-10 flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-400"><span>Agentic test scenarios</span><span>LLM-as-a-judge</span><span>Deterministic assertions</span><span>Release integrity</span></div></div><div className="rounded-2xl border border-white/10 bg-white/[0.055] p-4 shadow-2xl shadow-black/20 backdrop-blur sm:p-5"><div className="rounded-xl border border-white/10 bg-[#0B1728]"><div className="flex items-center justify-between border-b border-white/10 px-5 py-4"><div><p className="text-xs font-medium text-slate-400">VERA ASSURANCE RUN</p><p className="mt-1 text-sm font-semibold">Address change journey</p></div><span className="rounded-full bg-red-400/10 px-2.5 py-1 text-xs font-semibold text-red-300">RELEASE BLOCKED</span></div><div className="grid grid-cols-2 gap-px bg-white/10">{[["Execution", "17 / 17 turns", "text-emerald-300"], ["Quality", "0.81", "text-white"], ["Integrity", "PASS", "text-emerald-300"], ["Assertions", "14 / 15", "text-amber-300"]].map(([label, value, color]) => <div key={label} className="bg-[#0B1728] p-5"><p className="text-xs text-slate-500">{label}</p><p className={`mt-2 text-xl font-semibold ${color}`}>{value}</p></div>)}</div><div className="border-t border-white/10 p-5"><p className="text-xs uppercase tracking-[0.14em] text-slate-500">Finding</p><p className="mt-2 font-semibold">Required business state was not reached</p><div className="mt-4 grid gap-3 sm:grid-cols-2"><div className="rounded-lg border border-white/10 bg-white/[0.03] p-3"><p className="text-[11px] text-slate-500">Affected component</p><p className="mt-1 text-sm">Address Change / Node 42</p></div><div className="rounded-lg border border-white/10 bg-white/[0.03] p-3"><p className="text-[11px] text-slate-500">Root-cause confidence</p><p className="mt-1 text-sm text-emerald-300">96%</p></div></div></div></div><div className="mt-3 flex items-center gap-2 px-1 text-xs text-slate-500"><CircleCheck className="h-3.5 w-3.5 text-violet-400" /> Evidence is attached to the verdict, not hidden behind a score.</div></div></div></section>
 
-      {/* Capabilities */}
-      {CAPABILITIES.map((cap, i) => {
-        const Mock = cap.mock;
-        const isEven = i % 2 === 0;
-        return (
-          <section
-            key={cap.id}
-            className="mx-auto w-full max-w-7xl px-5 py-20 sm:px-8 lg:py-28"
-          >
-            <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-              <div className={cn("order-1", isEven ? "lg:order-1" : "lg:order-2")}>
-                <Mock />
-              </div>
-              <div className={cn("order-2", isEven ? "lg:order-2" : "lg:order-1")}>
-                <p className="font-mono text-xs uppercase tracking-[0.18em] text-primary">
-                  Capability {String(i + 1).padStart(2, "0")}
-                </p>
-                <h2 className="mt-3 text-3xl font-bold sm:text-4xl">{cap.title}</h2>
-                <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-                  {cap.description}
-                </p>
-                <ul className="mt-6 space-y-3">
-                  {cap.checks.map((check) => (
-                    <li key={check} className="flex items-start gap-3">
-                      <span className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
-                        <Check className="h-3 w-3" />
-                      </span>
-                      <span className="text-sm leading-relaxed text-foreground">{check}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </section>
-        );
-      })}
+      <section className="border-b border-slate-200 bg-white py-20 sm:py-24"><div className="mx-auto max-w-7xl px-5 sm:px-8"><div className="max-w-3xl"><p className="text-xs font-semibold uppercase tracking-[0.18em] text-violet-700">The assurance problem</p><h2 className="mt-4 text-3xl font-semibold tracking-tight text-slate-950 sm:text-5xl">A good answer does not prove a good agent.</h2><p className="mt-5 text-lg leading-8 text-slate-600">An AI agent can produce a convincing response while taking the wrong orchestration path, missing a business condition, calling the wrong tool or ending before the customer's goal is complete. AI quality assurance needs to evaluate the whole execution.</p></div><div className="mt-12 grid gap-5 md:grid-cols-3">{[["Answer quality", "Was the response useful, relevant and correct?"], ["Agent behavior", "Did the agent follow the intended business and system behavior?"], ["Execution integrity", "Did the journey actually complete without a hidden failure?"]].map(([title, text], i) => <div key={title} className="rounded-2xl border border-slate-200 bg-slate-50 p-7"><span className="text-xs font-bold tracking-[0.15em] text-violet-700">0{i + 1}</span><h3 className="mt-5 text-xl font-semibold text-slate-950">{title}</h3><p className="mt-3 text-sm leading-6 text-slate-600">{text}</p></div>)}</div></div></section>
 
-      {/* Legacy automation vs. agentic testing */}
-      <section className="bg-navy py-24">
-        <div className="mx-auto w-full max-w-7xl px-5 sm:px-8">
-          <div className="max-w-2xl">
-            <p className="font-mono text-xs uppercase tracking-[0.18em] text-accent">Not another automation grid</p>
-            <h2 className="mt-4 text-3xl font-bold text-navy-foreground sm:text-4xl">
-              Adding AI to a scripted test isn't the same as agentic testing.
-            </h2>
-            <p className="mt-4 text-navy-muted">
-              Most browser and device test-automation platforms are still built on the same
-              record-and-replay foundation they always were — a fixed sequence of steps, now with
-              AI-assisted authoring or self-healing selectors bolted on top. Vera starts from a
-              different premise: the test is a goal, not a script.
-            </p>
-          </div>
+      <section className="bg-slate-50 py-20 sm:py-24"><div className="mx-auto max-w-7xl px-5 sm:px-8"><div className="max-w-3xl"><p className="text-xs font-semibold uppercase tracking-[0.18em] text-violet-700">The Vera assurance model</p><h2 className="mt-4 text-3xl font-semibold tracking-tight text-slate-950 sm:text-5xl">From realistic agent testing to a release-ready verdict.</h2></div><div className="mt-12 grid gap-5 lg:grid-cols-3">{ASSURANCE_LAYERS.map((layer) => { const Icon = layer.icon; return <article key={layer.number} className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm"><div className="flex items-center justify-between"><span className="text-xs font-bold tracking-[0.18em] text-violet-700">{layer.number}</span><span className="flex h-10 w-10 items-center justify-center rounded-xl bg-violet-50 text-violet-700"><Icon className="h-5 w-5" /></span></div><h3 className="mt-7 text-xl font-semibold text-slate-950">{layer.title}</h3><p className="mt-3 text-sm leading-6 text-slate-600">{layer.description}</p><ul className="mt-6 space-y-3">{layer.items.map((item) => <li key={item} className="flex items-start gap-2.5 text-sm text-slate-700"><Check className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />{item}</li>)}</ul></article>; })}</div></div></section>
 
-          <div className="mt-10 overflow-x-auto rounded-2xl border border-navy-border bg-white/[0.03]">
-            <div className="min-w-[720px]">
-              <div className="grid grid-cols-[1fr_1.4fr_1.4fr] items-center gap-6 border-b border-navy-border px-6 py-4 text-sm font-semibold">
-                <span className="text-navy-foreground">&nbsp;</span>
-                <span className="flex items-center gap-2 text-navy-muted">
-                  <X className="h-4 w-4 text-navy-muted" />
-                  Legacy test automation
-                </span>
-                <span className="flex items-center gap-2 text-primary">
-                  <Check className="h-4 w-4 text-primary" />
-                  Vera
-                </span>
-              </div>
-              {PARADIGM_ROWS.map((row, i) => (
-                <div
-                  key={row.label}
-                  className={`grid grid-cols-[1fr_1.4fr_1.4fr] items-start gap-6 px-6 py-5 text-sm last:rounded-b-2xl ${i % 2 === 1 ? "bg-white/[0.02]" : ""}`}
-                >
-                  <span className="font-semibold text-navy-foreground">{row.label}</span>
-                  <span className="leading-relaxed text-navy-muted">{row.legacy}</span>
-                  <span className="leading-relaxed text-navy-foreground">{row.shyena}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      <section className="bg-[#0A1422] py-20 text-white sm:py-24"><div className="mx-auto max-w-7xl px-5 sm:px-8"><div className="grid gap-12 lg:grid-cols-[.9fr_1.1fr] lg:items-start"><div><p className="text-xs font-semibold uppercase tracking-[0.18em] text-violet-300">Evaluation model</p><h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-5xl">One verdict. Multiple independent signals.</h2><p className="mt-5 text-lg leading-8 text-slate-300">Vera does not reduce an AI agent to one LLM score. Semantic evaluation, deterministic assertions and execution integrity are evaluated together, then preserved as evidence.</p><div className="mt-8 rounded-2xl border border-white/10 bg-white/[0.04] p-5"><div className="flex flex-wrap items-center gap-2 text-sm font-medium"><span className="rounded-lg bg-white/10 px-3 py-2">Conversation</span><ChevronRight className="h-4 w-4 text-slate-500" /><span className="rounded-lg bg-white/10 px-3 py-2">Evaluation</span><ChevronRight className="h-4 w-4 text-slate-500" /><span className="rounded-lg bg-violet-500/20 px-3 py-2 text-violet-200">Evidence</span><ChevronRight className="h-4 w-4 text-slate-500" /><span className="rounded-lg bg-emerald-500/15 px-3 py-2 text-emerald-300">Verdict</span></div></div></div><div className="grid gap-3 sm:grid-cols-2">{EVALUATION_DIMENSIONS.map((dimension, i) => <div key={dimension} className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.035] p-4"><span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-violet-500/15 text-xs font-semibold text-violet-200">{i + 1}</span><span className="text-sm text-slate-200">{dimension}</span></div>)}</div></div></div></section>
 
-      {/* Roadmap */}
-      <section className="mx-auto w-full max-w-7xl px-5 pb-20 sm:px-8">
-        <div className="max-w-2xl">
-          <p className="font-mono text-xs uppercase tracking-[0.18em] text-primary">On the roadmap</p>
-          <h2 className="mt-4 text-3xl font-bold sm:text-4xl">What's coming next</h2>
-          <p className="mt-4 text-muted-foreground">
-            Test specs are hand-written today, deliberately — an agent's behavior is too important
-            to hand entirely to a generator. Here's what we're building to make writing them faster
-            without giving that up.
-          </p>
-        </div>
+      <section className="border-b border-slate-200 bg-white py-20 sm:py-24"><div className="mx-auto grid max-w-7xl gap-12 px-5 sm:px-8 lg:grid-cols-2 lg:items-center"><div><p className="text-xs font-semibold uppercase tracking-[0.18em] text-violet-700">Core assurance control</p><h2 className="mt-4 text-3xl font-semibold tracking-tight text-slate-950 sm:text-5xl">A high score cannot override a broken execution.</h2><p className="mt-5 text-lg leading-8 text-slate-600">The execution-integrity gate runs before the final quality verdict. If a conversation fails, truncates or times out, Vera preserves the diagnostic score but prevents a false green release result.</p></div><div className="rounded-2xl border border-slate-200 bg-slate-50 p-6"><div className="grid gap-3">{["Execution completed", "Semantic quality evaluated", "Deterministic assertions checked", "Integrity gate applied"].map((item, i) => <div key={item} className="flex items-center gap-3 rounded-xl border border-slate-200 bg-white p-4"><span className={`flex h-8 w-8 items-center justify-center rounded-full ${i === 3 ? "bg-red-50 text-red-600" : "bg-emerald-50 text-emerald-600"}`}>{i === 3 ? <X className="h-4 w-4" /> : <Check className="h-4 w-4" />}</span><span className="text-sm font-medium text-slate-800">{item}</span>{i === 3 && <span className="ml-auto text-xs font-bold text-red-600">FAIL</span>}</div>)}</div><div className="mt-4 rounded-xl border border-red-200 bg-red-50 p-4"><p className="text-xs font-semibold uppercase tracking-[0.14em] text-red-700">Final verdict</p><p className="mt-1 text-lg font-semibold text-red-950">Release blocked — evidence attached</p></div></div></div></section>
 
-        <div className="mt-10 grid gap-6 md:grid-cols-2">
-          {ROADMAP_CARDS.map((card) => {
-            const Icon = card.icon;
-            return (
-              <div
-                key={card.title}
-                className="rounded-xl border border-dashed border-border bg-secondary/20 p-7"
-              >
-                <div className="flex items-center justify-between">
-                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                    <Icon className="h-5 w-5" />
-                  </span>
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-2.5 py-1 text-xs font-medium text-muted-foreground">
-                    <Sparkles className="h-3 w-3 text-primary" />
-                    Coming Soon
-                  </span>
-                </div>
-                <h3 className="mt-5 text-base font-semibold">{card.title}</h3>
-                <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">
-                  {card.description}
-                </p>
-              </div>
-            );
-          })}
-        </div>
-      </section>
+      <section className="bg-slate-50 py-20 sm:py-24"><div className="mx-auto max-w-7xl px-5 sm:px-8"><div className="max-w-3xl"><p className="text-xs font-semibold uppercase tracking-[0.18em] text-violet-700">A different testing model</p><h2 className="mt-4 text-3xl font-semibold tracking-tight text-slate-950 sm:text-5xl">Agentic testing is not scripted automation with AI added.</h2><p className="mt-5 text-lg leading-8 text-slate-600">Traditional automation is optimized around known paths. AI agent testing has to account for probabilistic behavior, multi-turn context and different valid paths to the same business goal.</p></div><div className="mt-10 overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm"><table className="w-full min-w-[760px] border-collapse text-left"><thead><tr className="border-b border-slate-200 bg-slate-50 text-sm"><th className="px-6 py-4 font-semibold text-slate-500">Dimension</th><th className="px-6 py-4 font-semibold text-slate-500">Scripted automation</th><th className="px-6 py-4 font-semibold text-violet-800">Vera</th></tr></thead><tbody>{DIFFERENCES.map(([label, conventional, vera]) => <tr key={label} className="border-b border-slate-100 last:border-0"><td className="px-6 py-5 text-sm font-semibold text-slate-900">{label}</td><td className="px-6 py-5 text-sm text-slate-600">{conventional}</td><td className="px-6 py-5 text-sm font-medium text-slate-900">{vera}</td></tr>)}</tbody></table></div></div></section>
 
-      {/* Built for scale */}
-      <section className="bg-navy py-24">
-        <div className="mx-auto w-full max-w-7xl px-5 sm:px-8">
-          <div className="max-w-2xl">
-            <p className="font-mono text-xs uppercase tracking-[0.18em] text-accent">
-              Built for scale
-            </p>
-            <h2 className="mt-4 text-3xl font-bold text-navy-foreground sm:text-4xl">
-              Evaluation infrastructure that stays reliable under load.
-            </h2>
-            <p className="mt-4 text-lg leading-relaxed text-navy-muted">
-              A quality platform is only useful if it runs consistently across thousands of
-              conversations. Shyena's job architecture is designed for large regression suites
-              without overwhelming the agent under test.
-            </p>
-          </div>
+      <section className="bg-white py-20 sm:py-24"><div className="mx-auto max-w-7xl px-5 sm:px-8"><div className="max-w-3xl"><p className="text-xs font-semibold uppercase tracking-[0.18em] text-violet-700">Evidence chain</p><h2 className="mt-4 text-3xl font-semibold tracking-tight text-slate-950 sm:text-5xl">Every failure becomes an engineering artifact.</h2><p className="mt-5 text-lg leading-8 text-slate-600">A score is useful. Evidence is actionable. Vera keeps the conversation, evaluation, assertion, finding and verdict connected so engineering teams can investigate and release with context.</p></div><div className="mt-12 grid gap-3 md:grid-cols-7">{["Journey", "Conversation", "Evaluation", "Finding", "Component", "Confidence", "Verdict"].map((item, i) => <div key={item} className="flex items-center md:block"><div className="w-full rounded-xl border border-slate-200 bg-slate-50 p-4 text-center shadow-sm"><p className="text-[11px] font-bold uppercase tracking-[0.12em] text-violet-700">0{i + 1}</p><p className="mt-2 text-sm font-semibold text-slate-900">{item}</p></div>{i < 6 && <ArrowRight className="mx-2 h-4 w-4 shrink-0 text-slate-300 md:mx-auto md:my-3 md:block md:rotate-90" />}</div>)}</div></div></section>
 
-          <div className="mt-14 grid gap-6 md:grid-cols-3">
-            {SCALE_CARDS.map((card) => {
-              const Icon = card.icon;
-              return (
-                <div
-                  key={card.title}
-                  className="rounded-xl border border-navy-border bg-white/[0.03] p-6"
-                >
-                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-primary/20 text-primary">
-                    <Icon className="h-5 w-5" />
-                  </span>
-                  <h3 className="mt-5 text-base font-semibold text-navy-foreground">{card.title}</h3>
-                  <p className="mt-2.5 text-sm leading-relaxed text-navy-muted">
-                    {card.description}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+      <section className="border-y border-slate-200 bg-slate-50 py-20 sm:py-24"><div className="mx-auto max-w-7xl px-5 sm:px-8"><div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end"><div className="max-w-3xl"><p className="text-xs font-semibold uppercase tracking-[0.18em] text-violet-700">Live integration</p><h2 className="mt-4 text-3xl font-semibold tracking-tight text-slate-950 sm:text-5xl">Built for agentic AI. Live today with Cognigy.</h2><p className="mt-5 text-lg leading-8 text-slate-600">Vera can exercise Cognigy conversational and voice agents through real customer-style journeys, then apply the same AI agent testing and evaluation model to the resulting execution.</p></div><Button asChild variant="outline" size="lg" className="border-slate-300 bg-white"><Link to="/docs">View integration documentation <ArrowRight className="h-4 w-4" /></Link></Button></div></div></section>
 
-      {/* Cognigy FAQ */}
-      <section className="mx-auto w-full max-w-4xl px-5 py-24 sm:px-8">
-        <div className="max-w-2xl">
-          <p className="font-mono text-xs uppercase tracking-[0.18em] text-primary">
-            Cognigy Agent Testing FAQ
-          </p>
-          <h2 className="mt-4 text-3xl font-bold sm:text-4xl">
-            Testing &amp; evaluating Cognigy conversational agents
-          </h2>
-        </div>
-        <Accordion type="single" collapsible className="mt-10 w-full">
-          {COGNIGY_FAQS.map((faq, i) => (
-            <AccordionItem key={faq.question} value={`cognigy-faq-${i}`}>
-              <AccordionTrigger className="text-left text-base font-semibold">
-                {faq.question}
-              </AccordionTrigger>
-              <AccordionContent className="text-sm leading-relaxed text-muted-foreground">
-                {faq.answer}
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
-      </section>
+      <section className="bg-[#07111F] py-20 text-white sm:py-24"><div className="mx-auto max-w-7xl px-5 sm:px-8"><div className="max-w-3xl"><p className="text-xs font-semibold uppercase tracking-[0.18em] text-violet-300">Enterprise AI quality assurance</p><h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-5xl">Designed for governed AI delivery.</h2><p className="mt-5 text-lg leading-8 text-slate-300">Connect AI agent testing to the engineering and release process instead of leaving evaluation in a separate experiment.</p></div><div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4">{ENTERPRISE_POINTS.map((point) => { const Icon = point.icon; return <div key={point.title} className="rounded-2xl border border-white/10 bg-white/[0.04] p-6"><Icon className="h-5 w-5 text-violet-300" /><h3 className="mt-5 font-semibold">{point.title}</h3><p className="mt-2 text-sm leading-6 text-slate-400">{point.text}</p></div>; })}</div><div className="mt-10 flex flex-wrap gap-3 text-sm text-slate-400"><span className="rounded-full border border-white/10 px-3 py-1.5">AI agent regression testing</span><span className="rounded-full border border-white/10 px-3 py-1.5">Conversational AI QA</span><span className="rounded-full border border-white/10 px-3 py-1.5">LLM evaluation</span><span className="rounded-full border border-white/10 px-3 py-1.5">Release assurance</span></div></div></section>
 
+      <section className="bg-white py-20 sm:py-24"><div className="mx-auto max-w-4xl px-5 sm:px-8"><div className="max-w-3xl"><p className="text-xs font-semibold uppercase tracking-[0.18em] text-violet-700">AI agent testing FAQ</p><h2 className="mt-4 text-3xl font-semibold tracking-tight text-slate-950 sm:text-5xl">Questions teams ask before production.</h2></div><Accordion type="single" collapsible className="mt-10 w-full">{FAQS.map((faq, i) => <AccordionItem key={faq.question} value={`faq-${i}`}><AccordionTrigger className="text-left text-base font-semibold text-slate-900">{faq.question}</AccordionTrigger><AccordionContent className="text-sm leading-7 text-slate-600">{faq.answer}</AccordionContent></AccordionItem>)}</Accordion></div></section>
       <CtaBand />
-    </>
-  );
+    </main>
+  </>;
 }
