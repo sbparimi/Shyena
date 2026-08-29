@@ -1,29 +1,33 @@
 # Shyena
 
-> Shyena is an AI evaluation platform that tests AI systems before they ship. It is live today for testing and evaluating Cognigy-built conversational and voice AI agents, with RAG evaluation next. Shyena runs real, agent-driven conversations against a live Cognigy chat or voice bot, scores every turn with LLM-as-judge evaluation and deterministic assertions, and structurally prevents a broken conversation from reporting a false pass.
+> Shyena is an AI agent assurance platform for testing, evaluating and security-assessing conversational, voice and agentic AI before production. Its product architecture is Nexus (system-map intelligence, powered by CIS), Vera (quality and evaluation, powered by ECAAP), and Chakra (adversarial/security assurance).
 
-Shyena tests Cognigy agents the way a real customer would use them, not with scripted click-paths: each test case is an agentic persona with a goal and a behavioral playbook, and the executor improvises its next message based on how the Cognigy agent actually responded. Every turn is scored — by default 31 metrics per case, 117 in the full catalog including custom ones — and an execution-integrity gate caps any failed or truncated conversation at FAIL regardless of how well earlier turns scored, so a broken run can never report a green pass.
+Shyena runs agentic test journeys against supported live agent surfaces, evaluates behavior with deterministic assertions and AI evaluation, preserves runtime evidence, and turns the evidence chain into a release verdict. Product names shown publicly are Nexus, Vera and Chakra; CIS and ECAAP are underlying technology layers.
 
-Shyena also offers Ziran, a separate open-source security/red-teaming tool for LangChain, CrewAI, Bedrock, MCP, and browser/HTTPS-driven agents.
+## Products
 
-## Product
+- [Nexus](https://shyena.eu/nexus): understand the agent through structural system-map intelligence, flow discovery, conditions, orchestration and high-coverage test specification generation.
+- [Vera](https://shyena.eu/vera): evaluate conversational and voice AI using agentic execution, LLM-judged quality, deterministic checks, orchestration evaluation and release gating.
+- [Chakra](https://shyena.eu/chakra): adversarial and security assurance for agentic AI.
 
-- [Homepage](https://shyena.eu/): what Shyena is, why conversational AI needs a different testing model, and where it fits versus prompt testers, observability tools, and scripted chatbot testers.
-- [Product](https://shyena.eu/product): full capability breakdown for testing and evaluating Cognigy conversational and voice agents — agentic test personas, real conversation execution, LLM-as-judge evaluation, deterministic assertions, the execution-integrity gate, and a Cognigy-specific FAQ.
-- [Docs: Evaluation Model](https://shyena.eu/docs/evaluation-model): how Shyena's evaluation pipeline and metrics work.
-- [Security (Ziran)](https://shyena.eu/security): the separate open-source red-teaming/security tool for LangChain, CrewAI, Bedrock, MCP, and browser/HTTPS agents.
+## Platform assurance lifecycle
+
+Test → Evaluate → Attack → Prove → Verdict.
+
+Every release signal should be traceable to the underlying execution, conversation, finding, affected component and evidence.
 
 ## Pricing
 
-- [Pricing](https://shyena.eu/pricing): Starter from $750/mo, Growth from $3,500/mo, Enterprise custom-scoped. Includes a Cognigy platform-support FAQ answer.
+- [Pricing](https://shyena.eu/pricing): SaaS platform subscription with included assurance/security consumption, contracted overage rates, and separately priced professional services such as pilots, training, custom development and bespoke framework adapters.
 
 ## Company
 
-- [Services](https://shyena.eu/services): Evaluation Implementation, Managed Red-Teaming, and Ongoing Managed Program engagements.
+- [Services](https://shyena.eu/services)
 - [About](https://shyena.eu/about)
 - [Contact](https://shyena.eu/contact)
 
-## Blog
+## Resources
 
-- [Why Conversational AI Needs a Different Testing Model](https://shyena.eu/blog/why-conversational-ai-needs-a-different-testing-model)
-- [The Problem With Green Checkmarks on Broken Conversations](https://shyena.eu/blog/the-problem-with-green-checkmarks-on-broken-conversations)
+- [Documentation](https://shyena.eu/docs)
+- [Evaluation Model](https://shyena.eu/docs/evaluation-model)
+- [Blog](https://shyena.eu/blog)
