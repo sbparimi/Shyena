@@ -5,7 +5,6 @@ import {
   CheckCircle2,
   CircleAlert,
   Gauge,
-  GitBranch,
   Layers3,
   Network,
   Play,
@@ -60,79 +59,75 @@ const DIFFERENTIATORS = [
   [ShieldCheck, "Security integrated", "Quality and adversarial assurance converge into the same release workflow."],
 ] as const;
 
-function FlowPreview() {
+const COMING_SOON = [
+  ["01", "Salesforce Agentforce", "End-to-end agent testing across customer journeys, actions, orchestration and outcomes."],
+  ["02", "LangGraph multi-agent", "Evaluate multi-agent coordination, state, routing, tool use and final outcomes."],
+  ["03", "RAG pipelines", "Evaluate retrieval quality, grounding, context usage and answer behavior across RAG workflows."],
+] as const;
+
+function AssuranceVideo() {
   return (
-    <div className="overflow-hidden rounded-[28px] border border-white/10 bg-[#0d0a1c] shadow-2xl">
-      <div className="flex items-center justify-between border-b border-white/10 px-5 py-4 text-xs text-white/55">
-        <span className="flex items-center gap-2"><span className="h-2 w-2 rounded-full bg-emerald-400" /> Cognigy flow / Address Change</span>
-        <span className="font-mono">FLOW-042</span>
+    <div className="overflow-hidden rounded-[28px] border border-white/10 bg-black shadow-2xl shadow-violet-950/40">
+      <div className="flex items-center justify-between border-b border-white/10 bg-[#0d0a1c] px-5 py-4 text-xs text-white/55">
+        <span className="flex items-center gap-2">
+          <span className="h-2 w-2 rounded-full bg-emerald-400" />
+          Cognigy flow → assurance evidence
+        </span>
+        <span className="font-mono tracking-wide">NEXUS · VERA · CHAKRA</span>
       </div>
-      <div className="grid min-h-[390px] grid-cols-[1fr_0.78fr]">
-        <div className="relative overflow-hidden border-r border-white/10 p-6">
-          <div className="absolute inset-0 opacity-30 [background-image:radial-gradient(rgba(139,92,246,.35)_1px,transparent_1px)] [background-size:22px_22px]" />
-          <div className="relative flex h-full flex-col justify-center gap-3">
-            {[
-              ["START", "Customer wants to change address", "border-white/10 bg-white/[0.04]"],
-              ["INTENT", "Address Change", "border-violet-400/30 bg-violet-500/10"],
-              ["CONDITION", "Customer confirmed new address", "border-blue-400/25 bg-blue-500/10"],
-              ["TOOL", "UpdateAddress", "border-emerald-400/25 bg-emerald-500/10"],
-              ["RESPONSE", "Confirmation", "border-orange-400/25 bg-orange-500/10"],
-            ].map(([label, value, style]) => (
-              <div key={label} className={`rounded-2xl border p-3 ${style}`}>
-                <div className="text-[9px] font-mono tracking-[0.18em] text-white/40">{label}</div>
-                <div className="mt-1 text-xs font-medium text-white/85">{value}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="bg-white/[0.025] p-5">
-          <div className="text-[9px] font-mono uppercase tracking-[0.2em] text-violet-300">Nexus analysis</div>
-          <div className="mt-4 space-y-2">
-            {["17 nodes discovered", "8 decision branches", "4 tool interactions", "12 journey candidates"].map((item, i) => (
-              <div key={item} className="rounded-xl border border-white/10 bg-white/[0.035] p-3">
-                <div className="text-lg font-semibold text-white">{String(i + 1).padStart(2, "0")}</div>
-                <div className="text-[10px] text-white/45">{item}</div>
-              </div>
-            ))}
-          </div>
-          <div className="mt-4 rounded-xl border border-violet-400/20 bg-violet-500/10 p-3">
-            <div className="flex items-center gap-2 text-xs font-semibold text-violet-200"><Sparkles className="h-3.5 w-3.5" /> Assurance candidates ready</div>
-            <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-white/10"><div className="h-full w-[86%] rounded-full bg-violet-400" /></div>
-          </div>
+      <div className="relative aspect-video w-full bg-[#080711]">
+        <video
+          className="h-full w-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+          controls
+          preload="auto"
+          poster="/hero-video-poster.png"
+          aria-label="Shyena Cognigy assurance workflow"
+        >
+          <source src="/hero-video.mp4" type="video/mp4" />
+        </video>
+        <div className="pointer-events-none absolute left-5 top-5 rounded-full border border-white/10 bg-black/50 px-3 py-1.5 text-[10px] font-mono uppercase tracking-[0.18em] text-white/60 backdrop-blur">
+          SHYENA · COGNIGY ASSURANCE
         </div>
       </div>
     </div>
   );
 }
 
-function ProductVideo() {
+function ComingSoon() {
   return (
-    <section id="walkthrough" className="bg-slate-950 py-24 text-white sm:py-32">
-      <div className="mx-auto max-w-7xl px-5 sm:px-8">
+    <section className="border-y border-border bg-secondary/45">
+      <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
         <Reveal>
-          <div className="mx-auto max-w-3xl text-center">
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-1.5 text-xs font-medium text-white/65"><Play className="h-3.5 w-3.5 fill-current text-violet-300" /> Product walkthrough</div>
-            <h2 className="mt-5 text-4xl leading-tight sm:text-6xl">Watch a Cognigy flow become a release decision.</h2>
-            <p className="mt-5 text-lg leading-relaxed text-white/55">One visual workflow. Three products. One evidence chain.</p>
-          </div>
-        </Reveal>
-        <Reveal delay={100}>
-          <div className="mt-12 overflow-hidden rounded-[32px] border border-white/10 bg-black shadow-2xl shadow-violet-950/40">
-            <div className="relative aspect-video w-full bg-[#080711]">
-              <video className="h-full w-full object-cover" autoPlay muted loop playsInline controls preload="metadata" poster="/hero-video-poster.png">
-                <source src="/hero-video.mp4" type="video/mp4" />
-              </video>
-              <div className="pointer-events-none absolute left-5 top-5 rounded-full border border-white/10 bg-black/50 px-3 py-1.5 text-[10px] font-mono uppercase tracking-[0.18em] text-white/60 backdrop-blur">SHYENA · COGNIGY ASSURANCE</div>
+          <div className="flex flex-col gap-5 border-b border-border pb-8 lg:flex-row lg:items-end lg:justify-between">
+            <div className="max-w-3xl">
+              <span className="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-primary">
+                Coming soon
+              </span>
+              <h2 className="mt-4 text-3xl leading-tight sm:text-4xl">Expanding assurance beyond Cognigy.</h2>
+              <p className="mt-3 max-w-2xl text-muted-foreground">
+                The same evidence-backed evaluation approach is being extended to the agentic AI stacks teams are adopting next.
+              </p>
             </div>
           </div>
         </Reveal>
-        <div className="mt-6 grid gap-3 md:grid-cols-3">
-          {PRODUCTS.map(([Icon, name, title, body]) => (
-            <div key={name} className="rounded-2xl border border-white/10 bg-white/[0.035] p-5">
-              <div className="flex items-center gap-3"><div className="flex h-9 w-9 items-center justify-center rounded-xl bg-violet-500/10 text-violet-300"><Icon className="h-4 w-4" /></div><span className="font-mono text-[10px] tracking-[0.18em] text-violet-300">{name}</span></div>
-              <div className="mt-4 text-base font-semibold">{title}</div>
-              <p className="mt-2 text-sm leading-relaxed text-white/45">{body}</p>
-            </div>
+        <div className="mt-8 grid gap-4 md:grid-cols-3">
+          {COMING_SOON.map(([number, title, body]) => (
+            <Reveal key={number}>
+              <div className="h-full rounded-2xl border border-border bg-card p-6 shadow-card">
+                <div className="flex items-center justify-between">
+                  <span className="font-mono text-xs text-primary/55">{number}</span>
+                  <span className="rounded-full border border-border bg-secondary px-2.5 py-1 text-[9px] font-semibold uppercase tracking-wider text-muted-foreground">
+                    Coming soon
+                  </span>
+                </div>
+                <h3 className="mt-6 text-xl">{title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{body}</p>
+              </div>
+            </Reveal>
           ))}
         </div>
       </div>
@@ -147,12 +142,12 @@ function Index() {
         <div className="pointer-events-none absolute inset-0 opacity-35 [background-image:linear-gradient(rgba(139,92,246,.08)_1px,transparent_1px),linear-gradient(90deg,rgba(139,92,246,.08)_1px,transparent_1px)] [background-size:64px_64px]" />
         <div className="pointer-events-none absolute -left-40 top-10 h-[560px] w-[560px] rounded-full bg-violet-700/20 blur-3xl" />
         <div className="pointer-events-none absolute right-0 top-0 h-[520px] w-[520px] rounded-full bg-fuchsia-700/10 blur-3xl" />
-        <div className="relative mx-auto max-w-7xl px-5 pb-20 pt-14 sm:px-8 sm:pb-28 sm:pt-20">
+        <div className="relative mx-auto max-w-7xl px-5 pb-16 pt-14 sm:px-8 sm:pb-20 sm:pt-20">
           <div className="mb-10 flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-5 text-xs text-white/50">
             <div className="flex items-center gap-2"><span className="h-2 w-2 rounded-full bg-emerald-400" /> AI agent assurance <span className="text-white/15">/</span> Cognigy flow testing</div>
             <span className="font-mono tracking-wide">NEXUS · VERA · CHAKRA</span>
           </div>
-          <div className="grid items-center gap-12 lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="grid items-center gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:gap-12">
             <Reveal>
               <div className="max-w-3xl">
                 <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-1.5 text-xs font-medium text-white/60"><Sparkles className="h-3.5 w-3.5 text-violet-300" /> End-to-end assurance for Cognigy agents</span>
@@ -162,7 +157,12 @@ function Index() {
                 <div className="mt-9 flex flex-wrap gap-x-7 gap-y-2 text-xs text-white/40"><span>Flow-aware testing</span><span>Real conversations</span><span>Semantic + deterministic</span><span>Security assurance</span></div>
               </div>
             </Reveal>
-            <Reveal delay={120}><FlowPreview /></Reveal>
+            <Reveal delay={120}>
+              <div id="walkthrough">
+                <AssuranceVideo />
+                <div className="mt-3 text-center text-[10px] uppercase tracking-[0.18em] text-white/35">The walkthrough starts with the Cognigy flow and follows the assurance chain</div>
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -178,7 +178,7 @@ function Index() {
         </div>
       </section>
 
-      <ProductVideo />
+      <ComingSoon />
 
       <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
         <Reveal>
