@@ -29,8 +29,6 @@ export const Route = createFileRoute("/contact")({
   component: ContactPage,
 });
 
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/mljrpeep";
-
 const NEXT_STEPS = [
   {
     icon: Clock,
@@ -59,21 +57,28 @@ function ContactPage() {
     const formData = new FormData(form);
 
     try {
-      const response = await fetch(FORMSPREE_ENDPOINT, {
+      const response = await fetch("/api/contact", {
         method: "POST",
-        body: formData,
-        headers: { Accept: "application/json" },
+        body: JSON.stringify({
+          name: formData.get("name"),
+          email: formData.get("email"),
+          company: formData.get("company"),
+          companySize: formData.get("companySize"),
+          message: formData.get("message"),
+        }),
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
       });
-      if (response.ok) {
-        setStatus("success");
-        form.reset();
-        // Fires once Plausible is actually configured (see __root.tsx); no-op until then.
-        (window as unknown as { plausible?: (event: string) => void }).plausible?.(
-          "Demo Request Submitted",
-        );
-      } else {
+
+      if (!response.ok) {
         setStatus("error");
+        return;
       }
+
+      setStatus("success");
+      form.reset();
+      (window as unknown as { plausible?: (event: string) => void }).plausible?.(
+        "Demo Request Submitted",
+      );
     } catch {
       setStatus("error");
     }
@@ -97,7 +102,6 @@ function ContactPage() {
 
       <section className="mx-auto w-full max-w-7xl px-5 pb-28 sm:px-8">
         <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
-          {/* Form */}
           <div className="rounded-2xl border border-border bg-card p-7 shadow-card sm:p-9">
             {status === "success" ? (
               <div className="flex flex-col items-center py-12 text-center">
@@ -168,7 +172,6 @@ function ContactPage() {
             )}
           </div>
 
-          {/* Info panel */}
           <div>
             <h2 className="text-xl font-bold">What happens next</h2>
             <div className="mt-6 space-y-6">
