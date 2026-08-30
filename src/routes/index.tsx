@@ -59,10 +59,19 @@ const DIFFERENTIATORS = [
   [ShieldCheck, "Security integrated", "Quality and adversarial assurance converge into the same release workflow."],
 ] as const;
 
-const COMING_SOON = [
-  ["01", "Salesforce Agentforce", "End-to-end agent testing across customer journeys, actions, orchestration and outcomes."],
-  ["02", "LangGraph multi-agent", "Evaluate multi-agent coordination, state, routing, tool use and final outcomes."],
-  ["03", "RAG pipelines", "Evaluate retrieval quality, grounding, context usage and answer behavior across RAG workflows."],
+const ASSURANCE_SKILLS = [
+  ["01", "DeepEval", "Open-source evaluation framework", "Customer-specific assurance skill built around your journeys, business rules, thresholds and release evidence."],
+  ["02", "Promptfoo", "Open-source eval + red-team framework", "Customer-specific assurance skill that turns your application context and risk model into focused evaluation coverage."],
+  ["03", "Confident AI", "Managed evaluation platform", "Customer-specific assurance skill that connects existing evaluation workflows to Shyena's release-assurance model."],
+] as const;
+
+const ASSURANCE_COMPARISON = [
+  ["DeepEval", "LLM / agent / RAG evaluation", "Strong metrics, traces and test execution", "Customer-specific journey model, risk prioritization, release tags and evidence chain", "Open source"],
+  ["Promptfoo", "LLM evaluation + red teaming", "Broad evals, assertions and adversarial probes", "Flow-aware assurance, risk-ranked coverage and release decision context", "Open source / free community"],
+  ["Confident AI", "Evaluation + observability", "Managed eval workflows, tracing and regression testing", "Customer-specific assurance operating model across business journeys and release gates", "Free tier + paid"],
+  ["Phoenix / Arize", "Tracing + evaluation + experimentation", "Open-source observability, traces, evals and experiments", "System-level assurance context, journey prioritization and release governance", "Open source / commercial"],
+  ["LangSmith", "Tracing + offline / online evaluation", "Datasets, evaluators, experiments, monitoring and agent evaluation", "Cognigy-aware assurance workflow with risk, coverage, evidence and release verdicts", "Free tier + paid"],
+  ["Shyena", "Enterprise AI assurance", "Nexus + Vera + Chakra across one assurance chain", "Understands the system, identifies journeys, prioritizes risk, executes tests, evaluates behavior, probes security and produces release evidence", "Enterprise platform"],
 ] as const;
 
 function AssuranceVideo() {
@@ -101,34 +110,74 @@ function ComingSoon() {
     <section className="border-y border-border bg-secondary/45">
       <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
         <Reveal>
-          <div className="flex flex-col gap-5 border-b border-border pb-8 lg:flex-row lg:items-end lg:justify-between">
-            <div className="max-w-3xl">
-              <span className="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-primary">
-                Coming soon
-              </span>
-              <h2 className="mt-4 text-3xl leading-tight sm:text-4xl">Expanding assurance beyond Cognigy.</h2>
-              <p className="mt-3 max-w-2xl text-muted-foreground">
-                The same evidence-backed evaluation approach is being extended to the agentic AI stacks teams are adopting next.
-              </p>
-            </div>
+          <div className="max-w-4xl">
+            <span className="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-primary">
+              Coming soon · Customer assurance skills
+            </span>
+            <h2 className="mt-4 text-3xl leading-tight sm:text-5xl">
+              Keep the tools you already use. <span className="text-gradient-brand">Upgrade what they prove.</span>
+            </h2>
+            <p className="mt-4 max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+              DeepEval, Promptfoo, Confident AI, Phoenix and LangSmith are powerful evaluation building blocks. Shyena is designed to add the missing enterprise assurance layer: customer-specific journeys, system context, risk prioritization, release coverage and evidence-backed decisions.
+            </p>
           </div>
         </Reveal>
-        <div className="mt-8 grid gap-4 md:grid-cols-3">
-          {COMING_SOON.map(([number, title, body]) => (
+
+        <div className="mt-10 grid gap-4 md:grid-cols-3">
+          {ASSURANCE_SKILLS.map(([number, title, subtitle, body]) => (
             <Reveal key={number}>
-              <div className="h-full rounded-2xl border border-border bg-card p-6 shadow-card">
+              <div className="h-full rounded-2xl border border-border bg-card p-6 shadow-card transition hover:-translate-y-1 hover:border-primary/30 hover:shadow-elevated">
                 <div className="flex items-center justify-between">
                   <span className="font-mono text-xs text-primary/55">{number}</span>
-                  <span className="rounded-full border border-border bg-secondary px-2.5 py-1 text-[9px] font-semibold uppercase tracking-wider text-muted-foreground">
-                    Coming soon
-                  </span>
+                  <span className="rounded-full border border-border bg-secondary px-2.5 py-1 text-[9px] font-semibold uppercase tracking-wider text-muted-foreground">Coming soon</span>
                 </div>
                 <h3 className="mt-6 text-xl">{title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{body}</p>
+                <div className="mt-1 text-xs font-medium text-primary">{subtitle}</div>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{body}</p>
               </div>
             </Reveal>
           ))}
         </div>
+
+        <Reveal delay={80}>
+          <div className="mt-10 overflow-hidden rounded-2xl border border-border bg-card shadow-elevated">
+            <div className="border-b border-border bg-secondary/60 px-5 py-5 sm:px-7">
+              <div className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">The assurance layer</div>
+              <h3 className="mt-2 text-2xl sm:text-3xl">Generic evaluation is useful. Customer-specific assurance is the differentiator.</h3>
+              <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+                Shyena does not need to replace your evaluation stack. It can sit above it, use its signals, and turn them into an assurance model tied to how your AI system actually operates and what your business is willing to release.
+              </p>
+            </div>
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[980px] border-collapse text-left text-sm">
+                <thead>
+                  <tr className="border-b border-border bg-background">
+                    <th className="px-5 py-4 font-semibold">Platform</th>
+                    <th className="px-5 py-4 font-semibold">Primary role</th>
+                    <th className="px-5 py-4 font-semibold">Core strength</th>
+                    <th className="px-5 py-4 font-semibold text-primary">Shyena assurance extension</th>
+                    <th className="px-5 py-4 font-semibold">Commercial model</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {ASSURANCE_COMPARISON.map(([tool, role, strength, extension, model]) => (
+                    <tr key={tool} className={tool === "Shyena" ? "border-b border-primary/20 bg-primary/[0.06]" : "border-b border-border"}>
+                      <td className="px-5 py-4 font-semibold whitespace-nowrap">{tool}</td>
+                      <td className="px-5 py-4 text-muted-foreground">{role}</td>
+                      <td className="px-5 py-4 text-muted-foreground">{strength}</td>
+                      <td className="px-5 py-4 font-medium">{extension}</td>
+                      <td className="px-5 py-4 text-muted-foreground whitespace-nowrap">{model}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </Reveal>
+
+        <p className="mt-5 text-[11px] leading-relaxed text-muted-foreground/75">
+          Positioning note: the comparison describes primary product orientation, not a claim that the listed platforms cannot be customized. Shyena's differentiator is the assurance model and its connection of system understanding, risk, execution, evaluation, security and release evidence.
+        </p>
       </div>
     </section>
   );
