@@ -82,7 +82,6 @@ function AssuranceVideo() {
           muted
           loop
           playsInline
-          controls
           preload="auto"
           poster="/hero-video-poster.png"
           aria-label="Shyena Cognigy assurance workflow"
