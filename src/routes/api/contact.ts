@@ -38,17 +38,26 @@ export const Route = createFileRoute("/api/contact")({
         const message = cleanText(input.message, MAX_MESSAGE_LENGTH);
 
         if (!name || !email || !company || !message) {
-          return Response.json({ error: "Name, email, company, and message are required" }, { status: 400 });
+          return Response.json(
+            { error: "Name, email, company, and message are required" },
+            { status: 400 },
+          );
         }
 
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-          return Response.json({ error: "Please provide a valid email address" }, { status: 400 });
+          return Response.json(
+            { error: "Please provide a valid email address" },
+            { status: 400 },
+          );
         }
 
         const resendApiKey = process.env["RESEND_API_KEY"];
         if (!resendApiKey) {
           console.error("RESEND_API_KEY is not configured");
-          return Response.json({ error: "Email service is not configured" }, { status: 500 });
+          return Response.json(
+            { error: "Email service is not configured" },
+            { status: 500 },
+          );
         }
 
         const safeName = escapeHtml(name);
@@ -87,7 +96,10 @@ export const Route = createFileRoute("/api/contact")({
         if (!resendResponse.ok) {
           const errorBody = await resendResponse.text();
           console.error("Resend API error", resendResponse.status, errorBody);
-          return Response.json({ error: "Unable to send your message" }, { status: 502 });
+          return Response.json(
+            { error: "Unable to send your message" },
+            { status: 502 },
+          );
         }
 
         const result = (await resendResponse.json()) as { id?: string };
