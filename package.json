@@ -5,12 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite dev",
-    "build": "node scripts/generate-content.mjs && vite build",
-    "build:dev": "node scripts/generate-content.mjs && vite build --mode development",
+    "build": "node scripts/generate-public-content.mjs && vite build",
+    "build:dev": "node scripts/generate-public-content.mjs && vite build --mode development",
     "preview": "vite preview",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "content:generate": "node scripts/generate-content.mjs",
+    "content:generate": "node scripts/generate-public-content.mjs",
     "content:validate": "node scripts/validate-public-content.mjs"
   },
   "dependencies": {
