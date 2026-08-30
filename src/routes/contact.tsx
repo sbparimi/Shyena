@@ -19,7 +19,8 @@ export const Route = createFileRoute("/contact")({
       { title: "Contact & Demo — Shyena" },
       {
         name: "description",
-        content: "Book a demo and watch Shyena evaluate a real conversation against your own agent.",
+        content:
+          "Book a demo and watch Shyena evaluate a real conversation against your own agent.",
       },
       { property: "og:title", content: "Contact & Demo — Shyena" },
       { property: "og:description", content: "Book a demo of Shyena for your AI team." },
@@ -43,7 +44,8 @@ const NEXT_STEPS = [
   {
     icon: Sparkles,
     title: "A pilot against your real agent",
-    description: "We run one real scenario against your live agent and show you the actual verdict.",
+    description:
+      "We run one real scenario against your live agent and show you the actual verdict.",
   },
 ];
 
@@ -66,7 +68,10 @@ function ContactPage() {
           companySize: formData.get("companySize"),
           message: formData.get("message"),
         }),
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
       });
 
       if (!response.ok) {
@@ -125,7 +130,13 @@ function ContactPage() {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="email">Work email</Label>
-                    <Input id="email" name="email" type="email" required placeholder="jane@company.com" />
+                    <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      required
+                      placeholder="jane@company.com"
+                    />
                   </div>
                 </div>
                 <div className="grid gap-5 sm:grid-cols-2">
@@ -165,7 +176,12 @@ function ContactPage() {
                   </p>
                 )}
 
-                <Button type="submit" size="lg" className="w-full" disabled={status === "submitting"}>
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="w-full"
+                  disabled={status === "submitting"}
+                >
                   {status === "submitting" ? "Sending…" : "Request a Demo"}
                 </Button>
               </form>
