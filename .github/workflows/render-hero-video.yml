@@ -1,12 +1,7 @@
 name: Render Hero Video
 
-# Vercel's build image (Amazon Linux 2023) can't launch headless Chrome --
-# it's missing shared libraries (libnspr4 and friends) that Chrome needs at
-# runtime, and the Vercel build sandbox has no root access to install them.
-# ubuntu-latest runners ship Chrome preinstalled, so its full dependency set
-# is already satisfied here. This workflow renders the branded Remotion
-# video and commits it as a normal static asset -- Vercel then just serves
-# it, no rendering at deploy time.
+# Render the branded Remotion video on GitHub Actions and commit the static
+# result. Vercel only serves the resulting MP4 and does not render video.
 
 on:
   workflow_dispatch: {}
@@ -15,6 +10,7 @@ on:
     paths:
       - "remotion/src/**"
       - "remotion/public/**"
+      - "remotion/scripts/**"
 
 permissions:
   contents: write
@@ -39,7 +35,11 @@ jobs:
             libxkbcommon0 libxcomposite1 libxdamage1 libxfixes3 \
             libxrandr2 libgbm1 libasound2t64 || true
 
-      - name: Render branded hero video
+      - name: Generate original Shyena soundtrack
+        working-directory: remotion
+        run: node scripts/generate-soundtrack.mjs
+
+      - name: Render branded hero video with soundtrack
         working-directory: remotion
         run: node scripts/render-remotion.mjs
 
@@ -51,6 +51,6 @@ jobs:
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "Render branded hero video via Remotion (automated)"
+            git commit -m "Render branded hero video with original soundtrack (automated)"
             git push
           fi
