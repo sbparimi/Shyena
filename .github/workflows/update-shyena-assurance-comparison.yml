@@ -57,9 +57,7 @@ jobs:
                       <p className="mt-4 max-w-4xl text-base leading-relaxed text-muted-foreground sm:text-lg">DeepEval, Promptfoo, Confident AI, Phoenix and LangSmith are powerful evaluation and observability building blocks. Shyena goes one level higher: it connects system understanding, browser execution, YAML-defined assurance contracts, deterministic checks, LLM judging, orchestration evidence, API/tool evidence, security findings and release governance into one customer-specific assurance decision.</p>
                     </div>
                   </Reveal>
-                  <div className="mt-10 grid gap-4 md:grid-cols-3">
-                    {ASSURANCE_SKILLS.map(([number, title, subtitle, body]) => <Reveal key={number}><div className="h-full rounded-2xl border border-border bg-card p-6 shadow-card transition hover:-translate-y-1 hover:border-primary/30 hover:shadow-elevated"><div className="flex items-center justify-between"><span className="font-mono text-xs text-primary/55">{number}</span><span className="rounded-full border border-primary/20 bg-primary/10 px-2.5 py-1 text-[9px] font-semibold uppercase tracking-wider text-primary">Coming soon</span></div><h3 className="mt-6 text-xl">{title}</h3><div className="mt-1 text-xs font-medium text-primary">{subtitle}</div><p className="mt-3 text-sm leading-relaxed text-muted-foreground">{body}</p></div></Reveal>)}
-                  </div>
+                  <div className="mt-10 grid gap-4 md:grid-cols-3">{ASSURANCE_SKILLS.map(([number, title, subtitle, body]) => <Reveal key={number}><div className="h-full rounded-2xl border border-border bg-card p-6 shadow-card transition hover:-translate-y-1 hover:border-primary/30 hover:shadow-elevated"><div className="flex items-center justify-between"><span className="font-mono text-xs text-primary/55">{number}</span><span className="rounded-full border border-primary/20 bg-primary/10 px-2.5 py-1 text-[9px] font-semibold uppercase tracking-wider text-primary">Coming soon</span></div><h3 className="mt-6 text-xl">{title}</h3><div className="mt-1 text-xs font-medium text-primary">{subtitle}</div><p className="mt-3 text-sm leading-relaxed text-muted-foreground">{body}</p></div></Reveal>)}</div>
                   <Reveal delay={80}>
                     <div className="mt-10 overflow-hidden rounded-[28px] border border-primary/20 bg-card shadow-elevated">
                       <div className="border-b border-border bg-gradient-to-r from-primary/[0.10] via-secondary/60 to-background px-5 py-7 sm:px-8"><div className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">The assurance layer</div><h3 className="mt-2 max-w-4xl text-2xl leading-tight sm:text-4xl">Others help you evaluate an AI application. Shyena builds the evidence needed to release the AI system.</h3><p className="mt-3 max-w-4xl text-sm leading-relaxed text-muted-foreground sm:text-base">The distinction is not whether another platform can run a metric, trace a call or execute an evaluator. Several can. The distinction is what the evaluation is anchored to — and whether the result becomes an actionable, auditable release decision for a real customer journey.</p></div>
@@ -78,12 +76,6 @@ jobs:
           }'''
           text = text[:start] + coming + text[end:]
           path.write_text(text)
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Verify build
-        run: npm run build
-
       - name: Commit homepage update and remove one-time workflow
         shell: bash
         run: |
