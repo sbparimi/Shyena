@@ -13,7 +13,7 @@
 :root {
   --radius:.9rem; --background:#0a071d; --foreground:#faf8ff; --card:#15102d; --card-foreground:#faf8ff; --popover:#15102d; --popover-foreground:#faf8ff; --primary:#7c3aed; --primary-foreground:#faf8ff; --secondary:#15102d; --secondary-foreground:#faf8ff; --muted:#15102d; --muted-foreground:#c9c4d8; --accent:#a855f7; --accent-foreground:#faf8ff; --destructive:#ef4444; --destructive-foreground:#faf8ff; --border:#2b2350; --input:#514778; --ring:#a855f7; --navy:#0a071d; --navy-foreground:#faf8ff; --navy-muted:#918aa8; --navy-border:#2b2350; --purple:#7c3aed; --purple-foreground:#faf8ff; --lavender:#a855f7; --lavender-foreground:#faf8ff; --success:#34d399; --warning:#f59804; --gradient-primary:linear-gradient(135deg,#a855f7 0%,#7c3aed 100%); --gradient-navy:radial-gradient(120% 120% at 10% 0%,#15102d 0%,#0a071d 58%); --shadow-card:0 1px 2px rgba(0,0,0,.24),0 18px 40px -24px rgba(0,0,0,.5); --shadow-elevated:0 28px 70px -34px rgba(124,58,237,.45); --font-display:"Inter",ui-sans-serif,system-ui,sans-serif; --font-body:"Inter",ui-sans-serif,system-ui,sans-serif; --font-mono:"JetBrains Mono",ui-monospace,SFMono-Regular,monospace;
 }
-.dark { --background:#0a071d; --foreground:#faf8ff; --card:#15102d; --card-foreground:#faf8ff; --popover:#15102d; --popover-foreground:#faf8ff; --primary:#7c3aed; --primary-foreground:#faf8ff; --secondary:#15102d; --secondary-foreground:#faf8ff; --muted:#15102d; --muted-foreground:#c9c4d8; --accent:#a855f7; --accent-foreground:#faf8ff; --destructive:#ef4444; --destructive-foreground:#faf8ff; --border:#2b2350; --input:#514778; --ring:#a855f7; }
+.dark { --background:#0a071d; --foreground:#faf8ff; --card:#15102d; --card-foreground:#faf8ff; --popover:#15102d; --popover-foreground:#faf8ff; --muted:#15102d; --muted-foreground:#c9c4d8; --accent:#a855f7; --accent-foreground:#faf8ff; --destructive:#ef4444; --destructive-foreground:#faf8ff; --border:#2b2350; --input:#514778; --ring:#a855f7; }
 
 @layer base {
   * { border-color:var(--color-border); }
@@ -24,12 +24,12 @@
   ::selection { background:rgba(168,85,247,.28); color:#faf8ff; }
 }
 
-/* Corporate typography system. Inter is the single primary website font. JetBrains Mono is reserved for technical labels, metrics and section kickers. */
+/* Corporate design system: Inter for product communication, JetBrains Mono for technical section labels. */
 .section-title,.section-header,.section-kicker {
   color:#F59804 !important;
   font-family:var(--font-mono) !important;
-  font-weight:600 !important;
-  letter-spacing:.14em !important;
+  font-weight:500 !important;
+  letter-spacing:.22em !important;
   text-transform:uppercase !important;
 }
 
@@ -43,23 +43,24 @@ section h1,section h2,section h3,section h4,section h5,section h6 {
   -webkit-text-fill-color:#faf8ff !important;
 }
 
-/* Preserve the intentional brand gradient only where the component explicitly asks for it. */
 section h1 .text-gradient-brand,section h2 .text-gradient-brand,section h3 .text-gradient-brand {
   background:linear-gradient(135deg,#b66cff 0%,#7c3aed 100%) !important;
   -webkit-background-clip:text !important;
   background-clip:text !important;
   color:transparent !important;
   -webkit-text-fill-color:transparent !important;
+  white-space:normal !important;
+  overflow-wrap:normal !important;
+  word-break:normal !important;
 }
 
-/* Orange section labels used as the visual reference treatment. */
 section .text-xs.font-semibold.uppercase.tracking-\[0\.2em\],
 section .text-xs.font-semibold.uppercase.tracking-\[0\.18em\],
 section .text-xs.font-semibold.uppercase.tracking-widest {
   color:#F59804 !important;
   font-family:var(--font-mono) !important;
-  font-weight:600 !important;
-  letter-spacing:.14em !important;
+  font-weight:500 !important;
+  letter-spacing:.22em !important;
 }
 
 .bg-white,.bg-slate-50,.bg-slate-100,.bg-gray-50,.bg-gray-100,.bg-violet-50,.bg-purple-50 { background-color:#15102d !important; }
@@ -77,23 +78,27 @@ section .text-xs.font-semibold.uppercase.tracking-widest {
 @utility bg-grid { background-image:linear-gradient(to right,rgba(43,35,80,.62) 1px,transparent 1px),linear-gradient(to bottom,rgba(43,35,80,.62) 1px,transparent 1px); background-size:44px 44px; mask-image:radial-gradient(ellipse 72% 68% at 50% 0%,black 35%,transparent 100%); -webkit-mask-image:radial-gradient(ellipse 72% 68% at 50% 0%,black 35%,transparent 100%); }
 @utility bg-mesh { background-image:radial-gradient(45% 55% at 20% 8%,rgba(168,85,247,.22) 0%,transparent 72%),radial-gradient(48% 55% at 82% 4%,rgba(124,58,237,.22) 0%,transparent 72%),radial-gradient(55% 60% at 50% 100%,rgba(168,85,247,.12) 0%,transparent 72%); animation:mesh-drift 18s ease-in-out infinite alternate; }
 
-/* Hero: balanced corporate hierarchy and substantially larger product visual. */
-main > section:first-child > div.relative > div.grid.items-center {
-  grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr) !important;
+/* Shared hero layout. The grid is explicit so text can never occupy the visual region of the adjacent component. */
+main > section:first-child .grid.items-center {
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
   align-items:center !important;
   gap:clamp(2.5rem,5vw,5rem) !important;
 }
 
 main > section:first-child h1 {
   max-width:720px !important;
-  font-size:clamp(3.2rem,5.4vw,5.8rem) !important;
-  line-height:1.02 !important;
+  font-size:clamp(3.1rem,5vw,5.2rem) !important;
+  line-height:1.03 !important;
   letter-spacing:-.045em !important;
   font-weight:600 !important;
   margin-top:1.75rem !important;
+  overflow-wrap:normal !important;
+  word-break:normal !important;
 }
 
-main > section:first-child h1 .text-gradient-brand { white-space:nowrap; }
+main > section:first-child h1 .text-gradient-brand {
+  white-space:normal !important;
+}
 
 main > section:first-child .aspect-video {
   width:100% !important;
@@ -111,19 +116,32 @@ main > section:first-child video {
 }
 
 main > section:first-child .aspect-video + div { display:block; }
-main > section:first-child p { max-width:680px; font-size:clamp(1rem,1.35vw,1.18rem); line-height:1.7; }
+main > section:first-child p { max-width:680px; font-size:clamp(1rem,1.3vw,1.18rem); line-height:1.7; }
 main > section:first-child video + div { border-color:rgba(255,255,255,.08) !important; background:rgba(5,4,13,.62) !important; backdrop-filter:blur(12px); }
 
+/* Nexus specifically keeps the business-rule headline and explanatory copy in independent columns. */
+.shyena-hero > div.relative > div.grid.items-center {
+  grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr) !important;
+  gap:clamp(3rem,5vw,5rem) !important;
+}
+.shyena-hero h1 { max-width:700px !important; }
+.shyena-hero h1 .text-gradient-brand { display:block; }
+.shyena-hero p { max-width:590px !important; }
+
 @media (max-width:1100px) and (min-width:768px) {
-  main > section:first-child > div.relative > div.grid.items-center { grid-template-columns:1fr !important; }
+  main > section:first-child .grid.items-center { grid-template-columns:1fr !important; }
   main > section:first-child h1 { max-width:850px !important; }
   main > section:first-child .aspect-video { max-width:900px; margin-inline:auto; }
+  .shyena-hero > div.relative > div.grid.items-center { grid-template-columns:1fr !important; }
+  .shyena-hero h1 { max-width:850px !important; }
+  .shyena-hero p { max-width:760px !important; }
 }
 
 @media (max-width:767px) {
-  main > section:first-child h1 { font-size:clamp(2.7rem,11vw,4rem) !important; line-height:1.02 !important; }
-  main > section:first-child h1 .text-gradient-brand { white-space:normal; }
+  main > section:first-child h1 { font-size:clamp(2.7rem,11vw,4rem) !important; line-height:1.04 !important; }
   main > section:first-child .aspect-video { border-radius:18px !important; }
+  .shyena-hero h1 { font-size:clamp(2.7rem,11vw,4rem) !important; line-height:1.04 !important; }
+  .shyena-hero h1 .text-gradient-brand { white-space:normal !important; }
 }
 
 @keyframes mesh-drift { 0% { background-position:0% 0%,0% 0%,0% 0%; } 100% { background-position:3% 4%,-3% 3%,2% -3%; } }
