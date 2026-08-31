@@ -114,12 +114,38 @@ export function VideoExperience() {
   useEffect(() => {
     const handleFullscreen = () => {
       const active = document.fullscreenElement;
-      const isFullscreen = active instanceof HTMLElement && active.classList.contains("shyena-video-player");
+      const player = active instanceof HTMLElement && active.classList.contains("shyena-video-player") ? active : null;
+      const isFullscreen = Boolean(player);
       setFullscreen(isFullscreen);
 
+      if (player) {
+        player.style.width = "100vw";
+        player.style.height = "100vh";
+        player.style.maxWidth = "none";
+        player.style.maxHeight = "none";
+        player.style.aspectRatio = "auto";
+        player.style.borderRadius = "0";
+        player.style.background = "#05040d";
+      }
+
       if (video) {
+        video.style.width = "100%";
+        video.style.height = "100%";
         video.style.objectFit = isFullscreen ? "contain" : "cover";
         video.style.objectPosition = "center center";
+      }
+
+      if (!isFullscreen) {
+        const parent = video?.parentElement;
+        if (parent) {
+          parent.style.width = "";
+          parent.style.height = "";
+          parent.style.maxWidth = "";
+          parent.style.maxHeight = "";
+          parent.style.aspectRatio = "";
+          parent.style.borderRadius = "";
+          parent.style.background = "";
+        }
       }
     };
 
@@ -192,6 +218,8 @@ export function VideoExperience() {
       if (document.fullscreenElement) {
         await document.exitFullscreen();
       } else {
+        // Set the framing before entering fullscreen so there is no cropped frame.
+        video.style.objectFit = "contain";
         await target.requestFullscreen();
       }
     } catch {
