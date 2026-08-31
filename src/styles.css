@@ -7,7 +7,7 @@
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px); --radius-md: calc(var(--radius) - 2px); --radius-lg: var(--radius); --radius-xl: calc(var(--radius) + 4px); --radius-2xl: calc(var(--radius) + 8px); --radius-3xl: calc(var(--radius) + 12px); --radius-4xl: calc(var(--radius) + 16px);
-  --color-background: var(--background); --color-foreground: var(--foreground); --color-card: var(--card); --color-card-foreground: var(--card-foreground); --color-popover: var(--popover); --color-popover-foreground: var(--popover-foreground); --color-primary: var(--primary); --color-primary-foreground: var(--primary-foreground); --color-secondary: var(--secondary); --color-secondary-foreground: var(--secondary-foreground); --color-muted: var(--muted); --color-muted-foreground: var(--muted-foreground); --color-accent: var(--accent); --color-accent-foreground: var(--accent-foreground); --color-destructive: var(--destructive); --color-destructive-foreground: var(--destructive-foreground); --color-border: var(--border); --color-input: var(--input); --color-ring: var(--ring); --color-navy: var(--navy); --color-navy-foreground: var(--navy-foreground); --color-navy-muted: var(--navy-muted); --color-navy-border: var(--navy-border); --color-purple: var(--purple); --color-lavender: var(--lavender); --color-lavender-foreground: var(--lavender-foreground); --color-success: var(--success); --color-warning: var(--warning); --font-display: var(--font-display); --font-body: var(--font-body); --font-mono: var(--font-mono); --shadow-card: var(--shadow-card); --shadow-elevated: var(--shadow-elevated);
+  --color-background: var(--background); --color-foreground: var(--foreground); --color-card: var(--card); --color-card-foreground: var(--card-foreground); --color-popover: var(--popover); --color-popover-foreground: var(--popover-foreground); --color-secondary: var(--secondary); --color-secondary-foreground: var(--secondary-foreground); --color-muted: var(--muted); --color-muted-foreground: var(--muted-foreground); --color-accent: var(--accent); --color-accent-foreground: var(--accent-foreground); --color-destructive: var(--destructive); --color-destructive-foreground: var(--destructive-foreground); --color-border: var(--border); --color-input: var(--input); --color-ring: var(--ring); --color-navy: var(--navy); --color-navy-foreground: var(--navy-foreground); --color-navy-muted: var(--navy-muted); --color-navy-border: var(--navy-border); --color-purple: var(--purple); --color-lavender: var(--lavender); --color-lavender-foreground: var(--lavender-foreground); --color-success: var(--success); --color-warning: var(--warning); --font-display: var(--font-display); --font-body: var(--font-body); --font-mono: var(--font-mono); --shadow-card: var(--shadow-card); --shadow-elevated: var(--shadow-elevated);
 }
 
 :root {
@@ -107,6 +107,8 @@ main > section:first-child:has(video[poster="/hero-video-poster.png"]) video + d
 
 @keyframes mesh-drift { 0% { background-position:0% 0%,0% 0%,0% 0%; } 100% { background-position:3% 4%,-3% 3%,2% -3%; } }
 @keyframes reveal-up { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
-[data-reveal="hidden"] { opacity:0; transform:translateY(16px); }
+
+/* Reveal is progressive enhancement only. Content must remain visible if IntersectionObserver/JS is delayed, blocked, or fails. */
+[data-reveal="hidden"] { opacity:1; transform:none; }
 [data-reveal="shown"] { animation:reveal-up .6s cubic-bezier(.16,1,.3,1) forwards; }
-@media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } .bg-mesh { animation:none; } [data-reveal="hidden"] { opacity:1; transform:none; } [data-reveal="shown"] { animation:none; } }
+@media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } .bg-mesh { animation:none; } [data-reveal="hidden"], [data-reveal="shown"] { opacity:1; transform:none; animation:none; } }
