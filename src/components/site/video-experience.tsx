@@ -6,8 +6,6 @@ import {
   Music2,
   Pause,
   Play,
-  Volume2,
-  VolumeX,
 } from "lucide-react";
 
 const VIDEO_SELECTOR = 'video[aria-label="Shyena Cognigy assurance workflow"]';
@@ -26,10 +24,8 @@ export function VideoExperience() {
   const [playing, setPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [volume, setVolume] = useState(0);
   const [musicEnabled, setMusicEnabled] = useState(false);
   const [fullscreen, setFullscreen] = useState(false);
-  const lastVolumeRef = useRef(0.7);
   const musicRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
@@ -44,8 +40,6 @@ export function VideoExperience() {
       setPlaying(!found.paused);
       setCurrentTime(found.currentTime || 0);
       setDuration(Number.isFinite(found.duration) ? found.duration : 0);
-      setVolume(found.muted ? 0 : found.volume);
-      if (!found.muted && found.volume > 0) lastVolumeRef.current = found.volume;
 
       const parent = found.parentElement;
       if (!parent) return;
@@ -77,23 +71,18 @@ export function VideoExperience() {
       setPlaying(!video.paused);
       setCurrentTime(video.currentTime || 0);
       setDuration(Number.isFinite(video.duration) ? video.duration : 0);
-      const nextVolume = video.muted ? 0 : video.volume;
-      setVolume(nextVolume);
-      if (nextVolume > 0) lastVolumeRef.current = nextVolume;
     };
 
     video.addEventListener("play", sync);
     video.addEventListener("pause", sync);
     video.addEventListener("timeupdate", sync);
     video.addEventListener("loadedmetadata", sync);
-    video.addEventListener("volumechange", sync);
 
     return () => {
       video.removeEventListener("play", sync);
       video.removeEventListener("pause", sync);
       video.removeEventListener("timeupdate", sync);
       video.removeEventListener("loadedmetadata", sync);
-      video.removeEventListener("volumechange", sync);
     };
   }, [video]);
 
@@ -114,44 +103,12 @@ export function VideoExperience() {
   useEffect(() => {
     const handleFullscreen = () => {
       const active = document.fullscreenElement;
-      const player = active instanceof HTMLElement && active.classList.contains("shyena-video-player") ? active : null;
-      const isFullscreen = Boolean(player);
-      setFullscreen(isFullscreen);
-
-      if (player) {
-        player.style.width = "100vw";
-        player.style.height = "100vh";
-        player.style.maxWidth = "none";
-        player.style.maxHeight = "none";
-        player.style.aspectRatio = "auto";
-        player.style.borderRadius = "0";
-        player.style.background = "#05040d";
-      }
-
-      if (video) {
-        video.style.width = "100%";
-        video.style.height = "100%";
-        video.style.objectFit = isFullscreen ? "contain" : "cover";
-        video.style.objectPosition = "center center";
-      }
-
-      if (!isFullscreen) {
-        const parent = video?.parentElement;
-        if (parent) {
-          parent.style.width = "";
-          parent.style.height = "";
-          parent.style.maxWidth = "";
-          parent.style.maxHeight = "";
-          parent.style.aspectRatio = "";
-          parent.style.borderRadius = "";
-          parent.style.background = "";
-        }
-      }
+      setFullscreen(active instanceof HTMLElement && active.classList.contains("shyena-video-player"));
     };
 
     document.addEventListener("fullscreenchange", handleFullscreen);
     return () => document.removeEventListener("fullscreenchange", handleFullscreen);
-  }, [video]);
+  }, []);
 
   if (!video || !controlsHost) return null;
 
@@ -169,29 +126,6 @@ export function VideoExperience() {
     setCurrentTime(video.currentTime);
   };
 
-  // Video Sound controls only the video's own audio track.
-  const changeVolume = (value: number) => {
-    const next = Math.min(1, Math.max(0, value));
-    if (next > 0) lastVolumeRef.current = next;
-    video.volume = next;
-    video.muted = next === 0;
-    setVolume(next);
-  };
-
-  const toggleMute = () => {
-    if (video.muted || video.volume === 0) {
-      const restored = lastVolumeRef.current > 0 ? lastVolumeRef.current : 0.7;
-      video.volume = restored;
-      video.muted = false;
-      setVolume(restored);
-    } else {
-      lastVolumeRef.current = video.volume;
-      video.muted = true;
-      setVolume(0);
-    }
-  };
-
-  // Music controls only the separate background music track.
   const toggleMusic = async () => {
     const music = musicRef.current;
     if (!music) return;
@@ -218,8 +152,6 @@ export function VideoExperience() {
       if (document.fullscreenElement) {
         await document.exitFullscreen();
       } else {
-        // Set the framing before entering fullscreen so there is no cropped frame.
-        video.style.objectFit = "contain";
         await target.requestFullscreen();
       }
     } catch {
@@ -263,28 +195,6 @@ export function VideoExperience() {
           <span className="hidden min-w-[74px] font-mono text-[10px] tabular-nums text-white/60 sm:inline">
             {formatTime(currentTime)} / {formatTime(duration)}
           </span>
-
-          <button
-            type="button"
-            aria-label={volume === 0 ? "Unmute video sound" : "Mute video sound"}
-            title={volume === 0 ? "Unmute video sound" : "Mute video sound"}
-            onClick={toggleMute}
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-white/75 transition hover:bg-white/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-300"
-          >
-            {volume === 0 ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
-          </button>
-
-          <input
-            aria-label="Video sound volume"
-            title="Video sound volume"
-            type="range"
-            min={0}
-            max={1}
-            step={0.01}
-            value={volume}
-            onChange={(event) => changeVolume(Number(event.target.value))}
-            className="hidden h-1 w-20 cursor-pointer accent-violet-400 sm:block"
-          />
 
           <button
             type="button"
