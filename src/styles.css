@@ -157,6 +157,21 @@
   ::selection { background: rgba(168,85,247,.28); color: #faf8ff; }
 }
 
+/* Section header / title treatment — Shyena reference */
+.section-title,
+.section-header,
+section h2,
+section h3,
+section h4,
+section h5,
+section h6 {
+  color: #f59804;
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
 /* Hard-coded utility compatibility: prevents any section from reverting to a light theme. */
 .bg-white,.bg-slate-50,.bg-slate-100,.bg-gray-50,.bg-gray-100,.bg-violet-50,.bg-purple-50 { background-color: #15102d !important; }
 .bg-slate-950,.bg-slate-900,.bg-gray-950,.bg-gray-900 { background-color: #0a071d !important; }
