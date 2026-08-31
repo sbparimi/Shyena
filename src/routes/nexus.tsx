@@ -64,38 +64,51 @@ const STAGES = [
 function NexusPage() {
   return (
     <>
-      {/* Hero */}
-      <section className="relative overflow-hidden">
-        <div className="pointer-events-none absolute inset-x-0 -top-40 h-[420px] bg-[radial-gradient(60%_60%_at_50%_50%,var(--color-accent)_0%,transparent_70%)] opacity-[0.13]" />
-        <div className="relative mx-auto w-full max-w-7xl px-5 pb-4 pt-20 sm:px-8 sm:pt-28">
-          <div className="mx-auto max-w-3xl text-center">
-            <span className="glass-card inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-medium text-muted-foreground">
-              <Sparkles className="h-3.5 w-3.5 text-accent" />
-              Nexus · Understand — System Map Intelligence
-            </span>
-            <h1 className="mt-6 text-4xl font-bold leading-[1.08] sm:text-6xl">
-              One business rule.{" "}
-              <span className="text-gradient-brand">Thousands of test conversations.</span>
-            </h1>
-            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-              Nexus, powered by CIS, reads your live Cognigy agent, builds a structural model of its
-              logic, and drafts high-coverage test specs from that model — so coverage grows with
-              your agent instead of your team's authoring time. Every generated spec passes semantic
-              review and carries full provenance before it's marked ready.
-            </p>
-            <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-              <Button asChild size="lg">
-                <Link to="/contact">
-                  See Nexus Generate a Spec
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </Button>
-              <Button asChild size="lg" variant="ghost">
-                <a href="#pipeline">See How It Works</a>
-              </Button>
-            </div>
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-2">
-              <span className="rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground">
+      <section className="relative overflow-hidden border-b border-border">
+        <div className="pointer-events-none absolute inset-x-0 -top-40 h-[520px] bg-[radial-gradient(60%_60%_at_50%_50%,var(--color-accent)_0%,transparent_70%)] opacity-[0.13]" />
+        <div className="relative mx-auto w-full max-w-7xl px-5 pb-14 pt-16 sm:px-8 sm:pb-18 sm:pt-24 lg:pb-16 lg:pt-28">
+          <div className="grid items-center gap-12 lg:grid-cols-[1.12fr_0.88fr] lg:gap-16">
+            <Reveal>
+              <div className="min-w-0">
+                <span className="glass-card inline-flex max-w-full items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-medium text-muted-foreground">
+                  <Sparkles className="h-3.5 w-3.5 shrink-0 text-accent" />
+                  <span className="truncate">Nexus · Understand — System Map Intelligence</span>
+                </span>
+                <h1 className="mt-7 max-w-4xl break-words whitespace-normal text-5xl font-semibold leading-[1.02] tracking-[-0.035em] text-foreground sm:text-6xl lg:text-[5.25rem]">
+                  One business rule.
+                  <span className="mt-2 block break-words whitespace-normal text-gradient-brand">
+                    Thousands of test conversations.
+                  </span>
+                </h1>
+              </div>
+            </Reveal>
+
+            <Reveal delay={100}>
+              <div className="max-w-xl lg:ml-auto">
+                <p className="text-lg leading-[1.7] text-muted-foreground sm:text-xl">
+                  Nexus, powered by CIS, reads your live Cognigy agent, builds a structural model of its
+                  logic, and drafts high-coverage test specs from that model — so coverage grows with
+                  your agent instead of your team's authoring time. Every generated spec passes semantic
+                  review and carries full provenance before it's marked ready.
+                </p>
+                <div className="mt-8 flex flex-wrap items-center gap-3">
+                  <Button asChild size="lg">
+                    <Link to="/contact">
+                      See Nexus Generate a Spec
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  </Button>
+                  <Button asChild size="lg" variant="outline">
+                    <a href="#pipeline">See How It Works</a>
+                  </Button>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+
+          <Reveal delay={160}>
+            <div className="mt-12 flex flex-wrap items-center gap-2 border-t border-border pt-6">
+              <span className="rounded-full border border-primary/25 bg-primary/10 px-3 py-1.5 text-xs font-semibold text-foreground">
                 Cognigy — live today
               </span>
               {["LangGraph", "LangChain", "RAG / KB"].map((platform) => (
@@ -107,17 +120,13 @@ function NexusPage() {
                 </span>
               ))}
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* Product visual */}
-      <section className="mx-auto w-full max-w-7xl px-5 pb-16 sm:px-8">
+      <section className="mx-auto w-full max-w-7xl px-5 pb-16 pt-12 sm:px-8 sm:pb-20 sm:pt-16">
         <Reveal>
-          <div
-            className="relative overflow-hidden rounded-3xl shadow-elevated"
-            style={{ aspectRatio: "16 / 8" }}
-          >
+          <div className="relative overflow-hidden rounded-3xl border border-border bg-card shadow-elevated" style={{ aspectRatio: "16 / 8" }}>
             <img
               src="/images/cis-hero.jpg"
               alt="One business rule flowing into many labeled, validated test-conversation paths — happy path, edge case, boundary, multilingual"
@@ -129,35 +138,27 @@ function NexusPage() {
         </Reveal>
       </section>
 
-      {/* Pipeline */}
       <section id="pipeline" className="bg-navy py-24">
         <div className="mx-auto w-full max-w-7xl px-5 sm:px-8">
           <div className="max-w-2xl">
             <p className="font-mono text-xs uppercase tracking-[0.18em] text-accent">How it works</p>
-            <h2 className="mt-4 text-3xl font-bold text-navy-foreground sm:text-4xl">
-              From any agent, to assured quality.
-            </h2>
+            <h2 className="mt-4 text-3xl font-bold text-navy-foreground sm:text-4xl">From any agent, to assured quality.</h2>
             <p className="mt-4 text-navy-muted">
               Five stages, each producing evidence the next one is allowed to trust — from your
               agent's live logic to an approved test spec with a full paper trail behind it.
             </p>
           </div>
-
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
             {STAGES.map((stage, i) => (
               <Reveal key={stage.title} delay={i * 90}>
                 <div className="relative h-full rounded-xl border border-navy-border bg-white/[0.03] p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-accent/50 hover:bg-white/[0.06]">
                   <div className="flex items-center justify-between">
-                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent/20 text-accent shadow-[0_0_24px_-6px_var(--color-accent)]">
-                      <stage.icon className="h-5 w-5" />
-                    </span>
+                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent/20 text-accent shadow-[0_0_24px_-6px_var(--color-accent)]"><stage.icon className="h-5 w-5" /></span>
                     <span className="font-mono text-xs text-navy-muted">0{i + 1}</span>
                   </div>
                   <h3 className="mt-5 text-base font-semibold text-navy-foreground">{stage.title}</h3>
                   <p className="mt-2.5 text-sm leading-relaxed text-navy-muted">{stage.body}</p>
-                  {i < STAGES.length - 1 && (
-                    <ArrowRight className="absolute -right-[19px] top-1/2 hidden h-5 w-5 -translate-y-1/2 text-navy-border lg:block" />
-                  )}
+                  {i < STAGES.length - 1 && <ArrowRight className="absolute -right-[19px] top-1/2 hidden h-5 w-5 -translate-y-1/2 text-navy-border lg:block" />}
                 </div>
               </Reveal>
             ))}
@@ -165,67 +166,34 @@ function NexusPage() {
         </div>
       </section>
 
-      {/* What it is / isn't */}
       <section className="mx-auto w-full max-w-7xl px-5 py-24 sm:px-8">
         <div className="rounded-3xl border border-border bg-secondary/40 p-8 sm:p-12">
           <div className="grid gap-8 lg:grid-cols-2">
             <div>
               <h3 className="text-lg font-bold text-foreground">Nexus is</h3>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                A test-generation engine for Cognigy conversational agents, powered by CIS and live
-                today. It reads your agent's actual flow definitions, builds a structural model of
-                the logic, and drafts test specs against real coverage obligations — every generated
-                spec goes through structural validation and a semantic review pass, with one bounded
-                revision, before it's marked ready to run.
+                A test-generation engine for Cognigy conversational agents, powered by CIS and live today. It reads your agent's actual flow definitions, builds a structural model of the logic, and drafts test specs against real coverage obligations — every generated spec goes through structural validation and a semantic review pass, with one bounded revision, before it's marked ready to run.
               </p>
             </div>
             <div>
               <h3 className="text-lg font-bold text-foreground">It is not</h3>
               <ul className="mt-3 space-y-2 text-sm leading-relaxed text-muted-foreground">
-                <li>
-                  Multi-platform yet — Cognigy is the live source adapter today; LangGraph,
-                  LangChain, and RAG/knowledge-base ingestion are on the roadmap, not shipped.
-                </li>
-                <li>
-                  A replacement for the hand-written edge-case specs your team already trusts —
-                  Nexus grows coverage alongside them, it doesn't retire manual authoring.
-                </li>
-                <li>
-                  A black box — every generated spec carries model-invocation evidence and revision
-                  lineage you can inspect, not just a pass/fail label.
-                </li>
+                <li>Multi-platform yet — Cognigy is the live source adapter today; LangGraph, LangChain, and RAG/knowledge-base ingestion are on the roadmap, not shipped.</li>
+                <li>A replacement for the hand-written edge-case specs your team already trusts — Nexus grows coverage alongside them, it doesn't retire manual authoring.</li>
+                <li>A black box — every generated spec carries model-invocation evidence and revision lineage you can inspect, not just a pass/fail label.</li>
               </ul>
             </div>
           </div>
         </div>
       </section>
 
-      {/* CTA */}
       <section className="mx-auto w-full max-w-7xl px-5 pb-24 sm:px-8">
         <div className="overflow-hidden rounded-3xl border border-navy-border bg-navy px-8 py-16 text-center shadow-elevated sm:px-16">
-          <h2 className="mx-auto max-w-2xl text-3xl font-bold text-navy-foreground sm:text-4xl">
-            Bring one business rule. See the coverage it generates.
-          </h2>
-          <p className="mx-auto mt-4 max-w-xl text-navy-muted">
-            We'll run Nexus against one real rule from your live Cognigy agent and walk through
-            every generated spec — the model, the coverage obligations, and the provenance behind
-            it — with you.
-          </p>
+          <h2 className="mx-auto max-w-2xl text-3xl font-bold text-navy-foreground sm:text-4xl">Bring one business rule. See the coverage it generates.</h2>
+          <p className="mx-auto mt-4 max-w-xl text-navy-muted">We'll run Nexus against one real rule from your live Cognigy agent and walk through every generated spec — the model, the coverage obligations, and the provenance behind it — with you.</p>
           <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-            <Button asChild size="lg">
-              <Link to="/contact">
-                Request a Demo
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </Button>
-            <Button
-              asChild
-              size="lg"
-              variant="outline"
-              className="border-navy-border bg-transparent text-navy-foreground hover:bg-white/10 hover:text-navy-foreground"
-            >
-              <Link to="/vera">See Vera, the Quality &amp; Evaluation Platform</Link>
-            </Button>
+            <Button asChild size="lg"><Link to="/contact">Request a Demo<ArrowRight className="h-4 w-4" /></Link></Button>
+            <Button asChild size="lg" variant="outline" className="border-navy-border bg-transparent text-navy-foreground hover:bg-white/10 hover:text-navy-foreground"><Link to="/vera">See Vera, the Quality &amp; Evaluation Platform</Link></Button>
           </div>
         </div>
       </section>
