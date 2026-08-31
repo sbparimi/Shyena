@@ -18,10 +18,10 @@
   --card-foreground: #faf8ff;
   --popover: #15102d;
   --popover-foreground: #faf8ff;
-  --primary: #7c3aed;
-  --primary-foreground: #faf8ff;
   --secondary: #15102d;
   --secondary-foreground: #faf8ff;
+  --primary: #7c3aed;
+  --primary-foreground: #faf8ff;
   --muted: #15102d;
   --muted-foreground: #c9c4d8;
   --accent: #a855f7;
@@ -70,14 +70,15 @@
 @utility bg-grid { background-image:linear-gradient(to right,rgba(43,35,80,.62) 1px,transparent 1px),linear-gradient(to bottom,rgba(43,35,80,.62) 1px,transparent 1px); background-size:44px 44px; mask-image:radial-gradient(ellipse 72% 68% at 50% 0%,black 35%,transparent 100%); -webkit-mask-image:radial-gradient(ellipse 72% 68% at 50% 0%,black 35%,transparent 100%); }
 @utility bg-mesh { background-image:radial-gradient(45% 55% at 20% 8%,rgba(168,85,247,.22) 0%,transparent 72%),radial-gradient(48% 55% at 82% 4%,rgba(124,58,237,.22) 0%,transparent 72%),radial-gradient(55% 60% at 50% 100%,rgba(168,85,247,.12) 0%,transparent 72%); animation:mesh-drift 18s ease-in-out infinite alternate; }
 
-main > section:first-child .grid.items-center { grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important; align-items:center !important; gap:clamp(2.5rem,5vw,5rem) !important; }
-main > section:first-child h1 { max-width:720px !important; font-size:clamp(3.1rem,5vw,5.2rem) !important; line-height:1.03 !important; letter-spacing:-.045em !important; font-weight:600 !important; margin-top:1.75rem !important; overflow-wrap:normal !important; word-break:normal !important; }
-main > section:first-child h1 .text-gradient-brand { white-space:normal !important; }
-main > section:first-child .aspect-video { width:100% !important; min-width:0 !important; aspect-ratio:16/9 !important; border-radius:24px !important; }
-main > section:first-child video { display:block !important; width:100% !important; height:100% !important; object-fit:cover !important; object-position:center center !important; background:#05040d; }
-main > section:first-child .aspect-video + div { display:block; }
-main > section:first-child p { max-width:680px; font-size:clamp(1rem,1.3vw,1.18rem); line-height:1.7; }
-main > section:first-child video + div { border-color:rgba(255,255,255,.08) !important; background:rgba(5,4,13,.62) !important; backdrop-filter:blur(12px); }
+/* Homepage-only hero overrides. The video poster is unique to the homepage, so these rules cannot leak into the first section of every route. */
+main > section:first-child:has(video[poster="/hero-video-poster.png"]) .grid.items-center { grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important; align-items:center !important; gap:clamp(2.5rem,5vw,5rem) !important; }
+main > section:first-child:has(video[poster="/hero-video-poster.png"]) h1 { max-width:720px !important; font-size:clamp(3.1rem,5vw,5.2rem) !important; line-height:1.03 !important; letter-spacing:-.045em !important; font-weight:600 !important; margin-top:1.75rem !important; overflow-wrap:normal !important; word-break:normal !important; }
+main > section:first-child:has(video[poster="/hero-video-poster.png"]) h1 .text-gradient-brand { white-space:normal !important; }
+main > section:first-child:has(video[poster="/hero-video-poster.png"]) .aspect-video { width:100% !important; min-width:0 !important; aspect-ratio:16/9 !important; border-radius:24px !important; }
+main > section:first-child:has(video[poster="/hero-video-poster.png"]) video { display:block !important; width:100% !important; height:100% !important; object-fit:cover !important; object-position:center center !important; background:#05040d; }
+main > section:first-child:has(video[poster="/hero-video-poster.png"]) .aspect-video + div { display:block; }
+main > section:first-child:has(video[poster="/hero-video-poster.png"]) p { max-width:680px; font-size:clamp(1rem,1.3vw,1.18rem); line-height:1.7; }
+main > section:first-child:has(video[poster="/hero-video-poster.png"]) video + div { border-color:rgba(255,255,255,.08) !important; background:rgba(5,4,13,.62) !important; backdrop-filter:blur(12px); }
 
 /* Fullscreen must override the normal 16:9 cover framing. The source composition is preserved in full. */
 .shyena-video-player:fullscreen { width:100vw !important; height:100vh !important; max-width:none !important; max-height:none !important; aspect-ratio:auto !important; border-radius:0 !important; background:#05040d !important; }
@@ -89,20 +90,17 @@ main > section:first-child video + div { border-color:rgba(255,255,255,.08) !imp
 .shyena-hero h1 .text-gradient-brand { display:block; }
 .shyena-hero p { max-width:590px !important; }
 
-.evidence-panel { border:1px solid var(--border); border-radius:1rem; background:var(--card); box-shadow:var(--shadow-card); }
-.evidence-panel-dark { border:1px solid var(--navy-border); border-radius:1rem; background:var(--navy); color:var(--navy-foreground); }
-
 @media (max-width:1100px) and (min-width:768px) {
-  main > section:first-child .grid.items-center { grid-template-columns:1fr !important; }
-  main > section:first-child h1 { max-width:850px !important; }
-  main > section:first-child .aspect-video { max-width:900px; margin-inline:auto; }
+  main > section:first-child:has(video[poster="/hero-video-poster.png"]) .grid.items-center { grid-template-columns:1fr !important; }
+  main > section:first-child:has(video[poster="/hero-video-poster.png"]) h1 { max-width:850px !important; }
+  main > section:first-child:has(video[poster="/hero-video-poster.png"]) .aspect-video { max-width:900px; margin-inline:auto; }
   .shyena-hero > div.relative > div.grid.items-center { grid-template-columns:1fr !important; }
   .shyena-hero h1 { max-width:850px !important; }
   .shyena-hero p { max-width:760px !important; }
 }
 @media (max-width:767px) {
-  main > section:first-child h1 { font-size:clamp(2.7rem,11vw,4rem) !important; line-height:1.04 !important; }
-  main > section:first-child .aspect-video { border-radius:18px !important; }
+  main > section:first-child:has(video[poster="/hero-video-poster.png"]) h1 { font-size:clamp(2.7rem,11vw,4rem) !important; line-height:1.04 !important; }
+  main > section:first-child:has(video[poster="/hero-video-poster.png"]) .aspect-video { border-radius:18px !important; }
   .shyena-hero h1 { font-size:clamp(2.7rem,11vw,4rem) !important; line-height:1.04 !important; }
   .shyena-hero h1 .text-gradient-brand { white-space:normal !important; }
 }
