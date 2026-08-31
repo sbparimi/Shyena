@@ -64,19 +64,19 @@ const STAGES = [
 function NexusPage() {
   return (
     <>
-      <section className="relative overflow-hidden border-b border-border">
+      <section className="shyena-hero relative overflow-hidden border-b border-border">
         <div className="pointer-events-none absolute inset-x-0 -top-40 h-[520px] bg-[radial-gradient(60%_60%_at_50%_50%,var(--color-accent)_0%,transparent_70%)] opacity-[0.13]" />
         <div className="relative mx-auto w-full max-w-7xl px-5 pb-14 pt-16 sm:px-8 sm:pb-18 sm:pt-24 lg:pb-16 lg:pt-28">
-          <div className="grid items-center gap-12 lg:grid-cols-[1.12fr_0.88fr] lg:gap-16">
+          <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-16">
             <Reveal>
-              <div className="min-w-0">
+              <div className="min-w-0 max-w-[720px]">
                 <span className="glass-card inline-flex max-w-full items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-medium text-muted-foreground">
                   <Sparkles className="h-3.5 w-3.5 shrink-0 text-accent" />
-                  <span className="truncate">Nexus · Understand — System Map Intelligence</span>
+                  <span>Nexus · Understand — System Map Intelligence</span>
                 </span>
-                <h1 className="mt-7 max-w-4xl break-words whitespace-normal text-5xl font-semibold leading-[1.02] tracking-[-0.035em] text-foreground sm:text-6xl lg:text-[5.25rem]">
+                <h1 className="mt-7 max-w-[700px] text-[clamp(3.25rem,5.4vw,5rem)] font-semibold leading-[1.03] tracking-[-0.045em] text-foreground">
                   One business rule.
-                  <span className="mt-2 block break-words whitespace-normal text-gradient-brand">
+                  <span className="mt-2 block text-gradient-brand">
                     Thousands of test conversations.
                   </span>
                 </h1>
@@ -84,7 +84,7 @@ function NexusPage() {
             </Reveal>
 
             <Reveal delay={100}>
-              <div className="max-w-xl lg:ml-auto">
+              <div className="min-w-0 max-w-[590px] lg:ml-auto">
                 <p className="text-lg leading-[1.7] text-muted-foreground sm:text-xl">
                   Nexus, powered by CIS, reads your live Cognigy agent, builds a structural model of its
                   logic, and drafts high-coverage test specs from that model — so coverage grows with
@@ -141,7 +141,7 @@ function NexusPage() {
       <section id="pipeline" className="bg-navy py-24">
         <div className="mx-auto w-full max-w-7xl px-5 sm:px-8">
           <div className="max-w-2xl">
-            <p className="font-mono text-xs uppercase tracking-[0.18em] text-accent">How it works</p>
+            <p className="section-kicker">How it works</p>
             <h2 className="mt-4 text-3xl font-bold text-navy-foreground sm:text-4xl">From any agent, to assured quality.</h2>
             <p className="mt-4 text-navy-muted">
               Five stages, each producing evidence the next one is allowed to trust — from your
