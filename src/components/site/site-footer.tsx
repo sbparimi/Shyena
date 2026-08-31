@@ -15,18 +15,26 @@ const COLUMNS = [
   {
     title: "Assurance",
     links: [
-      { label: "Evaluation model", to: "/docs/evaluation-model" },
+      { label: "Assurance model", to: "/docs/evaluation-model" },
+      { label: "Release evidence", to: "/docs/reporting" },
       { label: "Documentation", to: "/docs" },
-      { label: "Professional services", to: "/services" },
       { label: "Insights", to: "/blog" },
+    ],
+  },
+  {
+    title: "Enterprise",
+    links: [
+      { label: "Security & trust", to: "/security" },
+      { label: "Professional services", to: "/services" },
+      { label: "Contact", to: "/contact" },
+      { label: "Request a demo", to: "/contact" },
     ],
   },
   {
     title: "Company",
     links: [
       { label: "About Shyena", to: "/about" },
-      { label: "Contact", to: "/contact" },
-      { label: "Request a demo", to: "/contact" },
+      { label: "Engineering", to: "/docs" },
     ],
   },
 ] as const;
@@ -35,7 +43,7 @@ export function SiteFooter() {
   return (
     <footer className="border-t border-navy-border bg-navy text-navy-foreground">
       <div className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
-        <div className="grid gap-12 lg:grid-cols-[1.35fr_2fr]">
+        <div className="grid gap-12 lg:grid-cols-[1.1fr_2.9fr]">
           <div>
             <Logo tone="navy" />
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-navy-muted">
@@ -48,7 +56,7 @@ export function SiteFooter() {
             </div>
           </div>
 
-          <div className="grid gap-10 sm:grid-cols-3">
+          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
             {COLUMNS.map((column) => (
               <div key={column.title}>
                 <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-navy-foreground">{column.title}</h3>
