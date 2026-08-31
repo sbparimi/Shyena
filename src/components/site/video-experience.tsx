@@ -29,6 +29,7 @@ export function VideoExperience() {
   const [volume, setVolume] = useState(0);
   const [musicEnabled, setMusicEnabled] = useState(false);
   const [fullscreen, setFullscreen] = useState(false);
+  const lastVolumeRef = useRef(0.7);
   const musicRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
@@ -44,6 +45,7 @@ export function VideoExperience() {
       setCurrentTime(found.currentTime || 0);
       setDuration(Number.isFinite(found.duration) ? found.duration : 0);
       setVolume(found.muted ? 0 : found.volume);
+      if (!found.muted && found.volume > 0) lastVolumeRef.current = found.volume;
 
       const parent = found.parentElement;
       if (!parent) return;
@@ -75,7 +77,9 @@ export function VideoExperience() {
       setPlaying(!video.paused);
       setCurrentTime(video.currentTime || 0);
       setDuration(Number.isFinite(video.duration) ? video.duration : 0);
-      setVolume(video.muted ? 0 : video.volume);
+      const nextVolume = video.muted ? 0 : video.volume;
+      setVolume(nextVolume);
+      if (nextVolume > 0) lastVolumeRef.current = nextVolume;
     };
 
     video.addEventListener("play", sync);
@@ -108,10 +112,20 @@ export function VideoExperience() {
   }, []);
 
   useEffect(() => {
-    const handleFullscreen = () => setFullscreen(Boolean(document.fullscreenElement));
+    const handleFullscreen = () => {
+      const active = document.fullscreenElement;
+      const isFullscreen = active instanceof HTMLElement && active.classList.contains("shyena-video-player");
+      setFullscreen(isFullscreen);
+
+      if (video) {
+        video.style.objectFit = isFullscreen ? "contain" : "cover";
+        video.style.objectPosition = "center center";
+      }
+    };
+
     document.addEventListener("fullscreenchange", handleFullscreen);
     return () => document.removeEventListener("fullscreenchange", handleFullscreen);
-  }, []);
+  }, [video]);
 
   if (!video || !controlsHost) return null;
 
@@ -125,12 +139,14 @@ export function VideoExperience() {
 
   const seek = (value: number) => {
     if (!Number.isFinite(duration) || duration <= 0) return;
-    video.currentTime = value;
-    setCurrentTime(value);
+    video.currentTime = Math.min(duration, Math.max(0, value));
+    setCurrentTime(video.currentTime);
   };
 
+  // Video Sound controls only the video's own audio track.
   const changeVolume = (value: number) => {
     const next = Math.min(1, Math.max(0, value));
+    if (next > 0) lastVolumeRef.current = next;
     video.volume = next;
     video.muted = next === 0;
     setVolume(next);
@@ -138,20 +154,23 @@ export function VideoExperience() {
 
   const toggleMute = () => {
     if (video.muted || video.volume === 0) {
+      const restored = lastVolumeRef.current > 0 ? lastVolumeRef.current : 0.7;
+      video.volume = restored;
       video.muted = false;
-      video.volume = volume > 0 ? volume : 0.7;
-      setVolume(video.volume);
+      setVolume(restored);
     } else {
+      lastVolumeRef.current = video.volume;
       video.muted = true;
       setVolume(0);
     }
   };
 
+  // Music controls only the separate background music track.
   const toggleMusic = async () => {
     const music = musicRef.current;
     if (!music) return;
 
-    if (musicEnabled) {
+    if (!music.paused) {
       music.pause();
       setMusicEnabled(false);
       return;
@@ -169,10 +188,14 @@ export function VideoExperience() {
     const target = video.parentElement;
     if (!target) return;
 
-    if (document.fullscreenElement) {
-      await document.exitFullscreen();
-    } else {
-      await target.requestFullscreen();
+    try {
+      if (document.fullscreenElement) {
+        await document.exitFullscreen();
+      } else {
+        await target.requestFullscreen();
+      }
+    } catch {
+      setFullscreen(Boolean(document.fullscreenElement));
     }
   };
 
@@ -180,8 +203,9 @@ export function VideoExperience() {
 
   return createPortal(
     <div
-      className="pointer-events-none absolute inset-x-0 bottom-0 z-20 p-3 sm:p-4"
+      className="pointer-events-none absolute inset-x-0 bottom-0 z-20 p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:p-4 sm:pb-4"
       onMouseDown={(event) => event.stopPropagation()}
+      onClick={(event) => event.stopPropagation()}
     >
       <div className="pointer-events-auto rounded-2xl border border-white/10 bg-[#090713]/90 p-2.5 text-white shadow-2xl backdrop-blur-xl sm:p-3">
         <div className="relative mb-2 h-1.5 w-full overflow-hidden rounded-full bg-white/15">
@@ -214,7 +238,8 @@ export function VideoExperience() {
 
           <button
             type="button"
-            aria-label={volume === 0 ? "Unmute video" : "Mute video"}
+            aria-label={volume === 0 ? "Unmute video sound" : "Mute video sound"}
+            title={volume === 0 ? "Unmute video sound" : "Mute video sound"}
             onClick={toggleMute}
             className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-white/75 transition hover:bg-white/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-300"
           >
@@ -222,7 +247,8 @@ export function VideoExperience() {
           </button>
 
           <input
-            aria-label="Video volume"
+            aria-label="Video sound volume"
+            title="Video sound volume"
             type="range"
             min={0}
             max={1}
@@ -236,6 +262,7 @@ export function VideoExperience() {
             type="button"
             aria-pressed={musicEnabled}
             aria-label={musicEnabled ? "Turn background music off" : "Turn background music on"}
+            title={musicEnabled ? "Turn background music off" : "Turn background music on"}
             onClick={toggleMusic}
             className={`flex h-9 items-center gap-2 rounded-xl px-3 text-xs font-medium transition focus:outline-none focus:ring-2 focus:ring-violet-300 ${musicEnabled ? "bg-violet-500/25 text-violet-200" : "text-white/65 hover:bg-white/10 hover:text-white"}`}
           >
@@ -248,6 +275,7 @@ export function VideoExperience() {
           <button
             type="button"
             aria-label={fullscreen ? "Exit fullscreen" : "Enter fullscreen"}
+            title={fullscreen ? "Exit fullscreen" : "Enter fullscreen"}
             onClick={toggleFullscreen}
             className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-white/75 transition hover:bg-white/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-300"
           >
