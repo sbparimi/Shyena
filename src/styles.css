@@ -11,7 +11,7 @@
 }
 
 :root {
-  --radius:.9rem; --background:#0a071d; --foreground:#faf8ff; --card:#15102d; --card-foreground:#faf8ff; --popover:#15102d; --popover-foreground:#faf8ff; --primary:#7c3aed; --primary-foreground:#faf8ff; --secondary:#15102d; --secondary-foreground:#faf8ff; --muted:#15102d; --muted-foreground:#c9c4d8; --accent:#a855f7; --accent-foreground:#faf8ff; --destructive:#ef4444; --destructive-foreground:#faf8ff; --border:#2b2350; --input:#514778; --ring:#a855f7; --navy:#0a071d; --navy-foreground:#faf8ff; --navy-muted:#918aa8; --navy-border:#2b2350; --purple:#7c3aed; --purple-foreground:#faf8ff; --lavender:#a855f7; --lavender-foreground:#faf8ff; --success:#34d399; --warning:#f59804; --gradient-primary:linear-gradient(135deg,#a855f7 0%,#7c3aed 100%); --gradient-navy:radial-gradient(120% 120% at 10% 0%,#15102d 0%,#0a071d 58%); --shadow-card:0 1px 2px rgba(0,0,0,.24),0 18px 40px -24px rgba(0,0,0,.5); --shadow-elevated:0 28px 70px -34px rgba(124,58,237,.45); --font-display:"Inter",ui-sans-serif,system-ui,sans-serif; --font-body:"Inter",ui-sans-serif,system-ui,sans-serif; --font-mono:"JetBrains Mono",ui-monospace,SFMono-Regular,monospace; --chart-1:#7c3aed; --chart-2:#a855f7; --chart-3:#f59804; --chart-4:#8b5cf6; --chart-5:#2b2350; --sidebar:#15102d; --sidebar-foreground:#faf8ff; --sidebar-primary:#7c3aed; --sidebar-primary-foreground:#faf8ff; --sidebar-accent:#15102d; --sidebar-accent-foreground:#faf8ff; --sidebar-border:#2b2350; --sidebar-ring:#a855f7;
+  --radius:.9rem; --background:#0a071d; --foreground:#faf8ff; --card:#15102d; --card-foreground:#faf8ff; --popover:#15102d; --popover-foreground:#faf8ff; --primary:#7c3aed; --primary-foreground:#faf8ff; --secondary:#15102d; --secondary-foreground:#faf8ff; --muted:#15102d; --muted-foreground:#c9c4d8; --accent:#a855f7; --accent-foreground:#faf8ff; --destructive:#ef4444; --destructive-foreground:#faf8ff; --border:#2b2350; --input:#514778; --ring:#a855f7; --navy:#0a071d; --navy-foreground:#faf8ff; --navy-muted:#918aa8; --navy-border:#2b2350; --purple:#7c3aed; --purple-foreground:#faf8ff; --lavender:#a855f7; --lavender-foreground:#faf8ff; --success:#34d399; --warning:#f59804; --gradient-primary:linear-gradient(135deg,#a855f7 0%,#7c3aed 100%); --gradient-navy:radial-gradient(120% 120% at 10% 0%,#15102d 0%,#0a071d 58%); --shadow-card:0 1px 2px rgba(0,0,0,.24),0 18px 40px -24px rgba(0,0,0,.5); --shadow-elevated:0 28px 70px -34px rgba(124,58,237,.45); --font-display:"Inter",ui-sans-serif,system-ui,sans-serif; --font-body:"Inter",ui-sans-serif,system-ui,sans-serif; --font-mono:"JetBrains Mono",ui-monospace,SFMono-Regular,monospace;
 }
 .dark { --background:#0a071d; --foreground:#faf8ff; --card:#15102d; --card-foreground:#faf8ff; --popover:#15102d; --popover-foreground:#faf8ff; --primary:#7c3aed; --primary-foreground:#faf8ff; --secondary:#15102d; --secondary-foreground:#faf8ff; --muted:#15102d; --muted-foreground:#c9c4d8; --accent:#a855f7; --accent-foreground:#faf8ff; --destructive:#ef4444; --destructive-foreground:#faf8ff; --border:#2b2350; --input:#514778; --ring:#a855f7; }
 
@@ -19,24 +19,48 @@
   * { border-color:var(--color-border); }
   html { scroll-behavior:smooth; background:#0a071d; }
   body { background:#0a071d; color:#faf8ff; font-family:var(--font-body); -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
-  h1,h2,h3,h4,h5,h6 { font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,monospace; color:#faf8ff; font-weight:500; letter-spacing:.01em; }
+  h1,h2,h3,h4,h5,h6 { font-family:var(--font-body); color:#faf8ff; font-weight:600; letter-spacing:-.025em; }
+  p,li,td,th,button,a,input,textarea,select { font-family:var(--font-body); }
   ::selection { background:rgba(168,85,247,.28); color:#faf8ff; }
 }
 
-/* Exact reference treatment: section titles are orange, monospaced, uppercase and tracked. */
-.section-title,.section-header,section h1,section h2,section h3,section h4,section h5,section h6,
-section h1 *,section h2 *,section h3 *,section h4 *,section h5 *,section h6 * {
+/* Corporate typography system. Inter is the single primary website font. JetBrains Mono is reserved for technical labels, metrics and section kickers. */
+.section-title,.section-header,.section-kicker {
   color:#F59804 !important;
-  font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,monospace !important;
-  font-weight:500 !important;
-  letter-spacing:.22em !important;
+  font-family:var(--font-mono) !important;
+  font-weight:600 !important;
+  letter-spacing:.14em !important;
   text-transform:uppercase !important;
-  background:none !important;
-  -webkit-text-fill-color:#F59804 !important;
 }
 
-/* Keep non-title body copy readable and consistent. */
-section p,section li,section td,section th { font-family:var(--font-body); }
+section h1,section h2,section h3,section h4,section h5,section h6 {
+  color:#faf8ff !important;
+  font-family:var(--font-body) !important;
+  font-weight:600 !important;
+  letter-spacing:-.025em !important;
+  text-transform:none !important;
+  background:none !important;
+  -webkit-text-fill-color:#faf8ff !important;
+}
+
+/* Preserve the intentional brand gradient only where the component explicitly asks for it. */
+section h1 .text-gradient-brand,section h2 .text-gradient-brand,section h3 .text-gradient-brand {
+  background:linear-gradient(135deg,#b66cff 0%,#7c3aed 100%) !important;
+  -webkit-background-clip:text !important;
+  background-clip:text !important;
+  color:transparent !important;
+  -webkit-text-fill-color:transparent !important;
+}
+
+/* Orange section labels used as the visual reference treatment. */
+section .text-xs.font-semibold.uppercase.tracking-\[0\.2em\],
+section .text-xs.font-semibold.uppercase.tracking-\[0\.18em\],
+section .text-xs.font-semibold.uppercase.tracking-widest {
+  color:#F59804 !important;
+  font-family:var(--font-mono) !important;
+  font-weight:600 !important;
+  letter-spacing:.14em !important;
+}
 
 .bg-white,.bg-slate-50,.bg-slate-100,.bg-gray-50,.bg-gray-100,.bg-violet-50,.bg-purple-50 { background-color:#15102d !important; }
 .bg-slate-950,.bg-slate-900,.bg-gray-950,.bg-gray-900 { background-color:#0a071d !important; }
@@ -47,11 +71,61 @@ section p,section li,section td,section th { font-family:var(--font-body); }
 .border-slate-200,.border-slate-300,.border-gray-200,.border-gray-300,.border-white\/10,.border-white\/20 { border-color:#2b2350 !important; }
 .divide-slate-200 > :not([hidden]) ~ :not([hidden]),.divide-gray-200 > :not([hidden]) ~ :not([hidden]) { border-color:#2b2350 !important; }
 
-@utility text-gradient-brand { background:linear-gradient(135deg,#a855f7 0%,#7c3aed 100%); -webkit-background-clip:text; background-clip:text; color:transparent; }
+@utility text-gradient-brand { background:linear-gradient(135deg,#b66cff 0%,#7c3aed 100%); -webkit-background-clip:text; background-clip:text; color:transparent; }
 @utility glass-card { background:rgba(21,16,45,.92); border:1px solid #2b2350; backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px); box-shadow:var(--shadow-card); }
 @utility glow-primary { box-shadow:0 0 0 1px rgba(168,85,247,.18),0 0 48px -10px rgba(124,58,237,.34); }
 @utility bg-grid { background-image:linear-gradient(to right,rgba(43,35,80,.62) 1px,transparent 1px),linear-gradient(to bottom,rgba(43,35,80,.62) 1px,transparent 1px); background-size:44px 44px; mask-image:radial-gradient(ellipse 72% 68% at 50% 0%,black 35%,transparent 100%); -webkit-mask-image:radial-gradient(ellipse 72% 68% at 50% 0%,black 35%,transparent 100%); }
 @utility bg-mesh { background-image:radial-gradient(45% 55% at 20% 8%,rgba(168,85,247,.22) 0%,transparent 72%),radial-gradient(48% 55% at 82% 4%,rgba(124,58,237,.22) 0%,transparent 72%),radial-gradient(55% 60% at 50% 100%,rgba(168,85,247,.12) 0%,transparent 72%); animation:mesh-drift 18s ease-in-out infinite alternate; }
+
+/* Hero: balanced corporate hierarchy and substantially larger product visual. */
+main > section:first-child > div.relative > div.grid.items-center {
+  grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr) !important;
+  align-items:center !important;
+  gap:clamp(2.5rem,5vw,5rem) !important;
+}
+
+main > section:first-child h1 {
+  max-width:720px !important;
+  font-size:clamp(3.2rem,5.4vw,5.8rem) !important;
+  line-height:1.02 !important;
+  letter-spacing:-.045em !important;
+  font-weight:600 !important;
+  margin-top:1.75rem !important;
+}
+
+main > section:first-child h1 .text-gradient-brand { white-space:nowrap; }
+
+main > section:first-child .aspect-video {
+  width:100% !important;
+  min-width:0 !important;
+  aspect-ratio:16/9 !important;
+  border-radius:24px !important;
+}
+
+main > section:first-child video {
+  display:block !important;
+  width:100% !important;
+  height:100% !important;
+  object-fit:cover !important;
+  background:#05040d;
+}
+
+main > section:first-child .aspect-video + div { display:block; }
+main > section:first-child p { max-width:680px; font-size:clamp(1rem,1.35vw,1.18rem); line-height:1.7; }
+main > section:first-child video + div { border-color:rgba(255,255,255,.08) !important; background:rgba(5,4,13,.62) !important; backdrop-filter:blur(12px); }
+
+@media (max-width:1100px) and (min-width:768px) {
+  main > section:first-child > div.relative > div.grid.items-center { grid-template-columns:1fr !important; }
+  main > section:first-child h1 { max-width:850px !important; }
+  main > section:first-child .aspect-video { max-width:900px; margin-inline:auto; }
+}
+
+@media (max-width:767px) {
+  main > section:first-child h1 { font-size:clamp(2.7rem,11vw,4rem) !important; line-height:1.02 !important; }
+  main > section:first-child h1 .text-gradient-brand { white-space:normal; }
+  main > section:first-child .aspect-video { border-radius:18px !important; }
+}
+
 @keyframes mesh-drift { 0% { background-position:0% 0%,0% 0%,0% 0%; } 100% { background-position:3% 4%,-3% 3%,2% -3%; } }
 @keyframes reveal-up { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
 [data-reveal="hidden"] { opacity:0; transform:translateY(16px); }
