@@ -6,6 +6,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { startAnimatedFavicon } from "../lib/animated-favicon";
 import { SiteHeader } from "@/components/site/site-header";
 import { SiteFooter } from "@/components/site/site-footer";
+import { VideoExperience } from "@/components/site/video-experience";
 
 function NotFoundComponent() {
   return (
@@ -102,6 +103,7 @@ function RootComponent() {
         <SiteHeader />
         <main className="flex-1"><Outlet /></main>
         <SiteFooter />
+        <VideoExperience />
       </div>
     </QueryClientProvider>
   );
