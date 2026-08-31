@@ -103,34 +103,34 @@ function PricingCalculator() {
   const total = estimate.cis + estimate.vera + estimate.chakra;
   const Field = ({ id, label, value, setter }: { id: string; label: string; value: string; setter: (v: string) => void }) => (
     <div>
-      <label htmlFor={id} className="text-sm font-medium text-slate-700">{label}</label>
-      <input id={id} value={value} inputMode="numeric" onChange={(e) => update(e.target.value, setter)} onBlur={() => value === "" && setter("0")} className="mt-2 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-lg font-semibold text-slate-950 outline-none focus:border-violet-500 focus:ring-2 focus:ring-violet-100" />
-      <p className="mt-2 text-xs text-slate-500">€0.05 each · Whole numbers only</p>
+      <label htmlFor={id} className="text-sm font-medium text-[#e9e5f2]">{label}</label>
+      <input id={id} value={value} inputMode="numeric" onChange={(e) => update(e.target.value, setter)} onBlur={() => value === "" && setter("0")} className="mt-2 w-full rounded-xl border border-[#514778] bg-[#15102d] px-4 py-3 text-lg font-semibold text-[#faf8ff] outline-none focus:border-[#a855f7] focus:ring-2 focus:ring-[#7c3aed]/20" />
+      <p className="mt-2 text-xs text-[#918aa8]">€0.05 each · Whole numbers only</p>
     </div>
   );
   return (
-    <section id="usage-calculator" className="border-y border-slate-200 bg-slate-50 py-20 sm:py-24">
+    <section id="usage-calculator" className="border-y border-[#2b2350] bg-[#0a071d] py-20 sm:py-24">
       <div className="mx-auto grid max-w-7xl gap-12 px-5 sm:px-8 lg:grid-cols-[0.75fr_1.25fr] lg:items-start">
         <div>
-          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-violet-100 text-violet-700"><Calculator className="h-5 w-5" /></div>
-          <p className="mt-6 font-mono text-xs uppercase tracking-[0.18em] text-violet-600">Usage expansion</p>
-          <h2 className="mt-3 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">Estimate your variable usage.</h2>
-          <p className="mt-5 text-base leading-relaxed text-slate-600">Platform subscription and included usage are contracted separately. Use this calculator to estimate the variable component beyond your plan allowance.</p>
-          <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-5 text-sm leading-relaxed text-slate-600"><span className="font-semibold text-slate-950">Three independent units.</span> CIS test journeys, Vera conversations and Chakra security interactions are measured separately. One unit is never converted into another.</div>
+          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#7c3aed]/15 text-[#a855f7]"><Calculator className="h-5 w-5" /></div>
+          <p className="mt-6 font-mono text-xs uppercase tracking-[0.18em] text-[#f59804]">Usage expansion</p>
+          <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#faf8ff] sm:text-4xl">Estimate your variable usage.</h2>
+          <p className="mt-5 text-base leading-relaxed text-[#c9c4d8]">Platform subscription and included usage are contracted separately. Use this calculator to estimate the variable component beyond your plan allowance.</p>
+          <div className="mt-6 rounded-2xl border border-[#2b2350] bg-[#15102d] p-5 text-sm leading-relaxed text-[#c9c4d8]"><span className="font-semibold text-[#faf8ff]">Three independent units.</span> CIS test journeys, Vera conversations and Chakra security interactions are measured separately. One unit is never converted into another.</div>
         </div>
-        <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-xl sm:p-8">
+        <div className="rounded-3xl border border-[#2b2350] bg-[#15102d] p-6 shadow-xl sm:p-8">
           <div className="grid gap-7 md:grid-cols-3">
             <Field id="cis" label="CIS test journeys" value={cis} setter={setCis} />
             <Field id="vera" label="Vera conversations" value={vera} setter={setVera} />
             <Field id="chakra" label="Chakra security interactions" value={chakra} setter={setChakra} />
           </div>
-          <div className="mt-8 grid grid-cols-3 gap-4 border-t border-slate-200 pt-7">
-            <div><p className="text-xs uppercase tracking-wider text-slate-500">CIS</p><p className="mt-1 text-xl font-bold text-slate-950">{formatEuro(estimate.cis)}</p></div>
-            <div><p className="text-xs uppercase tracking-wider text-slate-500">Vera</p><p className="mt-1 text-xl font-bold text-slate-950">{formatEuro(estimate.vera)}</p></div>
-            <div><p className="text-xs uppercase tracking-wider text-slate-500">Chakra</p><p className="mt-1 text-xl font-bold text-slate-950">{formatEuro(estimate.chakra)}</p></div>
+          <div className="mt-8 grid grid-cols-3 gap-4 border-t border-[#2b2350] pt-7">
+            <div><p className="text-xs uppercase tracking-wider text-[#918aa8]">CIS</p><p className="mt-1 text-xl font-bold text-[#faf8ff]">{formatEuro(estimate.cis)}</p></div>
+            <div><p className="text-xs uppercase tracking-wider text-[#918aa8]">Vera</p><p className="mt-1 text-xl font-bold text-[#faf8ff]">{formatEuro(estimate.vera)}</p></div>
+            <div><p className="text-xs uppercase tracking-wider text-[#918aa8]">Chakra</p><p className="mt-1 text-xl font-bold text-[#faf8ff]">{formatEuro(estimate.chakra)}</p></div>
           </div>
-          <div className="mt-7 rounded-2xl bg-slate-950 p-6 text-white"><p className="text-xs uppercase tracking-[0.18em] text-slate-400">Estimated variable usage</p><p className="mt-2 text-4xl font-bold tracking-tight">{formatEuro(total)}</p><p className="mt-2 text-xs text-slate-400">Illustrative usage estimate only. VAT and separately scoped professional services are excluded.</p></div>
-          <div className="mt-6 flex flex-wrap gap-3"><Button asChild><Link to="/contact">Discuss your plan <ArrowRight className="h-4 w-4" /></Link></Button><a href="#plan-comparison" className="inline-flex h-10 items-center rounded-md border border-slate-300 px-4 text-sm font-medium text-slate-700">Compare plans</a></div>
+          <div className="mt-7 rounded-2xl bg-[#15102d] p-6 text-[#faf8ff]"><p className="text-xs uppercase tracking-[0.18em] text-[#a9a2bd]">Estimated variable usage</p><p className="mt-2 text-4xl font-bold tracking-tight">{formatEuro(total)}</p><p className="mt-2 text-xs text-[#a9a2bd]">Illustrative usage estimate only. VAT and separately scoped professional services are excluded.</p></div>
+          <div className="mt-6 flex flex-wrap gap-3"><Button asChild><Link to="/contact">Discuss your plan <ArrowRight className="h-4 w-4" /></Link></Button><a href="#plan-comparison" className="inline-flex h-10 items-center rounded-md border border-[#514778] px-4 text-sm font-medium text-[#e9e5f2]">Compare plans</a></div>
         </div>
       </div>
     </section>
@@ -139,45 +139,45 @@ function PricingCalculator() {
 
 function PricingPage() {
   return <>
-    <section className="relative overflow-hidden bg-slate-950 text-white">
+    <section className="relative overflow-hidden bg-[#0a071d] text-white">
       <div className="absolute inset-0 opacity-25 [background-image:linear-gradient(rgba(139,92,246,.10)_1px,transparent_1px),linear-gradient(90deg,rgba(139,92,246,.10)_1px,transparent_1px)] [background-size:64px_64px]" />
-      <div className="absolute -right-24 top-0 h-96 w-96 rounded-full bg-violet-700/20 blur-3xl" />
+      <div className="absolute -right-24 top-0 h-96 w-96 rounded-full bg-[#7c3aed]/20 blur-3xl" />
       <div className="relative mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
         <div className="max-w-4xl">
-          <p className="font-mono text-xs uppercase tracking-[0.22em] text-violet-300">Enterprise AI assurance</p>
-          <h1 className="mt-5 text-5xl font-bold leading-[1.02] tracking-tight sm:text-7xl">Start with one AI system.<br /><span className="text-violet-400">Scale across the estate.</span></h1>
-          <p className="mt-7 max-w-3xl text-lg leading-relaxed text-slate-300">A land-and-expand commercial model for enterprises that need evidence-backed assurance across AI agents, journeys, teams and release cycles.</p>
-          <div className="mt-8 flex flex-wrap gap-3 text-sm font-semibold"><span className="rounded-full border border-slate-700 bg-white/5 px-4 py-2">€7,500 pilot</span><span className="rounded-full border border-slate-700 bg-white/5 px-4 py-2">€30K–€60K annual platform</span><span className="rounded-full border border-slate-700 bg-white/5 px-4 py-2">€100K–€150K+ strategic</span></div>
-          <p className="mt-7 text-sm text-violet-300">Free one-week onboarding with a dedicated Shyena engineer.</p>
+          <p className="font-mono text-xs uppercase tracking-[0.22em] text-[#a855f7]">Enterprise AI assurance</p>
+          <h1 className="mt-5 text-5xl font-bold leading-[1.02] tracking-tight sm:text-7xl">Start with one AI system.<br /><span className="text-[#a855f7]">Scale across the estate.</span></h1>
+          <p className="mt-7 max-w-3xl text-lg leading-relaxed text-[#c9c4d8]">A land-and-expand commercial model for enterprises that need evidence-backed assurance across AI agents, journeys, teams and release cycles.</p>
+          <div className="mt-8 flex flex-wrap gap-3 text-sm font-semibold"><span className="rounded-full border border-[#514778] bg-[#15102d]/5 px-4 py-2">€7,500 pilot</span><span className="rounded-full border border-[#514778] bg-[#15102d]/5 px-4 py-2">€30K–€60K annual platform</span><span className="rounded-full border border-[#514778] bg-[#15102d]/5 px-4 py-2">€100K–€150K+ strategic</span></div>
+          <p className="mt-7 text-sm text-[#a855f7]">Free one-week onboarding with a dedicated Shyena engineer.</p>
         </div>
       </div>
     </section>
 
-    <section id="plans" className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-24">
-      <div className="max-w-3xl"><p className="font-mono text-xs uppercase tracking-[0.18em] text-violet-600">Enterprise offer</p><h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">Predictable platform pricing. Transparent expansion.</h2><p className="mt-4 text-lg leading-relaxed text-slate-600">The pilot lowers adoption risk. Annual plans create a predictable software commitment. Usage expands with the customer's AI estate.</p></div>
+    <section id="plans" className="bg-[#0a071d] mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-24">
+      <div className="max-w-3xl"><p className="font-mono text-xs uppercase tracking-[0.18em] text-[#f59804]">Enterprise offer</p><h2 className="mt-4 text-3xl font-bold tracking-tight text-[#faf8ff] sm:text-4xl">Predictable platform pricing. Transparent expansion.</h2><p className="mt-4 text-lg leading-relaxed text-[#c9c4d8]">The pilot lowers adoption risk. Annual plans create a predictable software commitment. Usage expands with the customer's AI estate.</p></div>
       <div className="mt-12 grid gap-5 lg:grid-cols-4">
-        {PLANS.map((plan) => <div key={plan.name} className={`relative flex flex-col rounded-3xl border p-7 ${plan.featured ? "border-violet-500 bg-slate-950 text-white shadow-2xl shadow-violet-200/50" : "border-slate-200 bg-white"}`}>
-          {plan.featured && <span className="absolute right-5 top-5 rounded-full bg-violet-600 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white">Recommended</span>}
-          <p className={`font-mono text-xs uppercase tracking-[0.16em] ${plan.featured ? "text-violet-300" : "text-violet-600"}`}>{plan.name}</p>
-          <p className="mt-6 text-3xl font-bold tracking-tight">{plan.price}</p><p className={`mt-1 text-sm ${plan.featured ? "text-slate-400" : "text-slate-500"}`}>{plan.term}</p>
-          <p className={`mt-5 text-sm font-semibold ${plan.featured ? "text-white" : "text-slate-900"}`}>{plan.audience}</p>
-          <p className={`mt-4 flex-1 text-sm leading-relaxed ${plan.featured ? "text-slate-300" : "text-slate-600"}`}>{plan.description}</p>
+        {PLANS.map((plan) => <div key={plan.name} className={`relative flex flex-col rounded-3xl border p-7 ${plan.featured ? "border-[#a855f7] bg-[#15102d] text-[#faf8ff] shadow-2xl shadow-[#7c3aed]/30" : "border-[#2b2350] bg-[#15102d]"}`}>
+          {plan.featured && <span className="absolute right-5 top-5 rounded-full bg-[#7c3aed] px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white">Recommended</span>}
+          <p className={`font-mono text-xs uppercase tracking-[0.16em] ${plan.featured ? "text-[#a855f7]" : "text-[#f59804]"}`}>{plan.name}</p>
+          <p className="mt-6 text-3xl font-bold tracking-tight">{plan.price}</p><p className={`mt-1 text-sm ${plan.featured ? "text-[#a9a2bd]" : "text-[#918aa8]"}`}>{plan.term}</p>
+          <p className={`mt-5 text-sm font-semibold ${plan.featured ? "text-white" : "text-[#faf8ff]"}`}>{plan.audience}</p>
+          <p className={`mt-4 flex-1 text-sm leading-relaxed ${plan.featured ? "text-[#c9c4d8]" : "text-[#c9c4d8]"}`}>{plan.description}</p>
           <Button asChild className="mt-7" variant={plan.featured ? "default" : "outline"}><Link to="/contact">Discuss this plan <ArrowRight className="h-4 w-4" /></Link></Button>
         </div>)}
       </div>
     </section>
 
-    <section className="bg-slate-50 py-20 sm:py-24"><div className="mx-auto max-w-7xl px-5 sm:px-8"><div className="grid gap-5 lg:grid-cols-3">
-      {[{icon:Layers3,title:"Platform license",body:"Nexus, Vera and Chakra are capabilities within one Shyena assurance platform—not separate module subscriptions."},{icon:Gauge,title:"Usage expansion",body:"CIS journeys, Vera conversations and Chakra security interactions are metered independently at €0.05 per additional unit."},{icon:ShieldCheck,title:"Customer environment",body:"Cloud infrastructure, LLM/API consumption, hosting and monitoring are customer-funded and separate from the Shyena software fee."}].map(({icon:Icon,title,body})=><div key={title} className="rounded-3xl border border-slate-200 bg-white p-7"><div className="flex h-11 w-11 items-center justify-center rounded-xl bg-violet-100 text-violet-700"><Icon className="h-5 w-5" /></div><h3 className="mt-6 text-xl font-bold text-slate-950">{title}</h3><p className="mt-3 text-sm leading-relaxed text-slate-600">{body}</p></div>)}
+    <section className="bg-[#0a071d] py-20 sm:py-24"><div className="mx-auto max-w-7xl px-5 sm:px-8"><div className="grid gap-5 lg:grid-cols-3">
+      {[{icon:Layers3,title:"Platform license",body:"Nexus, Vera and Chakra are capabilities within one Shyena assurance platform—not separate module subscriptions."},{icon:Gauge,title:"Usage expansion",body:"CIS journeys, Vera conversations and Chakra security interactions are metered independently at €0.05 per additional unit."},{icon:ShieldCheck,title:"Customer environment",body:"Cloud infrastructure, LLM/API consumption, hosting and monitoring are customer-funded and separate from the Shyena software fee."}].map(({icon:Icon,title,body})=><div key={title} className="rounded-3xl border border-[#2b2350] bg-[#15102d] p-7"><div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#7c3aed]/15 text-[#a855f7]"><Icon className="h-5 w-5" /></div><h3 className="mt-6 text-xl font-bold text-[#faf8ff]">{title}</h3><p className="mt-3 text-sm leading-relaxed text-[#c9c4d8]">{body}</p></div>)}
     </div></div></section>
 
     <PricingCalculator />
 
-    <section id="plan-comparison" className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-24"><div className="max-w-3xl"><p className="font-mono text-xs uppercase tracking-[0.18em] text-violet-600">Plan comparison</p><h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">One assurance foundation. More scale at each level.</h2></div><div className="mt-10 overflow-x-auto rounded-3xl border border-slate-200 bg-white shadow-sm"><table className="w-full min-w-[920px] border-collapse text-left text-sm"><thead><tr className="bg-slate-950 text-white">{["CAPABILITY / PLAN","PILOT 30–60 DAYS","PROFESSIONAL €30K / YEAR","ENTERPRISE €60K / YEAR","STRATEGIC €100K–€150K+ / YEAR"].map((h)=><th key={h} className="border-r border-slate-700 px-4 py-4 text-xs font-bold uppercase tracking-wide">{h}</th>)}</tr></thead><tbody>{CAPABILITIES.map((row,i)=><tr key={row[0]} className={i%2===0 ? "bg-white" : "bg-slate-50"}>{row.map((cell,j)=><td key={`${row[0]}-${j}`} className={`border-b border-slate-200 px-4 py-3 ${j===0 ? "font-semibold text-slate-950" : "text-slate-600"}`}>{cell}</td>)}</tr>)}</tbody></table></div><p className="mt-4 text-xs leading-relaxed text-slate-500">Customer infrastructure (cloud, LLM, hosting and monitoring) remains outside the Shyena software license. Enterprise commercial terms can be scoped around deployment, governance, support and committed volume.</p></section>
+    <section id="plan-comparison" className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-24"><div className="max-w-3xl"><p className="font-mono text-xs uppercase tracking-[0.18em] text-[#f59804]">Plan comparison</p><h2 className="mt-4 text-3xl font-bold tracking-tight text-[#faf8ff] sm:text-4xl">One assurance foundation. More scale at each level.</h2></div><div className="mt-10 overflow-x-auto rounded-3xl border border-[#2b2350] bg-[#15102d] shadow-sm"><table className="w-full min-w-[920px] border-collapse text-left text-sm"><thead><tr className="bg-[#0a071d] text-white">{["CAPABILITY / PLAN","PILOT 30–60 DAYS","PROFESSIONAL €30K / YEAR","ENTERPRISE €60K / YEAR","STRATEGIC €100K–€150K+ / YEAR"].map((h)=><th key={h} className="border-r border-[#514778] px-4 py-4 text-xs font-bold uppercase tracking-wide">{h}</th>)}</tr></thead><tbody>{CAPABILITIES.map((row,i)=><tr key={row[0]} className={i%2===0 ? "bg-[#15102d]" : "bg-[#0a071d]"}>{row.map((cell,j)=><td key={`${row[0]}-${j}`} className={`border-b border-[#2b2350] px-4 py-3 ${j===0 ? "font-semibold text-[#faf8ff]" : "text-[#c9c4d8]"}`}>{cell}</td>)}</tr>)}</tbody></table></div><p className="mt-4 text-xs leading-relaxed text-[#918aa8]">Customer infrastructure (cloud, LLM, hosting and monitoring) remains outside the Shyena software license. Enterprise commercial terms can be scoped around deployment, governance, support and committed volume.</p></section>
 
-    <section className="bg-slate-950 py-20 text-white sm:py-24"><div className="mx-auto max-w-7xl px-5 sm:px-8"><div className="grid gap-12 lg:grid-cols-2 lg:items-center"><div><p className="font-mono text-xs uppercase tracking-[0.18em] text-violet-300">The commercial logic</p><h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">Built to grow when the AI estate grows.</h2><p className="mt-5 max-w-xl leading-relaxed text-slate-300">Shyena keeps the software commitment predictable while allowing variable usage to scale with the customer's actual assurance activity.</p></div><div className="grid gap-3 sm:grid-cols-2">{[["01","Adopt","Start with one AI system and a defined assurance outcome."],["02","Prove","Establish evidence, workflows and release confidence."],["03","Expand","Add systems, teams, usage and governance."],["04","Scale","Move to enterprise-wide assurance when the estate demands it."]].map(([n,h,b])=><div key={n} className="rounded-2xl border border-slate-800 bg-white/[0.04] p-5"><span className="font-mono text-xs text-violet-400">{n}</span><h3 className="mt-3 font-semibold">{h}</h3><p className="mt-2 text-sm leading-relaxed text-slate-400">{b}</p></div>)}</div></div></div></section>
+    <section className="bg-[#0a071d] py-20 text-white sm:py-24"><div className="mx-auto max-w-7xl px-5 sm:px-8"><div className="grid gap-12 lg:grid-cols-2 lg:items-center"><div><p className="font-mono text-xs uppercase tracking-[0.18em] text-[#a855f7]">The commercial logic</p><h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">Built to grow when the AI estate grows.</h2><p className="mt-5 max-w-xl leading-relaxed text-[#c9c4d8]">Shyena keeps the software commitment predictable while allowing variable usage to scale with the customer's actual assurance activity.</p></div><div className="grid gap-3 sm:grid-cols-2">{[["01","Adopt","Start with one AI system and a defined assurance outcome."],["02","Prove","Establish evidence, workflows and release confidence."],["03","Expand","Add systems, teams, usage and governance."],["04","Scale","Move to enterprise-wide assurance when the estate demands it."]].map(([n,h,b])=><div key={n} className="rounded-2xl border border-slate-800 bg-[#15102d]/[0.04] p-5"><span className="font-mono text-xs text-[#a855f7]">{n}</span><h3 className="mt-3 font-semibold">{h}</h3><p className="mt-2 text-sm leading-relaxed text-[#a9a2bd]">{b}</p></div>)}</div></div></div></section>
 
-    <section className="mx-auto max-w-4xl px-5 py-20 sm:px-8 sm:py-24"><div className="text-center"><p className="font-mono text-xs uppercase tracking-[0.18em] text-violet-600">Pricing questions</p><h2 className="mt-4 text-3xl font-bold text-slate-950">Clear answers for procurement and engineering.</h2></div><Accordion type="single" collapsible className="mt-10">{FAQS.map(([q,a],i)=><AccordionItem key={q} value={`item-${i}`}><AccordionTrigger className="text-left">{q}</AccordionTrigger><AccordionContent className="text-slate-600">{a}</AccordionContent></AccordionItem>)}</Accordion></section>
+    <section className="mx-auto max-w-4xl px-5 py-20 sm:px-8 sm:py-24"><div className="text-center"><p className="font-mono text-xs uppercase tracking-[0.18em] text-[#f59804]">Pricing questions</p><h2 className="mt-4 text-3xl font-bold text-[#faf8ff]">Clear answers for procurement and engineering.</h2></div><Accordion type="single" collapsible className="mt-10">{FAQS.map(([q,a],i)=><AccordionItem key={q} value={`item-${i}`}><AccordionTrigger className="text-left">{q}</AccordionTrigger><AccordionContent className="text-[#c9c4d8]">{a}</AccordionContent></AccordionItem>)}</Accordion></section>
 
     <CtaBand eyebrow="Enterprise AI assurance" title="Prove your AI agent is ready to operate." description="Start with one AI system. Build the evidence. Scale the assurance model across the estate." primaryLabel="Request an Assurance Review" primaryHref="/contact" />
   </>;
