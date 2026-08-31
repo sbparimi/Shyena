@@ -74,17 +74,18 @@ function MenuGroup({ items, onNavigate }: { items: readonly MenuItem[]; onNaviga
 }
 
 export function SiteHeader() {
-  const [open, setOpen] = useState(false);
+  const [openMenu, setOpenMenu] = useState<MenuName | null>(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!open) return;
+    if (!openMenu) return;
 
     const handlePointerDown = (event: PointerEvent) => {
-      if (!navRef.current?.contains(event.target as Node)) setOpen(false);
+      if (!navRef.current?.contains(event.target as Node)) setOpenMenu(null);
     };
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key === "Escape") setOpenMenu(null);
     };
 
     document.addEventListener("pointerdown", handlePointerDown);
@@ -93,12 +94,13 @@ export function SiteHeader() {
       document.removeEventListener("pointerdown", handlePointerDown);
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [open]);
+  }, [openMenu]);
 
-  const toggleMenu = (menu: MenuName) => setOpen((current) => (current === menu ? false : menu));
-  const closeMenu = () => setOpen(false);
+  const toggleMenu = (menu: MenuName) => setOpenMenu((current) => (current === menu ? null : menu));
+  const closeMenu = () => setOpenMenu(null);
+  const closeMobile = () => setMobileOpen(false);
 
-  const dropdown = open === "platform" ? (
+  const dropdown = openMenu === "platform" ? (
     <div className="absolute left-1/2 top-[calc(100%+8px)] z-[60] -translate-x-1/2 overflow-hidden rounded-2xl border border-border bg-popover text-popover-foreground shadow-elevated">
       <div className="flex w-[650px] p-3">
         <MenuGroup items={PRODUCTS} onNavigate={closeMenu} />
@@ -114,11 +116,11 @@ export function SiteHeader() {
         </div>
       </div>
     </div>
-  ) : open === "resources" ? (
+  ) : openMenu === "resources" ? (
     <div className="absolute left-1/2 top-[calc(100%+8px)] z-[60] -translate-x-1/2 overflow-hidden rounded-2xl border border-border bg-popover text-popover-foreground shadow-elevated">
       <MenuGroup items={RESOURCES} onNavigate={closeMenu} />
     </div>
-  ) : open === "company" ? (
+  ) : openMenu === "company" ? (
     <div className="absolute left-1/2 top-[calc(100%+8px)] z-[60] -translate-x-1/2 overflow-hidden rounded-2xl border border-border bg-popover text-popover-foreground shadow-elevated">
       <MenuGroup items={COMPANY} onNavigate={closeMenu} />
     </div>
@@ -135,11 +137,11 @@ export function SiteHeader() {
               <li>
                 <button
                   type="button"
-                  aria-expanded={open === "platform"}
+                  aria-expanded={openMenu === "platform"}
                   onClick={() => toggleMenu("platform")}
-                  className={`inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium cursor-pointer transition-colors focus:outline-none ${open === "platform" ? "bg-accent/50 text-accent-foreground" : "bg-background hover:bg-accent hover:text-accent-foreground"}`}
+                  className={`inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium cursor-pointer transition-colors focus:outline-none ${openMenu === "platform" ? "bg-accent/50 text-accent-foreground" : "bg-background hover:bg-accent hover:text-accent-foreground"}`}
                 >
-                  Platform <ChevronDown className={`relative top-px ml-1 h-3 w-3 transition-transform ${open === "platform" ? "rotate-180" : ""}`} aria-hidden="true" />
+                  Platform <ChevronDown className={`relative top-px ml-1 h-3 w-3 transition-transform ${openMenu === "platform" ? "rotate-180" : ""}`} aria-hidden="true" />
                 </button>
               </li>
               <li>
@@ -154,21 +156,21 @@ export function SiteHeader() {
               <li>
                 <button
                   type="button"
-                  aria-expanded={open === "resources"}
+                  aria-expanded={openMenu === "resources"}
                   onClick={() => toggleMenu("resources")}
-                  className={`inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium cursor-pointer transition-colors focus:outline-none ${open === "resources" ? "bg-accent/50 text-accent-foreground" : "bg-background hover:bg-accent hover:text-accent-foreground"}`}
+                  className={`inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium cursor-pointer transition-colors focus:outline-none ${openMenu === "resources" ? "bg-accent/50 text-accent-foreground" : "bg-background hover:bg-accent hover:text-accent-foreground"}`}
                 >
-                  Resources <ChevronDown className={`relative top-px ml-1 h-3 w-3 transition-transform ${open === "resources" ? "rotate-180" : ""}`} aria-hidden="true" />
+                  Resources <ChevronDown className={`relative top-px ml-1 h-3 w-3 transition-transform ${openMenu === "resources" ? "rotate-180" : ""}`} aria-hidden="true" />
                 </button>
               </li>
               <li>
                 <button
                   type="button"
-                  aria-expanded={open === "company"}
+                  aria-expanded={openMenu === "company"}
                   onClick={() => toggleMenu("company")}
-                  className={`inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium cursor-pointer transition-colors focus:outline-none ${open === "company" ? "bg-accent/50 text-accent-foreground" : "bg-background hover:bg-accent hover:text-accent-foreground"}`}
+                  className={`inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium cursor-pointer transition-colors focus:outline-none ${openMenu === "company" ? "bg-accent/50 text-accent-foreground" : "bg-background hover:bg-accent hover:text-accent-foreground"}`}
                 >
-                  Company <ChevronDown className={`relative top-px ml-1 h-3 w-3 transition-transform ${open === "company" ? "rotate-180" : ""}`} aria-hidden="true" />
+                  Company <ChevronDown className={`relative top-px ml-1 h-3 w-3 transition-transform ${openMenu === "company" ? "rotate-180" : ""}`} aria-hidden="true" />
                 </button>
               </li>
             </ul>
@@ -181,19 +183,19 @@ export function SiteHeader() {
           <Button asChild size="sm"><Link to="/contact" onClick={closeMenu}>Request a Demo <ArrowRight className="h-3.5 w-3.5" /></Link></Button>
         </div>
 
-        <button type="button" onClick={() => setOpen((v) => (typeof v === "boolean" ? !v : false))} aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open === true} className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border text-foreground md:hidden">
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        <button type="button" onClick={() => setMobileOpen((v) => !v)} aria-label={mobileOpen ? "Close menu" : "Open menu"} aria-expanded={mobileOpen} className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border text-foreground md:hidden">
+          {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </div>
 
-      {open === true && (
+      {mobileOpen && (
         <div className="border-t border-border bg-background px-5 pb-6 pt-3 md:hidden">
           <nav className="flex flex-col">
-            {MOBILE_NAV.map((item) => <Link key={item.to} to={item.to} onClick={() => setOpen(false)} className="rounded-md px-2 py-3 text-sm font-medium text-muted-foreground hover:text-foreground">{item.label}</Link>)}
+            {MOBILE_NAV.map((item) => <Link key={item.to} to={item.to} onClick={closeMobile} className="rounded-md px-2 py-3 text-sm font-medium text-muted-foreground hover:text-foreground">{item.label}</Link>)}
           </nav>
           <div className="mt-4 flex flex-col gap-2">
-            <Button asChild variant="outline"><Link to="/docs" onClick={() => setOpen(false)}>Explore docs</Link></Button>
-            <Button asChild><Link to="/contact" onClick={() => setOpen(false)}>Request a Demo</Link></Button>
+            <Button asChild variant="outline"><Link to="/docs" onClick={closeMobile}>Explore docs</Link></Button>
+            <Button asChild><Link to="/contact" onClick={closeMobile}>Request a Demo</Link></Button>
           </div>
         </div>
       )}
