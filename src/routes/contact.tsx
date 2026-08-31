@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
-import { Calendar, CheckCircle2, Clock, MessageSquare, Sparkles } from "lucide-react";
+import { CheckCircle2, Clock, MessageSquare, ShieldCheck, Sparkles, Target } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -30,6 +30,13 @@ export const Route = createFileRoute("/contact")({
   component: ContactPage,
 });
 
+const DEMO_OUTCOMES = [
+  { icon: Target, title: "Your agent mapped", description: "We identify the journey, business goal and failure points that matter." },
+  { icon: MessageSquare, title: "A real journey executed", description: "We run a representative conversation against the agent rather than a scripted transcript." },
+  { icon: ShieldCheck, title: "Evidence-backed verdict", description: "You see quality, deterministic checks, execution integrity and the release decision together." },
+  { icon: Sparkles, title: "A practical pilot path", description: "If there is a fit, we define the smallest useful assurance scope for your team." },
+];
+
 const NEXT_STEPS = [
   {
     icon: Clock,
@@ -38,7 +45,7 @@ const NEXT_STEPS = [
   },
   {
     icon: MessageSquare,
-    title: "A 30-minute call",
+    title: "A 30-minute working session",
     description: "We'll walk through your agent and where your current testing gaps are.",
   },
   {
@@ -93,14 +100,36 @@ function ContactPage() {
     <>
       <section className="relative overflow-hidden bg-lavender text-lavender-foreground">
         <div className="relative mx-auto w-full max-w-7xl px-5 pb-4 pt-20 sm:px-8 sm:pt-28">
-          <div className="mx-auto max-w-2xl text-center">
+          <div className="mx-auto max-w-3xl text-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary px-3.5 py-1.5 text-xs font-medium text-muted-foreground">
-              Contact
+              Contact & demo
             </span>
-            <h1 className="mt-6 text-5xl leading-[1.05] sm:text-7xl">Let's talk</h1>
-            <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-              Tell us about your agent and what you're trying to catch before it reaches customers.
+            <h1 className="mt-6 text-5xl leading-[1.05] sm:text-7xl">See the evidence before you buy the story.</h1>
+            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
+              Tell us about your agent and what you're trying to catch before it reaches customers. The demo is built around a real assurance workflow, not a slide deck.
             </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto w-full max-w-7xl px-5 py-14 sm:px-8 sm:py-18">
+        <div className="mx-auto max-w-5xl">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {DEMO_OUTCOMES.map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <article key={item.title} className="rounded-2xl border border-border bg-card p-6 shadow-card">
+                  <div className="flex items-center justify-between">
+                    <span className="font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-primary">0{index + 1}</span>
+                    <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                      <Icon className="h-4 w-4" />
+                    </span>
+                  </div>
+                  <h2 className="mt-5 text-base font-semibold">{item.title}</h2>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.description}</p>
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -122,7 +151,12 @@ function ContactPage() {
                 </Button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-5">
+              <form onSubmit={handleSubmit} className="space-y-5" aria-label="Request a Shyena demo">
+                <div className="mb-7">
+                  <p className="font-mono text-xs uppercase tracking-[0.18em] text-primary">Request a demo</p>
+                  <h2 className="mt-3 text-2xl font-bold">Tell us where the assurance gap is.</h2>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">A few details help us make the first session specific to your system.</p>
+                </div>
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div className="space-y-2">
                     <Label htmlFor="name">Name</Label>
@@ -130,13 +164,7 @@ function ContactPage() {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="email">Work email</Label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      required
-                      placeholder="jane@company.com"
-                    />
+                    <Input id="email" name="email" type="email" required placeholder="jane@company.com" />
                   </div>
                 </div>
                 <div className="grid gap-5 sm:grid-cols-2">
@@ -161,27 +189,16 @@ function ContactPage() {
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="message">Message</Label>
-                  <Textarea
-                    id="message"
-                    name="message"
-                    required
-                    rows={5}
-                    placeholder="Tell us about your agent and what you want to catch before it reaches customers."
-                  />
+                  <Textarea id="message" name="message" required rows={5} placeholder="Tell us about your agent, current testing approach and what you want to catch before release." />
                 </div>
 
                 {status === "error" && (
-                  <p className="text-sm text-destructive">
-                    Something went wrong sending that — try again, or reach us another way below.
+                  <p className="text-sm text-destructive" role="alert">
+                    Something went wrong sending that — try again, or reach us another way.
                   </p>
                 )}
 
-                <Button
-                  type="submit"
-                  size="lg"
-                  className="w-full"
-                  disabled={status === "submitting"}
-                >
+                <Button type="submit" size="lg" className="w-full" disabled={status === "submitting"}>
                   {status === "submitting" ? "Sending…" : "Request a Demo"}
                 </Button>
               </form>
@@ -189,8 +206,9 @@ function ContactPage() {
           </div>
 
           <div>
-            <h2 className="text-xl font-bold">What happens next</h2>
-            <div className="mt-6 space-y-6">
+            <p className="font-mono text-xs uppercase tracking-[0.18em] text-primary">What happens next</p>
+            <h2 className="mt-3 text-2xl font-bold">A working session, not a sales script.</h2>
+            <div className="mt-7 space-y-6">
               {NEXT_STEPS.map((step, i) => {
                 const Icon = step.icon;
                 return (
@@ -199,28 +217,18 @@ function ContactPage() {
                       <Icon className="h-5 w-5" />
                     </span>
                     <div>
-                      <p className="text-xs font-mono uppercase tracking-wider text-muted-foreground">
-                        Step {i + 1}
-                      </p>
+                      <p className="text-xs font-mono uppercase tracking-wider text-muted-foreground">Step {i + 1}</p>
                       <p className="mt-1 text-sm font-semibold text-foreground">{step.title}</p>
-                      <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                        {step.description}
-                      </p>
+                      <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{step.description}</p>
                     </div>
                   </div>
                 );
               })}
             </div>
 
-            <div className="mt-10 rounded-xl border border-border bg-secondary/40 p-5">
-              <div className="flex items-center gap-2 text-sm font-semibold text-foreground">
-                <Calendar className="h-4 w-4 text-primary" />
-                Prefer to just grab time?
-              </div>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                Calendar booking is coming soon — for now, the form above is the fastest way to
-                reach us.
-              </p>
+            <div className="mt-10 rounded-xl border border-primary/20 bg-primary/5 p-5">
+              <p className="text-sm font-semibold text-foreground">The objective</p>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Leave the session knowing exactly what Shyena would test, what evidence it would produce and where it would sit in your release workflow.</p>
             </div>
           </div>
         </div>
