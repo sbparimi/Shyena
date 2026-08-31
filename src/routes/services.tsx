@@ -115,14 +115,8 @@ function ServicesPage() {
       <section className="relative isolate overflow-hidden border-b border-white/10 bg-[#09051b] text-white">
         <div className="absolute inset-0 bg-grid opacity-45" aria-hidden="true" />
         <div className="absolute inset-0 bg-mesh opacity-70" aria-hidden="true" />
-        <div
-          className="absolute -left-48 top-10 h-96 w-96 rounded-full bg-violet-600/20 blur-3xl"
-          aria-hidden="true"
-        />
-        <div
-          className="absolute -right-48 bottom-0 h-[32rem] w-[32rem] rounded-full bg-orange-500/10 blur-3xl"
-          aria-hidden="true"
-        />
+        <div className="absolute -left-48 top-10 h-96 w-96 rounded-full bg-violet-600/20 blur-3xl" aria-hidden="true" />
+        <div className="absolute -right-48 bottom-0 h-[32rem] w-[32rem] rounded-full bg-orange-500/10 blur-3xl" aria-hidden="true" />
 
         <div className="relative mx-auto w-full max-w-7xl px-5 pb-20 pt-14 sm:px-8 sm:pb-24 sm:pt-16 lg:pb-28 lg:pt-20">
           <div className="mb-10 flex items-center justify-between border-b border-white/10 pb-5 text-[10px] font-medium uppercase tracking-[0.22em] text-white/45 sm:mb-14">
@@ -147,19 +141,12 @@ function ServicesPage() {
                 Shyena remains the recurring software platform. Implementation, training, custom engineering, pilots and managed assurance are optional services with their own scope and commercial agreement.
               </p>
               <div className="mt-9 flex flex-wrap gap-3">
-                <Button
-                  asChild
-                  className="h-12 rounded-full bg-violet-600 px-6 text-sm font-semibold text-white shadow-[0_16px_45px_-18px_rgba(124,58,237,.9)] hover:bg-violet-500"
-                >
+                <Button asChild className="h-12 rounded-full bg-violet-600 px-6 text-sm font-semibold text-white shadow-[0_16px_45px_-18px_rgba(124,58,237,.9)] hover:bg-violet-500">
                   <Link to="/contact">
                     Discuss an engagement <ArrowRight className="h-4 w-4" />
                   </Link>
                 </Button>
-                <Button
-                  asChild
-                  variant="outline"
-                  className="h-12 rounded-full border-white/15 bg-white/[.03] px-6 text-sm text-white/80 hover:bg-white/[.08] hover:text-white"
-                >
+                <Button asChild variant="outline" className="h-12 rounded-full border-white/15 bg-white/[.03] px-6 text-sm text-white/80 hover:bg-white/[.08] hover:text-white">
                   <Link to="/pricing">View SaaS model</Link>
                 </Button>
               </div>
@@ -188,29 +175,19 @@ function ServicesPage() {
                     {ENGAGEMENTS.map((item, index) => {
                       const Icon = item.icon;
                       return (
-                        <div
-                          key={item.title}
-                          className="relative flex gap-4 rounded-xl border border-white/10 bg-white/[.025] p-4"
-                        >
+                        <div key={item.title} className="relative flex gap-4 rounded-xl border border-white/10 bg-white/[.025] p-4">
                           {index < ENGAGEMENTS.length - 1 && (
-                            <span
-                              className="absolute left-[27px] top-[52px] h-5 w-px bg-violet-400/30"
-                              aria-hidden="true"
-                            />
+                            <span className="absolute left-[27px] top-[52px] h-5 w-px bg-violet-400/30" aria-hidden="true" />
                           )}
                           <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border border-violet-300/20 bg-violet-400/10 text-violet-200">
                             <Icon className="h-3.5 w-3.5" />
                           </span>
                           <div className="min-w-0">
                             <div className="flex items-baseline gap-2">
-                              <span className="font-mono text-[9px] tracking-[0.18em] text-orange-300">
-                                {item.label}
-                              </span>
+                              <span className="font-mono text-[9px] tracking-[0.18em] text-orange-300">{item.label}</span>
                               <span className="text-sm font-semibold text-white">{item.title}</span>
                             </div>
-                            <p className="mt-1 text-xs leading-5 text-white/45">
-                              {item.description}
-                            </p>
+                            <p className="mt-1 text-xs leading-5 text-white/45">{item.description}</p>
                           </div>
                           <Check className="ml-auto mt-1 h-4 w-4 shrink-0 text-emerald-300/80" />
                         </div>
@@ -245,21 +222,14 @@ function ServicesPage() {
             {ENGAGEMENTS.map((engagement) => {
               const Icon = engagement.icon;
               return (
-                <article
-                  key={engagement.title}
-                  className="group flex flex-col bg-[#100a29] p-7 transition hover:bg-[#140d34] sm:p-8"
-                >
+                <article key={engagement.title} className="group flex flex-col bg-[#100a29] p-7 transition hover:bg-[#140d34] sm:p-8">
                   <div className="flex items-center justify-between">
-                    <span className="font-mono text-[10px] tracking-[0.18em] text-orange-300">
-                      {engagement.number}
-                    </span>
+                    <span className="font-mono text-[10px] tracking-[0.18em] text-orange-300">{engagement.number}</span>
                     <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-violet-300/15 bg-violet-400/10 text-violet-200 transition group-hover:bg-violet-400/15">
                       <Icon className="h-4 w-4" />
                     </span>
                   </div>
-                  <p className="mt-8 font-mono text-[9px] uppercase tracking-[0.18em] text-violet-300">
-                    {engagement.label}
-                  </p>
+                  <p className="mt-8 font-mono text-[9px] uppercase tracking-[0.18em] text-violet-300">{engagement.label}</p>
                   <h3 className="mt-2 text-lg font-semibold text-white">{engagement.title}</h3>
                   <p className="mt-3 text-sm leading-6 text-white/50">{engagement.description}</p>
                   <ul className="mt-6 space-y-3 border-t border-white/10 pt-5">
@@ -293,22 +263,13 @@ function ServicesPage() {
 
             <div className="rounded-2xl border border-white/10 bg-white/[.025] p-6 sm:p-8">
               <div className="mb-6 flex items-center justify-between border-b border-white/10 pb-5">
-                <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">
-                  Outside SaaS subscription
-                </span>
-                <span className="rounded-full border border-orange-300/15 bg-orange-300/5 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.15em] text-orange-300">
-                  Separately scoped
-                </span>
+                <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">Outside SaaS subscription</span>
+                <span className="rounded-full border border-orange-300/15 bg-orange-300/5 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.15em] text-orange-300">Separately scoped</span>
               </div>
               <ul className="grid gap-1 sm:grid-cols-2">
                 {NOT_SAAS.map((item, index) => (
-                  <li
-                    key={item}
-                    className="flex items-start gap-3 rounded-xl border border-white/5 bg-black/10 p-4"
-                  >
-                    <span className="font-mono text-[9px] tracking-[0.12em] text-violet-300/70">
-                      0{index + 1}
-                    </span>
+                  <li key={item} className="flex items-start gap-3 rounded-xl border border-white/5 bg-black/10 p-4">
+                    <span className="font-mono text-[9px] tracking-[0.12em] text-violet-300/70">0{index + 1}</span>
                     <span className="text-sm leading-6 text-white/55">{item}</span>
                   </li>
                 ))}
@@ -323,26 +284,17 @@ function ServicesPage() {
           <div className="grid gap-8 lg:grid-cols-[.35fr_.65fr] lg:gap-20">
             <div>
               <p className="section-kicker">How it works</p>
-              <h2 className="mt-5 text-3xl font-semibold tracking-[-.035em] text-white sm:text-4xl">
-                From scope to an operational assurance program.
-              </h2>
-              <p className="mt-5 max-w-sm text-sm leading-6 text-white/45">
-                A clear sequence keeps ownership, evidence and commercial responsibility visible at every stage.
-              </p>
+              <h2 className="mt-5 text-3xl font-semibold tracking-[-.035em] text-white sm:text-4xl">From scope to an operational assurance program.</h2>
+              <p className="mt-5 max-w-sm text-sm leading-6 text-white/45">A clear sequence keeps ownership, evidence and commercial responsibility visible at every stage.</p>
             </div>
 
             <div className="space-y-3">
-              {PROCESS.map((process, index) => {
+              {PROCESS.map((process) => {
                 const Icon = process.icon;
                 return (
-                  <article
-                    key={process.title}
-                    className="grid gap-4 rounded-2xl border border-white/10 bg-white/[.025] p-5 sm:grid-cols-[72px_1fr_auto] sm:items-center sm:p-6"
-                  >
+                  <article key={process.title} className="grid gap-4 rounded-2xl border border-white/10 bg-white/[.025] p-5 sm:grid-cols-[72px_1fr_auto] sm:items-center sm:p-6">
                     <div className="flex items-center gap-3 sm:block">
-                      <span className="font-mono text-xs tracking-[0.15em] text-orange-300">
-                        {process.step}
-                      </span>
+                      <span className="font-mono text-xs tracking-[0.15em] text-orange-300">{process.step}</span>
                       <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-violet-300/15 bg-violet-400/10 text-violet-200 sm:mt-3">
                         <Icon className="h-4 w-4" />
                       </span>
@@ -351,10 +303,7 @@ function ServicesPage() {
                       <h3 className="text-base font-semibold text-white">{process.title}</h3>
                       <p className="mt-1 text-sm leading-6 text-white/45">{process.description}</p>
                     </div>
-                    <ArrowRight
-                      className="hidden h-4 w-4 text-white/30 sm:block"
-                      aria-hidden="true"
-                    />
+                    <ArrowRight className="hidden h-4 w-4 text-white/30 sm:block" aria-hidden="true" />
                   </article>
                 );
               })}
@@ -366,19 +315,10 @@ function ServicesPage() {
       <section className="relative overflow-hidden border-b border-white/10 bg-[#0a071d] py-20 sm:py-24">
         <div className="absolute inset-0 bg-mesh opacity-40" aria-hidden="true" />
         <div className="relative mx-auto w-full max-w-4xl px-5 text-center sm:px-8">
-          <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-orange-300">
-            Start with the platform
-          </p>
-          <h2 className="mx-auto mt-5 max-w-2xl text-3xl font-semibold tracking-[-.04em] text-white sm:text-5xl">
-            Add specialist services only where they create measurable value.
-          </h2>
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/50">
-            Keep the SaaS subscription, contracted assurance volumes and professional services distinct in the commercial model and easy to understand.
-          </p>
-          <Button
-            asChild
-            className="mt-8 h-12 rounded-full bg-violet-600 px-7 text-sm font-semibold text-white shadow-[0_16px_45px_-18px_rgba(124,58,237,.9)] hover:bg-violet-500"
-          >
+          <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-orange-300">Start with the platform</p>
+          <h2 className="mx-auto mt-5 max-w-2xl text-3xl font-semibold tracking-[-.04em] text-white sm:text-5xl">Add specialist services only where they create measurable value.</h2>
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/50">Keep the SaaS subscription, contracted assurance volumes and professional services distinct in the commercial model and easy to understand.</p>
+          <Button asChild className="mt-8 h-12 rounded-full bg-violet-600 px-7 text-sm font-semibold text-white shadow-[0_16px_45px_-18px_rgba(124,58,237,.9)] hover:bg-violet-500">
             <Link to="/contact">
               Talk to Sales <ArrowRight className="h-4 w-4" />
             </Link>
