@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { CtaBand } from "@/components/site/cta-band";
 import { DocsSidebar } from "@/components/docs/docs-sidebar";
+import { DocConceptVisual } from "@/components/docs/doc-concept-visual";
 
 export const Route = createFileRoute("/docs/")({
   head: () => ({
@@ -44,18 +45,21 @@ function DocsOverview() {
     <section className="relative overflow-hidden bg-[#0a071d] text-white">
       <div className="absolute inset-0 opacity-25 [background-image:linear-gradient(rgba(139,92,246,.10)_1px,transparent_1px),linear-gradient(90deg,rgba(139,92,246,.10)_1px,transparent_1px)] [background-size:64px_64px]" />
       <div className="absolute -right-24 top-0 h-96 w-96 rounded-full bg-[#7c3aed]/20 blur-3xl" />
-      <div className="relative mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
-        <div className="max-w-4xl">
-          <p className="font-mono text-xs uppercase tracking-[0.22em] text-[#a855f7]">Engineering documentation</p>
-          <h1 className="mt-5 text-5xl font-bold leading-[1.02] tracking-tight sm:text-7xl">Build, evaluate, prove, release.</h1>
-          <p className="mt-7 max-w-3xl text-lg leading-relaxed text-[#c9c4d8]">Deep technical guidance for teams building evidence-backed assurance across real conversations, orchestration, retrieval, tool execution and release gates.</p>
-          <div className="mt-8 max-w-2xl">
-            <label htmlFor="docs-search" className="sr-only">Search documentation</label>
-            <div className="relative">
-              <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-white/40" />
-              <input id="docs-search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search engineering documentation..." className="h-13 w-full rounded-2xl border border-[#514778] bg-[#15102d] px-4 pl-11 text-sm text-white outline-none placeholder:text-white/40 focus:border-[#a855f7] focus:ring-2 focus:ring-[#7c3aed]/20" />
+      <div className="relative mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(420px,0.9fr)] lg:items-center">
+          <div className="max-w-4xl">
+            <p className="font-mono text-xs uppercase tracking-[0.22em] text-[#a855f7]">Engineering documentation</p>
+            <h1 className="mt-5 text-5xl font-bold leading-[1.02] tracking-tight sm:text-7xl">Build, evaluate, prove, release.</h1>
+            <p className="mt-7 max-w-3xl text-lg leading-relaxed text-[#c9c4d8]">Deep technical guidance for teams building evidence-backed assurance across real conversations, orchestration, retrieval, tool execution and release gates.</p>
+            <div className="mt-8 max-w-2xl">
+              <label htmlFor="docs-search" className="sr-only">Search documentation</label>
+              <div className="relative">
+                <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-white/40" />
+                <input id="docs-search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search engineering documentation..." className="h-13 w-full rounded-2xl border border-[#514778] bg-[#15102d] px-4 pl-11 text-sm text-white outline-none placeholder:text-white/40 focus:border-[#a855f7] focus:ring-2 focus:ring-[#7c3aed]/20" />
+              </div>
             </div>
           </div>
+          <DocConceptVisual section="Documentation Overview" />
         </div>
       </div>
     </section>
