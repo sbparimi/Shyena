@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, ArrowRight, Workflow } from "lucide-react";
+import { ArrowLeft, ArrowRight, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { DocConceptVisual } from "@/components/docs/doc-concept-visual";
 import { GeneratedMarkdown, getGeneratedDoc } from "@/content/generated-content-loader";
 
 export const Route = createFileRoute("/docs/sage-content-engineering")({
@@ -33,22 +34,33 @@ function SageContentEngineeringPage() {
   }
 
   return (
-    <>
-      <section className="relative overflow-hidden bg-lavender text-lavender-foreground">
-        <div className="relative mx-auto w-full max-w-3xl px-5 pb-8 pt-20 sm:px-8 sm:pt-28">
-          <span className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary px-3.5 py-1.5 text-xs font-medium text-primary">
-            <Workflow className="h-3.5 w-3.5" />
-            Docs · Content Engineering
-          </span>
-          <h1 className="mt-6 text-3xl font-bold leading-[1.1] sm:text-5xl">{doc.title}</h1>
-          <p className="mt-6 text-lg leading-relaxed text-muted-foreground">{doc.description}</p>
+    <div className="pb-10">
+      <section className="relative overflow-hidden rounded-3xl border border-[#2b2350] bg-[#0b0818] text-white shadow-2xl sm:rounded-[2rem]">
+        <div className="absolute inset-0 opacity-30 [background-image:linear-gradient(rgba(139,92,246,.10)_1px,transparent_1px),linear-gradient(90deg,rgba(139,92,246,.10)_1px,transparent_1px)] [background-size:64px_64px]" />
+        <div className="relative grid gap-8 px-6 py-10 sm:px-10 sm:py-14 lg:grid-cols-[minmax(0,1fr)_minmax(420px,0.9fr)] lg:items-center lg:px-12 lg:py-16">
+          <div className="max-w-3xl">
+            <p className="font-mono text-xs uppercase tracking-[0.22em] text-[#a855f7]">Docs / Content Engineering</p>
+            <h1 className="mt-5 text-4xl font-bold leading-[1.03] tracking-tight sm:text-5xl lg:text-6xl">{doc.title}</h1>
+            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[#c9c4d8]">{doc.description}</p>
+            <div className="mt-7 flex flex-wrap gap-2 font-mono text-[9px] uppercase tracking-[0.16em] text-[#918aa8]">
+              <span className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5">multi-agent workflow</span>
+              <span className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5">verified content</span>
+              <span className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5">content as code</span>
+            </div>
+          </div>
+          <DocConceptVisual section="SAGE Content Engineering" />
         </div>
       </section>
 
-      <article className="mx-auto w-full max-w-3xl px-5 pb-24 pt-12 sm:px-8">
+      <article className="mx-auto w-full max-w-5xl rounded-3xl border border-[#2b2350] bg-[#15102d] px-6 py-8 shadow-xl sm:px-10 sm:py-10 lg:px-12">
+        <div className="mb-10 rounded-2xl border border-[#3b2c66] bg-gradient-to-r from-[#1d153b] to-[#120d28] px-5 py-5 sm:px-6">
+          <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#a855f7]">How to read this guide</p>
+          <p className="mt-2 max-w-4xl text-sm leading-6 text-[#c9c4d8]">The visual above is the operating model. The guide below explains how each agent contributes, what evidence is produced, and how content moves from research to verified publication.</p>
+        </div>
+
         <GeneratedMarkdown sourcePath={doc.sourcePath} />
 
-        <div className="mt-12 flex flex-wrap gap-3">
+        <div className="mt-12 flex flex-wrap gap-3 border-t border-[#2b2350] pt-8">
           <Button asChild variant="outline">
             <Link to="/docs">
               <ArrowLeft className="mr-2 h-4 w-4" />
@@ -62,7 +74,8 @@ function SageContentEngineeringPage() {
             </Link>
           </Button>
         </div>
+        <div className="mt-8 text-xs text-[#918aa8]"><BookOpen className="mr-1 inline h-3.5 w-3.5" aria-hidden="true" />Published through the SAGE content pipeline.</div>
       </article>
-    </>
+    </div>
   );
 }
