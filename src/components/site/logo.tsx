@@ -6,14 +6,7 @@ export function Logo({ tone = "default" }: { tone?: "default" | "navy" }) {
 
   return (
     <Link to="/" aria-label="Shyena home" className="inline-flex items-center">
-      <svg
-        width="184"
-        height="51"
-        viewBox="0 0 368 102"
-        role="img"
-        aria-labelledby="shyena-logo-title shyena-logo-desc"
-        className="h-[51px] w-auto"
-      >
+      <svg width="184" height="51" viewBox="0 0 368 102" role="img" aria-labelledby="shyena-logo-title shyena-logo-desc" className="h-[51px] w-auto">
         <title id="shyena-logo-title">SHYENA</title>
         <desc id="shyena-logo-desc">SHYENA — Evaluate. Observe. Assure.</desc>
         <defs>
