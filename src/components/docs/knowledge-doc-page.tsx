@@ -4,6 +4,7 @@ import { Link, useLocation } from "@tanstack/react-router";
 import { Markdown } from "@tanstack/markdown/react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { AnimatedAssuranceVisual } from "@/components/docs/animated-assurance-visual";
 
 export type KnowledgeDocPageProps = {
   section: string;
@@ -85,13 +86,26 @@ export function KnowledgeDocPage({ section, title, description, source, next }: 
   return (
     <>
       <section className="relative overflow-hidden bg-[#0a071d] text-white">
-        <div className="absolute inset-0 opacity-30 [background-image:linear-gradient(rgba(168,85,247,.10)_1px,transparent_1px),linear-gradient(90deg,rgba(168,85,247,.10)_1px,transparent_1px)] [background-size:64px_64px]" />
-        <div className="absolute -right-32 top-0 h-[28rem] w-[28rem] rounded-full bg-[#7c3aed]/15 blur-3xl" />
-        <div className="relative mx-auto w-full max-w-7xl px-5 pb-14 pt-20 sm:px-8 sm:pb-16 sm:pt-28">
-          <div className="max-w-4xl">
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-1.5 text-xs font-medium text-white/70"><BookOpen className="h-3.5 w-3.5 text-[#a855f7]" />Docs · {section}</span>
-            <h1 className="mt-6 max-w-4xl text-4xl font-bold leading-[1.03] tracking-tight sm:text-6xl">{title}</h1>
-            <p className="mt-6 max-w-3xl text-lg leading-relaxed text-[#c9c4d8]">{description}</p>
+        <div className="absolute inset-0 opacity-30 [background-image:linear-gradient(rgba(168,85,247,.10)_1px,transparent_1px),linear-gradient(90deg,rgba(34,211,238,.08)_1px,transparent_1px)] [background-size:64px_64px]" />
+        <div className="absolute -right-32 top-0 h-[28rem] w-[28rem] rounded-full bg-[#7c3aed]/20 blur-3xl motion-safe:animate-pulse" />
+        <div className="relative mx-auto w-full max-w-7xl px-5 pb-10 pt-16 sm:px-8 sm:pb-14 sm:pt-24">
+          <div className="grid items-center gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:gap-14">
+            <div className="max-w-4xl">
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-1.5 text-xs font-medium text-white/70">
+                <BookOpen className="h-3.5 w-3.5 text-[#a855f7]" />
+                Docs · {section}
+              </span>
+              <h1 className="mt-6 max-w-4xl text-4xl font-bold leading-[1.03] tracking-tight sm:text-6xl">{title}</h1>
+              <p className="mt-6 max-w-3xl text-lg leading-relaxed text-[#c9c4d8]">{description}</p>
+              <div className="mt-7 flex flex-wrap gap-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#aaa0bf]">
+                <span className="rounded-full border border-[#3a2a5e] bg-white/[0.03] px-3 py-1.5">Live execution</span>
+                <span className="rounded-full border border-[#3a2a5e] bg-white/[0.03] px-3 py-1.5">Evidence-backed</span>
+                <span className="rounded-full border border-[#3a2a5e] bg-white/[0.03] px-3 py-1.5">Release-ready</span>
+              </div>
+            </div>
+            <div className="relative lg:pt-2">
+              <AnimatedAssuranceVisual compact />
+            </div>
           </div>
         </div>
       </section>
