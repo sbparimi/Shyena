@@ -129,6 +129,12 @@ const CONCEPTS: Record<string, { kicker: string; message: string; pieces: Array<
   },
 };
 
+const AGENTS = [
+  { label: "Planner agent", icon: Bot },
+  { label: "Evaluator agent", icon: Gauge },
+  { label: "Evidence agent", icon: ShieldCheck },
+];
+
 const FALLBACK = CONCEPTS["Getting Started"];
 
 export function DocConceptVisual({ section }: { section: string }) {
@@ -153,7 +159,20 @@ export function DocConceptVisual({ section }: { section: string }) {
           </div>
         </div>
 
-        <div className="relative mx-auto mt-8 min-h-[390px] max-w-[620px]">
+        <div className="mt-5 flex flex-wrap gap-2">
+          {AGENTS.map(({ label, icon: Icon }, index) => (
+            <div
+              key={label}
+              className="flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.025] px-2.5 py-1.5 font-mono text-[8px] uppercase tracking-[0.12em] text-[#9f97b3]"
+              style={{ animationDelay: `${index * 240}ms` }}
+            >
+              <Icon className="h-3 w-3 text-[#c4b5fd]" />
+              {label}
+            </div>
+          ))}
+        </div>
+
+        <div className="relative mx-auto mt-5 min-h-[390px] max-w-[620px]">
           <div className="absolute left-1/2 top-1/2 h-52 w-52 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#a855f7]/20 bg-[#120d28]/80 shadow-[0_0_70px_rgba(124,58,237,.22)] backdrop-blur-sm" />
           <div className="absolute left-1/2 top-1/2 flex h-28 w-28 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-3xl border border-[#a855f7]/40 bg-[#1b1240] shadow-[0_0_35px_rgba(168,85,247,.24)]">
             <Bot className="h-7 w-7 text-[#c4b5fd]" />
@@ -209,7 +228,7 @@ export function DocConceptVisual({ section }: { section: string }) {
 
           <div className="absolute bottom-0 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2 rounded-full border border-white/10 bg-[#0f0a21]/90 px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.16em] text-[#9f97b3] backdrop-blur-md">
             <span className="h-1.5 w-1.5 animate-ping rounded-full bg-[#a855f7]" />
-            pieces → evidence → decision
+            agents assemble pieces → evidence → decision
           </div>
         </div>
       </div>
