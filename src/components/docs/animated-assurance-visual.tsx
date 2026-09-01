@@ -19,35 +19,16 @@ const PATHS = [
 ] as const;
 
 const TONE = {
-  cyan: {
-    stroke: "#22d3ee",
-    fill: "#22d3ee",
-    shadow: "0 0 18px rgba(34,211,238,.65)",
-  },
-  violet: {
-    stroke: "#a855f7",
-    fill: "#a855f7",
-    shadow: "0 0 18px rgba(168,85,247,.65)",
-  },
-  fuchsia: {
-    stroke: "#e879f9",
-    fill: "#e879f9",
-    shadow: "0 0 18px rgba(232,121,249,.65)",
-  },
-  amber: {
-    stroke: "#f59e0b",
-    fill: "#f59e0b",
-    shadow: "0 0 18px rgba(245,158,11,.65)",
-  },
+  cyan: { stroke: "#22d3ee", fill: "#22d3ee", shadow: "0 0 18px rgba(34,211,238,.65)" },
+  violet: { stroke: "#a855f7", fill: "#a855f7", shadow: "0 0 18px rgba(168,85,247,.65)" },
+  fuchsia: { stroke: "#e879f9", fill: "#e879f9", shadow: "0 0 18px rgba(232,121,249,.65)" },
+  amber: { stroke: "#f59e0b", fill: "#f59e0b", shadow: "0 0 18px rgba(245,158,11,.65)" },
 } as const;
 
 export function AnimatedAssuranceVisual({ compact = false }: { compact?: boolean }) {
-  const width = compact ? 760 : 900;
-  const height = compact ? 420 : 500;
-
   return (
     <div
-      className="relative overflow-hidden rounded-[28px] border border-[#3b2a63] bg-[#090615] shadow-[0_0_70px_rgba(124,58,237,.16)]"
+      className={`relative overflow-hidden rounded-[28px] border border-[#3b2a63] bg-[#090615] shadow-[0_0_70px_rgba(124,58,237,.16)] ${compact ? "" : "min-h-[380px]"}`}
       aria-label="Animated Shyena assurance lifecycle visual"
       role="img"
     >
@@ -55,7 +36,7 @@ export function AnimatedAssuranceVisual({ compact = false }: { compact?: boolean
       <div className="absolute -left-16 top-10 h-64 w-64 rounded-full bg-cyan-400/10 blur-3xl motion-safe:animate-pulse" />
       <div className="absolute -right-20 bottom-0 h-72 w-72 rounded-full bg-fuchsia-500/10 blur-3xl motion-safe:animate-pulse" style={{ animationDelay: "1.6s" }} />
 
-      <svg viewBox={`0 0 320 190`} width="100%" height="100%" className="relative block h-auto min-h-[340px]">
+      <svg viewBox="0 0 320 190" width="100%" height="100%" className="relative block h-auto min-h-[340px]">
         <defs>
           <radialGradient id="assurance-core-glow" cx="50%" cy="50%" r="50%">
             <stop offset="0%" stopColor="#a855f7" stopOpacity=".34" />
