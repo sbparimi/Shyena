@@ -123,3 +123,5 @@ function PricingPage() {
     </>
   );
 }
+
+// Production deployment trigger: pricing page is the current source of truth.
