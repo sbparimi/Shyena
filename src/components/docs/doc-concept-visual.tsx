@@ -19,6 +19,18 @@ import {
 import type { LucideIcon } from "lucide-react";
 
 const CONCEPTS: Record<string, { kicker: string; message: string; pieces: Array<{ label: string; icon: LucideIcon }> }> = {
+  "Documentation Overview": {
+    kicker: "ASSURANCE SYSTEM",
+    message: "Every guide is one piece of the same evidence-backed AI assurance lifecycle.",
+    pieces: [
+      { label: "Discover", icon: Search },
+      { label: "Define", icon: FileCheck2 },
+      { label: "Execute", icon: Bot },
+      { label: "Evaluate", icon: Gauge },
+      { label: "Prove", icon: ShieldCheck },
+      { label: "Release", icon: CheckCircle2 },
+    ],
+  },
   "Getting Started": {
     kicker: "ASSEMBLY / 01",
     message: "Connect the system, prove the journey, then release from evidence.",
@@ -135,7 +147,7 @@ const AGENTS = [
   { label: "Evidence agent", icon: ShieldCheck },
 ];
 
-const FALLBACK = CONCEPTS["Getting Started"];
+const FALLBACK = CONCEPTS["Documentation Overview"];
 
 export function DocConceptVisual({ section }: { section: string }) {
   const concept = CONCEPTS[section] ?? FALLBACK;
