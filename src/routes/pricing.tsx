@@ -18,12 +18,12 @@ export const Route = createFileRoute("/pricing")({
 });
 
 const PILOT_FEATURES = [
-  "End-to-end setup of CIS, ECAAP & Chakra",
-  "Up to 3 AI systems or bots in scope",
-  "Test design & automation framework",
-  "Live dashboards & reporting",
-  "Knowledge transfer & team enablement",
-  "Pilot summary & roadmap for scale",
+  "One AI system or bot in scope",
+  "Defined critical AI journey assessment",
+  "Behavioural and conversation risk evaluation",
+  "Focused security risk assessment",
+  "Evidence-backed assurance report",
+  "Remediation priorities and production rollout recommendation",
 ];
 
 function PricingPage() {
@@ -48,15 +48,20 @@ function PricingPage() {
               <div>
                 <p className="font-mono text-xs uppercase tracking-[0.18em] text-[#f59804]">Pilot Project</p>
                 <p className="mt-4 text-4xl font-bold tracking-tight text-[#faf8ff] sm:text-5xl">€7,500</p>
-                <p className="mt-2 text-base text-[#918aa8]">one-time pilot engagement · 30–60 days</p>
+                <p className="mt-2 text-base text-[#918aa8]">one-time pilot engagement · 30 days</p>
               </div>
               <span className="rounded-full bg-[#7c3aed] px-4 py-2 text-xs font-bold uppercase tracking-wider text-white">Recommended</span>
             </div>
-            <p className="mt-7 text-lg font-semibold text-[#faf8ff]">Kickstart your AI assurance journey with a guided pilot.</p>
-            <p className="mt-3 max-w-3xl text-sm leading-relaxed text-[#c9c4d8]">One focused engagement to establish the assurance baseline, execute representative journeys, evaluate outcomes and create a practical roadmap for scale.</p>
+            <p className="mt-7 text-lg font-semibold text-[#faf8ff]">Kickstart your AI assurance journey with a focused pilot.</p>
+            <p className="mt-3 max-w-3xl text-sm leading-relaxed text-[#c9c4d8]">A defined assurance assessment for one AI system, focused on the journeys, behaviours and security risks that matter most before production rollout.</p>
           </div>
 
           <div className="px-7 py-8 sm:px-10">
+            <div className="mb-8 rounded-2xl border border-[#514778] bg-[#0a071d]/60 px-6 py-6">
+              <p className="font-mono text-xs uppercase tracking-[0.16em] text-[#a855f7]">Goal of the pilot</p>
+              <p className="mt-3 text-base leading-relaxed text-[#faf8ff]">Establish your baseline, assess critical AI journeys, identify behavioural and security risks, and receive an evidence-backed assurance report with remediation priorities and a production rollout recommendation.</p>
+            </div>
+
             <div className="overflow-hidden rounded-2xl border border-[#2b2350]">
               <div className="grid grid-cols-[1fr_auto] bg-[#0a071d] px-5 py-4 text-xs font-bold uppercase tracking-[0.16em] text-[#a855f7] sm:px-6">
                 <span>What’s included</span>
