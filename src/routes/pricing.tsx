@@ -172,3 +172,5 @@ function PricingPage() {
     </>
   );
 }
+
+// Production deployment trigger: keep the pricing calculator and focused pilot aligned with the approved scope.
