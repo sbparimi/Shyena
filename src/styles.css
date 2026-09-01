@@ -70,6 +70,23 @@
 @utility bg-grid { background-image:linear-gradient(to right,rgba(43,35,80,.62) 1px,transparent 1px),linear-gradient(to bottom,rgba(43,35,80,.62) 1px,transparent 1px); background-size:44px 44px; mask-image:radial-gradient(ellipse 72% 68% at 50% 0%,black 35%,transparent 100%); -webkit-mask-image:radial-gradient(ellipse 72% 68% at 50% 0%,black 35%,transparent 100%); }
 @utility bg-mesh { background-image:radial-gradient(45% 55% at 20% 8%,rgba(168,85,247,.22) 0%,transparent 72%),radial-gradient(48% 55% at 82% 4%,rgba(124,58,237,.22) 0%,transparent 72%),radial-gradient(55% 60% at 50% 100%,rgba(168,85,247,.12) 0%,transparent 72%); animation:mesh-drift 18s ease-in-out infinite alternate; }
 
+/* Resource pages use the same visual system as Pricing: deep navy canvas, purple glow, fine grid and elevated dark cards. */
+.resource-surface { background:#0a071d; color:#faf8ff; }
+.resource-surface .bg-lavender { background:#0a071d !important; color:#faf8ff !important; background-image:linear-gradient(rgba(139,92,246,.10) 1px,transparent 1px),linear-gradient(90deg,rgba(139,92,246,.10) 1px,transparent 1px) !important; background-size:64px 64px !important; }
+.resource-surface .text-lavender-foreground { color:#faf8ff !important; }
+.resource-surface .bg-card { background:#15102d !important; }
+.resource-surface .bg-card\/70,
+.resource-surface .bg-card\/80 { background:rgba(21,16,45,.82) !important; }
+.resource-surface .bg-primary\/5 { background:rgba(124,58,237,.08) !important; }
+.resource-surface .bg-secondary { background:#15102d !important; }
+.resource-surface .text-muted-foreground { color:#c9c4d8; }
+.resource-surface .text-primary { color:#a855f7; }
+.resource-surface .border-border { border-color:#2b2350; }
+.resource-surface .border-navy-border { border-color:#2b2350; }
+.resource-surface input,
+.resource-surface textarea,
+.resource-surface select { background:#15102d; color:#faf8ff; border-color:#514778; }
+
 /* Homepage-only hero overrides. The video poster is unique to the homepage, so these rules cannot leak into the first section of every route. */
 main > section:first-child:has(video[poster="/hero-video-poster.png"]) .grid.items-center { grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important; align-items:center !important; gap:clamp(2.5rem,5vw,5rem) !important; }
 main > section:first-child:has(video[poster="/hero-video-poster.png"]) h1 { max-width:720px !important; font-size:clamp(3.1rem,5vw,5.2rem) !important; line-height:1.03 !important; letter-spacing:-.045em !important; font-weight:600 !important; margin-top:1.75rem !important; overflow-wrap:normal !important; word-break:normal !important; }
