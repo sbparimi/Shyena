@@ -34,6 +34,8 @@ const LIFETIME_FEATURES = [
   "CIS, ECAAP & Chakra platform access",
   "One-week full framework onboarding",
   "Hands-on hand-holding during onboarding",
+  "Hosted and operated on Shyena-managed infrastructure",
+  "SOC 2-compliant cloud infrastructure and security controls",
   "Product updates and platform upgrades",
   "Use across agreed enterprise AI systems",
   "Internal enterprise use",
@@ -209,7 +211,7 @@ function PricingPage() {
             </div>
 
             <div className="mt-8 flex flex-col gap-5 border-t border-[#2b2350] pt-7 sm:flex-row sm:items-center sm:justify-between">
-              <p className="text-sm leading-relaxed text-[#c9c4d8]">One week of full-framework onboarding and hands-on hand-holding is included. Implementation, custom development, professional services, ongoing support and infrastructure are separately scoped where required.</p>
+              <p className="text-sm leading-relaxed text-[#c9c4d8]">The full framework runs on Shyena-managed infrastructure. SOC 2-compliant cloud infrastructure and security controls are included, together with one week of full-framework onboarding and hands-on hand-holding. Implementation, custom development, professional services and ongoing support are separately scoped where required.</p>
               <Button asChild className="shrink-0"><Link to="/contact">Discuss the lifetime license <ArrowRight className="h-4 w-4" /></Link></Button>
             </div>
           </div>
