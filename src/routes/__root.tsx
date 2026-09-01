@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Outlet, Link, createRootRouteWithContext, useRouter, HeadContent, Scripts } from "@tanstack/react-router";
+import { Outlet, Link, createRootRouteWithContext, useRouter, HeadContent, Scripts, useLocation } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
@@ -96,12 +96,15 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const location = useLocation();
+  const isResourcePage = location.pathname.startsWith("/docs") || location.pathname.startsWith("/blog");
+
   useEffect(() => { const stop = startAnimatedFavicon(); return stop; }, []);
   return (
     <QueryClientProvider client={queryClient}>
       <div className="flex min-h-screen flex-col">
         <SiteHeader />
-        <main className="flex-1"><Outlet /></main>
+        <main className={isResourcePage ? "resource-surface flex-1" : "flex-1"}><Outlet /></main>
         <SiteFooter />
         <VideoExperience />
       </div>
