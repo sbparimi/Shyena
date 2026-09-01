@@ -150,7 +150,7 @@ Use this checklist:
 
 If connection validation fails, fix the environment first. Do not compensate for an invalid test environment by changing the test specification.
 
-See [Environments & Configuration](/docs/environments-configuration) for deeper configuration guidance and [Integrations](/docs/integrations) for platform-specific connection patterns.
+See [Environments & Configuration](/docs/environments) for deeper configuration guidance and [Integrations](/docs/integrations) for platform-specific connection patterns.
 
 ---
 
@@ -419,7 +419,7 @@ Deploy / Block
 
 Use the same assurance contract across local, CI, staging, and pre-release execution where the environment and risk model allow it.
 
-For deeper configuration and release workflows, continue to [Environments & Configuration](/docs/environments-configuration) and [Reporting & Release Evidence](/docs/reporting-release-evidence).
+For deeper configuration and release workflows, continue to [Environments & Configuration](/docs/environments) and [Reporting & Release Evidence](/docs/reporting).
 
 ---
 
@@ -511,9 +511,9 @@ Turn the journey into a reusable regression case, add the highest-risk variation
 | --- | --- |
 | [Writing Test Specs](/docs/writing-test-specs) | Build reusable assurance contracts, personas, playbooks, assertions, and constraints. |
 | [The Evaluation Model](/docs/evaluation-model) | Understand deterministic, semantic, execution-integrity, and security evaluation. |
-| [Environments & Configuration](/docs/environments-configuration) | Configure execution environments, credentials, data, and runtime settings. |
+| [Environments & Configuration](/docs/environments) | Configure execution environments, credentials, data, and runtime settings. |
 | [Integrations](/docs/integrations) | Connect Shyena to the AI systems and engineering environments you already use. |
-| [Reporting & Release Evidence](/docs/reporting-release-evidence) | Turn test runs into evidence that supports release decisions and auditability. |
+| [Reporting & Release Evidence](/docs/reporting) | Turn test runs into evidence that supports release decisions and auditability. |
 
 ---
 
