@@ -1,24 +1,39 @@
 import { Link } from "@tanstack/react-router";
 
 export function Logo({ tone = "default" }: { tone?: "default" | "navy" }) {
-  const muted = tone === "navy" ? "text-navy-muted" : "text-muted-foreground";
-  const foreground = tone === "navy" ? "text-navy-foreground" : "text-foreground";
+  const foreground = tone === "navy" ? "#ffffff" : "currentColor";
+  const muted = tone === "navy" ? "#e5e7eb" : "#9ca3af";
 
   return (
-    <Link to="/" className="group inline-flex items-center gap-3" aria-label="Shyena home">
-      <img
-        src="/shyena-icon.png"
-        alt="Shyena falcon"
-        width={42}
-        height={52}
-        className="h-[42px] w-auto shrink-0 object-contain"
-      />
-      <span className="flex flex-col leading-none">
-        <span className={`font-display text-xl font-bold tracking-[0.22em] ${foreground}`}>SHYENA</span>
-        <span className={`mt-1 text-[8px] font-semibold uppercase tracking-[0.08em] ${muted}`}>
-          Evaluate. <span className="text-[#f59804]">Observe.</span> <span className="text-[#a855f7]">Assure.</span>
-        </span>
-      </span>
+    <Link to="/" aria-label="Shyena home" className="inline-flex items-center">
+      <svg
+        width="184"
+        height="51"
+        viewBox="0 0 368 102"
+        role="img"
+        aria-labelledby="shyena-logo-title shyena-logo-desc"
+        className="h-[51px] w-auto"
+      >
+        <title id="shyena-logo-title">SHYENA</title>
+        <desc id="shyena-logo-desc">SHYENA — Evaluate. Observe. Assure.</desc>
+        <defs>
+          <linearGradient id="shyenaFalcon" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stopColor="#f59804" />
+            <stop offset="0.48" stopColor="#a855f7" />
+            <stop offset="1" stopColor="#6d28d9" />
+          </linearGradient>
+        </defs>
+        <g transform="translate(5 8) scale(.92)">
+          <path fill="url(#shyenaFalcon)" d="M14 45c9-21 23-34 43-37 11-2 20 1 27 8-8-1-14 1-19 6 10-1 18 1 25 7-13-1-24 1-33 7-7 5-14 12-20 21-8 11-17 16-28 18 6-9 9-18 5-30z"/>
+          <path fill="#8b5cf6" d="M42 52c8-9 16-15 25-19-4 12-2 23 7 34-10-3-18-8-24-15-3 9-8 16-16 21 3-8 4-15 8-21z"/>
+          <path fill="#7c3aed" d="M25 66c9-7 16-15 20-24 2 13 7 22 16 30-13-1-25-3-36-6z"/>
+          <path fill="#f59804" d="M60 13c10-3 19-1 27 3l-8 7c-6-5-12-7-19-10z"/>
+        </g>
+        <text x="116" y="48" fill={foreground} fontFamily="Arial, Helvetica, sans-serif" fontSize="31" fontWeight="700" letterSpacing="8">SHYENA</text>
+        <text x="117" y="70" fill={muted} fontFamily="Arial, Helvetica, sans-serif" fontSize="10" fontWeight="700" letterSpacing="1.5">EVALUATE.</text>
+        <text x="183" y="70" fill="#f59804" fontFamily="Arial, Helvetica, sans-serif" fontSize="10" fontWeight="700" letterSpacing="1.5">OBSERVE.</text>
+        <text x="254" y="70" fill="#a855f7" fontFamily="Arial, Helvetica, sans-serif" fontSize="10" fontWeight="700" letterSpacing="1.5">ASSURE.</text>
+      </svg>
     </Link>
   );
 }
