@@ -3,6 +3,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Markdown } from "@tanstack/markdown/react";
 import { Button } from "@/components/ui/button";
 import { DocsSidebar } from "@/components/docs/docs-sidebar";
+import { AnimatedAssuranceVisual } from "@/components/docs/animated-assurance-visual";
 import source01 from "@/content/docs/getting-started/01-ai-agent-assurance-foundations.md?raw";
 import source02 from "@/content/docs/getting-started/02-anatomy-of-an-ai-agent.md?raw";
 import source03 from "@/content/docs/getting-started/03-deterministic-and-semantic-evaluation.md?raw";
@@ -63,18 +64,21 @@ function GettingStartedArticlePage() {
   return (
     <>
       <section className="relative overflow-hidden bg-[#0a071d] text-white">
-        <div className="absolute inset-0 opacity-25 [background-image:linear-gradient(rgba(139,92,246,.10)_1px,transparent_1px),linear-gradient(90deg,rgba(139,92,246,.10)_1px,transparent_1px)] [background-size:64px_64px]" />
-        <div className="absolute -right-24 top-0 h-96 w-96 rounded-full bg-[#7c3aed]/15 blur-3xl" />
-        <div className="relative mx-auto grid w-full max-w-7xl gap-10 px-5 pb-12 pt-20 sm:px-8 sm:pb-14 sm:pt-28 lg:grid-cols-[260px_minmax(0,1fr)] lg:gap-12">
+        <div className="absolute inset-0 opacity-30 [background-image:linear-gradient(rgba(168,85,247,.10)_1px,transparent_1px),linear-gradient(90deg,rgba(34,211,238,.08)_1px,transparent_1px)] [background-size:64px_64px]" />
+        <div className="absolute -right-24 top-0 h-96 w-96 rounded-full bg-[#7c3aed]/20 blur-3xl motion-safe:animate-pulse" />
+        <div className="relative mx-auto grid w-full max-w-7xl gap-10 px-5 pb-12 pt-16 sm:px-8 sm:pb-14 sm:pt-24 lg:grid-cols-[260px_minmax(0,1fr)] lg:gap-12">
           <DocsSidebar />
-          <div className="max-w-4xl">
-            <div className="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em]">
-              <span className="rounded-full bg-[#7c3aed]/15 px-3 py-1.5 text-[#a855f7]">Getting Started</span>
-              <span className="rounded-full border border-[#514778] px-3 py-1.5 text-[#c9c4d8]">{doc.level}</span>
-              <span className="text-[#918aa8]">Guide {String(doc.order).padStart(2, "0")} / 10</span>
+          <div className="grid items-center gap-10 xl:grid-cols-[0.78fr_1.22fr] xl:gap-12">
+            <div className="max-w-4xl">
+              <div className="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em]">
+                <span className="rounded-full bg-[#7c3aed]/15 px-3 py-1.5 text-[#a855f7]">Getting Started</span>
+                <span className="rounded-full border border-[#514778] px-3 py-1.5 text-[#c9c4d8]">{doc.level}</span>
+                <span className="text-[#918aa8]">Guide {String(doc.order).padStart(2, "0")} / 10</span>
+              </div>
+              <h1 className="mt-6 text-4xl font-bold leading-[1.05] tracking-tight sm:text-6xl">{doc.title}</h1>
+              <p className="mt-6 max-w-3xl text-lg leading-relaxed text-[#c9c4d8]">{doc.description}</p>
             </div>
-            <h1 className="mt-6 text-4xl font-bold leading-[1.05] tracking-tight sm:text-6xl">{doc.title}</h1>
-            <p className="mt-6 max-w-3xl text-lg leading-relaxed text-[#c9c4d8]">{doc.description}</p>
+            <AnimatedAssuranceVisual compact />
           </div>
         </div>
       </section>
