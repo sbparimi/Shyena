@@ -19,6 +19,9 @@
 .reference-page-theme input,.reference-page-theme textarea,.reference-page-theme select{background:#fff;color:#0f172a;border-color:#cbd5e1}
 .reference-page-theme input::placeholder,.reference-page-theme textarea::placeholder{color:#94a3b8}
 
+/* Shyena wordmark: geometric, compact and deliberately tighter than the previous wide tracking. */
+.shyena-wordmark{font-family:"Sora","Inter",ui-sans-serif,system-ui,sans-serif;font-weight:700;letter-spacing:-0.045em;text-rendering:geometricPrecision}
+
 /* Shyena CTA system: primary actions use the supplied yellow. Secondary actions remain quiet but use the same yellow as the interaction accent. */
 .site-theme [data-shyena-button="primary"]{background:#ffb804!important;border:1px solid #ffb804!important;color:#0f172a!important;box-shadow:none!important}
 .site-theme [data-shyena-button="primary"]:hover{background:#f2aa00!important;border-color:#f2aa00!important;color:#0f172a!important}
