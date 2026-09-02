@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Check, Calculator, ShieldCheck, Sparkles, Users, Workflow } from "lucide-react";
+import { ArrowRight, Check, Calculator, ShieldCheck, Sparkles } from "lucide-react";
 import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { CtaBand } from "@/components/site/cta-band";
@@ -131,34 +131,6 @@ function PricingPage() {
             <h1 className="mt-7 max-w-4xl text-5xl font-semibold leading-[0.98] tracking-[-0.045em] text-slate-950 sm:text-6xl lg:text-[72px]">Simple. Transparent.<br /><span className="text-orange-700">Outcome-driven.</span></h1>
             <p className="mt-7 max-w-3xl text-lg leading-8 text-slate-600 sm:text-xl">Start with a focused pilot, establish measurable assurance and build the evidence needed to scale across your AI estate.</p>
             <div className="mt-8 flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-[0.16em] text-slate-400"><span>Public list prices</span><span>Excluding VAT</span><span>Enterprise volume terms negotiable</span></div>
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-white px-6 py-16 lg:px-8 lg:py-24">
-        <div className="mx-auto max-w-7xl">
-          <div className="max-w-3xl"><p className="text-xs font-bold uppercase tracking-[0.2em] text-orange-700">Enterprise offer</p><h2 className="mt-4 text-4xl font-semibold tracking-[-0.03em] sm:text-5xl">A focused pilot. A clear path to scale.</h2><p className="mt-5 text-lg leading-8 text-slate-600">Start with one real AI system, establish the assurance baseline and use the resulting evidence to shape the right production scope.</p></div>
-          <div className="mt-12 overflow-hidden rounded-[30px] border border-slate-200 bg-slate-50 shadow-[0_24px_70px_-48px_rgba(15,23,42,0.45)]">
-            <div className="grid lg:grid-cols-[1.05fr_0.95fr]">
-              <div className="p-8 sm:p-10 lg:p-12">
-                <div className="text-xs font-bold uppercase tracking-[0.18em] text-orange-700">AI Assurance Pilot</div>
-                <div className="mt-5 flex flex-wrap items-end gap-x-3 gap-y-1"><span className="text-6xl font-semibold tracking-[-0.05em] text-slate-950 sm:text-7xl">€7,500</span><span className="pb-2 text-sm font-medium text-slate-500">30–60 days</span></div>
-                <p className="mt-2 text-base font-medium text-slate-500">One AI system · focused assurance scope</p>
-                <p className="mt-7 max-w-2xl text-base leading-7 text-slate-600">For teams evaluating Shyena for the first time. Establish the baseline, execute representative customer journeys, evaluate outcomes and prove the assurance model before broader rollout.</p>
-                <Button asChild size="lg" className="mt-8"><Link to="/contact">Discuss the pilot <ArrowRight className="h-4 w-4" /></Link></Button>
-              </div>
-              <div className="border-t border-slate-200 bg-white p-8 sm:p-10 lg:border-l lg:border-t-0 lg:p-12">
-                <p className="text-xs font-bold uppercase tracking-[0.18em] text-slate-400">What the pilot establishes</p>
-                <div className="mt-6 space-y-4">
-                  {["A measurable assurance baseline", "Representative executable journeys", "Quality, orchestration and outcome evidence", "A release-ready reporting model"].map((item) => <div key={item} className="flex items-start gap-3"><span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-orange-50 text-orange-700"><Check className="h-3.5 w-3.5" /></span><span className="text-sm font-medium leading-6 text-slate-700">{item}</span></div>)}
-                </div>
-                <div className="mt-8 rounded-2xl border border-orange-100 bg-[#fff8f2] p-5"><p className="text-sm font-semibold text-slate-900">Then scale with evidence.</p><p className="mt-1.5 text-sm leading-6 text-slate-600">Production scope, usage and enterprise terms are agreed against the assurance footprint that the pilot proves.</p></div>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-5 grid gap-5 lg:grid-cols-3">
-            {[[Workflow, "Platform license", "Nexus, Vera and Chakra are capabilities within one Shyena assurance platform—not separate module subscriptions."], [Sparkles, "Usage expansion", "CIS journeys, Vera conversations and Chakra security interactions are metered independently at €0.05 per additional unit."], [Users, "Customer environment", "Cloud infrastructure, LLM/API consumption, hosting and monitoring are customer-funded and separate from the Shyena software fee."]].map(([Icon, title, text]) => { const Component = Icon as typeof Workflow; return <div key={title as string} className="group rounded-2xl border border-slate-200 bg-slate-50 p-6 transition duration-200 hover:-translate-y-0.5 hover:border-orange-200 hover:shadow-[0_18px_45px_-30px_rgba(234,88,12,0.35)]"><div className="flex h-10 w-10 items-center justify-center rounded-xl bg-orange-50 text-orange-700"><Component className="h-5 w-5" /></div><h3 className="mt-5 text-base font-semibold text-slate-950">{title as string}</h3><p className="mt-2 text-sm leading-6 text-slate-600">{text as string}</p></div>; })}
           </div>
         </div>
       </section>
