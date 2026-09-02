@@ -26,18 +26,6 @@ const PILOT_FEATURES = [
   "Remediation priorities and production rollout recommendation",
 ];
 
-const LIFETIME_FEATURES = [
-  "One-time lifetime platform license",
-  "CIS, ECAAP & Chakra platform access",
-  "One-week full framework onboarding",
-  "Hands-on hand-holding during onboarding",
-  "Hosted and operated on Shyena-managed infrastructure",
-  "SOC 2-compliant cloud infrastructure and security controls",
-  "Product updates and platform upgrades",
-  "Use across agreed enterprise AI systems",
-  "Internal enterprise use",
-];
-
 function FeatureTable({ title, features }: { title: string; features: string[] }) {
   return (
     <div className="overflow-hidden rounded-2xl border border-[#2b2350]">
@@ -95,33 +83,7 @@ function PricingPage() {
         </div>
       </section>
 
-      <section id="lifetime-platform-license" className="bg-[#0a071d] px-5 pb-16 sm:px-8 sm:pb-24">
-        <div className="mx-auto max-w-6xl overflow-hidden rounded-3xl border border-[#7c3aed] bg-[#15102d] shadow-2xl shadow-[#7c3aed]/20">
-          <div className="border-b border-[#2b2350] px-7 py-8 sm:px-10">
-            <div className="flex flex-wrap items-start justify-between gap-5">
-              <div>
-                <p className="font-mono text-xs uppercase tracking-[0.18em] text-[#a855f7]">After the pilot</p>
-                <p className="mt-3 text-2xl font-bold text-[#faf8ff] sm:text-3xl">Lifetime Platform License</p>
-                <p className="mt-4 text-4xl font-bold tracking-tight text-[#faf8ff] sm:text-5xl">€50,000 <span className="text-lg font-medium text-[#918aa8]">+ applicable taxes</span></p>
-                <p className="mt-2 text-base text-[#918aa8]">one-time license fee</p>
-              </div>
-              <span className="rounded-full border border-[#a855f7]/40 bg-[#7c3aed]/15 px-4 py-2 text-xs font-bold uppercase tracking-wider text-[#d8b4fe]">Preferred pilot offer</span>
-            </div>
-            <p className="mt-7 max-w-4xl text-base leading-relaxed text-[#e8e3f2]">For customers who complete the pilot, continue with a one-time lifetime license for the Shyena assurance platform.</p>
-          </div>
-          <div className="px-7 py-8 sm:px-10">
-            <FeatureTable title="License includes" features={LIFETIME_FEATURES} />
-            <div className="mt-8 flex flex-col gap-5 border-t border-[#2b2350] pt-7 sm:flex-row sm:items-center sm:justify-between">
-              <p className="text-sm leading-relaxed text-[#c9c4d8]">The full framework runs on Shyena-managed infrastructure. SOC 2-compliant cloud infrastructure and security controls are included, together with one week of full-framework onboarding and hands-on hand-holding. Implementation, custom development, professional services and ongoing support are separately scoped where required.</p>
-              <Button asChild className="shrink-0"><Link to="/contact">Discuss the lifetime license <ArrowRight className="h-4 w-4" /></Link></Button>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <CtaBand eyebrow="Enterprise AI assurance" title="Prove your AI agent is ready to operate." description="Start with one focused pilot. Build the evidence. Scale the assurance model across the estate." primaryLabel="Request an Assurance Review" primaryHref="/contact" />
     </>
   );
 }
-
-// Production deployment trigger: pricing page is the current source of truth.
