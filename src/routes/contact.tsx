@@ -68,7 +68,7 @@ function ContactPage() {
   }
 
   return (
-    <>
+    <div data-page="contact" className="reference-page-theme">
       <section className="relative overflow-hidden bg-[#0a071d] text-white">
         <div className="absolute inset-0 opacity-25 [background-image:linear-gradient(rgba(139,92,246,.10)_1px,transparent_1px),linear-gradient(90deg,rgba(139,92,246,.10)_1px,transparent_1px)] [background-size:64px_64px]" aria-hidden="true" />
         <div className="absolute -right-24 top-0 h-96 w-96 rounded-full bg-[#7c3aed]/20 blur-3xl" aria-hidden="true" />
@@ -149,6 +149,6 @@ function ContactPage() {
         </div>
       </section>
       <CtaBand />
-    </>
+    </div>
   );
 }
