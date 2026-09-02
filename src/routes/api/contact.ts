@@ -31,15 +31,21 @@ export const Route = createFileRoute("/api/contact")({
         }
 
         const input = body as Record<string, unknown>;
-        const name = cleanText(input.name, MAX_NAME_LENGTH);
+        const inquiryReason = cleanText(input.inquiryReason, 80);
+        const firstName = cleanText(input.firstName, MAX_NAME_LENGTH);
+        const lastName = cleanText(input.lastName, MAX_NAME_LENGTH);
         const email = cleanText(input.email, MAX_EMAIL_LENGTH);
+        const phone = cleanText(input.phone, 60);
         const company = cleanText(input.company, MAX_COMPANY_LENGTH);
+        const jobTitle = cleanText(input.jobTitle, 120);
         const companySize = cleanText(input.companySize, 40);
+        const country = cleanText(input.country, 100);
         const message = cleanText(input.message, MAX_MESSAGE_LENGTH);
+        const name = [firstName, lastName].filter(Boolean).join(" ");
 
         if (!name || !email || !company || !message) {
           return Response.json(
-            { error: "Name, email, company, and message are required" },
+            { error: "First name, last name, email, company, and message are required" },
             { status: 400 },
           );
         }
@@ -60,10 +66,7 @@ export const Route = createFileRoute("/api/contact")({
           );
         }
 
-        const safeName = escapeHtml(name);
-        const safeEmail = escapeHtml(email);
-        const safeCompany = escapeHtml(company);
-        const safeCompanySize = escapeHtml(companySize || "Not provided");
+        const safe = (value: string, fallback = "Not provided") => escapeHtml(value || fallback);
         const safeMessage = escapeHtml(message).replaceAll("\n", "<br />");
 
         const resendResponse = await fetch("https://api.resend.com/emails", {
@@ -76,14 +79,18 @@ export const Route = createFileRoute("/api/contact")({
             from: "Shyena <contact@shyena.eu>",
             to: ["sp@shyena.eu"],
             reply_to: email,
-            subject: `New Shyena demo request from ${name}`,
+            subject: `New Shyena enquiry from ${name}`,
             html: `
               <div style="font-family:Arial,sans-serif;line-height:1.6;color:#17132f">
                 <h2>New Shyena Website Enquiry</h2>
-                <p><strong>Name:</strong> ${safeName}</p>
-                <p><strong>Work email:</strong> ${safeEmail}</p>
-                <p><strong>Company:</strong> ${safeCompany}</p>
-                <p><strong>Company size:</strong> ${safeCompanySize}</p>
+                <p><strong>Inquiry reason:</strong> ${safe(inquiryReason)}</p>
+                <p><strong>Name:</strong> ${safe(name)}</p>
+                <p><strong>Work email:</strong> ${safe(email)}</p>
+                <p><strong>Phone:</strong> ${safe(phone)}</p>
+                <p><strong>Company:</strong> ${safe(company)}</p>
+                <p><strong>Job title:</strong> ${safe(jobTitle)}</p>
+                <p><strong>Company size:</strong> ${safe(companySize)}</p>
+                <p><strong>Country:</strong> ${safe(country)}</p>
                 <hr />
                 <p><strong>Message</strong></p>
                 <p>${safeMessage}</p>
