@@ -20,28 +20,8 @@ jobs:
 
       - name: Update homepage hero
         run: |
-          python - <<'PY'
-          from pathlib import Path
-          p = Path("src/routes/index.tsx")
-          s = p.read_text()
-
-          replacements = [
-              ("AI agent assurance", "Enterprise AI assurance"),
-              ("Test your AI agents before they reach production.", "AI built for your enterprise. <br /><span className=\"text-slate-500\">Assurance that proves it is ready.</span>"),
-              ("Shyena turns Cognigy flows into executable journeys, evaluates real conversations, finds security risks, and gives teams evidence to release with confidence.", "Shyena gives enterprise teams one assurance layer to understand AI agents, test real behavior, expose security risk, and make evidence-backed release decisions."),
-              ("Let's talk", "Talk to an assurance expert"),
-              ("See how it works", "See how Shyena works"),
-              ("border-violet-200 bg-white/70 px-3.5 py-2 text-[11px] font-bold uppercase tracking-[0.18em] text-violet-700 shadow-sm'><span className=\"h-1.5 w-1.5 rounded-full bg-violet-500\" />", "border-orange-200 bg-white/75 px-3.5 py-2 text-[11px] font-bold uppercase tracking-[0.18em] text-orange-700 shadow-sm'><span className=\"h-1.5 w-1.5 rounded-full bg-orange-500\" />"),
-              ("className=\"mt-7 max-w-2xl text-5xl font-semibold leading-[0.98] tracking-[-0.045em] text-slate-950 sm:text-6xl lg:text-[70px]\"", "className=\"mt-7 max-w-2xl font-[Sora] text-[clamp(3.75rem,5.8vw,5.5rem)] font-extrabold leading-[0.94] tracking-[-0.045em] text-slate-950\""),
-          ]
-
-          for old, new in replacements:
-              if old not in s:
-                  raise SystemExit(f"Expected text not found: {old}")
-              s = s.replace(old, new, 1)
-
-          p.write_text(s)
-          PY
+          echo 'ZnJvbSBwYXRobGliIGltcG9ydCBQYXRoCnAgPSBQYXRoKCJzcmMvcm91dGVzL2luZGV4LnRzeCIpCnMgPSBwLnJlYWRfdGV4dCgpCgpwYWlycyA9IFsKICAgICgiQUkgYWdlbnQgYXNzdXJhbmNlIiwgIkVudGVycHJpc2UgQUkgYXNzdXJhbmNlIiksCiAgICAoIlRlc3QgeW91ciBBSSBhZ2VudHMgYmVmb3JlIHRoZXkgcmVhY2ggcHJvZHVjdGlvbi4iLCAnQUkgYnVpbHQgZm9yIHlvdXIgZW50ZXJwcmlzZS4gPGJyIC8+PHNwYW4gY2xhc3NOYW1lPSJ0ZXh0LXNsYXRlLTUwMCI+QXNzdXJhbmNlIHRoYXQgcHJvdmVzIGl0IGlzIHJlYWR5Ljwvc3Bhbj4nKSwKICAgICgiU2h5ZW5hIHR1cm5zIENvZ25pZ3kgZmxvd3MgaW50byBleGVjdXRhYmxlIGpvdXJuZXlzLCBldmFsdWF0ZXMgcmVhbCBjb252ZXJzYXRpb25zLCBmaW5kcyBzZWN1cml0eSByaXNrcywgYW5kIGdpdmVzIHRlYW1zIGV2aWRlbmNlIHRvIHJlbGVhc2Ugd2l0aCBjb25maWRlbmNlLiIsICJTaHllbmEgZ2l2ZXMgZW50ZXJwcmlzZSB0ZWFtcyBvbmUgYXNzdXJhbmNlIGxheWVyIHRvIHVuZGVyc3RhbmQgQUkgYWdlbnRzLCB0ZXN0IHJlYWwgYmVoYXZpb3IsIGV4cG9zZSBzZWN1cml0eSByaXNrLCBhbmQgbWFrZSBldmlkZW5jZS1iYWNrZWQgcmVsZWFzZSBkZWNpc2lvbnMuIiksCiAgICAoIkxldCdzIHRhbGsiLCAiVGFsayB0byBhbiBhc3N1cmFuY2UgZXhwZXJ0IiksCiAgICAoIlNlZSBob3cgaXQgd29ya3MiLCAiU2VlIGhvdyBTaHllbmEgd29ya3MiKSwKICAgICgiYm9yZGVyLXZpb2xldC0yMDAgYmctd2hpdGUvNzAiLCAiYm9yZGVyLW9yYW5nZS0yMDAgYmctd2hpdGUvNzUiKSwKICAgICgidGV4dC12aW9sZXQtNzAwIHNoYWRvdy1zbVwiPjxzcGFuIGNsYXNzTmFtZT1cImgtMS41IHctMS41IHJvdW5kZWQtZnVsbCBiZy12aW9sZXQtNTAwXCIiLCAidGV4dC1vcmFuZ2UtNzAwIHNoYWRvdy1zbVwiPjxzcGFuIGNsYXNzTmFtZT1cImgtMS41IHctMS41IHJvdW5kZWQtZnVsbCBiZy1vcmFuZ2UtNTAwXCIiKSwKICAgICgnY2xhc3NOYW1lPSJtdC03IG1heC13LTJ4bCB0ZXh0LTV4bCBmb250LXNlbWlib2xkIGxlYWRpbmctWzAuOThdIHRyYWNraW5nLVstMC4wNDVlbV0gdGV4dC1zbGF0ZS05NTAgc206dGV4dC02eGwgbGc6dGV4dC1bNzBweF0iJywgJ2NsYXNzTmFtZT0ibXQtNyBtYXgtdy0yeGwgZm9udC1bU29yYV0gdGV4dC1bY2xhbXAoMy43NXJlbSw1Ljh2dyw1LjVyZW0pXSBmb250LWV4dHJhYm9sZCBsZWFkaW5nLVswLjk0XSB0cmFja2luZy1bLTAuMDQ1ZW1dIHRleHQtc2xhdGUtOTUwIicpLApdCmZvciBvbGQsIG5ldyBpbiBwYWlyczoKICAgIGlmIG9sZCBub3QgaW4gczoKICAgICAgICByYWlzZSBTeXN0ZW1FeGl0KGYiRXhwZWN0ZWQgaGVybyB0ZXh0IG5vdCBmb3VuZDoge29sZH0iKQogICAgcyA9IHMucmVwbGFjZShvbGQsIG5ldywgMSkKcC53cml0ZV90ZXh0KHMpCg==' | base64 --decode > /tmp/update_hero.py
+          python /tmp/update_hero.py
 
       - name: Verify hero
         run: |
