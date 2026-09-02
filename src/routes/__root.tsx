@@ -2,6 +2,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Outlet, Link, createRootRouteWithContext, useRouter, HeadContent, Scripts, useLocation } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
+import siteThemeCss from "../site-theme.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { startAnimatedFavicon } from "../lib/animated-favicon";
 import { SiteHeader } from "@/components/site/site-header";
@@ -58,6 +59,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     links: [
       { rel: "stylesheet", href: appCss },
+      { rel: "stylesheet", href: siteThemeCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" },
@@ -103,7 +105,7 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <div className="flex min-h-screen flex-col">
         <SiteHeader />
-        <main className={isResourcePage ? "resource-surface flex-1" : "flex-1"}><Outlet /></main>
+        <main className={`${isResourcePage ? "resource-surface " : ""}site-theme flex-1`}><Outlet /></main>
         <SiteFooter />
         <VideoExperience />
       </div>
