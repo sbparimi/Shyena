@@ -67,12 +67,12 @@ function Index() {
         <div className="pointer-events-none absolute -bottom-48 left-1/3 h-[420px] w-[420px] rounded-full bg-orange-100/50 blur-3xl" />
         <div className="relative mx-auto grid max-w-7xl gap-12 px-6 py-16 sm:py-20 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-16 lg:px-8 lg:py-24">
           <div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-violet-200 bg-white/70 px-3.5 py-2 text-[11px] font-bold uppercase tracking-[0.18em] text-violet-700 shadow-sm"><span className="h-1.5 w-1.5 rounded-full bg-violet-500" /> AI agent assurance</div>
-            <h1 className="mt-7 max-w-2xl text-5xl font-semibold leading-[0.98] tracking-[-0.045em] text-slate-950 sm:text-6xl lg:text-[70px]">Test your AI agents before they reach production.</h1>
-            <p className="mt-7 max-w-xl text-lg leading-8 text-slate-600 sm:text-xl">Shyena turns Cognigy flows into executable journeys, evaluates real conversations, finds security risks, and gives teams evidence to release with confidence.</p>
+            <div className="inline-flex items-center gap-2 rounded-full border border-orange-200 bg-white/75 px-3.5 py-2 text-[11px] font-bold uppercase tracking-[0.18em] text-orange-700 shadow-sm"><span className="h-1.5 w-1.5 rounded-full bg-orange-500" /> Enterprise AI assurance</div>
+            <h1 className="mt-7 max-w-2xl font-[Sora] text-[clamp(3.75rem,5.8vw,5.5rem)] font-extrabold leading-[0.94] tracking-[-0.045em] text-slate-950">AI built for your enterprise. <br /><span className="text-slate-500">Assurance that proves it is ready.</span></h1>
+            <p className="mt-7 max-w-xl text-lg leading-8 text-slate-600 sm:text-xl">Shyena gives enterprise teams one assurance layer to understand AI agents, test real behavior, expose security risk, and make evidence-backed release decisions.</p>
             <div className="mt-9 flex flex-wrap gap-3">
-              <Link to="/contact" data-shyena-button="primary" className="inline-flex h-12 items-center justify-center gap-2 rounded-full border px-7 text-[14px] font-extrabold uppercase tracking-[0.01em] transition-all duration-200">Let's talk <ArrowRight className="h-4 w-4" /></Link>
-              <a href="#how-it-works" data-shyena-button="secondary" className="inline-flex h-12 items-center justify-center gap-2 rounded-full border px-7 text-[14px] font-semibold transition-all duration-200"><Play className="h-4 w-4" /> See how it works</a>
+              <Link to="/contact" data-shyena-button="primary" className="inline-flex h-12 items-center justify-center gap-2 rounded-full border px-7 text-[14px] font-extrabold uppercase tracking-[0.01em] transition-all duration-200">Talk to an assurance expert <ArrowRight className="h-4 w-4" /></Link>
+              <a href="#how-it-works" data-shyena-button="secondary" className="inline-flex h-12 items-center justify-center gap-2 rounded-full border px-7 text-[14px] font-semibold transition-all duration-200"><Play className="h-4 w-4" /> See how Shyena works</a>
             </div>
             <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-xs font-semibold uppercase tracking-[0.16em] text-slate-400"><span>NEXUS · Understand</span><span>VERA · Evaluate</span><span>CHAKRA · Defend</span></div>
           </div>
