@@ -1,4 +1,4 @@
-/* Shared enterprise normalization for legacy product/resource surfaces. Explicit dark panels retain their technical treatment. */
+/* Shared enterprise normalization for legacy product/resource surfaces. Explicit dark technical panels keep their treatment. */
 .site-theme section[class*="bg-white"],.site-theme section[class*="bg-slate-50"],.site-theme section[class*="bg-slate-100"],.site-theme section[class*="bg-gray-50"],.site-theme section[class*="bg-gray-100"]{background:#fff!important;color:#0f172a!important;border-color:#e2e8f0!important}
 .site-theme article[class*="bg-white"],.site-theme article[class*="bg-slate-50"],.site-theme article[class*="bg-slate-100"],.site-theme article[class*="bg-gray-50"],.site-theme article[class*="bg-gray-100"]{background:#fff!important;border-color:#e2e8f0!important}
 .site-theme [class*="text-slate-950"],.site-theme [class*="text-slate-900"],.site-theme [class*="text-gray-950"],.site-theme [class*="text-gray-900"]{color:#0f172a!important}
@@ -9,19 +9,17 @@
 .site-theme [class*="border-violet-"],.site-theme [class*="border-purple-"]{border-color:#ddd6fe!important}
 .site-theme .text-gradient-brand{background:linear-gradient(135deg,#7c3aed 0%,#4f46e5 100%);-webkit-background-clip:text;background-clip:text;color:transparent!important}
 .site-theme [class*="shadow-sm"],.site-theme [class*="shadow-md"]{box-shadow:0 18px 40px -28px rgba(15,23,42,.28)!important}
-/* Preserve translucent cards inside explicitly dark technical panels. */
+
+/* Dark evidence surfaces are intentional and must not inherit light-card normalization. */
 .site-theme .bg-navy [class*="bg-white/"],.site-theme [class*="bg-[#0b0920]"] [class*="bg-white/"]{background:rgba(255,255,255,.035)!important;border-color:rgba(255,255,255,.1)!important}
 .site-theme .bg-navy [class*="text-slate-"],.site-theme [class*="bg-[#0b0920]"] [class*="text-slate-"]{color:#faf8ff!important}
-/* Reference-inspired contact surface. */
-.reference-page-theme{background:#fff!important;color:#0f172a!important}
-.reference-page-theme section,.reference-page-theme>div,.reference-page-theme article,.reference-page-theme aside{color:#0f172a!important}
-.reference-page-theme section[class*="bg-[#0a071d]"],.reference-page-theme section[class*="bg-[#0b0920]"]{background:#edf6ff!important;color:#0f172a!important}
-.reference-page-theme [class*="bg-[#15102d]"],.reference-page-theme [class*="bg-[#100b25]"]{background:#fff!important}
-.reference-page-theme [class*="border-[#2b2350]"],.reference-page-theme [class*="border-[#514778]"]{border-color:#e2e8f0!important}
-.reference-page-theme [class*="text-[#faf8ff]"],.reference-page-theme [class*="text-white"]{color:#0f172a!important}
-.reference-page-theme [class*="text-[#c9c4d8]"],.reference-page-theme [class*="text-[#918aa8]"],.reference-page-theme [class*="text-[#77708d]"]{color:#64748b!important}
-.reference-page-theme [class*="text-[#a855f7]"],.reference-page-theme [class*="text-[#c4b5fd]"]{color:#7c3aed!important}
-.reference-page-theme [class*="text-[#f59804]"]{color:#ea580c!important}
-.reference-page-theme input,.reference-page-theme textarea,.reference-page-theme select{background:#fff!important;color:#0f172a!important;border-color:#cbd5e1!important}
-.reference-page-theme input::placeholder,.reference-page-theme textarea::placeholder{color:#94a3b8!important}
-@media(max-width:767px){.site-theme section[class*="bg-white"],.site-theme section[class*="bg-slate-50"],.site-theme section[class*="bg-slate-100"]{border-radius:0}}
+
+/* Enterprise contact surface is explicitly styled by the route; this class provides only safe defaults. */
+.reference-page-theme{background:#fff;color:#0f172a}
+.reference-page-theme input,.reference-page-theme textarea,.reference-page-theme select{background:#fff;color:#0f172a;border-color:#cbd5e1}
+.reference-page-theme input::placeholder,.reference-page-theme textarea::placeholder{color:#94a3b8}
+
+/* Keyboard visibility and reduced-motion support. */
+.site-theme :where(a,button,input,textarea,select):focus-visible,.reference-page-theme :where(a,button,input,textarea,select):focus-visible{outline:3px solid rgba(124,58,237,.35);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){.site-theme *, .reference-page-theme *{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+@media(max-width:767px){.site-theme section[class*="bg-white"],.site-theme section[class*="bg-slate-50"],.site-theme section[class*="bg-slate-100"]{border-radius:0}.site-theme table{font-size:.8125rem}.site-theme [class*="overflow-x-auto"]{-webkit-overflow-scrolling:touch}}
