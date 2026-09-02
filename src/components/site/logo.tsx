@@ -6,7 +6,7 @@ export function Logo({ tone = "default" }: { tone?: "default" | "navy" }) {
 
   return (
     <Link to="/" aria-label="Shyena home" className="inline-flex items-center">
-      <svg width="184" height="51" viewBox="0 0 368 102" role="img" aria-labelledby="shyena-logo-title shyena-logo-desc" className="h-[51px] w-auto" data-brand="shyena-wordmark-v3">
+      <svg width="210" height="58" viewBox="0 0 368 102" role="img" aria-labelledby="shyena-logo-title shyena-logo-desc" className="h-[58px] w-auto" data-brand="shyena-wordmark-v4">
         <title id="shyena-logo-title">SHYENA</title>
         <desc id="shyena-logo-desc">SHYENA — Understand. Test. Defend.</desc>
         <defs>
@@ -24,9 +24,9 @@ export function Logo({ tone = "default" }: { tone?: "default" | "navy" }) {
         </g>
         <text x="116" y="48" fill={foreground} fontFamily="Arial, Helvetica, sans-serif" fontSize="31" fontWeight="700" letterSpacing="8">SHYENA</text>
         <g aria-label="Understand. Test. Defend.">
-          <text x="117" y="70" fill={muted} fontFamily="Arial, Helvetica, sans-serif" fontSize="9.5" fontWeight="800" letterSpacing="1.6" className="shyena-tagline-word shyena-tagline-word-1">UNDERSTAND.</text>
-          <text x="221" y="70" fill="#f59804" fontFamily="Arial, Helvetica, sans-serif" fontSize="9.5" fontWeight="800" letterSpacing="1.6" className="shyena-tagline-word shyena-tagline-word-2">TEST.</text>
-          <text x="271" y="70" fill="#a855f7" fontFamily="Arial, Helvetica, sans-serif" fontSize="9.5" fontWeight="800" letterSpacing="1.6" className="shyena-tagline-word shyena-tagline-word-3">DEFEND.</text>
+          <text x="117" y="71" fill="#7c3aed" fontFamily="Arial, Helvetica, sans-serif" fontSize="10.5" fontWeight="800" letterSpacing="1.8" className="shyena-tagline-word shyena-tagline-word-1">UNDERSTAND.</text>
+          <text x="230" y="71" fill="#f59804" fontFamily="Arial, Helvetica, sans-serif" fontSize="10.5" fontWeight="800" letterSpacing="1.8" className="shyena-tagline-word shyena-tagline-word-2">TEST.</text>
+          <text x="274" y="71" fill="#a855f7" fontFamily="Arial, Helvetica, sans-serif" fontSize="10.5" fontWeight="800" letterSpacing="1.8" className="shyena-tagline-word shyena-tagline-word-3">DEFEND.</text>
         </g>
       </svg>
     </Link>
