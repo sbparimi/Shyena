@@ -14,7 +14,7 @@ export function CtaBand() {
           through every judged turn with you.
         </p>
         <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-          <Button asChild size="lg">
+          <Button asChild size="lg" className="bg-[#ffb804] text-slate-950 hover:bg-[#f2aa00] hover:text-slate-950">
             <Link to="/contact">
               Request a Demo
               <ArrowRight className="h-4 w-4" />
