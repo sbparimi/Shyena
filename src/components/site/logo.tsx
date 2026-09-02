@@ -6,9 +6,9 @@ export function Logo({ tone = "default" }: { tone?: "default" | "navy" }) {
 
   return (
     <Link to="/" aria-label="Shyena home" className="inline-flex items-center">
-      <svg width="184" height="51" viewBox="0 0 368 102" role="img" aria-labelledby="shyena-logo-title shyena-logo-desc" className="h-[51px] w-auto" data-brand="shyena-wordmark-v2">
+      <svg width="184" height="51" viewBox="0 0 368 102" role="img" aria-labelledby="shyena-logo-title shyena-logo-desc" className="h-[51px] w-auto" data-brand="shyena-wordmark-v3">
         <title id="shyena-logo-title">SHYENA</title>
-        <desc id="shyena-logo-desc">SHYENA — Evaluate. Observe. Assure.</desc>
+        <desc id="shyena-logo-desc">SHYENA — Understand. Test. Defend.</desc>
         <defs>
           <linearGradient id="shyenaFalcon" x1="0" y1="0" x2="1" y2="1">
             <stop offset="0" stopColor="#f59804" />
@@ -23,9 +23,11 @@ export function Logo({ tone = "default" }: { tone?: "default" | "navy" }) {
           <path fill="#f59804" d="M60 13c10-3 19-1 27 3l-8 7c-6-5-12-7-19-10z"/>
         </g>
         <text x="116" y="48" fill={foreground} fontFamily="Arial, Helvetica, sans-serif" fontSize="31" fontWeight="700" letterSpacing="8">SHYENA</text>
-        <text x="117" y="70" fill={muted} fontFamily="Arial, Helvetica, sans-serif" fontSize="10" fontWeight="700" letterSpacing="1.5">EVALUATE.</text>
-        <text x="183" y="70" fill="#f59804" fontFamily="Arial, Helvetica, sans-serif" fontSize="10" fontWeight="700" letterSpacing="1.5">OBSERVE.</text>
-        <text x="254" y="70" fill="#a855f7" fontFamily="Arial, Helvetica, sans-serif" fontSize="10" fontWeight="700" letterSpacing="1.5">ASSURE.</text>
+        <g aria-label="Understand. Test. Defend.">
+          <text x="117" y="70" fill={muted} fontFamily="Arial, Helvetica, sans-serif" fontSize="9.5" fontWeight="800" letterSpacing="1.6" className="shyena-tagline-word shyena-tagline-word-1">UNDERSTAND.</text>
+          <text x="221" y="70" fill="#f59804" fontFamily="Arial, Helvetica, sans-serif" fontSize="9.5" fontWeight="800" letterSpacing="1.6" className="shyena-tagline-word shyena-tagline-word-2">TEST.</text>
+          <text x="271" y="70" fill="#a855f7" fontFamily="Arial, Helvetica, sans-serif" fontSize="9.5" fontWeight="800" letterSpacing="1.6" className="shyena-tagline-word shyena-tagline-word-3">DEFEND.</text>
+        </g>
       </svg>
     </Link>
   );
