@@ -1,0 +1,79 @@
+name: Apply enterprise mission hero
+
+on:
+  push:
+    paths:
+      - .github/workflows/apply-hero-mission.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Update homepage hero
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path("src/routes/index.tsx")
+          s = p.read_text()
+
+          old_badge = 'AI agent assurance'
+          new_badge = 'Enterprise AI assurance'
+
+          old_h1 = 'Test your AI agents before they reach production.'
+          new_h1 = 'AI built for your enterprise. <br /><span className="text-slate-500">Assurance that proves it is ready.</span>'
+
+          old_copy = 'Shyena turns Cognigy flows into executable journeys, evaluates real conversations, finds security risks, and gives teams evidence to release with confidence.'
+          new_copy = 'Shyena gives enterprise teams one assurance layer to understand AI agents, test real behavior, expose security risk, and make evidence-backed release decisions.'
+
+          old_primary = "Let's talk"
+          new_primary = 'Talk to an assurance expert'
+
+          old_secondary = 'See how it works'
+          new_secondary = 'See how Shyena works'
+
+          required = [old_badge, old_h1, old_copy, old_primary, old_secondary]
+          missing = [x for x in required if x not in s]
+          if missing:
+              raise SystemExit(f"Expected hero text not found: {missing}")
+
+          s = s.replace(old_badge, new_badge, 1)
+          s = s.replace(old_h1, new_h1, 1)
+          s = s.replace(old_copy, new_copy, 1)
+          s = s.replace(old_primary, new_primary, 1)
+          s = s.replace(old_secondary, new_secondary, 1)
+
+          old_badge_classes = 'border-violet-200 bg-white/70 px-3.5 py-2 text-[11px] font-bold uppercase tracking-[0.18em] text-violet-700 shadow-sm'><span className="h-1.5 w-1.5 rounded-full bg-violet-500" />'
+          new_badge_classes = 'border-orange-200 bg-white/75 px-3.5 py-2 text-[11px] font-bold uppercase tracking-[0.18em] text-orange-700 shadow-sm'><span className="h-1.5 w-1.5 rounded-full bg-orange-500" />'
+          s = s.replace(old_badge_classes, new_badge_classes, 1)
+
+          old_h1_start = 'className="mt-7 max-w-2xl text-5xl font-semibold leading-[0.98] tracking-[-0.045em] text-slate-950 sm:text-6xl lg:text-[70px]"'
+          new_h1_start = 'className="mt-7 max-w-2xl font-[Sora] text-[clamp(3.75rem,5.8vw,5.5rem)] font-extrabold leading-[0.94] tracking-[-0.045em] text-slate-950"'
+          s = s.replace(old_h1_start, new_h1_start, 1)
+
+          p.write_text(s)
+          PY
+
+      - name: Verify hero
+        run: |
+          grep -n -A8 -B2 'AI built for your enterprise' src/routes/index.tsx
+          ! grep -q 'Test your AI agents before they reach production.' src/routes/index.tsx
+          ! grep -q '>AI agent assurance<' src/routes/index.tsx
+
+      - name: Commit homepage and remove one-time workflow
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add src/routes/index.tsx .github/workflows/apply-hero-mission.yml
+          git commit -m 'feat: make homepage hero enterprise mission led'
+          git rm .github/workflows/apply-hero-mission.yml
+          git commit -m 'chore: remove one-time hero migration workflow'
+          git push origin main
