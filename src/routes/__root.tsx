@@ -67,21 +67,26 @@ function EnterpriseBridge({ pathname }: { pathname: string }) {
   if (pathname.startsWith("/docs") || pathname.startsWith("/blog")) return null;
   const content = ENTERPRISE_BRIDGE[pathname] ?? { kicker: "ENTERPRISE AI ASSURANCE", title: "Understand the system. Test the behavior. Defend the release.", body: "Build one evidence chain across system understanding, executable journeys, evaluation, security assurance and release governance." };
   return (
-    <section className="border-t border-slate-200 bg-white">
+    <section className="border-t border-slate-200 bg-[#f8fbff]">
       <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8 lg:py-20">
         <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
           <div>
             <div className="text-xs font-bold uppercase tracking-[0.2em] text-violet-600">{content.kicker}</div>
-            <h2 className="mt-4 max-w-3xl text-3xl font-semibold tracking-[-0.03em] text-slate-950 sm:text-4xl">{content.title}</h2>
-            <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600">{content.body}</p>
+            <h2 className="mt-4 max-w-3xl text-3xl font-semibold leading-[1.08] tracking-[-0.035em] text-[#0e172b] sm:text-4xl">{content.title}</h2>
+            <p className="mt-5 max-w-2xl text-base leading-7 text-[#475569]">{content.body}</p>
           </div>
           <div className="grid gap-3 sm:grid-cols-2">
             {[["Prepare", "Understand the system and define what matters."], ["Assure", "Execute real journeys and evaluate behavior."], ["Govern", "Correlate findings, risk and release impact."], ["Operate", "Keep evidence connected to the delivery lifecycle."]].map(([title, text]) => (
-              <div key={title} className="rounded-2xl border border-slate-200 bg-slate-50 p-5"><div className="text-sm font-semibold text-slate-950">{title}</div><div className="mt-1.5 text-sm leading-6 text-slate-600">{text}</div></div>
+              <div key={title} className="min-h-[118px] rounded-[22px] border border-slate-200 bg-[#f9fafc] p-6 shadow-[0_8px_28px_-24px_rgba(15,23,42,0.45)]">
+                <div className="text-base font-semibold text-[#0e172b]">{title}</div>
+                <div className="mt-2 text-sm leading-6 text-[#475569]">{text}</div>
+              </div>
             ))}
           </div>
         </div>
-        <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-slate-200 pt-6 text-xs font-semibold uppercase tracking-[0.16em] text-slate-400"><span>Conversational AI</span><span>Agentic workflows</span><span>Customer journeys</span><span>Security assurance</span><span>Release governance</span></div>
+        <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-3 border-t border-slate-200 pt-6 text-xs font-semibold uppercase tracking-[0.16em] text-[#8fa2bd]">
+          <span>Conversational AI</span><span>Agentic workflows</span><span>Customer journeys</span><span>Security assurance</span><span>Release governance</span>
+        </div>
       </div>
     </section>
   );
