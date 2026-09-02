@@ -66,26 +66,36 @@ const ENTERPRISE_BRIDGE: Record<string, { kicker: string; title: string; body: s
 function EnterpriseBridge({ pathname }: { pathname: string }) {
   if (pathname.startsWith("/docs") || pathname.startsWith("/blog")) return null;
   const content = ENTERPRISE_BRIDGE[pathname] ?? { kicker: "ENTERPRISE AI ASSURANCE", title: "Understand the system. Test the behavior. Defend the release.", body: "Build one evidence chain across system understanding, executable journeys, evaluation, security assurance and release governance." };
+  const stages = [
+    ["01", "Prepare", "Understand the system and define what matters."],
+    ["02", "Assure", "Execute real journeys and evaluate behavior."],
+    ["03", "Govern", "Correlate findings, risk and release impact."],
+    ["04", "Operate", "Keep evidence connected to the delivery lifecycle."],
+  ];
   return (
-    <section className="border-t border-slate-200 bg-[#f8fbff]">
-      <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8 lg:py-20">
-        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+    <section className="relative overflow-hidden border-t border-slate-200 bg-[linear-gradient(180deg,#f8fbff_0%,#f4f8fc_100%)]">
+      <div className="pointer-events-none absolute -right-40 top-0 h-80 w-80 rounded-full bg-orange-100/50 blur-3xl" />
+      <div className="pointer-events-none absolute -left-40 bottom-0 h-72 w-72 rounded-full bg-sky-100/60 blur-3xl" />
+      <div className="relative mx-auto max-w-7xl px-6 py-16 lg:px-8 lg:py-20">
+        <div className="grid gap-10 lg:grid-cols-[0.88fr_1.12fr] lg:items-end">
           <div>
-            <div className="text-xs font-bold uppercase tracking-[0.2em] text-violet-600">{content.kicker}</div>
-            <h2 className="mt-4 max-w-3xl text-3xl font-semibold leading-[1.08] tracking-[-0.035em] text-[#0e172b] sm:text-4xl">{content.title}</h2>
-            <p className="mt-5 max-w-2xl text-base leading-7 text-[#475569]">{content.body}</p>
+            <div className="inline-flex items-center rounded-full border border-orange-200 bg-white/80 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-orange-700 shadow-sm">{content.kicker}</div>
+            <h2 className="mt-5 max-w-3xl text-3xl font-semibold leading-[1.05] tracking-[-0.04em] text-[#0e172b] sm:text-4xl lg:text-[46px]">{content.title}</h2>
+            <p className="mt-5 max-w-2xl text-base leading-7 text-[#475569] sm:text-lg">{content.body}</p>
           </div>
           <div className="grid gap-3 sm:grid-cols-2">
-            {[["Prepare", "Understand the system and define what matters."], ["Assure", "Execute real journeys and evaluate behavior."], ["Govern", "Correlate findings, risk and release impact."], ["Operate", "Keep evidence connected to the delivery lifecycle."]].map(([title, text]) => (
-              <div key={title} className="min-h-[118px] rounded-[22px] border border-slate-200 bg-[#f9fafc] p-6 shadow-[0_8px_28px_-24px_rgba(15,23,42,0.45)]">
-                <div className="text-base font-semibold text-[#0e172b]">{title}</div>
+            {stages.map(([number, title, text]) => (
+              <div key={number} className="group relative overflow-hidden rounded-[22px] border border-slate-200 bg-white p-5 shadow-[0_12px_35px_-28px_rgba(15,23,42,0.4)] transition duration-200 hover:-translate-y-1 hover:border-orange-200 hover:shadow-[0_20px_45px_-28px_rgba(234,88,12,0.25)] sm:min-h-[126px] sm:p-6">
+                <div className="absolute inset-y-0 left-0 w-1 bg-orange-500/70 opacity-0 transition duration-200 group-hover:opacity-100" />
+                <div className="flex items-start justify-between gap-4"><span className="font-mono text-[10px] font-semibold tracking-[0.14em] text-orange-700">{number}</span><span className="h-2 w-2 rounded-full bg-orange-400/70 transition duration-200 group-hover:scale-125" /></div>
+                <div className="mt-5 text-base font-semibold tracking-[-0.01em] text-[#0e172b]">{title}</div>
                 <div className="mt-2 text-sm leading-6 text-[#475569]">{text}</div>
               </div>
             ))}
           </div>
         </div>
-        <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-3 border-t border-slate-200 pt-6 text-xs font-semibold uppercase tracking-[0.16em] text-[#8fa2bd]">
-          <span>Conversational AI</span><span>Agentic workflows</span><span>Customer journeys</span><span>Security assurance</span><span>Release governance</span>
+        <div className="mt-10 flex flex-wrap items-center gap-2 border-t border-slate-200 pt-6">
+          {["Conversational AI", "Agentic workflows", "Customer journeys", "Security assurance", "Release governance"].map((item) => <span key={item} className="rounded-full border border-slate-200 bg-white/70 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.15em] text-slate-400">{item}</span>)}
         </div>
       </div>
     </section>
