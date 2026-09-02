@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="45 30 105 100" role="img" aria-label="Shyena falcon">
+  <defs>
+    <linearGradient id="orange" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffad1f"/>
+      <stop offset=".55" stop-color="#f47a16"/>
+      <stop offset="1" stop-color="#df4e1a"/>
+    </linearGradient>
+    <linearGradient id="purple" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8d3ec0"/>
+      <stop offset=".55" stop-color="#7133a8"/>
+      <stop offset="1" stop-color="#55278f"/>
+    </linearGradient>
+  </defs>
+  <path d="M63 55L63 56L69 54L73 54L74 55L74 57L71 60L77 57L88 57L89 56L118 56L119 55L142 55L143 56L140 52L132 49L130 47L130 45L127 41L119 37L116 37L111 35L90 35L89 36L84 36L83 37L76 38L75 39L77 40L77 43L75 45L72 46Z" fill="url(#orange)"/>
+  <path d="M146 56L132 56L131 54L130 56L114 55L110 57L89 57L70 60L54 82L54 84L61 82L64 86L62 90L59 91L60 95L50 119L61 116L68 110L72 110L76 103L86 107L79 119L92 112L105 119L112 119L113 117L117 119L139 119L120 93L121 88L118 87L118 77L121 75L122 70L120 70L119 67L126 65L131 67L132 65L137 65L143 71L146 66Z" fill="url(#purple)"/>
+  <path d="M109 46C114 46 119 47 124 49C121 51 117 52 113 51C111 50 109 49 107 48Z" fill="#02030d"/>
+</svg>
