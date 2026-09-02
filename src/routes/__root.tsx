@@ -40,22 +40,120 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   );
 }
 
+const ORGANIZATION_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "Shyena",
+  applicationCategory: "BusinessApplication",
+  operatingSystem: "Web",
+  description: "Shyena is an enterprise AI agent assurance platform that helps teams understand AI systems, test real behavior, defend security boundaries and produce evidence-backed release decisions.",
+  url: "https://shyena.eu/",
+  keywords: "AI agent assurance, AI evaluation, AI testing, AI QA automation, AI agent testing, Cognigy testing, LLM evaluation, conversational AI testing, AI security testing, AI release assurance",
+};
+
+const ENTERPRISE_BRIDGE: Record<string, { kicker: string; title: string; body: string }> = {
+  "/": {
+    kicker: "FROM AI EXPERIMENT TO PRODUCTION",
+    title: "Make assurance part of the delivery lifecycle.",
+    body: "Prepare the system, assure real behavior, govern release risk and operate with evidence. Shyena connects those activities around the agent your business actually runs.",
+  },
+  "/nexus": {
+    kicker: "BUSINESS OUTCOME",
+    title: "Turn system understanding into meaningful coverage.",
+    body: "NEXUS gives QA, engineering and product teams a structured view of the system so assurance starts with business journeys and actual orchestration paths.",
+  },
+  "/vera": {
+    kicker: "BUSINESS OUTCOME",
+    title: "Turn conversation quality into release confidence.",
+    body: "VERA moves evaluation beyond isolated answers by testing complete journeys, state, orchestration and outcomes against executable assurance expectations.",
+  },
+  "/chakra": {
+    kicker: "BUSINESS OUTCOME",
+    title: "Turn security testing into release control.",
+    body: "CHAKRA adds adversarial assurance to the same evidence chain as functional and semantic evaluation, so security findings can affect the release decision.",
+  },
+  "/pricing": {
+    kicker: "STARTING POINT",
+    title: "Choose the assurance depth your program needs.",
+    body: "Start with system understanding, add executable conversation assurance, extend into security testing, or use the complete evidence chain for continuous release governance.",
+  },
+  "/security": {
+    kicker: "ENTERPRISE TRUST",
+    title: "Make the assurance review-ready.",
+    body: "Enterprise adoption needs more than product capability. Security, data handling, access, evidence integrity and release governance should be clear enough for technical and risk stakeholders to review.",
+  },
+  "/about": {
+    kicker: "WHY SHYENA",
+    title: "Built for teams accountable for AI outcomes.",
+    body: "The platform is designed around a simple operating principle: evaluation should produce evidence that helps a responsible team decide whether an AI system is ready to release.",
+  },
+  "/services": {
+    kicker: "ENTERPRISE ADOPTION",
+    title: "Accelerate adoption without changing the platform boundary.",
+    body: "Use implementation, enablement and managed assurance services to establish the operating model, onboard real journeys and move from initial assurance to repeatable release practice.",
+  },
+  "/contact": {
+    kicker: "START WITH ONE REAL JOURNEY",
+    title: "See what the evidence would look like for your agent.",
+    body: "Bring a real customer journey, flow or assurance problem. The working session can map what to test, what evidence matters and where the result belongs in your release workflow.",
+  },
+};
+
+function EnterpriseBridge({ pathname }: { pathname: string }) {
+  if (pathname.startsWith("/docs") || pathname.startsWith("/blog")) return null;
+  const content = ENTERPRISE_BRIDGE[pathname] ?? {
+    kicker: "ENTERPRISE AI ASSURANCE",
+    title: "Understand the system. Test the behavior. Defend the release.",
+    body: "Build one evidence chain across system understanding, executable journeys, evaluation, security assurance and release governance.",
+  };
+
+  return (
+    <section className="border-t border-slate-200 bg-white">
+      <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8 lg:py-20">
+        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+          <div>
+            <div className="text-xs font-bold uppercase tracking-[0.2em] text-violet-600">{content.kicker}</div>
+            <h2 className="mt-4 max-w-3xl text-3xl font-semibold tracking-[-0.03em] text-slate-950 sm:text-4xl">{content.title}</h2>
+            <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600">{content.body}</p>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {[
+              ["Prepare", "Understand the system and define what matters."],
+              ["Assure", "Execute real journeys and evaluate behavior."],
+              ["Govern", "Correlate findings, risk and release impact."],
+              ["Operate", "Keep evidence connected to the delivery lifecycle."],
+            ].map(([title, text]) => (
+              <div key={title} className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+                <div className="text-sm font-semibold text-slate-950">{title}</div>
+                <div className="mt-1.5 text-sm leading-6 text-slate-600">{text}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-slate-200 pt-6 text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">
+          <span>Conversational AI</span><span>Agentic workflows</span><span>Customer journeys</span><span>Security assurance</span><span>Release governance</span>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Shyena — AI Evaluation, AI Testing & AI QA Automation Platform" },
-      { name: "description", content: "Shyena is an enterprise AI evaluation and AI QA automation platform for testing AI agents end to end. Test Cognigy agents with flow-aware system analysis, Playwright browser automation, YAML assurance contracts, deterministic and LLM evaluation, security testing and evidence-backed release governance." },
-      { name: "keywords", content: "AI evaluation, AI testing, AI QA, AI QA automation, AI agent testing, AI agent evaluation, enterprise AI testing, LLM evaluation, LLM testing, conversational AI testing, Cognigy testing, Cognigy AI testing, AI test automation, end to end AI testing, agentic AI evaluation, AI security testing, AI release assurance, AI quality assurance, Playwright AI testing, YAML test automation" },
+      { title: "Shyena — Enterprise AI Agent Assurance Platform" },
+      { name: "description", content: "Make AI systems safe to release with evidence. Shyena helps teams understand AI agents, test real behavior, defend security boundaries and govern release decisions." },
+      { name: "keywords", content: "AI agent assurance, AI evaluation, AI testing, AI QA, AI QA automation, enterprise AI testing, LLM evaluation, conversational AI testing, Cognigy testing, agentic AI evaluation, AI security testing, AI release assurance" },
       { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
-      { property: "og:title", content: "Shyena — AI Evaluation, AI Testing & AI QA Automation" },
-      { property: "og:description", content: "Understand AI systems, generate risk-prioritized tests, execute real agent journeys, evaluate behavior, test security and produce evidence-backed release decisions." },
+      { property: "og:title", content: "Shyena — Enterprise AI Agent Assurance Platform" },
+      { property: "og:description", content: "Understand the system. Test the behavior. Defend the release. Produce evidence-backed AI release decisions." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://shyena.eu/" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Shyena — AI Evaluation, AI Testing & AI QA Automation" },
-      { name: "twitter:description", content: "Enterprise AI agent testing, evaluation and QA automation with flow-aware assurance, Playwright execution and release evidence." },
+      { name: "twitter:title", content: "Shyena — Enterprise AI Agent Assurance Platform" },
+      { name: "twitter:description", content: "Enterprise AI agent testing, evaluation, security assurance and release evidence in one assurance model." },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -71,17 +169,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   notFoundComponent: NotFoundComponent,
   errorComponent: ErrorComponent,
 });
-
-const ORGANIZATION_SCHEMA = {
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  name: "Shyena",
-  applicationCategory: "BusinessApplication",
-  operatingSystem: "Web",
-  description: "Shyena is an enterprise AI evaluation, AI testing and AI QA automation platform connecting system understanding, real conversations, deterministic and LLM evaluation, security assurance and evidence-backed release decisions.",
-  url: "https://shyena.eu/",
-  keywords: "AI evaluation, AI testing, AI QA automation, AI agent testing, Cognigy testing, LLM evaluation, conversational AI testing, Playwright testing",
-};
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
@@ -105,7 +192,7 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <div className="flex min-h-screen flex-col">
         <SiteHeader />
-        <main className={`${isResourcePage ? "resource-surface " : ""}site-theme flex-1`}><Outlet /></main>
+        <main className={`${isResourcePage ? "resource-surface " : ""}site-theme flex-1`}><Outlet /><EnterpriseBridge pathname={location.pathname} /></main>
         <SiteFooter />
         <VideoExperience />
       </div>
