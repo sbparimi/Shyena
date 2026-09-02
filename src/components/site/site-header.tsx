@@ -19,15 +19,19 @@ const PRODUCTS = [
   { to: "/chakra", icon: ShieldAlert, title: "Chakra", kicker: "Defend", description: "Run adversarial assurance, verify impact and gate security risk before release." },
 ] as const;
 
+const ASSURANCE = [
+  { to: "/docs/evaluation-model", icon: Layers, title: "Evaluation model", description: "See how deterministic, semantic and execution signals combine." },
+  { to: "/docs", icon: BookOpen, title: "Assurance model", description: "Understand the evidence chain from flow to release decision." },
+  { to: "/services", icon: Briefcase, title: "Professional services", description: "Implementation, training and bespoke engineering for enterprise programs." },
+] as const;
+
 const RESOURCES = [
   { to: "/docs", icon: BookOpen, title: "Documentation", description: "Set up assurance runs and understand the evidence model." },
-  { to: "/docs/evaluation-model", icon: Layers, title: "Evaluation model", description: "See how deterministic, semantic and execution signals combine." },
   { to: "/blog", icon: Newspaper, title: "Insights", description: "Research and field notes on AI agent assurance." },
 ] as const;
 
 const COMPANY = [
   { to: "/about", icon: Users, title: "About Shyena", description: "The evidence layer for AI systems that make decisions." },
-  { to: "/services", icon: Briefcase, title: "Professional services", description: "Implementation, training and bespoke engineering kept separate from SaaS." },
   { to: "/contact", icon: Mail, title: "Contact", description: "Request a demo or discuss an assurance program." },
 ] as const;
 
@@ -36,6 +40,7 @@ const MOBILE_NAV = [
   { label: "Vera", to: "/vera" },
   { label: "Chakra", to: "/chakra" },
   { label: "Pricing", to: "/pricing" },
+  { label: "Assurance", to: "/docs" },
   { label: "Services", to: "/services" },
   { label: "Documentation", to: "/docs" },
   { label: "Insights", to: "/blog" },
@@ -61,17 +66,17 @@ function MenuGroup({ items }: { items: readonly MenuItem[] }) {
             <NavigationMenuLink asChild>
               <Link
                 to={item.to}
-                className="group flex select-none items-start gap-3 rounded-xl p-3.5 leading-none no-underline outline-none transition-colors hover:bg-secondary"
+                className="group flex select-none items-start gap-3 rounded-xl p-3.5 leading-none no-underline outline-none transition-colors hover:bg-slate-50"
               >
-                <span className="mt-0.5 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+                <span className="mt-0.5 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-orange-50 text-orange-600 transition-colors group-hover:bg-orange-500 group-hover:text-white">
                   <Icon className="h-4 w-4" />
                 </span>
                 <span className="min-w-0">
-                  {item.kicker && <span className="block text-[10px] font-semibold uppercase tracking-[0.16em] text-primary">{item.kicker}</span>}
-                  <span className="mt-0.5 block text-sm font-semibold text-foreground">{item.title}</span>
-                  <span className="mt-1.5 block text-xs leading-relaxed text-muted-foreground">{item.description}</span>
+                  {item.kicker && <span className="block text-[10px] font-semibold uppercase tracking-[0.16em] text-violet-600">{item.kicker}</span>}
+                  <span className="mt-0.5 block text-sm font-semibold text-slate-950">{item.title}</span>
+                  <span className="mt-1.5 block text-xs leading-relaxed text-slate-600">{item.description}</span>
                 </span>
-                <ArrowRight className="ml-auto mt-1 h-4 w-4 shrink-0 text-muted-foreground opacity-0 transition-all group-hover:translate-x-0.5 group-hover:text-primary group-hover:opacity-100" />
+                <ArrowRight className="ml-auto mt-1 h-4 w-4 shrink-0 text-slate-400 opacity-0 transition-all group-hover:translate-x-0.5 group-hover:text-orange-500 group-hover:opacity-100" />
               </Link>
             </NavigationMenuLink>
           </li>
@@ -85,61 +90,61 @@ export function SiteHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/70 bg-background/88 backdrop-blur-2xl">
-      <div className="mx-auto flex h-[68px] w-full max-w-7xl items-center justify-between gap-6 px-5 sm:px-8">
+    <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white">
+      <div className="mx-auto flex h-[88px] w-full max-w-[1400px] items-center justify-between gap-8 px-6 lg:px-10">
         <Logo />
 
-        <div className="hidden md:flex">
+        <div className="hidden flex-1 justify-center md:flex">
           <NavigationMenu>
-            <NavigationMenuList>
+            <NavigationMenuList className="gap-1">
               <NavigationMenuItem>
-                <NavigationMenuTrigger>Platform</NavigationMenuTrigger>
+                <NavigationMenuTrigger className="bg-transparent px-3 text-[15px] font-semibold text-slate-800 hover:bg-slate-50 hover:text-slate-950 focus:bg-slate-50">
+                  Platform
+                </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <div className="flex w-[650px] p-3">
-                    <MenuGroup items={PRODUCTS} />
-                    <div className="m-2 hidden w-[190px] flex-col justify-between rounded-xl bg-navy p-4 text-navy-foreground lg:flex">
-                      <div>
-                        <div className="font-mono text-[9px] uppercase tracking-[0.18em] text-navy-muted">One evidence chain</div>
-                        <div className="mt-2 text-lg">Understand → Evaluate → Defend</div>
-                        <p className="mt-2 text-xs leading-relaxed text-navy-muted">One platform, one release decision, shared evidence.</p>
-                      </div>
-                      <Link to="/" className="mt-6 inline-flex items-center gap-1 text-xs font-semibold text-primary">
-                        See the platform <ArrowRight className="h-3 w-3" />
-                      </Link>
-                    </div>
-                  </div>
+                  <div className="p-3"><MenuGroup items={PRODUCTS} /></div>
                 </NavigationMenuContent>
               </NavigationMenuItem>
 
               <NavigationMenuItem>
-                <Link to="/pricing" className={navigationMenuTriggerStyle()}>
+                <NavigationMenuTrigger className="bg-transparent px-3 text-[15px] font-semibold text-slate-800 hover:bg-slate-50 hover:text-slate-950 focus:bg-slate-50">
+                  Assurance
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <div className="p-3"><MenuGroup items={ASSURANCE} /></div>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+
+              <NavigationMenuItem>
+                <Link to="/pricing" className={`${navigationMenuTriggerStyle()} bg-transparent px-3 text-[15px] font-semibold text-slate-800 hover:bg-slate-50 hover:text-slate-950`}>
                   Pricing
                 </Link>
               </NavigationMenuItem>
 
               <NavigationMenuItem>
-                <NavigationMenuTrigger>Resources</NavigationMenuTrigger>
+                <NavigationMenuTrigger className="bg-transparent px-3 text-[15px] font-semibold text-slate-800 hover:bg-slate-50 hover:text-slate-950 focus:bg-slate-50">
+                  Resources
+                </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <MenuGroup items={RESOURCES} />
+                  <div className="p-3"><MenuGroup items={RESOURCES} /></div>
                 </NavigationMenuContent>
               </NavigationMenuItem>
 
               <NavigationMenuItem>
-                <NavigationMenuTrigger>Company</NavigationMenuTrigger>
+                <NavigationMenuTrigger className="bg-transparent px-3 text-[15px] font-semibold text-slate-800 hover:bg-slate-50 hover:text-slate-950 focus:bg-slate-50">
+                  Company
+                </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <MenuGroup items={COMPANY} />
+                  <div className="p-3"><MenuGroup items={COMPANY} /></div>
                 </NavigationMenuContent>
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
         </div>
 
-        <div className="hidden items-center gap-2 md:flex">
-          <Button asChild variant="ghost" size="sm">
-            <Link to="/docs">Explore docs</Link>
-          </Button>
-          <Button asChild size="sm">
-            <Link to="/contact">Request a Demo <ArrowRight className="h-3.5 w-3.5" /></Link>
+        <div className="hidden items-center md:flex">
+          <Button asChild size="lg" className="h-12 rounded-full bg-[#f6b800] px-7 text-[14px] font-extrabold uppercase tracking-[0.01em] text-slate-950 shadow-none hover:bg-[#e9aa00]">
+            <Link to="/contact">Let's talk<ArrowRight className="ml-2 h-4 w-4" /></Link>
           </Button>
         </div>
 
@@ -148,32 +153,24 @@ export function SiteHeader() {
           onClick={() => setMobileOpen((v) => !v)}
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
           aria-expanded={mobileOpen}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border text-foreground md:hidden"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-slate-300 bg-white text-slate-900 md:hidden"
         >
           {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </div>
 
       {mobileOpen && (
-        <div className="border-t border-border bg-background px-5 pb-6 pt-3 md:hidden">
+        <div className="border-t border-slate-200 bg-white px-6 pb-7 pt-4 md:hidden">
           <nav className="flex flex-col">
             {MOBILE_NAV.map((item) => (
-              <Link
-                key={item.to}
-                to={item.to}
-                onClick={() => setMobileOpen(false)}
-                className="rounded-md px-2 py-3 text-sm font-medium text-muted-foreground hover:text-foreground"
-              >
+              <Link key={item.to} to={item.to} onClick={() => setMobileOpen(false)} className="border-b border-slate-100 px-1 py-3.5 text-sm font-semibold text-slate-800">
                 {item.label}
               </Link>
             ))}
           </nav>
-          <div className="mt-4 flex flex-col gap-2">
-            <Button asChild variant="outline">
-              <Link to="/docs" onClick={() => setMobileOpen(false)}>Explore docs</Link>
-            </Button>
-            <Button asChild>
-              <Link to="/contact" onClick={() => setMobileOpen(false)}>Request a Demo</Link>
+          <div className="mt-5">
+            <Button asChild className="h-12 w-full rounded-full bg-[#f6b800] font-extrabold uppercase tracking-[0.01em] text-slate-950 hover:bg-[#e9aa00]">
+              <Link to="/contact" onClick={() => setMobileOpen(false)}>Let's talk</Link>
             </Button>
           </div>
         </div>
