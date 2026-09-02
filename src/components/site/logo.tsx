@@ -40,7 +40,7 @@ export function Logo({ tone = "default" }: { tone?: "default" | "navy" }) {
       </svg>
 
       <span
-        className={`text-[25px] font-bold tracking-[0.24em] sm:text-[27px] ${
+        className={`shyena-wordmark text-[25px] font-bold leading-none sm:text-[27px] ${
           darkSurface ? "text-white" : "text-slate-950"
         }`}
       >
