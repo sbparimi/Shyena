@@ -6,10 +6,10 @@ export function Logo({ tone = "default" }: { tone?: "default" | "navy" }) {
   return (
     <Link to="/" aria-label="Shyena home" className="inline-flex shrink-0 items-center gap-3">
       <img
-        src="/favicon.png"
+        src="/shyena-original-falcon.svg"
         alt="Shyena falcon"
-        className="block h-[46px] w-[46px] shrink-0 rounded-lg object-contain sm:h-[50px] sm:w-[50px]"
-        data-brand="shyena-original-falcon"
+        className="block h-[46px] w-[52px] shrink-0 object-contain sm:h-[50px] sm:w-[56px]"
+        data-brand="shyena-supplied-falcon"
       />
       <span className="flex flex-col justify-center leading-none">
         <span className={`text-[25px] font-bold tracking-[0.24em] sm:text-[27px] ${darkSurface ? "text-white" : "text-slate-950"}`}>
