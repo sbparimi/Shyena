@@ -13,7 +13,7 @@ export const Route = createFileRoute("/pricing")({
       { name: "description", content: "Start with a focused AI assurance pilot and build the evidence needed to scale across your AI estate." },
       { name: "keywords", content: "AI agent assurance pricing, enterprise AI testing pricing, Cognigy testing pricing, AI agent evaluation pricing, AI security testing pricing" },
       { property: "og:title", content: "Shyena Pricing | Enterprise AI Agent Assurance" },
-      { property: "og:description", content: "Start with a focused pilot. Prove the assurance model. Scale with confidence." },
+      { property: "og:description", content: "Calculate your usage and understand the transparent Shyena pricing model." },
     ],
     links: [{ rel: "canonical", href: "https://shyena.eu/pricing" }],
   }),
@@ -81,17 +81,23 @@ function PricingCalculator() {
   );
 
   return (
-    <section id="usage-calculator" className="relative overflow-hidden border-y border-slate-200 bg-[#0b0920] text-white">
+    <section id="usage-calculator" className="relative overflow-hidden border-b border-slate-200 bg-[#0b0920] text-white">
       <div className="pointer-events-none absolute -left-40 top-1/2 h-96 w-96 -translate-y-1/2 rounded-full bg-orange-500/10 blur-3xl" />
       <div className="pointer-events-none absolute -right-40 bottom-0 h-96 w-96 rounded-full bg-amber-400/10 blur-3xl" />
       <div className="relative mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-24">
-        <div className="grid gap-12 lg:grid-cols-[0.75fr_1.25fr] lg:items-start">
-          <div className="lg:sticky lg:top-28">
+        <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
+          <div className="max-w-3xl">
             <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-400/10 text-orange-300 ring-1 ring-orange-300/10"><Calculator className="h-5 w-5" /></div>
             <p className="mt-7 text-xs font-bold uppercase tracking-[0.2em] text-orange-300">Usage calculator</p>
-            <h2 className="mt-4 text-4xl font-semibold tracking-[-0.03em] sm:text-5xl">Estimate your variable usage.</h2>
-            <p className="mt-5 max-w-xl text-lg leading-8 text-white/55">Enter the activity you expect to generate and execute. The calculator applies the public €0.05 usage rates so your team can estimate cost before speaking with sales.</p>
-            <div className="mt-7 rounded-2xl border border-white/10 bg-white/[0.035] p-5"><div className="flex gap-3"><ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-orange-300" /><p className="text-sm leading-6 text-white/60"><span className="font-semibold text-white">Three independent usage units.</span> CIS generation, Vera conversations and Chakra security interactions are measured separately. One unit is never converted into another.</p></div></div>
+            <h1 className="mt-4 text-5xl font-semibold leading-[0.98] tracking-[-0.045em] sm:text-6xl lg:text-7xl">Calculate your<br /><span className="text-orange-300">monthly usage.</span></h1>
+            <p className="mt-5 max-w-2xl text-lg leading-8 text-white/55 sm:text-xl">Estimate your Shyena usage before you talk to sales. Each generated test journey, AI conversation and security interaction is priced transparently at €0.05.</p>
+          </div>
+          <div className="flex flex-wrap gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-white/45"><span className="rounded-full border border-white/10 bg-white/[0.035] px-4 py-2">Public rates</span><span className="rounded-full border border-white/10 bg-white/[0.035] px-4 py-2">Excluding VAT</span><span className="rounded-full border border-white/10 bg-white/[0.035] px-4 py-2">Volume terms negotiable</span></div>
+        </div>
+
+        <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-start">
+          <div className="lg:sticky lg:top-28">
+            <div className="rounded-2xl border border-white/10 bg-white/[0.035] p-5"><div className="flex gap-3"><ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-orange-300" /><p className="text-sm leading-6 text-white/60"><span className="font-semibold text-white">Three independent usage units.</span> CIS generation, Vera conversations and Chakra security interactions are measured separately. One unit is never converted into another.</p></div></div>
           </div>
 
           <div className="rounded-[28px] border border-white/10 bg-white/[0.035] p-5 shadow-[0_35px_90px_-35px_rgba(0,0,0,0.7)] sm:p-7">
@@ -122,19 +128,6 @@ function PricingCalculator() {
 function PricingPage() {
   return (
     <main className="overflow-hidden bg-white text-slate-950">
-      <section className="relative overflow-hidden border-b border-slate-200 bg-[#edf6ff]">
-        <div className="pointer-events-none absolute -right-32 -top-40 h-[560px] w-[560px] rounded-full bg-orange-100/70 blur-3xl" />
-        <div className="pointer-events-none absolute -bottom-48 left-1/4 h-[420px] w-[420px] rounded-full bg-amber-100/60 blur-3xl" />
-        <div className="relative mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-28">
-          <div className="max-w-4xl">
-            <div className="inline-flex items-center gap-2 rounded-full border border-orange-200 bg-white/80 px-3.5 py-2 text-[11px] font-bold uppercase tracking-[0.18em] text-orange-700 shadow-sm"><Sparkles className="h-3.5 w-3.5" /> Pricing</div>
-            <h1 className="mt-7 max-w-4xl text-5xl font-semibold leading-[0.98] tracking-[-0.045em] text-slate-950 sm:text-6xl lg:text-[72px]">Simple. Transparent.<br /><span className="text-orange-700">Outcome-driven.</span></h1>
-            <p className="mt-7 max-w-3xl text-lg leading-8 text-slate-600 sm:text-xl">Start with a focused pilot, establish measurable assurance and build the evidence needed to scale across your AI estate.</p>
-            <div className="mt-8 flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-[0.16em] text-slate-400"><span>Public list prices</span><span>Excluding VAT</span><span>Enterprise volume terms negotiable</span></div>
-          </div>
-        </div>
-      </section>
-
       <PricingCalculator />
 
       <section className="relative overflow-hidden bg-[#f6f8fb] px-6 py-20 lg:px-8 lg:py-24">
