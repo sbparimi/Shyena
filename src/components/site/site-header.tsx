@@ -143,7 +143,7 @@ export function SiteHeader() {
         </div>
 
         <div className="hidden items-center md:flex">
-          <Button asChild size="lg" className="h-12 rounded-full bg-[#f6b800] px-7 text-[14px] font-extrabold uppercase tracking-[0.01em] text-slate-950 shadow-none hover:bg-[#e9aa00]">
+          <Button asChild size="lg" className="h-12 rounded-full bg-[#ffb804] px-7 text-[14px] font-extrabold uppercase tracking-[0.01em] text-slate-950 shadow-none hover:bg-[#f2aa00]">
             <Link to="/contact">Let's talk<ArrowRight className="ml-2 h-4 w-4" /></Link>
           </Button>
         </div>
@@ -153,7 +153,7 @@ export function SiteHeader() {
           onClick={() => setMobileOpen((v) => !v)}
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
           aria-expanded={mobileOpen}
-          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-slate-300 bg-white text-slate-900 md:hidden"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#ffb804] bg-[#ffb804] text-slate-950 md:hidden"
         >
           {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
@@ -169,7 +169,7 @@ export function SiteHeader() {
             ))}
           </nav>
           <div className="mt-5">
-            <Button asChild className="h-12 w-full rounded-full bg-[#f6b800] font-extrabold uppercase tracking-[0.01em] text-slate-950 hover:bg-[#e9aa00]">
+            <Button asChild className="h-12 w-full rounded-full bg-[#ffb804] font-extrabold uppercase tracking-[0.01em] text-slate-950 hover:bg-[#f2aa00]">
               <Link to="/contact" onClick={() => setMobileOpen(false)}>Let's talk</Link>
             </Button>
           </div>
