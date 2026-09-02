@@ -25,7 +25,6 @@ export function Logo({ tone = "default" }: { tone?: "default" | "navy" }) {
             <stop offset="1" stopColor="#55278f" />
           </linearGradient>
         </defs>
-        <rect width="168" height="150" rx="2" fill="#02030d" />
         <path
           d="M63 55L63 56L69 54L73 54L74 55L74 57L71 60L77 57L88 57L89 56L118 56L119 55L142 55L143 56L140 52L132 49L130 47L130 45L127 41L119 37L116 37L111 35L90 35L89 36L84 36L83 37L76 38L75 39L77 40L77 43L75 45L72 46Z"
           fill="url(#shyenaFalconOrange)"
@@ -40,22 +39,12 @@ export function Logo({ tone = "default" }: { tone?: "default" | "navy" }) {
         />
       </svg>
 
-      <span className="flex flex-col justify-center leading-none">
-        <span
-          className={`text-[25px] font-bold tracking-[0.24em] sm:text-[27px] ${
-            darkSurface ? "text-white" : "text-slate-950"
-          }`}
-        >
-          SHYENA
-        </span>
-        <span
-          className={`mt-1 text-[7px] font-semibold uppercase tracking-[0.18em] sm:text-[8px] ${
-            darkSurface ? "text-white/70" : "text-slate-500"
-          }`}
-        >
-          <span>EVALUATE.</span> <span className="text-orange-500">OBSERVE.</span>{" "}
-          <span className="text-violet-600">ASSURE.</span>
-        </span>
+      <span
+        className={`text-[25px] font-bold tracking-[0.24em] sm:text-[27px] ${
+          darkSurface ? "text-white" : "text-slate-950"
+        }`}
+      >
+        SHYENA
       </span>
     </div>
   );
