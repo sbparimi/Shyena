@@ -156,7 +156,7 @@ function PricingCalculator() {
                   <p className="text-xs font-bold uppercase tracking-[0.18em] text-violet-200/60">Estimated monthly usage</p>
                   <p className="mt-2 text-5xl font-semibold tracking-[-0.04em] text-white sm:text-6xl">{formatEuro(total)}</p>
                 </div>
-                <Link to="/contact" className="inline-flex items-center justify-center gap-2 rounded-full bg-[#f6b800] px-5 py-3 text-sm font-extrabold text-slate-950 transition hover:bg-[#e9aa00]">Discuss this estimate <ArrowRight className="h-4 w-4" /></Link>
+                <Link to="/contact" className="inline-flex h-12 items-center justify-center gap-3 rounded-full bg-[#ffb804] px-7 text-[14px] font-extrabold text-white uppercase tracking-[0.01em] shadow-none transition hover:-translate-y-px hover:bg-[#f2aa00] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#ffb804]/45 focus:ring-offset-2 focus:ring-offset-[#0b0920]">Discuss this estimate <ArrowRight className="h-4 w-4" /></Link>
               </div>
               <p className="mt-5 text-xs leading-5 text-white/40">Usage estimate only. VAT and separately scoped professional services are excluded.</p>
             </div>
@@ -206,9 +206,8 @@ function PricingPage() {
               <Button asChild className="mt-7 w-full"><Link to="/contact">Discuss this plan <ArrowRight className="h-4 w-4" /></Link></Button>
             </article>
 
-            <article className="relative rounded-[26px] border-2 border-violet-500 bg-white p-7 shadow-[0_24px_70px_-35px_rgba(124,58,237,0.45)] sm:p-8">
-              <span className="absolute right-6 top-6 rounded-full bg-violet-600 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.16em] text-white">Recommended</span>
-              <div className="pr-24 text-xs font-bold uppercase tracking-[0.18em] text-violet-700">Professional</div>
+            <article className="rounded-[26px] border border-slate-200 bg-slate-50 p-7 sm:p-8">
+              <div className="text-xs font-bold uppercase tracking-[0.18em] text-violet-700">Professional</div>
               <div className="mt-6 flex items-end gap-2"><span className="text-5xl font-semibold tracking-[-0.04em]">€30K</span><span className="pb-1 text-sm text-slate-500">/ year</span></div>
               <p className="mt-2 text-sm font-medium text-slate-500">One AI system in production</p>
               <p className="mt-6 text-sm leading-7 text-slate-600">Default production plan with core assurance capabilities, dashboards and reporting for one production AI system.</p>
@@ -220,7 +219,7 @@ function PricingPage() {
               <div className="mt-6 flex items-end gap-2"><span className="text-5xl font-semibold tracking-[-0.04em]">€60K</span><span className="pb-1 text-sm text-white/45">/ year</span></div>
               <p className="mt-2 text-sm font-medium text-white/45">Multiple teams and AI systems</p>
               <p className="mt-6 text-sm leading-7 text-white/60">Multiple AI systems and teams, higher included usage, governance, SSO, API/CI/CD integrations and priority support.</p>
-              <Button asChild className="mt-7 w-full bg-[#f6b800] text-slate-950 hover:bg-[#e9aa00]"><Link to="/contact">Discuss this plan <ArrowRight className="h-4 w-4" /></Link></Button>
+              <Button asChild className="mt-7 w-full bg-[#ffb804] text-white hover:bg-[#f2aa00] hover:text-white"><Link to="/contact">Discuss this plan <ArrowRight className="h-4 w-4" /></Link></Button>
             </article>
           </div>
 
@@ -248,25 +247,36 @@ function PricingPage() {
               <p className="mt-5 text-lg leading-8 text-slate-600">Customers get the platform capabilities without separate module subscriptions. Unlimited access means the tools, workflows and user access are available; executed or generated usage is the metered component.</p>
             </div>
             <div className="grid gap-3 sm:grid-cols-2">
-              {PLATFORM_FEATURES.map((feature, index) => <div key={feature} className="flex gap-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"><span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-violet-100 text-violet-700"><Check className="h-4 w-4" /></span><span className="text-sm font-medium leading-6 text-slate-700">{feature}</span></div>)}
+              {PLATFORM_FEATURES.map((feature) => <div key={feature} className="flex gap-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"><span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-violet-100 text-violet-700"><Check className="h-4 w-4" /></span><span className="text-sm font-medium leading-6 text-slate-700">{feature}</span></div>)}
             </div>
           </div>
         </div>
       </section>
 
-      <section className="bg-white px-6 py-20 lg:px-8 lg:py-24">
+      <section className="border-y border-slate-200 bg-[#edf6ff] px-6 py-20 lg:px-8 lg:py-24">
         <div className="mx-auto max-w-7xl">
-          <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
-            <div>
+          <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+            <div className="max-w-2xl">
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-orange-600">Included onboarding</p>
-              <h2 className="mt-4 text-4xl font-semibold tracking-[-0.03em] sm:text-5xl">Start with a dedicated engineer.</h2>
-              <p className="mt-5 text-lg leading-8 text-slate-600">Every customer receives a free one-week onboarding period with a dedicated Shyena engineer to establish the initial agent connection, test journeys and assurance configuration.</p>
+              <h2 className="mt-4 text-4xl font-semibold leading-[1.02] tracking-[-0.04em] sm:text-5xl">Start with a working assurance baseline.</h2>
+              <p className="mt-6 text-lg leading-8 text-slate-600">Every customer gets a free one-week onboarding period with a dedicated Shyena engineer. Connect the agent, configure the critical journeys and validate the reporting path before broader rollout.</p>
+              <div className="mt-7 inline-flex items-center rounded-full border border-slate-200 bg-white/80 px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] text-slate-500 shadow-sm">Connect · Configure · Validate</div>
             </div>
             <div className="grid gap-4 sm:grid-cols-3">
-              {[["01", "Connect", "Establish the initial agent and execution setup."], ["02", "Configure", "Set up journeys, evaluation rules and security scope."], ["03", "Validate", "Run the initial assurance workflow and confirm the reporting path."]].map(([number, title, text]) => <div key={number} className="rounded-[24px] border border-slate-200 bg-slate-50 p-6"><span className="font-mono text-xs text-violet-600">{number}</span><h3 className="mt-6 text-xl font-semibold">{title}</h3><p className="mt-3 text-sm leading-6 text-slate-600">{text}</p></div>)}
+              {[
+                ["01", "Connect", "Establish the agent connection, execution environment and access."],
+                ["02", "Configure", "Define critical journeys, evaluation rules and security scope."],
+                ["03", "Validate", "Run the first assurance workflow and confirm the evidence and reporting path."],
+              ].map(([number, title, text]) => (
+                <div key={number} className="group rounded-[24px] border border-slate-200 bg-white p-6 shadow-[0_14px_40px_-28px_rgba(15,23,42,0.4)] transition duration-200 hover:-translate-y-0.5 hover:border-violet-200 hover:shadow-[0_20px_45px_-28px_rgba(124,58,237,0.3)] sm:p-7">
+                  <span className="font-mono text-xs font-semibold tracking-[0.08em] text-violet-600">{number}</span>
+                  <h3 className="mt-8 text-xl font-semibold tracking-[-0.02em] text-slate-950">{title}</h3>
+                  <p className="mt-3 text-sm leading-6 text-slate-600">{text}</p>
+                </div>
+              ))}
             </div>
           </div>
-          <p className="mt-8 max-w-4xl text-sm leading-6 text-slate-500">Extended implementation, training, custom development, bespoke framework adapters and other professional services are separately scoped and priced.</p>
+          <p className="mt-9 max-w-4xl text-sm leading-6 text-slate-500">Extended implementation, training, custom development, bespoke framework adapters and other professional services are separately scoped and priced.</p>
         </div>
       </section>
 
@@ -277,7 +287,7 @@ function PricingPage() {
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-orange-300">Enterprise pricing</p>
               <h2 className="mt-4 text-4xl font-semibold tracking-[-0.03em] sm:text-5xl">Public rate first. Negotiation at scale.</h2>
               <p className="mt-5 text-lg leading-8 text-white/55">The €0.05 rates establish the standard list-price anchor. Enterprise customers can negotiate committed volume, deployment, governance, support, data controls and other contractual requirements at contract stage.</p>
-              <Button asChild className="mt-8 bg-[#f6b800] text-slate-950 hover:bg-[#e9aa00]"><Link to="/contact">Discuss enterprise volume <ArrowRight className="h-4 w-4" /></Link></Button>
+              <Button asChild className="mt-8 bg-[#ffb804] text-white hover:bg-[#f2aa00] hover:text-white"><Link to="/contact">Discuss enterprise volume <ArrowRight className="h-4 w-4" /></Link></Button>
             </div>
             <div className="rounded-[28px] border border-white/10 bg-white/[0.04] p-7 sm:p-8">
               <div className="flex items-start justify-between gap-6"><div><p className="text-xs font-bold uppercase tracking-[0.18em] text-white/35">Strategic</p><p className="mt-3 text-4xl font-semibold">€100K–€150K+</p><p className="mt-2 text-sm text-white/45">per year</p></div><div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-orange-400/10 text-orange-300"><ShieldCheck className="h-5 w-5" /></div></div>
