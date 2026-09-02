@@ -19,13 +19,6 @@
 .reference-page-theme input,.reference-page-theme textarea,.reference-page-theme select{background:#fff;color:#0f172a;border-color:#cbd5e1}
 .reference-page-theme input::placeholder,.reference-page-theme textarea::placeholder{color:#94a3b8}
 
-/* Modern animated brand tagline: a restrained word-by-word assurance pulse. */
-.shyena-tagline-word{transform-box:fill-box;transform-origin:center;animation:shyena-tagline-pulse 3.6s ease-in-out infinite;filter:drop-shadow(0 0 0 rgba(124,58,237,0))}
-.shyena-tagline-word-1{animation-delay:0s}
-.shyena-tagline-word-2{animation-delay:1.2s}
-.shyena-tagline-word-3{animation-delay:2.4s}
-@keyframes shyena-tagline-pulse{0%,100%{opacity:.55;transform:translateY(0) scale(1);filter:drop-shadow(0 0 0 rgba(124,58,237,0))}18%,42%{opacity:1;transform:translateY(-1.2px) scale(1.035);filter:drop-shadow(0 2px 5px rgba(124,58,237,.18))}58%{opacity:.72;transform:translateY(0) scale(1.01);filter:drop-shadow(0 0 0 rgba(124,58,237,0))}}
-
 /* Keyboard visibility and reduced-motion support. */
 .site-theme :where(a,button,input,textarea,select):focus-visible,.reference-page-theme :where(a,button,input,textarea,select):focus-visible{outline:3px solid rgba(124,58,237,.35);outline-offset:3px}
 @media (prefers-reduced-motion:reduce){.site-theme *, .reference-page-theme *{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
