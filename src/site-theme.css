@@ -20,8 +20,8 @@
 .reference-page-theme input::placeholder,.reference-page-theme textarea::placeholder{color:#94a3b8}
 
 /* Shyena action-button system: use the supplied CTA yellow consistently without recoloring utility controls such as accordions. */
-.site-theme [data-shyena-button]{background:#ffb804!important;border-color:#ffb804!important;color:#0f172a!important;box-shadow:none!important}
-.site-theme [data-shyena-button]:hover{background:#f2aa00!important;border-color:#f2aa00!important;color:#0f172a!important}
+.site-theme [data-shyena-button],.site-theme a[class*="bg-[#f6b800]"]{background:#ffb804!important;border-color:#ffb804!important;color:#0f172a!important;box-shadow:none!important}
+.site-theme [data-shyena-button]:hover,.site-theme a[class*="bg-[#f6b800]"]:hover{background:#f2aa00!important;border-color:#f2aa00!important;color:#0f172a!important}
 .site-theme a.rounded-full[class*="px-6"][class*="py-3.5"]{background:#ffb804!important;border-color:#ffb804!important;color:#0f172a!important;box-shadow:none!important}
 .site-theme a.rounded-full[class*="px-6"][class*="py-3.5"]:hover{background:#f2aa00!important;border-color:#f2aa00!important;color:#0f172a!important}
 
