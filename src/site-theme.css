@@ -129,6 +129,73 @@
   box-shadow: 0 18px 40px -24px rgba(0,0,0,.55) !important;
 }
 
+/* Contact-page reference palette. Scoped so no other page changes. */
+.reference-page-theme {
+  background: #04081a !important;
+  color: #f4f6fb !important;
+}
+
+.reference-page-theme section,
+.reference-page-theme > div,
+.reference-page-theme article,
+.reference-page-theme aside {
+  color: #f4f6fb !important;
+}
+
+.reference-page-theme section[class*="bg-[#0a071d]"] {
+  background: #04081a !important;
+}
+
+.reference-page-theme [class*="bg-[#15102d]"] {
+  background: #0d1638 !important;
+}
+
+.reference-page-theme [class*="bg-[#100b25]"] {
+  background: #070f23 !important;
+}
+
+.reference-page-theme [class*="border-[#2b2350]"],
+.reference-page-theme [class*="border-[#514778]"] {
+  border-color: #1b2544 !important;
+}
+
+.reference-page-theme [class*="text-[#faf8ff]"],
+.reference-page-theme [class*="text-white"] {
+  color: #f4f6fb !important;
+}
+
+.reference-page-theme [class*="text-[#c9c4d8]"],
+.reference-page-theme [class*="text-[#918aa8]"],
+.reference-page-theme [class*="text-[#77708d]"] {
+  color: #a7b0cc !important;
+}
+
+.reference-page-theme [class*="text-[#a855f7]"],
+.reference-page-theme [class*="text-[#c4b5fd]"] {
+  color: #8a6bff !important;
+}
+
+.reference-page-theme [class*="text-[#f59804]"] {
+  color: #f79129 !important;
+}
+
+.reference-page-theme [class*="placeholder:text-[#5f5875]"]::placeholder {
+  color: #64708f !important;
+}
+
+.reference-page-theme input,
+.reference-page-theme textarea,
+.reference-page-theme select {
+  background: #070f23 !important;
+  color: #f4f6fb !important;
+  border-color: #1b2544 !important;
+}
+
+.reference-page-theme input::placeholder,
+.reference-page-theme textarea::placeholder {
+  color: #64708f !important;
+}
+
 @media (max-width: 767px) {
   .site-theme section[class*="bg-white"],
   .site-theme section[class*="bg-slate-50"],
