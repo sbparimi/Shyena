@@ -6,10 +6,10 @@ import { CtaBand } from "@/components/site/cta-band";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About Shyena | From a Testing Problem to AI Assurance" },
-      { name: "description", content: "The story behind Shyena: how a real assurance problem became an evidence-first AI assurance platform with three product suites." },
-      { property: "og:title", content: "About Shyena | From a Testing Problem to AI Assurance" },
-      { property: "og:description", content: "How Shyena evolved from a practical testing problem into an evidence-first AI assurance platform." },
+      { title: "About Shyena | Vision, Precision, Assurance" },
+      { name: "description", content: "The story behind Shyena: inspired by the Vedic image of the swift Shyena, we built an evidence-first AI assurance platform to see the whole system and prove what it did." },
+      { property: "og:title", content: "About Shyena | Vision, Precision, Assurance" },
+      { property: "og:description", content: "How a real AI assurance problem became Shyena: an evidence-first platform built to understand, evaluate and defend AI systems." },
     ],
     links: [{ rel: "canonical", href: "https://shyena.eu/about" }],
   }),
@@ -17,10 +17,10 @@ export const Route = createFileRoute("/about")({
 });
 
 const JOURNEY = [
-  { number: "01", label: "THE PROBLEM", title: "AI testing stopped at the answer.", copy: "Traditional automation could tell us whether a screen changed. LLM evaluators could tell us whether an answer sounded good. Security scanners could find isolated weaknesses. None gave us a trustworthy view of what the complete agent actually did across the journey." },
-  { number: "02", label: "THE BUILD", title: "We built Shyena to close the gap.", copy: "Shyena began as an engineering response to a real assurance problem: connect system behavior, execution, evaluation and evidence so a release decision could be defended." },
-  { number: "03", label: "THE EVOLUTION", title: "Shyena became a platform and a brand.", copy: "As the problem widened beyond one implementation, Shyena evolved into a product architecture and a clear market proposition: prove the behavior and security of AI systems as a whole, not just the quality of individual responses." },
-  { number: "04", label: "TODAY", title: "One platform. Three assurance suites.", copy: "NEXUS understands the system. VERA evaluates real behavior. CHAKRA attacks the security boundary. Together they turn fragmented test signals into one evidence chain for engineering and release decisions." },
+  { number: "01", label: "THE PROBLEM", title: "AI testing stopped at the answer.", copy: "AI systems were becoming more capable, but assurance remained fragmented. One tool checked the answer, another checked deterministic behavior, another scanned security. No one view explained what the complete agent actually did across the journey." },
+  { number: "02", label: "THE BUILD", title: "We built the assurance layer we could not find.", copy: "The work began as an engineering response to that gap. We connected system behavior, execution, evaluation and evidence so a release decision could be based on what happened — not only on what a model scored." },
+  { number: "03", label: "THE EVOLUTION", title: "The problem became a platform. The platform became Shyena.", copy: "As the problem widened beyond one implementation, the idea evolved into a product architecture and a brand. The name Shyena gave that architecture a point of view: see higher, move with purpose, and return with what matters." },
+  { number: "04", label: "TODAY", title: "One platform. Three assurance suites.", copy: "NEXUS understands the system. VERA evaluates real behavior. CHAKRA defends the security boundary. Together they turn fragmented signals into one evidence chain for engineering and release decisions." },
 ] as const;
 
 const SUITES = [
@@ -33,40 +33,70 @@ const PRINCIPLES = [
   ["01", "Evidence over scores", "A score without the evidence behind it is not a release decision."],
   ["02", "The whole system matters", "Conversation quality alone cannot prove orchestration, tools, retrieval, state or security."],
   ["03", "No false confidence", "A failed or incomplete execution must never be presented as a passing evaluation."],
-  ["04", "Built from the engineering problem", "Shyena is shaped by the problems teams encounter in production, not by a collection of disconnected AI features."],
+  ["04", "Purpose over noise", "Every capability should help an engineering team see the system more clearly and make a decision with evidence."],
 ] as const;
+
+function ShyenaMark() {
+  return (
+    <svg viewBox="0 0 240 200" role="img" aria-label="Shyena eagle mountain mark" className="h-full w-full">
+      <defs>
+        <clipPath id="aboutShyenaEagle">
+          <path d="M18 108 61 65 45 54 98 28 84 17 151 12c38 1 65 15 72 37 7 20-3 36-21 39-14 2-25-4-35-12l7 19 32 67-61-20-24 26-20-28-39 27 14-39-58-20Z" />
+        </clipPath>
+        <linearGradient id="aboutShyenaSky" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#dbeefa" />
+          <stop offset="0.55" stopColor="#f7a45b" />
+          <stop offset="1" stopColor="#e56a24" />
+        </linearGradient>
+        <linearGradient id="aboutShyenaMountain" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#233a61" />
+          <stop offset="1" stopColor="#071a3a" />
+        </linearGradient>
+      </defs>
+      <g clipPath="url(#aboutShyenaEagle)">
+        <rect width="240" height="200" fill="url(#aboutShyenaSky)" />
+        <path d="M0 170 48 116 76 139 111 77 137 116 166 69 240 158V200H0Z" fill="url(#aboutShyenaMountain)" />
+        <path d="m48 116 28 23 35-62-13 48-19 7-18-8Z" fill="#f8fbff" />
+        <path d="m111 77 26 39-14-10-12 22-11-16Z" fill="#eaf4fb" />
+        <path d="m166 69 74 89-49-29-17-28-14 19-13-12Z" fill="#f5f9fc" />
+        <path d="M0 176 61 148 91 158 125 139 155 156 196 143 240 171V200H0Z" fill="#0b2347" opacity=".92" />
+      </g>
+      <path d="M18 108 61 65 45 54 98 28 84 17 151 12c38 1 65 15 72 37 7 20-3 36-21 39-14 2-25-4-35-12l7 19 32 67-61-20-24 26-20-28-39 27 14-39-58-20Z" fill="none" stroke="#0b1833" strokeWidth="2.5" strokeLinejoin="round" />
+      <path d="M187 52c7 1 14 4 18 8-7 4-14 4-21 1-3-2-4-5-4-8Z" fill="#071226" />
+      <circle cx="192" cy="53" r="2.2" fill="#ffb703" />
+    </svg>
+  );
+}
 
 function AboutPage() {
   return (
     <main className="overflow-hidden bg-white text-slate-950">
       <section className="border-b border-slate-300 bg-[#eaf5fa]">
-        <div className="mx-auto w-full max-w-7xl px-5 pb-20 pt-12 sm:px-8 sm:pb-24 sm:pt-16 lg:pb-28">
+        <div className="mx-auto w-full max-w-7xl px-5 pb-20 pt-10 sm:px-8 sm:pb-24 sm:pt-14 lg:pb-28">
           <div className="flex items-center justify-between border-b border-slate-300 pb-5 text-[10px] font-medium uppercase tracking-[0.22em] text-slate-500">
             <div className="flex items-center gap-2"><span className="h-1.5 w-1.5 bg-[#ffb703]" /><span>About Shyena</span><span className="text-slate-300">/</span><span>Our story</span></div>
-            <span className="hidden sm:block">NEXUS · VERA · CHAKRA</span>
+            <span className="hidden sm:block">VISION · PRECISION · ASSURANCE</span>
           </div>
 
-          <div className="grid gap-12 pt-14 lg:grid-cols-[1.15fr_.85fr] lg:items-end lg:gap-20">
+          <div className="grid gap-12 pt-12 lg:grid-cols-[1.08fr_.92fr] lg:items-center lg:gap-16">
             <div>
-              <p className="font-mono text-xs uppercase tracking-[0.22em] text-[#a87900]">From a problem to a platform</p>
-              <h1 className="mt-5 max-w-5xl text-5xl font-bold leading-[0.98] tracking-[-0.045em] sm:text-7xl lg:text-[6.5rem]">We did not start with a product.<br /><span className="text-[#a87900]">We started with a problem.</span></h1>
-              <p className="mt-8 max-w-3xl text-lg leading-8 text-slate-600 sm:text-xl">AI systems were becoming more capable, but the evidence needed to trust them for release was still fragmented. Shyena was built to close that gap.</p>
+              <p className="font-mono text-xs uppercase tracking-[0.22em] text-[#a87900]">Our name. Our inspiration.</p>
+              <h1 className="mt-5 max-w-4xl text-5xl font-bold leading-[0.98] tracking-[-0.045em] sm:text-7xl lg:text-[6.2rem]">Shyena is vision.<br />Shyena is precision.<br /><span className="text-[#a87900]">Shyena returns.</span></h1>
+              <p className="mt-8 max-w-3xl text-lg leading-8 text-slate-600 sm:text-xl">Our name is inspired by the Vedic image of the <em>śyena</em> — a swift bird of prey associated in the Rigveda with carrying Soma. We took that image as a brand metaphor: see higher, move with purpose, and return with what matters.</p>
+              <div className="mt-7 border-l-2 border-[#ffb703] pl-5 text-base font-semibold leading-7 text-slate-800">That spirit shapes how we build assurance: a higher view of the system, a sharper view of its behavior, and evidence that returns to the people making the release decision.</div>
               <div className="mt-9 flex flex-wrap gap-3">
                 <Button asChild className="h-12 rounded-none bg-[#ffb703] px-6 text-sm font-semibold text-slate-950 hover:bg-[#f2aa00]"><Link to="/contact">Talk to Shyena <ArrowRight className="h-4 w-4" /></Link></Button>
                 <Button asChild variant="outline" className="h-12 rounded-none border-slate-400 bg-white px-6 text-sm text-slate-900 hover:bg-slate-50"><Link to="/docs">Explore the platform</Link></Button>
               </div>
             </div>
 
-            <div className="border-l border-slate-300 pl-6 lg:pl-8">
-              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-slate-500">The transformation</p>
-              <div className="mt-5 space-y-0">
-                {["Testing responses", "Understanding systems", "Evaluating journeys", "Defending the boundary", "Proving the release"].map((item, index) => (
-                  <div key={item} className="flex items-center gap-4 border-b border-slate-300 py-4 first:border-t">
-                    <span className="font-mono text-[10px] text-[#a87900]">0{index + 1}</span><span className="text-sm font-semibold text-slate-800">{item}</span>
-                  </div>
-                ))}
+            <div className="relative mx-auto w-full max-w-[520px]">
+              <div className="absolute inset-8 bg-white/40 blur-2xl" />
+              <div className="relative aspect-[6/5] border border-slate-300 bg-white/40 p-5 sm:p-8">
+                <div className="absolute left-5 top-5 font-mono text-[10px] uppercase tracking-[0.2em] text-slate-400">THE SHYENA MARK</div>
+                <div className="h-full w-full pt-5"><ShyenaMark /></div>
+                <div className="absolute bottom-5 left-5 right-5 flex justify-between border-t border-slate-300 pt-3 font-mono text-[9px] uppercase tracking-[0.18em] text-slate-400"><span>See higher</span><span>Move with purpose</span><span>Return with evidence</span></div>
               </div>
-              <p className="mt-6 text-sm leading-6 text-slate-500">The unit of assurance changed from an isolated answer to an evidence-backed system decision.</p>
             </div>
           </div>
         </div>
@@ -77,13 +107,13 @@ function AboutPage() {
           <div className="max-w-3xl">
             <p className="font-mono text-xs uppercase tracking-[0.18em] text-[#a87900]">Why Shyena exists</p>
             <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-5xl">The tools were good at pieces of the problem. The release decision was still ours to make.</h2>
-            <p className="mt-5 text-lg leading-8 text-slate-600">That was the problem we kept seeing. One tool evaluated language. Another checked deterministic behavior. Another scanned security. Another exposed logs. The evidence lived in separate places, and none of it explained whether the AI system as a whole had behaved correctly enough to release.</p>
+            <p className="mt-5 text-lg leading-8 text-slate-600">That was the engineering problem. Answer quality, deterministic checks, security scans and runtime logs all had value, but the evidence lived in separate places. We needed a way to understand the system, evaluate what actually happened and defend the resulting decision.</p>
           </div>
           <div className="mt-12 grid gap-px border border-slate-300 bg-slate-300 md:grid-cols-3">
             {[
               ["ANSWER", "Is the response good?", "Useful, but incomplete."],
               ["EXECUTION", "Did the journey actually work?", "Necessary, but not enough."],
-              ["ASSURANCE", "Can we prove the release is safe?", "That is the missing layer."],
+              ["ASSURANCE", "Can we prove the release decision?", "That is the layer we built."],
             ].map(([label, title, copy]) => (
               <article key={label} className="bg-[#f5f8fc] p-7 sm:p-8">
                 <p className="font-mono text-[10px] tracking-[0.2em] text-[#a87900]">{label}</p>
@@ -98,8 +128,8 @@ function AboutPage() {
       <section className="border-b border-slate-300 bg-[#f5f8fc]">
         <div className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
           <div className="flex flex-col justify-between gap-5 border-b border-slate-300 pb-8 lg:flex-row lg:items-end">
-            <div><p className="font-mono text-xs uppercase tracking-[0.18em] text-[#a87900]">The Shyena story</p><h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-5xl">Problem → Shyena → three suites.</h2></div>
-            <p className="max-w-md text-sm leading-6 text-slate-600">A product story driven by an engineering problem, not a branding exercise.</p>
+            <div><p className="font-mono text-xs uppercase tracking-[0.18em] text-[#a87900]">The Shyena story</p><h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-5xl">A problem became a purpose. A purpose became a platform.</h2></div>
+            <p className="max-w-md text-sm leading-6 text-slate-600">The brand is not separate from the engineering problem. The name expresses the way we chose to solve it.</p>
           </div>
           <div className="mt-10 border-t border-slate-300">
             {JOURNEY.map((item) => (
@@ -116,7 +146,7 @@ function AboutPage() {
       <section className="border-b border-slate-300 bg-white">
         <div className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
           <div className="grid gap-10 lg:grid-cols-[.4fr_.6fr] lg:gap-20">
-            <div><p className="font-mono text-xs uppercase tracking-[0.18em] text-[#a87900]">What Shyena became</p><h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-5xl">Three product suites. One evidence chain.</h2><p className="mt-5 max-w-md text-base leading-7 text-slate-600">Each suite solves a different failure point. Together they address the full assurance problem.</p></div>
+            <div><p className="font-mono text-xs uppercase tracking-[0.18em] text-[#a87900]">What Shyena became</p><h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-5xl">Understand. Evaluate. Defend.</h2><p className="mt-5 max-w-md text-base leading-7 text-slate-600">Three purpose-built suites, connected by one evidence chain and one mission: help teams make AI release decisions they can defend.</p></div>
             <div className="border-t border-slate-300">
               {SUITES.map((suite, index) => { const Icon = suite.icon; return <Link key={suite.label} to={suite.to} className="group grid gap-5 border-b border-slate-300 py-7 sm:grid-cols-[60px_110px_1fr_auto] sm:items-start"><span className="font-mono text-xs text-[#a87900]">0{index + 1}</span><span className="flex h-10 w-10 items-center justify-center bg-[#fff4cf] text-[#a87900]"><Icon className="h-4 w-4" /></span><div><p className="font-mono text-[10px] tracking-[0.18em] text-slate-500">{suite.label}</p><h3 className="mt-1 text-xl font-bold">{suite.title}</h3><p className="mt-2 text-sm leading-6 text-slate-600">{suite.copy}</p></div><ArrowRight className="mt-2 h-4 w-4 text-slate-400 transition-transform group-hover:translate-x-1 group-hover:text-[#a87900]" /></Link>; })}
             </div>
@@ -127,7 +157,7 @@ function AboutPage() {
       <section className="border-b border-slate-300 bg-[#eaf5fa]">
         <div className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
           <div className="grid gap-10 lg:grid-cols-[.4fr_.6fr] lg:gap-20">
-            <div><p className="font-mono text-xs uppercase tracking-[0.18em] text-[#a87900]">What we believe</p><h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-5xl">Built to solve what fragmented tools could not.</h2></div>
+            <div><p className="font-mono text-xs uppercase tracking-[0.18em] text-[#a87900]">What we believe</p><h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-5xl">See the whole. Prove the decision.</h2></div>
             <div className="border-t border-slate-300">
               {PRINCIPLES.map(([number, title, copy]) => <article key={number} className="grid gap-4 border-b border-slate-300 py-6 sm:grid-cols-[50px_190px_1fr]"><span className="font-mono text-xs text-[#a87900]">{number}</span><h3 className="font-bold">{title}</h3><p className="text-sm leading-6 text-slate-600">{copy}</p></article>)}
             </div>
