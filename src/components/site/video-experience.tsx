@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { Maximize2, Minimize2, Music2, Pause, Play } from "lucide-react";
+import { ArrowRight, Maximize2, Minimize2, Music2, Pause, Play } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 
 const VIDEO_SELECTOR = 'video[aria-label="Shyena Cognigy assurance workflow"]';
