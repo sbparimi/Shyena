@@ -9,7 +9,6 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { Logo } from "./logo";
 
@@ -87,7 +86,7 @@ function MenuGroup({ items }: { items: readonly MenuItem[] }) {
 
 const desktopTriggerClass = "relative h-12 rounded-none border-0 !bg-white px-4 text-[14px] font-bold uppercase tracking-[0.06em] text-slate-800 transition-all duration-200 !hover:border-0 !hover:bg-white hover:text-slate-950 focus:border-0 !focus:bg-white data-[state=open]:border-0 data-[state=open]:!bg-white data-[state=open]:text-slate-950 after:absolute after:inset-x-3 after:bottom-0 after:h-[3px] after:origin-left after:scale-x-0 after:bg-[#14b8a6] after:transition-transform after:duration-300 hover:after:scale-x-100 data-[state=open]:after:scale-x-100";
 
-const desktopLinkClass = `${navigationMenuTriggerStyle()} relative h-12 rounded-none border-0 bg-transparent px-4 text-[14px] font-bold uppercase tracking-[0.06em] text-slate-800 transition-all duration-200 !hover:border-0 !hover:bg-white hover:text-slate-950 focus:border-0 !focus:bg-white after:absolute after:inset-x-3 after:bottom-0 after:h-[3px] after:origin-left after:scale-x-0 after:bg-[#14b8a6] after:transition-transform after:duration-300 hover:after:scale-x-100`;
+const desktopLinkClass = "relative h-12 rounded-none border-0 !bg-white px-4 text-[14px] font-bold uppercase tracking-[0.06em] text-slate-800 transition-all duration-200 !hover:border-0 !hover:bg-white hover:text-slate-950 focus:border-0 !focus:bg-white after:absolute after:inset-x-3 after:bottom-0 after:h-[3px] after:origin-left after:scale-x-0 after:bg-[#14b8a6] after:transition-transform after:duration-300 hover:after:scale-x-100";
 
 export function SiteHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
