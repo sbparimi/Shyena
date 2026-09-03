@@ -87,9 +87,9 @@ function MenuGroup({ items }: { items: readonly MenuItem[] }) {
   );
 }
 
-const desktopTriggerClass = "relative h-12 rounded-none border border-transparent bg-transparent px-4 text-[14px] font-bold uppercase tracking-[0.06em] text-slate-800 transition-all duration-200 hover:border-slate-300 hover:bg-white hover:text-slate-950 focus:border-slate-300 focus:bg-white data-[state=open]:border-slate-300 data-[state=open]:bg-white data-[state=open]:text-slate-950 after:absolute after:inset-x-3 after:bottom-0 after:h-[3px] after:origin-left after:scale-x-0 after:bg-[#14b8a6] after:transition-transform after:duration-300 hover:after:scale-x-100 data-[state=open]:after:scale-x-100";
+const desktopTriggerClass = "relative h-12 rounded-none border-0 bg-transparent px-4 text-[14px] font-bold uppercase tracking-[0.06em] text-slate-800 transition-all duration-200 hover:border-0 hover:bg-white hover:text-slate-950 focus:border-0 focus:bg-white data-[state=open]:border-0 data-[state=open]:bg-white data-[state=open]:text-slate-950 after:absolute after:inset-x-3 after:bottom-0 after:h-[3px] after:origin-left after:scale-x-0 after:bg-[#14b8a6] after:transition-transform after:duration-300 hover:after:scale-x-100 data-[state=open]:after:scale-x-100";
 
-const desktopLinkClass = `${navigationMenuTriggerStyle()} relative h-12 rounded-none border border-transparent bg-transparent px-4 text-[14px] font-bold uppercase tracking-[0.06em] text-slate-800 transition-all duration-200 hover:border-slate-300 hover:bg-white hover:text-slate-950 focus:border-slate-300 focus:bg-white after:absolute after:inset-x-3 after:bottom-0 after:h-[3px] after:origin-left after:scale-x-0 after:bg-[#14b8a6] after:transition-transform after:duration-300 hover:after:scale-x-100`;
+const desktopLinkClass = `${navigationMenuTriggerStyle()} relative h-12 rounded-none border-0 bg-transparent px-4 text-[14px] font-bold uppercase tracking-[0.06em] text-slate-800 transition-all duration-200 hover:border-0 hover:bg-white hover:text-slate-950 focus:border-0 focus:bg-white after:absolute after:inset-x-3 after:bottom-0 after:h-[3px] after:origin-left after:scale-x-0 after:bg-[#14b8a6] after:transition-transform after:duration-300 hover:after:scale-x-100`;
 
 export function SiteHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -100,7 +100,7 @@ export function SiteHeader() {
         <Logo />
 
         <div className="hidden flex-1 justify-center md:flex">
-          <div className="border border-slate-300 bg-slate-50 p-1 shadow-[0_4px_18px_rgba(15,23,42,0.05)]">
+          <div className="bg-slate-50 p-1 shadow-[0_4px_18px_rgba(15,23,42,0.05)]">
             <NavigationMenu>
               <NavigationMenuList className="gap-0">
                 <NavigationMenuItem>
