@@ -75,12 +75,12 @@ function Index() {
       <section className="relative overflow-hidden border-b border-slate-200 bg-[#edf6ff]">
         <div className="pointer-events-none absolute -right-32 -top-40 h-[560px] w-[560px] rounded-full bg-violet-200/35 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-48 left-1/3 h-[420px] w-[420px] rounded-full bg-orange-100/50 blur-3xl" />
-        <div className="relative mx-auto grid max-w-7xl gap-12 px-6 py-16 sm:py-20 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-16 lg:px-8 lg:py-24">
+        <div className="relative mx-auto grid max-w-7xl gap-12 px-6 py-16 sm:py-20 lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-12 lg:px-8 lg:py-24">
           <div className="flex flex-col items-start justify-center">
-            <h1 className="max-w-2xl font-[Sora] text-[clamp(3.5rem,5.5vw,5.5rem)] font-extrabold leading-[0.94] tracking-[-0.045em] text-slate-950">Agentic AI Evaluation built for enterprises.</h1>
-            <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
-              <Link to="/contact" data-shyena-button="primary" className="inline-flex h-14 items-center justify-center gap-3 rounded-full border border-[#ffb703] bg-[#ffb703] px-8 text-[15px] font-extrabold uppercase tracking-[0.01em] text-slate-950 transition-all duration-200 hover:bg-[#f5a900]">Talk to an Assurance Expert <ArrowRight className="h-5 w-5" /></Link>
-              <a href="#how-it-works" data-shyena-button="secondary" className="inline-flex h-14 items-center justify-center gap-3 rounded-full border-2 border-[#ffb703] bg-white px-8 text-[15px] font-semibold text-slate-950 transition-all duration-200 hover:bg-amber-50"><Play className="h-5 w-5" /> See how Shyena works</a>
+            <h1 className="max-w-none font-[Sora] text-[clamp(3rem,4.4vw,4.75rem)] font-extrabold leading-[0.98] tracking-[-0.045em] text-slate-950">AI agent assurance.</h1>
+            <div className="mt-10 flex flex-row flex-nowrap gap-3">
+              <Link to="/contact" data-shyena-button="primary" className="inline-flex h-14 shrink items-center justify-center gap-2 rounded-full border border-[#ffb703] bg-[#ffb703] px-6 text-[14px] font-extrabold uppercase tracking-[0.01em] text-slate-950 transition-all duration-200 hover:bg-[#f5a900]">Talk to an Expert <ArrowRight className="h-5 w-5" /></Link>
+              <a href="#how-it-works" data-shyena-button="secondary" className="inline-flex h-14 shrink items-center justify-center gap-2 rounded-full border-2 border-[#ffb703] bg-white px-6 text-[14px] font-semibold text-slate-950 transition-all duration-200 hover:bg-amber-50"><Play className="h-5 w-5" /> See how it works</a>
             </div>
           </div>
           <AssuranceVideo />
