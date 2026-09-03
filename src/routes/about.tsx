@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, BarChart3, CheckCircle2, CircleDot, Mountain, ShieldCheck, Sparkles, Target } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ABOUT_HERO_IMAGE } from "@/assets/about-hero";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -165,18 +166,27 @@ function AboutPage() {
           <div className="mb-8 text-[11px] font-medium text-slate-500 sm:mb-10">
             Home <span className="px-2">/</span> About
           </div>
-          <div className="mx-auto max-w-[900px]">
-            <p className="text-[11px] font-medium uppercase tracking-[0.17em] text-[#e59a00]">Our name. Our inspiration.</p>
-            <h1 className="mt-4 text-[48px] font-bold leading-[1.04] tracking-[-0.045em] sm:text-[62px] lg:text-[67px]">
-              Shyena is vision.<br />
-              Shyena is precision.<br />
-              <span className="text-[#f0a400]">Shyena returns.</span>
-            </h1>
-            <p className="mt-5 max-w-[760px] text-[16px] leading-6 text-slate-700 sm:text-[17px]">
-              Shyena represents the strength to rise higher than all, the vision to see what others miss, and the power to return with what truly matters.
-            </p>
-            <div className="mt-4 border-l-[3px] border-[#ffb703] pl-4 text-[14px] font-semibold leading-6 text-slate-800">
-              That is the spirit behind everything we build.
+          <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_.95fr] lg:gap-8">
+            <div className="max-w-[700px]">
+              <p className="text-[11px] font-medium uppercase tracking-[0.17em] text-[#e59a00]">Our name. Our inspiration.</p>
+              <h1 className="mt-4 text-[48px] font-bold leading-[1.04] tracking-[-0.045em] sm:text-[62px] lg:text-[67px]">
+                Shyena is vision.<br />
+                Shyena is precision.<br />
+                <span className="text-[#f0a400]">Shyena returns.</span>
+              </h1>
+              <p className="mt-5 max-w-[650px] text-[16px] leading-6 text-slate-700 sm:text-[17px]">
+                Shyena represents the strength to rise higher than all, the vision to see what others miss, and the power to return with what truly matters.
+              </p>
+              <div className="mt-4 border-l-[3px] border-[#ffb703] pl-4 text-[14px] font-semibold leading-6 text-slate-800">
+                That is the spirit behind everything we build.
+              </div>
+            </div>
+            <div className="flex items-center justify-center lg:justify-end">
+              <img
+                src={ABOUT_HERO_IMAGE}
+                alt="Eagle silhouette containing a mountain landscape"
+                className="h-auto w-full max-w-[486px] object-contain"
+              />
             </div>
           </div>
         </div>
