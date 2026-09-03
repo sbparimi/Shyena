@@ -201,8 +201,10 @@ export function VideoExperience() {
             aria-pressed={musicEnabled}
             aria-label={musicEnabled ? "Turn background music off" : "Turn background music on"}
             title={musicEnabled ? "Turn background music off" : "Turn background music on"}
+            data-music-control="true"
+            data-music-active={musicEnabled ? "true" : "false"}
             onClick={toggleMusic}
-            className={`flex h-9 items-center gap-2 rounded-xl px-3 text-xs font-medium transition focus:outline-none focus:ring-2 focus:ring-violet-300 ${musicEnabled ? "bg-violet-500/25 text-violet-200" : "text-white/65 hover:bg-white/10 hover:text-white"}`}
+            className={`flex h-9 items-center gap-2 rounded-xl px-3 text-xs font-medium transition focus:outline-none focus:ring-2 focus:ring-violet-300 ${musicEnabled ? "bg-violet-500/25 text-violet-200" : "bg-[#15122a] text-white/65 hover:bg-[#211c3c] hover:text-white"}`}
           >
             <Music2 className="h-4 w-4" />
             <span className="hidden sm:inline">Music</span>
