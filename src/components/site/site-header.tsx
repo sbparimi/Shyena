@@ -87,9 +87,9 @@ function MenuGroup({ items }: { items: readonly MenuItem[] }) {
   );
 }
 
-const desktopTriggerClass = "relative h-12 rounded-none border-0 bg-transparent px-4 text-[14px] font-bold uppercase tracking-[0.06em] text-slate-800 transition-all duration-200 hover:border-0 hover:bg-white hover:text-slate-950 focus:border-0 focus:bg-white data-[state=open]:border-0 data-[state=open]:bg-white data-[state=open]:text-slate-950 after:absolute after:inset-x-3 after:bottom-0 after:h-[3px] after:origin-left after:scale-x-0 after:bg-[#14b8a6] after:transition-transform after:duration-300 hover:after:scale-x-100 data-[state=open]:after:scale-x-100";
+const desktopTriggerClass = "relative h-12 rounded-none border-0 bg-transparent px-4 text-[14px] font-bold uppercase tracking-[0.06em] text-slate-800 transition-all duration-200 !hover:border-0 !hover:bg-white hover:text-slate-950 focus:border-0 !focus:bg-white data-[state=open]:border-0 data-[state=open]:!bg-white data-[state=open]:text-slate-950 after:absolute after:inset-x-3 after:bottom-0 after:h-[3px] after:origin-left after:scale-x-0 after:bg-[#14b8a6] after:transition-transform after:duration-300 hover:after:scale-x-100 data-[state=open]:after:scale-x-100";
 
-const desktopLinkClass = `${navigationMenuTriggerStyle()} relative h-12 rounded-none border-0 bg-transparent px-4 text-[14px] font-bold uppercase tracking-[0.06em] text-slate-800 transition-all duration-200 hover:border-0 hover:bg-white hover:text-slate-950 focus:border-0 focus:bg-white after:absolute after:inset-x-3 after:bottom-0 after:h-[3px] after:origin-left after:scale-x-0 after:bg-[#14b8a6] after:transition-transform after:duration-300 hover:after:scale-x-100`;
+const desktopLinkClass = `${navigationMenuTriggerStyle()} relative h-12 rounded-none border-0 bg-transparent px-4 text-[14px] font-bold uppercase tracking-[0.06em] text-slate-800 transition-all duration-200 !hover:border-0 !hover:bg-white hover:text-slate-950 focus:border-0 !focus:bg-white after:absolute after:inset-x-3 after:bottom-0 after:h-[3px] after:origin-left after:scale-x-0 after:bg-[#14b8a6] after:transition-transform after:duration-300 hover:after:scale-x-100`;
 
 export function SiteHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -104,52 +104,30 @@ export function SiteHeader() {
             <NavigationMenu>
               <NavigationMenuList className="gap-0">
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className={desktopTriggerClass}>
-                    Platform
-                  </NavigationMenuTrigger>
+                  <NavigationMenuTrigger className={desktopTriggerClass}>Platform</NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <div className="border-t border-slate-300 bg-white p-3">
-                      <MenuGroup items={PRODUCTS} />
-                    </div>
+                    <div className="border-t border-slate-300 bg-white p-3"><MenuGroup items={PRODUCTS} /></div>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
-
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className={desktopTriggerClass}>
-                    Assurance
-                  </NavigationMenuTrigger>
+                  <NavigationMenuTrigger className={desktopTriggerClass}>Assurance</NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <div className="border-t border-slate-300 bg-white p-3">
-                      <MenuGroup items={ASSURANCE} />
-                    </div>
+                    <div className="border-t border-slate-300 bg-white p-3"><MenuGroup items={ASSURANCE} /></div>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
-
                 <NavigationMenuItem>
-                  <Link to="/pricing" className={desktopLinkClass}>
-                    Pricing
-                  </Link>
+                  <Link to="/pricing" className={desktopLinkClass}>Pricing</Link>
                 </NavigationMenuItem>
-
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className={desktopTriggerClass}>
-                    Resources
-                  </NavigationMenuTrigger>
+                  <NavigationMenuTrigger className={desktopTriggerClass}>Resources</NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <div className="border-t border-slate-300 bg-white p-3">
-                      <MenuGroup items={RESOURCES} />
-                    </div>
+                    <div className="border-t border-slate-300 bg-white p-3"><MenuGroup items={RESOURCES} /></div>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
-
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className={desktopTriggerClass}>
-                    Company
-                  </NavigationMenuTrigger>
+                  <NavigationMenuTrigger className={desktopTriggerClass}>Company</NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <div className="border-t border-slate-300 bg-white p-3">
-                      <MenuGroup items={COMPANY} />
-                    </div>
+                    <div className="border-t border-slate-300 bg-white p-3"><MenuGroup items={COMPANY} /></div>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
               </NavigationMenuList>
@@ -163,13 +141,7 @@ export function SiteHeader() {
           </Button>
         </div>
 
-        <button
-          type="button"
-          onClick={() => setMobileOpen((v) => !v)}
-          aria-label={mobileOpen ? "Close menu" : "Open menu"}
-          aria-expanded={mobileOpen}
-          className="inline-flex h-12 w-12 items-center justify-center rounded-none border border-[#ffb804] bg-[#ffb804] text-slate-950 transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#f2aa00] md:hidden"
-        >
+        <button type="button" onClick={() => setMobileOpen((v) => !v)} aria-label={mobileOpen ? "Close menu" : "Open menu"} aria-expanded={mobileOpen} className="inline-flex h-12 w-12 items-center justify-center rounded-none border border-[#ffb804] bg-[#ffb804] text-slate-950 transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#f2aa00] md:hidden">
           {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </div>
@@ -178,22 +150,12 @@ export function SiteHeader() {
         <div className="border-t border-slate-300 bg-slate-50 px-6 pb-7 pt-4 md:hidden">
           <nav className="grid gap-2">
             {MOBILE_NAV.map((item) => (
-              <Link
-                key={item.to}
-                to={item.to}
-                onClick={() => setMobileOpen(false)}
-                className="group relative flex items-center justify-between border border-slate-300 bg-white px-4 py-4 text-sm font-bold uppercase tracking-[0.05em] text-slate-800 transition-all duration-200 hover:border-slate-950 hover:bg-slate-950 hover:text-white"
-              >
-                {item.label}
-                <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+              <Link key={item.to} to={item.to} onClick={() => setMobileOpen(false)} className="group relative flex items-center justify-between border border-slate-300 bg-white px-4 py-4 text-sm font-bold uppercase tracking-[0.05em] text-slate-800 transition-all duration-200 hover:border-slate-950 hover:bg-slate-950 hover:text-white">
+                {item.label}<ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
               </Link>
             ))}
           </nav>
-          <div className="mt-5">
-            <Button asChild className="h-12 w-full rounded-none border border-[#ffb804] bg-[#ffb804] font-extrabold uppercase tracking-[0.01em] text-slate-950 transition-all duration-200 hover:bg-[#f2aa00]">
-              <Link to="/contact" onClick={() => setMobileOpen(false)}>Let's talk<ArrowRight className="ml-2 h-4 w-4" /></Link>
-            </Button>
-          </div>
+          <div className="mt-5"><Button asChild className="h-12 w-full rounded-none border border-[#ffb804] bg-[#ffb804] font-extrabold uppercase tracking-[0.01em] text-slate-950 transition-all duration-200 hover:bg-[#f2aa00]"><Link to="/contact" onClick={() => setMobileOpen(false)}>Let's talk<ArrowRight className="ml-2 h-4 w-4" /></Link></Button></div>
         </div>
       )}
     </header>
