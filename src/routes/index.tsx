@@ -2,9 +2,9 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, CheckCircle2, CircleAlert, Gauge, Network, Play, ShieldCheck, Target, Workflow } from "lucide-react";
 
 const products = [
-  { name: "NEXUS", stage: "UNDERSTAND", title: "Map the agent before you test it.", description: "Reads Cognigy nodes, intents, branches, conditions, tools and orchestration paths so testing starts from the real system.", href: "/nexus", icon: Network, accent: "bg-violet-100 text-violet-700" },
-  { name: "VERA", stage: "TEST + EVALUATE", title: "Test the behavior behind the answer.", description: "Runs realistic multi-turn journeys and evaluates deterministic, semantic and orchestration behavior together.", href: "/vera", icon: Gauge, accent: "bg-indigo-100 text-indigo-700" },
-  { name: "CHAKRA", stage: "DEFEND", title: "Find security risk before release.", description: "Probes adversarial behavior and security boundaries, then brings the findings into the same release decision.", href: "/chakra", icon: ShieldCheck, accent: "bg-orange-100 text-orange-700" },
+  { name: "NEXUS", stage: "UNDERSTAND", title: "Map the agent before you test it.", description: "Reads Cognigy nodes, intents, branches, conditions, tools and orchestration paths so testing starts from the real system.", href: "/nexus", icon: Network },
+  { name: "VERA", stage: "TEST + EVALUATE", title: "Test the behavior behind the answer.", description: "Runs realistic multi-turn journeys and evaluates deterministic, semantic and orchestration behavior together.", href: "/vera", icon: Gauge },
+  { name: "CHAKRA", stage: "DEFEND", title: "Find security risk before release.", description: "Probes adversarial behavior and security boundaries, then brings the findings into the same release decision.", href: "/chakra", icon: ShieldCheck },
 ];
 
 const assuranceSteps = [
@@ -36,24 +36,53 @@ function AssuranceVideo() {
   );
 }
 
+function HeroRail({ side }: { side: "left" | "right" }) {
+  if (side === "left") {
+    return (
+      <aside className="hidden self-stretch border-r border-slate-300/70 pr-8 xl:flex xl:flex-col xl:justify-between xl:py-2">
+        <div>
+          <div className="font-mono text-[10px] font-semibold tracking-[0.22em] text-slate-400">SHYENA / ASSURANCE</div>
+          <div className="mt-5 h-px w-12 bg-[#ffb703]" />
+          <p className="mt-5 max-w-[170px] text-sm font-semibold leading-6 text-slate-800">AI agent evaluation, testing and security assurance for enterprise teams.</p>
+        </div>
+        <div className="space-y-5 border-t border-slate-300/70 pt-5">
+          {[["01", "UNDERSTAND", "Map the system"], ["02", "EVALUATE", "Test real behavior"], ["03", "DEFEND", "Protect the release"]].map(([n, label, text]) => (
+            <div key={n}>
+              <div className="font-mono text-[10px] text-slate-400">{n}</div>
+              <div className="mt-1 text-[11px] font-bold tracking-[0.16em] text-slate-700">{label}</div>
+              <div className="mt-1 text-xs leading-5 text-slate-500">{text}</div>
+            </div>
+          ))}
+        </div>
+      </aside>
+    );
+  }
+
+  return (
+    <aside className="hidden self-stretch border-l border-slate-300/70 pl-8 xl:flex xl:flex-col xl:justify-between xl:py-2">
+      <div>
+        <div className="font-mono text-[10px] font-semibold tracking-[0.22em] text-slate-400">EVIDENCE / RELEASE</div>
+        <div className="mt-5 h-px w-12 bg-[#08a995]" />
+        <p className="mt-5 max-w-[170px] text-sm font-semibold leading-6 text-slate-800">From customer journey to evidence-backed release decision.</p>
+      </div>
+      <div className="space-y-3 border-t border-slate-300/70 pt-5">
+        {["FLOW", "JOURNEY", "EXECUTION", "FINDING", "VERDICT"].map((item, i) => (
+          <div key={item} className="flex items-center gap-3 text-[10px] font-bold tracking-[0.18em] text-slate-500"><span className="font-mono text-slate-300">0{i + 1}</span>{item}</div>
+        ))}
+      </div>
+    </aside>
+  );
+}
+
 function ProductCard({ product }: { product: (typeof products)[number] }) {
-  const Icon = product.icon;
   return (
     <Link to={product.href} className="group relative flex min-h-[360px] flex-col overflow-hidden border-2 border-slate-200 bg-white p-7 transition-[border-color,transform,box-shadow] duration-300 ease-out hover:-translate-y-1 hover:border-[#08a995] hover:shadow-[0_20px_50px_-30px_rgba(15,23,42,0.45)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffb703] focus-visible:ring-offset-4 sm:p-8">
-      <div className="absolute inset-x-0 top-0 h-1.5 bg-[#08a995] origin-left scale-x-[0.2] transition-transform duration-500 ease-out group-hover:scale-x-100" />
-      <div className="flex items-start justify-between gap-6">
-        <div className="font-mono text-sm tracking-[0.18em] text-slate-300">{product.name === "NEXUS" ? "01" : product.name === "VERA" ? "02" : "03"}</div>
-        <div className="flex h-10 w-10 items-center justify-center border border-slate-200 bg-white text-slate-400 transition-all duration-300 group-hover:border-slate-950 group-hover:bg-slate-950 group-hover:text-white">
-          <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
-        </div>
-      </div>
+      <div className="absolute inset-x-0 top-0 h-1.5 origin-left scale-x-[0.2] bg-[#08a995] transition-transform duration-500 ease-out group-hover:scale-x-100" />
+      <div className="flex items-start justify-between gap-6"><div className="font-mono text-sm tracking-[0.18em] text-slate-300">{product.name === "NEXUS" ? "01" : product.name === "VERA" ? "02" : "03"}</div><div className="flex h-10 w-10 items-center justify-center border border-slate-200 bg-white text-slate-400 transition-all duration-300 group-hover:border-slate-950 group-hover:bg-slate-950 group-hover:text-white"><ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" /></div></div>
       <div className="mt-16 text-xs font-bold uppercase tracking-[0.2em] text-slate-400">{product.name} · {product.stage}</div>
       <h3 className="mt-5 max-w-md font-[Sora] text-[clamp(2rem,3vw,2.65rem)] font-semibold leading-[1.04] tracking-[-0.035em] text-slate-950">{product.title}</h3>
       <p className="mt-5 max-w-md text-[15px] leading-7 text-slate-600">{product.description}</p>
-      <span className="mt-auto inline-flex h-12 w-fit items-center justify-center gap-3 rounded-full border border-[#ffb703] bg-[#ffb703] px-6 pt-px text-sm font-extrabold uppercase tracking-[0.01em] text-slate-950 transition-all duration-200 group-hover:bg-[#f5a900]">
-        Explore {product.name}
-        <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
-      </span>
+      <span className="mt-auto inline-flex h-12 w-fit items-center justify-center gap-3 rounded-full border border-[#ffb703] bg-[#ffb703] px-6 pt-px text-sm font-extrabold uppercase tracking-[0.01em] text-slate-950 transition-all duration-200 group-hover:bg-[#f5a900]">Explore {product.name}<ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" /></span>
     </Link>
   );
 }
@@ -75,48 +104,36 @@ function Index() {
       <section className="relative overflow-hidden border-b border-slate-200 bg-[#edf6ff]">
         <div className="pointer-events-none absolute -right-32 -top-40 h-[560px] w-[560px] rounded-full bg-violet-200/35 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-48 left-1/3 h-[420px] w-[420px] rounded-full bg-orange-100/50 blur-3xl" />
-        <div className="relative mx-auto grid max-w-7xl gap-12 px-6 py-16 sm:py-20 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-16 lg:px-8 lg:py-24">
-          <div className="flex flex-col items-start justify-center">
-            <h1 className="max-w-2xl font-[Sora] text-[clamp(3.5rem,5.5vw,5.5rem)] font-extrabold leading-[0.94] tracking-[-0.045em] text-slate-950">Agentic AI Evaluation built for enterprises.</h1>
-            <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
-              <Link to="/contact" data-shyena-button="primary" className="inline-flex h-14 items-center justify-center gap-3 rounded-full border border-[#ffb703] bg-[#ffb703] px-8 text-[15px] font-extrabold uppercase tracking-[0.01em] text-slate-950 transition-all duration-200 hover:bg-[#f5a900]">Talk to an Assurance Expert <ArrowRight className="h-5 w-5" /></Link>
-              <a href="#how-it-works" data-shyena-button="secondary" className="inline-flex h-14 items-center justify-center gap-3 rounded-full border-2 border-[#ffb703] bg-white px-8 text-[15px] font-semibold text-slate-950 transition-all duration-200 hover:bg-amber-50"><Play className="h-5 w-5" /> See how Shyena works</a>
+        <div className="relative mx-auto grid max-w-[1680px] grid-cols-[210px_minmax(0,1fr)_210px] gap-8 px-6 py-14 sm:px-8 lg:py-20 xl:px-10 xl:gap-10">
+          <HeroRail side="left" />
+          <div className="grid min-w-0 gap-10 lg:grid-cols-[0.88fr_1.12fr] lg:items-center lg:gap-14">
+            <div className="flex flex-col items-start justify-center">
+              <div className="mb-6 text-xs font-bold uppercase tracking-[0.22em] text-slate-500">Enterprise AI agent assurance</div>
+              <h1 className="max-w-3xl font-[Sora] text-[clamp(3.35rem,5.6vw,6rem)] font-extrabold leading-[0.92] tracking-[-0.055em] text-slate-950">Agentic AI evaluation built for enterprises.</h1>
+              <p className="mt-7 max-w-xl text-lg leading-8 text-slate-600 sm:text-xl">Understand the system. Test real agent behavior. Defend security boundaries. Produce evidence-backed release decisions.</p>
+              <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                <Link to="/contact" data-shyena-button="primary" className="inline-flex h-14 items-center justify-center gap-3 rounded-full border border-[#ffb703] bg-[#ffb703] px-8 text-[15px] font-extrabold uppercase tracking-[0.01em] text-slate-950 transition-all duration-200 hover:bg-[#f5a900]">Talk to an Assurance Expert <ArrowRight className="h-5 w-5" /></Link>
+                <a href="#how-it-works" data-shyena-button="secondary" className="inline-flex h-14 items-center justify-center gap-3 rounded-full border-2 border-[#ffb703] bg-white px-8 text-[15px] font-semibold text-slate-950 transition-all duration-200 hover:bg-amber-50"><Play className="h-5 w-5" /> See how Shyena works</a>
+              </div>
+              <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-400"><span>AI agent testing</span><span>LLM evaluation</span><span>Cognigy testing</span><span>AI security testing</span></div>
             </div>
+            <AssuranceVideo />
           </div>
-          <AssuranceVideo />
+          <HeroRail side="right" />
         </div>
       </section>
 
       <section className="border-b border-slate-200 bg-white"><div className="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-24"><div className="max-w-3xl"><div className="text-xs font-bold uppercase tracking-[0.2em] text-violet-600">The assurance gap</div><h2 className="mt-4 text-4xl font-semibold tracking-[-0.03em] text-slate-950 sm:text-5xl">A good answer does not prove a good agent.</h2><p className="mt-5 text-lg leading-8 text-slate-600">An agent can produce the right sentence while taking the wrong branch, skipping a tool, losing state or failing to complete the customer's goal. Shyena tests the behavior underneath the answer.</p></div><div className="mt-12 grid gap-5 md:grid-cols-3">{[[Workflow,"Wrong path","Catch incorrect orchestration, missed intents, skipped tools and state failures."],[Target,"Broken behavior","Verify the complete customer journey instead of judging a response in isolation."],[ShieldCheck,"Security risk","Probe adversarial behavior and carry security findings into the same release gate."]].map(([Icon,title,text])=>{const Component=Icon as typeof Workflow;return <div key={title as string} className="rounded-[24px] border border-slate-200 bg-slate-50 p-7"><Component className="h-6 w-6 text-slate-900"/><h3 className="mt-7 text-xl font-semibold text-slate-950">{title as string}</h3><p className="mt-3 text-sm leading-7 text-slate-600">{text as string}</p></div>})}</div></div></section>
 
-      <section className="bg-white">
-        <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-24">
-          <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
-            <div className="max-w-5xl">
-              <div className="mb-5 text-xs font-bold uppercase tracking-[0.22em] text-slate-400">One connected assurance model</div>
-              <h2 className="font-[Sora] text-[clamp(3rem,5vw,5.5rem)] font-normal leading-[1.02] tracking-[-0.045em] text-slate-950">One AI agent. <span className="font-extrabold">Three assurance layers.</span></h2>
-            </div>
-            <p className="max-w-sm text-base leading-7 text-slate-500 lg:pb-1">Understand the system. Test the behavior. Defend the release. One evidence chain from flow to decision.</p>
-          </div>
+      <section className="bg-white"><div className="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-24"><div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end"><div className="max-w-5xl"><div className="mb-5 text-xs font-bold uppercase tracking-[0.22em] text-slate-400">One connected assurance model</div><h2 className="font-[Sora] text-[clamp(3rem,5vw,5.5rem)] font-normal leading-[1.02] tracking-[-0.045em] text-slate-950">One AI agent. <span className="font-extrabold">Three assurance layers.</span></h2></div><p className="max-w-sm text-base leading-7 text-slate-500 lg:pb-1">Understand the system. Test the behavior. Defend the release. One evidence chain from flow to decision.</p></div><div className="mt-12 grid gap-5 md:grid-cols-3">{products.map((product)=><ProductCard key={product.name} product={product}/>)}</div><Link to="/pricing" className="group mt-7 inline-flex items-center gap-4 border border-slate-300 bg-white px-5 py-3.5 text-base font-semibold text-slate-950 transition-all duration-200 hover:border-slate-950 hover:bg-slate-950 hover:text-white">Explore the Shyena platform<span className="inline-flex h-8 w-8 items-center justify-center bg-[#ffb703] text-slate-950 transition-transform duration-200 group-hover:translate-x-1"><ArrowRight className="h-4 w-4"/></span></Link></div></section>
 
-          <div className="mt-12 grid gap-5 md:grid-cols-3">
-            {products.map((product) => <ProductCard key={product.name} product={product} />)}
-          </div>
-
-          <Link to="/pricing" className="group mt-7 inline-flex items-center gap-4 border border-slate-300 bg-white px-5 py-3.5 text-base font-semibold text-slate-950 transition-all duration-200 hover:border-slate-950 hover:bg-slate-950 hover:text-white">
-            Explore the Shyena platform
-            <span className="inline-flex h-8 w-8 items-center justify-center bg-[#ffb703] text-slate-950 transition-transform duration-200 group-hover:translate-x-1"><ArrowRight className="h-4 w-4" /></span>
-          </Link>
-        </div>
-      </section>
-
-      <section id="how-it-works" className="scroll-mt-20 bg-[#0b0920] text-white"><div className="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-24"><div className="grid gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:items-start"><div><div className="text-xs font-bold uppercase tracking-[0.2em] text-violet-300">From flow to release</div><h2 className="mt-4 text-4xl font-semibold tracking-[-0.03em] sm:text-5xl">One continuous assurance chain.</h2><p className="mt-5 max-w-xl text-lg leading-8 text-white/55">Map the system. Generate journeys. Execute the agent. Evaluate behavior. Attack risk. Prove the release.</p><div className="mt-8 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold text-white/60"><CheckCircle2 className="h-4 w-4 text-emerald-400"/> Evidence accumulates at every stage</div></div><div className="grid gap-3 sm:grid-cols-2">{assuranceSteps.map(([number,title,description])=><div key={number} className="rounded-[22px] border border-white/10 bg-white/[0.035] p-6 transition hover:bg-white/[0.06]"><div className="text-xs font-mono text-violet-300/80">{number}</div><h3 className="mt-5 text-lg font-semibold">{title}</h3><p className="mt-2 text-sm leading-6 text-white/45">{description}</p></div>)}</div></div></div></section>
+      <section id="how-it-works" className="scroll-mt-20 bg-[#0b0920] text-white"><div className="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-24"><div className="grid gap-14 lg:grid-cols-[0.78fr_1.22fr] lg:items-start"><div><div className="text-xs font-bold uppercase tracking-[0.2em] text-violet-300">From flow to release</div><h2 className="mt-4 text-4xl font-semibold tracking-[-0.03em] sm:text-5xl">One continuous assurance chain.</h2><p className="mt-5 max-w-xl text-lg leading-8 text-white/55">Map the system. Generate journeys. Execute the agent. Evaluate behavior. Attack risk. Prove the release.</p><div className="mt-8 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold text-white/60"><CheckCircle2 className="h-4 w-4 text-emerald-400"/> Evidence accumulates at every stage</div><div className="mt-8 flex flex-wrap gap-3"><Link to="/contact" data-shyena-button="primary" className="inline-flex h-12 items-center justify-center gap-2 rounded-full border px-6 text-sm font-extrabold uppercase tracking-[0.01em] transition-all duration-200">Assess my AI agent <ArrowRight className="h-4 w-4"/></Link><Link to="/vera" data-shyena-button="secondary" className="inline-flex h-12 items-center justify-center gap-2 rounded-full border px-6 text-sm font-semibold transition-all duration-200">Explore AI agent evaluation</Link></div></div><div className="grid gap-3 sm:grid-cols-2">{assuranceSteps.map(([number,title,description])=><div key={number} className="rounded-[22px] border border-white/10 bg-white/[0.035] p-6 transition hover:bg-white/[0.06]"><div className="text-xs font-mono text-violet-300/80">{number}</div><h3 className="mt-5 text-lg font-semibold">{title}</h3><p className="mt-2 text-sm leading-6 text-white/45">{description}</p></div>)}</div></div></div></section>
 
       <section className="bg-white"><div className="mx-auto grid max-w-7xl gap-14 px-6 py-20 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:px-8 lg:py-24"><div><div className="text-xs font-bold uppercase tracking-[0.2em] text-violet-600">Evidence-backed release</div><h2 className="mt-4 text-4xl font-semibold tracking-[-0.03em] text-slate-950 sm:text-5xl">Every verdict points back to what happened.</h2><p className="mt-5 text-lg leading-8 text-slate-600">Shyena keeps the journey, execution trace, evaluation signals, finding, component context and release impact together so a team can act on the result.</p><div className="mt-8 space-y-4">{["Customer journey and execution trace","Turn-level orchestration evidence","Deterministic + semantic evaluation","Security findings and release impact"].map(item=><div key={item} className="flex items-center gap-3 text-sm font-medium text-slate-700"><CheckCircle2 className="h-5 w-5 shrink-0 text-violet-600"/>{item}</div>)}</div></div><div className="rounded-[32px] bg-[#0b0920] p-3 shadow-[0_35px_90px_-35px_rgba(15,23,42,0.55)]"><EvidenceCard/></div></div></section>
 
-      <section className="bg-[#f7f8fb]"><div className="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-24"><div className="grid gap-5 md:grid-cols-3">{[["Flow-aware","Testing starts from the actual Cognigy orchestration, not a disconnected prompt list."],["Conversation-native","Realistic multi-turn journeys validate state, tools, handovers and outcomes."],["Release-focused","Quality and security become one evidence-backed release decision."]].map(([title,text])=><div key={title} className="rounded-[24px] border border-slate-200 bg-white p-7"><div className="text-xs font-bold uppercase tracking-[0.18em] text-slate-400">Shyena advantage</div><h3 className="mt-5 text-2xl font-semibold tracking-tight text-slate-950">{title}</h3><p className="mt-3 text-sm leading-7 text-slate-600">{text}</p></div>)}</div></div></section>
+      <section className="bg-[#f7f8fb]"><div className="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-24"><div className="mb-10 max-w-3xl"><div className="text-xs font-bold uppercase tracking-[0.2em] text-violet-600">Why enterprise teams choose Shyena</div><h2 className="mt-4 text-4xl font-semibold tracking-[-0.03em] text-slate-950 sm:text-5xl">AI agent quality, security and release assurance in one evidence chain.</h2><p className="mt-5 text-lg leading-8 text-slate-600">Built for teams evaluating agentic AI, conversational AI and LLM-powered workflows before they become production risk.</p></div><div className="grid gap-5 md:grid-cols-3">{[["Flow-aware","Testing starts from the actual Cognigy orchestration, not a disconnected prompt list."],["Conversation-native","Realistic multi-turn journeys validate state, tools, handovers and outcomes."],["Release-focused","Quality and security become one evidence-backed release decision."]].map(([title,text])=><div key={title} className="border border-slate-200 bg-white p-7"><div className="text-xs font-bold uppercase tracking-[0.18em] text-slate-400">Shyena advantage</div><h3 className="mt-5 text-2xl font-semibold tracking-tight text-slate-950">{title}</h3><p className="mt-3 text-sm leading-7 text-slate-600">{text}</p></div>)}</div><div className="mt-8 flex flex-wrap items-center gap-4"><Link to="/contact" data-shyena-button="primary" className="inline-flex h-12 items-center justify-center gap-2 rounded-full border px-7 text-sm font-extrabold uppercase">Get an AI agent assurance assessment <ArrowRight className="h-4 w-4"/></Link><span className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">Enterprise AI evaluation · AI agent testing · AI security testing</span></div></div></section>
 
-      <section className="bg-[#0b0920] text-white"><div className="mx-auto max-w-5xl px-6 py-20 text-center lg:px-8 lg:py-24"><div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10"><ShieldCheck className="h-6 w-6 text-violet-300"/></div><h2 className="mt-7 text-4xl font-semibold tracking-[-0.03em] sm:text-5xl">Know whether your AI agent is ready to release.</h2><p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-white/55">Bring one Cognigy flow. See how NEXUS, VERA and CHAKRA turn it into executable assurance and evidence for a release decision.</p><div className="mt-9 flex flex-wrap justify-center gap-3"><Link to="/contact" data-shyena-button="primary" className="inline-flex h-12 items-center justify-center gap-2 rounded-full border px-7 text-[14px] font-extrabold uppercase tracking-[0.01em] transition-all duration-200">Request an Assurance Review <ArrowRight className="h-4 w-4" /></Link><Link to="/pricing" data-shyena-button="secondary" className="inline-flex h-12 items-center justify-center gap-2 rounded-full border px-7 text-[14px] font-semibold transition-all duration-200">View Pricing</Link></div></div></section>
+      <section className="bg-[#0b0920] text-white"><div className="mx-auto max-w-5xl px-6 py-20 text-center lg:px-8 lg:py-24"><div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10"><ShieldCheck className="h-6 w-6 text-violet-300"/></div><h2 className="mt-7 text-4xl font-semibold tracking-[-0.03em] sm:text-5xl">Know whether your AI agent is ready to release.</h2><p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-white/55">Bring one Cognigy flow. See how NEXUS, VERA and CHAKRA turn it into executable assurance and evidence for a release decision.</p><div className="mt-9 flex flex-wrap justify-center gap-3"><Link to="/contact" data-shyena-button="primary" className="inline-flex h-12 items-center justify-center gap-2 rounded-full border px-7 text-[14px] font-extrabold uppercase tracking-[0.01em] transition-all duration-200">Request an Assurance Review <ArrowRight className="h-4 w-4"/></Link><Link to="/pricing" data-shyena-button="secondary" className="inline-flex h-12 items-center justify-center gap-2 rounded-full border px-7 text-[14px] font-semibold transition-all duration-200">View Pricing</Link></div></div></section>
     </main>
   );
 }
