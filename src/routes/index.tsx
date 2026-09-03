@@ -81,27 +81,39 @@ function Index() {
 
       <section className="bg-white">
         <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-24">
-          <div className="max-w-5xl">
-            <h2 className="font-[Sora] text-[clamp(3rem,5vw,5.5rem)] font-normal leading-[1.02] tracking-[-0.045em] text-slate-950">
-              One AI agent. <span className="font-extrabold">Three assurance layers.</span>
-            </h2>
+          <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
+            <div className="max-w-5xl">
+              <div className="mb-5 text-xs font-bold uppercase tracking-[0.22em] text-slate-400">One connected assurance model</div>
+              <h2 className="font-[Sora] text-[clamp(3rem,5vw,5.5rem)] font-normal leading-[1.02] tracking-[-0.045em] text-slate-950">
+                One AI agent. <span className="font-extrabold">Three assurance layers.</span>
+              </h2>
+            </div>
+            <p className="max-w-sm text-base leading-7 text-slate-500 lg:pb-1">Understand the system. Test the behavior. Defend the release. One evidence chain from flow to decision.</p>
           </div>
-          <div className="mt-10 rounded-[8px] border-2 border-[#08a995] p-4 sm:p-5 lg:mt-12">
-            <div className="grid gap-4 md:grid-cols-3">
-              {products.map((product) => (
-                <Link key={product.name} to={product.href} className="group flex min-h-[360px] flex-col border border-slate-300 bg-white p-7 transition-colors duration-200 hover:border-[#08a995]">
-                  <div className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400">{product.name} · {product.stage}</div>
-                  <h3 className="mt-6 max-w-md text-2xl font-semibold leading-tight tracking-tight text-slate-950">{product.title}</h3>
-                  <p className="mt-4 text-[15px] leading-7 text-slate-600">{product.description}</p>
-                  <span className="mt-auto inline-flex w-fit items-center gap-2 border-2 border-[#08a995] px-4 py-3 text-sm font-semibold text-slate-950 transition-colors group-hover:bg-[#08a995] group-hover:text-white">
-                    Explore {product.name} <ArrowRight className="h-4 w-4" />
+
+          <div className="mt-12 border-y border-slate-200">
+            <div className="grid md:grid-cols-3">
+              {products.map((product, index) => (
+                <Link key={product.name} to={product.href} className={`group relative flex min-h-[390px] flex-col bg-white px-1 py-9 transition-colors duration-200 hover:bg-slate-50 md:px-9 ${index > 0 ? "border-t border-slate-200 md:border-l md:border-t-0" : ""}`}>
+                  <div className="absolute left-1 top-0 h-1 w-16 bg-[#08a995] transition-all duration-300 group-hover:w-28 md:left-9" />
+                  <div className="flex items-start justify-between gap-6">
+                    <div className="font-mono text-xs tracking-[0.18em] text-slate-300">0{index + 1}</div>
+                    <ArrowRight className="h-5 w-5 text-slate-300 transition-all duration-200 group-hover:translate-x-1 group-hover:text-slate-950" />
+                  </div>
+                  <div className="mt-14 text-xs font-bold uppercase tracking-[0.2em] text-slate-400">{product.name} · {product.stage}</div>
+                  <h3 className="mt-5 max-w-md text-[1.8rem] font-semibold leading-[1.12] tracking-[-0.025em] text-slate-950">{product.title}</h3>
+                  <p className="mt-5 max-w-md text-[15px] leading-7 text-slate-600">{product.description}</p>
+                  <span className="mt-auto inline-flex w-fit items-center gap-2 pt-8 text-sm font-bold text-slate-950">
+                    Explore {product.name}<span className="transition-transform duration-200 group-hover:translate-x-1"><ArrowRight className="h-4 w-4" /></span>
                   </span>
                 </Link>
               ))}
             </div>
           </div>
-          <Link to="/pricing" className="mt-5 inline-flex items-center gap-3 border-2 border-[#08a995] px-5 py-3 text-base font-semibold text-slate-950 transition-colors hover:bg-[#08a995] hover:text-white">
-            Explore the Shyena platform <span className="inline-flex h-7 w-7 items-center justify-center bg-[#ffb703] text-slate-950"><ArrowRight className="h-4 w-4" /></span>
+
+          <Link to="/pricing" className="group mt-7 inline-flex items-center gap-4 border border-slate-300 bg-white px-5 py-3.5 text-base font-semibold text-slate-950 transition-all duration-200 hover:border-slate-950 hover:bg-slate-950 hover:text-white">
+            Explore the Shyena platform
+            <span className="inline-flex h-8 w-8 items-center justify-center bg-[#ffb703] text-slate-950 transition-transform duration-200 group-hover:translate-x-1"><ArrowRight className="h-4 w-4" /></span>
           </Link>
         </div>
       </section>
