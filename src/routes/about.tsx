@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Check, Compass, Layers3, ShieldCheck, Sparkles, Target } from "lucide-react";
+import { ArrowRight, Compass, ShieldCheck, Target } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CtaBand } from "@/components/site/cta-band";
 
@@ -7,7 +7,7 @@ export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
       { title: "About Shyena | From a Testing Problem to AI Assurance" },
-      { name: "description", content: "The story behind Shyena: how a real assurance problem became ECAAP, evolved into three product suites, and grew into an evidence-first AI assurance platform." },
+      { name: "description", content: "The story behind Shyena: how a real assurance problem became an evidence-first AI assurance platform with three product suites." },
       { property: "og:title", content: "About Shyena | From a Testing Problem to AI Assurance" },
       { property: "og:description", content: "How Shyena evolved from a practical testing problem into an evidence-first AI assurance platform." },
     ],
@@ -18,8 +18,8 @@ export const Route = createFileRoute("/about")({
 
 const JOURNEY = [
   { number: "01", label: "THE PROBLEM", title: "AI testing stopped at the answer.", copy: "Traditional automation could tell us whether a screen changed. LLM evaluators could tell us whether an answer sounded good. Security scanners could find isolated weaknesses. None gave us a trustworthy view of what the complete agent actually did across the journey." },
-  { number: "02", label: "THE BUILD", title: "We built ECAAP to close the gap.", copy: "The first solution was not conceived as a brand. It was an engineering response to a real assurance problem: connect system behavior, execution, evaluation and evidence so a release decision could be defended." },
-  { number: "03", label: "THE EVOLUTION", title: "ECAAP became Shyena.", copy: "As the problem widened beyond one implementation, the platform evolved into a product architecture and a brand: Shyena. The focus moved from testing individual responses to proving the behavior and security of AI systems as a whole." },
+  { number: "02", label: "THE BUILD", title: "We built Shyena to close the gap.", copy: "Shyena began as an engineering response to a real assurance problem: connect system behavior, execution, evaluation and evidence so a release decision could be defended." },
+  { number: "03", label: "THE EVOLUTION", title: "Shyena became a platform and a brand.", copy: "As the problem widened beyond one implementation, Shyena evolved into a product architecture and a clear market proposition: prove the behavior and security of AI systems as a whole, not just the quality of individual responses." },
   { number: "04", label: "TODAY", title: "One platform. Three assurance suites.", copy: "NEXUS understands the system. VERA evaluates real behavior. CHAKRA attacks the security boundary. Together they turn fragmented test signals into one evidence chain for engineering and release decisions." },
 ] as const;
 
@@ -98,7 +98,7 @@ function AboutPage() {
       <section className="border-b border-slate-300 bg-[#f5f8fc]">
         <div className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
           <div className="flex flex-col justify-between gap-5 border-b border-slate-300 pb-8 lg:flex-row lg:items-end">
-            <div><p className="font-mono text-xs uppercase tracking-[0.18em] text-[#a87900]">The Shyena story</p><h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-5xl">Problem → ECAAP → Shyena → three suites.</h2></div>
+            <div><p className="font-mono text-xs uppercase tracking-[0.18em] text-[#a87900]">The Shyena story</p><h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-5xl">Problem → Shyena → three suites.</h2></div>
             <p className="max-w-md text-sm leading-6 text-slate-600">A product story driven by an engineering problem, not a branding exercise.</p>
           </div>
           <div className="mt-10 border-t border-slate-300">
