@@ -30,6 +30,12 @@
 .site-theme [data-shyena-button="destructive"]{background:#dc2626!important;border-color:#dc2626!important;color:#fff!important}
 .site-theme [data-shyena-button="ghost"],.site-theme [data-shyena-button="link"]{box-shadow:none!important}
 
+/* Home navigation: all desktop tabs share the same neutral hover/open treatment. No purple accent background. */
+.site-theme header [data-radix-navigation-menu-trigger],.site-theme header [data-radix-navigation-menu-trigger]:hover,.site-theme header [data-radix-navigation-menu-trigger][data-state="open"]{background:#fff!important;background-color:#fff!important;color:#0f172a!important;border-color:transparent!important;box-shadow:none!important}
+.site-theme header [data-radix-navigation-menu-trigger]::before{background:transparent!important}
+.site-theme header [data-radix-navigation-menu-trigger]::after{background:#14b8a6!important}
+.site-theme header a[href="/pricing"],.site-theme header a[href="/pricing"]:hover{background:#fff!important;background-color:#fff!important;color:#0f172a!important;border-color:transparent!important;box-shadow:none!important}
+
 /* Video experience: fullscreen uses contain rather than cover so baked-in corner text is never cropped. */
 .shyena-video-player{position:relative}
 .shyena-video-player:fullscreen{width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#080711}
