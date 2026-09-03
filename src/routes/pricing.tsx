@@ -133,13 +133,13 @@ function PricingCalculator() {
             </div>
 
             <div className="mt-10 border-t border-slate-200 pt-7">
-              <div className="grid gap-0 sm:grid-cols-3">
+              <div className="grid gap-4 sm:grid-cols-3">
                 {[
                   ["CIS", estimate.cis],
                   ["Vera", estimate.vera],
                   ["Chakra", estimate.chakra],
                 ].map(([name, value]) => (
-                  <div key={name as string} className="border-b border-slate-200 py-4 sm:border-b-0 sm:border-r sm:px-5 sm:first:pl-0 sm:last:border-r-0">
+                  <div key={name as string} className="border border-slate-300 bg-white p-5">
                     <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">{name as string}</p>
                     <p className="mt-2 text-xl font-semibold tracking-[-0.02em] text-slate-950">{formatEuro(value as number)}</p>
                   </div>
@@ -152,7 +152,7 @@ function PricingCalculator() {
                 <p className="text-xs font-bold uppercase tracking-[0.18em] text-slate-500">Estimated monthly usage</p>
                 <p className="mt-2 text-5xl font-semibold tracking-[-0.05em] text-slate-950 sm:text-6xl">{formatEuro(total)}</p>
               </div>
-              <Button asChild size="lg" className="rounded-none bg-slate-950 px-6 hover:bg-orange-700">
+              <Button asChild size="lg" className="rounded-none bg-orange-600 px-6 text-white hover:bg-orange-700">
                 <Link to="/contact">Discuss this estimate <ArrowRight className="h-4 w-4" /></Link>
               </Button>
             </div>
