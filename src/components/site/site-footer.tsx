@@ -33,7 +33,7 @@ const COLUMNS = [
     title: "Company",
     links: [
       { label: "About Shyena", to: "/about" },
-      { label: "Engineering", to: "/docs" },
+      { label: "Contact", to: "/contact" },
     ],
   },
 ] as const;
@@ -49,8 +49,8 @@ export function SiteFooter() {
               The AI agent assurance platform for teams that need evidence before they release.
               Understand the system. Evaluate the behavior. Defend the release.
             </p>
-            <div className="mt-7 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/70 px-3 py-1.5 text-xs text-[#64748b]">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#14b8a6]" />
+            <div className="mt-7 inline-flex items-center gap-2 border border-slate-200 bg-white/70 px-3 py-1.5 text-xs text-[#64748b]">
+              <span className="h-1.5 w-1.5 bg-[#14b8a6]" />
               Evidence-backed AI assurance
             </div>
           </div>
