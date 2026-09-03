@@ -17,13 +17,11 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
+          import re
           p = Path('src/routes/index.tsx')
           s = p.read_text()
-          old = '''          <div className="flex items-center">
-            <h1 className="max-w-2xl font-[Sora] text-[clamp(3.5rem,5.5vw,5.5rem)] font-extrabold leading-[0.94] tracking-[-0.045em] text-slate-950">AI built for your enterprise. <br /><span className="text-slate-500">Assurance that proves it is ready.</span></h1>
-          </div>
-          <AssuranceVideo />'''
-          new = '''          <div className="flex flex-col items-start justify-center">
+          pattern = r'<div className="flex items-center">\s*<h1[^>]*>AI built for your enterprise\.\s*<br\s*/><span className="text-slate-500">Assurance that proves it is ready\.</span></h1>\s*</div>\s*<AssuranceVideo />'
+          new = '''<div className="flex flex-col items-start justify-center">
             <h1 className="max-w-2xl font-[Sora] text-[clamp(3.5rem,5.5vw,5.5rem)] font-extrabold leading-[0.94] tracking-[-0.045em] text-slate-950">Agentic AI Evaluation built for enterprises.</h1>
             <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
               <Link to="/contact" data-shyena-button="primary" className="inline-flex h-14 items-center justify-center gap-3 rounded-full border border-[#ffb703] bg-[#ffb703] px-8 text-[15px] font-extrabold uppercase tracking-[0.01em] text-slate-950 transition-all duration-200 hover:bg-[#f5a900]">Talk to an Assurance Expert <ArrowRight className="h-5 w-5" /></Link>
@@ -31,10 +29,10 @@ jobs:
             </div>
           </div>
           <AssuranceVideo />'''
-          if old not in s:
+          updated, count = re.subn(pattern, new, s, count=1)
+          if count != 1:
               raise SystemExit('Expected hero block not found')
-          s = s.replace(old, new, 1)
-          p.write_text(s)
+          p.write_text(updated)
           PY
 
       - name: Verify hero
