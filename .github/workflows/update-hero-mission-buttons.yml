@@ -1,7 +1,8 @@
 name: Update hero mission and CTAs
 
 on:
-  workflow_dispatch:
+  push:
+    branches: [main]
 
 permissions:
   contents: write
