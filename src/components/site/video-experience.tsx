@@ -1,14 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import {
-  Maximize2,
-  Minimize2,
-  Music2,
-  Pause,
-  Play,
-} from "lucide-react";
+import { ArrowRight, Maximize2, Minimize2, Music2, Pause, Play } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 
 const VIDEO_SELECTOR = 'video[aria-label="Shyena Cognigy assurance workflow"]';
+
+const STORY = [
+  { title: "Map the system", label: "NEXUS · UNDERSTAND", text: "Read the Cognigy flow, branches, intents, tools and orchestration paths before testing." },
+  { title: "Test real behavior", label: "VERA · TEST + EVALUATE", text: "Execute realistic customer journeys and evaluate deterministic, semantic and orchestration signals." },
+  { title: "Defend the release", label: "CHAKRA · DEFEND", text: "Probe security boundaries and carry findings into the same evidence-backed release decision." },
+  { title: "Prove the release", label: "SHYENA · ASSURANCE", text: "Connect runtime evidence to a clear release verdict that teams can act on." },
+];
 
 function formatTime(value: number) {
   if (!Number.isFinite(value)) return "0:00";
@@ -66,18 +68,15 @@ export function VideoExperience() {
 
   useEffect(() => {
     if (!video) return;
-
     const sync = () => {
       setPlaying(!video.paused);
       setCurrentTime(video.currentTime || 0);
       setDuration(Number.isFinite(video.duration) ? video.duration : 0);
     };
-
     video.addEventListener("play", sync);
     video.addEventListener("pause", sync);
     video.addEventListener("timeupdate", sync);
     video.addEventListener("loadedmetadata", sync);
-
     return () => {
       video.removeEventListener("play", sync);
       video.removeEventListener("pause", sync);
@@ -92,7 +91,6 @@ export function VideoExperience() {
     music.preload = "metadata";
     music.volume = 0.16;
     musicRef.current = music;
-
     return () => {
       music.pause();
       music.src = "";
@@ -105,7 +103,6 @@ export function VideoExperience() {
       const active = document.fullscreenElement;
       setFullscreen(active instanceof HTMLElement && active.classList.contains("shyena-video-player"));
     };
-
     document.addEventListener("fullscreenchange", handleFullscreen);
     return () => document.removeEventListener("fullscreenchange", handleFullscreen);
   }, []);
@@ -113,11 +110,8 @@ export function VideoExperience() {
   if (!video || !controlsHost) return null;
 
   const togglePlayback = async () => {
-    if (video.paused) {
-      await video.play();
-    } else {
-      video.pause();
-    }
+    if (video.paused) await video.play();
+    else video.pause();
   };
 
   const seek = (value: number) => {
@@ -129,13 +123,11 @@ export function VideoExperience() {
   const toggleMusic = async () => {
     const music = musicRef.current;
     if (!music) return;
-
     if (!music.paused) {
       music.pause();
       setMusicEnabled(false);
       return;
     }
-
     try {
       await music.play();
       setMusicEnabled(true);
@@ -147,80 +139,63 @@ export function VideoExperience() {
   const toggleFullscreen = async () => {
     const target = video.parentElement;
     if (!target) return;
-
     try {
-      if (document.fullscreenElement) {
-        await document.exitFullscreen();
-      } else {
-        await target.requestFullscreen();
-      }
+      if (document.fullscreenElement) await document.exitFullscreen();
+      else await target.requestFullscreen();
     } catch {
       setFullscreen(Boolean(document.fullscreenElement));
     }
   };
 
   const progress = duration > 0 ? Math.min(100, Math.max(0, (currentTime / duration) * 100)) : 0;
+  const storyIndex = duration > 0 ? Math.min(STORY.length - 1, Math.floor((currentTime / duration) * STORY.length)) : 0;
+  const story = STORY[storyIndex];
 
   return createPortal(
     <div
-      className="pointer-events-none absolute inset-x-0 bottom-0 z-20 p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:p-4 sm:pb-4"
+      className="pointer-events-none absolute inset-0 z-20"
       onMouseDown={(event) => event.stopPropagation()}
       onClick={(event) => event.stopPropagation()}
     >
-      <div className="pointer-events-auto rounded-2xl border border-white/10 bg-[#090713]/90 p-2.5 text-white shadow-2xl backdrop-blur-xl sm:p-3">
-        <div className="relative mb-2 h-1.5 w-full overflow-hidden rounded-full bg-white/15">
-          <div className="absolute inset-y-0 left-0 rounded-full bg-violet-400" style={{ width: `${progress}%` }} />
-          <input
-            aria-label="Video progress"
-            type="range"
-            min={0}
-            max={duration || 0}
-            step={0.1}
-            value={Math.min(currentTime, duration || 0)}
-            onChange={(event) => seek(Number(event.target.value))}
-            className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
-          />
+      <div className="absolute left-4 top-4 max-w-[min(360px,calc(100%-2rem))] sm:left-5 sm:top-5">
+        <div className="pointer-events-auto rounded-2xl border border-slate-200/90 bg-white/95 p-4 text-slate-950 shadow-[0_18px_45px_-25px_rgba(15,23,42,.45)] backdrop-blur-xl sm:p-5">
+          <div className="flex items-center gap-2 text-[9px] font-bold uppercase tracking-[0.18em] text-slate-500">
+            <span className="h-2 w-2 rounded-full bg-[#14b8a6]" /> Live assurance walkthrough
+          </div>
+          <div className="mt-2 text-[11px] font-bold uppercase tracking-[0.12em] text-[#0f766e]">{story.label}</div>
+          <div className="mt-1 text-lg font-semibold tracking-tight text-slate-950">{story.title}</div>
+          <p className="mt-1.5 text-xs leading-5 text-slate-600">{story.text}</p>
+          <div className="mt-4 flex flex-wrap gap-2">
+            <Link to="/contact" className="pointer-events-auto inline-flex h-9 items-center gap-1.5 rounded-full bg-[#ffb804] px-3.5 text-[10px] font-extrabold uppercase tracking-[0.04em] text-slate-950 transition hover:bg-[#f2aa00]">
+              Request a review <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+            <Link to={storyIndex === 0 ? "/nexus" : storyIndex === 1 ? "/vera" : storyIndex === 2 ? "/chakra" : "/docs"} className="pointer-events-auto inline-flex h-9 items-center gap-1.5 rounded-full border border-slate-300 bg-white px-3.5 text-[10px] font-bold uppercase tracking-[0.04em] text-slate-800 transition hover:border-slate-950 hover:bg-slate-50">
+              Explore <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </div>
         </div>
+      </div>
 
-        <div className="flex items-center gap-2 sm:gap-3">
-          <button
-            type="button"
-            aria-label={playing ? "Pause video" : "Play video"}
-            onClick={togglePlayback}
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white text-[#090713] transition hover:bg-violet-100 focus:outline-none focus:ring-2 focus:ring-violet-300"
-          >
-            {playing ? <Pause className="h-4 w-4" fill="currentColor" /> : <Play className="h-4 w-4" fill="currentColor" />}
-          </button>
+      <div className="absolute bottom-0 left-0 right-0 p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:p-4 sm:pb-4">
+        <div className="pointer-events-auto rounded-2xl border border-slate-200/90 bg-white/95 p-2.5 text-slate-900 shadow-[0_18px_45px_-25px_rgba(15,23,42,.45)] backdrop-blur-xl sm:p-3">
+          <div className="relative mb-2 h-1.5 w-full overflow-hidden rounded-full bg-slate-200">
+            <div className="absolute inset-y-0 left-0 rounded-full bg-[#14b8a6]" style={{ width: `${progress}%` }} />
+            <input aria-label="Video progress" type="range" min={0} max={duration || 0} step={0.1} value={Math.min(currentTime, duration || 0)} onChange={(event) => seek(Number(event.target.value))} className="absolute inset-0 h-full w-full cursor-pointer opacity-0" />
+          </div>
 
-          <span className="hidden min-w-[74px] font-mono text-[10px] tabular-nums text-white/60 sm:inline">
-            {formatTime(currentTime)} / {formatTime(duration)}
-          </span>
-
-          <button
-            type="button"
-            aria-pressed={musicEnabled}
-            aria-label={musicEnabled ? "Turn background music off" : "Turn background music on"}
-            title={musicEnabled ? "Turn background music off" : "Turn background music on"}
-            data-music-control="true"
-            data-music-active={musicEnabled ? "true" : "false"}
-            onClick={toggleMusic}
-            className={`flex h-9 items-center gap-2 rounded-xl px-3 text-xs font-medium transition focus:outline-none focus:ring-2 focus:ring-violet-300 ${musicEnabled ? "bg-violet-500/25 text-violet-200" : "bg-[#15122a] text-white/65 hover:bg-[#211c3c] hover:text-white"}`}
-          >
-            <Music2 className="h-4 w-4" />
-            <span className="hidden sm:inline">Music</span>
-          </button>
-
-          <div className="ml-auto" />
-
-          <button
-            type="button"
-            aria-label={fullscreen ? "Exit fullscreen" : "Enter fullscreen"}
-            title={fullscreen ? "Exit fullscreen" : "Enter fullscreen"}
-            onClick={toggleFullscreen}
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-white/75 transition hover:bg-white/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-violet-300"
-          >
-            {fullscreen ? <Minimize2 className="h-4 w-4" /> : <Maximize2 className="h-4 w-4" />}
-          </button>
+          <div className="flex items-center gap-2 sm:gap-3">
+            <button type="button" aria-label={playing ? "Pause video" : "Play video"} onClick={togglePlayback} className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-slate-950 text-white transition hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-[#ffb804]">
+              {playing ? <Pause className="h-4 w-4" fill="currentColor" /> : <Play className="h-4 w-4" fill="currentColor" />}
+            </button>
+            <span className="hidden min-w-[74px] font-mono text-[10px] tabular-nums text-slate-500 sm:inline">{formatTime(currentTime)} / {formatTime(duration)}</span>
+            <button type="button" aria-pressed={musicEnabled} aria-label={musicEnabled ? "Turn background music off" : "Turn background music on"} title={musicEnabled ? "Turn background music off" : "Turn background music on"} data-music-control="true" data-music-active={musicEnabled ? "true" : "false"} onClick={toggleMusic} className="flex h-9 items-center gap-2 rounded-full border border-slate-300 bg-white px-3 text-xs font-medium text-slate-600 transition hover:border-slate-950 hover:text-slate-950 focus:outline-none focus:ring-2 focus:ring-[#ffb804]">
+              <Music2 className="h-4 w-4" /> <span className="hidden sm:inline">Music</span>
+            </button>
+            <div className="ml-auto" />
+            <button type="button" aria-label={fullscreen ? "Exit fullscreen" : "Enter fullscreen"} title={fullscreen ? "Exit fullscreen" : "Enter fullscreen"} onClick={toggleFullscreen} className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-slate-300 bg-white text-slate-600 transition hover:border-slate-950 hover:text-slate-950 focus:outline-none focus:ring-2 focus:ring-[#ffb804]">
+              {fullscreen ? <Minimize2 className="h-4 w-4" /> : <Maximize2 className="h-4 w-4" />}
+            </button>
+          </div>
         </div>
       </div>
     </div>,
