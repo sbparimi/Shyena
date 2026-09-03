@@ -41,21 +41,22 @@ function DocsOverview() {
     return CATEGORIES.filter(([, title, description]) => `${title} ${description}`.toLowerCase().includes(normalizedQuery));
   }, [normalizedQuery]);
 
-  return <div>
-    <section className="relative overflow-hidden bg-[#0a071d] text-white">
-      <div className="absolute inset-0 opacity-25 [background-image:linear-gradient(rgba(139,92,246,.10)_1px,transparent_1px),linear-gradient(90deg,rgba(139,92,246,.10)_1px,transparent_1px)] [background-size:64px_64px]" />
-      <div className="absolute -right-24 top-0 h-96 w-96 rounded-full bg-[#7c3aed]/20 blur-3xl" />
+  return <div className="bg-[#eef7fb] text-[#0e172b]">
+    <section className="relative overflow-hidden bg-[#eaf5fa] text-[#0e172b]">
+      <div className="absolute inset-0 opacity-60 [background-image:linear-gradient(rgba(14,116,144,.06)_1px,transparent_1px),linear-gradient(90deg,rgba(14,116,144,.06)_1px,transparent_1px)] [background-size:64px_64px]" />
+      <div className="absolute -right-24 top-0 h-96 w-96 rounded-full bg-orange-200/40 blur-3xl" />
+      <div className="absolute -left-32 bottom-0 h-80 w-80 rounded-full bg-sky-200/50 blur-3xl" />
       <div className="relative mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(420px,0.9fr)] lg:items-center">
           <div className="max-w-4xl">
-            <p className="font-mono text-xs uppercase tracking-[0.22em] text-[#a855f7]">Engineering documentation</p>
-            <h1 className="mt-5 text-5xl font-bold leading-[1.02] tracking-tight sm:text-7xl">Build, evaluate, prove, release.</h1>
-            <p className="mt-7 max-w-3xl text-lg leading-relaxed text-[#c9c4d8]">Deep technical guidance for teams building evidence-backed assurance across real conversations, orchestration, retrieval, tool execution and release gates.</p>
+            <p className="font-mono text-xs uppercase tracking-[0.22em] text-orange-700">Engineering documentation</p>
+            <h1 className="mt-5 text-5xl font-bold leading-[1.02] tracking-tight text-[#0e172b] sm:text-7xl">Build, evaluate, prove, release.</h1>
+            <p className="mt-7 max-w-3xl text-lg leading-relaxed text-[#475569]">Deep technical guidance for teams building evidence-backed assurance across real conversations, orchestration, retrieval, tool execution and release gates.</p>
             <div className="mt-8 max-w-2xl">
               <label htmlFor="docs-search" className="sr-only">Search documentation</label>
               <div className="relative">
-                <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-white/40" />
-                <input id="docs-search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search engineering documentation..." className="h-13 w-full rounded-2xl border border-[#514778] bg-[#15102d] px-4 pl-11 text-sm text-white outline-none placeholder:text-white/40 focus:border-[#a855f7] focus:ring-2 focus:ring-[#7c3aed]/20" />
+                <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+                <input id="docs-search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search engineering documentation..." className="h-13 w-full rounded-2xl border border-slate-300 bg-white px-4 pl-11 text-sm text-[#0e172b] outline-none placeholder:text-slate-400 focus:border-orange-400 focus:ring-2 focus:ring-orange-100" />
               </div>
             </div>
           </div>
@@ -69,40 +70,40 @@ function DocsOverview() {
         <DocsSidebar />
         <div className="min-w-0">
           <div className="max-w-3xl">
-            <p className="font-mono text-xs uppercase tracking-[0.18em] text-[#f59804]">Assurance knowledge system</p>
-            <h2 className="mt-4 text-3xl font-bold tracking-tight text-[#faf8ff] sm:text-4xl">Documentation follows the engineering lifecycle.</h2>
-            <p className="mt-4 text-base leading-relaxed text-[#c9c4d8]">Each guide is a standalone engineering reference connected to the same Shyena evidence model.</p>
+            <p className="font-mono text-xs uppercase tracking-[0.18em] text-orange-700">Assurance knowledge system</p>
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-[#0e172b] sm:text-4xl">Documentation follows the engineering lifecycle.</h2>
+            <p className="mt-4 text-base leading-relaxed text-[#475569]">Each guide is a standalone engineering reference connected to the same Shyena evidence model.</p>
           </div>
 
           {filtered.length > 0 ? (
             <div className="mt-10 grid gap-5 sm:grid-cols-2">
               {filtered.map(([id, title, description, Icon, to]) => (
                 <Link key={id} to={to} className="group block h-full">
-                  <Card className="flex h-full min-h-60 flex-col overflow-hidden border-[#2b2350] bg-[#15102d] shadow-xl transition-all hover:-translate-y-1 hover:border-[#a855f7]/50 hover:shadow-2xl hover:shadow-[#7c3aed]/10">
+                  <Card className="flex h-full min-h-60 flex-col overflow-hidden border-slate-200 bg-white shadow-[0_12px_35px_-28px_rgba(15,23,42,0.4)] transition-all hover:-translate-y-1 hover:border-orange-300 hover:shadow-[0_20px_45px_-28px_rgba(234,88,12,0.25)]">
                     <CardHeader className="pb-3">
-                      <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[#7c3aed]/15 text-[#a855f7] transition-colors group-hover:bg-[#7c3aed] group-hover:text-white"><Icon className="h-5 w-5" /></span>
-                      <CardTitle className="mt-4 text-lg font-bold text-[#faf8ff]">{title}</CardTitle>
-                      <CardDescription className="mt-2 text-sm leading-relaxed text-[#c9c4d8]">{description}</CardDescription>
+                      <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-orange-50 text-orange-700 transition-colors group-hover:bg-orange-600 group-hover:text-white"><Icon className="h-5 w-5" /></span>
+                      <CardTitle className="mt-4 text-lg font-bold text-[#0e172b]">{title}</CardTitle>
+                      <CardDescription className="mt-2 text-sm leading-relaxed text-[#475569]">{description}</CardDescription>
                     </CardHeader>
-                    <CardContent className="mt-auto pt-0"><span className="inline-flex items-center gap-2 text-sm font-semibold text-[#a855f7]">Read knowledge guide <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" /></span></CardContent>
+                    <CardContent className="mt-auto pt-0"><span className="inline-flex items-center gap-2 text-sm font-semibold text-orange-700">Read knowledge guide <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" /></span></CardContent>
                   </Card>
                 </Link>
               ))}
             </div>
           ) : (
-            <div className="mt-10 rounded-3xl border border-[#2b2350] bg-[#15102d] p-10 text-center shadow-xl">
-              <h3 className="text-lg font-semibold text-[#faf8ff]">No matching documentation</h3>
-              <p className="mt-2 text-sm text-[#c9c4d8]">Try evaluation, testing, reporting, security, environments or integrations.</p>
+            <div className="mt-10 rounded-3xl border border-slate-200 bg-white p-10 text-center shadow-sm">
+              <h3 className="text-lg font-semibold text-[#0e172b]">No matching documentation</h3>
+              <p className="mt-2 text-sm text-[#475569]">Try evaluation, testing, reporting, security, environments or integrations.</p>
             </div>
           )}
 
-          <div className="mt-10 rounded-3xl border border-[#2b2350] bg-[#15102d] px-6 py-8 shadow-xl sm:px-10 sm:py-10">
+          <div className="mt-10 rounded-3xl border border-slate-200 bg-white px-6 py-8 shadow-[0_12px_35px_-28px_rgba(15,23,42,0.4)] sm:px-10 sm:py-10">
             <div className="max-w-2xl">
-              <p className="font-mono text-xs uppercase tracking-[0.18em] text-[#a855f7]">Content engineering</p>
-              <h3 className="mt-3 text-xl font-bold text-[#faf8ff] sm:text-2xl">Documentation is part of the assurance system.</h3>
-              <p className="mt-2 text-[#c9c4d8]">SAGE can research, draft, review, validate and publish technical knowledge through the same content-as-code path used for engineering changes.</p>
+              <p className="font-mono text-xs uppercase tracking-[0.18em] text-orange-700">Content engineering</p>
+              <h3 className="mt-3 text-xl font-bold text-[#0e172b] sm:text-2xl">Documentation is part of the assurance system.</h3>
+              <p className="mt-2 text-[#475569]">SAGE can research, draft, review, validate and publish technical knowledge through the same content-as-code path used for engineering changes.</p>
             </div>
-            <Button asChild className="mt-6"><Link to="/docs/sage-content-engineering">View SAGE architecture <ArrowRight className="h-4 w-4" /></Link></Button>
+            <Button asChild className="mt-6 bg-orange-600 text-white hover:bg-orange-700"><Link to="/docs/sage-content-engineering">View SAGE architecture <ArrowRight className="h-4 w-4" /></Link></Button>
           </div>
         </div>
       </div>
