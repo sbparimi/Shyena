@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { ArrowRight, Maximize2, Minimize2, Music2, Pause, Play } from "lucide-react";
+import { Maximize2, Minimize2, Music2, Pause, Play } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 
 const VIDEO_SELECTOR = 'video[aria-label="Shyena Cognigy assurance workflow"]';
@@ -46,6 +46,7 @@ export function VideoExperience() {
       const parent = found.parentElement;
       if (!parent) return;
       parent.classList.add("shyena-video-player");
+      parent.parentElement?.classList.add("shyena-video-shell");
 
       let host = parent.querySelector<HTMLDivElement>(":scope > .shyena-video-controls-host");
       if (!host) {
@@ -157,22 +158,13 @@ export function VideoExperience() {
       onMouseDown={(event) => event.stopPropagation()}
       onClick={(event) => event.stopPropagation()}
     >
-      <div className="absolute left-4 top-4 max-w-[min(360px,calc(100%-2rem))] sm:left-5 sm:top-5">
-        <div className="pointer-events-auto rounded-2xl border border-slate-200/90 bg-white/95 p-4 text-slate-950 shadow-[0_18px_45px_-25px_rgba(15,23,42,.45)] backdrop-blur-xl sm:p-5">
-          <div className="flex items-center gap-2 text-[9px] font-bold uppercase tracking-[0.18em] text-slate-500">
-            <span className="h-2 w-2 rounded-full bg-[#14b8a6]" /> Live assurance walkthrough
+      <div className="absolute right-4 top-4 max-w-[min(330px,calc(100%-2rem))] sm:right-5 sm:top-5">
+        <div className="pointer-events-auto rounded-xl border border-slate-200/90 bg-white/92 px-3.5 py-3 text-slate-950 shadow-[0_12px_30px_-20px_rgba(15,23,42,.5)] backdrop-blur-xl">
+          <div className="flex items-center gap-2 text-[9px] font-bold uppercase tracking-[0.16em] text-slate-500">
+            <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#14b8a6]" />
+            <span>{story.label}</span>
           </div>
-          <div className="mt-2 text-[11px] font-bold uppercase tracking-[0.12em] text-[#0f766e]">{story.label}</div>
-          <div className="mt-1 text-lg font-semibold tracking-tight text-slate-950">{story.title}</div>
-          <p className="mt-1.5 text-xs leading-5 text-slate-600">{story.text}</p>
-          <div className="mt-4 flex flex-wrap gap-2">
-            <Link to="/contact" className="pointer-events-auto inline-flex h-9 items-center gap-1.5 rounded-full bg-[#ffb804] px-3.5 text-[10px] font-extrabold uppercase tracking-[0.04em] text-slate-950 transition hover:bg-[#f2aa00]">
-              Request a review <ArrowRight className="h-3.5 w-3.5" />
-            </Link>
-            <Link to={storyIndex === 0 ? "/nexus" : storyIndex === 1 ? "/vera" : storyIndex === 2 ? "/chakra" : "/docs"} className="pointer-events-auto inline-flex h-9 items-center gap-1.5 rounded-full border border-slate-300 bg-white px-3.5 text-[10px] font-bold uppercase tracking-[0.04em] text-slate-800 transition hover:border-slate-950 hover:bg-slate-50">
-              Explore <ArrowRight className="h-3.5 w-3.5" />
-            </Link>
-          </div>
+          <div className="mt-1 text-sm font-semibold tracking-tight text-slate-950">{story.title}</div>
         </div>
       </div>
 
@@ -192,6 +184,10 @@ export function VideoExperience() {
               <Music2 className="h-4 w-4" /> <span className="hidden sm:inline">Music</span>
             </button>
             <div className="ml-auto" />
+            <Link to="/contact" className="hidden h-9 items-center gap-1.5 rounded-full bg-[#ffb804] px-3.5 text-[10px] font-extrabold uppercase tracking-[0.04em] text-slate-950 transition hover:bg-[#f2aa00] sm:inline-flex">
+              Talk to an expert
+              <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
             <button type="button" aria-label={fullscreen ? "Exit fullscreen" : "Enter fullscreen"} title={fullscreen ? "Exit fullscreen" : "Enter fullscreen"} onClick={toggleFullscreen} className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-slate-300 bg-white text-slate-600 transition hover:border-slate-950 hover:text-slate-950 focus:outline-none focus:ring-2 focus:ring-[#ffb804]">
               {fullscreen ? <Minimize2 className="h-4 w-4" /> : <Maximize2 className="h-4 w-4" />}
             </button>
