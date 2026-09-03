@@ -1,29 +1,25 @@
 name: Redesign products section
 
-on:
-  push:
-    branches: [main]
+on: [push]
 
 permissions:
   contents: write
 
 jobs:
   update:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Redesign section
-        shell: python
+      - name: Update products section
         run: |
+          python3 - <<'PY'
           from pathlib import Path
           import re
-
           p = Path('src/routes/index.tsx')
           s = p.read_text()
-
           pattern = r'      <section className="bg-\[#f7f8fb\]">.*?</section>\n\n      <section id="how-it-works"'
-
           replacement = '''      <section className="bg-white">
         <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-24">
           <div className="max-w-5xl">
@@ -31,67 +27,49 @@ jobs:
               Understand, test, and defend your AI agents before release.
             </h2>
           </div>
-
           <div className="mt-10 rounded-[8px] border-2 border-[#08a995] p-4 sm:p-5 lg:mt-12">
             <div className="grid gap-4 md:grid-cols-3">
               {products.map((product) => {
                 const Icon = product.icon;
                 return (
-                  <Link
-                    key={product.name}
-                    to={product.href}
-                    className="group flex min-h-[330px] flex-col border border-slate-300 bg-white p-7 transition-colors duration-200 hover:border-[#08a995]"
-                  >
+                  <Link key={product.name} to={product.href} className="group flex min-h-[330px] flex-col border border-slate-300 bg-white p-7 transition-colors duration-200 hover:border-[#08a995]">
                     <div className="flex items-start justify-between gap-5">
-                      <div className={`flex h-12 w-12 items-center justify-center rounded-full ${product.accent}`}>
-                        <Icon className="h-5 w-5" />
-                      </div>
+                      <div className={`flex h-12 w-12 items-center justify-center rounded-full ${product.accent}`}><Icon className="h-5 w-5" /></div>
                       <ArrowRight className="h-5 w-5 text-slate-900 transition-transform duration-200 group-hover:translate-x-1" />
                     </div>
-                    <div className="mt-9 text-xs font-semibold tracking-[0.2em] text-slate-400">
-                      {product.name} · {product.stage}
-                    </div>
-                    <h3 className="mt-4 max-w-md text-2xl font-semibold leading-tight tracking-tight text-slate-950">
-                      {product.title}
-                    </h3>
-                    <p className="mt-5 text-[15px] leading-7 text-slate-600">
-                      {product.description}
-                    </p>
+                    <div className="mt-9 text-xs font-semibold tracking-[0.2em] text-slate-400">{product.name} · {product.stage}</div>
+                    <h3 className="mt-4 max-w-md text-2xl font-semibold leading-tight tracking-tight text-slate-950">{product.title}</h3>
+                    <p className="mt-5 text-[15px] leading-7 text-slate-600">{product.description}</p>
                   </Link>
                 );
               })}
             </div>
           </div>
-
-          <Link
-            to="/pricing"
-            className="mt-5 inline-flex items-center gap-3 border-2 border-[#08a995] px-5 py-3 text-base font-semibold text-slate-950 transition-colors hover:bg-[#08a995] hover:text-white"
-          >
+          <Link to="/pricing" className="mt-5 inline-flex items-center gap-3 border-2 border-[#08a995] px-5 py-3 text-base font-semibold text-slate-950 transition-colors hover:bg-[#08a995] hover:text-white">
             Explore the Shyena platform <span className="inline-flex h-7 w-7 items-center justify-center bg-[#ffb703] text-slate-950"><ArrowRight className="h-4 w-4" /></span>
           </Link>
         </div>
       </section>
 
       <section id="how-it-works"'''
-
           out, n = re.subn(pattern, replacement, s, count=1, flags=re.S)
           if n != 1:
-              raise SystemExit(f'Expected exactly one products section match, found {n}')
+              raise SystemExit(f'Expected one old products section, found {n}')
           p.write_text(out)
+          PY
 
       - name: Verify
         run: |
-          grep -n "Understand, test, and defend your AI agents before release" src/routes/index.tsx
-          grep -n "Explore the Shyena platform" src/routes/index.tsx
-          if grep -q "bg-\[#f7f8fb\]" src/routes/index.tsx; then echo 'ERROR: old section remains'; exit 1; fi
+          grep -q "Understand, test, and defend your AI agents before release" src/routes/index.tsx
+          grep -q "Explore the Shyena platform" src/routes/index.tsx
+          ! grep -q 'className="bg-\[#f7f8fb\]"' src/routes/index.tsx
 
-      - name: Commit and remove workflow
-        shell: bash
+      - name: Commit change and remove workflow
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/routes/index.tsx .github/workflows/update-products-section.yml
-          git commit -m "Redesign assurance products section"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add src/routes/index.tsx
+          git commit -m 'Redesign assurance products section'
           git rm .github/workflows/update-products-section.yml
-          git commit -m "Remove temporary products update workflow"
+          git commit -m 'Remove temporary products update workflow'
           git push
