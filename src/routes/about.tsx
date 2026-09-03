@@ -1,178 +1,344 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Compass, ShieldCheck, Target } from "lucide-react";
+import {
+  ArrowRight,
+  BarChart3,
+  Bird,
+  CheckCircle2,
+  CircleDot,
+  Mountain,
+  ShieldCheck,
+  Sparkles,
+  Target,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { CtaBand } from "@/components/site/cta-band";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
       { title: "About Shyena | Vision, Precision, Assurance" },
-      { name: "description", content: "The story behind Shyena: inspired by the Vedic image of the swift Shyena, we built an evidence-first AI assurance platform to see the whole system and prove what it did." },
+      {
+        name: "description",
+        content:
+          "The story behind Shyena: vision, precision and the purpose behind an evidence-first AI assurance platform.",
+      },
       { property: "og:title", content: "About Shyena | Vision, Precision, Assurance" },
-      { property: "og:description", content: "How a real AI assurance problem became Shyena: an evidence-first platform built to understand, evaluate and defend AI systems." },
+      {
+        property: "og:description",
+        content:
+          "Born from a problem. Built with purpose. Shyena helps teams understand, evaluate and defend AI with confidence.",
+      },
     ],
     links: [{ rel: "canonical", href: "https://shyena.eu/about" }],
   }),
   component: AboutPage,
 });
 
-const JOURNEY = [
-  { number: "01", label: "THE PROBLEM", title: "AI testing stopped at the answer.", copy: "AI systems were becoming more capable, but assurance remained fragmented. One tool checked the answer, another checked deterministic behavior, another scanned security. No one view explained what the complete agent actually did across the journey." },
-  { number: "02", label: "THE BUILD", title: "We built the assurance layer we could not find.", copy: "The work began as an engineering response to that gap. We connected system behavior, execution, evaluation and evidence so a release decision could be based on what happened — not only on what a model scored." },
-  { number: "03", label: "THE EVOLUTION", title: "The problem became a platform. The platform became Shyena.", copy: "As the problem widened beyond one implementation, the idea evolved into a product architecture and a brand. The name Shyena gave that architecture a point of view: see higher, move with purpose, and return with what matters." },
-  { number: "04", label: "TODAY", title: "One platform. Three assurance suites.", copy: "NEXUS understands the system. VERA evaluates real behavior. CHAKRA defends the security boundary. Together they turn fragmented signals into one evidence chain for engineering and release decisions." },
+const STORY = [
+  {
+    number: "01",
+    title: "The Problem",
+    icon: Mountain,
+    copy:
+      "AI testing stopped at the answer. Companies lacked visibility across systems, conversations and risks. Tools saw fragments. No one saw the whole truth.",
+  },
+  {
+    number: "02",
+    title: "The Build",
+    icon: Bird,
+    copy:
+      "We set out to build assurance that engineers could trust — across every layer of an AI system. Not another tool. A complete assurance layer.",
+  },
+  {
+    number: "03",
+    title: "The Evolution",
+    icon: Sparkles,
+    copy:
+      "From that mission, Shyena was born. A name that carries vision, precision and the power to return with what matters.",
+  },
+  {
+    number: "04",
+    title: "Today",
+    icon: CircleDot,
+    copy:
+      "Shyena has evolved into a platform with three purpose-built suites — helping teams understand, evaluate and defend AI with confidence.",
+  },
 ] as const;
 
 const SUITES = [
-  { label: "NEXUS", title: "Understand the system", copy: "Maps flows, rules, orchestration and system intent so assurance starts from how the agent is designed to behave.", icon: Compass, to: "/nexus" },
-  { label: "VERA", title: "Evaluate what happened", copy: "Runs real journeys and combines deterministic, semantic and execution evidence into defensible verdicts.", icon: Target, to: "/vera" },
-  { label: "CHAKRA", title: "Defend the boundary", copy: "Probes agentic systems for security weaknesses and connects adversarial findings to the same release evidence chain.", icon: ShieldCheck, to: "/chakra" },
+  {
+    name: "NEXUS",
+    title: "Understand",
+    copy: "Gain complete visibility into your AI systems, conversations and dependencies.",
+    to: "/nexus",
+    tone: "text-[#101d3a]",
+    button: "border-slate-500 text-slate-900 hover:bg-slate-50",
+  },
+  {
+    name: "VERA",
+    title: "Evaluate",
+    copy: "Continuously evaluate behavior, performance and experience with multi-layer assurance.",
+    to: "/vera",
+    tone: "text-[#d18a00]",
+    button: "border-[#e5a51a] text-[#c38300] hover:bg-[#fffaf0]",
+  },
+  {
+    name: "CHAKRA",
+    title: "Defend",
+    copy: "Proactively detect risks, vulnerabilities and misuse before they impact users.",
+    to: "/chakra",
+    tone: "text-[#7137b8]",
+    button: "border-[#9b68d5] text-[#7137b8] hover:bg-[#fbf8ff]",
+  },
 ] as const;
 
-const PRINCIPLES = [
-  ["01", "Evidence over scores", "A score without the evidence behind it is not a release decision."],
-  ["02", "The whole system matters", "Conversation quality alone cannot prove orchestration, tools, retrieval, state or security."],
-  ["03", "No false confidence", "A failed or incomplete execution must never be presented as a passing evaluation."],
-  ["04", "Purpose over noise", "Every capability should help an engineering team see the system more clearly and make a decision with evidence."],
-] as const;
-
-function ShyenaMark() {
+function NexusLogo() {
   return (
-    <svg viewBox="0 0 240 200" role="img" aria-label="Shyena eagle mountain mark" className="h-full w-full">
+    <svg viewBox="0 0 52 48" aria-hidden="true" className="h-11 w-12">
+      <path d="M4 8 16 3v25L4 33Z" fill="currentColor" />
+      <path d="M23 3h9l16 15v13h-9L23 16Z" fill="currentColor" />
+      <path d="M23 22h9l16 15v8h-9L23 32Z" fill="currentColor" opacity=".92" />
+    </svg>
+  );
+}
+
+function VeraLogo() {
+  return (
+    <svg viewBox="0 0 58 48" aria-hidden="true" className="h-11 w-14">
+      <path d="M2 3h16l11 21L40 3h16L31 45h-5Z" fill="currentColor" />
+      <path d="M19 3h11l7 14-8 12Z" fill="#fff" opacity=".24" />
+    </svg>
+  );
+}
+
+function ChakraLogo() {
+  return (
+    <svg viewBox="0 0 52 52" aria-hidden="true" className="h-12 w-12">
+      <circle cx="26" cy="26" r="21" fill="none" stroke="currentColor" strokeWidth="3" />
+      <ellipse cx="26" cy="26" rx="9" ry="20" fill="none" stroke="currentColor" strokeWidth="2" />
+      <ellipse cx="26" cy="26" rx="9" ry="20" fill="none" stroke="currentColor" strokeWidth="2" transform="rotate(60 26 26)" />
+      <ellipse cx="26" cy="26" rx="9" ry="20" fill="none" stroke="currentColor" strokeWidth="2" transform="rotate(120 26 26)" />
+      <circle cx="26" cy="26" r="3" fill="currentColor" />
+    </svg>
+  );
+}
+
+function ShyenaEagleArt() {
+  return (
+    <svg
+      viewBox="0 0 560 470"
+      role="img"
+      aria-label="Shyena eagle silhouette with mountain landscape"
+      className="h-full w-full"
+      preserveAspectRatio="xMidYMid meet"
+    >
       <defs>
-        <clipPath id="aboutShyenaEagle">
-          <path d="M18 108 61 65 45 54 98 28 84 17 151 12c38 1 65 15 72 37 7 20-3 36-21 39-14 2-25-4-35-12l7 19 32 67-61-20-24 26-20-28-39 27 14-39-58-20Z" />
+        <clipPath id="aboutEagleClip">
+          <path d="M50 250 155 155 115 130 245 62 211 34 352 22c91 2 158 35 174 84 16 46-7 80-49 88-32 6-58-7-83-27l16 45 76 154-142-48-57 59-48-65-91 63 34-91-138-49Z" />
         </clipPath>
-        <linearGradient id="aboutShyenaSky" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#dbeefa" />
-          <stop offset="0.55" stopColor="#f7a45b" />
-          <stop offset="1" stopColor="#e56a24" />
+        <linearGradient id="aboutSky" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#dceefa" />
+          <stop offset="0.38" stopColor="#f7d4b0" />
+          <stop offset="0.7" stopColor="#f39a4f" />
+          <stop offset="1" stopColor="#d96a31" />
         </linearGradient>
-        <linearGradient id="aboutShyenaMountain" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#233a61" />
-          <stop offset="1" stopColor="#071a3a" />
+        <linearGradient id="aboutMountain" x1="0" y1="0" x2="0.8" y2="1">
+          <stop offset="0" stopColor="#49688c" />
+          <stop offset="0.35" stopColor="#203d61" />
+          <stop offset="1" stopColor="#071a38" />
+        </linearGradient>
+        <linearGradient id="aboutSnow" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#ffffff" />
+          <stop offset="1" stopColor="#d9e7f0" />
         </linearGradient>
       </defs>
-      <g clipPath="url(#aboutShyenaEagle)">
-        <rect width="240" height="200" fill="url(#aboutShyenaSky)" />
-        <path d="M0 170 48 116 76 139 111 77 137 116 166 69 240 158V200H0Z" fill="url(#aboutShyenaMountain)" />
-        <path d="m48 116 28 23 35-62-13 48-19 7-18-8Z" fill="#f8fbff" />
-        <path d="m111 77 26 39-14-10-12 22-11-16Z" fill="#eaf4fb" />
-        <path d="m166 69 74 89-49-29-17-28-14 19-13-12Z" fill="#f5f9fc" />
-        <path d="M0 176 61 148 91 158 125 139 155 156 196 143 240 171V200H0Z" fill="#0b2347" opacity=".92" />
+      <g clipPath="url(#aboutEagleClip)">
+        <rect width="560" height="470" fill="url(#aboutSky)" />
+        <path d="M0 390 112 252 176 305 267 152 331 251 405 132 560 320V470H0Z" fill="url(#aboutMountain)" />
+        <path d="m112 252 64 53 91-153-32 118-46 18-43-19Z" fill="url(#aboutSnow)" />
+        <path d="m267 152 64 99-34-25-29 54-28-38Z" fill="url(#aboutSnow)" />
+        <path d="m405 132 155 188-102-61-36-63-31 42-28-26Z" fill="url(#aboutSnow)" />
+        <path d="M0 407 146 342 215 366 302 325 374 363 470 330 560 394V470H0Z" fill="#071b39" opacity=".88" />
+        <path d="M70 355 168 299 222 321 283 284 340 315 431 286 520 347 560 365V470H70Z" fill="#102d50" opacity=".65" />
       </g>
-      <path d="M18 108 61 65 45 54 98 28 84 17 151 12c38 1 65 15 72 37 7 20-3 36-21 39-14 2-25-4-35-12l7 19 32 67-61-20-24 26-20-28-39 27 14-39-58-20Z" fill="none" stroke="#0b1833" strokeWidth="2.5" strokeLinejoin="round" />
-      <path d="M187 52c7 1 14 4 18 8-7 4-14 4-21 1-3-2-4-5-4-8Z" fill="#071226" />
-      <circle cx="192" cy="53" r="2.2" fill="#ffb703" />
+      <path
+        d="M50 250 155 155 115 130 245 62 211 34 352 22c91 2 158 35 174 84 16 46-7 80-49 88-32 6-58-7-83-27l16 45 76 154-142-48-57 59-48-65-91 63 34-91-138-49Z"
+        fill="none"
+        stroke="#0b1833"
+        strokeWidth="4"
+        strokeLinejoin="round"
+      />
+      <path d="M435 112c17 2 31 8 42 18-16 9-32 9-47 2-7-4-9-12-8-19Z" fill="#08152d" />
+      <circle cx="447" cy="116" r="4" fill="#ffb703" />
     </svg>
+  );
+}
+
+function StoryCard({ item }: { item: (typeof STORY)[number] }) {
+  const Icon = item.icon;
+  return (
+    <article className="min-h-[285px] border border-slate-300 bg-white p-5 sm:p-6">
+      <span className="font-mono text-sm text-[#d99000]">{item.number}</span>
+      <Icon className="mt-5 h-9 w-9 stroke-[1.5] text-slate-900" />
+      <h3 className="mt-5 text-[17px] font-semibold tracking-tight">{item.title}</h3>
+      <p className="mt-2 text-[13px] leading-5 text-slate-700">{item.copy}</p>
+    </article>
+  );
+}
+
+function SuiteCard({ suite }: { suite: (typeof SUITES)[number] }) {
+  const Logo = suite.name === "NEXUS" ? NexusLogo : suite.name === "VERA" ? VeraLogo : ChakraLogo;
+  return (
+    <article className="border border-slate-200 bg-white p-6 sm:p-7">
+      <div className={`flex items-center gap-4 ${suite.tone}`}>
+        <Logo />
+        <span className="text-xl font-semibold tracking-tight">{suite.name}</span>
+      </div>
+      <h3 className="mt-3 text-base font-semibold text-slate-950">{suite.title}</h3>
+      <p className="mt-2 min-h-[64px] text-[13px] leading-5 text-slate-700">{suite.copy}</p>
+      <Button
+        asChild
+        variant="outline"
+        className={`mt-4 h-9 rounded-none bg-white px-4 text-[11px] font-semibold ${suite.button}`}
+      >
+        <Link to={suite.to}>
+          Explore {suite.name.charAt(0) + suite.name.slice(1).toLowerCase()}
+          <ArrowRight className="h-3.5 w-3.5" />
+        </Link>
+      </Button>
+    </article>
   );
 }
 
 function AboutPage() {
   return (
-    <main className="overflow-hidden bg-white text-slate-950">
-      <section className="border-b border-slate-300 bg-[#eaf5fa]">
-        <div className="mx-auto w-full max-w-7xl px-5 pb-20 pt-10 sm:px-8 sm:pb-24 sm:pt-14 lg:pb-28">
-          <div className="flex items-center justify-between border-b border-slate-300 pb-5 text-[10px] font-medium uppercase tracking-[0.22em] text-slate-500">
-            <div className="flex items-center gap-2"><span className="h-1.5 w-1.5 bg-[#ffb703]" /><span>About Shyena</span><span className="text-slate-300">/</span><span>Our story</span></div>
-            <span className="hidden sm:block">VISION · PRECISION · ASSURANCE</span>
+    <main className="overflow-hidden bg-white text-[#0d1935]">
+      <section className="bg-[#edf6ff]">
+        <div className="mx-auto max-w-[1280px] px-6 pb-12 pt-6 sm:px-10 sm:pb-16 sm:pt-8 lg:px-12 lg:pb-14">
+          <div className="mb-8 text-[11px] font-medium text-slate-500 sm:mb-10">Home <span className="px-2">/</span> About</div>
+          <div className="grid items-center gap-8 lg:grid-cols-[1.03fr_.97fr] lg:gap-4">
+            <div className="max-w-[650px]">
+              <p className="text-[11px] font-medium uppercase tracking-[0.17em] text-[#e59a00]">Our name. Our inspiration.</p>
+              <h1 className="mt-4 text-[48px] font-bold leading-[1.04] tracking-[-0.045em] sm:text-[62px] lg:text-[67px]">
+                Shyena is vision.<br />
+                Shyena is precision.<br />
+                <span className="text-[#f0a400]">Shyena returns.</span>
+              </h1>
+              <p className="mt-5 max-w-[590px] text-[16px] leading-6 text-slate-700 sm:text-[17px]">
+                Shyena represents the strength to rise higher than all, the vision to see what others miss, and the power to return with what truly matters.
+              </p>
+              <div className="mt-4 border-l-[3px] border-[#ffb703] pl-4 text-[14px] font-semibold leading-6 text-slate-800">
+                That is the spirit behind everything we build.
+              </div>
+            </div>
+            <div className="relative mx-auto w-full max-w-[570px] lg:ml-auto">
+              <ShyenaEagleArt />
+            </div>
           </div>
+        </div>
+      </section>
 
-          <div className="grid gap-12 pt-12 lg:grid-cols-[1.08fr_.92fr] lg:items-center lg:gap-16">
+      <section className="bg-white">
+        <div className="mx-auto max-w-[1160px] px-6 py-12 sm:px-10 sm:py-14 lg:px-12 lg:py-14">
+          <div className="text-center">
+            <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-[#e59a00]">Our story</p>
+            <h2 className="mt-3 text-[27px] font-semibold tracking-tight sm:text-[30px]">Born from a problem. Built with purpose.</h2>
+            <p className="mt-2 text-[13px] text-slate-600">AI was moving fast. But assurance was falling behind.</p>
+          </div>
+          <div className="mt-6 grid gap-4 md:grid-cols-4 md:gap-12">
+            {STORY.map((item, index) => (
+              <div key={item.number} className="relative">
+                <StoryCard item={item} />
+                {index < STORY.length - 1 ? (
+                  <ArrowRight className="absolute -right-9 top-1/2 hidden h-5 w-5 -translate-y-1/2 text-slate-900 md:block" />
+                ) : null}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white">
+        <div className="mx-auto max-w-[1160px] px-6 pb-12 sm:px-10 sm:pb-14 lg:px-12 lg:pb-14">
+          <div className="text-center">
+            <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-[#e59a00]">Three suites. One mission.</p>
+            <h2 className="mt-3 text-[27px] font-semibold tracking-tight sm:text-[30px]">Understand. Evaluate. Defend.</h2>
+          </div>
+          <div className="mt-6 grid gap-5 md:grid-cols-3">
+            {SUITES.map((suite) => <SuiteCard key={suite.name} suite={suite} />)}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-[#d8e7f4] bg-[#edf6ff]">
+        <div className="mx-auto grid max-w-[1160px] grid-cols-2 divide-x divide-[#d8e0e9] px-6 py-6 sm:grid-cols-4 sm:px-10 lg:px-12">
+          <Stat icon={ShieldCheck} kicker="Trusted by" value="Enterprises" detail="across industries" />
+          <Stat icon={Target} kicker="Assuring" value="Millions" detail="of AI interactions daily" />
+          <Stat icon={BarChart3} kicker="Across" value="Complex AI" detail="landscapes" />
+          <Stat icon={CheckCircle2} kicker="With" value="Evidence" detail="you can defend" />
+        </div>
+      </section>
+
+      <section className="px-4 py-2 sm:px-7 sm:py-2">
+        <div className="relative mx-auto max-w-[1220px] overflow-hidden rounded-[22px] bg-[#03132d] text-white">
+          <div className="absolute inset-0 opacity-45">
+            <svg viewBox="0 0 900 300" className="h-full w-full" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <path d="M280 300 465 60 520 155 575 105 710 300Z" fill="#15365b" />
+              <path d="m465 60 55 95-31-24-25 43-20-31Z" fill="#6f88a2" opacity=".75" />
+              <path d="M150 300 340 150 410 205 500 145 610 225 730 170 900 280V300Z" fill="#0b2748" />
+            </svg>
+          </div>
+          <div className="relative grid gap-8 px-8 py-8 sm:px-12 sm:py-10 lg:grid-cols-[1.1fr_.65fr] lg:px-14">
             <div>
-              <p className="font-mono text-xs uppercase tracking-[0.22em] text-[#a87900]">Our name. Our inspiration.</p>
-              <h1 className="mt-5 max-w-4xl text-5xl font-bold leading-[0.98] tracking-[-0.045em] sm:text-7xl lg:text-[6.2rem]">Shyena is vision.<br />Shyena is precision.<br /><span className="text-[#a87900]">Shyena returns.</span></h1>
-              <p className="mt-8 max-w-3xl text-lg leading-8 text-slate-600 sm:text-xl">Our name is inspired by the Vedic image of the <em>śyena</em> — a swift bird of prey associated in the Rigveda with carrying Soma. We took that image as a brand metaphor: see higher, move with purpose, and return with what matters.</p>
-              <div className="mt-7 border-l-2 border-[#ffb703] pl-5 text-base font-semibold leading-7 text-slate-800">That spirit shapes how we build assurance: a higher view of the system, a sharper view of its behavior, and evidence that returns to the people making the release decision.</div>
-              <div className="mt-9 flex flex-wrap gap-3">
-                <Button asChild className="h-12 rounded-none bg-[#ffb703] px-6 text-sm font-semibold text-slate-950 hover:bg-[#f2aa00]"><Link to="/contact">Talk to Shyena <ArrowRight className="h-4 w-4" /></Link></Button>
-                <Button asChild variant="outline" className="h-12 rounded-none border-slate-400 bg-white px-6 text-sm text-slate-900 hover:bg-slate-50"><Link to="/docs">Explore the platform</Link></Button>
+              <span className="inline-flex border border-[#f4b000] px-2 py-1 text-[10px] font-medium uppercase tracking-[0.08em] text-white">
+                <span className="mr-1.5">●</span> Live assurance walkthrough
+              </span>
+              <h2 className="mt-4 text-[29px] font-semibold tracking-tight sm:text-[31px]">See it evaluate your own agent</h2>
+              <p className="mt-2 max-w-[560px] text-[13px] leading-5 text-slate-200">
+                Bring one real scenario. We&apos;ll run it against your live conversational AI agent and walk through every judged turn with you.
+              </p>
+              <div className="mt-5 flex flex-wrap gap-4">
+                <Button asChild className="h-9 rounded-none bg-[#ffb703] px-4 text-[11px] font-semibold text-slate-950 hover:bg-[#f0aa00]">
+                  <Link to="/contact">Book a walkthrough <ArrowRight className="h-3.5 w-3.5" /></Link>
+                </Button>
+                <Button asChild variant="outline" className="h-9 rounded-none border-white/80 bg-transparent px-4 text-[11px] font-semibold text-white hover:bg-white/10">
+                  <Link to="/docs">See how it works</Link>
+                </Button>
               </div>
             </div>
-
-            <div className="relative mx-auto w-full max-w-[520px]">
-              <div className="absolute inset-8 bg-white/40 blur-2xl" />
-              <div className="relative aspect-[6/5] border border-slate-300 bg-white/40 p-5 sm:p-8">
-                <div className="absolute left-5 top-5 font-mono text-[10px] uppercase tracking-[0.2em] text-slate-400">THE SHYENA MARK</div>
-                <div className="h-full w-full pt-5"><ShyenaMark /></div>
-                <div className="absolute bottom-5 left-5 right-5 flex justify-between border-t border-slate-300 pt-3 font-mono text-[9px] uppercase tracking-[0.18em] text-slate-400"><span>See higher</span><span>Move with purpose</span><span>Return with evidence</span></div>
+            <div className="flex flex-col justify-center lg:pl-8">
+              <div className="text-4xl leading-none text-[#ffb703]">“</div>
+              <p className="mt-1 text-[16px] leading-6 text-white">The story is no longer about testing whether AI works. It is about proving what it did.</p>
+              <p className="mt-3 text-[14px] font-semibold text-white">That is Shyena.</p>
+              <div className="mt-4 flex h-9 w-9 items-center justify-center text-[#ffb703]">
+                <Bird className="h-8 w-8" />
               </div>
             </div>
           </div>
         </div>
       </section>
-
-      <section className="border-b border-slate-300 bg-white">
-        <div className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
-          <div className="max-w-3xl">
-            <p className="font-mono text-xs uppercase tracking-[0.18em] text-[#a87900]">Why Shyena exists</p>
-            <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-5xl">The tools were good at pieces of the problem. The release decision was still ours to make.</h2>
-            <p className="mt-5 text-lg leading-8 text-slate-600">That was the engineering problem. Answer quality, deterministic checks, security scans and runtime logs all had value, but the evidence lived in separate places. We needed a way to understand the system, evaluate what actually happened and defend the resulting decision.</p>
-          </div>
-          <div className="mt-12 grid gap-px border border-slate-300 bg-slate-300 md:grid-cols-3">
-            {[
-              ["ANSWER", "Is the response good?", "Useful, but incomplete."],
-              ["EXECUTION", "Did the journey actually work?", "Necessary, but not enough."],
-              ["ASSURANCE", "Can we prove the release decision?", "That is the layer we built."],
-            ].map(([label, title, copy]) => (
-              <article key={label} className="bg-[#f5f8fc] p-7 sm:p-8">
-                <p className="font-mono text-[10px] tracking-[0.2em] text-[#a87900]">{label}</p>
-                <h3 className="mt-5 text-xl font-bold">{title}</h3>
-                <p className="mt-3 text-sm leading-6 text-slate-600">{copy}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="border-b border-slate-300 bg-[#f5f8fc]">
-        <div className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
-          <div className="flex flex-col justify-between gap-5 border-b border-slate-300 pb-8 lg:flex-row lg:items-end">
-            <div><p className="font-mono text-xs uppercase tracking-[0.18em] text-[#a87900]">The Shyena story</p><h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-5xl">A problem became a purpose. A purpose became a platform.</h2></div>
-            <p className="max-w-md text-sm leading-6 text-slate-600">The brand is not separate from the engineering problem. The name expresses the way we chose to solve it.</p>
-          </div>
-          <div className="mt-10 border-t border-slate-300">
-            {JOURNEY.map((item) => (
-              <article key={item.number} className="grid gap-5 border-b border-slate-300 py-8 lg:grid-cols-[80px_190px_1fr] lg:gap-8">
-                <span className="font-mono text-sm text-[#a87900]">{item.number}</span>
-                <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-500">{item.label}</p>
-                <div className="max-w-3xl"><h3 className="text-2xl font-bold tracking-tight">{item.title}</h3><p className="mt-3 text-base leading-7 text-slate-600">{item.copy}</p></div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="border-b border-slate-300 bg-white">
-        <div className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
-          <div className="grid gap-10 lg:grid-cols-[.4fr_.6fr] lg:gap-20">
-            <div><p className="font-mono text-xs uppercase tracking-[0.18em] text-[#a87900]">What Shyena became</p><h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-5xl">Understand. Evaluate. Defend.</h2><p className="mt-5 max-w-md text-base leading-7 text-slate-600">Three purpose-built suites, connected by one evidence chain and one mission: help teams make AI release decisions they can defend.</p></div>
-            <div className="border-t border-slate-300">
-              {SUITES.map((suite, index) => { const Icon = suite.icon; return <Link key={suite.label} to={suite.to} className="group grid gap-5 border-b border-slate-300 py-7 sm:grid-cols-[60px_110px_1fr_auto] sm:items-start"><span className="font-mono text-xs text-[#a87900]">0{index + 1}</span><span className="flex h-10 w-10 items-center justify-center bg-[#fff4cf] text-[#a87900]"><Icon className="h-4 w-4" /></span><div><p className="font-mono text-[10px] tracking-[0.18em] text-slate-500">{suite.label}</p><h3 className="mt-1 text-xl font-bold">{suite.title}</h3><p className="mt-2 text-sm leading-6 text-slate-600">{suite.copy}</p></div><ArrowRight className="mt-2 h-4 w-4 text-slate-400 transition-transform group-hover:translate-x-1 group-hover:text-[#a87900]" /></Link>; })}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="border-b border-slate-300 bg-[#eaf5fa]">
-        <div className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
-          <div className="grid gap-10 lg:grid-cols-[.4fr_.6fr] lg:gap-20">
-            <div><p className="font-mono text-xs uppercase tracking-[0.18em] text-[#a87900]">What we believe</p><h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-5xl">See the whole. Prove the decision.</h2></div>
-            <div className="border-t border-slate-300">
-              {PRINCIPLES.map(([number, title, copy]) => <article key={number} className="grid gap-4 border-b border-slate-300 py-6 sm:grid-cols-[50px_190px_1fr]"><span className="font-mono text-xs text-[#a87900]">{number}</span><h3 className="font-bold">{title}</h3><p className="text-sm leading-6 text-slate-600">{copy}</p></article>)}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-[#0b0920] text-white">
-        <div className="mx-auto grid w-full max-w-7xl gap-10 px-5 py-16 sm:px-8 sm:py-20 lg:grid-cols-[1fr_auto] lg:items-end">
-          <div><p className="font-mono text-xs uppercase tracking-[0.18em] text-[#ffb703]">The next chapter</p><h2 className="mt-4 max-w-4xl text-3xl font-bold tracking-tight sm:text-5xl">The story is no longer about testing whether AI works. It is about proving what it did.</h2><p className="mt-5 max-w-2xl text-base leading-7 text-white/60">That is the boundary Shyena is building for engineering teams that need confidence they can defend.</p></div>
-          <Button asChild className="h-12 rounded-none bg-[#ffb703] px-6 text-sm font-semibold text-slate-950 hover:bg-[#f2aa00]"><Link to="/contact">Start the conversation <ArrowRight className="h-4 w-4" /></Link></Button>
-        </div>
-      </section>
-
-      <CtaBand />
     </main>
+  );
+}
+
+function Stat({
+  icon: Icon,
+  kicker,
+  value,
+  detail,
+}: {
+  icon: typeof ShieldCheck;
+  kicker: string;
+  value: string;
+  detail: string;
+}) {
+  return (
+    <div className="flex items-center gap-3 px-4 first:pl-0 last:pr-0 sm:px-7">
+      <Icon className="h-9 w-9 shrink-0 stroke-[1.7] text-slate-900" />
+      <div>
+        <p className="text-[9px] text-slate-600">{kicker}</p>
+        <p className="text-[17px] font-semibold leading-5 tracking-tight">{value}</p>
+        <p className="text-[9px] leading-4 text-slate-600">{detail}</p>
+      </div>
+    </div>
   );
 }
