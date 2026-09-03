@@ -10,14 +10,7 @@ import { VideoExperience } from "@/components/site/video-experience";
 
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
-        <p className="mt-2 text-sm text-muted-foreground">The page you're looking for doesn't exist or has been moved.</p>
-        <div className="mt-6"><Link to="/" className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90">Go home</Link></div>
-      </div>
-    </div>
+    <div className="flex min-h-screen items-center justify-center bg-background px-4"><div className="max-w-md text-center"><h1 className="text-7xl font-bold text-foreground">404</h1><h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2><p className="mt-2 text-sm text-muted-foreground">The page you're looking for doesn't exist or has been moved.</p><div className="mt-6"><Link to="/" className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90">Go home</Link></div></div></div>
   );
 }
 
@@ -26,16 +19,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   const router = useRouter();
   useEffect(() => { reportLovableError(error, { boundary: "tanstack_root_error_component" }); }, [error]);
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-xl font-semibold tracking-tight text-foreground">This page didn't load</h1>
-        <p className="mt-2 text-sm text-muted-foreground">Something went wrong on our end. You can try refreshing or head back home.</p>
-        <div className="mt-6 flex flex-wrap justify-center gap-2">
-          <button onClick={() => { router.invalidate(); reset(); }} className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90">Try again</button>
-          <a href="/" className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent">Go home</a>
-        </div>
-      </div>
-    </div>
+    <div className="flex min-h-screen items-center justify-center bg-background px-4"><div className="max-w-md text-center"><h1 className="text-xl font-semibold tracking-tight text-foreground">This page didn't load</h1><p className="mt-2 text-sm text-muted-foreground">Something went wrong on our end. You can try refreshing or head back home.</p><div className="mt-6 flex flex-wrap justify-center gap-2"><button onClick={() => { router.invalidate(); reset(); }} className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90">Try again</button><a href="/" className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent">Go home</a></div></div></div>
   );
 }
 
@@ -45,9 +29,9 @@ const ORGANIZATION_SCHEMA = {
   name: "Shyena",
   applicationCategory: "BusinessApplication",
   operatingSystem: "Web",
-  description: "Shyena is an enterprise AI agent assurance platform that helps teams understand AI systems, test real behavior, defend security boundaries and produce evidence-backed release decisions.",
+  description: "Shyena is an enterprise AI agent assurance platform for AI agent evaluation, testing, security assurance and evidence-backed release decisions.",
   url: "https://shyena.eu/",
-  keywords: "AI agent assurance, AI evaluation, AI testing, AI QA automation, AI agent testing, Cognigy testing, LLM evaluation, conversational AI testing, AI security testing, AI release assurance",
+  keywords: "AI agent assurance, AI agent evaluation, AI agent testing, enterprise AI testing, LLM evaluation, conversational AI testing, Cognigy testing, agentic AI evaluation, AI security testing, AI QA automation, AI release assurance",
 };
 
 const ENTERPRISE_BRIDGE: Record<string, { kicker: string; title: string; body: string }> = {
@@ -65,39 +49,9 @@ const ENTERPRISE_BRIDGE: Record<string, { kicker: string; title: string; body: s
 function EnterpriseBridge({ pathname }: { pathname: string }) {
   if (pathname.startsWith("/docs") || pathname.startsWith("/blog")) return null;
   const content = ENTERPRISE_BRIDGE[pathname] ?? { kicker: "ENTERPRISE AI ASSURANCE", title: "Understand the system. Test the behavior. Defend the release.", body: "Build one evidence chain across system understanding, executable journeys, evaluation, security assurance and release governance." };
-  const stages = [
-    ["01", "Prepare", "Understand the system and define what matters."],
-    ["02", "Assure", "Execute real journeys and evaluate behavior."],
-    ["03", "Govern", "Correlate findings, risk and release impact."],
-    ["04", "Operate", "Keep evidence connected to the delivery lifecycle."],
-  ];
+  const stages = [["01", "Prepare", "Understand the system and define what matters."], ["02", "Assure", "Execute real journeys and evaluate behavior."], ["03", "Govern", "Correlate findings, risk and release impact."], ["04", "Operate", "Keep evidence connected to the delivery lifecycle."]];
   return (
-    <section className="relative overflow-hidden border-t border-slate-200 bg-[linear-gradient(180deg,#f8fbff_0%,#f4f8fc_100%)]">
-      <div className="pointer-events-none absolute -right-40 top-0 h-80 w-80 rounded-full bg-orange-100/50 blur-3xl" />
-      <div className="pointer-events-none absolute -left-40 bottom-0 h-72 w-72 rounded-full bg-sky-100/60 blur-3xl" />
-      <div className="relative mx-auto max-w-7xl px-6 py-16 lg:px-8 lg:py-20">
-        <div className="grid gap-10 lg:grid-cols-[0.88fr_1.12fr] lg:items-end">
-          <div>
-            <div className="inline-flex items-center rounded-full border border-orange-200 bg-white/80 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-orange-700 shadow-sm">{content.kicker}</div>
-            <h2 className="mt-5 max-w-3xl text-3xl font-semibold leading-[1.05] tracking-[-0.04em] text-[#0e172b] sm:text-4xl lg:text-[46px]">{content.title}</h2>
-            <p className="mt-5 max-w-2xl text-base leading-7 text-[#475569] sm:text-lg">{content.body}</p>
-          </div>
-          <div className="grid gap-3 sm:grid-cols-2">
-            {stages.map(([number, title, text]) => (
-              <div key={number} className="group relative overflow-hidden rounded-[22px] border border-slate-200 bg-white p-5 shadow-[0_12px_35px_-28px_rgba(15,23,42,0.4)] transition duration-200 hover:-translate-y-1 hover:border-orange-200 hover:shadow-[0_20px_45px_-28px_rgba(234,88,12,0.25)] sm:min-h-[126px] sm:p-6">
-                <div className="absolute inset-y-0 left-0 w-1 bg-orange-500/70 opacity-0 transition duration-200 group-hover:opacity-100" />
-                <div className="flex items-start justify-between gap-4"><span className="font-mono text-[10px] font-semibold tracking-[0.14em] text-orange-700">{number}</span><span className="h-2 w-2 rounded-full bg-orange-400/70 transition duration-200 group-hover:scale-125" /></div>
-                <div className="mt-5 text-base font-semibold tracking-[-0.01em] text-[#0e172b]">{title}</div>
-                <div className="mt-2 text-sm leading-6 text-[#475569]">{text}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="mt-10 flex flex-wrap items-center gap-2 border-t border-slate-200 pt-6">
-          {["Conversational AI", "Agentic workflows", "Customer journeys", "Security assurance", "Release governance"].map((item) => <span key={item} className="rounded-full border border-slate-200 bg-white/70 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.15em] text-slate-400">{item}</span>)}
-        </div>
-      </div>
-    </section>
+    <section className="relative overflow-hidden border-t border-slate-200 bg-[linear-gradient(180deg,#f8fbff_0%,#f4f8fc_100%)]"><div className="pointer-events-none absolute -right-40 top-0 h-80 w-80 rounded-full bg-orange-100/50 blur-3xl"/><div className="pointer-events-none absolute -left-40 bottom-0 h-72 w-72 rounded-full bg-sky-100/60 blur-3xl"/><div className="relative mx-auto max-w-7xl px-6 py-16 lg:px-8 lg:py-20"><div className="grid gap-10 lg:grid-cols-[0.88fr_1.12fr] lg:items-end"><div><div className="inline-flex items-center rounded-full border border-orange-200 bg-white/80 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-orange-700 shadow-sm">{content.kicker}</div><h2 className="mt-5 max-w-3xl text-3xl font-semibold leading-[1.05] tracking-[-0.04em] text-[#0e172b] sm:text-4xl lg:text-[46px]">{content.title}</h2><p className="mt-5 max-w-2xl text-base leading-7 text-[#475569] sm:text-lg">{content.body}</p></div><div className="grid gap-3 sm:grid-cols-2">{stages.map(([number,title,text])=><div key={number} className="group relative overflow-hidden rounded-[22px] border border-slate-200 bg-white p-5 shadow-[0_12px_35px_-28px_rgba(15,23,42,0.4)] transition duration-200 hover:-translate-y-1 hover:border-orange-200 hover:shadow-[0_20px_45px_-28px_rgba(234,88,12,0.25)] sm:min-h-[126px] sm:p-6"><div className="absolute inset-y-0 left-0 w-1 bg-orange-500/70 opacity-0 transition duration-200 group-hover:opacity-100"/><div className="flex items-start justify-between gap-4"><span className="font-mono text-[10px] font-semibold tracking-[0.14em] text-orange-700">{number}</span><span className="h-2 w-2 rounded-full bg-orange-400/70 transition duration-200 group-hover:scale-125"/></div><div className="mt-5 text-base font-semibold tracking-[-0.01em] text-[#0e172b]">{title}</div><div className="mt-2 text-sm leading-6 text-[#475569]">{text}</div></div>)}</div></div><div className="mt-10 flex flex-wrap items-center gap-2 border-t border-slate-200 pt-6">{["Conversational AI", "Agentic workflows", "Customer journeys", "Security assurance", "Release governance"].map((item)=><span key={item} className="rounded-full border border-slate-200 bg-white/70 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.15em] text-slate-400">{item}</span>)}</div></div></section>
   );
 }
 
@@ -106,16 +60,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Shyena — Enterprise AI Agent Assurance Platform" },
-      { name: "description", content: "Make AI systems safe to release with evidence. Shyena helps teams understand AI agents, test real behavior, defend security boundaries and govern release decisions." },
-      { name: "keywords", content: "AI agent assurance, AI evaluation, AI testing, AI QA, AI QA automation, enterprise AI testing, LLM evaluation, conversational AI testing, Cognigy testing, agentic AI evaluation, AI security testing, AI release assurance" },
+      { title: "AI Agent Evaluation & Testing Platform for Enterprises | Shyena" },
+      { name: "description", content: "Enterprise AI agent evaluation, testing and security assurance. Test real agent behavior, evaluate LLM and conversational AI systems, and produce evidence-backed release decisions with Shyena." },
+      { name: "keywords", content: "AI agent evaluation, AI agent testing, enterprise AI testing, AI agent assurance, LLM evaluation, conversational AI testing, Cognigy testing, agentic AI evaluation, AI security testing, AI QA automation, AI release assurance" },
       { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
-      { property: "og:title", content: "Shyena — Enterprise AI Agent Assurance Platform" },
-      { property: "og:description", content: "Understand the system. Test the behavior. Defend the release. Produce evidence-backed AI release decisions." },
+      { property: "og:title", content: "AI Agent Evaluation & Testing Platform for Enterprises | Shyena" },
+      { property: "og:description", content: "Test real AI agent behavior, evaluate quality and orchestration, defend security boundaries and produce evidence-backed release decisions." },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://shyena.eu/" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
+      { rel: "canonical", href: "https://shyena.eu/" },
       { rel: "stylesheet", href: appCss },
       { rel: "stylesheet", href: siteThemeCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -132,30 +88,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 });
 
 function RootShell({ children }: { children: ReactNode }) {
-  return (
-    <html lang="en">
-      <head>
-        <HeadContent />
-        <script defer data-domain="shyena.eu" src="https://plausible.io/js/script.js" />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ORGANIZATION_SCHEMA) }} />
-      </head>
-      <body>{children}<Scripts /></body>
-    </html>
-  );
+  return (<html lang="en"><head><HeadContent/><script defer data-domain="shyena.eu" src="https://plausible.io/js/script.js"/><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ORGANIZATION_SCHEMA) }}/></head><body>{children}<Scripts/></body></html>);
 }
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const location = useLocation();
   const isResourcePage = location.pathname.startsWith("/docs") || location.pathname.startsWith("/blog");
-  return (
-    <QueryClientProvider client={queryClient}>
-      <div className="flex min-h-screen flex-col">
-        <SiteHeader />
-        <main className={`${isResourcePage ? "resource-surface " : ""}site-theme flex-1`}><Outlet /><EnterpriseBridge pathname={location.pathname} /></main>
-        <SiteFooter />
-        <VideoExperience />
-      </div>
-    </QueryClientProvider>
-  );
+  return (<QueryClientProvider client={queryClient}><div className="flex min-h-screen flex-col"><SiteHeader/><main className={`${isResourcePage ? "resource-surface " : ""}site-theme flex-1`}><Outlet/><EnterpriseBridge pathname={location.pathname}/></main><SiteFooter/><VideoExperience/></div></QueryClientProvider>);
 }
