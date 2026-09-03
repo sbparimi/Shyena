@@ -39,11 +39,21 @@ function AssuranceVideo() {
 function ProductCard({ product }: { product: (typeof products)[number] }) {
   const Icon = product.icon;
   return (
-    <Link to={product.href} className="group rounded-[24px] border border-slate-200 bg-white p-7 shadow-sm transition duration-200 hover:-translate-y-1 hover:border-slate-300 hover:shadow-xl">
-      <div className="flex items-start justify-between gap-6"><div className={`flex h-11 w-11 items-center justify-center rounded-2xl ${product.accent}`}><Icon className="h-5 w-5" /></div><ArrowRight className="h-5 w-5 text-slate-300 transition group-hover:translate-x-1 group-hover:text-slate-900" /></div>
-      <div className="mt-7 text-xs font-semibold tracking-[0.2em] text-slate-400">{product.name} · {product.stage}</div>
-      <h3 className="mt-3 text-2xl font-semibold tracking-tight text-slate-950">{product.title}</h3>
-      <p className="mt-4 text-[15px] leading-7 text-slate-600">{product.description}</p>
+    <Link to={product.href} className="group relative flex min-h-[360px] flex-col overflow-hidden border-2 border-slate-200 bg-white p-7 transition-[border-color,transform,box-shadow] duration-300 ease-out hover:-translate-y-1 hover:border-[#08a995] hover:shadow-[0_20px_50px_-30px_rgba(15,23,42,0.45)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffb703] focus-visible:ring-offset-4 sm:p-8">
+      <div className="absolute inset-x-0 top-0 h-1.5 bg-[#08a995] origin-left scale-x-[0.2] transition-transform duration-500 ease-out group-hover:scale-x-100" />
+      <div className="flex items-start justify-between gap-6">
+        <div className="font-mono text-sm tracking-[0.18em] text-slate-300">{product.name === "NEXUS" ? "01" : product.name === "VERA" ? "02" : "03"}</div>
+        <div className="flex h-10 w-10 items-center justify-center border border-slate-200 bg-white text-slate-400 transition-all duration-300 group-hover:border-slate-950 group-hover:bg-slate-950 group-hover:text-white">
+          <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+        </div>
+      </div>
+      <div className="mt-16 text-xs font-bold uppercase tracking-[0.2em] text-slate-400">{product.name} · {product.stage}</div>
+      <h3 className="mt-5 max-w-md font-[Sora] text-[clamp(2rem,3vw,2.65rem)] font-semibold leading-[1.04] tracking-[-0.035em] text-slate-950">{product.title}</h3>
+      <p className="mt-5 max-w-md text-[15px] leading-7 text-slate-600">{product.description}</p>
+      <span className="mt-auto inline-flex h-12 w-fit items-center justify-center gap-3 rounded-full border border-[#ffb703] bg-[#ffb703] px-6 pt-px text-sm font-extrabold uppercase tracking-[0.01em] text-slate-950 transition-all duration-200 group-hover:bg-[#f5a900]">
+        Explore {product.name}
+        <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+      </span>
     </Link>
   );
 }
@@ -67,13 +77,13 @@ function Index() {
         <div className="pointer-events-none absolute -bottom-48 left-1/3 h-[420px] w-[420px] rounded-full bg-orange-100/50 blur-3xl" />
         <div className="relative mx-auto grid max-w-7xl gap-12 px-6 py-16 sm:py-20 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-16 lg:px-8 lg:py-24">
           <div className="flex flex-col items-start justify-center">
-  <h1 className="max-w-2xl font-[Sora] text-[clamp(3.5rem,5.5vw,5.5rem)] font-extrabold leading-[0.94] tracking-[-0.045em] text-slate-950">Agentic AI Evaluation built for enterprises.</h1>
-  <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
-    <Link to="/contact" data-shyena-button="primary" className="inline-flex h-14 items-center justify-center gap-3 rounded-full border border-[#ffb703] bg-[#ffb703] px-8 text-[15px] font-extrabold uppercase tracking-[0.01em] text-slate-950 transition-all duration-200 hover:bg-[#f5a900]">Talk to an Assurance Expert <ArrowRight className="h-5 w-5" /></Link>
-    <a href="#how-it-works" data-shyena-button="secondary" className="inline-flex h-14 items-center justify-center gap-3 rounded-full border-2 border-[#ffb703] bg-white px-8 text-[15px] font-semibold text-slate-950 transition-all duration-200 hover:bg-amber-50"><Play className="h-5 w-5" /> See how Shyena works</a>
-  </div>
-</div>
-<AssuranceVideo />
+            <h1 className="max-w-2xl font-[Sora] text-[clamp(3.5rem,5.5vw,5.5rem)] font-extrabold leading-[0.94] tracking-[-0.045em] text-slate-950">Agentic AI Evaluation built for enterprises.</h1>
+            <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
+              <Link to="/contact" data-shyena-button="primary" className="inline-flex h-14 items-center justify-center gap-3 rounded-full border border-[#ffb703] bg-[#ffb703] px-8 text-[15px] font-extrabold uppercase tracking-[0.01em] text-slate-950 transition-all duration-200 hover:bg-[#f5a900]">Talk to an Assurance Expert <ArrowRight className="h-5 w-5" /></Link>
+              <a href="#how-it-works" data-shyena-button="secondary" className="inline-flex h-14 items-center justify-center gap-3 rounded-full border-2 border-[#ffb703] bg-white px-8 text-[15px] font-semibold text-slate-950 transition-all duration-200 hover:bg-amber-50"><Play className="h-5 w-5" /> See how Shyena works</a>
+            </div>
+          </div>
+          <AssuranceVideo />
         </div>
       </section>
 
@@ -84,31 +94,13 @@ function Index() {
           <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
             <div className="max-w-5xl">
               <div className="mb-5 text-xs font-bold uppercase tracking-[0.22em] text-slate-400">One connected assurance model</div>
-              <h2 className="font-[Sora] text-[clamp(3rem,5vw,5.5rem)] font-normal leading-[1.02] tracking-[-0.045em] text-slate-950">
-                One AI agent. <span className="font-extrabold">Three assurance layers.</span>
-              </h2>
+              <h2 className="font-[Sora] text-[clamp(3rem,5vw,5.5rem)] font-normal leading-[1.02] tracking-[-0.045em] text-slate-950">One AI agent. <span className="font-extrabold">Three assurance layers.</span></h2>
             </div>
             <p className="max-w-sm text-base leading-7 text-slate-500 lg:pb-1">Understand the system. Test the behavior. Defend the release. One evidence chain from flow to decision.</p>
           </div>
 
-          <div className="mt-12 border-y border-slate-200">
-            <div className="grid md:grid-cols-3">
-              {products.map((product, index) => (
-                <Link key={product.name} to={product.href} className={`group relative flex min-h-[390px] flex-col bg-white px-1 py-9 transition-colors duration-200 hover:bg-slate-50 md:px-9 ${index > 0 ? "border-t border-slate-200 md:border-l md:border-t-0" : ""}`}>
-                  <div className="absolute left-1 top-0 h-1 w-16 bg-[#08a995] transition-all duration-300 group-hover:w-28 md:left-9" />
-                  <div className="flex items-start justify-between gap-6">
-                    <div className="font-mono text-xs tracking-[0.18em] text-slate-300">0{index + 1}</div>
-                    <ArrowRight className="h-5 w-5 text-slate-300 transition-all duration-200 group-hover:translate-x-1 group-hover:text-slate-950" />
-                  </div>
-                  <div className="mt-14 text-xs font-bold uppercase tracking-[0.2em] text-slate-400">{product.name} · {product.stage}</div>
-                  <h3 className="mt-5 max-w-md text-[1.8rem] font-semibold leading-[1.12] tracking-[-0.025em] text-slate-950">{product.title}</h3>
-                  <p className="mt-5 max-w-md text-[15px] leading-7 text-slate-600">{product.description}</p>
-                  <span className="mt-auto inline-flex w-fit items-center gap-2 pt-8 text-sm font-bold text-slate-950">
-                    Explore {product.name}<span className="transition-transform duration-200 group-hover:translate-x-1"><ArrowRight className="h-4 w-4" /></span>
-                  </span>
-                </Link>
-              ))}
-            </div>
+          <div className="mt-12 grid gap-5 md:grid-cols-3">
+            {products.map((product) => <ProductCard key={product.name} product={product} />)}
           </div>
 
           <Link to="/pricing" className="group mt-7 inline-flex items-center gap-4 border border-slate-300 bg-white px-5 py-3.5 text-base font-semibold text-slate-950 transition-all duration-200 hover:border-slate-950 hover:bg-slate-950 hover:text-white">
