@@ -1,15 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import {
-  ArrowRight,
-  BarChart3,
-  Bird,
-  CheckCircle2,
-  CircleDot,
-  Mountain,
-  ShieldCheck,
-  Sparkles,
-  Target,
-} from "lucide-react";
+import { ArrowRight, BarChart3, CheckCircle2, CircleDot, Mountain, ShieldCheck, Sparkles, Target } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/about")({
@@ -44,21 +34,21 @@ const STORY = [
   {
     number: "02",
     title: "The Build",
-    icon: Bird,
+    icon: Sparkles,
     copy:
       "We set out to build assurance that engineers could trust — across every layer of an AI system. Not another tool. A complete assurance layer.",
   },
   {
     number: "03",
     title: "The Evolution",
-    icon: Sparkles,
+    icon: CircleDot,
     copy:
-      "From that mission, Shyena was born. A name that carries vision, precision and the power to return with what matters.",
+      "From that mission, Shyena was born. A name that represents vision, precision and the power to return with what matters.",
   },
   {
     number: "04",
     title: "Today",
-    icon: CircleDot,
+    icon: CheckCircle2,
     copy:
       "Shyena has evolved into a platform with three purpose-built suites — helping teams understand, evaluate and defend AI with confidence.",
   },
@@ -122,57 +112,6 @@ function ChakraLogo() {
   );
 }
 
-function ShyenaEagleArt() {
-  return (
-    <svg
-      viewBox="0 0 560 470"
-      role="img"
-      aria-label="Shyena eagle silhouette with mountain landscape"
-      className="h-full w-full"
-      preserveAspectRatio="xMidYMid meet"
-    >
-      <defs>
-        <clipPath id="aboutEagleClip">
-          <path d="M50 250 155 155 115 130 245 62 211 34 352 22c91 2 158 35 174 84 16 46-7 80-49 88-32 6-58-7-83-27l16 45 76 154-142-48-57 59-48-65-91 63 34-91-138-49Z" />
-        </clipPath>
-        <linearGradient id="aboutSky" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#dceefa" />
-          <stop offset="0.38" stopColor="#f7d4b0" />
-          <stop offset="0.7" stopColor="#f39a4f" />
-          <stop offset="1" stopColor="#d96a31" />
-        </linearGradient>
-        <linearGradient id="aboutMountain" x1="0" y1="0" x2="0.8" y2="1">
-          <stop offset="0" stopColor="#49688c" />
-          <stop offset="0.35" stopColor="#203d61" />
-          <stop offset="1" stopColor="#071a38" />
-        </linearGradient>
-        <linearGradient id="aboutSnow" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#ffffff" />
-          <stop offset="1" stopColor="#d9e7f0" />
-        </linearGradient>
-      </defs>
-      <g clipPath="url(#aboutEagleClip)">
-        <rect width="560" height="470" fill="url(#aboutSky)" />
-        <path d="M0 390 112 252 176 305 267 152 331 251 405 132 560 320V470H0Z" fill="url(#aboutMountain)" />
-        <path d="m112 252 64 53 91-153-32 118-46 18-43-19Z" fill="url(#aboutSnow)" />
-        <path d="m267 152 64 99-34-25-29 54-28-38Z" fill="url(#aboutSnow)" />
-        <path d="m405 132 155 188-102-61-36-63-31 42-28-26Z" fill="url(#aboutSnow)" />
-        <path d="M0 407 146 342 215 366 302 325 374 363 470 330 560 394V470H0Z" fill="#071b39" opacity=".88" />
-        <path d="M70 355 168 299 222 321 283 284 340 315 431 286 520 347 560 365V470H70Z" fill="#102d50" opacity=".65" />
-      </g>
-      <path
-        d="M50 250 155 155 115 130 245 62 211 34 352 22c91 2 158 35 174 84 16 46-7 80-49 88-32 6-58-7-83-27l16 45 76 154-142-48-57 59-48-65-91 63 34-91-138-49Z"
-        fill="none"
-        stroke="#0b1833"
-        strokeWidth="4"
-        strokeLinejoin="round"
-      />
-      <path d="M435 112c17 2 31 8 42 18-16 9-32 9-47 2-7-4-9-12-8-19Z" fill="#08152d" />
-      <circle cx="447" cy="116" r="4" fill="#ffb703" />
-    </svg>
-  );
-}
-
 function StoryCard({ item }: { item: (typeof STORY)[number] }) {
   const Icon = item.icon;
   return (
@@ -195,11 +134,7 @@ function SuiteCard({ suite }: { suite: (typeof SUITES)[number] }) {
       </div>
       <h3 className="mt-3 text-base font-semibold text-slate-950">{suite.title}</h3>
       <p className="mt-2 min-h-[64px] text-[13px] leading-5 text-slate-700">{suite.copy}</p>
-      <Button
-        asChild
-        variant="outline"
-        className={`mt-4 h-9 rounded-none bg-white px-4 text-[11px] font-semibold ${suite.button}`}
-      >
+      <Button asChild variant="outline" className={`mt-4 h-9 rounded-none bg-white px-4 text-[11px] font-semibold ${suite.button}`}>
         <Link to={suite.to}>
           Explore {suite.name.charAt(0) + suite.name.slice(1).toLowerCase()}
           <ArrowRight className="h-3.5 w-3.5" />
@@ -209,29 +144,39 @@ function SuiteCard({ suite }: { suite: (typeof SUITES)[number] }) {
   );
 }
 
+function Stat({ icon: Icon, kicker, value, detail }: { icon: typeof ShieldCheck; kicker: string; value: string; detail: string }) {
+  return (
+    <div className="flex items-center gap-3 px-4 first:pl-0 last:pr-0 sm:px-7">
+      <Icon className="h-9 w-9 shrink-0 stroke-[1.7] text-slate-900" />
+      <div>
+        <p className="text-[9px] text-slate-600">{kicker}</p>
+        <p className="text-[17px] font-semibold leading-5 tracking-tight">{value}</p>
+        <p className="text-[9px] leading-4 text-slate-600">{detail}</p>
+      </div>
+    </div>
+  );
+}
+
 function AboutPage() {
   return (
     <main className="overflow-hidden bg-white text-[#0d1935]">
       <section className="bg-[#edf6ff]">
-        <div className="mx-auto max-w-[1280px] px-6 pb-12 pt-6 sm:px-10 sm:pb-16 sm:pt-8 lg:px-12 lg:pb-14">
-          <div className="mb-8 text-[11px] font-medium text-slate-500 sm:mb-10">Home <span className="px-2">/</span> About</div>
-          <div className="grid items-center gap-8 lg:grid-cols-[1.03fr_.97fr] lg:gap-4">
-            <div className="max-w-[650px]">
-              <p className="text-[11px] font-medium uppercase tracking-[0.17em] text-[#e59a00]">Our name. Our inspiration.</p>
-              <h1 className="mt-4 text-[48px] font-bold leading-[1.04] tracking-[-0.045em] sm:text-[62px] lg:text-[67px]">
-                Shyena is vision.<br />
-                Shyena is precision.<br />
-                <span className="text-[#f0a400]">Shyena returns.</span>
-              </h1>
-              <p className="mt-5 max-w-[590px] text-[16px] leading-6 text-slate-700 sm:text-[17px]">
-                Shyena represents the strength to rise higher than all, the vision to see what others miss, and the power to return with what truly matters.
-              </p>
-              <div className="mt-4 border-l-[3px] border-[#ffb703] pl-4 text-[14px] font-semibold leading-6 text-slate-800">
-                That is the spirit behind everything we build.
-              </div>
-            </div>
-            <div className="relative mx-auto w-full max-w-[570px] lg:ml-auto">
-              <ShyenaEagleArt />
+        <div className="mx-auto max-w-[1280px] px-6 pb-14 pt-6 sm:px-10 sm:pb-16 sm:pt-8 lg:px-12">
+          <div className="mb-8 text-[11px] font-medium text-slate-500 sm:mb-10">
+            Home <span className="px-2">/</span> About
+          </div>
+          <div className="mx-auto max-w-[900px]">
+            <p className="text-[11px] font-medium uppercase tracking-[0.17em] text-[#e59a00]">Our name. Our inspiration.</p>
+            <h1 className="mt-4 text-[48px] font-bold leading-[1.04] tracking-[-0.045em] sm:text-[62px] lg:text-[67px]">
+              Shyena is vision.<br />
+              Shyena is precision.<br />
+              <span className="text-[#f0a400]">Shyena returns.</span>
+            </h1>
+            <p className="mt-5 max-w-[760px] text-[16px] leading-6 text-slate-700 sm:text-[17px]">
+              Shyena represents the strength to rise higher than all, the vision to see what others miss, and the power to return with what truly matters.
+            </p>
+            <div className="mt-4 border-l-[3px] border-[#ffb703] pl-4 text-[14px] font-semibold leading-6 text-slate-800">
+              That is the spirit behind everything we build.
             </div>
           </div>
         </div>
@@ -248,9 +193,7 @@ function AboutPage() {
             {STORY.map((item, index) => (
               <div key={item.number} className="relative">
                 <StoryCard item={item} />
-                {index < STORY.length - 1 ? (
-                  <ArrowRight className="absolute -right-9 top-1/2 hidden h-5 w-5 -translate-y-1/2 text-slate-900 md:block" />
-                ) : null}
+                {index < STORY.length - 1 ? <ArrowRight className="absolute -right-9 top-1/2 hidden h-5 w-5 -translate-y-1/2 text-slate-900 md:block" /> : null}
               </div>
             ))}
           </div>
@@ -280,8 +223,8 @@ function AboutPage() {
 
       <section className="px-4 py-2 sm:px-7 sm:py-2">
         <div className="relative mx-auto max-w-[1220px] overflow-hidden rounded-[22px] bg-[#03132d] text-white">
-          <div className="absolute inset-0 opacity-45">
-            <svg viewBox="0 0 900 300" className="h-full w-full" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <div className="absolute inset-0 opacity-45" aria-hidden="true">
+            <svg viewBox="0 0 900 300" className="h-full w-full" preserveAspectRatio="xMidYMid slice">
               <path d="M280 300 465 60 520 155 575 105 710 300Z" fill="#15365b" />
               <path d="m465 60 55 95-31-24-25 43-20-31Z" fill="#6f88a2" opacity=".75" />
               <path d="M150 300 340 150 410 205 500 145 610 225 730 170 900 280V300Z" fill="#0b2748" />
@@ -294,13 +237,13 @@ function AboutPage() {
               </span>
               <h2 className="mt-4 text-[29px] font-semibold tracking-tight sm:text-[31px]">See it evaluate your own agent</h2>
               <p className="mt-2 max-w-[560px] text-[13px] leading-5 text-slate-200">
-                Bring one real scenario. We&apos;ll run it against your live conversational AI agent and walk through every judged turn with you.
+                Bring one real scenario. We'll run it against your live conversational AI agent and walk through every judged turn with you.
               </p>
               <div className="mt-5 flex flex-wrap gap-4">
                 <Button asChild className="h-9 rounded-none bg-[#ffb703] px-4 text-[11px] font-semibold text-slate-950 hover:bg-[#f0aa00]">
                   <Link to="/contact">Book a walkthrough <ArrowRight className="h-3.5 w-3.5" /></Link>
                 </Button>
-                <Button asChild variant="outline" className="h-9 rounded-none border-white/80 bg-transparent px-4 text-[11px] font-semibold text-white hover:bg-white/10">
+                <Button asChild variant="outline" className="h-9 rounded-none border-white/80 bg-transparent px-4 text-[11px] font-semibold text-white hover:bg-white/10 hover:text-white">
                   <Link to="/docs">See how it works</Link>
                 </Button>
               </div>
@@ -309,36 +252,11 @@ function AboutPage() {
               <div className="text-4xl leading-none text-[#ffb703]">“</div>
               <p className="mt-1 text-[16px] leading-6 text-white">The story is no longer about testing whether AI works. It is about proving what it did.</p>
               <p className="mt-3 text-[14px] font-semibold text-white">That is Shyena.</p>
-              <div className="mt-4 flex h-9 w-9 items-center justify-center text-[#ffb703]">
-                <Bird className="h-8 w-8" />
-              </div>
+              <div className="mt-4 text-[#ffb703]"><CheckCircle2 className="h-8 w-8" /></div>
             </div>
           </div>
         </div>
       </section>
     </main>
-  );
-}
-
-function Stat({
-  icon: Icon,
-  kicker,
-  value,
-  detail,
-}: {
-  icon: typeof ShieldCheck;
-  kicker: string;
-  value: string;
-  detail: string;
-}) {
-  return (
-    <div className="flex items-center gap-3 px-4 first:pl-0 last:pr-0 sm:px-7">
-      <Icon className="h-9 w-9 shrink-0 stroke-[1.7] text-slate-900" />
-      <div>
-        <p className="text-[9px] text-slate-600">{kicker}</p>
-        <p className="text-[17px] font-semibold leading-5 tracking-tight">{value}</p>
-        <p className="text-[9px] leading-4 text-slate-600">{detail}</p>
-      </div>
-    </div>
   );
 }
