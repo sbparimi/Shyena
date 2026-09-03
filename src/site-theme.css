@@ -36,14 +36,20 @@
 .site-theme header [data-radix-navigation-menu-trigger]::after{background:#14b8a6!important}
 .site-theme header a[href="/pricing"],.site-theme header a[href="/pricing"]:hover{background:#fff!important;background-color:#fff!important;color:#0f172a!important;border-color:transparent!important;box-shadow:none!important}
 
-/* Video experience: fullscreen uses contain rather than cover so baked-in corner text is never cropped. */
-.shyena-video-player{position:relative}
-.shyena-video-player:fullscreen{width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#080711}
-.shyena-video-player:fullscreen video{width:100%;height:100%;max-width:100vw;max-height:100vh;display:block;object-fit:contain!important;object-position:center center!important}
+/* Video experience: light enterprise shell, zero crop/stretch, and safe fullscreen rendering. */
+.shyena-video-player{position:relative;background:#eaf5fa}
+.shyena-video-player:fullscreen{width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#eaf5fa}
+.shyena-video-player:fullscreen video{width:100%;height:100%;max-width:100vw;max-height:100vh;display:block;object-fit:contain!important;object-position:center center!important;background:#eaf5fa}
 .shyena-video-player:fullscreen .shyena-video-controls-host{position:absolute;inset:0;z-index:20;pointer-events:none}
-.shyena-video-controls-host [data-music-control="true"]{background:rgba(21,18,42,.92)!important;color:rgba(255,255,255,.68)!important}
-.shyena-video-controls-host [data-music-control="true"]:hover{background:rgba(33,28,60,.96)!important;color:#fff!important}
-.shyena-video-controls-host [data-music-control="true"][data-music-active="true"]{background:rgba(139,92,246,.25)!important;color:#ddd6fe!important}
+.shyena-video-controls-host [data-music-control="true"]{background:rgba(255,255,255,.94)!important;color:#475569!important;border:1px solid #e2e8f0!important}
+.shyena-video-controls-host [data-music-control="true"]:hover{background:#fff!important;color:#0f172a!important}
+.shyena-video-controls-host [data-music-control="true"][data-music-active="true"]{background:#fff7dc!important;color:#92400e!important;border-color:#f2aa00!important}
+
+/* Force the homepage video shell out of the legacy dark treatment. The :has selectors target only the Cognigy hero video. */
+.site-theme div:has(> div > video[aria-label="Shyena Cognigy assurance workflow"]){background:#fff!important;border-color:#dbe4ea!important;box-shadow:0 30px 70px -38px rgba(15,23,42,.34)!important}
+.site-theme div:has(> div > video[aria-label="Shyena Cognigy assurance workflow"]) > div:first-child{background:#fff!important;color:#475569!important;border-color:#e2e8f0!important}
+.site-theme div:has(> video[aria-label="Shyena Cognigy assurance workflow"]){background:#eaf5fa!important}
+.site-theme video[aria-label="Shyena Cognigy assurance workflow"]{object-fit:contain!important;object-position:center center!important;display:block;width:100%;height:100%;background:#eaf5fa;filter:saturate(.88) contrast(1.02)}
 
 /* Keyboard visibility and reduced-motion support. */
 .site-theme :where(a,button,input,textarea,select):focus-visible,.reference-page-theme :where(a,button,input,textarea,select):focus-visible{outline:3px solid rgba(255,184,4,.45);outline-offset:3px}
