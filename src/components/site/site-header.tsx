@@ -9,13 +9,14 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { Logo } from "./logo";
 
 const PRODUCTS = [
-  { to: "/nexus", icon: Network, title: "Nexus", kicker: "Understand", description: "Map system logic, business rules and orchestration paths into assurance candidates." },
-  { to: "/vera", icon: Gauge, title: "Vera", kicker: "Evaluate", description: "Execute real conversations and evaluate quality, state, orchestration and integrity." },
-  { to: "/chakra", icon: ShieldAlert, title: "Chakra", kicker: "Defend", description: "Run adversarial assurance, verify impact and gate security risk before release." },
+  { to: "/nexus", icon: Network, title: "Nexus", description: "Map system logic, business rules and orchestration paths into assurance candidates." },
+  { to: "/vera", icon: Gauge, title: "Vera", description: "Execute real conversations and evaluate quality, state, orchestration and integrity." },
+  { to: "/chakra", icon: ShieldAlert, title: "Chakra", description: "Run adversarial assurance, verify impact and gate security risk before release." },
 ] as const;
 
 const ASSURANCE = [
@@ -52,7 +53,6 @@ type MenuItem = {
   icon: typeof Gauge;
   title: string;
   description: string;
-  kicker?: string;
 };
 
 function MenuGroup({ items }: { items: readonly MenuItem[] }) {
@@ -71,8 +71,7 @@ function MenuGroup({ items }: { items: readonly MenuItem[] }) {
                   <Icon className="h-4 w-4" />
                 </span>
                 <span className="min-w-0">
-                  {item.kicker && <span className="block text-[10px] font-semibold uppercase tracking-[0.16em] text-violet-600">{item.kicker}</span>}
-                  <span className="mt-0.5 block text-sm font-semibold text-slate-950">{item.title}</span>
+                  <span className="block text-sm font-semibold text-slate-950">{item.title}</span>
                   <span className="mt-1.5 block text-xs leading-relaxed text-slate-600">{item.description}</span>
                 </span>
                 <ArrowRight className="ml-auto mt-1 h-4 w-4 shrink-0 text-slate-400 opacity-0 transition-all duration-200 group-hover:translate-x-1 group-hover:text-slate-950 group-hover:opacity-100" />
@@ -88,7 +87,7 @@ function MenuGroup({ items }: { items: readonly MenuItem[] }) {
 
 const desktopTriggerClass = "relative h-12 rounded-none border-0 !bg-white px-4 text-[14px] font-bold uppercase tracking-[0.06em] text-slate-800 transition-all duration-200 !hover:border-0 !hover:bg-white hover:text-slate-950 focus:border-0 !focus:bg-white data-[state=open]:border-0 data-[state=open]:!bg-white data-[state=open]:text-slate-950 after:absolute after:inset-x-3 after:bottom-0 after:h-[3px] after:origin-left after:scale-x-0 after:bg-[#14b8a6] after:transition-transform after:duration-300 hover:after:scale-x-100 data-[state=open]:after:scale-x-100";
 
-const desktopLinkClass = "relative h-12 rounded-none border-0 !bg-white px-4 text-[14px] font-bold uppercase tracking-[0.06em] text-slate-800 transition-all duration-200 !hover:border-0 !hover:bg-white hover:text-slate-950 focus:border-0 !focus:bg-white data-[state=active]:!bg-white after:absolute after:inset-x-3 after:bottom-0 after:h-[3px] after:origin-left after:scale-x-0 after:bg-[#14b8a6] after:transition-transform after:duration-300 hover:after:scale-x-100";
+const desktopLinkClass = `${navigationMenuTriggerStyle()} relative h-12 rounded-none border-0 bg-transparent px-4 text-[14px] font-bold uppercase tracking-[0.06em] text-slate-800 transition-all duration-200 !hover:border-0 !hover:bg-white hover:text-slate-950 focus:border-0 !focus:bg-white after:absolute after:inset-x-3 after:bottom-0 after:h-[3px] after:origin-left after:scale-x-0 after:bg-[#14b8a6] after:transition-transform after:duration-300 hover:after:scale-x-100`;
 
 export function SiteHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
