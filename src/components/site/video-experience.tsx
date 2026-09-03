@@ -120,18 +120,26 @@ export function VideoExperience() {
   const progress = duration > 0 ? Math.min(100, Math.max(0, (currentTime / duration) * 100)) : 0;
   const storyIndex = duration > 0 ? Math.min(STORY.length - 1, Math.floor((currentTime / duration) * STORY.length)) : 0;
   const story = STORY[storyIndex];
+  const storyPath = storyIndex === 0 ? "/nexus" : storyIndex === 1 ? "/vera" : storyIndex === 2 ? "/chakra" : "/docs";
 
   return createPortal(
     <div className="pointer-events-none absolute inset-0 z-20" onMouseDown={(event) => event.stopPropagation()} onClick={(event) => event.stopPropagation()}>
-      <div className="absolute left-4 top-4 max-w-[min(360px,calc(100%-2rem))] sm:left-5 sm:top-5">
-        <div className="pointer-events-auto rounded-2xl border border-white/10 bg-[#090713]/92 p-4 text-white shadow-[0_18px_45px_-25px_rgba(0,0,0,.7)] backdrop-blur-xl sm:p-5">
-          <div className="flex items-center gap-2 text-[9px] font-bold uppercase tracking-[0.18em] text-white/45"><span className="h-2 w-2 rounded-full bg-[#14b8a6]" /> Live assurance walkthrough</div>
+      <div className="absolute bottom-[6.75rem] right-4 max-w-[min(390px,calc(100%-2rem))] sm:bottom-[7.5rem] sm:right-5">
+        <div className="pointer-events-auto rounded-2xl border border-white/10 bg-[#090713]/95 p-4 text-white shadow-[0_18px_45px_-25px_rgba(0,0,0,.7)] backdrop-blur-xl sm:p-5">
+          <div className="inline-flex items-center rounded-full border border-[#ffb804]/45 bg-[#ffb804]/12 px-2.5 py-1 text-[9px] font-extrabold uppercase tracking-[0.12em] text-[#ffcf4d]">
+            Pilot customer offer
+          </div>
+          <div className="mt-3 flex items-center gap-2 text-[9px] font-bold uppercase tracking-[0.18em] text-white/45"><span className="h-2 w-2 rounded-full bg-[#14b8a6]" /> Live assurance walkthrough</div>
           <div className="mt-2 text-[11px] font-bold uppercase tracking-[0.12em] text-violet-300">{story.label}</div>
           <div className="mt-1 text-lg font-semibold tracking-tight text-white">{story.title}</div>
           <p className="mt-1.5 text-xs leading-5 text-white/55">{story.text}</p>
+          <div className="mt-3 border-l-2 border-[#ffb804] pl-3">
+            <div className="text-sm font-extrabold uppercase tracking-[0.04em] text-[#ffcf4d]">Free official onboarding + training</div>
+            <div className="mt-1 text-[11px] leading-4 text-white/55">One full week of official onboarding and training — exclusively for customers who complete a Shyena Pilot.</div>
+          </div>
           <div className="mt-4 flex flex-wrap gap-2">
             <Link to="/contact" className="pointer-events-auto inline-flex h-9 items-center gap-1.5 rounded-full bg-[#ffb804] px-3.5 text-[10px] font-extrabold uppercase tracking-[0.04em] text-slate-950 transition hover:bg-[#f2aa00]">Request a review <ArrowRight className="h-3.5 w-3.5" /></Link>
-            <Link to={storyIndex === 0 ? "/nexus" : storyIndex === 1 ? "/vera" : storyIndex === 2 ? "/chakra" : "/docs"} className="pointer-events-auto inline-flex h-9 items-center gap-1.5 rounded-full border border-white/20 bg-white/5 px-3.5 text-[10px] font-bold uppercase tracking-[0.04em] text-white transition hover:border-white/40 hover:bg-white/10">Explore <ArrowRight className="h-3.5 w-3.5" /></Link>
+            <Link to={storyPath} className="pointer-events-auto inline-flex h-9 items-center gap-1.5 rounded-full border border-white/20 bg-white/5 px-3.5 text-[10px] font-bold uppercase tracking-[0.04em] text-white transition hover:border-white/40 hover:bg-white/10">Explore <ArrowRight className="h-3.5 w-3.5" /></Link>
           </div>
         </div>
       </div>
