@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, type FormEvent } from "react";
 import { ArrowRight, CheckCircle2, Clock, Mail, MessageSquare, ShieldCheck, Target } from "lucide-react";
+import { useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -29,8 +29,8 @@ const NEXT_STEPS = [
   { icon: ShieldCheck, title: "Define the pilot", description: "We agree the smallest useful scope for your team and release workflow." },
 ];
 
-const FIELD_CLASS = "h-12 rounded-xl border-slate-300 bg-white text-slate-950 shadow-none placeholder:text-slate-400 focus-visible:ring-violet-500";
-const SELECT_CLASS = "h-12 rounded-xl border-slate-300 bg-white text-slate-950 shadow-none focus:ring-violet-500";
+const FIELD_CLASS = "h-12 rounded-xl border-slate-300 bg-white text-slate-950 shadow-none placeholder:text-slate-400 focus-visible:ring-[#f6b800]";
+const SELECT_CLASS = "h-12 rounded-xl border-slate-300 bg-white text-slate-950 shadow-none focus:ring-[#f6b800]";
 const LABEL_CLASS = "text-sm font-semibold text-slate-700";
 
 function ContactPage() {
@@ -78,7 +78,7 @@ function ContactPage() {
             <h2 className="mt-4 text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">Bring a real assurance problem.</h2>
             <p className="mt-5 text-base leading-7 text-slate-600">A good first conversation starts with a real agent, journey or release concern. We can then show where Nexus, Vera and Chakra fit into the assurance workflow.</p>
             <div className="mt-8 space-y-4">
-              <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5"><div className="flex items-center gap-3"><Mail className="h-4 w-4 text-violet-600" /><span className="font-semibold text-slate-950">Direct contact</span></div><p className="mt-2 text-sm leading-6 text-slate-500">Prefer email? Reach the Shyena team directly.</p><a className="mt-3 inline-block text-sm font-semibold text-violet-700 hover:text-violet-900" href="mailto:contact@shyena.eu">contact@shyena.eu</a></div>
+              <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5"><div className="flex items-center gap-3"><Mail className="h-4 w-4 text-[#f6b800]" /><span className="font-semibold text-slate-950">Direct contact</span></div><p className="mt-2 text-sm leading-6 text-slate-500">Prefer email? Reach the Shyena team directly.</p><a className="mt-3 inline-block text-sm font-semibold text-slate-950 hover:text-slate-700" href="mailto:contact@shyena.eu">contact@shyena.eu</a></div>
               <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5"><div className="flex items-center gap-3"><Clock className="h-4 w-4 text-orange-600" /><span className="font-semibold text-slate-950">What to expect</span></div><p className="mt-2 text-sm leading-6 text-slate-500">We review the request, respond within one business day, and use the first session to focus on your actual assurance gap.</p></div>
             </div>
           </aside>
@@ -94,7 +94,7 @@ function ContactPage() {
                 <div className="grid gap-5 sm:grid-cols-2"><div className="space-y-2"><Label htmlFor="email" className={LABEL_CLASS}>Work email</Label><Input id="email" name="email" type="email" required placeholder="jane@company.com" className={FIELD_CLASS} /></div><div className="space-y-2"><Label htmlFor="phone" className={LABEL_CLASS}>Phone <span className="font-normal text-slate-400">(optional)</span></Label><Input id="phone" name="phone" placeholder="+31 ..." className={FIELD_CLASS} /></div></div>
                 <div className="grid gap-5 sm:grid-cols-2"><div className="space-y-2"><Label htmlFor="jobTitle" className={LABEL_CLASS}>Job title</Label><Input id="jobTitle" name="jobTitle" placeholder="Engineering / QA / Product" className={FIELD_CLASS} /></div><div className="space-y-2"><Label htmlFor="companySize" className={LABEL_CLASS}>Company size</Label><Select name="companySize"><SelectTrigger id="companySize" className={SELECT_CLASS}><SelectValue placeholder="Select size" /></SelectTrigger><SelectContent><SelectItem value="1-50">1–50</SelectItem><SelectItem value="51-200">51–200</SelectItem><SelectItem value="201-1000">201–1,000</SelectItem><SelectItem value="1000+">1,000+</SelectItem></SelectContent></Select></div></div>
                 <div className="space-y-2"><Label htmlFor="country" className={LABEL_CLASS}>Country</Label><Input id="country" name="country" placeholder="Country of residence" className={FIELD_CLASS} /></div>
-                <div className="space-y-2"><Label htmlFor="message" className={LABEL_CLASS}>Message</Label><Textarea id="message" name="message" required rows={6} placeholder="Tell us about your agent, journey or release risk." className="min-h-36 rounded-xl border-slate-300 bg-white text-slate-950 shadow-none placeholder:text-slate-400 focus-visible:ring-violet-500" /></div>
+                <div className="space-y-2"><Label htmlFor="message" className={LABEL_CLASS}>Message</Label><Textarea id="message" name="message" required rows={6} placeholder="Tell us about your agent, journey or release risk." className="min-h-36 rounded-xl border-slate-300 bg-white text-slate-950 shadow-none placeholder:text-slate-400 focus-visible:ring-[#f6b800]" /></div>
                 {status === "error" && <p className="text-sm font-medium text-red-600" role="alert">Something went wrong sending that. Try again, or email contact@shyena.eu.</p>}
                 <div className="border-t border-slate-200 pt-5"><p className="text-xs leading-5 text-slate-500">By submitting this form, you agree that Shyena may use the information provided to respond to your enquiry. We only use the details needed to handle your request.</p></div>
                 <Button type="submit" size="lg" className="h-12 w-full rounded-full bg-[#f6b800] font-extrabold text-slate-950 shadow-none hover:bg-[#e9aa00]" disabled={status === "submitting"}>{status === "submitting" ? "Sending…" : "Submit"}<ArrowRight className="ml-2 h-4 w-4" /></Button>
@@ -104,13 +104,13 @@ function ContactPage() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden border-y border-slate-200 bg-[#edf6ff] text-slate-950">
+      <section className="relative overflow-hidden border-y border-[#f6b800]/45 bg-[#edf6ff] text-slate-950">
         <div className="pointer-events-none absolute -right-24 -top-32 h-[360px] w-[360px] rounded-full bg-violet-200/35 blur-3xl" aria-hidden="true" />
         <div className="pointer-events-none absolute -bottom-36 left-1/3 h-[300px] w-[300px] rounded-full bg-orange-100/50 blur-3xl" aria-hidden="true" />
         <div className="relative mx-auto max-w-7xl px-6 py-20 sm:px-8 sm:py-24">
-          <div className="max-w-3xl"><p className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-violet-700">What happens next</p><h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">A focused path from conversation to evidence.</h2></div>
+          <div className="max-w-3xl"><p className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[#f6b800]">What happens next</p><h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">A focused path from conversation to evidence.</h2></div>
           <div className="mt-10 grid gap-5 md:grid-cols-3">
-            {NEXT_STEPS.map((step, index) => { const Icon = step.icon; return <article key={step.title} className="border border-slate-200 bg-white p-6 shadow-[0_18px_45px_-32px_rgba(15,23,42,0.35)]"><div className="flex items-center gap-3"><span className="font-mono text-xs tracking-[0.15em] text-slate-400">0{index + 1}</span><span className="flex h-9 w-9 items-center justify-center border border-violet-200 bg-violet-50 text-violet-600"><Icon className="h-4 w-4" /></span></div><h3 className="mt-5 text-base font-semibold text-slate-950">{step.title}</h3><p className="mt-2 text-sm leading-6 text-slate-600">{step.description}</p></article>; })}
+            {NEXT_STEPS.map((step, index) => { const Icon = step.icon; return <article key={step.title} className="group border border-[#f6b800]/35 bg-white p-6 shadow-[0_18px_45px_-32px_rgba(15,23,42,0.35)] transition-all duration-200 hover:-translate-y-1 hover:border-[#f6b800] hover:shadow-[0_22px_50px_-30px_rgba(15,23,42,0.3)]"><div className="flex items-center gap-3"><span className="font-mono text-xs tracking-[0.15em] text-slate-400">0{index + 1}</span><span className="flex h-11 w-11 items-center justify-center rounded-full border border-[#f6b800]/45 bg-[#f6b800]/10 text-[#f6b800] transition-colors duration-200 group-hover:bg-[#f6b800] group-hover:text-slate-950"><Icon className="h-5 w-5" /></span></div><h3 className="mt-5 text-base font-semibold text-slate-950">{step.title}</h3><div className="mt-3 h-0.5 w-8 bg-[#f6b800] transition-all duration-200 group-hover:w-12" /><p className="mt-4 text-sm leading-6 text-slate-600">{step.description}</p><span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-slate-950">Explore <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" /></span></article>; })}
           </div>
         </div>
       </section>
