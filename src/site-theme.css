@@ -30,6 +30,74 @@
 .site-theme [data-shyena-button="destructive"]{background:#dc2626!important;border-color:#dc2626!important;color:#fff!important}
 .site-theme [data-shyena-button="ghost"],.site-theme [data-shyena-button="link"]{box-shadow:none!important}
 
+/* Homepage hero VQA: the previous max-width container left large unused side gutters on wide screens. Turn those gutters into intentional assurance rails. */
+@media (min-width:1280px){
+  .site-theme main > section:first-child > .mx-auto.grid{
+    width:calc(100% - 48px)!important;
+    max-width:1600px!important;
+    grid-template-columns:minmax(150px,.42fr) minmax(390px,1fr) minmax(520px,1.35fr) minmax(150px,.42fr)!important;
+    gap:0!important;
+    align-items:stretch!important;
+    min-height:500px!important;
+  }
+  .site-theme main > section:first-child > .mx-auto.grid::before{
+    content:"ASSURANCE PLATFORM\\A\\A01  UNDERSTAND\\A  Map the system\\A\\A02  EVALUATE\\A  Test the behavior\\A\\A03  DEFEND\\A  Protect the release";
+    white-space:pre-wrap;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:32px 28px 32px 0;
+    border-right:1px solid rgba(15,23,42,.12);
+    color:#64748b;
+    font:700 10px/1.8 ui-monospace,SFMono-Regular,Menlo,monospace;
+    letter-spacing:.14em;
+  }
+  .site-theme main > section:first-child > .mx-auto.grid::after{
+    content:"EVIDENCE CHAIN\\A\\A FLOW\\A  System understood\\A\\A JOURNEY\\A  Behavior exercised\\A\\A VERDICT\\A  Release decision";
+    white-space:pre-wrap;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:32px 0 32px 28px;
+    border-left:1px solid rgba(15,23,42,.12);
+    color:#64748b;
+    font:700 10px/1.8 ui-monospace,SFMono-Regular,Menlo,monospace;
+    letter-spacing:.14em;
+  }
+  .site-theme main > section:first-child > .mx-auto.grid > :nth-child(2){
+    grid-column:2;
+    padding-right:48px;
+  }
+  .site-theme main > section:first-child > .mx-auto.grid > :nth-child(3){
+    grid-column:3;
+    width:100%;
+    align-self:center;
+  }
+  .site-theme main > section:first-child > .mx-auto.grid > :nth-child(3) > .relative{
+    width:100%;
+  }
+  .site-theme main > section:first-child > .mx-auto.grid > :nth-child(3) > .relative > .relative{
+    border-radius:24px;
+  }
+  .site-theme main > section:first-child h1{
+    max-width:720px!important;
+    font-size:clamp(4.1rem,5.1vw,6.2rem)!important;
+  }
+}
+
+@media (min-width:1280px) and (max-width:1500px){
+  .site-theme main > section:first-child > .mx-auto.grid{
+    grid-template-columns:minmax(125px,.34fr) minmax(340px,1fr) minmax(450px,1.25fr) minmax(125px,.34fr)!important;
+  }
+  .site-theme main > section:first-child > .mx-auto.grid > :nth-child(2){padding-right:32px}
+  .site-theme main > section:first-child > .mx-auto.grid::before{padding-right:20px}
+  .site-theme main > section:first-child > .mx-auto.grid::after{padding-left:20px}
+}
+
+@media(max-width:1279px){
+  .site-theme main > section:first-child > .mx-auto.grid{max-width:1280px!important}
+}
+
 /* Keyboard visibility and reduced-motion support. */
 .site-theme :where(a,button,input,textarea,select):focus-visible,.reference-page-theme :where(a,button,input,textarea,select):focus-visible{outline:3px solid rgba(255,184,4,.45);outline-offset:3px}
 @media (prefers-reduced-motion:reduce){.site-theme *, .reference-page-theme *{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
