@@ -35,9 +35,12 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 
 const ORGANIZATION_SCHEMA = { "@context": "https://schema.org", "@type": "SoftwareApplication", name: "Shyena", applicationCategory: "BusinessApplication", operatingSystem: "Web", description: "Shyena is an enterprise AI agent assurance platform that helps teams understand AI systems, test real behavior, defend security boundaries and produce evidence-backed release decisions.", url: "https://shyena.eu/", keywords: "AI agent assurance, AI evaluation, AI testing, AI QA automation, enterprise AI testing, LLM evaluation, conversational AI testing, Cognigy testing, AI security testing, AI release assurance" };
 
+type InlineMount = { node: HTMLDivElement; concept: ArticleConcept; label: string };
+
 function ArticleVisualInjector() {
   const location = useLocation();
   const [mountNode, setMountNode] = useState<HTMLDivElement | null>(null);
+  const [inlineMounts, setInlineMounts] = useState<InlineMount[]>([]);
   const slug = location.pathname.startsWith("/blog/") ? location.pathname.split("/").filter(Boolean).at(-1) : undefined;
   const generated = slug ? generatedContent.articles.find((article) => article.slug === slug) : undefined;
   const visual = slug ? MANUAL_ARTICLE_VISUALS[slug] : undefined;
@@ -45,7 +48,7 @@ function ArticleVisualInjector() {
   const thesis = generated?.thesis || visual?.thesis || "Reliable AI agent assurance tests the system around the model, not generated text in isolation.";
 
   useEffect(() => {
-    if (!location.pathname.startsWith("/blog/")) { setMountNode(null); return; }
+    if (!location.pathname.startsWith("/blog/")) { setMountNode(null); setInlineMounts([]); return; }
     const main = document.querySelector("main");
     if (!main) return;
 
@@ -60,32 +63,43 @@ function ArticleVisualInjector() {
 
       if (!generated) return;
       const specs = GENERATED_INLINE_VISUALS[generated.slug] || [];
-      specs.forEach((spec, index) => {
-        const headings = Array.from(main.querySelectorAll("h2"));
-        const target = headings.find((h) => h.textContent?.toLowerCase().includes(spec.match.toLowerCase()));
-        if (!target) return;
-        const existing = main.querySelector(`[data-shyena-inline-visual="${index}"]`);
-        if (existing) return;
-        const node = document.createElement("div");
-        node.dataset.shyenaInlineVisual = String(index);
-        node.className = "shyena-inline-visual my-8 w-full";
-        const paragraph = target.nextElementSibling;
-        (paragraph || target).insertAdjacentElement("afterend", node);
-        const portal = createPortal(<div><ArticleConceptDiagram concept={spec.concept} /><p className="mt-3 text-center text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">{spec.label}</p></div>, node);
-        node.dataset.portalIndex = String(index);
-        (window as unknown as { __shyenaArticlePortals?: Map<Element, ReactNode> }).__shyenaArticlePortals ??= new Map();
-        (window as unknown as { __shyenaArticlePortals: Map<Element, ReactNode> }).__shyenaArticlePortals.set(node, portal);
+      setInlineMounts((current) => {
+        const next = [...current];
+        specs.forEach((spec, index) => {
+          const existing = main.querySelector(`[data-shyena-inline-visual="${index}"]`) as HTMLDivElement | null;
+          if (existing) {
+            if (!next.some((item) => item.node === existing)) next.push({ node: existing, concept: spec.concept, label: spec.label });
+            return;
+          }
+          const headings = Array.from(main.querySelectorAll("h2"));
+          const target = headings.find((h) => h.textContent?.toLowerCase().includes(spec.match.toLowerCase()));
+          if (!target) return;
+          const node = document.createElement("div");
+          node.dataset.shyenaInlineVisual = String(index);
+          node.className = "shyena-inline-visual my-8 w-full";
+          const paragraph = target.nextElementSibling;
+          (paragraph || target).insertAdjacentElement("afterend", node);
+          next.push({ node, concept: spec.concept, label: spec.label });
+        });
+        return next;
       });
     };
 
     inject();
     const observer = new MutationObserver(inject);
     observer.observe(main, { childList: true, subtree: true });
-    return () => { observer.disconnect(); document.querySelectorAll(".shyena-article-visual, .shyena-inline-visual").forEach((node) => node.remove()); setMountNode(null); };
+    return () => {
+      observer.disconnect();
+      main.querySelectorAll(".shyena-article-visual, .shyena-inline-visual").forEach((node) => node.remove());
+      setMountNode(null);
+      setInlineMounts([]);
+    };
   }, [location.pathname, generated]);
 
-  if (!mountNode) return null;
-  return createPortal(<div><ArticleConceptDiagram concept={concept} /><p className="mx-auto mt-8 max-w-3xl text-center text-base font-medium leading-relaxed text-foreground sm:text-lg">{thesis}</p></div>, mountNode);
+  return <>
+    {mountNode && createPortal(<div><ArticleConceptDiagram concept={concept} /><p className="mx-auto mt-8 max-w-3xl text-center text-base font-medium leading-relaxed text-foreground sm:text-lg">{thesis}</p></div>, mountNode)}
+    {inlineMounts.map((item) => createPortal(<div><ArticleConceptDiagram concept={item.concept} /><p className="mt-3 text-center text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">{item.label}</p></div>, item.node))}
+  </>;
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
@@ -101,5 +115,4 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 });
 
 function RootShell({ children }: { children: ReactNode }) { return <html lang="en"><head><HeadContent /><script defer data-domain="shyena.eu" src="https://plausible.io/js/script.js" /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ORGANIZATION_SCHEMA) }} /></head><body>{children}<Scripts /></body></html>; }
-
 function RootComponent() { const { queryClient } = Route.useRouteContext(); const location = useLocation(); const isResourcePage = location.pathname.startsWith("/docs") || location.pathname.startsWith("/blog"); return <QueryClientProvider client={queryClient}><div className="flex min-h-screen flex-col"><SiteHeader /><main className={`${isResourcePage ? "resource-surface " : ""}site-theme flex-1`}><ArticleVisualInjector /><Outlet /></main><SiteFooter /><VideoExperience /></div></QueryClientProvider>; }
