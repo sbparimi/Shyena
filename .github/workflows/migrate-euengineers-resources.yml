@@ -1,0 +1,42 @@
+name: Migrate EU Engineers Resources
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - '.github/workflows/migrate-euengineers-resources.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    if: ${{ !contains(github.event.head_commit.message, '[skip euengineers migration]') || github.event_name == 'workflow_dispatch' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install scraper dependency
+        run: npm install --no-save cheerio@1.1.2
+
+      - name: Scrape EU Engineers resources
+        run: node scripts/migrate-euengineers-resources.mjs
+
+      - name: Build and validate
+        run: npm run build
+
+      - name: Commit migration
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add src/data/euengineers-resources.ts src/routes/docs.index.tsx src/routes/docs.resource.\$slug.tsx
+          git diff --cached --quiet && echo 'No migration changes detected.' && exit 0
+          git commit -m 'Import EU Engineers resources into Shyena docs [skip euengineers migration]'
+          git push
