@@ -44,6 +44,7 @@ function DocsOverview() {
     if (!normalizedQuery) return EUENGINEERS_RESOURCES;
     return EUENGINEERS_RESOURCES.filter((article) => `${article.title} ${article.description}`.toLowerCase().includes(normalizedQuery));
   }, [normalizedQuery]);
+  const showTokenomics = !normalizedQuery || "ai assurance tokenomics cost trust agentic ai economics assurance".includes(normalizedQuery);
 
   return <div className="bg-white text-slate-950">
     <section className="border-b border-slate-300 bg-[#eaf5fa]">
@@ -86,9 +87,7 @@ function DocsOverview() {
                 <Link key={id} to={to} className="group block border-b border-slate-300 sm:odd:border-r sm:odd:pr-7 sm:even:pl-7">
                   <article className="flex min-h-64 flex-col py-8 transition-colors group-hover:bg-[#fffdf4] sm:px-2">
                     <div className="flex items-start justify-between gap-6">
-                      <span className="flex h-10 w-10 items-center justify-center border border-slate-300 bg-white text-[#a87900] group-hover:border-[#ffb703] group-hover:bg-[#fff4cc]">
-                        <Icon className="h-5 w-5" />
-                      </span>
+                      <span className="flex h-10 w-10 items-center justify-center border border-slate-300 bg-white text-[#a87900] group-hover:border-[#ffb703] group-hover:bg-[#fff4cc]"><Icon className="h-5 w-5" /></span>
                       <span className="font-mono text-[10px] tracking-[0.12em] text-slate-400">0{index + 1}</span>
                     </div>
                     <h3 className="mt-6 text-xl font-bold tracking-tight text-[#0e172b]">{title}</h3>
@@ -99,52 +98,30 @@ function DocsOverview() {
               ))}
             </div>
           ) : (
-            <div className="border-b border-slate-300 px-2 py-12">
-              <h3 className="text-lg font-semibold text-[#0e172b]">No matching documentation</h3>
-              <p className="mt-2 text-sm text-slate-600">Try evaluation, testing, reporting, security, environments or integrations.</p>
-            </div>
+            <div className="border-b border-slate-300 px-2 py-12"><h3 className="text-lg font-semibold text-[#0e172b]">No matching documentation</h3><p className="mt-2 text-sm text-slate-600">Try evaluation, testing, reporting, security, environments or integrations.</p></div>
           )}
+
+          {showTokenomics && <section className="mt-16 border-t-2 border-slate-950 pt-10">
+            <div className="border border-slate-300 bg-[#f7f4ec] p-6 sm:p-8">
+              <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+                <div className="max-w-3xl"><p className="font-mono text-xs uppercase tracking-[0.18em] text-[#a87900]">Featured assurance article</p><h2 className="mt-3 text-3xl font-bold tracking-tight text-[#0e172b] sm:text-4xl">AI Assurance Tokenomics</h2><p className="mt-4 text-base leading-7 text-slate-600">Measuring the cost of trust in agentic AI — connecting inference, behaviour, evidence, economics and business outcomes.</p></div>
+                <Link to="/docs/ai-assurance-tokenomics" className="inline-flex shrink-0 items-center justify-center gap-2 bg-[#0e172b] px-5 py-3 text-sm font-semibold text-white hover:bg-slate-800">Read the article <ArrowRight className="h-4 w-4" /></Link>
+              </div>
+              <div className="mt-7 flex flex-wrap gap-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-slate-500"><span className="border border-slate-300 bg-white px-3 py-2">Quality</span><span className="border border-slate-300 bg-white px-3 py-2">Safety</span><span className="border border-slate-300 bg-white px-3 py-2">Security</span><span className="border border-slate-300 bg-white px-3 py-2">Reliability</span><span className="border border-slate-300 bg-white px-3 py-2">Economics</span></div>
+            </div>
+          </section>}
 
           {EUENGINEERS_RESOURCES.length > 0 && (
             <section className="mt-16 border-t-2 border-slate-950 pt-10">
               <div className="flex flex-col gap-3 border-b border-slate-300 pb-6 sm:flex-row sm:items-end sm:justify-between">
-                <div>
-                  <p className="font-mono text-xs uppercase tracking-[0.18em] text-[#a87900]">Engineering library</p>
-                  <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#0e172b] sm:text-4xl">Insights & resources</h2>
-                  <p className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-600">Practical engineering articles migrated from the European Engineers resource library and presented as part of the Shyena documentation system.</p>
-                </div>
+                <div><p className="font-mono text-xs uppercase tracking-[0.18em] text-[#a87900]">Engineering library</p><h2 className="mt-3 text-3xl font-bold tracking-tight text-[#0e172b] sm:text-4xl">Insights & resources</h2><p className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-600">Practical engineering articles migrated from the European Engineers resource library and presented as part of the Shyena documentation system.</p></div>
                 <span className="font-mono text-xs uppercase tracking-[0.12em] text-slate-500">{filteredResources.length} articles</span>
               </div>
-              {filteredResources.length > 0 && (
-                <div className="grid sm:grid-cols-2">
-                  {filteredResources.map((article, index) => (
-                    <Link key={article.slug} to="/docs/resource/$slug" params={{ slug: article.slug }} className="group block border-b border-slate-300 sm:odd:border-r sm:odd:pr-7 sm:even:pl-7">
-                      <article className="flex min-h-64 flex-col py-8 transition-colors group-hover:bg-[#fffdf4] sm:px-2">
-                        <div className="flex items-start justify-between gap-6">
-                          <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-[#a87900]">Resource</span>
-                          <span className="font-mono text-[10px] tracking-[0.12em] text-slate-400">{String(index + 1).padStart(2, "0")}</span>
-                        </div>
-                        <h3 className="mt-5 text-xl font-bold tracking-tight text-[#0e172b] group-hover:text-[#a87900]">{article.title}</h3>
-                        <p className="mt-3 text-sm leading-relaxed text-slate-600">{article.description}</p>
-                        <span className="mt-auto inline-flex items-center gap-2 pt-7 text-sm font-semibold text-[#0e172b]">Read article <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" /></span>
-                      </article>
-                    </Link>
-                  ))}
-                </div>
-              )}
+              {filteredResources.length > 0 && <div className="grid sm:grid-cols-2">{filteredResources.map((article, index) => <Link key={article.slug} to="/docs/resource/$slug" params={{ slug: article.slug }} className="group block border-b border-slate-300 sm:odd:border-r sm:odd:pr-7 sm:even:pl-7"><article className="flex min-h-64 flex-col py-8 transition-colors group-hover:bg-[#fffdf4] sm:px-2"><div className="flex items-start justify-between gap-6"><span className="font-mono text-[10px] uppercase tracking-[0.12em] text-[#a87900]">Resource</span><span className="font-mono text-[10px] tracking-[0.12em] text-slate-400">{String(index + 1).padStart(2, "0")}</span></div><h3 className="mt-5 text-xl font-bold tracking-tight text-[#0e172b] group-hover:text-[#a87900]">{article.title}</h3><p className="mt-3 text-sm leading-relaxed text-slate-600">{article.description}</p><span className="mt-auto inline-flex items-center gap-2 pt-7 text-sm font-semibold text-[#0e172b]">Read article <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" /></span></article></Link>)}</div>}
             </section>
           )}
 
-          <div className="mt-12 border-y-2 border-slate-950 bg-[#f5f8fc] px-6 py-8 sm:px-8 sm:py-10">
-            <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
-              <div className="max-w-2xl">
-                <p className="font-mono text-xs uppercase tracking-[0.18em] text-[#a87900]">Content engineering</p>
-                <h3 className="mt-3 text-xl font-bold text-[#0e172b] sm:text-2xl">Documentation is part of the assurance system.</h3>
-                <p className="mt-2 text-slate-600">SAGE can research, draft, review, validate and publish technical knowledge through the same content-as-code path used for engineering changes.</p>
-              </div>
-              <Button asChild className="bg-[#ffb703] text-slate-950 hover:bg-[#e5a500]"><Link to="/docs/sage-content-engineering">View SAGE architecture <ArrowRight className="h-4 w-4" /></Link></Button>
-            </div>
-          </div>
+          <div className="mt-12 border-y-2 border-slate-950 bg-[#f5f8fc] px-6 py-8 sm:px-8 sm:py-10"><div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end"><div className="max-w-2xl"><p className="font-mono text-xs uppercase tracking-[0.18em] text-[#a87900]">Content engineering</p><h3 className="mt-3 text-xl font-bold text-[#0e172b] sm:text-2xl">Documentation is part of the assurance system.</h3><p className="mt-2 text-slate-600">SAGE can research, draft, review, validate and publish technical knowledge through the same content-as-code path used for engineering changes.</p></div><Button asChild className="bg-[#ffb703] text-slate-950 hover:bg-[#e5a500]"><Link to="/docs/sage-content-engineering">View SAGE architecture <ArrowRight className="h-4 w-4" /></Link></Button></div></div>
         </div>
       </div>
     </section>
