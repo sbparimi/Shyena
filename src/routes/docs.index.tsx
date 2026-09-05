@@ -4,6 +4,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { CtaBand } from "@/components/site/cta-band";
 import { DocsSidebar } from "@/components/docs/docs-sidebar";
+import { LatestArticles } from "@/components/docs/latest-articles";
 import { DocConceptVisual } from "@/components/docs/doc-concept-visual";
 import { EUENGINEERS_RESOURCES } from "@/data/euengineers-resources";
 
@@ -70,8 +71,9 @@ function DocsOverview() {
     </section>
 
     <section className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
-      <div className="grid gap-12 lg:grid-cols-[260px_minmax(0,1fr)] lg:items-start lg:gap-14">
+      <div className="grid gap-12 lg:grid-cols-[220px_minmax(0,1fr)_320px] lg:items-start lg:gap-10">
         <DocsSidebar />
+
         <div className="min-w-0">
           <div className="flex flex-col gap-4 border-b border-slate-300 pb-6 sm:flex-row sm:items-end sm:justify-between">
             <div className="max-w-3xl">
@@ -83,8 +85,8 @@ function DocsOverview() {
 
           {filtered.length > 0 ? (
             <div className="mt-0 grid sm:grid-cols-2">
-              {filtered.map(([id, title, description, Icon, to], index) => (
-                <Link key={id} to={to} className="group block border-b border-slate-300 sm:odd:border-r sm:odd:pr-7 sm:even:pl-7">
+              {filtered.map(([id, title, description, Icon], index) => (
+                <Link key={id} to={CATEGORIES.find((item) => item[0] === id)?.[4] ?? "/docs"} className="group block border-b border-slate-300 sm:odd:border-r sm:odd:pr-7 sm:even:pl-7">
                   <article className="flex min-h-64 flex-col py-8 transition-colors group-hover:bg-[#fffdf4] sm:px-2">
                     <div className="flex items-start justify-between gap-6">
                       <span className="flex h-10 w-10 items-center justify-center border border-slate-300 bg-white text-[#a87900] group-hover:border-[#ffb703] group-hover:bg-[#fff4cc]"><Icon className="h-5 w-5" /></span>
@@ -123,6 +125,8 @@ function DocsOverview() {
 
           <div className="mt-12 border-y-2 border-slate-950 bg-[#f5f8fc] px-6 py-8 sm:px-8 sm:py-10"><div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end"><div className="max-w-2xl"><p className="font-mono text-xs uppercase tracking-[0.18em] text-[#a87900]">Content engineering</p><h3 className="mt-3 text-xl font-bold text-[#0e172b] sm:text-2xl">Documentation is part of the assurance system.</h3><p className="mt-2 text-slate-600">SAGE can research, draft, review, validate and publish technical knowledge through the same content-as-code path used for engineering changes.</p></div><Button asChild className="bg-[#ffb703] text-slate-950 hover:bg-[#e5a500]"><Link to="/docs/sage-content-engineering">View SAGE architecture <ArrowRight className="h-4 w-4" /></Link></Button></div></div>
         </div>
+
+        <LatestArticles />
       </div>
     </section>
     <CtaBand />
