@@ -66,3 +66,5 @@
 .site-theme :where(a,button,input,textarea,select):focus-visible,.reference-page-theme :where(a,button,input,textarea,select):focus-visible{outline:3px solid rgba(255,184,4,.45);outline-offset:3px}
 @media (prefers-reduced-motion:reduce){.site-theme *, .reference-page-theme *{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 @media(max-width:767px){.site-theme section[class*="bg-white"],.site-theme section[class*="bg-slate-50"],.site-theme section[class*="bg-slate-100"]{border-radius:0}.site-theme table{font-size:.8125rem}.site-theme [class*="overflow-x-auto"]{-webkit-overflow-scrolling:touch}.shyena-video-controls-host>div:first-child{left:10px!important;right:10px!important;top:10px!important;max-width:calc(100% - 20px)!important}.site-theme .shyena-concept-header{align-items:flex-start;flex-direction:column;gap:.25rem}.site-theme .shyena-concept-figure{border-radius:14px}.site-theme .shyena-article-visual>div>p{font-size:.94rem}}
+
+/* Editorial system: Insights figures are explanatory engineering diagrams, not decorative hero art. */
