@@ -7,6 +7,8 @@ export type GeneratedContentMeta = {
   slug: string;
   description: string;
   category?: string;
+  diagram?: string;
+  thesis?: string;
   primary_keyword?: string;
   search_intent?: string;
   author?: string;
@@ -22,6 +24,8 @@ export const generatedContent = {
       description: "Why reliable AI agent assurance has to test goals, orchestration, deterministic contracts, generated answers, and security as one system.",
       slug: "ai-agent-testing-is-a-systems-problem",
       category: "AI Agent Assurance",
+      diagram: "systems",
+      thesis: "A production AI agent is a system, not a model. Reliable assurance must connect goal completion, orchestration, deterministic contracts, generated-answer quality, security, and execution evidence into one release verdict.",
       primary_keyword: "AI agent testing",
       search_intent: "informational",
       author: "Shyena Engineering",
