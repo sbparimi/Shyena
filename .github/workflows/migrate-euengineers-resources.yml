@@ -36,7 +36,9 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add src/data/euengineers-resources.ts src/routes/docs.index.tsx src/routes/docs.resource.\$slug.tsx
+          git add src/data/euengineers-resources.ts
           git diff --cached --quiet && echo 'No migration changes detected.' && exit 0
           git commit -m 'Import EU Engineers resources into Shyena docs [skip euengineers migration]'
-          git push
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
