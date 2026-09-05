@@ -17,15 +17,29 @@ const slugify = (value) => value.toLowerCase().trim()
 async function get(url) {
   const response = await fetch(url, {
     headers: {
-      'user-agent': 'Mozilla/5.0 (compatible; Shyena-Content-Migration/2.0)',
-      accept: 'text/html,application/xhtml+xml',
+      'user-agent': 'Mozilla/5.0 (compatible; Shyena-Content-Migration/3.0)',
+      accept: 'text/html,application/xhtml+xml,text/plain',
     },
   });
   if (!response.ok) throw new Error(`${response.status} ${response.statusText} for ${url}`);
   return await response.text();
 }
 
-const indexHtml = await get(SOURCE);
+async function getWithFallback(url) {
+  try {
+    return await get(url);
+  } catch (directError) {
+    const proxy = `https://r.jina.ai/http://${url.replace(/^https?:\/\//, '')}`;
+    try {
+      console.warn(`Direct fetch failed for ${url}; retrying through reader proxy.`);
+      return await get(proxy);
+    } catch (proxyError) {
+      throw new Error(`Direct: ${directError.message}; Proxy: ${proxyError.message}`);
+    }
+  }
+}
+
+const indexHtml = await getWithFallback(SOURCE);
 const $index = load(indexHtml);
 const links = new Set(SEED_ARTICLES);
 $index('a[href]').each((_, el) => {
@@ -43,13 +57,16 @@ if (!links.size) throw new Error('No EU Engineers blog articles found.');
 const articles = [];
 for (const url of [...links]) {
   try {
-    const html = await get(url);
+    const html = await getWithFallback(url);
     const $ = load(html);
     const title = $('meta[property="og:title"]').attr('content')?.trim() || $('h1').first().text().trim();
     const description = $('meta[name="description"]').attr('content')?.trim() || '';
     const published = $('time').first().attr('datetime') || $('time').first().text().trim() || '';
     const root = $('article').first().length ? $('article').first() : $('main').first();
-    if (!root.length || !title) continue;
+    if (!root.length || !title) {
+      console.warn(`No article root/title found for ${url}`);
+      continue;
+    }
 
     root.find('script,style,noscript,nav,header,footer,form,button,[aria-hidden="true"]').remove();
     root.find('img').each((_, el) => {
@@ -59,7 +76,6 @@ for (const url of [...links]) {
     });
     root.find('a[href]').each((_, el) => $(el).attr('href', absolute($(el).attr('href'), url)));
 
-    // Remove EU Engineers commercial/hiring chrome while preserving the article itself.
     root.find('*').each((_, el) => {
       const text = $(el).text().trim().toLowerCase();
       if (text.length < 20) return;
@@ -70,14 +86,7 @@ for (const url of [...links]) {
 
     const cleanHtml = root.html()?.trim();
     if (!cleanHtml) continue;
-    articles.push({
-      slug: slugify(title),
-      title,
-      description,
-      published,
-      sourceUrl: url,
-      html: cleanHtml,
-    });
+    articles.push({ slug: slugify(title), title, description, published, sourceUrl: url, html: cleanHtml });
   } catch (error) {
     console.warn(`Skipping ${url}: ${error.message}`);
   }
@@ -85,6 +94,7 @@ for (const url of [...links]) {
 
 const unique = [...new Map(articles.map((article) => [article.sourceUrl, article])).values()];
 unique.sort((a, b) => a.title.localeCompare(b.title));
+if (!unique.length) throw new Error('Article discovery succeeded, but no article content could be extracted.');
 
 const output = `// Generated from ${SOURCE}. Do not edit manually.\nexport const EUENGINEERS_RESOURCES = ${JSON.stringify(unique, null, 2)} as const;\n`;
 fs.mkdirSync('src/data', { recursive: true });
