@@ -16,13 +16,24 @@ const MANUAL_ARTICLE_VISUALS: Record<string, { concept: ArticleConcept; thesis: 
   "the-problem-with-green-checkmarks-on-broken-conversations": { concept: "false-pass", thesis: "A quality score cannot rescue an incomplete execution. Execution integrity must be checked first so a truncated, timed-out, or errored conversation can never masquerade as a passing journey." },
   "how-to-test-a-cognigy-agent": { concept: "cognigy", thesis: "Cognigy assurance starts with the real flow and ends with evidence: generate a goal-driven journey, execute it against the live agent, evaluate deterministic and semantic behaviour, then preserve the trace behind the verdict." },
   "cognigy-agent-security-testing-with-ziran": { concept: "security", thesis: "Agent security testing is a prioritization problem as well as an attack problem: understand the changed surface, model exposure, select high-value campaigns, execute adaptively, and turn the resulting evidence into a security verdict." },
+  "what-llm-as-judge-actually-means-in-practice": { concept: "judge", thesis: "LLM-as-judge is a semantic evaluation layer, not a universal truth oracle. Use it where interpretation is required and keep deterministic facts, security boundaries, and execution integrity under explicit controls." },
+};
+
+const GENERATED_INLINE_VISUALS: Record<string, { match: string; concept: ArticleConcept; label: string }[]> = {
+  "ai-agent-testing-is-a-systems-problem": [
+    { match: "The LLM is only one part of the system", concept: "systems", label: "The model is one component inside the assurance surface." },
+    { match: "Six contracts need to agree", concept: "contracts", label: "The six assurance contracts separate what must be true." },
+    { match: "The test case should describe intent", concept: "trajectory", label: "Goal-driven tests allow valid runtime variation." },
+    { match: "Evidence is more important than the score", concept: "evidence", label: "The verdict must be reconstructable from evidence." },
+    { match: "The release gate should reflect the system's risk", concept: "false-pass", label: "A critical failure cannot be averaged away." },
+  ],
 };
 
 function NotFoundComponent() { return <div className="flex min-h-screen items-center justify-center bg-background px-4"><div className="max-w-md text-center"><h1 className="text-7xl font-bold text-foreground">404</h1><h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2><p className="mt-2 text-sm text-muted-foreground">The page you're looking for doesn't exist or has been moved.</p><div className="mt-6"><Link to="/" className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90">Go home</Link></div></div></div>; }
 
 function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) { console.error(error); const router = useRouter(); useEffect(() => { reportLovableError(error, { boundary: "tanstack_root_error_component" }); }, [error]); return <div className="flex min-h-screen items-center justify-center bg-background px-4"><div className="max-w-md text-center"><h1 className="text-xl font-semibold tracking-tight text-foreground">This page didn't load</h1><p className="mt-2 text-sm text-muted-foreground">Something went wrong on our end. You can try refreshing or head back home.</p><div className="mt-6 flex flex-wrap justify-center gap-2"><button onClick={() => { router.invalidate(); reset(); }} className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90">Try again</button><a href="/" className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent">Go home</a></div></div></div>; }
 
-const ORGANIZATION_SCHEMA = { "@context": "https://schema.org", "@type": "SoftwareApplication", name: "Shyena", applicationCategory: "BusinessApplication", operatingSystem: "Web", description: "Shyena is an enterprise AI agent assurance platform that helps teams understand AI systems, test real behavior, defend security boundaries and produce evidence-backed release decisions.", url: "https://shyena.eu/", keywords: "AI agent assurance, AI evaluation, AI testing, AI QA automation, AI agent testing, Cognigy testing, LLM evaluation, conversational AI testing, AI security testing, AI release assurance" };
+const ORGANIZATION_SCHEMA = { "@context": "https://schema.org", "@type": "SoftwareApplication", name: "Shyena", applicationCategory: "BusinessApplication", operatingSystem: "Web", description: "Shyena is an enterprise AI agent assurance platform that helps teams understand AI systems, test real behavior, defend security boundaries and produce evidence-backed release decisions.", url: "https://shyena.eu/", keywords: "AI agent assurance, AI evaluation, AI testing, AI QA automation, enterprise AI testing, LLM evaluation, conversational AI testing, Cognigy testing, AI security testing, AI release assurance" };
 
 function ArticleVisualInjector() {
   const location = useLocation();
@@ -32,17 +43,47 @@ function ArticleVisualInjector() {
   const visual = slug ? MANUAL_ARTICLE_VISUALS[slug] : undefined;
   const concept = (generated?.diagram || visual?.concept || "systems") as ArticleConcept;
   const thesis = generated?.thesis || visual?.thesis || "Reliable AI agent assurance tests the system around the model, not generated text in isolation.";
+
   useEffect(() => {
     if (!location.pathname.startsWith("/blog/")) { setMountNode(null); return; }
-    const heading = document.querySelector("main h1");
-    if (!heading) return;
-    document.querySelector(".shyena-article-visual")?.remove();
-    const node = document.createElement("div");
-    node.className = "shyena-article-visual mt-8 w-full text-left";
-    heading.insertAdjacentElement("afterend", node);
-    setMountNode(node);
-    return () => { node.remove(); setMountNode(null); };
-  }, [location.pathname]);
+    const main = document.querySelector("main");
+    if (!main) return;
+
+    const inject = () => {
+      const heading = main.querySelector("h1");
+      if (heading && !main.querySelector(".shyena-article-visual")) {
+        const node = document.createElement("div");
+        node.className = "shyena-article-visual mt-8 w-full text-left";
+        heading.insertAdjacentElement("afterend", node);
+        setMountNode(node);
+      }
+
+      if (!generated) return;
+      const specs = GENERATED_INLINE_VISUALS[generated.slug] || [];
+      specs.forEach((spec, index) => {
+        const headings = Array.from(main.querySelectorAll("h2"));
+        const target = headings.find((h) => h.textContent?.toLowerCase().includes(spec.match.toLowerCase()));
+        if (!target) return;
+        const existing = main.querySelector(`[data-shyena-inline-visual="${index}"]`);
+        if (existing) return;
+        const node = document.createElement("div");
+        node.dataset.shyenaInlineVisual = String(index);
+        node.className = "shyena-inline-visual my-8 w-full";
+        const paragraph = target.nextElementSibling;
+        (paragraph || target).insertAdjacentElement("afterend", node);
+        const portal = createPortal(<div><ArticleConceptDiagram concept={spec.concept} /><p className="mt-3 text-center text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">{spec.label}</p></div>, node);
+        node.dataset.portalIndex = String(index);
+        (window as unknown as { __shyenaArticlePortals?: Map<Element, ReactNode> }).__shyenaArticlePortals ??= new Map();
+        (window as unknown as { __shyenaArticlePortals: Map<Element, ReactNode> }).__shyenaArticlePortals.set(node, portal);
+      });
+    };
+
+    inject();
+    const observer = new MutationObserver(inject);
+    observer.observe(main, { childList: true, subtree: true });
+    return () => { observer.disconnect(); document.querySelectorAll(".shyena-article-visual, .shyena-inline-visual").forEach((node) => node.remove()); setMountNode(null); };
+  }, [location.pathname, generated]);
+
   if (!mountNode) return null;
   return createPortal(<div><ArticleConceptDiagram concept={concept} /><p className="mx-auto mt-8 max-w-3xl text-center text-base font-medium leading-relaxed text-foreground sm:text-lg">{thesis}</p></div>, mountNode);
 }
