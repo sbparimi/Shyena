@@ -1,13 +1,14 @@
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArticleConceptDiagram, type ArticleConcept } from "@/components/blog/article-concept-diagrams";
 import { Button } from "@/components/ui/button";
 import { GeneratedMarkdown, getGeneratedArticle } from "@/content/generated-content-loader";
 
 export const Route = createFileRoute("/blog/generated/$slug")({
   head: ({ params }) => {
     const article = getGeneratedArticle(params.slug);
-    if (!article) return { meta: [{ title: "Article not found — Shyena" }] };
+    if (!article) {
+      return { meta: [{ title: "Article not found — Shyena" }] };
+    }
     return {
       meta: [
         { title: `${article.title} — Shyena` },
@@ -38,20 +39,18 @@ function GeneratedArticlePage() {
     );
   }
 
-  const concept = (article.diagram || "systems") as ArticleConcept;
-  const thesis = article.thesis || article.description;
-
   return (
     <>
       <section className="relative overflow-hidden bg-lavender text-lavender-foreground">
-        <div className="mx-auto w-full max-w-4xl px-5 pb-12 pt-20 sm:px-8 sm:pt-28">
+        <div className="mx-auto w-full max-w-4xl px-5 pb-10 pt-20 sm:px-8 sm:pt-28">
           <div className="text-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary px-3.5 py-1.5 text-xs font-medium text-primary">
               {article.category || "Engineering"}
             </span>
             <h1 className="mt-6 text-3xl font-bold leading-[1.1] sm:text-5xl">{article.title}</h1>
-            <div className="mt-10 text-left"><ArticleConceptDiagram concept={concept} /></div>
-            <p className="mx-auto mt-8 max-w-3xl text-base font-medium leading-relaxed text-foreground sm:text-lg">{thesis}</p>
+            <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+              {article.description}
+            </p>
             <p className="mt-5 text-sm text-muted-foreground">{article.author || "Shyena Engineering"}</p>
           </div>
         </div>
