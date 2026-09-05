@@ -1,7 +1,19 @@
+import { Markdown } from "@tanstack/markdown/react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { EUENGINEERS_RESOURCES } from "@/data/euengineers-resources";
+
+const markdownComponents = {
+  a(props) {
+    const href = props.href || "";
+    const external = /^https?:\/\//i.test(href);
+    return <a {...props} href={href} rel={external ? "nofollow noopener noreferrer" : props.rel} target={external ? "_blank" : props.target} />;
+  },
+  img(props) {
+    return <img {...props} loading="lazy" decoding="async" />;
+  },
+};
 
 export const Route = createFileRoute("/docs/resource/$slug")({
   head: ({ params }) => {
@@ -37,9 +49,7 @@ function ResourceArticle() {
     <div className="bg-white text-slate-950">
       <section className="border-b border-slate-300 bg-[#eaf5fa]">
         <div className="mx-auto max-w-5xl px-5 py-14 sm:px-8 sm:py-20">
-          <Link to="/docs" className="inline-flex items-center gap-2 text-sm font-semibold text-slate-600 hover:text-slate-950">
-            <ArrowLeft className="h-4 w-4" /> Documentation
-          </Link>
+          <Link to="/docs" className="inline-flex items-center gap-2 text-sm font-semibold text-slate-600 hover:text-slate-950"><ArrowLeft className="h-4 w-4" /> Documentation</Link>
           <div className="mt-10 max-w-4xl">
             <p className="font-mono text-xs uppercase tracking-[0.2em] text-[#a87900]">Engineering resource</p>
             <h1 className="mt-4 text-4xl font-bold leading-tight tracking-tight text-[#0e172b] sm:text-6xl">{article.title}</h1>
@@ -50,20 +60,15 @@ function ResourceArticle() {
       </section>
 
       <article className="mx-auto max-w-4xl px-5 py-12 sm:px-8 sm:py-20">
-        <div
-          className="euengineers-resource-content prose prose-slate max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-a:text-[#8a6500] prose-img:mx-auto prose-img:max-h-[680px] prose-img:rounded-lg"
-          dangerouslySetInnerHTML={{ __html: article.html }}
-        />
+        <div className="generated-content prose prose-slate max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-a:text-[#8a6500] prose-img:mx-auto prose-img:max-h-[680px] prose-img:rounded-lg">
+          <Markdown components={markdownComponents}>{article.markdown}</Markdown>
+        </div>
 
         <div className="mt-16 border-y-2 border-slate-950 bg-[#f5f8fc] px-6 py-8 sm:px-8">
           <p className="text-sm leading-7 text-slate-600">Originally published in the EU Engineers engineering library. This copy is maintained as part of the Shyena documentation knowledge base.</p>
           <div className="mt-6 flex flex-wrap gap-3">
-            <Button asChild className="bg-slate-950 text-white hover:bg-slate-800">
-              <Link to="/docs/evaluation-model">Explore the Shyena evaluation model <ArrowRight className="h-4 w-4" /></Link>
-            </Button>
-            <Button asChild variant="outline">
-              <a href={article.sourceUrl} target="_blank" rel="noopener noreferrer">View original article</a>
-            </Button>
+            <Button asChild className="bg-slate-950 text-white hover:bg-slate-800"><Link to="/docs/evaluation-model">Explore the Shyena evaluation model <ArrowRight className="h-4 w-4" /></Link></Button>
+            <Button asChild variant="outline"><a href={article.sourceUrl} target="_blank" rel="noopener noreferrer">View original article</a></Button>
           </div>
         </div>
       </article>
