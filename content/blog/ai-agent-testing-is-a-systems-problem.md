@@ -4,6 +4,8 @@ description: "Why reliable AI agent assurance has to test goals, orchestration, 
 slug: "ai-agent-testing-is-a-systems-problem"
 content_type: "technical-article"
 category: "AI Agent Assurance"
+diagram: "systems"
+thesis: "A production AI agent is a system, not a model. Reliable assurance must connect goal completion, orchestration, deterministic contracts, generated-answer quality, security, and execution evidence into one release verdict."
 primary_keyword: "AI agent testing"
 search_intent: "informational"
 author: "Shyena Engineering"
