@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { CtaBand } from "@/components/site/cta-band";
 import { DocsSidebar } from "@/components/docs/docs-sidebar";
 import { DocConceptVisual } from "@/components/docs/doc-concept-visual";
+import { EUENGINEERS_RESOURCES } from "@/data/euengineers-resources";
 
 export const Route = createFileRoute("/docs/")({
   head: () => ({
@@ -15,7 +16,7 @@ export const Route = createFileRoute("/docs/")({
       { property: "og:description", content: "Deep engineering knowledge for building evidence-backed AI assurance workflows." },
       { property: "og:type", content: "website" },
     ],
-    links: [{ rel: "canonical", href: "https://shyena.eu/docs" }],
+    links: [{ rel: "canonical", href: "https://www.shyena.eu/docs" }],
   }),
   component: DocsOverview,
 });
@@ -38,6 +39,10 @@ function DocsOverview() {
   const filtered = useMemo(() => {
     if (!normalizedQuery) return CATEGORIES;
     return CATEGORIES.filter(([, title, description]) => `${title} ${description}`.toLowerCase().includes(normalizedQuery));
+  }, [normalizedQuery]);
+  const filteredResources = useMemo(() => {
+    if (!normalizedQuery) return EUENGINEERS_RESOURCES;
+    return EUENGINEERS_RESOURCES.filter((article) => `${article.title} ${article.description}`.toLowerCase().includes(normalizedQuery));
   }, [normalizedQuery]);
 
   return <div className="bg-white text-slate-950">
@@ -98,6 +103,36 @@ function DocsOverview() {
               <h3 className="text-lg font-semibold text-[#0e172b]">No matching documentation</h3>
               <p className="mt-2 text-sm text-slate-600">Try evaluation, testing, reporting, security, environments or integrations.</p>
             </div>
+          )}
+
+          {EUENGINEERS_RESOURCES.length > 0 && (
+            <section className="mt-16 border-t-2 border-slate-950 pt-10">
+              <div className="flex flex-col gap-3 border-b border-slate-300 pb-6 sm:flex-row sm:items-end sm:justify-between">
+                <div>
+                  <p className="font-mono text-xs uppercase tracking-[0.18em] text-[#a87900]">Engineering library</p>
+                  <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#0e172b] sm:text-4xl">Insights & resources</h2>
+                  <p className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-600">Practical engineering articles migrated from the European Engineers resource library and presented as part of the Shyena documentation system.</p>
+                </div>
+                <span className="font-mono text-xs uppercase tracking-[0.12em] text-slate-500">{filteredResources.length} articles</span>
+              </div>
+              {filteredResources.length > 0 && (
+                <div className="grid sm:grid-cols-2">
+                  {filteredResources.map((article, index) => (
+                    <Link key={article.slug} to="/docs/resource/$slug" params={{ slug: article.slug }} className="group block border-b border-slate-300 sm:odd:border-r sm:odd:pr-7 sm:even:pl-7">
+                      <article className="flex min-h-64 flex-col py-8 transition-colors group-hover:bg-[#fffdf4] sm:px-2">
+                        <div className="flex items-start justify-between gap-6">
+                          <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-[#a87900]">Resource</span>
+                          <span className="font-mono text-[10px] tracking-[0.12em] text-slate-400">{String(index + 1).padStart(2, "0")}</span>
+                        </div>
+                        <h3 className="mt-5 text-xl font-bold tracking-tight text-[#0e172b] group-hover:text-[#a87900]">{article.title}</h3>
+                        <p className="mt-3 text-sm leading-relaxed text-slate-600">{article.description}</p>
+                        <span className="mt-auto inline-flex items-center gap-2 pt-7 text-sm font-semibold text-[#0e172b]">Read article <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" /></span>
+                      </article>
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </section>
           )}
 
           <div className="mt-12 border-y-2 border-slate-950 bg-[#f5f8fc] px-6 py-8 sm:px-8 sm:py-10">
