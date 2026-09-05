@@ -11,8 +11,7 @@ type Plan = {
   price: string;
   cadence: string;
   audience: string;
-  systems: string;
-  usage: string;
+  capacity: string;
   description: string;
   featured?: boolean;
   cta: string;
@@ -25,15 +24,14 @@ const PLANS: Plan[] = [
     name: "Pilot",
     price: "€7,500",
     cadence: "30–60 days",
-    audience: "Prove the model on one real AI system",
-    systems: "1 AI system",
-    usage: "5,000 assurance operations",
-    description: "A focused proof-of-value engagement to establish the baseline, run representative journeys and prove the evidence chain.",
+    audience: "Establish your assurance baseline",
+    capacity: "5,000 assurance operations",
+    description: "A focused proof-of-value engagement to establish the baseline, run representative assurance journeys and prove the evidence chain.",
     cta: "Start a pilot",
     href: "/contact",
     features: [
       "Nexus, Vera and Chakra",
-      "Basic dashboards and release evidence",
+      "Core dashboards and release evidence",
       "1 environment",
       "Limited team access",
       "Email support",
@@ -43,10 +41,9 @@ const PLANS: Plan[] = [
     name: "Professional",
     price: "€30,000",
     cadence: "per year",
-    audience: "One production AI system",
-    systems: "1 AI system",
-    usage: "100,000 assurance operations / year",
-    description: "The default production plan for teams that need repeatable assurance in engineering and release workflows.",
+    audience: "Production assurance at engineering scale",
+    capacity: "100,000 assurance operations / year",
+    description: "The default production plan for teams that need repeatable testing, evaluation, security assurance and release evidence.",
     cta: "Choose Professional",
     href: "/contact",
     features: [
@@ -54,7 +51,7 @@ const PLANS: Plan[] = [
       "Advanced dashboards and reporting",
       "Release-gate reporting",
       "Multiple environments",
-      "API + basic CI/CD integration",
+      "API + CI/CD integration",
       "Up to 10 users",
       "Standard support",
     ],
@@ -63,70 +60,67 @@ const PLANS: Plan[] = [
     name: "Enterprise",
     price: "€60,000",
     cadence: "per year",
-    audience: "Multiple teams and AI systems",
-    systems: "Multiple AI systems",
-    usage: "500,000 assurance operations / year",
-    description: "For organizations expanding assurance across agents, teams, environments and governed release processes.",
+    audience: "High-volume enterprise assurance",
+    capacity: "500,000 assurance operations / year",
+    description: "For organizations running assurance at significant volume with stronger governance, integration and operational requirements.",
     featured: true,
     cta: "Choose Enterprise",
     href: "/contact",
     features: [
       "Everything in Professional",
-      "Multiple AI systems and teams",
       "SSO + RBAC",
       "Advanced API and CI/CD",
       "Advanced governance and reporting",
       "Up to 50 users",
       "Priority support",
+      "Higher assurance capacity",
     ],
   },
   {
     name: "Strategic",
     price: "€100K–€150K+",
     cadence: "per year",
-    audience: "Enterprise-wide AI estates",
-    systems: "Enterprise-wide",
-    usage: "Custom assurance capacity",
-    description: "For large AI estates requiring custom deployment, integrations, governance and dedicated assurance support.",
+    audience: "Large-scale assurance programs",
+    capacity: "Custom assurance capacity",
+    description: "For organizations requiring tailored capacity, deployment, integrations, governance, managed assurance or dedicated support.",
     cta: "Talk to sales",
     href: "/contact",
     features: [
       "Everything in Enterprise",
-      "Enterprise-wide AI coverage",
+      "Custom assurance capacity",
       "Custom deployment and integrations",
       "Advanced + custom reporting",
       "Unlimited users",
       "Dedicated support",
-      "Custom assurance capacity",
+      "Managed assurance options",
     ],
   },
 ];
 
 const COMPARISON = [
-  ["AI systems under assurance", "1", "1", "Multiple", "Enterprise-wide"],
   ["Included assurance operations / year", "5,000*", "100,000", "500,000", "Custom"],
   ["Nexus — system understanding", "Included", "Included", "Included", "Included"],
   ["Vera — testing & evaluation", "Included", "Included", "Included", "Included"],
   ["Chakra — security assurance", "Included", "Included", "Included", "Included"],
-  ["Dashboards & reporting", "Basic", "Advanced", "Advanced", "Advanced + custom"],
-  ["Release-gate evidence", "Basic", "Advanced", "Advanced", "Advanced + custom"],
+  ["Dashboards & reporting", "Core", "Advanced", "Advanced", "Advanced + custom"],
+  ["Release-gate evidence", "Core", "Advanced", "Advanced", "Advanced + custom"],
   ["SSO / RBAC", "—", "—", "Included", "Included"],
-  ["API / integrations", "—", "Basic", "Advanced", "Advanced + custom"],
-  ["CI/CD integration", "—", "Basic", "Advanced", "Advanced + custom"],
+  ["API / integrations", "—", "Included", "Advanced", "Advanced + custom"],
+  ["CI/CD integration", "—", "Included", "Advanced", "Advanced + custom"],
   ["Environments", "1", "Multiple", "Multiple", "Custom"],
   ["Users", "Limited", "Up to 10", "Up to 50", "Unlimited"],
   ["Support", "Email", "Standard", "Priority", "Dedicated"],
 ];
 
 const FAQS = [
-  ["What is an assurance operation?", "An assurance operation is one metered unit of Shyena activity: a generated CIS test journey, a Vera AI conversation, or a Chakra security interaction. The units are tracked independently."],
+  ["What is an assurance operation?", "An assurance operation is one metered unit of Shyena activity: a generated CIS test journey, a Vera AI evaluation interaction, or a Chakra security interaction. The units are tracked independently."],
   ["Are Nexus, Vera and Chakra separate subscriptions?", "No. They are capabilities within one Shyena assurance platform. Customers do not buy three separate module licences."],
-  ["What is the primary pricing unit?", "The primary commercial unit is the AI system or estate under assurance. Included assurance operations provide predictable capacity for the testing and security activity that runs against that scope."],
-  ["What happens when we exceed our included usage?", "Additional assurance operations are billed at the public rate of €0.05 per unit. Enterprise customers can negotiate committed volume and commercial terms."],
-  ["Are there per-user or per-agent licence fees?", "No separate per-user or per-agent licence is used in the public model. Enterprise plans increase access through system, team, governance and capacity scope instead."],
-  ["What is included in the pilot?", "The pilot covers one AI system and 5,000 assurance operations, with the core Nexus, Vera and Chakra capabilities available to establish a working assurance baseline."],
+  ["What is the pricing model?", "Shyena is priced primarily around contracted assurance capacity. Each plan includes a defined number of assurance operations, with a transparent overage rate when additional capacity is required."],
+  ["Are there per-user or per-agent licence fees?", "No. Shyena does not use per-user or per-agent licensing as the primary commercial model. Access and governance capabilities are included according to plan."],
+  ["What happens when we exceed our included capacity?", "Additional assurance operations are billed at the public rate of €0.05 per unit. Enterprise customers can negotiate committed volume and commercial terms."],
+  ["What is included in the pilot?", "The pilot includes 5,000 assurance operations and the core Nexus, Vera and Chakra capabilities needed to establish a working assurance baseline."],
   ["Who pays for cloud infrastructure and model/API consumption?", "Customer infrastructure, hosting, monitoring and third-party LLM/API consumption are separate from the Shyena software subscription unless explicitly included in a custom commercial agreement."],
-  ["Can professional services be added?", "Yes. Implementation, training, custom engineering, managed security assurance and ongoing managed programs are separately scoped so the SaaS boundary remains clear."],
+  ["Can professional services be added?", "Yes. Implementation, training, custom engineering, managed security assurance and ongoing managed programs are separately scoped."],
 ];
 
 function formatEuro(value: number) {
@@ -138,28 +132,13 @@ function formatEuro(value: number) {
   }).format(value);
 }
 
-function UsageField({ id, label, value, setter }: { id: string; label: string; value: string; setter: (value: string) => void }) {
-  const update = (next: string) => {
-    if (next === "" || /^\d+$/.test(next)) setter(next.replace(/^0+(?=\d)/, ""));
-  };
-
-  return (
-    <div>
-      <label htmlFor={id} className="text-sm font-semibold text-slate-950">{label}</label>
-      <div className="mt-3 flex items-center border-b-2 border-slate-900">
-        <input id={id} value={value} inputMode="numeric" aria-label={`${label} quantity`} onChange={(event) => update(event.target.value)} onBlur={() => value === "" && setter("0")} className="w-full bg-transparent py-3 text-2xl font-semibold tracking-[-0.03em] text-slate-950 outline-none placeholder:text-slate-300" />
-        <span className="pb-3 text-xs font-bold uppercase tracking-[0.14em] text-slate-400">units</span>
-      </div>
-    </div>
-  );
-}
-
 function UsageCalculator() {
-  const [cis, setCis] = useState("100");
-  const [vera, setVera] = useState("1000");
-  const [chakra, setChakra] = useState("250");
-  const estimate = useMemo(() => ({ cis: Number(cis || 0) * RATE, vera: Number(vera || 0) * RATE, chakra: Number(chakra || 0) * RATE }), [cis, vera, chakra]);
-  const total = estimate.cis + estimate.vera + estimate.chakra;
+  const [operations, setOperations] = useState("10000");
+  const estimate = useMemo(() => Number(operations || 0) * RATE, [operations]);
+
+  const update = (next: string) => {
+    if (next === "" || /^\d+$/.test(next)) setOperations(next.replace(/^0+(?=\d)/, ""));
+  };
 
   return (
     <section id="usage-calculator" className="border-y border-slate-200 bg-[#f5f6f7]">
@@ -167,42 +146,33 @@ function UsageCalculator() {
         <div className="grid gap-12 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20">
           <div className="max-w-xl">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-orange-700">03 / Assurance capacity</p>
-            <h2 className="mt-5 text-4xl font-semibold leading-[0.98] tracking-[-0.05em] text-slate-950 sm:text-5xl">Scale the assurance work. Not the licence count.</h2>
-            <p className="mt-6 text-lg leading-8 text-slate-600">Your plan defines the AI systems under assurance. Your included capacity covers the activity you run against them. When activity grows, the overage model stays predictable.</p>
+            <h2 className="mt-5 text-4xl font-semibold leading-[0.98] tracking-[-0.05em] text-slate-950 sm:text-5xl">Pay for assurance capacity, not licence complexity.</h2>
+            <p className="mt-6 text-lg leading-8 text-slate-600">Choose the annual assurance capacity that matches your engineering and release activity. The same Shyena platform is available across every plan.</p>
             <div className="mt-8 space-y-4 border-t border-slate-300 pt-6 text-sm leading-6 text-slate-600">
-              <p><span className="font-semibold text-slate-950">One commercial currency:</span> assurance operations.</p>
+              <p><span className="font-semibold text-slate-950">One commercial unit:</span> assurance operations.</p>
               <p><span className="font-semibold text-slate-950">One public overage rate:</span> €0.05 per additional operation.</p>
-              <p><span className="font-semibold text-slate-950">No conversion:</span> CIS, Vera and Chakra activity remains independently measured.</p>
+              <p><span className="font-semibold text-slate-950">No per-user or per-agent licensing:</span> capacity is the pricing driver.</p>
             </div>
           </div>
 
           <div className="bg-white p-6 shadow-[0_20px_60px_-45px_rgba(15,23,42,0.45)] sm:p-9 lg:p-10">
-            <div className="grid gap-8 md:grid-cols-3 md:gap-6">
-              <UsageField id="cis" label="CIS test journeys" value={cis} setter={setCis} />
-              <UsageField id="vera" label="Vera AI conversations" value={vera} setter={setVera} />
-              <UsageField id="chakra" label="Chakra security interactions" value={chakra} setter={setChakra} />
+            <div>
+              <label htmlFor="operations" className="text-sm font-semibold text-slate-950">Additional assurance operations</label>
+              <div className="mt-3 flex items-center border-b-2 border-slate-900">
+                <input id="operations" value={operations} inputMode="numeric" aria-label="Additional assurance operations" onChange={(event) => update(event.target.value)} onBlur={() => operations === "" && setOperations("0")} className="w-full bg-transparent py-3 text-3xl font-semibold tracking-[-0.04em] text-slate-950 outline-none placeholder:text-slate-300" />
+                <span className="pb-3 text-xs font-bold uppercase tracking-[0.14em] text-slate-400">operations</span>
+              </div>
             </div>
             <p className="mt-4 text-xs leading-5 text-slate-500">€0.05 per additional operation · whole numbers only</p>
 
-            <div className="mt-9 grid gap-3 border-t border-slate-200 pt-7 sm:grid-cols-3">
-              {[["CIS", estimate.cis], ["Vera", estimate.vera], ["Chakra", estimate.chakra]].map(([name, value]) => (
-                <div key={name as string} className="border border-slate-300 px-5 py-4">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">{name as string}</p>
-                  <p className="mt-2 text-xl font-semibold tracking-[-0.02em] text-slate-950">{formatEuro(value as number)}</p>
-                </div>
-              ))}
+            <div className="mt-9 border-t border-slate-200 pt-7">
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-slate-500">Estimated additional usage</p>
+              <p className="mt-2 text-5xl font-semibold tracking-[-0.05em] text-slate-950 sm:text-6xl">{formatEuro(estimate)}</p>
             </div>
-
             <div className="mt-8 flex flex-col gap-5 border-t-2 border-slate-950 pt-6 sm:flex-row sm:items-end sm:justify-between">
-              <div>
-                <p className="text-xs font-bold uppercase tracking-[0.18em] text-slate-500">Estimated additional usage</p>
-                <p className="mt-2 text-5xl font-semibold tracking-[-0.05em] text-slate-950 sm:text-6xl">{formatEuro(total)}</p>
-              </div>
-              <Button asChild size="lg" className="rounded-none bg-[#ffb703] px-6 text-slate-950 hover:bg-[#f5a900]">
-                <Link to="/contact">Discuss your capacity <ArrowRight className="h-4 w-4" /></Link>
-              </Button>
+              <p className="max-w-md text-sm leading-6 text-slate-600">This calculator estimates usage beyond a contracted plan allowance. VAT and separately scoped services are excluded.</p>
+              <Button asChild size="lg" className="rounded-none bg-[#ffb703] px-6 text-slate-950 hover:bg-[#f5a900]"><Link to="/contact">Discuss capacity <ArrowRight className="h-4 w-4" /></Link></Button>
             </div>
-            <p className="mt-5 text-xs leading-5 text-slate-500">This calculator estimates usage beyond a contracted plan allowance. VAT and separately scoped services are excluded.</p>
           </div>
         </div>
       </div>
@@ -218,23 +188,14 @@ function PlanCard({ plan }: { plan: Plan }) {
       <p className={`mt-7 text-4xl font-semibold tracking-[-0.05em] sm:text-5xl ${plan.featured ? "text-white" : "text-slate-950"}`}>{plan.price}</p>
       <p className={`mt-2 text-sm font-medium ${plan.featured ? "text-slate-400" : "text-slate-500"}`}>{plan.cadence}</p>
       <div className={`mt-8 border-y py-5 ${plan.featured ? "border-slate-700" : "border-slate-200"}`}>
-        <p className={`text-sm font-semibold ${plan.featured ? "text-white" : "text-slate-950"}`}>{plan.systems}</p>
-        <p className={`mt-1 text-sm ${plan.featured ? "text-slate-400" : "text-slate-500"}`}>{plan.usage}</p>
+        <p className={`text-sm font-semibold ${plan.featured ? "text-white" : "text-slate-950"}`}>{plan.audience}</p>
+        <p className={`mt-2 text-sm font-semibold ${plan.featured ? "text-[#ffb703]" : "text-orange-700"}`}>{plan.capacity}</p>
       </div>
       <p className={`mt-6 text-sm leading-6 ${plan.featured ? "text-slate-300" : "text-slate-600"}`}>{plan.description}</p>
       <div className="mt-7 space-y-3">
-        {plan.features.map((feature) => (
-          <div key={feature} className="flex gap-3 text-sm leading-6">
-            <Check className={`mt-1 h-4 w-4 shrink-0 ${plan.featured ? "text-[#ffb703]" : "text-orange-700"}`} />
-            <span className={plan.featured ? "text-slate-200" : "text-slate-700"}>{feature}</span>
-          </div>
-        ))}
+        {plan.features.map((feature) => <div key={feature} className="flex gap-3 text-sm leading-6"><Check className={`mt-1 h-4 w-4 shrink-0 ${plan.featured ? "text-[#ffb703]" : "text-orange-700"}`} /><span className={plan.featured ? "text-slate-200" : "text-slate-700"}>{feature}</span></div>)}
       </div>
-      <div className="mt-auto pt-9">
-        <Button asChild size="lg" className={`w-full rounded-none ${plan.featured ? "bg-[#ffb703] text-slate-950 hover:bg-[#f5a900]" : "bg-slate-950 text-white hover:bg-slate-800"}`}>
-          <Link to={plan.href}>{plan.cta} <ArrowRight className="h-4 w-4" /></Link>
-        </Button>
-      </div>
+      <div className="mt-auto pt-9"><Button asChild size="lg" className={`w-full rounded-none ${plan.featured ? "bg-[#ffb703] text-slate-950 hover:bg-[#f5a900]" : "bg-slate-950 text-white hover:bg-slate-800"}`}><Link to={plan.href}>{plan.cta} <ArrowRight className="h-4 w-4" /></Link></Button></div>
     </article>
   );
 }
@@ -242,11 +203,11 @@ function PlanCard({ plan }: { plan: Plan }) {
 export const Route = createFileRoute("/pricing")({
   head: () => ({
     meta: [
-      { title: "Shyena Pricing | AI Agent Assurance Platform" },
-      { name: "description", content: "Simple enterprise pricing for AI agent assurance. Price the AI systems you assure, with included assurance capacity and transparent €0.05 overage." },
-      { name: "keywords", content: "AI agent assurance pricing, AI agent testing pricing, enterprise AI evaluation pricing, AI security testing pricing, Cognigy assurance pricing" },
-      { property: "og:title", content: "Shyena Pricing | AI Agent Assurance Platform" },
-      { property: "og:description", content: "Price the AI systems you assure. Scale assurance capacity without per-user or per-agent licence fees." },
+      { title: "Shyena Pricing | AI Assurance Platform" },
+      { name: "description", content: "Transparent enterprise pricing for AI assurance. Choose the assurance capacity you need, with no per-user or per-agent licensing and €0.05 transparent overage." },
+      { name: "keywords", content: "AI assurance pricing, AI agent testing pricing, enterprise AI evaluation pricing, AI security testing pricing, assurance platform pricing" },
+      { property: "og:title", content: "Shyena Pricing | AI Assurance Platform" },
+      { property: "og:description", content: "Choose assurance capacity without per-user or per-agent licensing." },
     ],
     links: [{ rel: "canonical", href: "https://shyena.eu/pricing" }],
   }),
@@ -261,113 +222,29 @@ function PricingPage() {
         <div className="pointer-events-none absolute -bottom-48 left-1/3 h-[420px] w-[420px] rounded-full bg-orange-100/50 blur-3xl" />
         <div className="relative mx-auto max-w-7xl px-6 pb-20 pt-16 lg:px-8 lg:pb-24 lg:pt-24">
           <div className="grid gap-12 lg:grid-cols-[1.08fr_0.92fr] lg:items-end lg:gap-20">
-            <div>
-              <p className="text-xs font-bold uppercase tracking-[0.22em] text-orange-700">01 / Pricing</p>
-              <h1 className="mt-6 max-w-5xl font-[Sora] text-5xl font-extrabold leading-[0.94] tracking-[-0.06em] text-slate-950 sm:text-6xl lg:text-[clamp(3.5rem,5.5vw,5.5rem)]">
-                Price the AI systems you assure.
-              </h1>
-            </div>
-            <div className="max-w-xl border-t border-slate-300 pt-6 lg:mb-2">
-              <p className="text-xl leading-8 text-slate-700">One Shyena platform. One commercial foundation. Your plan defines the systems under assurance; included capacity and transparent overage cover the work you actually run.</p>
-              <div className="mt-7 flex flex-wrap gap-x-6 gap-y-2 text-xs font-bold uppercase tracking-[0.14em] text-slate-500"><span>No per-user fees</span><span>No per-agent fees</span><span>€0.05 overage</span></div>
-            </div>
+            <div><p className="text-xs font-bold uppercase tracking-[0.22em] text-orange-700">01 / Pricing</p><h1 className="mt-6 max-w-5xl font-[Sora] text-5xl font-extrabold leading-[0.94] tracking-[-0.06em] text-slate-950 sm:text-6xl lg:text-[clamp(3.5rem,5.5vw,5.5rem)]">Assurance pricing that scales with the work.</h1></div>
+            <div className="max-w-xl border-t border-slate-300 pt-6 lg:mb-2"><p className="text-xl leading-8 text-slate-700">One Shyena platform. One commercial foundation. Choose the assurance capacity you need and scale it as your testing, evaluation and security activity grows.</p><div className="mt-7 flex flex-wrap gap-x-6 gap-y-2 text-xs font-bold uppercase tracking-[0.14em] text-slate-500"><span>No per-user fees</span><span>No per-agent fees</span><span>€0.05 overage</span></div></div>
           </div>
 
           <div className="mt-16 grid gap-4 lg:grid-cols-3">
-            {[["AI systems", "Primary scope", "The systems and estate Shyena assures"], ["Assurance operations", "Included capacity", "Testing, evaluation and security activity"], ["Additional usage", "€0.05 / operation", "A predictable expansion path when activity grows"]].map(([title, label, text]) => (
-              <div key={title} className="border border-slate-300 bg-white px-7 py-8 lg:px-8 lg:py-9">
-                <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400">{label}</p>
-                <p className="mt-4 text-2xl font-semibold tracking-[-0.03em] text-slate-950">{title}</p>
-                <p className="mt-2 text-sm leading-6 text-slate-600">{text}</p>
-              </div>
-            ))}
+            {[["Assurance capacity", "Primary pricing unit", "Contracted capacity for testing, evaluation and security activity"], ["One platform", "Included across plans", "Nexus, Vera and Chakra are capabilities within the same assurance platform"], ["Additional usage", "€0.05 / operation", "A predictable expansion path when contracted capacity is exceeded"]].map(([title, label, text]) => <div key={title} className="border border-slate-300 bg-white px-7 py-8 lg:px-8 lg:py-9"><p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400">{label}</p><p className="mt-4 text-2xl font-semibold tracking-[-0.03em] text-slate-950">{title}</p><p className="mt-2 text-sm leading-6 text-slate-600">{text}</p></div>)}
           </div>
 
-          <div className="mt-8 flex items-start gap-3 border-l-2 border-orange-600 pl-4 text-sm leading-6 text-slate-600"><ShieldCheck className="mt-1 h-4 w-4 shrink-0 text-orange-700" /><span><strong className="text-slate-950">Start with one system.</strong> Expand systems, teams, governance and assurance capacity as the AI estate grows.</span></div>
+          <div className="mt-8 flex items-start gap-3 border-l-2 border-orange-600 pl-4 text-sm leading-6 text-slate-600"><ShieldCheck className="mt-1 h-4 w-4 shrink-0 text-orange-700" /><span><strong className="text-slate-950">The platform does not meter ownership by system count.</strong> Pricing is driven by contracted assurance capacity and the activity consumed.</span></div>
         </div>
       </section>
 
-      <section className="bg-white">
-        <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-28">
-          <div className="mb-12 max-w-3xl">
-            <p className="text-xs font-bold uppercase tracking-[0.22em] text-orange-700">02 / Plans</p>
-            <h2 className="mt-5 text-4xl font-semibold leading-[0.98] tracking-[-0.05em] sm:text-5xl">One assurance foundation. More scope at each level.</h2>
-            <p className="mt-5 text-lg leading-8 text-slate-600">Every plan includes the same core assurance platform. The commercial difference is how much of your AI estate you cover and how much assurance capacity you commit.</p>
-          </div>
-          <div className="grid gap-5 lg:grid-cols-4">
-            {PLANS.map((plan) => <PlanCard key={plan.name} plan={plan} />)}
-          </div>
-          <p className="mt-5 text-xs leading-5 text-slate-500">* Pilot assurance capacity is contracted for the pilot period; annual plan allowances are stated per year.</p>
-        </div>
-      </section>
+      <section className="bg-white"><div className="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-28"><div className="mb-12 max-w-3xl"><p className="text-xs font-bold uppercase tracking-[0.22em] text-orange-700">02 / Plans</p><h2 className="mt-5 text-4xl font-semibold leading-[0.98] tracking-[-0.05em] sm:text-5xl">Choose the assurance capacity that fits your operating model.</h2><p className="mt-5 text-lg leading-8 text-slate-600">Every plan includes the same core Shyena assurance platform. The commercial difference is capacity, governance, integration depth and support.</p></div><div className="grid gap-5 lg:grid-cols-4">{PLANS.map((plan) => <PlanCard key={plan.name} plan={plan} />)}</div><p className="mt-5 text-xs leading-5 text-slate-500">* Pilot assurance capacity is contracted for the pilot period; annual plan allowances are stated per year.</p></div></section>
 
-      <section className="border-y border-slate-200 bg-slate-950 text-white">
-        <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8 lg:py-20">
-          <div className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-center lg:gap-20">
-            <div>
-              <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#ffb703]">Platform boundary</p>
-              <h2 className="mt-5 text-3xl font-semibold leading-[1] tracking-[-0.04em] sm:text-4xl">The platform is one subscription.</h2>
-            </div>
-            <div className="grid gap-5 sm:grid-cols-3">
-              {[["Nexus", "Understand", "System logic, journeys, decisions and orchestration."], ["Vera", "Evaluate", "Real journeys, semantic quality, deterministic checks and integrity."], ["Chakra", "Defend", "Adversarial testing, security boundaries and release impact."]].map(([name, verb, text]) => (
-                <div key={name} className="border border-slate-700 p-5"><p className="text-xs font-bold uppercase tracking-[0.18em] text-slate-400">{name}</p><p className="mt-5 text-lg font-semibold">{verb}</p><p className="mt-2 text-sm leading-6 text-slate-400">{text}</p></div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      <section className="border-y border-slate-200 bg-slate-950 text-white"><div className="mx-auto max-w-7xl px-6 py-16 lg:px-8 lg:py-20"><div className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-center lg:gap-20"><div><p className="text-xs font-bold uppercase tracking-[0.22em] text-[#ffb703]">Platform boundary</p><h2 className="mt-5 text-3xl font-semibold leading-[1] tracking-[-0.04em] sm:text-4xl">One subscription. Three assurance capabilities.</h2></div><div className="grid gap-5 sm:grid-cols-3">{[["Nexus", "Understand", "System logic, journeys, decisions and orchestration."], ["Vera", "Evaluate", "Real journeys, semantic quality, deterministic checks and integrity."], ["Chakra", "Defend", "Adversarial testing, security boundaries and release impact."]].map(([name, verb, text]) => <div key={name} className="border border-slate-700 p-5"><p className="text-xs font-bold uppercase tracking-[0.18em] text-slate-400">{name}</p><p className="mt-5 text-lg font-semibold">{verb}</p><p className="mt-2 text-sm leading-6 text-slate-400">{text}</p></div>)}</div></div></div></section>
 
       <UsageCalculator />
 
-      <section className="bg-white">
-        <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-28">
-          <div className="mb-10 max-w-3xl">
-            <p className="text-xs font-bold uppercase tracking-[0.22em] text-orange-700">04 / Compare</p>
-            <h2 className="mt-5 text-4xl font-semibold leading-[0.98] tracking-[-0.05em] sm:text-5xl">Compare the assurance scope.</h2>
-          </div>
-          <div className="overflow-x-auto border border-slate-300">
-            <table className="w-full min-w-[1050px] border-collapse text-left text-sm">
-              <thead>
-                <tr className="bg-slate-950 text-white">
-                  <th className="w-[30%] px-5 py-4 text-xs font-bold uppercase tracking-[0.16em]">Capability / scope</th>
-                  {PLANS.map((plan) => <th key={plan.name} className="px-5 py-4 text-xs font-bold uppercase tracking-[0.16em]">{plan.name}</th>)}
-                </tr>
-              </thead>
-              <tbody>
-                {COMPARISON.map((row, index) => (
-                  <tr key={row[0]} className={index % 2 === 0 ? "bg-white" : "bg-slate-50"}>
-                    {row.map((cell, cellIndex) => <td key={`${row[0]}-${cellIndex}`} className={`border-t border-slate-200 px-5 py-4 ${cellIndex === 0 ? "font-semibold text-slate-950" : "text-slate-600"}`}>{cell}</td>)}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <div className="mt-6 flex items-start gap-3 text-sm leading-6 text-slate-600"><CircleHelp className="mt-1 h-4 w-4 shrink-0 text-orange-700" /><p><strong className="text-slate-950">Commercial clarity:</strong> customer infrastructure, hosting, monitoring and third-party LLM/API consumption are separate from the Shyena software fee unless explicitly contracted otherwise.</p></div>
-        </div>
-      </section>
+      <section className="bg-white"><div className="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-28"><div className="mb-10 max-w-3xl"><p className="text-xs font-bold uppercase tracking-[0.22em] text-orange-700">04 / Compare</p><h2 className="mt-5 text-4xl font-semibold leading-[0.98] tracking-[-0.05em] sm:text-5xl">Compare capacity and platform access.</h2></div><div className="overflow-x-auto border border-slate-300"><table className="w-full min-w-[1050px] border-collapse text-left text-sm"><thead><tr className="bg-slate-950 text-white"><th className="w-[30%] px-5 py-4 text-xs font-bold uppercase tracking-[0.16em]">Capability</th>{PLANS.map((plan) => <th key={plan.name} className="px-5 py-4 text-xs font-bold uppercase tracking-[0.16em]">{plan.name}</th>)}</tr></thead><tbody>{COMPARISON.map((row, index) => <tr key={row[0]} className={index % 2 === 0 ? "bg-white" : "bg-slate-50"}>{row.map((cell, cellIndex) => <td key={`${row[0]}-${cellIndex}`} className={`border-t border-slate-200 px-5 py-4 ${cellIndex === 0 ? "font-semibold text-slate-950" : "text-slate-600"}`}>{cell}</td>)}</tr>)}</tbody></table></div><div className="mt-6 flex items-start gap-3 text-sm leading-6 text-slate-600"><CircleHelp className="mt-1 h-4 w-4 shrink-0 text-orange-700" /><p><strong className="text-slate-950">Commercial clarity:</strong> customer infrastructure, hosting, monitoring and third-party LLM/API consumption are separate from the Shyena software fee unless explicitly contracted otherwise.</p></div></div></section>
 
-      <section className="border-y border-slate-200 bg-[#edf6ff]">
-        <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-28">
-          <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-end lg:gap-20">
-            <div><p className="text-xs font-bold uppercase tracking-[0.22em] text-orange-700">05 / Expansion model</p><h2 className="mt-5 text-4xl font-semibold leading-[0.98] tracking-[-0.05em] sm:text-5xl">Grow the assurance program as the estate grows.</h2></div>
-            <div>
-              <p className="max-w-3xl text-xl leading-8 text-slate-700">The commercial model follows the way enterprises adopt AI: start with one system, prove the assurance workflow, then expand coverage without rebuilding the licensing model.</p>
-              <div className="mt-10 grid border-y border-slate-300 sm:grid-cols-4">
-                {[["01", "Adopt", "One AI system and one defined assurance outcome."], ["02", "Prove", "Evidence, workflows and release confidence."], ["03", "Expand", "More systems, teams, environments and capacity."], ["04", "Scale", "Enterprise-wide governance and assurance."]].map(([number, title, text], index) => <div key={number} className={`py-7 sm:px-5 ${index > 0 ? "border-t border-slate-300 sm:border-l sm:border-t-0" : "sm:pl-0"}`}><span className="font-mono text-xs font-semibold tracking-[0.12em] text-orange-700">{number}</span><h3 className="mt-7 text-lg font-semibold tracking-[-0.02em] text-slate-950">{title}</h3><p className="mt-3 text-sm leading-6 text-slate-600">{text}</p></div>)}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <section className="border-y border-slate-200 bg-[#edf6ff]"><div className="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-28"><div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-end lg:gap-20"><div><p className="text-xs font-bold uppercase tracking-[0.22em] text-orange-700">05 / Expansion model</p><h2 className="mt-5 text-4xl font-semibold leading-[0.98] tracking-[-0.05em] sm:text-5xl">Increase capacity as assurance demand increases.</h2></div><div><p className="max-w-3xl text-xl leading-8 text-slate-700">Start with a defined assurance capacity, establish the workflow, then increase capacity without changing the underlying licensing model.</p><div className="mt-10 grid border-y border-slate-300 sm:grid-cols-4">{[["01", "Adopt", "Define the assurance outcomes and operating baseline."], ["02", "Prove", "Establish evidence, workflows and release confidence."], ["03", "Scale", "Increase assurance capacity as activity grows."], ["04", "Govern", "Add deeper governance, integrations and support."]].map(([number, title, text], index) => <div key={number} className={`py-7 sm:px-5 ${index > 0 ? "border-t border-slate-300 sm:border-l sm:border-t-0" : "sm:pl-0"}`}><span className="font-mono text-xs font-semibold tracking-[0.12em] text-orange-700">{number}</span><h3 className="mt-7 text-lg font-semibold tracking-[-0.02em] text-slate-950">{title}</h3><p className="mt-3 text-sm leading-6 text-slate-600">{text}</p></div>)}</div></div></div></div></section>
 
-      <section className="bg-white">
-        <div className="mx-auto max-w-5xl px-6 py-20 lg:px-8 lg:py-28">
-          <div className="mb-12 max-w-2xl"><p className="text-xs font-bold uppercase tracking-[0.22em] text-orange-700">06 / Pricing questions</p><h2 className="mt-5 text-4xl font-semibold leading-[0.98] tracking-[-0.05em] sm:text-5xl">Clear answers for procurement and engineering.</h2></div>
-          <div className="divide-y divide-slate-200 border-y border-slate-300">
-            {FAQS.map(([question, answer]) => <details key={question} className="group py-6"><summary className="flex cursor-pointer list-none items-center justify-between gap-8 text-lg font-semibold tracking-[-0.02em] text-slate-950"><span>{question}</span><span className="text-2xl font-normal text-slate-400 transition-transform group-open:rotate-45">+</span></summary><p className="max-w-3xl pt-4 text-sm leading-7 text-slate-600">{answer}</p></details>)}
-          </div>
-        </div>
-      </section>
+      <section className="bg-white"><div className="mx-auto max-w-5xl px-6 py-20 lg:px-8 lg:py-28"><div className="mb-12 max-w-2xl"><p className="text-xs font-bold uppercase tracking-[0.22em] text-orange-700">06 / Pricing questions</p><h2 className="mt-5 text-4xl font-semibold leading-[0.98] tracking-[-0.05em] sm:text-5xl">Clear answers for procurement and engineering.</h2></div><div className="divide-y divide-slate-200 border-y border-slate-300">{FAQS.map(([question, answer]) => <details key={question} className="group py-6"><summary className="flex cursor-pointer list-none items-center justify-between gap-8 text-lg font-semibold tracking-[-0.02em] text-slate-950"><span>{question}</span><span className="text-2xl font-normal text-slate-400 transition-transform group-open:rotate-45">+</span></summary><p className="max-w-3xl pt-4 text-sm leading-7 text-slate-600">{answer}</p></details>)}</div></div></section>
 
       <CtaBand />
     </main>
