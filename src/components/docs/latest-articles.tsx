@@ -3,6 +3,13 @@ import { Link } from "@tanstack/react-router";
 
 const LATEST_ARTICLES = [
   {
+    title: "AI Agent Testing Is a Systems Problem, Not Just an LLM Evaluation Problem",
+    category: "AI Agent Assurance",
+    readTime: "6 min",
+    to: "/blog/generated/ai-agent-testing-is-a-systems-problem",
+    icon: Sparkles,
+  },
+  {
     title: "Why Conversational AI Needs a Different Testing Model",
     category: "Testing Strategy",
     readTime: "6 min",
@@ -29,13 +36,6 @@ const LATEST_ARTICLES = [
     readTime: "7 min",
     to: "/blog/cognigy-agent-security-testing-with-ziran",
     icon: Shield,
-  },
-  {
-    title: "AI Agent Testing Is a Systems Problem, Not Just an LLM Evaluation Problem",
-    category: "AI Agent Assurance",
-    readTime: "6 min",
-    to: "/blog/generated/ai-agent-testing-is-a-systems-problem",
-    icon: Sparkles,
   },
 ] as const;
 
