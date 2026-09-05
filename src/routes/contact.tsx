@@ -40,14 +40,32 @@ function ContactPage() {
   const [inquiryReason, setInquiryReason] = useState("");
   const [companySize, setCompanySize] = useState("");
 
+  function focusInvalidField(field: string) {
+    const element = document.getElementById(field);
+    if (!element) return;
+    element.scrollIntoView({ behavior: "smooth", block: "center" });
+    window.setTimeout(() => {
+      (element as HTMLElement).focus({ preventScroll: true });
+    }, 350);
+  }
+
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault(); setError("");
     const form = event.currentTarget; const formData = new FormData(form);
     const emailValidation = getEmailError(String(formData.get("email") ?? ""));
-    if (emailValidation) { setEmailError(emailValidation); return; }
+    if (emailValidation) {
+      setEmailError(emailValidation);
+      focusInvalidField("email");
+      return;
+    }
     setEmailError("");
     const requiredFields = ["inquiryReason", "company", "firstName", "lastName", "email", "phone", "jobTitle", "companySize", "country", "message"];
-    if (requiredFields.some((field) => !String(formData.get(field) ?? "").trim())) { setError("Please complete every field before submitting."); return; }
+    const firstMissingField = requiredFields.find((field) => !String(formData.get(field) ?? "").trim());
+    if (firstMissingField) {
+      setError("Please complete every field before submitting.");
+      focusInvalidField(firstMissingField);
+      return;
+    }
     setStatus("submitting");
     try {
       const response = await fetch("/api/contact", { method: "POST", body: JSON.stringify(Object.fromEntries(formData.entries())), headers: { "Content-Type": "application/json", Accept: "application/json" } });
