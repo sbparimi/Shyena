@@ -30,7 +30,6 @@ const GENERATED_INLINE_VISUALS: Record<string, { match: string; concept: Article
 };
 
 function NotFoundComponent() { return <div className="flex min-h-screen items-center justify-center bg-background px-4"><div className="max-w-md text-center"><h1 className="text-7xl font-bold text-foreground">404</h1><h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2><p className="mt-2 text-sm text-muted-foreground">The page you're looking for doesn't exist or has been moved.</p><div className="mt-6"><Link to="/" className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90">Go home</Link></div></div></div>; }
-
 function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) { console.error(error); const router = useRouter(); useEffect(() => { reportLovableError(error, { boundary: "tanstack_root_error_component" }); }, [error]); return <div className="flex min-h-screen items-center justify-center bg-background px-4"><div className="max-w-md text-center"><h1 className="text-xl font-semibold tracking-tight text-foreground">This page didn't load</h1><p className="mt-2 text-sm text-muted-foreground">Something went wrong on our end. You can try refreshing or head back home.</p><div className="mt-6 flex flex-wrap justify-center gap-2"><button onClick={() => { router.invalidate(); reset(); }} className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90">Try again</button><a href="/" className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent">Go home</a></div></div></div>; }
 
 const ORGANIZATION_SCHEMA = { "@context": "https://schema.org", "@type": "SoftwareApplication", name: "Shyena", applicationCategory: "BusinessApplication", operatingSystem: "Web", description: "Shyena is an enterprise AI agent assurance platform that helps teams understand AI systems, test real behavior, defend security boundaries and produce evidence-backed release decisions.", url: "https://shyena.eu/", keywords: "AI agent assurance, AI evaluation, AI testing, AI QA automation, enterprise AI testing, LLM evaluation, conversational AI testing, Cognigy testing, AI security testing, AI release assurance" };
@@ -64,11 +63,12 @@ function ArticleVisualInjector() {
       if (!generated) return;
       const specs = GENERATED_INLINE_VISUALS[generated.slug] || [];
       setInlineMounts((current) => {
+        let changed = false;
         const next = [...current];
         specs.forEach((spec, index) => {
           const existing = main.querySelector(`[data-shyena-inline-visual="${index}"]`) as HTMLDivElement | null;
           if (existing) {
-            if (!next.some((item) => item.node === existing)) next.push({ node: existing, concept: spec.concept, label: spec.label });
+            if (!next.some((item) => item.node === existing)) { next.push({ node: existing, concept: spec.concept, label: spec.label }); changed = true; }
             return;
           }
           const headings = Array.from(main.querySelectorAll("h2"));
@@ -80,8 +80,9 @@ function ArticleVisualInjector() {
           const paragraph = target.nextElementSibling;
           (paragraph || target).insertAdjacentElement("afterend", node);
           next.push({ node, concept: spec.concept, label: spec.label });
+          changed = true;
         });
-        return next;
+        return changed ? next : current;
       });
     };
 
@@ -98,7 +99,7 @@ function ArticleVisualInjector() {
 
   return <>
     {mountNode && createPortal(<div><ArticleConceptDiagram concept={concept} /><p className="mx-auto mt-8 max-w-3xl text-center text-base font-medium leading-relaxed text-foreground sm:text-lg">{thesis}</p></div>, mountNode)}
-    {inlineMounts.map((item) => createPortal(<div><ArticleConceptDiagram concept={item.concept} /><p className="mt-3 text-center text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">{item.label}</p></div>, item.node))}
+    {inlineMounts.map((item) => createPortal(<div key={item.node.dataset.shyenaInlineVisual}><ArticleConceptDiagram concept={item.concept} /><p className="mt-3 text-center text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">{item.label}</p></div>, item.node))}
   </>;
 }
 
