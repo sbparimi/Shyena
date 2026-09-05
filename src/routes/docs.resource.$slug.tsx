@@ -1,11 +1,11 @@
-import { ArrowLeft, ExternalLink } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
-import { EUENGINEERS_RESOURCES } from "@/data/euengineers-resources";
+import { generatedContent } from "@/content/generated-content";
 
 export const Route = createFileRoute("/docs/resource/$slug")({
   head: ({ params }) => {
-    const article = EUENGINEERS_RESOURCES.find((item) => item.slug === params.slug);
+    const article = generatedContent.docs.find((item) => item.slug === params.slug);
     return {
       meta: [
         { title: article ? `${article.title} | Shyena Docs` : "Resource | Shyena Docs" },
@@ -22,11 +22,11 @@ export const Route = createFileRoute("/docs/resource/$slug")({
 
 function ResourceArticle() {
   const { slug } = Route.useParams();
-  const article = EUENGINEERS_RESOURCES.find((item) => item.slug === slug);
+  const article = generatedContent.docs.find((item) => item.slug === slug);
 
   if (!article) {
     return (
-      <div className="mx-auto max-w-3xl py-24 text-center">
+      <div className="mx-auto max-w-3xl px-6 py-24 text-center">
         <h1 className="text-3xl font-bold text-[#0e172b]">Resource not found</h1>
         <Button asChild className="mt-8"><Link to="/docs"><ArrowLeft className="mr-2 h-4 w-4" />Back to Documentation</Link></Button>
       </div>
@@ -43,20 +43,18 @@ function ResourceArticle() {
           <div className="mt-10 max-w-4xl">
             <p className="font-mono text-xs uppercase tracking-[0.2em] text-[#a87900]">Engineering resource</p>
             <h1 className="mt-4 text-4xl font-bold leading-tight tracking-tight text-[#0e172b] sm:text-6xl">{article.title}</h1>
-            {article.description && <p className="mt-6 max-w-3xl text-lg leading-relaxed text-slate-600">{article.description}</p>}
-            {article.published && <p className="mt-5 font-mono text-xs uppercase tracking-[0.12em] text-slate-500">{article.published}</p>}
+            <p className="mt-6 max-w-3xl text-lg leading-relaxed text-slate-600">{article.description}</p>
+            {article.published && <p className="mt-5 font-mono text-xs uppercase tracking-[0.12em] text-slate-500">Published</p>}
           </div>
         </div>
       </section>
 
       <div className="mx-auto max-w-5xl px-5 py-14 sm:px-8 sm:py-20">
-        <article className="prose prose-slate max-w-4xl prose-headings:tracking-tight prose-headings:text-[#0e172b] prose-p:leading-8 prose-li:leading-7 prose-img:rounded-xl" dangerouslySetInnerHTML={{ __html: article.html }} />
-
-        <div className="mt-16 border-t border-slate-300 pt-8">
-          <p className="text-sm text-slate-500">Originally published by European Engineers Group.</p>
-          <a href={article.sourceUrl} target="_blank" rel="noreferrer" className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-[#0e172b] hover:text-[#a87900]">
-            View original source <ExternalLink className="h-4 w-4" />
-          </a>
+        <div className="border-y border-slate-300 bg-[#f5f8fc] px-6 py-8 sm:px-8">
+          <p className="text-sm leading-7 text-slate-600">This resource is maintained as content-as-code and published through the Shyena documentation pipeline.</p>
+          <Button asChild className="mt-6 bg-slate-950 text-white hover:bg-slate-800">
+            <Link to="/docs/$slug" params={{ slug: article.slug }}>Read the engineering guide <ArrowRight className="h-4 w-4" /></Link>
+          </Button>
         </div>
       </div>
     </div>
