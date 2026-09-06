@@ -50,16 +50,16 @@ function MenuGroup({ items }: { items: readonly MenuItem[] }) {
   );
 }
 
-const desktopTriggerClass = "relative h-10 whitespace-nowrap rounded-none border-0 !bg-white px-2.5 text-[12px] font-bold uppercase tracking-[0.045em] text-slate-800 transition-all duration-200 hover:!border-0 hover:!bg-white hover:text-slate-950 focus:!border-0 focus:!bg-white focus:text-slate-950 data-[state=open]:!border-0 data-[state=open]:!bg-white data-[state=open]:text-slate-950 after:absolute after:inset-x-2 after:bottom-0 after:h-[2px] after:origin-left after:scale-x-0 after:bg-[#14b8a6] after:transition-transform after:duration-300 hover:after:scale-x-100 data-[state=open]:after:scale-x-100";
-const desktopLinkClass = "relative flex h-10 items-center whitespace-nowrap rounded-none border-0 !bg-white px-2.5 text-[12px] font-bold uppercase tracking-[0.045em] text-slate-800 transition-all duration-200 hover:!border-0 hover:!bg-white hover:text-slate-950 focus:!border-0 focus:!bg-white focus:text-slate-950 after:absolute after:inset-x-2 after:bottom-0 after:h-[2px] after:origin-left after:scale-x-0 after:bg-[#14b8a6] after:transition-transform duration-300 hover:after:scale-x-100";
+const desktopTriggerClass = "relative h-10 whitespace-nowrap rounded-none border-0 !bg-transparent px-2.5 text-[12px] font-bold uppercase tracking-[0.045em] text-slate-700 transition-all duration-200 hover:!border-0 hover:!bg-transparent hover:text-slate-950 focus:!border-0 focus:!bg-transparent focus:text-slate-950 data-[state=open]:!border-0 data-[state=open]:!bg-transparent data-[state=open]:text-slate-950 after:absolute after:inset-x-2 after:bottom-0 after:h-[2px] after:origin-left after:scale-x-0 after:bg-[#5b2be0] after:transition-transform after:duration-300 hover:after:scale-x-100 data-[state=open]:after:scale-x-100";
+const desktopLinkClass = "relative flex h-10 items-center whitespace-nowrap rounded-none border-0 !bg-transparent px-2.5 text-[12px] font-bold uppercase tracking-[0.045em] text-slate-700 transition-all duration-200 hover:!border-0 hover:!bg-transparent hover:text-slate-950 focus:!border-0 focus:!bg-transparent focus:text-slate-950 after:absolute after:inset-x-2 after:bottom-0 after:h-[2px] after:origin-left after:scale-x-0 after:bg-[#5b2be0] after:transition-transform after:duration-300 hover:after:scale-x-100";
 
 export function SiteHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-300 bg-white">
-      <div className="mx-auto flex h-[96px] w-full max-w-[1400px] items-center justify-between gap-4 px-5 lg:px-7">
-        <Logo />
-        <div className="hidden min-w-0 flex-1 justify-center md:flex"><div className="bg-slate-50 p-0.5 shadow-[0_4px_18px_rgba(15,23,42,0.05)]"><NavigationMenu><NavigationMenuList className="gap-0 whitespace-nowrap">
+    <header className="sticky top-0 z-50 border-b border-slate-200 bg-white">
+      <div className="mx-auto flex h-[80px] w-full max-w-[1400px] items-center justify-between gap-5 px-5 lg:px-7">
+        <Logo size="header" />
+        <div className="hidden min-w-0 flex-1 justify-center md:flex"><div className="p-0"><NavigationMenu><NavigationMenuList className="gap-0 whitespace-nowrap">
           <NavigationMenuItem><NavigationMenuTrigger className={desktopTriggerClass}>Platform</NavigationMenuTrigger><NavigationMenuContent><div className="border-t border-slate-300 bg-white p-3"><MenuGroup items={PRODUCTS} /></div></NavigationMenuContent></NavigationMenuItem>
           <NavigationMenuItem><Link to="/autonomous-testing" className={desktopLinkClass}><TestTube2 className="mr-1.5 inline-block h-3.5 w-3.5 shrink-0 align-[-2px]" />Autonomous Testing</Link></NavigationMenuItem>
           <NavigationMenuItem><NavigationMenuTrigger className={desktopTriggerClass}>Assurance</NavigationMenuTrigger><NavigationMenuContent><div className="border-t border-slate-300 bg-white p-3"><MenuGroup items={ASSURANCE} /></div></NavigationMenuContent></NavigationMenuItem>
@@ -70,6 +70,7 @@ export function SiteHeader() {
         <div className="hidden items-center md:flex"><Button asChild size="lg" className="h-10 rounded-none border border-[#ffb804] bg-[#ffb804] px-5 text-[12px] font-extrabold uppercase tracking-[0.01em] text-slate-950 shadow-none transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#f2aa00] hover:shadow-[0_8px_20px_rgba(15,23,42,0.12)]"><Link to="/contact">Let's talk<ArrowRight className="ml-1.5 h-3.5 w-3.5" /></Link></Button></div>
         <button type="button" onClick={() => setMobileOpen((v) => !v)} aria-label={mobileOpen ? "Close menu" : "Open menu"} aria-expanded={mobileOpen} className="inline-flex h-12 w-12 items-center justify-center rounded-none border border-[#ffb804] bg-[#ffb804] text-slate-950 transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#f2aa00] md:hidden">{mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}</button>
       </div>
+      <div aria-hidden="true" className="h-[2px] w-full bg-[linear-gradient(90deg,#0b1638_0%,#5b2be0_48%,#00b7e8_78%,#f5a623_100%)]" />
       {mobileOpen && <div className="border-t border-slate-300 bg-slate-50 px-6 pb-7 pt-4 md:hidden"><nav className="grid gap-2">{MOBILE_NAV.map((item) => <Link key={item.to} to={item.to} onClick={() => setMobileOpen(false)} className="group relative flex items-center justify-between border border-slate-300 bg-white px-4 py-4 text-sm font-bold uppercase tracking-[0.05em] text-slate-800 transition-all duration-200 hover:border-slate-950 hover:bg-slate-950 hover:text-white">{item.label}<ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" /></Link>)}</nav><div className="mt-5"><Button asChild className="h-12 w-full rounded-none border border-[#ffb804] bg-[#ffb804] font-extrabold uppercase tracking-[0.01em] text-slate-950 transition-all duration-200 hover:bg-[#f2aa00]"><Link to="/contact" onClick={() => setMobileOpen(false)}>Let's talk<ArrowRight className="ml-2 h-4 w-4" /></Link></Button></div></div>}
     </header>
   );
