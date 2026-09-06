@@ -4,6 +4,8 @@ description: "How Shyena researches, verifies, drafts, reviews, and publishes te
 slug: "sage-content-engineering"
 content_type: "documentation"
 category: "Content Engineering"
+diagram: "sage-content-engineering"
+thesis: "SAGE treats technical content as an engineered, evidence-backed artifact: research establishes claims, verification makes them defensible, review challenges them, and controlled publication preserves traceability."
 primary_keyword: "AI content engineering"
 search_intent: "informational"
 author: "Shyena Engineering"
