@@ -1,6 +1,7 @@
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
+import { ArticleConceptDiagram, type ArticleConcept } from "@/components/blog/article-concept-diagrams";
 import { GeneratedMarkdown, getGeneratedArticle } from "@/content/generated-content-loader";
 
 export const Route = createFileRoute("/blog/$slug")({
@@ -32,13 +33,14 @@ function ArticlePage() {
 
   return <>
     <section className="relative overflow-hidden bg-lavender text-lavender-foreground">
-      <div className="mx-auto w-full max-w-4xl px-5 pb-10 pt-20 sm:px-8 sm:pt-28">
+      <div className="mx-auto w-full max-w-5xl px-5 pb-10 pt-20 sm:px-8 sm:pt-28">
         <div className="text-center">
           <span className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary px-3.5 py-1.5 text-xs font-medium text-primary">{article.category || "Engineering"}</span>
           <h1 className="mt-6 text-3xl font-bold leading-[1.1] sm:text-5xl">{article.title}</h1>
-          <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">{article.description}</p>
-          <p className="mt-5 text-sm text-muted-foreground">{article.author || "Shyena Engineering"}</p>
         </div>
+        {article.diagram && <div className="mt-10"><ArticleConceptDiagram concept={article.diagram as ArticleConcept} /></div>}
+        {article.thesis && <p className="mx-auto mt-10 max-w-3xl text-center text-base font-medium leading-relaxed text-foreground sm:text-lg">{article.thesis}</p>}
+        <div className="mt-5 text-center text-sm text-muted-foreground">{article.author || "Shyena Engineering"}</div>
       </div>
     </section>
 
