@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Shyena Autonomous Testing</title>
+  <desc id="desc">From tester intent to autonomous application understanding, test generation, review, execution, failure forensics and continuous remediation.</desc>
+  <defs>
+    <linearGradient id="hero" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#eff8ff"/><stop offset="0.55" stop-color="#f7fbff"/><stop offset="1" stop-color="#eefcf8"/></linearGradient>
+    <linearGradient id="graph" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e9f6ff"/><stop offset="1" stop-color="#eefcf7"/></linearGradient>
+    <linearGradient id="loop" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff6e6"/><stop offset="0.5" stop-color="#f5f0ff"/><stop offset="1" stop-color="#eafbf7"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#0f172a" flood-opacity=".10"/></filter>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#1e40af"/></marker>
+  </defs>
+  <rect width="1600" height="1000" fill="#ffffff"/>
+  <rect x="24" y="24" width="1552" height="952" rx="24" fill="url(#hero)" stroke="#dbe7f2" stroke-width="2"/>
+
+  <text x="70" y="78" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#1d4ed8" letter-spacing="3">SHYENA · AUTONOMOUS TESTING</text>
+  <text x="70" y="125" font-family="Arial, Helvetica, sans-serif" font-size="39" font-weight="800" fill="#0f172a">From tester intent to a complete, continuously engineered test suite.</text>
+  <text x="70" y="157" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#475569">No Playwright coding. No locator maintenance. No manual test-suite engineering.</text>
+
+  <g filter="url(#shadow)">
+    <rect x="70" y="190" width="290" height="155" rx="16" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="94" y="222" font-family="Arial" font-size="14" font-weight="800" fill="#64748b" letter-spacing="2">TESTER INTENT</text>
+    <text x="94" y="254" font-family="Arial" font-size="19" font-weight="700" fill="#0f172a">“Test the complete</text>
+    <text x="94" y="280" font-family="Arial" font-size="19" font-weight="700" fill="#0f172a">checkout journey and</text>
+    <text x="94" y="306" font-family="Arial" font-size="19" font-weight="700" fill="#0f172a">find what I missed.”</text>
+    <rect x="94" y="318" width="126" height="6" rx="3" fill="#ffb703"/>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="395" y="190" width="340" height="155" rx="16" fill="#ffffff" stroke="#bfdbfe"/>
+    <text x="420" y="222" font-family="Arial" font-size="14" font-weight="800" fill="#2563eb" letter-spacing="1.5">01 · UNDERSTAND</text>
+    <text x="420" y="254" font-family="Arial" font-size="20" font-weight="800" fill="#0f172a">Repository Intelligence</text>
+    <text x="420" y="280" font-family="Arial" font-size="15" fill="#475569">Code · architecture · APIs · rules</text>
+    <text x="420" y="303" font-family="Arial" font-size="15" fill="#475569">existing tests · data · dependencies</text>
+    <text x="420" y="326" font-family="Arial" font-size="13" font-weight="700" fill="#2563eb">BUILD APPLICATION INTELLIGENCE</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="770" y="190" width="340" height="155" rx="16" fill="#ffffff" stroke="#bbf7d0"/>
+    <text x="795" y="222" font-family="Arial" font-size="14" font-weight="800" fill="#059669" letter-spacing="1.5">02 · ANALYZE</text>
+    <text x="795" y="254" font-family="Arial" font-size="20" font-weight="800" fill="#0f172a">Assurance Analysis</text>
+    <text x="795" y="280" font-family="Arial" font-size="15" fill="#475569">Critical paths · scenarios · blind spots</text>
+    <text x="795" y="303" font-family="Arial" font-size="15" fill="#475569">risk · coverage gaps · test data needs</text>
+    <text x="795" y="326" font-family="Arial" font-size="13" font-weight="700" fill="#059669">RECOMMEND WHAT MUST BE TESTED</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="1145" y="190" width="360" height="155" rx="16" fill="#ffffff" stroke="#ddd6fe"/>
+    <text x="1170" y="222" font-family="Arial" font-size="14" font-weight="800" fill="#7c3aed" letter-spacing="1.5">03 · ENGINEER</text>
+    <text x="1170" y="254" font-family="Arial" font-size="20" font-weight="800" fill="#0f172a">Playwright + Code Agent</text>
+    <text x="1170" y="280" font-family="Arial" font-size="15" fill="#475569">Generates the entire E2E suite</text>
+    <text x="1170" y="303" font-family="Arial" font-size="15" fill="#475569">fixtures · data · helpers · tests</text>
+    <text x="1170" y="326" font-family="Arial" font-size="13" font-weight="700" fill="#7c3aed">TESTER NEVER WRITES CODE</text>
+  </g>
+
+  <path d="M360 267 H390" stroke="#1e40af" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M735 267 H765" stroke="#1e40af" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M1110 267 H1140" stroke="#1e40af" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <rect x="70" y="385" width="1435" height="285" rx="20" fill="#0f172a"/>
+  <text x="105" y="424" font-family="Arial" font-size="14" font-weight="800" fill="#93c5fd" letter-spacing="2">APPLICATION INTELLIGENCE GRAPH</text>
+  <text x="105" y="458" font-family="Arial" font-size="26" font-weight="800" fill="#ffffff">One shared model for every agent.</text>
+  <text x="105" y="486" font-family="Arial" font-size="15" fill="#cbd5e1">Code, behaviour, tests, requirements, risks, dependencies, changes and evidence.</text>
+
+  <g>
+    <rect x="105" y="520" width="155" height="82" rx="12" fill="#172554" stroke="#60a5fa"/>
+    <text x="182" y="552" text-anchor="middle" font-family="Arial" font-size="15" font-weight="800" fill="#bfdbfe">CODE</text>
+    <text x="182" y="575" text-anchor="middle" font-family="Arial" font-size="13" fill="#dbeafe">AST · APIs · rules</text>
+    <rect x="285" y="520" width="155" height="82" rx="12" fill="#052e2b" stroke="#34d399"/>
+    <text x="362" y="552" text-anchor="middle" font-family="Arial" font-size="15" font-weight="800" fill="#a7f3d0">BEHAVIOUR</text>
+    <text x="362" y="575" text-anchor="middle" font-family="Arial" font-size="13" fill="#d1fae5">paths · states · outcomes</text>
+    <rect x="465" y="520" width="155" height="82" rx="12" fill="#2e1065" stroke="#a78bfa"/>
+    <text x="542" y="552" text-anchor="middle" font-family="Arial" font-size="15" font-weight="800" fill="#ddd6fe">TESTS</text>
+    <text x="542" y="575" text-anchor="middle" font-family="Arial" font-size="13" fill="#ede9fe">intent · coverage · suites</text>
+    <rect x="645" y="520" width="155" height="82" rx="12" fill="#422006" stroke="#fbbf24"/>
+    <text x="722" y="552" text-anchor="middle" font-family="Arial" font-size="15" font-weight="800" fill="#fde68a">RISK</text>
+    <text x="722" y="575" text-anchor="middle" font-family="Arial" font-size="13" fill="#fef3c7">criticality · impact</text>
+    <rect x="825" y="520" width="155" height="82" rx="12" fill="#172554" stroke="#818cf8"/>
+    <text x="902" y="552" text-anchor="middle" font-family="Arial" font-size="15" font-weight="800" fill="#c7d2fe">CHANGE</text>
+    <text x="902" y="575" text-anchor="middle" font-family="Arial" font-size="13" fill="#e0e7ff">diff · impact · history</text>
+    <rect x="1005" y="520" width="155" height="82" rx="12" fill="#083344" stroke="#22d3ee"/>
+    <text x="1082" y="552" text-anchor="middle" font-family="Arial" font-size="15" font-weight="800" fill="#a5f3fc">EVIDENCE</text>
+    <text x="1082" y="575" text-anchor="middle" font-family="Arial" font-size="13" fill="#cffafe">trace · API · logs</text>
+    <rect x="1185" y="520" width="280" height="82" rx="12" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="1325" y="552" text-anchor="middle" font-family="Arial" font-size="15" font-weight="800" fill="#0f172a">GRAPH + RAG + CONTEXT</text>
+    <text x="1325" y="575" text-anchor="middle" font-family="Arial" font-size="13" fill="#475569">Relevant knowledge for every decision</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="70" y="710" width="300" height="190" rx="16" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="98" y="746" font-family="Arial" font-size="14" font-weight="800" fill="#7c3aed" letter-spacing="1.5">REVIEW AGENT</text>
+    <text x="98" y="779" font-family="Arial" font-size="21" font-weight="800" fill="#0f172a">Coverage you can defend.</text>
+    <text x="98" y="809" font-family="Arial" font-size="14" fill="#475569">Reviews generated tests against</text>
+    <text x="98" y="832" font-family="Arial" font-size="14" fill="#475569">requirements, code and critical paths.</text>
+    <rect x="98" y="851" width="122" height="29" rx="8" fill="#f5f3ff"/><text x="159" y="871" text-anchor="middle" font-family="Arial" font-size="12" font-weight="800" fill="#6d28d9">COVERAGE %</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="395" y="710" width="350" height="190" rx="16" fill="#ffffff" stroke="#bae6fd"/>
+    <text x="423" y="746" font-family="Arial" font-size="14" font-weight="800" fill="#0284c7" letter-spacing="1.5">EXECUTE</text>
+    <text x="423" y="779" font-family="Arial" font-size="21" font-weight="800" fill="#0f172a">Run only after approval.</text>
+    <text x="423" y="809" font-family="Arial" font-size="14" fill="#475569">Playwright runs the generated suite</text>
+    <text x="423" y="832" font-family="Arial" font-size="14" fill="#475569">and captures trace, screenshots, APIs and logs.</text>
+    <text x="423" y="869" font-family="Arial" font-size="13" font-weight="700" fill="#0284c7">EVIDENCE-FIRST EXECUTION</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="770" y="710" width="735" height="190" rx="16" fill="url(#loop)" stroke="#cbd5e1"/>
+    <text x="800" y="746" font-family="Arial" font-size="14" font-weight="800" fill="#be123c" letter-spacing="1.5">AUTONOMOUS FAILURE FORENSICS &amp; REMEDIATION</text>
+    <text x="800" y="779" font-family="Arial" font-size="21" font-weight="800" fill="#0f172a">Detect → classify → fix → review → merge → re-execute → learn</text>
+    <g font-family="Arial" font-size="13" font-weight="700">
+      <rect x="800" y="804" width="130" height="52" rx="10" fill="#ffffff" stroke="#fecdd3"/><text x="865" y="835" text-anchor="middle" fill="#be123c">FORENSICS</text>
+      <rect x="950" y="804" width="130" height="52" rx="10" fill="#ffffff" stroke="#fed7aa"/><text x="1015" y="835" text-anchor="middle" fill="#c2410c">CLASSIFY</text>
+      <rect x="1100" y="804" width="130" height="52" rx="10" fill="#ffffff" stroke="#bbf7d0"/><text x="1165" y="835" text-anchor="middle" fill="#15803d">DEVELOPER / TEST</text>
+      <rect x="1250" y="804" width="105" height="52" rx="10" fill="#ffffff" stroke="#ddd6fe"/><text x="1302" y="835" text-anchor="middle" fill="#6d28d9">REVIEW</text>
+      <rect x="1375" y="804" width="105" height="52" rx="10" fill="#ffffff" stroke="#bfdbfe"/><text x="1427" y="835" text-anchor="middle" fill="#1d4ed8">RE-RUN</text>
+    </g>
+  </g>
+
+  <path d="M745 805 H760" stroke="#1e40af" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M750 865 C650 930 470 930 370 865" fill="none" stroke="#14b8a6" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M1500 865 C1525 930 1370 938 1280 900" fill="none" stroke="#14b8a6" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <text x="800" y="934" font-family="Arial" font-size="14" font-weight="800" fill="#0f766e" letter-spacing="2">CONTINUOUS LEARNING · EVERY EXECUTION UPDATES THE APPLICATION INTELLIGENCE</text>
+  <text x="70" y="950" font-family="Arial" font-size="14" fill="#64748b">Human owns intent and approval. Agents own test engineering, execution, diagnosis and maintenance.</text>
+</svg>
