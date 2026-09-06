@@ -51,13 +51,13 @@ function MenuGroup({ items }: { items: readonly MenuItem[] }) {
 }
 
 const desktopTriggerClass = "relative h-10 whitespace-nowrap rounded-none border-0 !bg-white px-2.5 text-[12px] font-bold uppercase tracking-[0.045em] text-slate-800 transition-all duration-200 hover:!border-0 hover:!bg-white hover:text-slate-950 focus:!border-0 focus:!bg-white focus:text-slate-950 data-[state=open]:!border-0 data-[state=open]:!bg-white data-[state=open]:text-slate-950 after:absolute after:inset-x-2 after:bottom-0 after:h-[2px] after:origin-left after:scale-x-0 after:bg-[#14b8a6] after:transition-transform after:duration-300 hover:after:scale-x-100 data-[state=open]:after:scale-x-100";
-const desktopLinkClass = "relative flex h-10 items-center whitespace-nowrap rounded-none border-0 !bg-white px-2.5 text-[12px] font-bold uppercase tracking-[0.045em] text-slate-800 transition-all duration-200 hover:!border-0 hover:!bg-white hover:text-slate-950 focus:!border-0 focus:!bg-white focus:text-slate-950 after:absolute after:inset-x-2 after:bottom-0 after:h-[2px] after:origin-left after:scale-x-0 after:bg-[#14b8a6] after:transition-transform after:duration-300 hover:after:scale-x-100";
+const desktopLinkClass = "relative flex h-10 items-center whitespace-nowrap rounded-none border-0 !bg-white px-2.5 text-[12px] font-bold uppercase tracking-[0.045em] text-slate-800 transition-all duration-200 hover:!border-0 hover:!bg-white hover:text-slate-950 focus:!border-0 focus:!bg-white focus:text-slate-950 after:absolute after:inset-x-2 after:bottom-0 after:h-[2px] after:origin-left after:scale-x-0 after:bg-[#14b8a6] after:transition-transform duration-300 hover:after:scale-x-100";
 
 export function SiteHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
   return (
     <header className="sticky top-0 z-50 border-b border-slate-300 bg-white">
-      <div className="mx-auto flex h-[76px] w-full max-w-[1400px] items-center justify-between gap-4 px-5 lg:px-7">
+      <div className="mx-auto flex h-[96px] w-full max-w-[1400px] items-center justify-between gap-4 px-5 lg:px-7">
         <Logo />
         <div className="hidden min-w-0 flex-1 justify-center md:flex"><div className="bg-slate-50 p-0.5 shadow-[0_4px_18px_rgba(15,23,42,0.05)]"><NavigationMenu><NavigationMenuList className="gap-0 whitespace-nowrap">
           <NavigationMenuItem><NavigationMenuTrigger className={desktopTriggerClass}>Platform</NavigationMenuTrigger><NavigationMenuContent><div className="border-t border-slate-300 bg-white p-3"><MenuGroup items={PRODUCTS} /></div></NavigationMenuContent></NavigationMenuItem>
