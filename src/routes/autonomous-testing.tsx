@@ -24,7 +24,7 @@ export const Route = createFileRoute("/autonomous-testing")({
       {
         name: "description",
         content:
-          "Shyena turns a testing goal into an engineered, reviewed and continuously maintained Playwright assurance suite — with autonomous failure forensics, evidence and release confidence.",
+          "Shyena turns testing outcomes into continuously engineered assurance: understand the system, build and review tests, investigate failures, and produce evidence for release decisions.",
       },
       {
         name: "keywords",
@@ -35,7 +35,7 @@ export const Route = createFileRoute("/autonomous-testing")({
       {
         property: "og:description",
         content:
-          "Not another AI test generator. Shyena autonomously understands the application, engineers the tests, reviews coverage, investigates failures and keeps the assurance suite ready.",
+          "Define the quality outcome. Shyena autonomously engineers the testing work required to prove it, maintain it and support the release decision.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -46,39 +46,41 @@ export const Route = createFileRoute("/autonomous-testing")({
 });
 
 const DIFFERENCES = [
-  {
-    title: "Not just test generation",
-    text: "Most AI tools start with a prompt and produce test code. Shyena starts by understanding the application and the behavior that actually needs to be proven.",
-    icon: FileSearch,
-  },
-  {
-    title: "Not just execution",
-    text: "A green or red result is not enough. Shyena connects intent, coverage, execution evidence, failures, remediation and the next release decision.",
-    icon: ShieldCheck,
-  },
-  {
-    title: "Not just self-healing",
-    text: "Shyena does not blindly change assertions to make a test green. It separates product defects from automation defects and applies controlled remediation.",
-    icon: RefreshCw,
-  },
-];
+  ["AI-generated tests are not assurance", "Generating test code is only one small part of the work. Shyena starts with the outcome and the system that must be proven.", FileSearch],
+  ["A pass/fail result is not enough", "Shyena connects intent, risk, coverage, execution evidence, failure cause and release impact so teams know what the result means.", ShieldCheck],
+  ["Self-healing must not hide defects", "Shyena distinguishes product defects from automation defects and applies controlled remediation instead of changing assertions simply to get a green test.", RefreshCw],
+] as const;
 
 const FLOW = [
-  ["01", "Define the outcome", "Give Shyena a goal, capability, requirement or area you need confidence in.", Target],
-  ["02", "Understand the system", "Read the repository, application behavior, APIs, existing tests and engineering conventions.", FileSearch],
-  ["03", "Find what is missing", "Map critical journeys, risk, dependencies and coverage gaps before writing automation.", Search],
-  ["04", "Engineer the suite", "Generate repository-native Playwright automation, fixtures, data and supporting code.", Code2],
-  ["05", "Review before trust", "An independent agent challenges weak scenarios, shallow assertions and missing coverage.", ShieldCheck],
-  ["06", "Run and learn", "Execute, capture evidence, diagnose failures, safely repair where permitted and feed the result back into the system.", RefreshCw],
+  ["01", "Define the outcome", "Give Shyena a business journey, requirement, capability or risk that needs confidence.", Target],
+  ["02", "Understand the system", "Build context from the application, repository, APIs, existing tests, dependencies and engineering conventions.", FileSearch],
+  ["03", "Map risk and coverage", "Identify critical journeys, failure conditions, dependencies, change impact and gaps before automation is created.", Search],
+  ["04", "Engineer the assurance", "Create repository-native Playwright automation, fixtures, data and supporting code aligned to the system.", Code2],
+  ["05", "Challenge the result", "An independent assurance pass looks for weak scenarios, shallow assertions and untested risk.", ShieldCheck],
+  ["06", "Execute, diagnose and prove", "Run the suite, capture evidence, classify failures, apply governed remediation and establish the next release signal.", RefreshCw],
+] as const;
+
+const CUSTOMER_GETS = [
+  ["Executable assurance suite", "Repository-native Playwright tests, fixtures, data and supporting automation that your engineering team can run and maintain.", FileCode2],
+  ["Risk-based coverage map", "A visible connection between business outcomes, critical journeys, dependencies, change impact and what is actually tested.", Target],
+  ["Failure intelligence", "Evidence-backed classification of product, automation, data, environment and dependency failures with actionable findings.", Search],
+  ["Release evidence", "Execution results, traces, findings, remediation history and verdicts connected into a defensible evidence chain.", ShieldCheck],
+  ["Continuously improving assurance", "The system retains context from previous runs so coverage and diagnosis improve instead of restarting from zero.", GitBranch],
+  ["Engineering-ready integration", "A workflow designed to fit Playwright, Git, CI/CD, APIs, observability and existing release processes.", GitPullRequest],
 ] as const;
 
 const BENEFITS = [
-  ["More engineering capacity", "Move testers and developers away from repetitive automation authoring and failure triage toward higher-value quality work.", Sparkles],
-  ["Coverage that follows risk", "Prioritize business behavior, critical paths, dependencies and change impact instead of treating test count as coverage.", Target],
-  ["Faster release confidence", "Turn a testing objective into executable evidence without waiting for a large manual test-engineering cycle.", Play],
-  ["Lower maintenance burden", "The same autonomous loop observes failures, distinguishes causes and keeps the automation aligned with the application.", RefreshCw],
-  ["Evidence engineers can defend", "Connect intent, generated tests, execution, traces, findings, remediation and verdicts into one evidence chain.", ShieldCheck],
-  ["A system that compounds", "Every run adds context about application behavior, failures, coverage and what matters to the product.", GitBranch],
+  ["More engineering capacity", "Reduce repetitive test authoring, maintenance and first-line failure triage so specialists spend more time on risk and product quality.", Sparkles],
+  ["Faster confidence", "Move from a testing request to executable evidence without waiting for every test to be manually designed and maintained.", Play],
+  ["Better coverage decisions", "Prioritize what matters to the business rather than measuring progress by the number of test cases generated.", Target],
+  ["Lower maintenance effort", "Continuously investigate failures and keep automation aligned with application change through a governed autonomous loop.", RefreshCw],
+] as const;
+
+const SAVINGS = [
+  ["Less manual automation work", "Automate the repetitive work of discovering scenarios, creating test assets and preparing execution instead of adding the same effort to every release."],
+  ["Less failure investigation time", "Correlate execution evidence with code, APIs, logs and history before an engineer starts the investigation from scratch."],
+  ["Less rework from late defects", "Expose coverage gaps and high-risk failures earlier, when remediation is cheaper than production investigation and release disruption."],
+  ["Better use of specialist teams", "Keep senior QA and engineering capacity focused on architecture, risk, exploratory testing and quality decisions rather than repetitive mechanics."],
 ] as const;
 
 function MissionVisual() {
@@ -92,34 +94,22 @@ function MissionVisual() {
           </div>
           <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.12em] text-emerald-700"><span className="h-2 w-2 bg-emerald-500" /> Evidence ready</div>
         </div>
-
         <div className="grid gap-px bg-slate-200 md:grid-cols-[1fr_1.35fr]">
           <div className="space-y-3 bg-slate-950 p-5 text-white">
-            <div className="font-mono text-[9px] uppercase tracking-[0.18em] text-slate-500">Human intent</div>
+            <div className="font-mono text-[9px] uppercase tracking-[0.18em] text-slate-500">Business outcome</div>
             <div className="border border-white/10 bg-white/[0.04] p-4 text-sm font-semibold leading-6 text-slate-200">Prove that a customer can complete checkout, payment failure is handled correctly, and no order is created without successful payment.</div>
-            <div className="flex items-center gap-2 pt-1 text-[10px] font-bold uppercase tracking-[0.12em] text-[#ffb703]"><Target className="h-3.5 w-3.5" /> Business outcome</div>
+            <div className="flex items-center gap-2 pt-1 text-[10px] font-bold uppercase tracking-[0.12em] text-[#ffb703]"><Target className="h-3.5 w-3.5" /> Quality outcome</div>
           </div>
-
           <div className="space-y-3 bg-white p-5">
             <div className="font-mono text-[9px] uppercase tracking-[0.18em] text-slate-400">Autonomous work</div>
-            {[
-              ["System understood", "Repository + application behavior"],
-              ["Risk mapped", "Critical paths + failure conditions"],
-              ["Tests engineered", "Playwright + fixtures + data"],
-              ["Coverage reviewed", "Independent assurance review"],
-              ["Evidence captured", "Trace + result + finding + verdict"],
-            ].map(([title, detail]) => (
-              <div key={title} className="flex gap-3 border border-slate-200 p-3">
-                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center bg-[#ffb703] text-[10px] font-extrabold text-slate-950"><Check className="h-3 w-3" /></span>
-                <div><div className="text-xs font-extrabold text-slate-800">{title}</div><div className="mt-0.5 text-[10px] leading-4 text-slate-500">{detail}</div></div>
-              </div>
+            {[["System understood", "Application + repository + dependencies"], ["Risk mapped", "Critical paths + failure conditions"], ["Assurance engineered", "Playwright + fixtures + data"], ["Result challenged", "Independent coverage review"], ["Evidence captured", "Trace + finding + verdict"]].map(([title, detail]) => (
+              <div key={title} className="flex gap-3 border border-slate-200 p-3"><span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center bg-[#ffb703] text-[10px] font-extrabold text-slate-950"><Check className="h-3 w-3" /></span><div><div className="text-xs font-extrabold text-slate-800">{title}</div><div className="mt-0.5 text-[10px] leading-4 text-slate-500">{detail}</div></div></div>
             ))}
           </div>
         </div>
-
         <div className="grid grid-cols-3 gap-px border-t border-slate-200 bg-slate-200">
-          <div className="bg-white p-4"><div className="font-mono text-[9px] uppercase tracking-wider text-slate-400">Input</div><div className="mt-1 text-xs font-extrabold">Intent</div></div>
-          <div className="bg-white p-4"><div className="font-mono text-[9px] uppercase tracking-wider text-slate-400">System</div><div className="mt-1 text-xs font-extrabold">Behavior model</div></div>
+          <div className="bg-white p-4"><div className="font-mono text-[9px] uppercase tracking-wider text-slate-400">Input</div><div className="mt-1 text-xs font-extrabold">Outcome</div></div>
+          <div className="bg-white p-4"><div className="font-mono text-[9px] uppercase tracking-wider text-slate-400">System</div><div className="mt-1 text-xs font-extrabold">Risk + behavior</div></div>
           <div className="bg-white p-4"><div className="font-mono text-[9px] uppercase tracking-wider text-slate-400">Output</div><div className="mt-1 text-xs font-extrabold">Release evidence</div></div>
         </div>
       </div>
@@ -134,13 +124,13 @@ function AutonomousTestingPage() {
         <div className="mx-auto grid max-w-[1440px] gap-14 px-6 pb-16 pt-16 sm:px-8 sm:pb-20 sm:pt-20 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:gap-16 lg:px-10 lg:py-24">
           <div>
             <div className="mb-6 inline-flex items-center gap-2 border border-slate-300 bg-slate-50 px-3 py-2 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-slate-600"><TestTube2 className="h-3.5 w-3.5 text-[#a87900]" /> Autonomous quality engineering</div>
-            <h1 className="max-w-4xl font-[Sora] text-[clamp(3.2rem,6vw,6.5rem)] font-extrabold leading-[0.9] tracking-[-0.065em] text-slate-950">Stop building tests.<br /><span className="text-[#1d4ed8]">Start proving software.</span></h1>
-            <p className="mt-7 max-w-2xl text-lg leading-8 text-slate-600 sm:text-xl">Shyena turns a testing goal into an engineered assurance system. It understands your application, discovers what matters, builds the automation, challenges its own coverage, investigates failures and produces evidence your team can use to make a release decision.</p>
+            <h1 className="max-w-4xl font-[Sora] text-[clamp(3.2rem,6vw,6.5rem)] font-extrabold leading-[0.9] tracking-[-0.065em] text-slate-950">Testing should prove the outcome.<br /><span className="text-[#1d4ed8]">Not just run the test.</span></h1>
+            <p className="mt-7 max-w-2xl text-lg leading-8 text-slate-600 sm:text-xl">Modern software changes faster than teams can manually design, maintain and investigate its automation. Shyena turns a quality outcome into a continuously engineered assurance loop — understanding the system, finding risk, building tests, challenging coverage, investigating failures and producing evidence for the release decision.</p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link to="/contact" className="inline-flex h-13 items-center justify-center gap-2 border border-[#ffb703] bg-[#ffb703] px-7 py-3.5 text-sm font-extrabold uppercase tracking-[0.01em] text-slate-950 transition-all hover:-translate-y-0.5 hover:bg-[#f2aa00]">See it in action <ArrowRight className="h-5 w-5" /></Link>
-              <a href="#difference" className="inline-flex h-13 items-center justify-center gap-2 border border-slate-400 bg-white px-7 py-3.5 text-sm font-semibold text-slate-950 transition-colors hover:border-slate-950">Why Shyena?</a>
+              <a href="#how" className="inline-flex h-13 items-center justify-center gap-2 border border-slate-400 bg-white px-7 py-3.5 text-sm font-semibold text-slate-950 transition-colors hover:border-slate-950">How it works</a>
             </div>
-            <div className="mt-7 flex flex-wrap gap-x-5 gap-y-2 text-[10px] font-bold uppercase tracking-[0.16em] text-slate-400">Understand · Engineer · Review · Execute · Diagnose · Prove</div>
+            <div className="mt-7 flex flex-wrap gap-x-5 gap-y-2 text-[10px] font-bold uppercase tracking-[0.16em] text-slate-400">Outcome · Context · Risk · Engineer · Challenge · Prove</div>
           </div>
           <MissionVisual />
         </div>
@@ -149,38 +139,36 @@ function AutonomousTestingPage() {
       <section className="border-b border-slate-300 bg-slate-50">
         <div className="mx-auto max-w-[1440px] px-6 py-16 sm:px-8 lg:px-10 lg:py-20">
           <div className="mx-auto max-w-4xl text-center">
-            <div className="font-mono text-xs font-bold uppercase tracking-[0.22em] text-[#a87900]">The problem</div>
-            <h2 className="mt-4 font-[Sora] text-[clamp(2.7rem,5vw,5rem)] font-extrabold leading-[0.92] tracking-[-0.06em]">AI can write a test in seconds.<br />That is not autonomous testing.</h2>
-            <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-slate-600">The expensive work is everything around the code: understanding the system, deciding what must be tested, finding blind spots, maintaining suites, diagnosing failures and proving whether the result is trustworthy.</p>
+            <div className="font-mono text-xs font-bold uppercase tracking-[0.22em] text-[#a87900]">Context → clarity</div>
+            <h2 className="mt-4 font-[Sora] text-[clamp(2.7rem,5vw,5rem)] font-extrabold leading-[0.92] tracking-[-0.06em]">The hard part is not writing test code.</h2>
+            <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-slate-600">Teams lose time because testing is a chain of disconnected activities: someone decides what to test, someone writes automation, someone maintains it, someone investigates failures, and someone else decides whether the evidence is trustworthy. AI can accelerate individual tasks without solving that system-level problem.</p>
           </div>
-
-          <div id="difference" className="mt-12 grid gap-px border border-slate-300 bg-slate-300 md:grid-cols-3">
-            {DIFFERENCES.map((item) => {
-              const Icon = item.icon;
-              return <article key={item.title} className="bg-white p-8 lg:p-10"><Icon className="h-6 w-6 text-[#a87900]" /><h3 className="mt-7 text-xl font-extrabold tracking-tight">{item.title}</h3><p className="mt-4 text-sm leading-7 text-slate-600">{item.text}</p></article>;
-            })}
+          <div className="mt-12 grid gap-px border border-slate-300 bg-slate-300 md:grid-cols-3">
+            {DIFFERENCES.map(([title, text, Icon]) => <article key={title} className="bg-white p-8 lg:p-10"><Icon className="h-6 w-6 text-[#a87900]" /><h3 className="mt-7 text-xl font-extrabold tracking-tight">{title}</h3><p className="mt-4 text-sm leading-7 text-slate-600">{text}</p></article>)}
           </div>
         </div>
       </section>
 
-      <section className="border-b border-slate-300 bg-white">
+      <section id="how" className="border-b border-slate-300 bg-white">
         <div className="mx-auto max-w-[1440px] px-6 py-20 sm:px-8 lg:px-10 lg:py-28">
           <div className="grid gap-14 lg:grid-cols-[0.75fr_1.25fr] lg:items-start">
             <div className="lg:sticky lg:top-24">
-              <div className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-[#a87900]">What Shyena delivers</div>
-              <h2 className="mt-5 font-[Sora] text-[clamp(3rem,5vw,5.4rem)] font-extrabold leading-[0.9] tracking-[-0.06em]">A living assurance layer for your software.</h2>
-              <p className="mt-6 max-w-xl text-lg leading-8 text-slate-600">Your team keeps ownership of quality. Shyena takes ownership of the repetitive engineering loop required to establish and maintain confidence.</p>
+              <div className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-[#a87900]">How Shyena does it</div>
+              <h2 className="mt-5 font-[Sora] text-[clamp(3rem,5vw,5.4rem)] font-extrabold leading-[0.9] tracking-[-0.06em]">One autonomous engineering loop.</h2>
+              <p className="mt-6 max-w-xl text-lg leading-8 text-slate-600">Shyena does not replace your quality strategy. It operationalizes the repetitive engineering work needed to turn that strategy into continuously updated evidence.</p>
             </div>
-
             <div className="border-t border-slate-300">
-              {FLOW.map(([number, title, text, Icon]) => (
-                <article key={number} className="grid gap-5 border-b border-slate-300 py-8 sm:grid-cols-[64px_1fr_42px] sm:items-start sm:gap-7">
-                  <div className="font-mono text-xs font-bold tracking-[0.15em] text-slate-400">{number}</div>
-                  <div><h3 className="text-2xl font-extrabold tracking-tight">{title}</h3><p className="mt-2 max-w-2xl text-sm leading-7 text-slate-600">{text}</p></div>
-                  <div className="flex h-10 w-10 items-center justify-center border border-slate-300 bg-slate-50 text-slate-700"><Icon className="h-4 w-4" /></div>
-                </article>
-              ))}
+              {FLOW.map(([number, title, text, Icon]) => <article key={number} className="grid gap-5 border-b border-slate-300 py-8 sm:grid-cols-[64px_1fr_42px] sm:items-start sm:gap-7"><div className="font-mono text-xs font-bold tracking-[0.15em] text-slate-400">{number}</div><div><h3 className="text-2xl font-extrabold tracking-tight">{title}</h3><p className="mt-2 max-w-2xl text-sm leading-7 text-slate-600">{text}</p></div><div className="flex h-10 w-10 items-center justify-center border border-slate-300 bg-slate-50 text-slate-700"><Icon className="h-4 w-4" /></div></article>)}
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-slate-300 bg-slate-50">
+        <div className="mx-auto max-w-[1440px] px-6 py-20 sm:px-8 lg:px-10 lg:py-28">
+          <div className="mx-auto max-w-4xl text-center"><div className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-[#a87900]">What customers get</div><h2 className="mt-5 font-[Sora] text-[clamp(3rem,5vw,5.2rem)] font-extrabold leading-[0.9] tracking-[-0.06em]">Not another test report. A working assurance system.</h2><p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-slate-600">Every engagement produces engineering assets and evidence that can be used by testers, developers, release managers and engineering leaders.</p></div>
+          <div className="mt-12 grid gap-px border border-slate-300 bg-slate-300 sm:grid-cols-2 lg:grid-cols-3">
+            {CUSTOMER_GETS.map(([title, text, Icon]) => <article key={title} className="bg-white p-7 lg:p-8"><Icon className="h-5 w-5 text-[#a87900]" /><h3 className="mt-6 text-lg font-extrabold">{title}</h3><p className="mt-3 text-sm leading-6 text-slate-600">{text}</p></article>)}
           </div>
         </div>
       </section>
@@ -188,7 +176,7 @@ function AutonomousTestingPage() {
       <section className="bg-[#0b0920] text-white">
         <div className="mx-auto max-w-[1440px] px-6 py-20 sm:px-8 lg:px-10 lg:py-28">
           <div className="grid gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
-            <div><div className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-[#ffb703]">Why teams use it</div><h2 className="mt-5 font-[Sora] text-[clamp(3rem,5vw,5.3rem)] font-extrabold leading-[0.9] tracking-[-0.06em]">Less test maintenance.<br />More proof.</h2><p className="mt-6 max-w-xl text-lg leading-8 text-slate-300">Shyena is designed around the outcome engineering leaders actually need: confidence that survives the next code change, the next release and the next failure.</p></div>
+            <div><div className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-[#ffb703]">How it benefits teams</div><h2 className="mt-5 font-[Sora] text-[clamp(3rem,5vw,5.3rem)] font-extrabold leading-[0.9] tracking-[-0.06em]">Less repetitive work.<br />More engineering capacity.</h2><p className="mt-6 max-w-xl text-lg leading-8 text-slate-300">The value is not more tests. It is more useful confidence with less manual effort around every test.</p></div>
             <div className="grid gap-px border border-white/10 bg-white/10 sm:grid-cols-2">
               {BENEFITS.map(([title, text, Icon]) => <article key={title} className="bg-[#0b0920] p-7 lg:p-8"><Icon className="h-5 w-5 text-[#ffb703]" /><h3 className="mt-6 text-lg font-extrabold">{title}</h3><p className="mt-3 text-sm leading-6 text-slate-400">{text}</p></article>)}
             </div>
@@ -198,57 +186,28 @@ function AutonomousTestingPage() {
 
       <section className="border-b border-slate-300 bg-white">
         <div className="mx-auto max-w-[1440px] px-6 py-20 sm:px-8 lg:px-10 lg:py-28">
-          <div className="mx-auto max-w-4xl text-center">
-            <div className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-[#a87900]">The autonomous loop</div>
-            <h2 className="mt-5 font-[Sora] text-[clamp(3rem,5vw,5.3rem)] font-extrabold leading-[0.9] tracking-[-0.06em]">A failed test is not the end of the workflow.</h2>
-            <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-slate-600">Shyena investigates what actually failed, identifies the likely cause and routes the next action to the right agent. Safe automation repairs can be applied autonomously; changes to business behavior remain governed.</p>
+          <div className="grid gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+            <div><div className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-[#a87900]">How the company saves money and resources</div><h2 className="mt-5 font-[Sora] text-[clamp(3rem,5vw,5.1rem)] font-extrabold leading-[0.9] tracking-[-0.06em]">Reduce the cost of proving quality.</h2><p className="mt-6 max-w-xl text-lg leading-8 text-slate-600">Autonomous testing creates value when it removes recurring work and reduces the cost of failure — not when it simply increases the number of automated tests.</p></div>
+            <div className="border-t border-slate-300">
+              {SAVINGS.map(([title, text], index) => <article key={title} className="grid gap-5 border-b border-slate-300 py-8 sm:grid-cols-[48px_1fr] sm:gap-7"><div className="font-mono text-xs font-bold tracking-[0.15em] text-slate-400">0{index + 1}</div><div><h3 className="text-xl font-extrabold tracking-tight">{title}</h3><p className="mt-3 max-w-2xl text-sm leading-7 text-slate-600">{text}</p></div></article>)}
+            </div>
           </div>
-
-          <div className="mx-auto mt-12 grid max-w-6xl gap-3 md:grid-cols-5">
-            {[
-              ["01", "Observe", "Trace the complete execution."],
-              ["02", "Diagnose", "Correlate code, API, logs and history."],
-              ["03", "Classify", "Product, test, data, environment or dependency."],
-              ["04", "Remediate", "Apply controlled repair or create the engineering finding."],
-              ["05", "Prove again", "Re-execute and preserve the new evidence."],
-            ].map(([n, title, text]) => <div key={n} className="border border-slate-300 bg-slate-50 p-6"><div className="font-mono text-xs text-slate-400">{n}</div><h3 className="mt-7 text-lg font-extrabold">{title}</h3><p className="mt-3 text-sm leading-6 text-slate-600">{text}</p></div>)}
-          </div>
-
-          <div className="mx-auto mt-10 grid max-w-6xl gap-px border border-slate-300 bg-slate-300 sm:grid-cols-3">
-            <div className="bg-white p-7"><FileCode2 className="h-5 w-5 text-[#a87900]" /><h3 className="mt-5 text-base font-extrabold">Repository-native</h3><p className="mt-2 text-sm leading-6 text-slate-600">Works with the engineering conventions, fixtures and CI structure already in use.</p></div>
-            <div className="bg-white p-7"><Boxes className="h-5 w-5 text-[#1d4ed8]" /><h3 className="mt-5 text-base font-extrabold">System-aware</h3><p className="mt-2 text-sm leading-6 text-slate-600">Connects application behavior, dependencies, execution evidence and change context.</p></div>
-            <div className="bg-white p-7"><GitPullRequest className="h-5 w-5 text-emerald-600" /><h3 className="mt-5 text-base font-extrabold">Engineering-ready</h3><p className="mt-2 text-sm leading-6 text-slate-600">Produces actionable findings and evidence instead of another disconnected test report.</p></div>
-          </div>
+          <div className="mt-12 grid gap-px border border-slate-300 bg-slate-300 sm:grid-cols-3"><div className="bg-slate-50 p-6"><div className="font-mono text-[9px] uppercase tracking-[0.16em] text-slate-400">Cost driver</div><div className="mt-2 text-sm font-extrabold">Automation authoring + maintenance</div></div><div className="bg-slate-50 p-6"><div className="font-mono text-[9px] uppercase tracking-[0.16em] text-slate-400">Cost driver</div><div className="mt-2 text-sm font-extrabold">Failure investigation + rework</div></div><div className="bg-slate-50 p-6"><div className="font-mono text-[9px] uppercase tracking-[0.16em] text-slate-400">Business outcome</div><div className="mt-2 text-sm font-extrabold">More release capacity from the same team</div></div></div>
         </div>
       </section>
 
-      <section className="bg-slate-50">
+      <section className="border-b border-slate-300 bg-slate-50">
         <div className="mx-auto max-w-[1440px] px-6 py-20 sm:px-8 lg:px-10 lg:py-28">
           <div className="grid gap-14 lg:grid-cols-[1fr_0.9fr] lg:items-center">
-            <div>
-              <div className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-[#a87900]">Built for engineering teams</div>
-              <h2 className="mt-5 max-w-4xl font-[Sora] text-[clamp(3rem,5vw,5.2rem)] font-extrabold leading-[0.9] tracking-[-0.06em]">Keep the tools you already use. Change who does the work.</h2>
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">Shyena is not another browser runner or another isolated AI evaluator. It sits above the engineering toolchain and orchestrates the work between intent, application intelligence, Playwright, APIs, observability, source control and release evidence.</p>
-              <div className="mt-8 flex flex-wrap gap-2">{["Playwright", "Git", "CI/CD", "APIs", "Observability", "Test suites", "Release workflows"].map((item) => <span key={item} className="border border-slate-300 bg-white px-3 py-2 text-[10px] font-bold uppercase tracking-[0.12em] text-slate-600">{item}</span>)}</div>
-            </div>
-
-            <div className="border border-slate-300 bg-white p-6 sm:p-8">
-              <div className="font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-slate-400">The shift</div>
-              <div className="mt-6 space-y-4">
-                {[
-                  ["Traditional", "People write → maintain → triage", false],
-                  ["AI-assisted", "People define → AI writes", false],
-                  ["Shyena", "People set the outcome → agents engineer the assurance loop", true],
-                ].map(([label, text, active]) => <div key={label} className={`border p-5 ${active ? "border-[#ffb703] bg-[#fff8dc]" : "border-slate-200 bg-slate-50"}`}><div className="font-mono text-[9px] font-bold uppercase tracking-[0.16em] text-slate-400">{label}</div><div className="mt-2 text-sm font-extrabold leading-6 text-slate-800">{text}</div></div>)}
-              </div>
-            </div>
+            <div><div className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-[#a87900]">Works with your engineering environment</div><h2 className="mt-5 max-w-4xl font-[Sora] text-[clamp(3rem,5vw,5.2rem)] font-extrabold leading-[0.9] tracking-[-0.06em]">Keep your tools.<br />Change who does the work.</h2><p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">Shyena sits above the existing toolchain rather than asking teams to replace it. It connects intent, application intelligence, Playwright, APIs, observability, source control and release evidence.</p><div className="mt-8 flex flex-wrap gap-2">{["Playwright", "Git", "CI/CD", "APIs", "Observability", "Test suites", "Release workflows"].map((item) => <span key={item} className="border border-slate-300 bg-white px-3 py-2 text-[10px] font-bold uppercase tracking-[0.12em] text-slate-600">{item}</span>)}</div></div>
+            <div className="border border-slate-300 bg-white p-6 sm:p-8"><div className="font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-slate-400">The operating model</div><div className="mt-6 space-y-4">{[["Traditional", "People write → maintain → triage", false], ["AI-assisted", "People define → AI writes", false], ["Shyena", "People define the outcome → agents engineer the assurance loop", true]].map(([label, text, active]) => <div key={label} className={`border p-5 ${active ? "border-[#ffb703] bg-[#fff8dc]" : "border-slate-200 bg-slate-50"}`}><div className="font-mono text-[9px] font-bold uppercase tracking-[0.16em] text-slate-400">{label}</div><div className="mt-2 text-sm font-extrabold leading-6 text-slate-800">{text}</div></div>)}</div></div>
           </div>
         </div>
       </section>
 
       <section className="bg-[#ffb703] text-slate-950">
         <div className="mx-auto flex max-w-[1440px] flex-col gap-8 px-6 py-16 sm:px-8 lg:flex-row lg:items-center lg:justify-between lg:px-10 lg:py-20">
-          <div><div className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-slate-700">The promise</div><h2 className="mt-4 max-w-5xl font-[Sora] text-[clamp(2.7rem,4.7vw,5.2rem)] font-extrabold leading-[0.92] tracking-[-0.06em]">You define the quality outcome.<br />Shyena does the engineering.</h2><p className="mt-5 max-w-3xl text-base leading-7 text-slate-800 sm:text-lg">Go from testing intent to executable automation, independent review, failure intelligence and evidence-backed release confidence — without turning every tester into a Playwright engineer.</p></div>
+          <div><div className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-slate-700">The outcome</div><h2 className="mt-4 max-w-5xl font-[Sora] text-[clamp(2.7rem,4.7vw,5.2rem)] font-extrabold leading-[0.92] tracking-[-0.06em]">You define what must be proven.<br />Shyena engineers the proof.</h2><p className="mt-5 max-w-3xl text-base leading-7 text-slate-800 sm:text-lg">From quality intent to executable automation, independent challenge, failure intelligence and evidence-backed release confidence — with less repetitive work for your team.</p></div>
           <Link to="/contact" className="inline-flex h-14 shrink-0 items-center justify-center gap-3 border border-slate-950 bg-slate-950 px-7 text-sm font-extrabold uppercase tracking-[0.01em] text-white transition-transform hover:-translate-y-0.5">See Shyena in action <ArrowRight className="h-4 w-4" /></Link>
         </div>
       </section>
