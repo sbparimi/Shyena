@@ -1,8 +1,3 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1385 540" role="img" aria-label="Shyena">
-  <defs>
-    <filter id="transparent-white" color-interpolation-filters="sRGB">
-      <feColorMatrix type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 -1 -1 -1 0 3"/>
-    </filter>
-  </defs>
-  <image href="/shyena-logo-exact.webp?v=20260906" x="-20" y="-20" width="1440" height="580" filter="url(#transparent-white)"/>
+  <image href="/shyena-logo-exact.webp?v=20260906" x="-20" y="-20" width="1440" height="580" preserveAspectRatio="none"/>
 </svg>
