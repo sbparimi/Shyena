@@ -4,7 +4,7 @@ type LogoProps = {
   size?: "header" | "footer";
 };
 
-const LOCKUP_SRC = "/shyena-logo-lockup.svg?v=20260906";
+const LOCKUP_SRC = "/shyena-logo-exact.webp?v=20260906";
 const MARK_SRC = "/shyena-mark.svg?v=20260906";
 
 export function Logo({ size = "header" }: LogoProps) {
