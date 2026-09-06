@@ -150,7 +150,7 @@ function ProductCard({ product }: { product: (typeof products)[number] }) {
       <div className="mt-14 text-xs font-bold uppercase tracking-[0.2em] text-slate-500">
         {product.name} · {product.stage}
       </div>
-      <h3 className="mt-5 max-w-md font-[Sora] text-[clamp(2rem,3vw,2.65rem)] font-extrabold leading-[1.02] tracking-[-0.045em] text-slate-950">
+      <h3 className="mt-5 max-w-md font-[Sora] text-[clamp(1.75rem,2.4vw,2.25rem)] font-extrabold leading-[1.06] tracking-[-0.04em] text-slate-950">
         {product.title}
       </h3>
       <p className="mt-5 max-w-md text-[15px] leading-7 text-slate-600">{product.description}</p>
@@ -210,20 +210,20 @@ function Index() {
   return (
     <main className="overflow-hidden bg-white text-slate-950">
       <section className="border-b border-slate-300 bg-white">
-        <div className="mx-auto grid max-w-[1440px] gap-14 px-6 py-16 sm:px-8 sm:py-20 lg:grid-cols-[0.92fr_1.08fr] lg:items-center lg:gap-16 lg:px-10 lg:py-24">
+        <div className="mx-auto grid max-w-[1440px] gap-12 px-6 py-14 sm:px-8 sm:py-18 lg:grid-cols-[0.92fr_1.08fr] lg:items-center lg:gap-16 lg:px-10 lg:py-20">
           <div className="flex flex-col items-start">
-            <div className="mb-7 border-l-4 border-[#ffb703] pl-4 font-mono text-xs font-bold uppercase tracking-[0.24em] text-slate-600">
+            <div className="mb-6 border-l-4 border-[#ffb703] pl-4 font-mono text-xs font-bold uppercase tracking-[0.2em] text-slate-600">
               Enterprise AI agent assurance
             </div>
-            <h1 className="max-w-3xl font-[Sora] text-[clamp(3.4rem,6.3vw,6.8rem)] font-extrabold leading-[0.9] tracking-[-0.065em] text-slate-950">
+            <h1 className="max-w-3xl font-[Sora] text-[clamp(2.75rem,4.5vw,4.5rem)] font-extrabold leading-[0.98] tracking-[-0.055em] text-slate-950">
               Your AI agent is already operating at scale.
               <br />
               <span className="text-slate-500">Can you prove it is behaving correctly?</span>
             </h1>
-            <p className="mt-8 max-w-2xl text-lg leading-8 text-slate-600 sm:text-xl">
+            <p className="mt-7 max-w-2xl text-lg leading-8 text-slate-600 sm:text-[19px]">
               Millions of conversations, constant changes and increasingly autonomous behaviour make answer-based testing insufficient. Shyena tests the complete agent journey—behaviour, orchestration, tools, outcomes and security—then turns what happened into evidence for a release decision.
             </p>
-            <div className="mt-9 flex flex-wrap gap-3">
+            <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 to="/contact"
                 className="inline-flex h-12 items-center justify-center gap-2 border border-[#ffb703] bg-[#ffb703] px-7 text-sm font-extrabold uppercase tracking-[0.01em] text-slate-950 transition-colors hover:bg-[#f5a900]"
@@ -237,7 +237,7 @@ function Index() {
                 <Play className="h-4 w-4" /> See how it works
               </a>
             </div>
-            <div className="mt-8 flex flex-wrap gap-x-5 gap-y-2 text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400">
+            <div className="mt-7 flex flex-wrap gap-x-5 gap-y-2 text-[10px] font-bold uppercase tracking-[0.16em] text-slate-400">
               Agentic testing · LLM evaluation · Cognigy assurance · AI security testing
             </div>
           </div>
@@ -246,42 +246,42 @@ function Index() {
       </section>
 
       <section className="border-b border-slate-300 bg-[#0b0920] text-white">
-        <div className="mx-auto max-w-[1440px] px-6 py-16 sm:px-8 lg:px-10 lg:py-20">
+        <div className="mx-auto max-w-[1440px] px-6 py-14 sm:px-8 lg:px-10 lg:py-18">
           <div className="max-w-3xl">
-            <div className="font-mono text-xs font-bold uppercase tracking-[0.22em] text-[#ffb703]">
+            <div className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-[#ffb703]">
               The scale of the problem
             </div>
-            <h2 className="mt-5 font-[Sora] text-[clamp(2.8rem,5vw,5.2rem)] font-extrabold leading-[0.92] tracking-[-0.06em]">
+            <h2 className="mt-5 font-[Sora] text-[clamp(2.35rem,4vw,4rem)] font-extrabold leading-[0.98] tracking-[-0.05em]">
               When AI handles millions of conversations, testing becomes an assurance problem.
             </h2>
           </div>
-          <div className="mt-12 grid gap-px border border-white/10 bg-white/10 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-10 grid gap-px border border-white/10 bg-white/10 sm:grid-cols-2 lg:grid-cols-3">
             {scaleSignals.map(([value, label, text]) => (
               <div key={value + label} className="bg-[#0b0920] p-7 sm:p-8">
-                <div className="font-[Sora] text-4xl font-extrabold tracking-[-0.04em] text-white sm:text-5xl">{value}</div>
+                <div className="font-[Sora] text-4xl font-extrabold tracking-[-0.04em] text-white sm:text-[2.75rem]">{value}</div>
                 <div className="mt-2 text-xs font-bold uppercase tracking-[0.16em] text-[#ffb703]">{label}</div>
                 <p className="mt-4 text-sm leading-7 text-white/55">{text}</p>
               </div>
             ))}
           </div>
-          <p className="mt-8 max-w-4xl text-lg leading-8 text-white/60">
+          <p className="mt-7 max-w-4xl text-lg leading-8 text-white/60">
             These are the kinds of AI operating environments Shyena is designed for. The challenge is not creating more scripts. It is knowing which journeys matter, testing them realistically and proving what happened.
           </p>
         </div>
       </section>
 
       <section className="border-b border-slate-300 bg-white">
-        <div className="mx-auto max-w-[1440px] px-6 py-20 sm:px-8 lg:px-10 lg:py-28">
+        <div className="mx-auto max-w-[1440px] px-6 py-16 sm:px-8 lg:px-10 lg:py-22">
           <div className="max-w-4xl">
-            <div className="mb-6 font-mono text-xs font-bold uppercase tracking-[0.22em] text-[#a87900]">The real problem</div>
-            <h2 className="font-[Sora] text-[clamp(3rem,5.8vw,6rem)] font-extrabold leading-[0.92] tracking-[-0.06em] text-slate-950">
+            <div className="mb-5 font-mono text-xs font-bold uppercase tracking-[0.2em] text-[#a87900]">The real problem</div>
+            <h2 className="font-[Sora] text-[clamp(2.5rem,4.2vw,4.25rem)] font-extrabold leading-[0.98] tracking-[-0.055em] text-slate-950">
               Your AI agent can give the right answer for the wrong reason.
             </h2>
-            <p className="mt-7 max-w-3xl text-lg leading-8 text-slate-600">
+            <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-600">
               A convincing response does not prove that the agent followed the correct path, preserved state, used the right tool, completed the customer&apos;s goal or stayed inside its security boundaries.
             </p>
           </div>
-          <div className="mt-14 grid border-t border-slate-300 md:grid-cols-3">
+          <div className="mt-12 grid border-t border-slate-300 md:grid-cols-3">
             {[
               [Workflow, "Wrong path", "Catch incorrect orchestration, missed intents, skipped tools and state failures."],
               [Target, "Incomplete journey", "Verify that the customer goal was actually achieved across the complete conversation."],
@@ -304,11 +304,11 @@ function Index() {
       </section>
 
       <section className="border-b border-slate-300 bg-white">
-        <div className="mx-auto max-w-[1440px] px-6 py-20 sm:px-8 lg:px-10 lg:py-28">
-          <div className="grid gap-10 border-b border-slate-300 pb-10 lg:grid-cols-[1fr_390px] lg:items-end">
+        <div className="mx-auto max-w-[1440px] px-6 py-16 sm:px-8 lg:px-10 lg:py-22">
+          <div className="grid gap-10 border-b border-slate-300 pb-9 lg:grid-cols-[1fr_390px] lg:items-end">
             <div>
-              <div className="mb-5 font-mono text-xs font-bold uppercase tracking-[0.22em] text-slate-500">Built around enterprise pain points</div>
-              <h2 className="font-[Sora] text-[clamp(3.2rem,5.8vw,6rem)] font-extrabold leading-[0.9] tracking-[-0.065em] text-slate-950">
+              <div className="mb-5 font-mono text-xs font-bold uppercase tracking-[0.2em] text-slate-500">Built around enterprise pain points</div>
+              <h2 className="font-[Sora] text-[clamp(2.5rem,4.2vw,4.25rem)] font-extrabold leading-[0.98] tracking-[-0.055em] text-slate-950">
                 What problem are you trying to solve?
               </h2>
             </div>
@@ -316,7 +316,7 @@ function Index() {
               Shyena is designed for the problems that appear when AI agents become business-critical, high-volume and continuously changing.
             </p>
           </div>
-          <div className="mt-12 grid gap-px border border-slate-300 bg-slate-300 md:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-10 grid gap-px border border-slate-300 bg-slate-300 md:grid-cols-2 lg:grid-cols-3">
             {problemPaths.map((item) => (
               <Link
                 key={item.title}
@@ -324,7 +324,7 @@ function Index() {
                 className="group flex min-h-[300px] flex-col bg-white p-7 transition-colors hover:bg-slate-50 sm:p-8"
               >
                 <div className="font-mono text-xs uppercase tracking-[0.16em] text-slate-400">Problem</div>
-                <h3 className="mt-5 max-w-sm font-[Sora] text-2xl font-extrabold leading-tight tracking-[-0.03em] text-slate-950">{item.title}</h3>
+                <h3 className="mt-5 max-w-sm font-[Sora] text-[1.55rem] font-extrabold leading-[1.1] tracking-[-0.03em] text-slate-950">{item.title}</h3>
                 <p className="mt-4 text-sm leading-7 text-slate-600">{item.text}</p>
                 <span className="mt-auto inline-flex items-center gap-2 pt-7 text-xs font-extrabold uppercase tracking-[0.04em] text-slate-950">
                   {item.cta}
@@ -337,11 +337,11 @@ function Index() {
       </section>
 
       <section className="bg-white">
-        <div className="mx-auto max-w-[1440px] px-6 py-20 sm:px-8 lg:px-10 lg:py-28">
-          <div className="grid gap-10 border-b border-slate-300 pb-10 lg:grid-cols-[1fr_360px] lg:items-end">
+        <div className="mx-auto max-w-[1440px] px-6 py-16 sm:px-8 lg:px-10 lg:py-22">
+          <div className="grid gap-10 border-b border-slate-300 pb-9 lg:grid-cols-[1fr_360px] lg:items-end">
             <div>
-              <div className="mb-5 font-mono text-xs font-bold uppercase tracking-[0.22em] text-slate-500">One connected assurance model</div>
-              <h2 className="font-[Sora] text-[clamp(3.4rem,6vw,6.4rem)] font-extrabold leading-[0.9] tracking-[-0.065em] text-slate-950">
+              <div className="mb-5 font-mono text-xs font-bold uppercase tracking-[0.2em] text-slate-500">One connected assurance model</div>
+              <h2 className="font-[Sora] text-[clamp(2.6rem,4.5vw,4.5rem)] font-extrabold leading-[0.96] tracking-[-0.055em] text-slate-950">
                 Understand. Test. Defend.
               </h2>
             </div>
@@ -349,7 +349,7 @@ function Index() {
               Three specialised capabilities connected by one evidence chain—from real agent behaviour to a defensible release decision.
             </p>
           </div>
-          <div className="mt-12 grid gap-px border border-slate-300 bg-slate-300 md:grid-cols-3">
+          <div className="mt-10 grid gap-px border border-slate-300 bg-slate-300 md:grid-cols-3">
             {products.map((product) => (
               <ProductCard key={product.name} product={product} />
             ))}
@@ -358,11 +358,11 @@ function Index() {
       </section>
 
       <section id="how-it-works" className="scroll-mt-20 border-y border-slate-300 bg-white text-slate-950">
-        <div className="mx-auto max-w-[1440px] px-6 py-20 sm:px-8 lg:px-10 lg:py-28">
-          <div className="grid gap-14 lg:grid-cols-[0.7fr_1.3fr] lg:items-start">
+        <div className="mx-auto max-w-[1440px] px-6 py-16 sm:px-8 lg:px-10 lg:py-22">
+          <div className="grid gap-12 lg:grid-cols-[0.7fr_1.3fr] lg:items-start">
             <div className="lg:sticky lg:top-24">
               <div className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-[#a87900]">From agent to release</div>
-              <h2 className="mt-5 font-[Sora] text-[clamp(3rem,5vw,5.5rem)] font-extrabold leading-[0.9] tracking-[-0.06em]">Test what actually happened.</h2>
+              <h2 className="mt-5 font-[Sora] text-[clamp(2.5rem,4vw,4rem)] font-extrabold leading-[0.98] tracking-[-0.05em]">Test what actually happened.</h2>
               <p className="mt-6 max-w-xl text-lg leading-8 text-slate-600">Map the system. Generate journeys. Execute the agent. Evaluate behaviour. Attack risk. Prove the release.</p>
               <Link to="/contact" className="mt-8 inline-flex items-center gap-3 border border-[#ffb703] bg-[#ffb703] px-6 py-4 text-sm font-extrabold uppercase text-slate-950 hover:bg-[#f5a900]">
                 Assess my AI agent <ArrowRight className="h-4 w-4" />
@@ -382,10 +382,10 @@ function Index() {
       </section>
 
       <section className="bg-[#0b0920] text-white">
-        <div className="mx-auto grid max-w-[1440px] gap-14 px-6 py-20 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:px-10 lg:py-28 lg:items-center">
+        <div className="mx-auto grid max-w-[1440px] gap-12 px-6 py-16 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:px-10 lg:py-22 lg:items-center">
           <div>
             <div className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-[#ffb703]">Evidence-backed release</div>
-            <h2 className="mt-5 font-[Sora] text-[clamp(3rem,5vw,5.4rem)] font-extrabold leading-[0.9] tracking-[-0.06em]">A score tells you how it performed. Evidence tells you why.</h2>
+            <h2 className="mt-5 font-[Sora] text-[clamp(2.5rem,4vw,4.1rem)] font-extrabold leading-[0.98] tracking-[-0.05em]">A score tells you how it performed. Evidence tells you why.</h2>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-white/60">
               Shyena keeps the journey, execution trace, evaluation signals, finding, component context and release impact together so engineering teams can act on the result.
             </p>
@@ -403,7 +403,7 @@ function Index() {
       </section>
 
       <section className="border-b border-slate-300 bg-white">
-        <div className="mx-auto max-w-[1440px] px-6 py-20 sm:px-8 lg:px-10 lg:py-28">
+        <div className="mx-auto max-w-[1440px] px-6 py-16 sm:px-8 lg:px-10 lg:py-22">
           <div className="grid border-t border-slate-300 md:grid-cols-3">
             {[
               ["System-derived", "Testing starts from the actual agent architecture, not a disconnected prompt list."],
@@ -421,11 +421,11 @@ function Index() {
       </section>
 
       <section className="bg-white">
-        <div className="mx-auto max-w-[1200px] px-6 py-24 text-center sm:px-8 lg:py-32">
-          <div className="mx-auto mb-8 flex h-12 w-12 items-center justify-center border border-[#ffb703] bg-[#ffb703] text-slate-950">
+        <div className="mx-auto max-w-[1200px] px-6 py-20 text-center sm:px-8 lg:py-24">
+          <div className="mx-auto mb-7 flex h-12 w-12 items-center justify-center border border-[#ffb703] bg-[#ffb703] text-slate-950">
             <ShieldCheck className="h-6 w-6" />
           </div>
-          <h2 className="font-[Sora] text-[clamp(3rem,5.5vw,6rem)] font-extrabold leading-[0.9] tracking-[-0.065em] text-slate-950">
+          <h2 className="font-[Sora] text-[clamp(2.5rem,4.5vw,4.5rem)] font-extrabold leading-[0.98] tracking-[-0.055em] text-slate-950">
             Know whether your AI agent is ready to release.
           </h2>
           <p className="mx-auto mt-7 max-w-2xl text-lg leading-8 text-slate-600">
