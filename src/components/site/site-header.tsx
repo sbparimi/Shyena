@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, BookOpen, Briefcase, Gauge, Layers, Mail, Menu, Network, Newspaper, ShieldAlert, Users, X } from "lucide-react";
+import { ArrowRight, BookOpen, Briefcase, Gauge, Layers, Mail, Menu, Newspaper, Network, ShieldAlert, TestTube2, Users, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "@/components/ui/navigation-menu";
 import { Logo } from "./logo";
@@ -24,7 +24,7 @@ const COMPANY = [
   { to: "/contact", icon: Mail, title: "Contact", description: "Request a demo or discuss an assurance program." },
 ] as const;
 const MOBILE_NAV = [
-  { label: "Nexus", to: "/nexus" }, { label: "Vera", to: "/vera" }, { label: "Chakra", to: "/chakra" }, { label: "Pricing", to: "/pricing" },
+  { label: "Nexus", to: "/nexus" }, { label: "Vera", to: "/vera" }, { label: "Chakra", to: "/chakra" }, { label: "Autonomous Testing", to: "/autonomous-testing" }, { label: "Pricing", to: "/pricing" },
   { label: "Assurance", to: "/docs" }, { label: "Services", to: "/services" }, { label: "Documentation", to: "/docs" }, { label: "Insights", to: "/blog" },
   { label: "About", to: "/about" }, { label: "Contact", to: "/contact" },
 ] as const;
@@ -61,6 +61,7 @@ export function SiteHeader() {
         <Logo />
         <div className="hidden flex-1 justify-center md:flex"><div className="bg-slate-50 p-1 shadow-[0_4px_18px_rgba(15,23,42,0.05)]"><NavigationMenu><NavigationMenuList className="gap-0">
           <NavigationMenuItem><NavigationMenuTrigger className={desktopTriggerClass}>Platform</NavigationMenuTrigger><NavigationMenuContent><div className="border-t border-slate-300 bg-white p-3"><MenuGroup items={PRODUCTS} /></div></NavigationMenuContent></NavigationMenuItem>
+          <NavigationMenuItem><Link to="/autonomous-testing" className={desktopLinkClass}><TestTube2 className="mr-2 inline-block h-4 w-4 align-[-2px]" />Autonomous Testing</Link></NavigationMenuItem>
           <NavigationMenuItem><NavigationMenuTrigger className={desktopTriggerClass}>Assurance</NavigationMenuTrigger><NavigationMenuContent><div className="border-t border-slate-300 bg-white p-3"><MenuGroup items={ASSURANCE} /></div></NavigationMenuContent></NavigationMenuItem>
           <NavigationMenuItem><Link to="/pricing" className={desktopLinkClass}>Pricing</Link></NavigationMenuItem>
           <NavigationMenuItem><NavigationMenuTrigger className={desktopTriggerClass}>Resources</NavigationMenuTrigger><NavigationMenuContent><div className="border-t border-slate-300 bg-white p-3"><MenuGroup items={RESOURCES} /></div></NavigationMenuContent></NavigationMenuItem>
