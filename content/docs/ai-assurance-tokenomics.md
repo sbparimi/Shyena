@@ -4,6 +4,8 @@ description: "Connecting tokens, agent behaviour, assurance effort, value and bu
 slug: "ai-assurance-tokenomics"
 content_type: "documentation"
 category: "AI Assurance Economics"
+diagram: "tokenomics"
+thesis: "AI execution cost is an assurance signal: Shyena connects token consumption to observable agent behaviour, assurance effort, trustworthy business outcomes and release decisions."
 primary_keyword: "AI assurance tokenomics"
 search_intent: "informational"
 author: "Shyena Engineering"
