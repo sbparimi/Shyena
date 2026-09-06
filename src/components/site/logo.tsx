@@ -14,39 +14,43 @@ export function Logo({ tone = "default" }: { tone?: "default" | "navy" }) {
         className="block h-[46px] w-[46px] shrink-0 sm:h-[50px] sm:w-[50px]"
       >
         <defs>
-          <linearGradient id="shyenaInfinity" x1="12" y1="6" x2="44" y2="50" gradientUnits="userSpaceOnUse">
-            <stop offset="0" stopColor="#172554" />
-            <stop offset="0.48" stopColor="#4c1d95" />
-            <stop offset="0.82" stopColor="#7c3aed" />
-            <stop offset="1" stopColor="#a78bfa" />
+          <linearGradient id="shyenaInfinityRich" x1="8" y1="8" x2="48" y2="50" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stopColor="#f5b83d" />
+            <stop offset="0.10" stopColor="#0b1f4f" />
+            <stop offset="0.34" stopColor="#063b68" />
+            <stop offset="0.56" stopColor="#00bfe8" />
+            <stop offset="0.76" stopColor="#2563eb" />
+            <stop offset="0.91" stopColor="#5b21b6" />
+            <stop offset="1" stopColor="#8b5cf6" />
           </linearGradient>
-          <linearGradient id="shyenaAccent" x1="24" y1="5" x2="32" y2="51" gradientUnits="userSpaceOnUse">
-            <stop offset="0" stopColor="#d6a84f" />
-            <stop offset="1" stopColor="#b7791f" />
+          <linearGradient id="shyenaGoldRich" x1="24" y1="3" x2="32" y2="53" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stopColor="#ffd978" />
+            <stop offset="0.45" stopColor="#f4b83f" />
+            <stop offset="1" stopColor="#d88919" />
           </linearGradient>
         </defs>
 
         <path
-          d="M28 5C17.8 5 11 10.4 11 18.1C11 25.1 16.4 28.3 28 28.3C39.6 28.3 45 31.2 45 38.1C45 45.7 38.2 51 28 51C17.8 51 11 45.7 11 38.1C11 31.1 16.4 28.3 28 28.3C39.6 28.3 45 25.1 45 18.1C45 10.4 38.2 5 28 5Z"
+          d="M28 4.5C17.2 4.5 10 10.2 10 18.2C10 25.5 16.1 28.2 28 28.2C39.9 28.2 46 31.1 46 38.2C46 46.1 38.8 51.5 28 51.5C17.2 51.5 10 46.1 10 38.2C10 31.1 16.1 28.2 28 28.2C39.9 28.2 46 25.5 46 18.2C46 10.2 38.8 4.5 28 4.5Z"
           fill="none"
-          stroke="url(#shyenaInfinity)"
-          strokeWidth="6"
+          stroke="url(#shyenaInfinityRich)"
+          strokeWidth="6.2"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
 
         <path
-          d="M28 5C21.2 5 16.2 7.2 13.2 11.1"
+          d="M28 4.5C21.1 4.5 15.8 6.9 12.8 11.2"
           fill="none"
-          stroke="url(#shyenaAccent)"
-          strokeWidth="2.4"
+          stroke="url(#shyenaGoldRich)"
+          strokeWidth="2.5"
           strokeLinecap="round"
         />
         <path
-          d="M28 51C34.8 51 39.8 48.8 42.8 44.9"
+          d="M28 51.5C34.9 51.5 40.2 49.1 43.2 44.8"
           fill="none"
-          stroke="url(#shyenaAccent)"
-          strokeWidth="2.4"
+          stroke="url(#shyenaGoldRich)"
+          strokeWidth="2.5"
           strokeLinecap="round"
         />
       </svg>
