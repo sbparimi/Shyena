@@ -1,3 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 350 530" role="img" aria-label="Shyena brand mark">
-  <use href="/shyena-mark.svg?v=20260906"/>
+  <defs>
+    <filter id="transparent-white" color-interpolation-filters="sRGB">
+      <feColorMatrix type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 -1 -1 -1 0 3"/>
+    </filter>
+  </defs>
+  <image href="/shyena-logo-exact.webp?v=20260906" x="-25" y="-25" width="1440" height="580" filter="url(#transparent-white)"/>
 </svg>
