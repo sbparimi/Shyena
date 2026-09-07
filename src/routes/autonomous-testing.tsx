@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Check, Cloud, Database, GitBranch, Network, Play, Server } from "lucide-react";
+import { ArrowRight, Check, Cloud, Database, GitBranch, Network, Play, Server, ShieldCheck } from "lucide-react";
 
 export const Route = createFileRoute("/autonomous-testing")({
   head: () => ({
@@ -18,12 +18,20 @@ export const Route = createFileRoute("/autonomous-testing")({
 });
 
 const customerInfrastructure = [
-  ["Browser automation", "Playwright / Selenium", Play],
+  ["Browser automation", "Playwright / Selenium / Cypress", Play],
   ["API automation", "Service + contract tests", Network],
   ["Environments", "Your cloud / VPC", Cloud],
   ["Test data", "Your databases + fixtures", Database],
   ["CI/CD", "Your existing pipelines", GitBranch],
   ["Observability", "Your logs + traces", Server],
+] as const;
+
+const agentStages = [
+  ["KNOW", "Change"],
+  ["DECIDE", "Risk"],
+  ["ORCHESTRATE", "Tests"],
+  ["INVESTIGATE", "Results"],
+  ["PROVE", "Evidence"],
 ] as const;
 
 function AutonomousFlow() {
@@ -51,21 +59,32 @@ function AutonomousFlow() {
           <div className="shyena-pulse w-full max-w-3xl border border-slate-900 bg-[#0b0920] p-5 text-white sm:p-6">
             <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
               <div className="shrink-0"><div className="font-mono text-[9px] font-bold uppercase tracking-[0.18em] text-[#ffb703]">Shyena agents</div><div className="mt-2 text-lg font-extrabold">Agentic testing harness</div><div className="mt-1 max-w-xs text-[10px] leading-5 text-white/45">Agents take care of automation work while testers focus on risk, quality and release decisions.</div></div>
-              <div className="grid flex-1 grid-cols-2 gap-2 sm:grid-cols-5">
-                {[['KNOW','Change'],['DECIDE','Risk'],['ORCHESTRATE','Tests'],['INVESTIGATE','Results'],['PROVE','Release']].map(([title, sub], index) => <div key={title} className="border border-white/10 bg-white/[0.045] p-3 text-center"><div className="font-mono text-[8px] font-bold tracking-[0.12em] text-[#ffb703]">0{index + 1}</div><div className="mt-2 text-[9px] font-extrabold">{title}</div><div className="mt-1 text-[8px] text-white/40">{sub}</div></div>)}
-              </div>
+              <div className="grid flex-1 grid-cols-2 gap-2 sm:grid-cols-5">{agentStages.map(([title, sub], index) => <div key={title} className="border border-white/10 bg-white/[0.045] p-3 text-center"><div className="font-mono text-[8px] font-bold tracking-[0.12em] text-[#ffb703]">0{index + 1}</div><div className="mt-2 text-[9px] font-extrabold">{title}</div><div className="mt-1 text-[8px] text-white/40">{sub}</div></div>)}</div>
             </div>
           </div>
           <div className="relative h-10 w-px bg-slate-300"><span className="shyena-flow-down absolute -left-[3px] top-0 h-2 w-2 rounded-full bg-[#ffb703]" /></div>
           <div className="w-full max-w-5xl border border-slate-300 bg-white p-5 sm:p-6">
-            <div className="text-center"><div className="font-mono text-[9px] font-bold uppercase tracking-[0.18em] text-slate-400">Your existing infrastructure</div><div className="mt-1 text-sm font-extrabold">Shyena agents work through the stack you already operate</div><div className="mt-1 text-[10px] text-slate-500">No Shyena-managed execution infrastructure. Your cloud, runners, environments and tools remain yours.</div></div>
+            <div className="text-center"><div className="font-mono text-[9px] font-bold uppercase tracking-[0.18em] text-slate-400">Your existing infrastructure</div><div className="mt-1 text-sm font-extrabold">Shyena agents work through the stack you already operate</div><div className="mt-1 text-[10px] text-slate-500">Shyena provides the intelligence and orchestration. Your cloud, runners, environments and tools remain yours.</div></div>
             <div className="mt-5 grid gap-px border border-slate-300 bg-slate-300 sm:grid-cols-2 lg:grid-cols-3">{customerInfrastructure.map(([title, sub, Icon]) => <div key={title} className="relative bg-[#f8fafc] p-4 sm:p-5"><div className="flex items-center gap-3"><Icon className="h-4 w-4 text-slate-900" /><div className="text-xs font-extrabold">{title}</div></div><div className="mt-2 text-[9px] text-slate-500">{sub}</div><span className="shyena-flow-right absolute right-3 top-1/2 h-1.5 w-1.5 rounded-full bg-[#ffb703]" /></div>)}</div>
           </div>
           <div className="relative h-10 w-full max-w-5xl"><div className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-slate-300"><span className="shyena-flow-down absolute -left-[3px] top-0 h-2 w-2 rounded-full bg-[#ffb703]" /></div></div>
           <div className="grid w-full max-w-5xl gap-3 lg:grid-cols-[1fr_80px_1fr] lg:items-center">
-            <div className="border border-slate-300 bg-white p-5 text-center"><div className="font-mono text-[9px] uppercase tracking-[0.18em] text-slate-400">Execution results</div><div className="mt-2 text-sm font-extrabold">Tests + runtime signals</div><div className="mt-1 text-[9px] text-slate-500">Browser, API, data, logs, traces and history flow back to Shyena.</div></div>
+            <div className="border border-slate-300 bg-white p-5 text-center"><div className="font-mono text-[9px] uppercase tracking-[0.18em] text-slate-400">Execution signals</div><div className="mt-2 text-sm font-extrabold">Tests + runtime evidence</div><div className="mt-1 text-[9px] text-slate-500">Browser, API, data, logs, traces and history flow back to Shyena.</div></div>
             <ArrowRight className="mx-auto hidden h-5 w-5 text-[#a87900] lg:block" />
-            <div className="border border-slate-900 bg-[#0b0920] p-5 text-center text-white"><div className="font-mono text-[9px] uppercase tracking-[0.18em] text-[#ffb703]">Release decision</div><div className="mt-2 text-sm font-extrabold">Evidence + risk</div><div className="mt-1 text-[9px] text-white/45">Testers decide with evidence. Shyena makes the evidence actionable.</div></div>
+            <div className="border border-slate-900 bg-[#0b0920] p-5 text-center text-white"><div className="font-mono text-[9px] uppercase tracking-[0.18em] text-[#ffb703]">Shyena assurance</div><div className="mt-2 text-sm font-extrabold">Investigate + evaluate</div><div className="mt-1 text-[9px] text-white/45">Classify failures, correlate signals, protect assertions and produce reviewable evidence.</div></div>
+          </div>
+          <div className="relative h-10 w-px bg-slate-300"><span className="shyena-flow-down absolute -left-[3px] top-0 h-2 w-2 rounded-full bg-[#ffb703]" /></div>
+          <div className="w-full max-w-5xl border border-slate-300 bg-white p-5 sm:p-6">
+            <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+              <div><div className="font-mono text-[9px] font-bold uppercase tracking-[0.18em] text-slate-400">Evidence graph</div><div className="mt-2 text-base font-extrabold">From test intent to release proof</div><div className="mt-1 max-w-2xl text-[10px] leading-5 text-slate-500">Requirement → rule → risk/control → test intent → execution → evidence → evaluation → defect/remediation → re-test.</div></div>
+              <div className="flex shrink-0 items-center gap-2 border border-slate-300 bg-[#f8fafc] px-4 py-3"><ShieldCheck className="h-5 w-5 text-slate-900" /><span className="font-mono text-[9px] font-bold uppercase tracking-[0.14em] text-slate-600">Traceable assurance</span></div>
+            </div>
+          </div>
+          <div className="relative h-10 w-px bg-slate-300"><span className="shyena-flow-down absolute -left-[3px] top-0 h-2 w-2 rounded-full bg-[#ffb703]" /></div>
+          <div className="grid w-full max-w-5xl gap-3 lg:grid-cols-[1fr_80px_1fr] lg:items-center">
+            <div className="border border-slate-300 bg-white p-5 text-center"><div className="font-mono text-[9px] uppercase tracking-[0.18em] text-slate-400">Risk assessment</div><div className="mt-2 text-sm font-extrabold">What changed. What matters.</div><div className="mt-1 text-[9px] text-slate-500">Impact, coverage, failures and evidence are brought together for a decision.</div></div>
+            <ArrowRight className="mx-auto hidden h-5 w-5 text-[#a87900] lg:block" />
+            <div className="border border-slate-900 bg-[#0b0920] p-5 text-center text-white"><div className="font-mono text-[9px] uppercase tracking-[0.18em] text-[#ffb703]">Human decision</div><div className="mt-2 text-sm font-extrabold">GO / NO-GO</div><div className="mt-1 text-[9px] text-white/45">Testers own the quality and release decision. Shyena makes the evidence actionable.</div></div>
           </div>
         </div>
       </div>
