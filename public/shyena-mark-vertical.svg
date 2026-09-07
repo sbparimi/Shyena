@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 96" role="img" aria-label="Shyena mark">
+  <defs>
+    <linearGradient id="shyena-mark-gradient" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#5b2be0"/>
+      <stop offset="52%" stop-color="#00b7e8"/>
+      <stop offset="100%" stop-color="#ffb804"/>
+    </linearGradient>
+  </defs>
+  <path d="M32 48C16 48 8 40 8 28C8 16 16 8 28 8C40 8 48 16 48 28C48 40 40 48 32 48C24 48 16 56 16 68C16 80 24 88 36 88C48 88 56 80 56 68C56 56 48 48 32 48Z" fill="none" stroke="url(#shyena-mark-gradient)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
