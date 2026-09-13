@@ -1,137 +1,232 @@
+import type { ReactNode } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
-  Activity,
-  ArrowDown,
   ArrowRight,
-  Bot,
-  BrainCircuit,
-  CheckCircle2,
-  CircleDot,
-  Code2,
-  FileCheck2,
-  Gauge,
+  Check,
+  CircleAlert,
+  Database,
   GitBranch,
+  Layers3,
   Search,
   ShieldCheck,
+  Sparkles,
+  Target,
   Workflow,
-  XCircle,
 } from "lucide-react";
 
 export const Route = createFileRoute("/autonomous-testing")({
   head: () => ({
     meta: [
-      { title: "Self-Driving Testing | Shyena" },
+      { title: "Autonomous Quality Engineering | Shyena" },
       {
         name: "description",
         content:
-          "From requirement to release decision: autonomous BDD testing, evidence, forensics and governed quality decisions.",
+          "Shyena connects software change to risk, testing, evidence and release decisions so engineering teams can release with confidence.",
       },
-      { property: "og:title", content: "Self-Driving Testing | Shyena" },
+      { property: "og:title", content: "Autonomous Quality Engineering | Shyena" },
       {
         property: "og:description",
-        content:
-          "Shyena understands change, designs BDD tests, executes through your existing stack, proves requirements with evidence and drives release decisions.",
+        content: "Turn software change into evidence-backed release confidence.",
       },
     ],
   }),
   component: AutonomousTestingPage,
 });
 
-const stages = [
-  { label: "CHANGE", detail: "Requirement · code · rules", icon: GitBranch },
-  { label: "UNDERSTAND", detail: "Impact · risk · coverage", icon: BrainCircuit },
-  { label: "DESIGN", detail: "PLTS · BDD · evidence", icon: FileCheck2 },
-  { label: "EXECUTE", detail: "Semantic intent → engines", icon: Workflow },
-  { label: "OBSERVE", detail: "Browser · API · data · logs", icon: Activity },
-  { label: "PROVE", detail: "Evidence · verdict · RCA", icon: ShieldCheck },
-  { label: "DECIDE", detail: "Policy → GO / NO-GO", icon: Gauge },
-] as const;
+const stack = ["Jira", "GitHub", "Playwright", "API testing", "CI/CD", "Logs & traces"];
 
-const engines = ["Playwright", "API", "Mobile", "Contract", "Security", "Performance"];
-const signals = ["DOM", "Network", "Data", "Logs", "Traces", "History"];
-
-function StageNode({
-  stage,
-  index,
-}: {
-  stage: (typeof stages)[number];
-  index: number;
-}) {
-  const Icon = stage.icon;
+function Eyebrow({ children }: { children: ReactNode }) {
   return (
-    <div className="system-stage" style={{ "--stage-delay": `${index * 0.42}s` } as React.CSSProperties}>
-      <div className="system-stage-icon">
-        <Icon className="h-4 w-4" />
-        <span className="system-pulse" />
-      </div>
-      <div className="mt-3 font-mono text-[8px] font-extrabold tracking-[.16em]">{stage.label}</div>
-      <div className="mt-1 text-[8px] leading-4 text-slate-500">{stage.detail}</div>
+    <div className="mb-4 flex items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-[.18em] text-[#a87900]">
+      <span className="h-1.5 w-1.5 rounded-full bg-[#ffb703]" />
+      {children}
     </div>
   );
 }
 
-function SystemVisual() {
+function ProblemRow({
+  number,
+  problem,
+  consequence,
+}: {
+  number: string;
+  problem: string;
+  consequence: string;
+}) {
   return (
-    <div className="system-visual relative overflow-hidden border border-slate-300 bg-[#f8fafc] shadow-[0_30px_100px_-55px_rgba(15,23,42,.55)]">
-      <div className="absolute inset-0 opacity-40 [background-image:linear-gradient(rgba(15,23,42,.045)_1px,transparent_1px),linear-gradient(90deg,rgba(15,23,42,.045)_1px,transparent_1px)] [background-size:32px_32px]" />
-      <div className="relative border-b border-slate-200 bg-[#0b0920] px-5 py-5 text-white sm:px-7">
-        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-          <div className="font-mono text-[9px] font-bold uppercase tracking-[.22em] text-[#ffb703]">Autonomous quality loop</div>
-          <div className="font-mono text-[8px] uppercase tracking-[.16em] text-white/35">Continuous · evidence-backed · governed</div>
+    <div className="grid gap-4 border-t border-slate-300 py-7 sm:grid-cols-[64px_1fr_1fr] sm:items-start">
+      <span className="font-mono text-[10px] font-bold tracking-[.14em] text-slate-400">{number}</span>
+      <div className="font-[Sora] text-lg font-bold tracking-[-.025em] text-slate-950">{problem}</div>
+      <div className="text-sm leading-6 text-slate-600">{consequence}</div>
+    </div>
+  );
+}
+
+function OperatingStep({
+  number,
+  title,
+  description,
+  icon: Icon,
+}: {
+  number: string;
+  title: string;
+  description: string;
+  icon: typeof Search;
+}) {
+  return (
+    <div className="group relative border-l border-slate-300 pl-6">
+      <div className="absolute -left-[5px] top-0 h-2.5 w-2.5 rounded-full border-2 border-white bg-slate-400 transition-colors duration-300 group-hover:bg-[#ffb703]" />
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <div className="font-mono text-[9px] font-bold tracking-[.16em] text-slate-400">{number}</div>
+          <h3 className="mt-2 font-[Sora] text-lg font-bold tracking-[-.025em]">{title}</h3>
+          <p className="mt-2 max-w-sm text-sm leading-6 text-slate-600">{description}</p>
         </div>
+        <Icon className="mt-1 h-5 w-5 shrink-0 text-slate-500 transition-colors group-hover:text-[#a87900]" />
       </div>
+    </div>
+  );
+}
 
-      <div className="relative p-4 sm:p-7 lg:p-10">
-        <div className="hidden lg:block absolute left-[9%] right-[9%] top-[116px] h-px bg-slate-300"><span className="system-flow-line" /></div>
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-7">
-          {stages.map((stage, index) => (
-            <div key={stage.label} className="relative"><StageNode stage={stage} index={index} />{index < stages.length - 1 && <ArrowRight className="absolute -bottom-5 left-1/2 h-3 w-3 -translate-x-1/2 rotate-90 text-slate-300 sm:hidden" />}</div>
-          ))}
-        </div>
+function ErpTesting() {
+  const capabilities = [
+    [Database, "Finance", "Close, billing, journals and controls"],
+    [Target, "HCM", "Employee and workforce processes"],
+    [Layers3, "Supply Chain", "Orders, inventory and fulfilment"],
+    [Workflow, "Procurement", "Requisition-to-pay workflows"],
+    [ShieldCheck, "Projects", "Project financials and governance"],
+  ] as const;
 
-        <div className="relative mt-8 grid gap-3 lg:grid-cols-[1fr_auto_1fr] lg:items-center">
-          <div className="border border-slate-300 bg-white p-4 sm:p-5">
-            <div className="flex items-center gap-2 font-mono text-[8px] font-bold uppercase tracking-[.18em] text-slate-400"><Code2 className="h-3 w-3" /> Test contract</div>
-            <div className="mt-3 grid grid-cols-3 gap-2">{["PLTS", "BDD", "Evidence"].map((item) => <div key={item} className="border border-slate-200 bg-[#f8fafc] px-2 py-2 text-center text-[8px] font-extrabold">{item}</div>)}</div>
-            <p className="mt-3 text-[8px] leading-4 text-slate-500">Tests describe intent and proof — not selectors or automation mechanics.</p>
+  return (
+    <section id="erp-testing" className="border-y border-slate-300 bg-[#f8fafc]">
+      <div className="mx-auto max-w-[1240px] px-6 py-16 sm:px-8 lg:px-10 lg:py-24">
+        <div className="grid gap-12 lg:grid-cols-[.8fr_1.2fr] lg:items-center lg:gap-20">
+          <div>
+            <Eyebrow>ERP testing</Eyebrow>
+            <h2 className="font-[Sora] text-[clamp(2.5rem,4.4vw,4.6rem)] font-extrabold leading-[.92] tracking-[-.065em]">
+              Oracle Fusion
+              <br />
+              <span className="text-slate-500">+ Claude AI.</span>
+            </h2>
+            <p className="mt-6 max-w-xl text-base leading-7 text-slate-600">
+              A dedicated ERP assurance capability for Oracle Fusion Cloud. Claude AI helps understand business processes and configuration, generate meaningful end-to-end scenarios and investigate complex failures.
+            </p>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <a
+                href="#erp-testing"
+                className="inline-flex h-11 items-center gap-2 border border-[#ffb703] bg-[#ffb703] px-5 text-xs font-extrabold uppercase text-slate-950 transition-colors hover:bg-[#e7a600]"
+              >
+                Explore ERP testing <ArrowRight className="h-4 w-4" />
+              </a>
+            </div>
           </div>
-          <div className="hidden lg:flex h-10 w-10 items-center justify-center rounded-full border border-[#ffb703] bg-[#ffb703] text-slate-950"><ArrowRight className="h-4 w-4" /></div>
-          <div className="border-2 border-[#ffb703] bg-white p-4 sm:p-5">
-            <div className="flex items-center gap-2 font-mono text-[8px] font-bold uppercase tracking-[.18em] text-slate-400"><Workflow className="h-3 w-3" /> Semantic execution engine</div>
-            <div className="mt-3 flex flex-wrap gap-1.5">{engines.map((engine) => <span key={engine} className="border border-slate-200 bg-[#f8fafc] px-2 py-1.5 text-[7px] font-bold text-slate-600">{engine}</span>)}</div>
-            <p className="mt-3 text-[8px] leading-4 text-slate-500">One semantic contract. Multiple execution engines. Your infrastructure stays.</p>
-          </div>
-        </div>
 
-        <div className="mt-3 grid gap-3 lg:grid-cols-[.8fr_1.4fr_.8fr]">
-          <div className="border border-slate-300 bg-white p-4">
-            <div className="font-mono text-[8px] font-bold uppercase tracking-[.18em] text-slate-400">Observe</div>
-            <div className="mt-3 flex flex-wrap gap-1.5">{signals.map((signal) => <span key={signal} className="border border-slate-200 px-2 py-1 text-[7px] font-bold text-slate-500">{signal}</span>)}</div>
-          </div>
-          <div className="relative overflow-hidden border-2 border-slate-900 bg-[#0b0920] p-4 text-white sm:p-5">
-            <div className="absolute right-0 top-0 h-full w-1 bg-[#ffb703]" />
-            <div className="flex items-center gap-2 font-mono text-[8px] font-bold uppercase tracking-[.18em] text-[#ffb703]"><Search className="h-3 w-3" /> Forensic failure analyst</div>
-            <div className="mt-3 grid gap-2 sm:grid-cols-3">{["Requirement verdict", "Root cause", "Safe repair"].map((item) => <div key={item} className="border border-white/10 bg-white/[.03] px-2 py-2 text-[7px] font-bold text-white/65">{item}</div>)}</div>
-            <p className="mt-3 text-[8px] leading-4 text-white/40">Execution is not verification. Evidence determines whether the requirement was actually satisfied.</p>
-          </div>
-          <div className="border border-slate-300 bg-white p-4"><div className="font-mono text-[8px] font-bold uppercase tracking-[.18em] text-slate-400">Memory</div><div className="mt-3 text-[8px] leading-5 text-slate-500">Failures · coverage · changes · decisions · evidence</div></div>
-        </div>
+          <div className="border border-slate-300 bg-white p-5 sm:p-7">
+            <div className="grid gap-3 sm:grid-cols-[1fr_auto_1fr] sm:items-center">
+              <div className="border border-slate-200 bg-slate-50 p-5">
+                <div className="font-mono text-[10px] font-bold tracking-[.18em] text-slate-500">ORACLE</div>
+                <div className="mt-2 font-[Sora] text-xl font-extrabold tracking-[-.03em] text-slate-950">Fusion Cloud</div>
+                <p className="mt-2 text-xs leading-5 text-slate-600">Business processes, configuration and transactional data.</p>
+              </div>
+              <div className="mx-auto flex h-9 w-9 items-center justify-center border border-[#ffb703] bg-[#ffb703] text-slate-950">
+                <span className="font-[Sora] text-sm font-extrabold">+</span>
+              </div>
+              <div className="border border-slate-200 bg-slate-50 p-5">
+                <div className="flex items-center gap-2 font-mono text-[10px] font-bold tracking-[.18em] text-slate-500">
+                  <Sparkles className="h-3.5 w-3.5 text-[#a87900]" /> CLAUDE
+                </div>
+                <div className="mt-2 font-[Sora] text-xl font-extrabold tracking-[-.03em] text-slate-950">AI reasoning</div>
+                <p className="mt-2 text-xs leading-5 text-slate-600">Scenario reasoning, analysis and failure investigation.</p>
+              </div>
+            </div>
 
-        <div className="mt-3 grid gap-3 md:grid-cols-[1fr_1.5fr]">
-          <div className="border border-slate-300 bg-white p-4 sm:p-5">
-            <div className="flex items-center gap-2 font-mono text-[8px] font-bold uppercase tracking-[.18em] text-slate-400"><Bot className="h-3 w-3" /> Intelligence model</div>
-            <div className="mt-3 grid grid-cols-2 gap-2 text-[7px] font-bold"><div className="border border-slate-200 p-2.5">AI reasoning</div><div className="border border-slate-200 p-2.5">Deterministic engines</div></div>
-            <p className="mt-3 text-[8px] font-semibold leading-4 text-slate-600">AI proposes. Deterministic engines verify. Policy governs.</p>
-          </div>
-          <div className="border-2 border-[#ffb703] bg-[#ffb703] p-4 sm:p-5">
-            <div className="font-mono text-[8px] font-bold uppercase tracking-[.18em] text-slate-800/55">Release governance</div>
-            <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <div><div className="font-[Sora] text-2xl font-extrabold tracking-[-.04em]">Evidence → Policy → Decision</div><div className="mt-1 text-[8px] font-semibold text-slate-800/65">Risk · coverage · failures · confidence</div></div>
-              <div className="flex gap-2"><div className="flex items-center gap-1 border border-slate-900 bg-slate-900 px-3 py-2 text-[8px] font-extrabold text-white"><CheckCircle2 className="h-3 w-3" /> GO</div><div className="flex items-center gap-1 border border-slate-900 px-3 py-2 text-[8px] font-extrabold"><XCircle className="h-3 w-3" /> NO-GO</div></div>
+            <div className="mt-5 grid gap-px border border-slate-300 bg-slate-300 sm:grid-cols-5">
+              {capabilities.map(([Icon, title, description]) => (
+                <div key={title} className="group bg-white p-4 transition-colors hover:bg-slate-50">
+                  <Icon className="h-4 w-4 text-slate-500 transition-colors group-hover:text-[#a87900]" />
+                  <div className="mt-4 text-xs font-extrabold text-slate-950">{title}</div>
+                  <p className="mt-1 text-[10px] leading-4 text-slate-500">{description}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-5 grid gap-3 sm:grid-cols-4">
+              {["Business-process aware", "Configuration driven", "End-to-end validation", "Audit-ready evidence"].map((item) => (
+                <div key={item} className="flex items-center gap-2 text-[10px] font-semibold text-slate-600">
+                  <Check className="h-3.5 w-3.5 shrink-0 text-[#a87900]" />
+                  {item}
+                </div>
+              ))}
             </div>
           </div>
         </div>
-        <div className="mt-5 flex items-center justify-center gap-2 text-center font-mono text-[8px] font-bold uppercase tracking-[.16em] text-slate-400"><CircleDot className="h-3 w-3 text-[#ffb703]" /><span>When the next change arrives, the loop starts again.</span></div>
+      </div>
+    </section>
+  );
+}
+
+function ReleaseDecision() {
+  return (
+    <div className="overflow-hidden border border-slate-300 bg-[#0b0920] shadow-[0_30px_80px_-50px_rgba(11,9,32,.7)]">
+      <div className="flex items-center justify-between border-b border-white/10 px-5 py-4 sm:px-7">
+        <div className="flex items-center gap-3">
+          <span className="h-2 w-2 rounded-full bg-[#ffb703]" />
+          <span className="font-mono text-[9px] font-bold uppercase tracking-[.18em] text-white/60">Release decision</span>
+        </div>
+        <span className="font-mono text-[8px] uppercase tracking-[.14em] text-white/35">Change 4821</span>
+      </div>
+
+      <div className="grid lg:grid-cols-[.95fr_1.05fr]">
+        <div className="border-b border-white/10 p-6 sm:p-8 lg:border-b-0 lg:border-r">
+          <div className="font-mono text-[9px] font-bold uppercase tracking-[.18em] text-[#ffb703]">Change impact</div>
+          <h3 className="mt-3 font-[Sora] text-xl font-bold tracking-[-.03em] text-white">Payment service updated</h3>
+          <p className="mt-2 text-xs leading-5 text-white/45">Requirement, dependency and historical failure analysis identifies the assurance scope.</p>
+          <div className="mt-7 grid grid-cols-2 gap-px border border-white/10 bg-white/10">
+            {["12 requirements", "31 relevant tests", "8 critical journeys", "4 affected risks"].map((item) => (
+              <div key={item} className="bg-[#0b0920] px-4 py-4 text-[10px] font-semibold text-white/65">{item}</div>
+            ))}
+          </div>
+        </div>
+
+        <div className="p-6 sm:p-8">
+          <div className="font-mono text-[9px] font-bold uppercase tracking-[.18em] text-[#ffb703]">Requirement verification</div>
+          <div className="mt-4 space-y-2">
+            {[
+              ["Authentication", "Verified", true],
+              ["Payment authorization", "Verified", true],
+              ["Payment retry", "Verified", true],
+              ["Refund calculation", "Not satisfied", false],
+            ].map(([name, status, ok]) => (
+              <div key={String(name)} className="flex items-center justify-between border border-white/10 px-3 py-3">
+                <span className="text-[10px] font-semibold text-white/70">{name}</span>
+                <span className="flex items-center gap-1.5 font-mono text-[8px] font-bold uppercase text-white/55">
+                  {ok ? <Check className="h-3 w-3 text-[#ffb703]" /> : <CircleAlert className="h-3 w-3 text-[#d8a54a]" />}
+                  {String(status)}
+                </span>
+              </div>
+            ))}
+          </div>
+          <div className="mt-5 border-l-2 border-[#ffb703] bg-white/[.03] px-4 py-3">
+            <div className="text-[10px] font-bold text-white/80">Product requirement not satisfied</div>
+            <div className="mt-1 text-[10px] leading-5 text-white/40">Evidence indicates a pricing-service defect, not merely a failed automation step.</div>
+          </div>
+        </div>
+      </div>
+
+      <div className="grid border-t border-white/10 sm:grid-cols-[1fr_auto] sm:items-center">
+        <div className="px-6 py-5 sm:px-8">
+          <div className="font-mono text-[8px] font-bold uppercase tracking-[.16em] text-white/35">Why the release is blocked</div>
+          <div className="mt-2 flex flex-wrap gap-x-5 gap-y-2 text-[9px] font-semibold text-white/50">
+            <span>Evidence collected</span>
+            <span>Requirement evaluated</span>
+            <span>Failure classified</span>
+            <span>Policy evaluated</span>
+          </div>
+        </div>
+        <div className="border-t border-white/10 px-6 py-5 sm:border-l sm:border-t-0 sm:px-8">
+          <div className="font-mono text-[8px] uppercase tracking-[.16em] text-white/35">Decision</div>
+          <div className="mt-1 font-[Sora] text-2xl font-extrabold tracking-[-.04em] text-[#ffb703]">NO-GO</div>
+        </div>
       </div>
     </div>
   );
@@ -141,42 +236,221 @@ function AutonomousTestingPage() {
   return (
     <main className="overflow-hidden bg-white text-slate-950">
       <style>{`
-        .system-stage { position: relative; z-index: 1; min-height: 122px; border: 1px solid rgb(203 213 225); background: rgba(255,255,255,.94); padding: 18px 14px; animation: stagePulse 2.94s ease-in-out infinite; animation-delay: var(--stage-delay); }
-        .system-stage-icon { position: relative; display: flex; width: 34px; height: 34px; align-items: center; justify-content: center; border: 1px solid rgb(203 213 225); background: #f8fafc; color: rgb(51 65 85); }
-        .system-pulse { position: absolute; inset: -1px; border: 1px solid #ffb703; opacity: 0; animation: nodePulse 2.94s ease-out infinite; animation-delay: var(--stage-delay); }
-        .system-flow-line { position: absolute; left: 0; top: -1px; height: 3px; width: 14%; background: #ffb703; box-shadow: 0 0 14px rgba(255,183,3,.7); animation: flowAcross 4s linear infinite; }
-        .system-visual { isolation: isolate; }
-        @keyframes stagePulse { 0%, 8%, 100% { transform: translateY(0); border-color: rgb(203 213 225); box-shadow: none; } 12%, 28% { transform: translateY(-3px); border-color: #ffb703; box-shadow: 0 12px 30px -20px rgba(255,183,3,.8); } 34% { transform: translateY(0); } }
-        @keyframes nodePulse { 0%, 10% { transform: scale(.94); opacity: 0; } 16% { transform: scale(1.18); opacity: .8; } 34%, 100% { transform: scale(1.35); opacity: 0; } }
-        @keyframes flowAcross { 0% { transform: translateX(-10%); opacity: 0; } 8% { opacity: 1; } 92% { opacity: 1; } 100% { transform: translateX(750%); opacity: 0; } }
-        @media (prefers-reduced-motion: reduce) { .system-stage, .system-pulse, .system-flow-line { animation: none !important; } }
+        .shyena-line{position:relative;overflow:hidden}
+        .shyena-line::after{content:"";position:absolute;left:-30%;top:0;height:1px;width:30%;background:#ffb703;animation:shyena-scan 4s ease-in-out infinite}
+        .shyena-step{transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease}
+        .shyena-step:hover{transform:translateY(-3px);border-color:#ffb703;box-shadow:0 18px 40px -28px rgba(15,23,42,.22)}
+        @keyframes shyena-scan{0%{left:-30%;opacity:0}15%{opacity:1}55%{opacity:1}100%{left:100%;opacity:0}}
+        @media(prefers-reduced-motion:reduce){.shyena-line::after{animation:none}.shyena-step{transition:none}.shyena-step:hover{transform:none}}
       `}</style>
 
-      <section className="border-b border-slate-300">
-        <div className="mx-auto max-w-[1440px] px-6 py-16 sm:px-8 lg:px-10 lg:py-24">
-          <div className="mx-auto max-w-5xl text-center">
-            <div className="mb-5 inline-flex items-center gap-2 border border-slate-300 px-3 py-2 font-mono text-[9px] font-bold uppercase tracking-[.2em] text-slate-500"><span className="h-2 w-2 rounded-full bg-[#ffb703]" /> Autonomous quality engineering</div>
-            <h1 className="font-[Sora] text-[clamp(3.2rem,7vw,7rem)] font-extrabold leading-[.86] tracking-[-.075em]">From change to<br/><span className="text-slate-500">release confidence.</span></h1>
-            <p className="mx-auto mt-7 max-w-3xl text-base font-medium leading-7 text-slate-600 sm:text-lg">Shyena understands change, designs BDD tests, executes them through your existing stack, proves requirements with evidence and drives governed release decisions.</p>
-            <div className="mt-7 flex flex-wrap justify-center gap-3"><Link to="/contact" className="inline-flex h-12 items-center gap-2 border border-[#ffb703] bg-[#ffb703] px-6 text-sm font-extrabold uppercase">See Shyena in action <ArrowRight className="h-4 w-4" /></Link><a href="#system" className="inline-flex h-12 items-center gap-2 border border-slate-400 px-6 text-sm font-semibold">Explore the system <ArrowDown className="h-4 w-4" /></a></div>
+      <section className="border-b border-slate-300 bg-white">
+        <div className="mx-auto max-w-[1440px] px-6 pb-16 pt-14 sm:px-8 lg:px-10 lg:pb-20 lg:pt-20">
+          <div className="grid gap-12 lg:grid-cols-[1.05fr_.95fr] lg:items-center lg:gap-20">
+            <div>
+              <Eyebrow>Autonomous quality engineering</Eyebrow>
+              <h1 className="max-w-4xl font-[Sora] text-[clamp(3rem,6vw,6.2rem)] font-extrabold leading-[.9] tracking-[-.07em]">
+                Release faster.
+                <br />
+                <span className="text-slate-500">With confidence.</span>
+              </h1>
+              <p className="mt-7 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">
+                Shyena turns every software change into a continuously verified release decision — autonomously. Connect change, risk, testing and evidence without replacing the tools your teams already use.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Link
+                  to="/contact"
+                  className="inline-flex h-12 items-center gap-2 border border-[#ffb703] bg-[#ffb703] px-7 text-sm font-extrabold uppercase text-slate-950 transition-colors hover:bg-[#e7a600]"
+                >
+                  Request a demo <ArrowRight className="h-4 w-4" />
+                </Link>
+                <a
+                  href="#system"
+                  className="inline-flex h-12 items-center gap-2 border border-slate-400 bg-white px-7 text-sm font-semibold text-slate-950 transition-colors hover:border-slate-950"
+                >
+                  See how it works <ArrowRight className="h-4 w-4" />
+                </a>
+              </div>
+              <div className="mt-8 grid max-w-2xl grid-cols-3 border-y border-slate-300 py-5">
+                {[
+                  ["Higher", "release velocity"],
+                  ["Lower", "risk and defects"],
+                  ["Evidence-backed", "decisions"],
+                ].map(([value, label], index) => (
+                  <div key={label} className={`${index > 0 ? "border-l border-slate-300 pl-4 sm:pl-6" : ""} pr-3`}>
+                    <div className="font-[Sora] text-lg font-extrabold text-[#a87900]">{value}</div>
+                    <div className="mt-1 text-[10px] font-semibold text-slate-500">{label}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="relative min-h-[330px] overflow-hidden border border-slate-300 bg-[#f8fafc] p-6 sm:p-8">
+              <div className="absolute -right-12 -top-12 h-48 w-48 rounded-full border border-[#ffb703]/30" />
+              <div className="absolute -right-2 top-0 h-72 w-px rotate-[24deg] bg-[#ffb703]/40" />
+              <div className="relative flex h-full min-h-[280px] flex-col justify-between">
+                <div className="flex items-center justify-between">
+                  <span className="font-mono text-[9px] font-bold uppercase tracking-[.18em] text-slate-400">The executive question</span>
+                  <ShieldCheck className="h-5 w-5 text-[#a87900]" />
+                </div>
+                <div>
+                  <div className="font-[Sora] text-[clamp(2rem,3vw,3rem)] font-extrabold leading-[.95] tracking-[-.055em]">“A test failed.”</div>
+                  <div className="mt-2 font-[Sora] text-[clamp(2rem,3vw,3rem)] font-extrabold leading-[.95] tracking-[-.055em] text-slate-500">Should we stop?</div>
+                  <p className="mt-6 max-w-md text-sm leading-6 text-slate-600">Shyena determines what the failure means for the requirement, the customer and the release — not just whether an automation step failed.</p>
+                </div>
+                <div className="flex items-center gap-3 font-mono text-[8px] font-bold uppercase tracking-[.15em] text-slate-400">
+                  <span className="h-px w-12 bg-[#ffb703]" />
+                  Evidence before decision
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <section id="system" className="border-b border-slate-300 bg-[#f8fafc]">
-        <div className="mx-auto max-w-[1440px] px-6 py-12 sm:px-8 lg:px-10 lg:py-16">
-          <div className="mx-auto mb-8 max-w-4xl text-center"><div className="font-mono text-[10px] font-bold uppercase tracking-[.2em] text-[#a87900]">The autonomous loop</div><h2 className="mt-3 font-[Sora] text-[clamp(2.2rem,4.2vw,4.3rem)] font-extrabold leading-[.92] tracking-[-.06em]">One system. One continuous path.</h2><p className="mx-auto mt-4 max-w-2xl text-sm leading-6 text-slate-500">The animation is the architecture: every change becomes a risk-aware test, evidence and release decision.</p></div>
-          <SystemVisual />
+      <section id="problem" className="border-b border-slate-300 bg-[#f8fafc]">
+        <div className="mx-auto max-w-[1440px] px-6 py-14 sm:px-8 lg:px-10 lg:py-20">
+          <div className="grid gap-10 lg:grid-cols-[.7fr_1.3fr] lg:gap-24">
+            <div>
+              <Eyebrow>The challenge</Eyebrow>
+              <h2 className="font-[Sora] text-[clamp(2.4rem,4.2vw,4.2rem)] font-extrabold leading-[.92] tracking-[-.065em]">Software changes faster than testing can.</h2>
+              <p className="mt-6 max-w-md text-sm leading-6 text-slate-600">More frequent releases, complex systems and AI-powered features make it harder to know what to test, what failed, why it failed and whether it is safe to release.</p>
+            </div>
+            <div>
+              <ProblemRow number="01" problem="Change moves faster than regression suites." consequence="Teams cannot manually determine the right scope for every release, so they either test too much or accept blind spots." />
+              <ProblemRow number="02" problem="Automation tells you that something failed — not why." consequence="Engineers spend valuable time separating application defects, test defects, data problems and environment failures." />
+              <ProblemRow number="03" problem="Leadership still lacks evidence for the release decision." consequence="A dashboard of pass/fail results does not prove that the business requirement was actually satisfied." />
+            </div>
+          </div>
         </div>
       </section>
 
-      <section className="border-b border-slate-300"><div className="mx-auto grid max-w-[1440px] gap-px bg-slate-300 px-0 lg:grid-cols-3">{[["UNDERSTAND", "Know what changed, what it touches and what matters."],["EXECUTE", "Turn semantic BDD intent into controlled execution across your stack."],["PROVE", "Correlate evidence, investigate failures and verify the requirement."]].map(([title,text],index)=><div key={title} className="bg-white px-6 py-10 sm:px-8 lg:px-10 lg:py-12"><div className="font-mono text-[9px] font-bold text-[#a87900]">0{index+1}</div><div className="mt-3 font-[Sora] text-2xl font-extrabold tracking-[-.04em]">{title}</div><p className="mt-3 max-w-sm text-sm leading-6 text-slate-500">{text}</p></div>)}</div></section>
+      <section id="system" className="border-b border-slate-300 bg-white">
+        <div className="mx-auto max-w-[1440px] px-6 py-14 sm:px-8 lg:px-10 lg:py-20">
+          <div className="max-w-3xl">
+            <Eyebrow>The Shyena approach</Eyebrow>
+            <h2 className="font-[Sora] text-[clamp(2.5rem,4.6vw,4.6rem)] font-extrabold leading-[.9] tracking-[-.065em]">From change to confident release.</h2>
+            <p className="mt-5 max-w-2xl text-sm leading-6 text-slate-600">An autonomous quality engineering system that connects requirements, tests, evidence and release governance around the work your teams already do.</p>
+          </div>
 
-      <section className="border-b border-slate-300 bg-[#0b0920] text-white"><div className="mx-auto max-w-[1440px] px-6 py-12 sm:px-8 lg:px-10 lg:py-16"><div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[1fr_1.5fr] lg:items-center"><div><div className="font-mono text-[10px] font-bold uppercase tracking-[.2em] text-[#ffb703]">The operating model</div><h2 className="mt-3 font-[Sora] text-[clamp(2.3rem,4vw,4.2rem)] font-extrabold leading-[.94] tracking-[-.06em]">AI where reasoning matters. Determinism where trust matters.</h2></div><div className="grid gap-px border border-white/10 bg-white/10 sm:grid-cols-2"><div className="bg-[#111026] p-5 sm:p-6"><div className="font-mono text-[8px] font-bold uppercase tracking-[.18em] text-[#ffb703]">AI reasoning</div><div className="mt-3 text-sm font-extrabold">Interpret · design · explore · diagnose</div><p className="mt-2 text-[9px] leading-5 text-white/40">Requirements, risk, test design, semantic evaluation and RCA.</p></div><div className="bg-[#111026] p-5 sm:p-6"><div className="font-mono text-[8px] font-bold uppercase tracking-[.18em] text-[#ffb703]">Deterministic</div><div className="mt-3 text-sm font-extrabold">Verify · calculate · enforce · gate</div><p className="mt-2 text-[9px] leading-5 text-white/40">Assertions, contracts, coverage, rules, schemas and release policy.</p></div></div></div><div className="mx-auto mt-8 max-w-6xl border-t border-white/10 pt-6 text-center font-[Sora] text-lg font-extrabold tracking-[-.02em] sm:text-2xl">AI proposes. Deterministic engines verify. Policy governs. <span className="text-[#ffb703]">Evidence proves.</span></div></div></section>
+          <div className="mt-12 grid gap-px border border-slate-300 bg-slate-300 md:grid-cols-5">
+            {[
+              ["01", "UNDERSTAND", "Requirements, code, dependencies", Search],
+              ["02", "ASSESS", "Risk, impact and coverage", Target],
+              ["03", "TEST", "Execute what matters", Workflow],
+              ["04", "INVESTIGATE", "AI-driven RCA and validation", Layers3],
+              ["05", "PROVE", "Evidence-backed release decision", ShieldCheck],
+            ].map(([number, title, description, Icon]) => (
+              <div key={String(number)} className="shyena-step bg-white p-6 sm:p-7">
+                <div className="flex items-center justify-between">
+                  <span className="font-mono text-[9px] font-bold tracking-[.16em] text-slate-400">{String(number)}</span>
+                  <Icon className="h-5 w-5 text-slate-500" />
+                </div>
+                <div className="mt-12 font-mono text-[9px] font-bold tracking-[.16em] text-slate-950">{String(title)}</div>
+                <p className="mt-3 text-xs leading-5 text-slate-600">{String(description)}</p>
+              </div>
+            ))}
+          </div>
 
-      <section className="border-b border-slate-300 bg-[#ffb703]"><div className="mx-auto max-w-[1440px] px-6 py-12 sm:px-8 lg:px-10 lg:py-14"><div className="mx-auto max-w-6xl"><div className="grid gap-6 lg:grid-cols-[.7fr_1.3fr] lg:items-center"><div><div className="font-mono text-[10px] font-bold uppercase tracking-[.2em] text-slate-800/55">Enterprise fit</div><h2 className="mt-3 font-[Sora] text-[clamp(2.3rem,4vw,4.2rem)] font-extrabold leading-[.94] tracking-[-.06em]">Keep the stack. Change the operating model.</h2></div><div className="grid gap-px border border-slate-900/10 bg-slate-900/10 sm:grid-cols-3">{[["Jira", "Why the test exists"],["GitHub", "What the test is"],["Shyena", "Intelligence connecting both"]].map(([name,text])=><div key={name} className="bg-white/45 p-5"><div className="text-lg font-extrabold">{name}</div><div className="mt-2 text-[9px] font-semibold leading-4 text-slate-800/65">{text}</div></div>)}</div></div></div></div></section>
+          <div className="shyena-line mt-5 h-px bg-slate-300" />
+          <div className="mt-4 flex flex-wrap justify-between gap-4 font-mono text-[8px] font-bold uppercase tracking-[.16em] text-slate-400">
+            <span>Change intelligence</span>
+            <span>Risk-based selection</span>
+            <span>Evidence collection</span>
+            <span>Forensic verification</span>
+            <span>Release governance</span>
+          </div>
+        </div>
+      </section>
 
-      <section><div className="mx-auto max-w-[1440px] px-6 py-14 text-center sm:px-8 lg:px-10 lg:py-20"><div className="mx-auto max-w-4xl"><div className="font-mono text-[10px] font-bold uppercase tracking-[.2em] text-[#a87900]">The boundary</div><h2 className="mt-3 font-[Sora] text-[clamp(2.5rem,5vw,5rem)] font-extrabold leading-[.9] tracking-[-.07em]">Autonomous execution.<br/><span className="text-slate-500">Governed quality.</span></h2><p className="mx-auto mt-6 max-w-2xl text-base leading-7 text-slate-600">Shyena owns the intelligence. Your organization owns the infrastructure. Teams retain governance and accountability.</p><div className="mt-8"><Link to="/contact" className="inline-flex h-12 items-center gap-2 border border-[#ffb703] bg-[#ffb703] px-6 text-sm font-extrabold uppercase">Talk to Shyena <ArrowRight className="h-4 w-4" /></Link></div></div></div></section>
+      <ErpTesting />
+
+      <section className="border-b border-slate-300 bg-white">
+        <div className="mx-auto max-w-[1440px] px-6 py-14 sm:px-8 lg:px-10 lg:py-20">
+          <div className="grid gap-10 lg:grid-cols-[.68fr_1.32fr] lg:items-end lg:gap-20">
+            <div>
+              <Eyebrow>Shyena in action</Eyebrow>
+              <h2 className="font-[Sora] text-[clamp(2.4rem,4vw,4rem)] font-extrabold leading-[.92] tracking-[-.06em]">A real example.<br />A real decision.</h2>
+              <p className="mt-5 max-w-md text-sm leading-6 text-slate-600">From a code change to a clear GO / NO-GO recommendation with the evidence needed to defend the decision.</p>
+              <div className="mt-7 space-y-5 border-l border-slate-300 pl-6">
+                {[
+                  ["01", "Change detected", "Payment service updated"],
+                  ["02", "Impact analysis", "12 requirements · 31 tests"],
+                  ["03", "Testing", "28 passed · 3 failed"],
+                  ["04", "Investigation", "AI analysis in progress"],
+                  ["05", "Release decision", "NO-GO · policy breach"],
+                ].map(([number, title, detail]) => (
+                  <div key={number} className="relative">
+                    <div className="absolute -left-[31px] top-0.5 flex h-2.5 w-2.5 items-center justify-center rounded-full border-2 border-white bg-slate-400" />
+                    <div className="font-mono text-[9px] font-bold tracking-[.15em] text-slate-400">{number}</div>
+                    <div className="mt-1 text-xs font-extrabold text-slate-950">{title}</div>
+                    <div className="mt-0.5 text-[10px] text-slate-500">{detail}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <ReleaseDecision />
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-slate-300 bg-[#f8fafc]">
+        <div className="mx-auto max-w-[1440px] px-6 py-14 sm:px-8 lg:px-10 lg:py-20">
+          <div className="grid gap-12 lg:grid-cols-[.8fr_1.2fr] lg:gap-24">
+            <div>
+              <Eyebrow>More than test results</Eyebrow>
+              <h2 className="font-[Sora] text-[clamp(2.4rem,4vw,4.1rem)] font-extrabold leading-[.92] tracking-[-.06em]">Automation executes.<br /><span className="text-slate-500">Shyena reasons.</span></h2>
+            </div>
+            <div className="grid gap-0 border border-slate-300 bg-white sm:grid-cols-2">
+              {[
+                ["AI REASONING", "Understands requirements, assesses change impact, selects assurance and forms failure hypotheses."],
+                ["DETERMINISTIC PROOF", "Rules, calculations, contracts and evidence checks provide reproducible verification."],
+                ["EVIDENCE", "Browser, API, data, logs, traces and business events are correlated to the requirement being tested."],
+                ["GOVERNANCE", "Policies determine how evidence becomes an auditable release recommendation."],
+              ].map(([title, description], index) => (
+                <div key={title} className={`${index % 2 === 0 ? "sm:border-r" : ""} border-b border-slate-300 p-6 last:border-b-0 sm:p-7 ${index >= 2 ? "sm:border-b-0" : ""}`}>
+                  <div className="font-mono text-[9px] font-bold tracking-[.16em] text-[#a87900]">{title}</div>
+                  <p className="mt-3 text-sm leading-6 text-slate-600">{description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-slate-300 bg-white">
+        <div className="mx-auto max-w-[1440px] px-6 py-14 sm:px-8 lg:px-10 lg:py-20">
+          <div className="grid gap-14 lg:grid-cols-[.65fr_1.35fr] lg:gap-24">
+            <div>
+              <Eyebrow>Works with what you already have</Eyebrow>
+              <h2 className="font-[Sora] text-[clamp(2.3rem,4vw,4rem)] font-extrabold leading-[.92] tracking-[-.06em]">Keep the tools.<br /><span className="text-slate-500">Add the intelligence.</span></h2>
+              <p className="mt-5 max-w-md text-sm leading-6 text-slate-600">Shyena does not require a replacement testing stack. It connects the systems that already contain requirements, code, automation and runtime evidence.</p>
+              <div className="mt-7 flex flex-wrap gap-2">
+                {stack.map((item) => (
+                  <span key={item} className="border border-slate-300 bg-white px-3 py-2 font-mono text-[8px] font-bold uppercase tracking-[.12em] text-slate-500">{item}</span>
+                ))}
+              </div>
+            </div>
+            <div className="grid gap-8 sm:grid-cols-2">
+              <OperatingStep number="01" title="Your requirements" description="Jira remains the source of truth for business intent, acceptance and priority." icon={Target} />
+              <OperatingStep number="02" title="Your engineering" description="GitHub remains the source of truth for test contracts, automation and version history." icon={GitBranch} />
+              <OperatingStep number="03" title="Your runtime" description="Existing execution engines and observability systems provide the evidence." icon={Workflow} />
+              <OperatingStep number="04" title="Your decision" description="Shyena brings the signals together into traceable quality intelligence and release governance." icon={ShieldCheck} />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-slate-300 bg-[#0b0920] text-white">
+        <div className="mx-auto max-w-[1440px] px-6 py-16 sm:px-8 lg:px-10 lg:py-24">
+          <div className="max-w-5xl">
+            <div className="font-mono text-[10px] font-bold uppercase tracking-[.2em] text-[#ffb703]">The outcome</div>
+            <h2 className="mt-5 font-[Sora] text-[clamp(2.7rem,5.5vw,5.7rem)] font-extrabold leading-[.9] tracking-[-.07em]">Move from “did the tests pass?”<br /><span className="text-white/35">to “is the release safe?”</span></h2>
+            <p className="mt-7 max-w-2xl text-base leading-7 text-white/55">Shyena makes quality engineering autonomous without removing human accountability. AI reasons. Deterministic systems verify. Evidence proves. Policy governs. Leaders decide.</p>
+            <Link to="/contact" className="mt-8 inline-flex h-12 items-center gap-2 border border-[#ffb703] bg-[#ffb703] px-6 text-sm font-extrabold text-slate-950 transition-colors hover:bg-[#e7a600]">Discuss your quality system <ArrowRight className="h-4 w-4" /></Link>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }
