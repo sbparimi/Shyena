@@ -9,7 +9,8 @@ export type ArticleConcept =
   | "judge"
   | "tokenomics"
   | "contracts"
-  | "evidence";
+  | "evidence"
+  | "latency";
 
 type Node = {
   x: number;
@@ -75,6 +76,7 @@ function JudgeDiagram() { const nodes: Node[] = [{x:130,y:215,label:"TRANSCRIPT"
 function TokenomicsDiagram() { const nodes: Node[] = [{x:130,y:215,label:"TOKENS",sub:"execution cost",tone:"gold"},{x:350,y:215,label:"BEHAVIOUR",sub:"what happened",tone:"purple"},{x:570,y:215,label:"ASSURANCE",sub:"trust + controls",tone:"purple"},{x:790,y:215,label:"VALUE",sub:"business outcome",tone:"gold"},{x:1010,y:215,label:"IMPACT",sub:"strategic result",tone:"gold"}]; return <Diagram title="Assurance economics connects execution to business impact" eyebrow="ASSURANCE ECONOMICS" nodes={nodes} edges={[{from:0,to:1},{from:1,to:2},{from:2,to:3},{from:3,to:4}]} caption="COST → BEHAVIOUR → ASSURANCE → VALUE → IMPACT"/>; }
 function ContractsDiagram() { const nodes: Node[] = [{x:600,y:70,label:"ASSURANCE",sub:"release decision",tone:"gold"},{x:180,y:205,label:"GOAL",sub:"outcome",tone:"purple"},{x:390,y:205,label:"ORCHESTRATION",sub:"routing",tone:"purple"},{x:610,y:205,label:"DETERMINISTIC",sub:"facts",tone:"purple"},{x:830,y:205,label:"ANSWER",sub:"quality",tone:"gold"},{x:1040,y:205,label:"SECURITY",sub:"boundaries",tone:"danger"},{x:600,y:335,label:"INTEGRITY",sub:"complete + provable",tone:"gold"}]; return <Diagram title="Six contracts must agree before release" eyebrow="ASSURANCE CONTRACTS" nodes={nodes} edges={[{from:0,to:1},{from:0,to:2},{from:0,to:3},{from:0,to:4},{from:0,to:5},{from:1,to:6},{from:2,to:6},{from:3,to:6},{from:4,to:6},{from:5,to:6,danger:true}]} caption="GOAL · ROUTE · FACTS · ANSWER · SECURITY · INTEGRITY → VERDICT"/>; }
 function EvidenceDiagram() { const nodes: Node[] = [{x:120,y:215,label:"TEST INTENT",sub:"what must be true",tone:"gold"},{x:340,y:215,label:"LIVE RUN",sub:"actual behaviour",tone:"purple"},{x:570,y:125,label:"CONVERSATION",sub:"turn evidence"},{x:570,y:305,label:"TRACE / TOOLS",sub:"execution evidence"},{x:800,y:215,label:"EVALUATION",sub:"claims + checks",tone:"gold"},{x:1030,y:215,label:"VERDICT",sub:"release / review / block",tone:"gold"}]; return <Diagram title="Evidence turns execution into a defensible verdict" eyebrow="EVIDENCE CHAIN" nodes={nodes} edges={[{from:0,to:1},{from:1,to:2},{from:1,to:3},{from:2,to:4},{from:3,to:4},{from:4,to:5}]} caption="INTENT → LIVE EVIDENCE → EVALUATION → DEFENSIBLE RELEASE DECISION"/>; }
+function LatencyDiagram() { const nodes: Node[] = [{x:120,y:215,label:"REQUEST",sub:"T0 · received",tone:"gold"},{x:330,y:215,label:"TTFT",sub:"first output",tone:"purple"},{x:545,y:115,label:"LLM",sub:"reasoning"},{x:545,y:315,label:"RAG",sub:"retrieval"},{x:760,y:115,label:"TOOLS / API",sub:"dependencies"},{x:760,y:315,label:"ORCHESTRATION",sub:"execution"},{x:1010,y:215,label:"RESPONSE",sub:"T1 · complete",tone:"gold"}]; return <Diagram title="Agentic AI latency is an execution-path problem" eyebrow="LATENCY ASSURANCE" nodes={nodes} edges={[{from:0,to:1},{from:1,to:2},{from:1,to:3},{from:2,to:6},{from:3,to:6},{from:2,to:4},{from:3,to:5},{from:4,to:6},{from:5,to:6}]} caption="TTFT + EXECUTION TRACE + CRITICAL PATH → RESPONSE LATENCY"/>; }
 
 export function ArticleConceptDiagram({ concept }: { concept: ArticleConcept }) {
   switch (concept) {
@@ -86,6 +88,7 @@ export function ArticleConceptDiagram({ concept }: { concept: ArticleConcept }) 
     case "tokenomics": return <TokenomicsDiagram />;
     case "contracts": return <ContractsDiagram />;
     case "evidence": return <EvidenceDiagram />;
+    case "latency": return <LatencyDiagram />;
     default: return <SystemsDiagram />;
   }
 }
