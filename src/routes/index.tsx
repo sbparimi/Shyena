@@ -1,98 +1,96 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowDownRight, ArrowRight, Play, ShieldCheck, Sparkles } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Shyena — Autonomous Quality Engineering" },
-      { name: "description", content: "Shyena autonomously tests, evaluates and secures AI systems and enterprise software, producing evidence-backed release decisions." },
+      { title: "Shyena — AI Assurance, Engineered as Evidence" },
+      { name: "description", content: "Shyena is the evidence layer for AI systems: understand, test, evaluate, secure and prove every critical release." },
+      { property: "og:title", content: "Shyena — AI Assurance, Engineered as Evidence" },
+      { property: "og:description", content: "Understand the system. Evaluate the behaviour. Defend the release." },
+      { property: "og:image", content: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=88&w=2400&auto=format&fit=crop" },
     ],
   }),
   component: HomePage,
 });
 
-const capabilities = [
-  ["UNDERSTAND", "Map the system", "Discover architecture, journeys, dependencies and business-critical paths before testing."],
-  ["TEST & EVALUATE", "Prove behaviour", "Run realistic journeys and evaluate outcomes, business rules and execution integrity."],
-  ["SECURE", "Find unsafe paths", "Probe trust boundaries, adversarial behaviour and control failures before production."],
-] as const;
+const editorialStories = [
+  { number: "01", eyebrow: "AI ASSURANCE", title: "AI agent testing is a systems problem.", description: "Why goals, orchestration, deterministic contracts, generated answers and security have to be tested as one system.", image: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=88&w=1800&auto=format&fit=crop", href: "/blog/ai-agent-testing-is-a-systems-problem" },
+  { number: "02", eyebrow: "EVALUATION", title: "A green checkmark is not proof.", description: "A high quality score cannot rescue a conversation that never reached its business goal.", image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=88&w=1800&auto=format&fit=crop", href: "/blog/the-problem-with-green-checkmarks-on-broken-conversations" },
+  { number: "03", eyebrow: "CONVERSATIONAL AI", title: "Test the journey, not the transcript.", description: "Goal-driven journeys let agents vary their route while deterministic and semantic controls prove correctness.", image: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?q=88&w=1800&auto=format&fit=crop", href: "/blog/why-conversational-ai-needs-a-different-testing-model" },
+];
 
-const outcomes = [
-  ["01", "More coverage", "Find critical paths your existing regression suite does not cover."],
-  ["02", "Faster investigation", "Correlate application, API, network, log and execution evidence."],
-  ["03", "Lower release risk", "Connect findings to requirements, customer impact and risk."],
-  ["04", "Defensible decisions", "Give engineering leaders evidence for GO, NO-GO or REVIEW."],
+const pillars = [
+  ["NEXUS", "Understand", "Map architecture, orchestration, dependencies, business rules and critical journeys before testing."],
+  ["VERA", "Evaluate", "Run realistic multi-turn journeys and combine deterministic, semantic and trajectory evidence."],
+  ["CHAKRA", "Defend", "Probe trust boundaries, adversarial behaviour and control failures inside the same evidence chain."],
 ] as const;
 
 function HomePage() {
   return (
-    <main className="overflow-x-hidden bg-white text-slate-950">
-      <section className="border-b border-slate-300 bg-white">
-        <div className="mx-auto max-w-[1440px] px-5 py-12 sm:px-8 sm:py-16 lg:px-10 lg:py-24">
-          <div className="grid gap-10 lg:grid-cols-[1.02fr_0.98fr] lg:items-center lg:gap-16">
-            <div>
-              <div className="mb-5 border-l-4 border-[#ffb703] pl-3 font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-slate-600 sm:mb-6 sm:pl-4 sm:text-xs">Autonomous Quality Engineering</div>
-              <h1 className="max-w-4xl font-[Sora] text-[clamp(2.8rem,8vw,6rem)] font-extrabold leading-[0.91] tracking-[-0.065em]">Test. Evaluate. Secure. <span className="text-[#a87900]">Prove.</span></h1>
-              <h2 className="mt-5 max-w-3xl font-[Sora] text-[clamp(1.7rem,3.4vw,2.8rem)] font-extrabold leading-[1.05] tracking-[-0.045em] text-slate-800">Know if your AI system is ready for production.</h2>
-              <p className="mt-6 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">Shyena autonomously tests AI agents and enterprise applications, investigates failures, validates security and turns the evidence into a release decision.</p>
-              <div className="mt-7 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:gap-3">
-                <Link to="/contact" className="inline-flex h-12 w-full items-center justify-center gap-2 border border-[#ffb703] bg-[#ffb703] px-6 text-sm font-extrabold uppercase text-slate-950 sm:w-fit sm:px-7">Assess your system <ArrowRight className="h-5 w-5" /></Link>
-                <a href="#how-it-works" className="inline-flex h-12 w-full items-center justify-center border border-slate-400 bg-white px-6 text-sm font-semibold text-slate-950 sm:w-fit sm:px-7">See how it works</a>
+    <main className="shyena-editorial bg-[#f4f1ea] text-[#151515]">
+      <section className="relative min-h-[760px] overflow-hidden bg-[#09080b] text-white lg:min-h-[900px]">
+        <video className="absolute inset-0 h-full w-full object-cover opacity-45" autoPlay muted loop playsInline preload="metadata" poster="https://images.unsplash.com/photo-1518770660439-4636190af475?q=88&w=2400&auto=format&fit=crop" aria-label="Cinematic technology background">
+          <source src="https://cdn.coverr.co/videos/coverr-typing-on-laptop-2630/1080p.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,5,7,.96)_0%,rgba(5,5,7,.78)_42%,rgba(5,5,7,.25)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_35%,rgba(255,191,71,.18),transparent_28%)]" />
+        <div className="relative mx-auto flex min-h-[760px] max-w-[1600px] flex-col px-6 pb-10 pt-6 sm:px-10 lg:min-h-[900px] lg:px-14 lg:pt-8">
+          <div className="flex items-center justify-between border-b border-white/15 pb-5">
+            <div className="shyena-wordmark text-2xl tracking-[-0.06em] text-white">SHYENA</div>
+            <div className="hidden items-center gap-8 font-mono text-[10px] uppercase tracking-[.22em] text-white/65 md:flex"><span>AI Assurance</span><span>Evidence Engineering</span><span>2026</span></div>
+            <Link to="/contact" className="border border-[#d6a84a] px-4 py-2 font-mono text-[10px] font-semibold uppercase tracking-[.16em] text-[#f1c86c] transition hover:bg-[#d6a84a] hover:text-black">Request a working session</Link>
+          </div>
+          <div className="flex flex-1 items-end pb-14 pt-24 lg:pb-20">
+            <div className="grid w-full gap-12 lg:grid-cols-[1.15fr_.85fr] lg:items-end">
+              <div>
+                <div className="mb-7 flex items-center gap-3 font-mono text-[10px] uppercase tracking-[.24em] text-[#e7bf67]"><span className="h-px w-12 bg-[#e7bf67]" /> Autonomous Quality Engineering</div>
+                <h1 className="max-w-6xl font-[Sora] text-[clamp(4rem,10vw,9.5rem)] font-extrabold leading-[.82] tracking-[-.075em]">Evidence<br /><span className="text-[#e7bf67]">before</span><br />release.</h1>
+                <p className="mt-9 max-w-2xl text-lg leading-8 text-white/70 sm:text-xl">Shyena turns AI system behaviour into traceable evidence — so engineering teams can understand what happened, why it matters and whether a release can be trusted.</p>
+                <div className="mt-9 flex flex-wrap gap-3"><Link to="/contact" className="inline-flex items-center gap-3 bg-[#e7bf67] px-6 py-4 text-xs font-extrabold uppercase tracking-[.12em] text-black transition hover:bg-white">See the assurance workflow <ArrowRight className="h-4 w-4" /></Link><Link to="/vera" className="inline-flex items-center gap-3 border border-white/25 px-6 py-4 text-xs font-extrabold uppercase tracking-[.12em] text-white transition hover:border-white">Explore VERA <ArrowRight className="h-4 w-4" /></Link></div>
               </div>
-              <div className="mt-6 border-t border-slate-300 pt-4 font-mono text-[9px] font-bold uppercase leading-5 tracking-[0.14em] text-slate-400 sm:text-[10px]">AI agents · Conversational AI · Enterprise applications · Autonomous testing</div>
-            </div>
-
-            <div className="border border-slate-300 bg-[#0b0920] p-5 sm:p-7 lg:p-8">
-              <div className="flex items-center justify-between border-b border-white/10 pb-4"><span className="font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-[#ffb703]">The Shyena loop</span><span className="font-mono text-[10px] text-white/40">ASSURANCE</span></div>
-              <div className="py-7 sm:py-9">
-                <div className="grid grid-cols-3 gap-2 sm:gap-3">
-                  {[["01", "Understand"], ["02", "Test & evaluate"], ["03", "Secure"]].map(([n, t]) => <div key={n} className="border border-white/10 bg-white/[0.04] px-2 py-5 text-center sm:px-4"><div className="font-mono text-xs text-[#ffb703]">{n}</div><div className="mt-3 text-xs font-bold text-white sm:text-sm">{t}</div></div>)}
-                </div>
-                <div className="my-5 flex justify-center"><ArrowRight className="h-5 w-5 rotate-90 text-[#ffb703]" /></div>
-                <div className="border border-white/10 px-4 py-4 text-center"><div className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">Evidence</div><div className="mt-2 text-base font-extrabold text-white sm:text-lg">Execution · APIs · Logs · Traces · Business outcomes</div></div>
-                <div className="my-5 flex justify-center"><ArrowRight className="h-5 w-5 rotate-90 text-[#ffb703]" /></div>
-                <div className="border border-[#ffb703]/40 bg-[#ffb703]/10 px-4 py-4 text-center"><div className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#ffb703]">Decision</div><div className="mt-2 text-lg font-extrabold text-white sm:text-xl">GO · NO-GO · REVIEW</div></div>
+              <div className="ml-auto w-full max-w-md border border-white/15 bg-black/35 p-5 backdrop-blur-md sm:p-7">
+                <div className="flex items-center justify-between border-b border-white/10 pb-4 font-mono text-[9px] uppercase tracking-[.2em] text-white/45"><span>Assurance chain</span><span>LIVE MODEL</span></div>
+                <div className="py-5 font-mono text-[11px] leading-8 text-white/75"><div><span className="text-[#e7bf67]">01</span> Understand the system</div><div><span className="text-[#e7bf67]">02</span> Engineer the assurance intent</div><div><span className="text-[#e7bf67]">03</span> Execute realistic journeys</div><div><span className="text-[#e7bf67]">04</span> Correlate evidence</div><div><span className="text-[#e7bf67]">05</span> Defend the security boundary</div><div><span className="text-[#e7bf67]">06</span> Prove the release decision</div></div>
+                <div className="border-t border-white/10 pt-4 text-sm font-semibold text-white">GO <span className="mx-2 text-white/25">/</span> NO-GO <span className="mx-2 text-white/25">/</span> REVIEW</div>
               </div>
-              <div className="flex items-center gap-2 border-t border-white/10 pt-4 text-xs text-white/55"><CheckCircle2 className="h-4 w-4 text-[#ffb703]" />AI reasons · deterministic systems verify · evidence proves</div>
             </div>
           </div>
+          <div className="flex items-center justify-between border-t border-white/15 pt-4 font-mono text-[9px] uppercase tracking-[.16em] text-white/45"><span>AI agents · Conversational AI · Enterprise applications</span><span className="hidden sm:block">Scroll to explore</span></div>
         </div>
       </section>
 
-      <section className="border-b border-slate-300 bg-[#f8fafc]">
-        <div className="mx-auto max-w-[1440px] px-5 py-10 sm:px-8 sm:py-14 lg:px-10 lg:py-16">
-          <div className="grid gap-px border border-slate-300 bg-slate-300 md:grid-cols-3">
-            {capabilities.map(([label, title, body]) => <div key={label} className="bg-white p-6 sm:p-8"><div className="font-mono text-[10px] font-bold tracking-[0.18em] text-[#a87900]">{label}</div><h2 className="mt-5 font-[Sora] text-2xl font-extrabold tracking-[-0.035em]">{title}</h2><p className="mt-3 text-sm leading-7 text-slate-600">{body}</p></div>)}
+      <section className="border-b border-[#d7d0c4] bg-[#f4f1ea]">
+        <div className="mx-auto max-w-[1600px] px-6 py-20 sm:px-10 lg:px-14 lg:py-28">
+          <div className="grid gap-12 lg:grid-cols-[.72fr_1.28fr] lg:gap-24">
+            <div><div className="font-mono text-[10px] font-bold uppercase tracking-[.22em] text-[#9b7322]">The premise</div><h2 className="mt-6 max-w-xl font-[Sora] text-[clamp(2.6rem,5vw,5.6rem)] font-extrabold leading-[.9] tracking-[-.065em]">A score is not a proof.</h2></div>
+            <div className="max-w-3xl text-xl leading-9 text-[#45413a] sm:text-2xl sm:leading-10"><p>AI agents operate through conversations, orchestration, retrieval, tools, business rules and security boundaries. The final answer is only one observable surface.</p><p className="mt-7">Shyena connects the full execution chain and keeps the evidence behind the verdict.</p><div className="mt-10 grid grid-cols-2 gap-x-8 gap-y-5 border-t border-[#d7d0c4] pt-6 font-mono text-[10px] uppercase tracking-[.14em] text-[#777066] sm:grid-cols-4"><span>Deterministic</span><span>Semantic</span><span>Trajectory</span><span>Security</span></div></div>
           </div>
         </div>
       </section>
 
-      <section id="how-it-works" className="scroll-mt-20 border-b border-slate-300 bg-white">
-        <div className="mx-auto max-w-[1440px] px-5 py-12 sm:px-8 sm:py-16 lg:px-10 lg:py-20">
-          <div className="grid gap-10 lg:grid-cols-[0.65fr_1.35fr]">
-            <div><div className="font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-[#a87900] sm:text-xs">How Shyena works</div><h2 className="mt-4 max-w-xl font-[Sora] text-[clamp(2.2rem,5vw,4.5rem)] font-extrabold leading-[0.94] tracking-[-0.055em]">From a quality goal to proof.</h2></div>
-            <div className="grid border-t border-slate-300 sm:grid-cols-2 lg:grid-cols-3">
-              {[["01", "Understand", "Map the system and identify critical journeys."], ["02", "Assess risk", "Prioritise behaviour, business rules and attack paths."], ["03", "Engineer", "Create implementation-independent test intent."], ["04", "Execute", "Run semantic journeys through the right test engine."], ["05", "Investigate", "Correlate evidence and determine what actually failed."], ["06", "Decide", "Apply policy and produce the release recommendation."]].map(([n, t, d]) => <div key={n} className="border-b border-slate-300 px-0 py-6 sm:px-6 sm:py-7"><div className="font-mono text-xs text-slate-400">{n}</div><h3 className="mt-3 text-lg font-extrabold sm:text-xl">{t}</h3><p className="mt-2 text-sm leading-6 text-slate-600">{d}</p></div>)}
-            </div>
-          </div>
+      <section className="border-b border-[#d7d0c4] bg-[#151419] text-white">
+        <div className="mx-auto max-w-[1600px] px-6 py-16 sm:px-10 lg:px-14 lg:py-24">
+          <div className="grid gap-10 lg:grid-cols-[.55fr_1.45fr] lg:items-end"><div><div className="font-mono text-[10px] uppercase tracking-[.22em] text-[#e7bf67]">The assurance system</div><h2 className="mt-5 font-[Sora] text-[clamp(2.7rem,5vw,5.4rem)] font-extrabold leading-[.9] tracking-[-.065em]">One chain.<br />Three disciplines.</h2></div><p className="max-w-2xl text-lg leading-8 text-white/55">NEXUS understands the system. VERA evaluates what it actually does. CHAKRA challenges the boundary. The evidence remains connected from first observation to release decision.</p></div>
+          <div className="mt-12 grid border-y border-white/15 md:grid-cols-3">{pillars.map(([name, title, body], index) => <Link key={name} to={name === "NEXUS" ? "/nexus" : name === "VERA" ? "/vera" : "/chakra"} className="group border-b border-white/15 p-7 transition hover:bg-white/[.035] md:border-b-0 md:border-r md:last:border-r-0 lg:p-10"><div className="flex items-start justify-between"><span className="font-mono text-[10px] tracking-[.2em] text-[#e7bf67]">0{index + 1}</span><ArrowDownRight className="h-5 w-5 text-white/25 transition group-hover:translate-x-1 group-hover:translate-y-1 group-hover:text-[#e7bf67]" /></div><div className="mt-14 font-mono text-[11px] font-semibold tracking-[.22em] text-white/40">{name}</div><h3 className="mt-3 font-[Sora] text-3xl font-bold tracking-[-.04em]">{title}</h3><p className="mt-5 text-sm leading-7 text-white/55">{body}</p><div className="mt-8 text-[10px] font-bold uppercase tracking-[.16em] text-[#e7bf67]">Explore capability</div></Link>)}</div>
         </div>
       </section>
 
-      <section className="border-b border-slate-300 bg-[#f8fafc]">
-        <div className="mx-auto max-w-[1440px] px-5 py-12 sm:px-8 sm:py-16 lg:px-10 lg:py-20">
-          <div className="mb-8"><div className="font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-[#a87900] sm:text-xs">Why it matters</div><h2 className="mt-4 max-w-4xl font-[Sora] text-[clamp(2.2rem,5vw,4.5rem)] font-extrabold leading-[0.94] tracking-[-0.055em]">Move from test results to release intelligence.</h2></div>
-          <div className="grid gap-px border border-slate-300 bg-slate-300 md:grid-cols-2 lg:grid-cols-4">{outcomes.map(([n, t, d]) => <div key={n} className="bg-white p-6 sm:p-7"><div className="font-mono text-xs text-slate-400">{n}</div><h3 className="mt-6 text-lg font-extrabold">{t}</h3><p className="mt-2 text-sm leading-6 text-slate-600">{d}</p></div>)}</div>
+      <section className="border-b border-[#d7d0c4] bg-[#f4f1ea]">
+        <div className="mx-auto max-w-[1600px] px-6 py-20 sm:px-10 lg:px-14 lg:py-28">
+          <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end"><div><div className="font-mono text-[10px] uppercase tracking-[.22em] text-[#9b7322]">Field notes</div><h2 className="mt-5 font-[Sora] text-[clamp(2.7rem,5vw,5.4rem)] font-extrabold leading-[.9] tracking-[-.065em]">The assurance<br />journal.</h2></div><Link to="/blog" className="inline-flex items-center gap-2 border-b border-[#9b7322] pb-2 text-xs font-bold uppercase tracking-[.16em]">Read all insights <ArrowRight className="h-4 w-4" /></Link></div>
+          <div className="mt-14 grid gap-8 lg:grid-cols-3">{editorialStories.map((story) => <article key={story.number} className="group"><Link to={story.href} className="block"><div className="relative aspect-[4/3] overflow-hidden bg-[#242126]"><img src={story.image} alt="" className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.035]" loading="lazy" /><div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent" /><div className="absolute left-5 top-5 font-mono text-[9px] tracking-[.18em] text-white/70">{story.number}</div><div className="absolute bottom-5 left-5 flex items-center gap-2 text-[9px] font-bold uppercase tracking-[.18em] text-[#f3cc75]"><span className="h-px w-7 bg-[#f3cc75]" /> {story.eyebrow}</div></div><div className="pt-6"><h3 className="font-[Sora] text-2xl font-bold leading-tight tracking-[-.04em] transition group-hover:text-[#8a641c]">{story.title}</h3><p className="mt-3 max-w-md text-sm leading-7 text-[#6d675e]">{story.description}</p><span className="mt-5 inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[.16em]">Read article <ArrowRight className="h-4 w-4" /></span></div></Link></article>)}</div>
         </div>
       </section>
 
-      <section className="border-b border-slate-300 bg-white">
-        <div className="mx-auto max-w-[1440px] px-5 py-12 sm:px-8 sm:py-16 lg:px-10 lg:py-20">
-          <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between"><div><div className="font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-[#a87900] sm:text-xs">One platform</div><h2 className="mt-4 font-[Sora] text-[clamp(2.2rem,5vw,4.5rem)] font-extrabold leading-[0.94] tracking-[-0.055em]">Three assurance capabilities.</h2></div><p className="max-w-lg text-base leading-7 text-slate-600">NEXUS understands. VERA tests and evaluates. CHAKRA secures. The evidence chain connects them.</p></div>
-          <div className="mt-8 grid gap-3 md:grid-cols-3"><Link to="/nexus" className="border border-slate-300 p-6 hover:border-slate-950 sm:p-8"><div className="font-mono text-xs font-bold tracking-[0.2em]">NEXUS</div><h3 className="mt-5 text-2xl font-extrabold">Understand</h3><p className="mt-3 text-sm leading-7 text-slate-600">Map architecture, orchestration, dependencies and journeys before testing.</p><span className="mt-6 inline-flex items-center gap-2 text-xs font-extrabold uppercase">Explore NEXUS <ArrowRight className="h-4 w-4" /></span></Link><Link to="/vera" className="border border-slate-300 p-6 hover:border-slate-950 sm:p-8"><div className="font-mono text-xs font-bold tracking-[0.2em]">VERA</div><h3 className="mt-5 text-2xl font-extrabold">Test &amp; Evaluate</h3><p className="mt-3 text-sm leading-7 text-slate-600">Run real journeys and evaluate behaviour, outcomes and execution integrity.</p><span className="mt-6 inline-flex items-center gap-2 text-xs font-extrabold uppercase">Explore VERA <ArrowRight className="h-4 w-4" /></span></Link><Link to="/chakra" className="border border-slate-300 p-6 hover:border-slate-950 sm:p-8"><div className="font-mono text-xs font-bold tracking-[0.2em]">CHAKRA</div><h3 className="mt-5 text-2xl font-extrabold">Secure</h3><p className="mt-3 text-sm leading-7 text-slate-600">Probe security boundaries, adversarial paths and control failures.</p><span className="mt-6 inline-flex items-center gap-2 text-xs font-extrabold uppercase">Explore CHAKRA <ArrowRight className="h-4 w-4" /></span></Link></div>
+      <section className="border-b border-[#d7d0c4] bg-[#ece7dc]">
+        <div className="mx-auto grid max-w-[1600px] gap-0 lg:grid-cols-[1.05fr_.95fr]">
+          <div className="relative min-h-[520px] overflow-hidden bg-[#0c0b0f] lg:min-h-[650px]"><img src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?q=88&w=2200&auto=format&fit=crop" alt="Cinematic close-up of a modern computing environment" className="absolute inset-0 h-full w-full object-cover opacity-75" loading="lazy" /><div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(8,7,11,.25),rgba(8,7,11,.86))]" /><div className="absolute inset-x-0 bottom-0 p-8 sm:p-12"><div className="flex items-center gap-3 font-mono text-[9px] uppercase tracking-[.22em] text-[#e7bf67]"><Play className="h-4 w-4 fill-current" /> Cinematic product study</div><p className="mt-4 max-w-xl font-[Sora] text-2xl font-bold leading-tight tracking-[-.04em] text-white sm:text-4xl">The interface should feel as rigorous as the evidence behind it.</p></div></div>
+          <div className="flex flex-col justify-between p-8 sm:p-12 lg:p-16"><div><div className="font-mono text-[10px] uppercase tracking-[.22em] text-[#9b7322]">Design direction</div><h2 className="mt-6 max-w-xl font-[Sora] text-[clamp(2.4rem,4.5vw,4.8rem)] font-extrabold leading-[.92] tracking-[-.065em]">Editorial precision for engineering software.</h2><p className="mt-7 max-w-xl text-base leading-8 text-[#5f594f]">The new visual system uses cinematic media, restrained typography, generous whitespace, strong grids and evidence-led information hierarchy. It deliberately avoids the generic SaaS dashboard aesthetic.</p></div><div className="mt-14 grid gap-5 border-t border-[#cfc7b8] pt-6 font-mono text-[9px] uppercase tracking-[.16em] text-[#6e675d] sm:grid-cols-2"><div className="flex gap-3"><Sparkles className="h-4 w-4 text-[#9b7322]" /> DSLR-grade visual treatment</div><div className="flex gap-3"><ShieldCheck className="h-4 w-4 text-[#9b7322]" /> Evidence-first narrative</div><div className="flex gap-3"><span className="h-4 w-4 border border-[#9b7322]" /> Editorial grid system</div><div className="flex gap-3"><span className="h-4 w-4 border-b border-[#9b7322]" /> High-performance media loading</div></div></div>
         </div>
       </section>
 
-      <section className="bg-[#0b0920] text-white"><div className="mx-auto max-w-[1440px] px-5 py-14 text-center sm:px-8 sm:py-20 lg:px-10 lg:py-24"><div className="font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-[#ffb703] sm:text-xs">Release confidence</div><h2 className="mx-auto mt-5 max-w-4xl font-[Sora] text-[clamp(2.5rem,5.5vw,5rem)] font-extrabold leading-[0.94] tracking-[-0.06em]">Know before you release.</h2><p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/60 sm:text-lg sm:leading-8">Bring one critical journey. Shyena shows what it can test, what it can discover and what evidence it can produce.</p><Link to="/contact" className="mt-8 inline-flex h-12 items-center justify-center gap-2 border border-[#ffb703] bg-[#ffb703] px-7 text-sm font-extrabold uppercase text-slate-950">Assess your system <ArrowRight className="h-5 w-5" /></Link></div></section>
+      <section className="relative overflow-hidden bg-[#09080b] text-white"><div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(215,168,74,.18),transparent_38%)]" /><div className="relative mx-auto max-w-[1600px] px-6 py-24 text-center sm:px-10 lg:px-14 lg:py-32"><div className="font-mono text-[10px] uppercase tracking-[.24em] text-[#e7bf67]">Release confidence</div><h2 className="mx-auto mt-6 max-w-5xl font-[Sora] text-[clamp(3.2rem,7vw,7.5rem)] font-extrabold leading-[.84] tracking-[-.075em]">Know what<br /><span className="text-[#e7bf67]">actually happened.</span></h2><p className="mx-auto mt-8 max-w-2xl text-base leading-8 text-white/55 sm:text-lg">Bring one critical journey. Shyena maps it, tests it, evaluates it, challenges it and preserves the evidence behind the release decision.</p><Link to="/contact" className="mt-9 inline-flex items-center gap-3 bg-[#e7bf67] px-7 py-4 text-xs font-extrabold uppercase tracking-[.14em] text-black transition hover:bg-white">Start with one journey <ArrowRight className="h-4 w-4" /></Link></div></section>
     </main>
   );
 }
