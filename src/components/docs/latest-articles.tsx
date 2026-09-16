@@ -1,19 +1,19 @@
-import { ArrowRight, BookOpen, Shield, Sparkles } from "lucide-react";
+import { ArrowRight, BookOpen, Shield, Sparkles, Scale } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 
 const LATEST_ARTICLES = [
+  { title: "DeepEval Rubric Scores: How to Make LLM Evaluation More Consistent", category: "Evaluation Model", readTime: "8 min", to: "/blog/generated/deepeval-rubric-score", icon: Scale },
   { title: "AI Agent Testing Is a Systems Problem, Not Just an LLM Evaluation Problem", category: "AI Agent Assurance", readTime: "6 min", to: "/blog/generated/ai-agent-testing-is-a-systems-problem", icon: Sparkles },
   { title: "Why Conversational AI Needs a Different Testing Model", category: "Testing Strategy", readTime: "6 min", to: "/blog/why-conversational-ai-needs-a-different-testing-model", icon: Sparkles },
   { title: "The Problem With Green Checkmarks on Broken Conversations", category: "Quality Assurance", readTime: "5 min", to: "/blog/the-problem-with-green-checkmarks-on-broken-conversations", icon: BookOpen },
   { title: "How to Test a Cognigy Agent: A Practical Guide", category: "Testing Strategy", readTime: "7 min", to: "/blog/how-to-test-a-cognigy-agent", icon: BookOpen },
-  { title: "Cognigy Agent Security Testing: Red-Teaming with Ziran", category: "Security", readTime: "7 min", to: "/blog/cognigy-agent-security-testing-with-ziran", icon: Shield },
 ] as const;
 
 export function LatestArticles() {
   return (
     <section aria-labelledby="latest-thinking-heading" className="border-t-2 border-[#0e172b] pt-8">
       <div className="flex flex-col gap-4 border-b border-[#d2ccc0] pb-6 sm:flex-row sm:items-end sm:justify-between">
-        <div><p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-[#a87900]">Latest thinking</p><h2 id="latest-thinking-heading" className="mt-2 text-3xl font-bold tracking-[-0.035em] text-[#0e172b] sm:text-4xl">Top 5 articles</h2><p className="mt-3 max-w-2xl text-sm leading-6 text-slate-600">Deep dives into AI assurance, testing strategy, conversational systems and security.</p></div>
+        <div><p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-[#a87900]">Latest thinking</p><h2 id="latest-thinking-heading" className="mt-2 text-3xl font-bold tracking-[-0.035em] text-[#0e172b] sm:text-4xl">Top 5 articles</h2><p className="mt-3 max-w-2xl text-sm leading-6 text-slate-600">Deep dives into AI assurance, evaluation strategy, testing, conversational systems and security.</p></div>
         <Link to="/blog" className="inline-flex items-center gap-2 font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-slate-500 transition-colors hover:text-[#8c6500]">All insights <ArrowRight className="h-3.5 w-3.5" /></Link>
       </div>
       <div className="mt-7 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
