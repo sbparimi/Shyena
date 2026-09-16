@@ -1,77 +1,83 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, BookOpen, Briefcase, Gauge, Layers, Mail, Menu, Newspaper, Network, ShieldAlert, Sparkles, TestTube2, Users, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "@/components/ui/navigation-menu";
+import { ArrowRight, Menu, X } from "lucide-react";
 import { Logo } from "./logo";
 
-const PRODUCTS = [
-  { to: "/nexus", icon: Network, title: "Nexus", description: "Map system logic, business rules and orchestration paths into assurance candidates." },
-  { to: "/vera", icon: Gauge, title: "Vera", description: "Execute real conversations and evaluate quality, state, orchestration and integrity." },
-  { to: "/chakra", icon: ShieldAlert, title: "Chakra", description: "Run adversarial assurance, verify impact and gate security risk before release." },
+const NAV = [
+  { label: "Platform", to: "/vera" },
+  { label: "Assurance", to: "/docs" },
+  { label: "Resources", to: "/blog" },
+  { label: "Company", to: "/about" },
 ] as const;
-const ASSURANCE = [
-  { to: "/docs/evaluation-model", icon: Layers, title: "Evaluation model", description: "See how deterministic, semantic and execution signals combine." },
-  { to: "/docs", icon: BookOpen, title: "Assurance model", description: "Understand the evidence chain from flow to release decision." },
-  { to: "/services", icon: Briefcase, title: "Professional services", description: "Implementation, training and bespoke engineering for enterprise programs." },
-] as const;
-const RESOURCES = [
-  { to: "/docs", icon: BookOpen, title: "Documentation", description: "Set up assurance runs and understand the evidence model." },
-  { to: "/blog", icon: Newspaper, title: "Insights", description: "Research and field notes on AI agent assurance." },
-] as const;
-const COMPANY = [
-  { to: "/about", icon: Users, title: "About Shyena", description: "The evidence layer for AI systems that make decisions." },
-  { to: "/contact", icon: Mail, title: "Contact", description: "Request a demo or discuss an assurance program." },
-] as const;
+
 const MOBILE_NAV = [
-  { label: "How It Works", to: "/nexus" }, { label: "See It In Action", to: "/autonomous-testing" }, { label: "How We Prove It", to: "/docs" }, { label: "What It Costs", to: "/pricing" }, { label: "Explore The Thinking", to: "/blog" }, { label: "Why Shyena", to: "/about" }, { label: "Hire AI Experts", to: "/hire-ai-experts" }, { label: "Services", to: "/services" }, { label: "Documentation", to: "/docs" }, { label: "Contact", to: "/contact" },
+  ...NAV,
+  { label: "Security & trust", to: "/security" },
+  { label: "Pricing", to: "/pricing" },
+  { label: "Hire AI Experts", to: "/hire-ai-experts" },
 ] as const;
-
-type MenuItem = { to: string; icon: typeof Gauge; title: string; description: string };
-
-function MenuGroup({ items }: { items: readonly MenuItem[] }) {
-  return (
-    <ul className="grid w-[420px] gap-2 border border-slate-300 bg-white p-3 shadow-[0_18px_45px_rgba(15,23,42,0.12)]">
-      {items.map((item) => { const Icon = item.icon; return (
-        <li key={item.to}>
-          <NavigationMenuLink asChild>
-            <Link to={item.to} className="group relative flex select-none items-start gap-3 border border-transparent bg-white p-3.5 leading-none no-underline outline-none transition-all duration-200 hover:border-slate-300 hover:bg-slate-50 focus-visible:border-slate-950">
-              <span className="mt-0.5 inline-flex h-10 w-10 shrink-0 items-center justify-center border border-slate-200 bg-slate-50 text-slate-700 transition-all duration-200 group-hover:border-[#ffb804] group-hover:bg-[#ffb804] group-hover:text-slate-950"><Icon className="h-4 w-4" /></span>
-              <span className="min-w-0"><span className="block text-sm font-semibold text-slate-950">{item.title}</span><span className="mt-1.5 block text-xs leading-relaxed text-slate-600">{item.description}</span></span>
-              <ArrowRight className="ml-auto mt-1 h-4 w-4 shrink-0 text-slate-400 opacity-0 transition-all duration-200 group-hover:translate-x-1 group-hover:text-slate-950 group-hover:opacity-100" />
-              <span className="absolute inset-x-0 bottom-0 h-[2px] origin-left scale-x-0 bg-[#14b8a6] transition-transform duration-300 group-hover:scale-x-100" />
-            </Link>
-          </NavigationMenuLink>
-        </li>
-      ); })}
-    </ul>
-  );
-}
-
-const desktopTriggerClass = "relative h-10 whitespace-nowrap rounded-none border-0 !bg-transparent px-2.5 text-[12px] font-bold tracking-[0.025em] text-slate-700 transition-all duration-200 hover:!border-0 hover:!bg-transparent hover:text-slate-950 focus:!border-0 focus:!bg-transparent focus:text-slate-950 data-[state=open]:!border-0 data-[state=open]:!bg-transparent data-[state=open]:text-slate-950 after:absolute after:inset-x-2 after:bottom-0 after:h-[2px] after:origin-left after:scale-x-0 after:bg-[#5b2be0] after:transition-transform after:duration-300 hover:after:scale-x-100 data-[state=open]:after:scale-x-100";
-const desktopLinkClass = "relative flex h-10 items-center whitespace-nowrap rounded-none border-0 !bg-transparent px-2.5 text-[12px] font-bold tracking-[0.025em] text-slate-700 transition-all duration-200 hover:!border-0 hover:!bg-transparent hover:text-slate-950 focus:!border-0 focus:!bg-transparent focus:text-slate-950 after:absolute after:inset-x-2 after:bottom-0 after:h-[2px] after:origin-left after:scale-x-0 after:bg-[#5b2be0] after:transition-transform after:duration-300 hover:after:scale-x-100";
-const hireExpertsClass = "group relative ml-1 inline-flex h-10 items-center gap-1.5 overflow-hidden rounded-full border border-[#e7bf67] bg-[#151419] px-3.5 text-[11px] font-extrabold tracking-[0.01em] text-[#f3cc75] shadow-[0_0_0_1px_rgba(231,191,103,.08),0_0_22px_rgba(231,191,103,.16)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#e7bf67] hover:text-black hover:shadow-[0_8px_30px_rgba(231,191,103,.28)] before:absolute before:inset-y-0 before:-left-10 before:w-8 before:skew-x-[-20deg] before:bg-white/30 before:blur-sm before:transition-transform before:duration-700 group-hover:before:translate-x-[180px]";
 
 export function SiteHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
+
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200 bg-white">
-      <div className="mx-auto flex h-[72px] w-full max-w-[1400px] items-center justify-between gap-3 px-4 sm:h-[80px] sm:gap-5 sm:px-5 lg:px-7">
+      <div className="mx-auto flex h-[72px] w-full max-w-[1280px] items-center justify-between gap-6 px-5 sm:h-[78px] sm:px-7 lg:px-8">
         <Logo size="header" />
-        <div className="hidden min-w-0 flex-1 justify-center md:flex"><div className="p-0"><NavigationMenu><NavigationMenuList className="gap-0 whitespace-nowrap">
-          <NavigationMenuItem><NavigationMenuTrigger className={desktopTriggerClass}>How It Works</NavigationMenuTrigger><NavigationMenuContent><div className="border-t border-slate-300 bg-white p-3"><MenuGroup items={PRODUCTS} /></div></NavigationMenuContent></NavigationMenuItem>
-          <NavigationMenuItem><Link to="/autonomous-testing" className={desktopLinkClass}><TestTube2 className="mr-1.5 inline-block h-3.5 w-3.5 shrink-0 align-[-2px]" />See It In Action</Link></NavigationMenuItem>
-          <NavigationMenuItem><NavigationMenuTrigger className={desktopTriggerClass}>How We Prove It</NavigationMenuTrigger><NavigationMenuContent><div className="border-t border-slate-300 bg-white p-3"><MenuGroup items={ASSURANCE} /></div></NavigationMenuContent></NavigationMenuItem>
-          <NavigationMenuItem><Link to="/pricing" className={desktopLinkClass}>What It Costs</Link></NavigationMenuItem>
-          <NavigationMenuItem><NavigationMenuTrigger className={desktopTriggerClass}>Explore The Thinking</NavigationMenuTrigger><NavigationMenuContent><div className="border-t border-slate-300 bg-white p-3"><MenuGroup items={RESOURCES} /></div></NavigationMenuContent></NavigationMenuItem>
-          <NavigationMenuItem><NavigationMenuTrigger className={desktopTriggerClass}>Why Shyena</NavigationMenuTrigger><NavigationMenuContent><div className="border-t border-slate-300 bg-white p-3"><MenuGroup items={COMPANY} /></div></NavigationMenuContent></NavigationMenuItem>
-          <NavigationMenuItem><Link to="/hire-ai-experts" className={hireExpertsClass}><span className="relative flex h-1.5 w-1.5"><span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#65e6d4] opacity-60" /><span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#65e6d4]" /></span><Sparkles className="relative h-3.5 w-3.5" />Hire AI Experts</Link></NavigationMenuItem>
-        </NavigationMenuList></NavigationMenu></div></div>
-        <div className="hidden items-center md:flex"><Button asChild size="lg" className="h-10 rounded-none border border-[#ffb804] bg-[#ffb804] px-5 text-[12px] font-extrabold uppercase tracking-[0.01em] text-slate-950 shadow-none transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#f2aa00] hover:shadow-[0_8px_20px_rgba(15,23,42,0.12)]"><Link to="/contact">Let's talk<ArrowRight className="ml-1.5 h-3.5 w-3.5" /></Link></Button></div>
-        <button type="button" onClick={() => setMobileOpen((v) => !v)} aria-label={mobileOpen ? "Close menu" : "Open menu"} aria-expanded={mobileOpen} className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-none border border-[#ffb804] bg-[#ffb804] text-slate-950 transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#f2aa00] sm:h-12 sm:w-12 md:hidden">{mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}</button>
+
+        <nav className="hidden items-center gap-8 md:flex" aria-label="Primary navigation">
+          {NAV.map((item) => (
+            <Link key={item.to} to={item.to} className="text-[13px] font-semibold text-slate-600 transition-colors hover:text-[#123e91]">
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+
+        <div className="hidden items-center gap-3 md:flex">
+          <Link to="/hire-ai-experts" className="px-2 text-[13px] font-semibold text-slate-600 transition-colors hover:text-[#123e91]">Hire AI Experts</Link>
+          <Link
+            to="/contact"
+            className="inline-flex h-10 items-center gap-2 rounded-md bg-[#123e91] px-5 text-[13px] font-bold text-white shadow-sm transition hover:bg-[#0d3276] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#123e91] focus-visible:ring-offset-2"
+          >
+            Request a demo <ArrowRight className="h-3.5 w-3.5" />
+          </Link>
+        </div>
+
+        <button
+          type="button"
+          onClick={() => setMobileOpen((value) => !value)}
+          aria-label={mobileOpen ? "Close menu" : "Open menu"}
+          aria-expanded={mobileOpen}
+          className="inline-flex h-11 w-11 items-center justify-center rounded-md border border-[#123e91] bg-white text-[#123e91] md:hidden"
+        >
+          {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        </button>
       </div>
-      <div aria-hidden="true" className="h-[2px] w-full bg-[linear-gradient(90deg,#0b1638_0%,#5b2be0_48%,#00b7e8_78%,#f5a623_100%)]" />
-      {mobileOpen && <div className="max-h-[calc(100svh-74px)] overflow-y-auto border-t border-slate-300 bg-slate-50 px-4 pb-6 pt-3 overscroll-contain sm:px-6 sm:pb-7 sm:pt-4 md:hidden"><nav className="grid gap-2">{MOBILE_NAV.map((item) => <Link key={item.to} to={item.to} onClick={() => setMobileOpen(false)} className={`group relative flex min-h-12 items-center justify-between border px-4 py-3.5 text-sm font-bold tracking-[0.04em] transition-all duration-200 ${item.label === "Hire AI Experts" ? "border-[#e7bf67] bg-[#151419] text-[#f3cc75] shadow-[0_0_24px_rgba(231,191,103,.16)]" : "border-slate-300 bg-white text-slate-800 hover:border-slate-950 hover:bg-slate-950 hover:text-white"}`}>{item.label}<ArrowRight className="h-4 w-4 shrink-0 transition-transform duration-200 group-hover:translate-x-1" /></Link>)}</nav><div className="mt-4"><Button asChild className="h-12 w-full rounded-none border border-[#ffb804] bg-[#ffb804] font-extrabold uppercase tracking-[0.01em] text-slate-950 transition-all duration-200 hover:bg-[#f2aa00]"><Link to="/contact" onClick={() => setMobileOpen(false)}>Let's talk<ArrowRight className="ml-2 h-4 w-4" /></Link></Button></div></div>}
+
+      {mobileOpen && (
+        <div className="border-t border-slate-200 bg-white px-5 pb-6 pt-3 md:hidden">
+          <nav className="grid gap-1" aria-label="Mobile navigation">
+            {MOBILE_NAV.map((item) => (
+              <Link
+                key={`${item.label}-${item.to}`}
+                to={item.to}
+                onClick={() => setMobileOpen(false)}
+                className="flex min-h-12 items-center justify-between border-b border-slate-100 px-1 py-3 text-sm font-semibold text-slate-700"
+              >
+                {item.label}
+                <ArrowRight className="h-4 w-4 text-slate-400" />
+              </Link>
+            ))}
+          </nav>
+          <Link
+            to="/contact"
+            onClick={() => setMobileOpen(false)}
+            className="mt-5 inline-flex h-12 w-full items-center justify-center gap-2 rounded-md bg-[#123e91] text-sm font-bold text-white"
+          >
+            Request a demo <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+      )}
     </header>
   );
 }
