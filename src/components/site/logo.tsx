@@ -4,28 +4,34 @@ type LogoProps = {
   size?: "header" | "footer";
 };
 
-const MARK_SRC = "/shyena-mark-vertical.svg?v=20260907";
+const LOCKUP_SRC = "/shyena-logo-lockup.svg?v=20260916";
+const MARK_SRC = "/shyena-mark-vertical.svg?v=20260916";
 
 export function Logo({ size = "header" }: LogoProps) {
-  const markSize = size === "footer" ? "h-12 w-8" : "h-9 w-6 sm:h-10 sm:w-7";
-  const wordmarkSize = size === "footer" ? "text-[25px]" : "text-[19px] sm:text-[21px]";
-  const subtitleSize = size === "footer" ? "text-[8px]" : "text-[6.5px] sm:text-[7px]";
+  const dimensions = size === "footer"
+    ? "h-[54px] w-[168px] sm:h-[60px] sm:w-[188px]"
+    : "h-[46px] w-[138px] sm:h-[50px] sm:w-[156px] lg:h-[54px] lg:w-[168px]";
 
   return (
     <Link
       to="/"
-      aria-label="Shyena home"
-      className="inline-flex shrink-0 items-center gap-2 select-none leading-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5b2be0] focus-visible:ring-offset-4 sm:gap-2.5"
+      aria-label="Shyena — Autonomous Quality Engineering"
+      title="Shyena — Autonomous Quality Engineering"
+      className="group inline-flex shrink-0 items-center select-none leading-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5b2be0] focus-visible:ring-offset-4"
     >
-      <img src={MARK_SRC} alt="" aria-hidden="true" className={`block shrink-0 object-contain ${markSize}`} />
-      <span className="flex min-w-0 flex-col justify-center">
-        <span className={`font-semibold tracking-[0.27em] text-[#0b1638] ${wordmarkSize}`}>SHYENA</span>
-        <span className={`mt-1 whitespace-nowrap font-medium uppercase tracking-[0.16em] text-[#64748b] ${subtitleSize}`}>Autonomous Quality Engineering</span>
-      </span>
+      <img
+        src={LOCKUP_SRC}
+        alt="Shyena — Autonomous Quality Engineering"
+        width={1385}
+        height={540}
+        decoding="async"
+        fetchPriority="high"
+        className={`block object-contain transition-transform duration-200 group-hover:scale-[1.015] ${dimensions}`}
+      />
     </Link>
   );
 }
 
 export function BrandMark({ className = "h-10 w-7" }: { className?: string }) {
-  return <img src={MARK_SRC} alt="" aria-hidden="true" className={`block object-contain ${className}`} />;
+  return <img src={MARK_SRC} alt="Shyena" width={64} height={96} decoding="async" className={`block object-contain ${className}`} />;
 }
