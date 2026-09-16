@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 955 625" role="img" aria-labelledby="title desc">
+  <title id="title">Shyena evaluation model</title>
+  <desc id="desc">From conversations to confidence: input context enters a planner, deterministic evaluation, semantic evaluation, trajectory evaluation and security evaluation around the Shyena assurance core, producing a verdict, evidence report, traceability and release readiness.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fbf8ef"/><stop offset="1" stop-color="#eef8f6"/></linearGradient>
+    <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#16a394"/><stop offset=".52" stop-color="#d0a341"/><stop offset="1" stop-color="#17324d"/></linearGradient>
+    <linearGradient id="flow" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#1b8f84"/><stop offset=".55" stop-color="#c89d3c"/><stop offset="1" stop-color="#17324d"/></linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#142338" flood-opacity=".12"/></filter>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="24"/></filter>
+  </defs>
+  <rect width="955" height="625" rx="30" fill="url(#bg)"/>
+  <circle cx="470" cy="330" r="190" fill="#e7bf67" opacity=".08" filter="url(#soft)"/>
+  <circle cx="470" cy="330" r="156" fill="none" stroke="#c9a85b" stroke-opacity=".18"/>
+  <circle cx="470" cy="330" r="116" fill="none" stroke="#1aa092" stroke-opacity=".14" stroke-dasharray="3 10"/>
+
+  <text x="42" y="52" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="700" letter-spacing="3" fill="#a87900">SHYENA EVALUATION MODEL</text>
+  <text x="42" y="83" font-family="Sora,Inter,Arial,sans-serif" font-size="25" font-weight="800" fill="#0e172b">From Conversations to Confidence</text>
+  <text x="42" y="106" font-family="Inter,Arial,sans-serif" font-size="13" fill="#52616b">Evaluate facts, meaning, execution trajectory and security</text>
+  <text x="42" y="125" font-family="Inter,Arial,sans-serif" font-size="13" fill="#52616b">before producing a defensible verdict.</text>
+  <text x="878" y="52" text-anchor="end" font-family="JetBrains Mono,monospace" font-size="9" font-weight="700" letter-spacing="2" fill="#71848e">EVALUATE.</text>
+  <text x="878" y="67" text-anchor="end" font-family="JetBrains Mono,monospace" font-size="9" font-weight="700" letter-spacing="2" fill="#71848e">OBSERVE.</text>
+  <text x="878" y="82" text-anchor="end" font-family="JetBrains Mono,monospace" font-size="9" font-weight="700" letter-spacing="2" fill="#71848e">ASSURE.</text>
+
+  <g filter="url(#shadow)">
+    <rect x="26" y="164" width="142" height="274" rx="18" fill="#fffdf8" stroke="#ddd4c5"/>
+    <rect x="787" y="164" width="142" height="274" rx="18" fill="#fffdf8" stroke="#d5e0dc"/>
+  </g>
+  <text x="47" y="195" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="800" fill="#0e172b">INPUT</text>
+  <text x="808" y="195" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="800" fill="#0e172b">OUTPUT</text>
+
+  <g font-family="Inter,Arial,sans-serif" fill="#52616b" font-size="11">
+    <circle cx="49" cy="226" r="13" fill="#edf8f6" stroke="#a7d8d1"/><text x="49" y="230" text-anchor="middle" font-size="12" fill="#178e83">●</text><text x="72" y="230">User message</text>
+    <circle cx="49" cy="278" r="13" fill="#f8f1dd" stroke="#e5d3a1"/><text x="49" y="282" text-anchor="middle" font-size="12" fill="#a87900">▣</text><text x="72" y="282">Conversation</text><text x="72" y="298">context</text>
+    <circle cx="49" cy="340" r="13" fill="#edf2f7" stroke="#c8d4df"/><text x="49" y="344" text-anchor="middle" font-size="12" fill="#17324d">◉</text><text x="72" y="344">System &amp;</text><text x="72" y="360">environment</text>
+    <circle cx="49" cy="402" r="13" fill="#f8f1dd" stroke="#e5d3a1"/><text x="49" y="406" text-anchor="middle" font-size="12" fill="#a87900">◎</text><text x="72" y="406">Expected</text><text x="72" y="422">behaviour</text>
+  </g>
+
+  <g font-family="Inter,Arial,sans-serif" fill="#52616b" font-size="11">
+    <circle cx="810" cy="226" r="13" fill="#edf8f6" stroke="#a7d8d1"/><text x="810" y="230" text-anchor="middle" font-size="12" fill="#178e83">✓</text><text x="833" y="230">Verdict</text>
+    <circle cx="810" cy="278" r="13" fill="#f8f1dd" stroke="#e5d3a1"/><text x="810" y="282" text-anchor="middle" font-size="12" fill="#a87900">▤</text><text x="833" y="282">Evidence</text><text x="833" y="298">report</text>
+    <circle cx="810" cy="340" r="13" fill="#edf2f7" stroke="#c8d4df"/><text x="810" y="344" text-anchor="middle" font-size="12" fill="#17324d">↗</text><text x="833" y="344">Traceability</text>
+    <circle cx="810" cy="402" r="13" fill="#edf8f6" stroke="#a7d8d1"/><text x="810" y="406" text-anchor="middle" font-size="12" fill="#178e83">▥</text><text x="833" y="406">Release</text><text x="833" y="422">readiness</text>
+  </g>
+
+  <path d="M169 301 H218" stroke="#17324d" stroke-width="2"/><path d="M218 301 l-9 -6 v12 z" fill="#17324d"/>
+  <path d="M737 301 H786" stroke="#17324d" stroke-width="2"/><path d="M786 301 l-9 -6 v12 z" fill="#17324d"/>
+
+  <g filter="url(#shadow)">
+    <rect x="365" y="146" width="210" height="70" rx="18" fill="#fffdf8" stroke="#ddd4c5"/>
+    <rect x="234" y="241" width="190" height="82" rx="18" fill="#fffdf8" stroke="#cfe3df"/>
+    <rect x="516" y="241" width="190" height="82" rx="18" fill="#fffdf8" stroke="#e2d6b8"/>
+    <rect x="234" y="352" width="190" height="82" rx="18" fill="#fffdf8" stroke="#d6dfdf"/>
+    <rect x="516" y="352" width="190" height="82" rx="18" fill="#fffdf8" stroke="#cfe3df"/>
+  </g>
+
+  <g font-family="Inter,Arial,sans-serif" fill="#0e172b">
+    <circle cx="394" cy="181" r="17" fill="#edf8f6" stroke="#a7d8d1"/><text x="394" y="186" text-anchor="middle" font-size="15" fill="#178e83">⌘</text>
+    <text x="421" y="178" font-size="13" font-weight="800">Planner Agent</text><text x="421" y="197" font-size="10" fill="#71848e">Understand &amp; decompose</text>
+
+    <circle cx="262" cy="274" r="17" fill="#edf8f6" stroke="#a7d8d1"/><text x="262" y="279" text-anchor="middle" font-size="15" fill="#178e83">▥</text>
+    <text x="289" y="270" font-size="12" font-weight="800">Deterministic</text><text x="289" y="286" font-size="10" fill="#71848e">Facts &amp; rules</text>
+
+    <circle cx="544" cy="274" r="17" fill="#f8f1dd" stroke="#e5d3a1"/><text x="544" y="279" text-anchor="middle" font-size="15" fill="#a87900">✣</text>
+    <text x="571" y="270" font-size="12" font-weight="800">Semantic</text><text x="571" y="286" font-size="10" fill="#71848e">Meaning &amp; intent</text>
+
+    <circle cx="262" cy="385" r="17" fill="#edf2f7" stroke="#c8d4df"/><text x="262" y="390" text-anchor="middle" font-size="15" fill="#17324d">∿</text>
+    <text x="289" y="381" font-size="12" font-weight="800">Trajectory</text><text x="289" y="397" font-size="10" fill="#71848e">Execution integrity</text>
+
+    <circle cx="544" cy="385" r="17" fill="#edf8f6" stroke="#a7d8d1"/><text x="544" y="390" text-anchor="middle" font-size="15" fill="#178e83">⬢</text>
+    <text x="571" y="381" font-size="12" font-weight="800">Security</text><text x="571" y="397" font-size="10" fill="#71848e">Risks &amp; safeguards</text>
+  </g>
+
+  <g>
+    <circle cx="470" cy="330" r="75" fill="#fffdf8" stroke="url(#ring)" stroke-width="4" filter="url(#shadow)"/>
+    <circle cx="470" cy="330" r="57" fill="#17324d"/>
+    <circle cx="470" cy="330" r="45" fill="#10283d" stroke="#d2ae59" stroke-opacity=".55"/>
+    <text x="470" y="316" text-anchor="middle" font-family="Sora,Inter,Arial,sans-serif" font-size="20" font-weight="800" fill="#fffdf8">∞</text>
+    <text x="470" y="346" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" font-weight="800" letter-spacing="2" fill="#fffdf8">SHYENA</text>
+    <text x="470" y="362" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="8" fill="#b9d8d3">assurance core</text>
+  </g>
+
+  <g stroke="url(#flow)" stroke-width="1.8" fill="none" opacity=".8">
+    <path d="M470 216 V252"/><path d="M424 282 C441 286 451 296 457 307"/><path d="M516 282 C499 286 489 296 483 307"/>
+    <path d="M424 393 C442 379 451 365 457 352"/><path d="M516 393 C498 379 489 365 483 352"/>
+  </g>
+
+  <rect x="354" y="492" width="232" height="40" rx="20" fill="#fff4cc" stroke="#e3c777"/>
+  <text x="470" y="517" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" font-weight="800" letter-spacing="1.5" fill="#a87900">FIVE STAGES → EVIDENCE → DECISION</text>
+  <text x="876" y="540" text-anchor="end" font-family="JetBrains Mono,monospace" font-size="8" letter-spacing="1.4" fill="#82918e">TRUSTED AI. REAL IMPACT.</text>
+</svg>
