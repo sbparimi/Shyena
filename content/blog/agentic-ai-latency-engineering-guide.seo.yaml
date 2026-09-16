@@ -1,0 +1,32 @@
+version: 1
+article: agentic-ai-latency-engineering-guide
+primary_keyword: agentic AI latency
+search_intent: informational
+secondary_topics:
+  - AI agent latency
+  - conversational AI latency
+  - LLM latency
+  - TTFT
+  - time to first token
+  - response latency
+  - AI agent observability
+  - agentic AI performance
+  - critical path analysis
+  - RAG latency
+  - tool API latency
+seo_contract:
+  unique_title: true
+  meta_description: true
+  canonical: true
+  single_h1: true
+  semantic_headings: true
+  intent_satisfied: true
+  internal_links: true
+  authoritative_external_sources: false
+  structured_data_ready: true
+  crawlable: true
+  no_keyword_stuffing: true
+  no_duplicate_content: true
+  product_claims_reviewed: true
+score: 94
+score_note: "Content and technical SEO compliance score; not a ranking prediction."
