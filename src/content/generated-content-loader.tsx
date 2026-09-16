@@ -21,7 +21,7 @@ const components = {
       <a
         {...props}
         href={href}
-        rel={external ? "nofollow noopener noreferrer" : props.rel}
+        rel={external ? "noopener noreferrer" : props.rel}
         target={external ? "_blank" : props.target}
       />
     );
@@ -30,6 +30,19 @@ const components = {
     return <img {...props} loading="lazy" decoding="async" />;
   },
 } satisfies MarkdownComponents;
+
+/**
+ * Published markdown can contain internal ChatGPT citation tokens from the
+ * research workflow. Those tokens are not valid website markup and the
+ * markdown renderer exposes them as raw text. Remove them before rendering;
+ * public source links remain the authoritative citations for readers.
+ */
+function sanitizePublishedMarkdown(source: string) {
+  return source
+    .replace(/cite[^]*/g, "")
+    .replace(/url[^]*/g, "")
+    .replace(/\n{3,}/g, "\n\n");
+}
 
 function sourceFor(sourcePath: string) {
   const normalized = `../../${sourcePath}`;
@@ -48,7 +61,7 @@ export function GeneratedMarkdown({ sourcePath }: { sourcePath: string }) {
 
   return (
     <div className="generated-content">
-      <Markdown components={components}>{source}</Markdown>
+      <Markdown components={components}>{sanitizePublishedMarkdown(source)}</Markdown>
     </div>
   );
 }
