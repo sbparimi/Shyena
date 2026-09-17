@@ -201,7 +201,20 @@ function HomePage() {
             <p className="max-w-lg text-sm leading-6 text-[#69707d]">One journey can be checked across system facts, behaviour, orchestration and security—not just whether the final answer sounds right.</p>
           </div>
           <div className="mt-9 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            []
+            {[
+              ["Deterministic", "APIs, states, routes, business rules and tool contracts."],
+              ["Semantic", "Relevance, correctness, tone and business meaning."],
+              ["Orchestrator", "Intent, routing, tool selection and next action."],
+              ["Security", "Prompt injection, unsafe tools and trust-boundary failures."],
+            ].map(([title, text], i) => (
+              <div key={title} className="rounded-lg border border-[#e1e3e7] bg-[#fafafa] p-5">
+                <div className="flex items-center gap-3">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#fff2e8] text-xs font-bold text-[#e87512]">{i + 1}</span>
+                  <h3 className="text-sm font-bold text-[#17233f]">{title}</h3>
+                </div>
+                <p className="mt-3 text-xs leading-5 text-[#69707d]">{text}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
