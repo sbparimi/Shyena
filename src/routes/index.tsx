@@ -29,7 +29,18 @@ const evaluation = [
 ] as const;
 
 const integrations = ["Cognigy", "Agentforce", "LangGraph", "LangChain", "CrewAI", "RAG", "AWS Bedrock", "Azure OpenAI", "Playwright", "OpenTelemetry", "GitHub Actions", "GitLab CI"];
-const customers = ["BMW", "Walmart", "OPTUM", "ADIDAS", "Philips", "CGI", "TCS", "Crossover", "Andela"];
+
+const customers = [
+  ["BMW", "https://cdn.simpleicons.org/bmw/1f1f1f"],
+  ["Walmart", "https://cdn.simpleicons.org/walmart/0071ce"],
+  ["Optum", "https://cdn.simpleicons.org/optum/002677"],
+  ["adidas", "https://cdn.simpleicons.org/adidas/111111"],
+  ["Philips", "https://cdn.simpleicons.org/philips/0066b3"],
+  ["CGI", "https://cdn.simpleicons.org/cgi/151515"],
+  ["TCS", "https://cdn.simpleicons.org/tcs/0055b8"],
+  ["Crossover", "https://cdn.simpleicons.org/crossover/111111"],
+  ["Andela", "https://cdn.simpleicons.org/andela/173b3f"],
+] as const;
 
 function HomePage() {
   return (
@@ -62,7 +73,7 @@ function HomePage() {
 
       <section className="border-y border-[#e8e8e8] bg-[#fafafa]"><div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24"><div className="grid gap-12 lg:grid-cols-[.8fr_1.2fr] lg:items-start"><div><div className="text-sm font-semibold text-[#e87512]">Autonomous testing</div><h2 className="mt-4 font-[Sora] text-[clamp(2.5rem,5vw,4.3rem)] font-extrabold leading-[.98] tracking-[-.055em] text-[#17233f]">Let your AI test your AI.</h2><p className="mt-6 text-lg leading-8 text-[#626976]">Start with a business goal. Shyena turns it into executable test intent, runs the journey, evaluates the trace and preserves the evidence.</p></div><div className="grid gap-3">{[["01","Goal","Describe the outcome in plain language."],["02","Plan","Generate realistic scenarios and assertions."],["03","Run","Execute conversations and agent actions."],["04","Judge","Evaluate behaviour and execution integrity."],["05","Prove","Create release evidence and a decision."]].map(([n,t,d])=><div key={n} className="flex gap-5 rounded-lg border border-[#e1e3e7] bg-white p-5"><span className="font-mono text-[10px] font-semibold text-[#e87512]">{n}</span><div><div className="font-semibold text-[#17233f]">{t}</div><div className="mt-1 text-sm text-[#69707d]">{d}</div></div><Check className="ml-auto h-4 w-4 shrink-0 text-[#c5c9d0]" /></div>)}</div></div></div></section>
 
-      <section className="border-y border-[#e8e8e8] bg-[#fafafa]"><div className="mx-auto max-w-[1280px] px-5 py-14 sm:px-8 lg:px-10 lg:py-16"><div className="text-center"><div className="text-sm font-semibold text-[#e87512]">Customers</div><h2 className="mt-3 font-[Sora] text-[clamp(2rem,4vw,3.2rem)] font-extrabold tracking-[-.045em] text-[#17233f]">Trusted by teams at leading organizations.</h2><p className="mx-auto mt-4 max-w-2xl text-sm leading-6 text-[#69707d]">Quality engineering and AI assurance across global enterprise and technology organizations.</p></div><div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-9">{customers.map((customer)=><div key={customer} className="flex min-h-20 items-center justify-center rounded-lg border border-[#e1e3e7] bg-white px-3 text-center font-[Sora] text-sm font-bold tracking-[-.02em] text-[#5d6470] transition hover:border-[#c8cbd1] hover:text-[#17233f]">{customer}</div>)}</div></div></section>
+      <section className="border-y border-[#e8e8e8] bg-white"><div className="mx-auto max-w-[1280px] px-5 py-16 sm:px-8 lg:px-10 lg:py-20"><div className="text-center"><div className="text-sm font-semibold text-[#e87512]">Customers</div><h2 className="mt-3 font-[Sora] text-[clamp(2rem,4vw,3.4rem)] font-extrabold tracking-[-.045em] text-[#17233f]">Trusted by teams at leading organizations.</h2><p className="mx-auto mt-4 max-w-2xl text-sm leading-6 text-[#69707d]">Quality engineering and AI assurance across enterprise technology, retail, healthcare, automotive and professional services.</p></div><div className="mt-10 grid grid-cols-2 overflow-hidden rounded-2xl border border-[#e4e6ea] bg-white sm:grid-cols-3 lg:grid-cols-5">{customers.map(([name,logo])=><div key={name} className="group flex min-h-[116px] items-center justify-center border-b border-r border-[#e8eaed] bg-white px-6 py-7 transition duration-300 hover:bg-[#fafafa] hover:shadow-[inset_0_-2px_0_#e87512]"><img src={logo} alt={`${name} logo`} loading="lazy" className="max-h-10 w-auto max-w-[150px] object-contain opacity-70 grayscale transition duration-300 group-hover:opacity-100 group-hover:grayscale-0" /></div>)}</div></div></section>
 
       <section className="bg-white"><div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24"><div className="flex flex-col justify-between gap-8 md:flex-row md:items-end"><div><div className="text-sm font-semibold text-[#e87512]">Integrations</div><h2 className="mt-4 font-[Sora] text-[clamp(2.4rem,4.5vw,4rem)] font-extrabold leading-[.98] tracking-[-.05em] text-[#17233f]">Works with your existing stack.</h2></div><Link to="/docs" className="text-sm font-semibold text-[#17233f]">View documentation <ArrowRight className="ml-1 inline h-4 w-4" /></Link></div><div className="mt-10 flex flex-wrap gap-2">{integrations.map((item)=><span key={item} className="rounded-md border border-[#e0e2e6] bg-[#fafafa] px-4 py-2.5 text-sm font-medium text-[#5f6672]">{item}</span>)}</div></div></section>
 
