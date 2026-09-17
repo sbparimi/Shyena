@@ -1,10 +1,19 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ExecutivePage } from "@/components/site/executive-page";
 
+const SITE = "https://www.shyena.eu";
+
 export const Route = createFileRoute("/about")({
   head: () => ({ meta: [
-    { title: "About Shyena — Autonomous Quality Engineering" },
-    { name: "description", content: "Shyena builds autonomous quality engineering for AI systems and enterprise software, connecting testing, security, evidence and release decisions." },
+    { title: "About Shyena | AI Quality Engineering & Assurance" },
+    { name: "description", content: "Learn how Shyena builds autonomous quality engineering and evidence-backed assurance for AI agents and enterprise software." },
+    { name: "robots", content: "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" },
+    { property: "og:title", content: "About Shyena | AI Quality Engineering & Assurance" },
+    { property: "og:description", content: "The quality engineering layer for AI systems that need to be understood, tested, secured and released with evidence." },
+    { property: "og:type", content: "website" }, { property: "og:site_name", content: "Shyena" },
+    { property: "og:url", content: `${SITE}/about` }, { property: "og:image", content: `${SITE}/shyena-logo-lockup.svg?v=20260917` },
+    { name: "twitter:card", content: "summary_large_image" }, { name: "twitter:title", content: "About Shyena | AI Quality Engineering & Assurance" },
+    { name: "twitter:description", content: "Autonomous quality engineering and evidence-backed AI assurance." }, { name: "twitter:image", content: `${SITE}/shyena-logo-lockup.svg?v=20260917` },
   ]}),
   component: AboutPage,
 });
