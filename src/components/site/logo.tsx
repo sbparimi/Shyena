@@ -1,34 +1,35 @@
-import { Link } from "@tanstack/react-router";
-
 type LogoProps = {
   size?: "header" | "footer";
 };
 
-const LOCKUP_SRC = "/shyena-logo-lockup.svg?v=20260916";
-const MARK_SRC = "/shyena-mark-vertical.svg?v=20260916";
+// Use the real brand asset directly. The previous lockup SVG wrapped a nested
+// <image> and Logo itself returned a Link, which was then wrapped by another
+// Link in the global header. That produced invalid nested anchors and could
+// leave the top-left logo invisible after hydration.
+const LOCKUP_SRC = "/shyena-logo-exact.webp?v=20260917";
+const MARK_SRC = "/shyena-mark-vertical.svg?v=20260917";
 
 export function Logo({ size = "header" }: LogoProps) {
   const dimensions = size === "footer"
     ? "h-[54px] w-[168px] sm:h-[60px] sm:w-[188px]"
-    : "h-[46px] w-[138px] sm:h-[50px] sm:w-[156px] lg:h-[54px] lg:w-[168px]";
+    : "h-[50px] w-[158px] sm:h-[54px] sm:w-[170px] lg:h-[58px] lg:w-[178px]";
 
   return (
-    <Link
-      to="/"
-      aria-label="Shyena — Autonomous Quality Engineering"
-      title="Shyena — Autonomous Quality Engineering"
-      className="group inline-flex shrink-0 items-center select-none leading-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5b2be0] focus-visible:ring-offset-4"
+    <span
+      aria-label="Shyena — AI Assurance for What's Next"
+      title="Shyena — AI Assurance for What's Next"
+      className="group inline-flex shrink-0 select-none leading-none"
     >
       <img
         src={LOCKUP_SRC}
-        alt="Shyena — Autonomous Quality Engineering"
-        width={1385}
-        height={540}
+        alt="Shyena — AI Assurance for What's Next"
+        width={1440}
+        height={580}
         decoding="async"
         fetchPriority="high"
-        className={`block object-contain transition-transform duration-200 group-hover:scale-[1.015] ${dimensions}`}
+        className={`block object-contain transition-transform duration-200 group-hover:scale-[1.01] ${dimensions}`}
       />
-    </Link>
+    </span>
   );
 }
 
