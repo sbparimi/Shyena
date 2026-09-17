@@ -23,8 +23,6 @@ const SKILL_RULES: Array<[string, string[]]> = [
   ["Test strategy & release governance", ["test strategy", "release governance", "quality engineering", "release management"]],
 ];
 
-// Only genuine page-level/key CTAs are eligible. Generic action buttons such as
-// "Test", "Evaluate", "Build" and card actions are deliberately excluded.
 const CTA_PATTERN = /^(book(?: a)?(?: demo| walkthrough)?|request(?: a)? demo|start(?: a)? pilot|discuss|talk|contact|get started|see how(?: it works)?|scope|explore|learn|schedule|try|demo|pilot|assessment|assurance review|consult)\b/i;
 
 function getPageSkills(): string[] {
@@ -34,10 +32,9 @@ function getPageSkills(): string[] {
 
 function buildHireHref(skills: string[]) {
   const params = new URLSearchParams();
-  params.set("expert", "matched specialists");
   if (skills.length) params.set("skills", skills.join(", "));
   params.set("source", window.location.pathname);
-  return `/contact?${params.toString()}`;
+  return `/hire-ai-experts?${params.toString()}`;
 }
 
 function isVisible(element: HTMLElement): boolean {
@@ -47,45 +44,68 @@ function isVisible(element: HTMLElement): boolean {
   return rect.width > 0 && rect.height > 0;
 }
 
+function isKeyCta(element: HTMLElement): boolean {
+  const text = (element.textContent ?? "").replace(/\s+/g, " ").trim();
+  return Boolean(text) && CTA_PATTERN.test(text) && !text.toLowerCase().includes("hire expert");
+}
+
+function getCtaGroup(element: HTMLElement, main: HTMLElement, candidates: HTMLElement[]): HTMLElement {
+  let current = element.parentElement;
+  let best = element.parentElement ?? main;
+
+  while (current && current !== main) {
+    const display = window.getComputedStyle(current).display;
+    if (display === "flex" || display === "inline-flex") {
+      const siblings = candidates.filter((candidate) => candidate.parentElement === current);
+      if (siblings.length > 1) return current;
+      best = current;
+    }
+    current = current.parentElement;
+  }
+
+  return best;
+}
+
+function createHireExpertsLink(href: string, skills: string[]): HTMLAnchorElement {
+  const link = document.createElement("a");
+  link.href = href;
+  link.dataset.hireExpertsSource = window.location.pathname;
+  link.className = "inline-flex h-11 items-center justify-center gap-2 rounded-lg border border-[#17213f] bg-white px-4 text-xs font-semibold text-[#17213f] transition hover:border-[#ff5a0a] hover:text-[#ff5a0a]";
+  link.title = skills.length ? `Find experts for: ${skills.join(", ")}` : "View Shyena experts";
+  link.textContent = "Hire Experts";
+  return link;
+}
+
 function addExpertCtas() {
-  const main = document.querySelector("main");
+  const main = document.querySelector("main") as HTMLElement | null;
   if (!main) return;
 
   const skills = getPageSkills();
   const href = buildHireHref(skills);
-  const candidates = Array.from(main.querySelectorAll<HTMLElement>("a, button"));
-  const seenCtas = new Set<string>();
+  const candidates = Array.from(main.querySelectorAll<HTMLElement>("a, button"))
+    .filter((element) => isVisible(element) && isKeyCta(element));
 
+  const groups = new Map<HTMLElement, HTMLElement[]>();
   candidates.forEach((element) => {
-    if (element.closest("[data-shyena-hire-experts]")) return;
-    if (element.dataset.shyenaHireExpertAttached === "true") return;
-    if (!isVisible(element)) return;
+    const group = getCtaGroup(element, main, candidates);
+    const members = groups.get(group) ?? [];
+    members.push(element);
+    groups.set(group, members);
+  });
 
-    const text = (element.textContent ?? "").replace(/\s+/g, " ").trim();
-    if (!text || !CTA_PATTERN.test(text)) return;
-    if (text.toLowerCase().includes("hire expert")) return;
+  groups.forEach((members) => {
+    if (members.some((element) => element.dataset.shyenaHireExpertAttached === "true")) return;
 
-    // One Hire Experts button per actual CTA. This also collapses duplicate
-    // desktop/mobile copies of the same CTA when they share the same label + destination.
-    const destination = element instanceof HTMLAnchorElement ? element.getAttribute("href") ?? "" : "button";
-    const ctaKey = `${text.toLowerCase()}|${destination}`;
-    if (seenCtas.has(ctaKey)) return;
-    seenCtas.add(ctaKey);
-
+    const lastCta = members[members.length - 1];
     const wrapper = document.createElement("span");
     wrapper.dataset.shyenaHireExperts = "true";
-    wrapper.className = "inline-flex flex-wrap items-center gap-2 align-middle ml-2 my-1";
+    wrapper.className = "inline-flex items-center gap-2 align-middle ml-2 my-1";
+    wrapper.appendChild(createHireExpertsLink(href, skills));
 
-    const link = document.createElement("a");
-    link.href = href;
-    link.dataset.hireExpertsSource = window.location.pathname;
-    link.className = "inline-flex h-11 items-center justify-center gap-2 rounded-lg border border-[#17213f] bg-white px-4 text-xs font-semibold text-[#17213f] transition hover:border-[#ff5a0a] hover:text-[#ff5a0a]";
-    link.title = skills.length ? `Find experts for: ${skills.join(", ")}` : "Find Shyena experts matched to this page";
-    link.textContent = "Hire Experts";
-
-    wrapper.appendChild(link);
-    element.dataset.shyenaHireExpertAttached = "true";
-    element.insertAdjacentElement("afterend", wrapper);
+    members.forEach((element) => {
+      element.dataset.shyenaHireExpertAttached = "true";
+    });
+    lastCta.insertAdjacentElement("afterend", wrapper);
   });
 }
 
