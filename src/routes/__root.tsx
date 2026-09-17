@@ -33,7 +33,38 @@ const GENERATED_INLINE_VISUALS: Record<string, { match: string; concept: Article
 function NotFoundComponent() { return <div className="flex min-h-screen items-center justify-center bg-background px-4"><div className="max-w-md text-center"><h1 className="text-7xl font-bold text-foreground">404</h1><h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2><p className="mt-2 text-sm text-muted-foreground">The page you're looking for doesn't exist or has been moved.</p><div className="mt-6"><Link to="/" className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90">Go home</Link></div></div></div>; }
 function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) { console.error(error); const router = useRouter(); useEffect(() => { reportLovableError(error, { boundary: "tanstack_root_error_component" }); }, [error]); return <div className="flex min-h-screen items-center justify-center bg-background px-4"><div className="max-w-md text-center"><h1 className="text-xl font-semibold tracking-tight text-foreground">This page didn't load</h1><p className="mt-2 text-sm text-muted-foreground">Something went wrong on our end. You can try refreshing or head back home.</p><div className="mt-6 flex flex-wrap justify-center gap-2"><button onClick={() => { router.invalidate(); reset(); }} className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90">Try again</button><a href="/" className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground hover:bg-accent">Go home</a></div></div></div>; }
 
-const ORGANIZATION_SCHEMA = { "@context": "https://schema.org", "@type": "SoftwareApplication", name: "Shyena", applicationCategory: "BusinessApplication", operatingSystem: "Web", description: "Shyena is an autonomous quality engineering platform that helps teams understand AI systems, test real behaviour, secure critical paths and produce evidence-backed release decisions.", url: "https://shyena.eu/", keywords: "autonomous quality engineering, AI agent testing, AI evaluation, enterprise software testing, AI security testing, release assurance" };
+const ORGANIZATION_SCHEMA = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.shyena.eu/#organization",
+      name: "Shyena Labs B.V.",
+      url: "https://www.shyena.eu/",
+      logo: { "@type": "ImageObject", url: "https://www.shyena.eu/shyena-logo-lockup.svg?v=20260917" },
+      description: "Shyena provides AI agent testing, evaluation, security and evidence-backed release assurance.",
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.shyena.eu/#website",
+      url: "https://www.shyena.eu/",
+      name: "Shyena",
+      publisher: { "@id": "https://www.shyena.eu/#organization" },
+      inLanguage: "en",
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://www.shyena.eu/#software",
+      name: "Shyena",
+      applicationCategory: "BusinessApplication",
+      operatingSystem: "Web",
+      url: "https://www.shyena.eu/",
+      description: "An autonomous quality engineering and AI assurance platform for understanding systems, testing behaviour, securing critical paths and producing evidence-backed release decisions.",
+      keywords: "AI agent testing, AI evaluation, conversational AI testing, autonomous testing, AI security testing, release assurance",
+      publisher: { "@id": "https://www.shyena.eu/#organization" },
+    },
+  ],
+};
 
 type InlineMount = { node: HTMLDivElement; concept: ArticleConcept; label: string };
 
@@ -73,7 +104,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     { name: "twitter:card", content: "summary_large_image" }, { name: "twitter:title", content: "Shyena — Autonomous Quality Engineering" }, { name: "twitter:description", content: "Test, evaluate and secure AI systems with evidence-backed release decisions." }, { name: "twitter:image", content: "https://www.shyena.eu/shyena-logo-lockup.svg?v=20260917" },
   ], links: [
     { rel: "stylesheet", href: appCss }, { rel: "stylesheet", href: siteThemeCss }, { rel: "stylesheet", href: enterpriseTypographyCss }, { rel: "preconnect", href: "https://fonts.googleapis.com" }, { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" }, { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Sora:wght@600;700;800&display=swap" }, { rel: "icon", href: "/shyena-mark.svg?v=20260917", type: "image/svg+xml" }, { rel: "apple-touch-icon", href: "/shyena-mark.svg?v=20260917" },
-  ] }),
+  ]}),
   shellComponent: RootShell, component: RootComponent, notFoundComponent: NotFoundComponent, errorComponent: ErrorComponent,
 });
 
