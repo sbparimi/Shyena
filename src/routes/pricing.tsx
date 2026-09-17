@@ -4,7 +4,7 @@ import { ArrowRight, Check } from "lucide-react";
 export const Route = createFileRoute("/pricing")({
   head: () => ({ meta: [
     { title: "Pricing | Shyena" },
-    { name: "description", content: "Paid enterprise pricing for Shyena AI assurance and autonomous quality engineering across web, mobile, API and AI systems." },
+    { name: "description", content: "Paid enterprise pricing for Shyena AI assurance and autonomous quality engineering across web, mobile, API, Oracle Fusion and Salesforce Agentforce." },
   ]}),
   component: PricingPage,
 });
@@ -135,6 +135,8 @@ const autonomousPlans = [
     items: [
       "Enterprise application estate",
       "Web + mobile + API + services",
+      "Oracle Fusion application testing",
+      "Salesforce + Agentforce testing",
       "Autonomous exploration at scale",
       "Repository-aware test engineering",
       "Advanced failure forensics",
@@ -179,13 +181,13 @@ function PricingPage() {
           <div className="max-w-4xl">
             <div className="text-xs font-semibold uppercase tracking-[.16em] text-[#e87512]">Shyena pricing</div>
             <h1 className="mt-4 font-[Sora] text-[clamp(2.7rem,6vw,5.2rem)] font-extrabold leading-[.96] tracking-[-.055em]">One autonomous quality platform. Two ways to buy.</h1>
-            <p className="mt-6 max-w-3xl text-lg leading-8 text-[#69707d]">Use Shyena to assure AI agents and to autonomously engineer traditional application testing across web, mobile and API. No free tier. No per-seat tax. Start with a defined paid pilot and scale when the value is proven.</p>
+            <p className="mt-6 max-w-3xl text-lg leading-8 text-[#69707d]">Use Shyena to assure AI agents and to autonomously engineer traditional application testing across web, mobile, API, Oracle Fusion and Salesforce Agentforce. No free tier. No per-seat tax. Start with a defined paid pilot and scale when the value is proven.</p>
           </div>
 
           <div className="mt-10 grid gap-4 md:grid-cols-3">
             {[
               ["AI assurance", "Prove agent behaviour, orchestration, security and release integrity."],
-              ["Autonomous testing", "Give Shyena a testing goal and let agents explore, engineer, execute and diagnose."],
+              ["Autonomous testing", "Give Shyena a testing goal and let agents explore, engineer, execute and diagnose across enterprise applications."],
               ["One evidence chain", "Connect browser, API, application, logs, traces and business outcomes to release evidence."],
             ].map(([title, body]) => (
               <div key={title} className="rounded-xl border border-[#e2e5ea] bg-[#fafbfc] p-5">
@@ -218,16 +220,18 @@ function PricingPage() {
           <div className="mb-10 max-w-3xl">
             <div className="text-xs font-semibold uppercase tracking-[.16em] text-[#e87512]">02 · Autonomous testing</div>
             <h2 className="mt-3 font-[Sora] text-3xl font-extrabold tracking-[-.04em] sm:text-4xl">Traditional testing, rebuilt as autonomous quality engineering.</h2>
-            <p className="mt-4 text-base leading-7 text-[#69707d]">Web, mobile and API testing remain first-class capabilities. Shyena adds AI-assisted discovery and autonomous test engineering so teams define the outcome instead of hand-authoring every test.</p>
+            <p className="mt-4 text-base leading-7 text-[#69707d]">Web, mobile and API testing remain first-class capabilities. Shyena adds AI-assisted discovery and autonomous test engineering for enterprise platforms including Oracle Fusion and Salesforce Agentforce, so teams define the outcome instead of hand-authoring every test.</p>
           </div>
           <div className="grid gap-4 xl:grid-cols-4">
             {autonomousPlans.map((plan) => <PlanCard key={plan.name} plan={plan} />)}
           </div>
-          <div className="mt-8 grid gap-4 md:grid-cols-3">
+          <div className="mt-8 grid gap-4 md:grid-cols-5">
             {[
               ["Web", "Autonomous browser exploration, journey discovery, Playwright engineering, regression and failure analysis."],
               ["Mobile", "AI-assisted mobile journey discovery and autonomous regression across iOS and Android workflows."],
               ["API", "Contract-aware API discovery, functional validation, negative paths, data assertions and service regression."],
+              ["Oracle Fusion + Claude", "AI-assisted autonomous testing of Oracle Fusion business flows using Claude for journey discovery, test engineering, execution analysis and failure triage."],
+              ["Salesforce Agentforce", "AI-assisted autonomous testing of Salesforce and Agentforce journeys, including agent behaviour, CRM workflows, integrations and regression validation."],
             ].map(([title, body]) => (
               <div key={title} className="rounded-xl border border-[#e2e5ea] bg-[#fafbfc] p-5">
                 <div className="text-sm font-bold text-[#17213f]">{title} testing</div>
