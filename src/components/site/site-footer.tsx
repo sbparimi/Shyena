@@ -1,13 +1,35 @@
 import { Link } from "@tanstack/react-router";
+import { ArrowRight, Linkedin, Github } from "lucide-react";
 import { Logo } from "./logo";
 
 const COLUMNS = [
-  { title: "Platform", links: [{ label: "Nexus · Understand", to: "/nexus" }, { label: "Vera · Test & Evaluate", to: "/vera" }, { label: "Chakra · Secure", to: "/chakra" }, { label: "Pricing", to: "/pricing" }] },
-  { title: "Assurance", links: [{ label: "Assurance model", to: "/docs/evaluation-model" }, { label: "Release evidence", to: "/docs/reporting" }, { label: "Documentation", to: "/docs" }, { label: "Insights", to: "/blog" }] },
-  { title: "Enterprise", links: [{ label: "Security & trust", to: "/security" }, { label: "Professional services", to: "/services" }, { label: "Contact", to: "/contact" }, { label: "Request a demo", to: "/contact" }] },
-  { title: "Company", links: [{ label: "About Shyena", to: "/about" }, { label: "Contact", to: "/contact" }] },
+  { title: "Product", links: [{ label: "Nexus", to: "/nexus" }, { label: "Vera", to: "/vera" }, { label: "Chakra", to: "/chakra" }, { label: "Pricing", to: "/pricing" }, { label: "Integrations", to: "/integrations" }] },
+  { title: "Resources", links: [{ label: "Blog", to: "/blog" }, { label: "Case studies", to: "/blog" }, { label: "Guides", to: "/blog" }, { label: "Webinars", to: "/blog" }, { label: "Docs", to: "/docs" }] },
+  { title: "Company", links: [{ label: "About", to: "/about" }, { label: "Careers", to: "/about" }, { label: "Contact", to: "/contact" }, { label: "Privacy", to: "/privacy" }, { label: "Terms", to: "/terms" }] },
 ] as const;
 
 export function SiteFooter() {
-  return <footer className="border-t border-slate-200 bg-[#f6f8fc] text-[#0e172b]"><div aria-hidden="true" className="h-[3px] w-full bg-[linear-gradient(90deg,#0b1638_0%,#5b2be0_48%,#00b7e8_78%,#f5a623_100%)]" /><div className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 sm:py-20"><div className="grid gap-12 lg:grid-cols-[1.1fr_2.9fr]"><div><Logo size="footer" /><p className="mt-5 max-w-sm text-sm leading-relaxed text-[#475569]">Autonomous quality engineering for AI systems and enterprise software. Test. Evaluate. Secure. Prove.</p><div className="mt-7 inline-flex items-center gap-2 border border-slate-200 bg-white px-3 py-1.5 text-xs text-[#64748b]"><span className="h-1.5 w-1.5 bg-[#00b7e8]" />Evidence-backed release decisions</div></div><div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">{COLUMNS.map((column) => <div key={column.title}><h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-[#0e172b]">{column.title}</h3><ul className="mt-5 space-y-3.5">{column.links.map((link) => <li key={`${column.title}-${link.label}`}><Link to={link.to} className="text-sm text-[#64748b] transition-colors hover:text-[#5b2be0]">{link.label}</Link></li>)}</ul></div>)}</div></div><div className="mt-14 border-t border-slate-200 pt-6 text-xs text-[#64748b]"><div className="flex flex-wrap gap-x-5 gap-y-2"><span>© {new Date().getFullYear()} Shyena Labs B.V.</span><span>Autonomous Quality Engineering</span><span>AI assurance</span><span>Security assurance</span></div></div></div></footer>;
+  return (
+    <footer className="border-t border-[#e5e7eb] bg-white text-[#17213f]">
+      <div className="mx-auto w-full max-w-[1480px] px-5 py-14 sm:px-8 lg:px-10 lg:py-16">
+        <div className="grid gap-12 lg:grid-cols-[1.5fr_2fr]">
+          <div>
+            <Link to="/" aria-label="Shyena home" className="inline-flex"><Logo size="footer" /></Link>
+            <p className="mt-5 max-w-sm text-sm leading-6 text-[#667085]">Test, evaluate and secure AI systems with confidence. Evidence-backed assurance for production agents.</p>
+            <div className="mt-6 flex items-center gap-2">
+              <a href="https://www.linkedin.com/company/shyena-ai/" aria-label="Shyena on LinkedIn" className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[#e1e4e9] text-[#596273] transition hover:border-[#17213f] hover:text-[#17213f]"><Linkedin className="h-4 w-4" /></a>
+              <a href="https://github.com/sbparimi/Shyena" aria-label="Shyena on GitHub" className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[#e1e4e9] text-[#596273] transition hover:border-[#17213f] hover:text-[#17213f]"><Github className="h-4 w-4" /></a>
+            </div>
+          </div>
+          <div className="grid gap-10 sm:grid-cols-3">
+            {COLUMNS.map((column) => <div key={column.title}><h3 className="text-xs font-bold uppercase tracking-[0.14em] text-[#17213f]">{column.title}</h3><ul className="mt-5 space-y-3">{column.links.map((link) => <li key={`${column.title}-${link.label}`}><Link to={link.to} className="text-sm text-[#667085] transition-colors hover:text-[#e87512]">{link.label}</Link></li>)}</ul></div>)}
+          </div>
+        </div>
+        <div className="mt-12 flex flex-col gap-4 border-t border-[#e5e7eb] pt-6 text-xs text-[#7a8290] sm:flex-row sm:items-center sm:justify-between">
+          <div>© {new Date().getFullYear()} Shyena. All rights reserved.</div>
+          <div className="flex items-center gap-2">Built for a more trustworthy AI future <ArrowRight className="h-3.5 w-3.5" /></div>
+        </div>
+      </div>
+    </footer>
+  );
 }
