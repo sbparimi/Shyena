@@ -1,8 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 350 530" role="img" aria-label="Shyena brand mark">
-  <defs>
-    <filter id="transparent-white" color-interpolation-filters="sRGB">
-      <feColorMatrix type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 -1 -1 -1 0 3"/>
-    </filter>
-  </defs>
-  <image href="/shyena-logo-exact.webp?v=20260906" x="-25" y="-25" width="1440" height="580" filter="url(#transparent-white)"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 650 724" role="img" aria-label="Shyena brand mark">
+  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFB21A"/><stop offset="0.42" stop-color="#FF7A00"/><stop offset="1" stop-color="#E93812"/></linearGradient></defs>
+  <path d="M 496 9 L 352 79 L 260 135 L 232 156 L 198 188 L 168 232 L 159 263 L 159 291 L 166 315 L 185 347 L 208 370 L 240 393 L 362 456 L 330 519 L 288 578 L 218 654 L 159 705 L 347 624 L 419 586 L 483 541 L 504 520 L 523 491 L 531 464 L 531 423 L 521 390 L 503 358 L 487 338 L 448 303 L 412 278 L 342 237 L 344 220 L 356 179 L 369 150 L 391 114 L 426 71 L 459 39 Z M 383 473 L 405 500 L 412 518 L 409 542 L 394 567 L 403 539 L 403 520 L 397 499 Z M 286 309 L 400 345 L 467 377 L 492 395 L 516 420 L 526 438 L 530 460 L 522 441 L 508 422 L 467 390 L 411 361 Z" fill="url(#g)" fill-rule="evenodd"/>
+  <path d="M 159 263 C 170 206 236 145 352 79 C 268 136 221 193 218 250 C 216 299 271 337 362 386 C 287 347 222 324 186 300 C 167 287 159 275 159 263 Z" fill="#FFB21A" opacity=".62"/>
+  <path d="M 362 456 C 420 487 486 506 531 451 C 515 520 447 566 347 624 C 384 582 408 527 362 456 Z" fill="#E93812" opacity=".68"/>
 </svg>
