@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { BriefcaseBusiness } from "lucide-react";
 
 const SKILL_RULES: Array<[string, string[]]> = [
   ["AI agent testing", ["ai agent", "agent testing", "agentic"]],
@@ -24,10 +23,12 @@ const SKILL_RULES: Array<[string, string[]]> = [
   ["Test strategy & release governance", ["test strategy", "release governance", "quality engineering", "release management"]],
 ];
 
-const CTA_PATTERN = /^(book|request|start|discuss|talk|contact|get started|see how|scope|explore|learn|schedule|try|demo|hire|build|test|evaluate|assure|run)\b|\b(demo|pilot|assessment|assurance review|consult|expert)\b/i;
+// Only genuine page-level/key CTAs are eligible. Generic action buttons such as
+// "Test", "Evaluate", "Build" and card actions are deliberately excluded.
+const CTA_PATTERN = /^(book(?: a)?(?: demo| walkthrough)?|request(?: a)? demo|start(?: a)? pilot|discuss|talk|contact|get started|see how(?: it works)?|scope|explore|learn|schedule|try|demo|pilot|assessment|assurance review|consult)\b/i;
 
 function getPageSkills(): string[] {
-  const text = document.querySelector("main")?.innerText?.toLowerCase() ?? document.body.innerText?.toLowerCase() ?? "";
+  const text = document.querySelector("main")?.innerText?.toLowerCase() ?? "";
   return SKILL_RULES.filter(([, terms]) => terms.some((term) => text.includes(term))).map(([skill]) => skill);
 }
 
@@ -39,40 +40,72 @@ function buildHireHref(skills: string[]) {
   return `/contact?${params.toString()}`;
 }
 
+function isVisible(element: HTMLElement): boolean {
+  const style = window.getComputedStyle(element);
+  if (style.display === "none" || style.visibility === "hidden" || Number(style.opacity) === 0) return false;
+  const rect = element.getBoundingClientRect();
+  return rect.width > 0 && rect.height > 0;
+}
+
 function addExpertCtas() {
+  const main = document.querySelector("main");
+  if (!main) return;
+
   const skills = getPageSkills();
   const href = buildHireHref(skills);
-  const candidates = Array.from(document.querySelectorAll<HTMLElement>("main a, main button"));
+  const candidates = Array.from(main.querySelectorAll<HTMLElement>("a, button"));
+  const seenCtas = new Set<string>();
+
   candidates.forEach((element) => {
     if (element.closest("[data-shyena-hire-experts]")) return;
-    if (element.getAttribute("data-hire-experts-source")) return;
+    if (element.dataset.shyenaHireExpertAttached === "true") return;
+    if (!isVisible(element)) return;
+
     const text = (element.textContent ?? "").replace(/\s+/g, " ").trim();
     if (!text || !CTA_PATTERN.test(text)) return;
     if (text.toLowerCase().includes("hire expert")) return;
+
+    // One Hire Experts button per actual CTA. This also collapses duplicate
+    // desktop/mobile copies of the same CTA when they share the same label + destination.
+    const destination = element instanceof HTMLAnchorElement ? element.getAttribute("href") ?? "" : "button";
+    const ctaKey = `${text.toLowerCase()}|${destination}`;
+    if (seenCtas.has(ctaKey)) return;
+    seenCtas.add(ctaKey);
+
     const wrapper = document.createElement("span");
     wrapper.dataset.shyenaHireExperts = "true";
     wrapper.className = "inline-flex flex-wrap items-center gap-2 align-middle ml-2 my-1";
+
     const link = document.createElement("a");
     link.href = href;
     link.dataset.hireExpertsSource = window.location.pathname;
     link.className = "inline-flex h-11 items-center justify-center gap-2 rounded-lg border border-[#17213f] bg-white px-4 text-xs font-semibold text-[#17213f] transition hover:border-[#ff5a0a] hover:text-[#ff5a0a]";
     link.title = skills.length ? `Find experts for: ${skills.join(", ")}` : "Find Shyena experts matched to this page";
-    link.innerHTML = `<span>Hire Experts</span>`;
-    const iconHost = document.createElement("span");
-    iconHost.className = "inline-flex";
-    link.appendChild(iconHost);
+    link.textContent = "Hire Experts";
+
     wrapper.appendChild(link);
+    element.dataset.shyenaHireExpertAttached = "true";
     element.insertAdjacentElement("afterend", wrapper);
   });
 }
 
 export function HireExpertsCtaInjector() {
   useEffect(() => {
-    const run = () => window.requestAnimationFrame(addExpertCtas);
+    let frame = 0;
+    const run = () => {
+      cancelAnimationFrame(frame);
+      frame = window.requestAnimationFrame(addExpertCtas);
+    };
+
     run();
     const observer = new MutationObserver(run);
     observer.observe(document.querySelector("main") ?? document.body, { childList: true, subtree: true });
-    return () => observer.disconnect();
+
+    return () => {
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+    };
   }, []);
+
   return null;
 }
