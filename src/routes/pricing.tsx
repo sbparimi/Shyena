@@ -1,24 +1,50 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 
 export const Route = createFileRoute("/pricing")({
   head: () => ({ meta: [
-    { title: "Pricing — Shyena Autonomous Quality Engineering" },
-    { name: "description", content: "Flexible Shyena engagements for pilots, enterprise deployment and strategic autonomous quality engineering programs." },
+    { title: "Pricing | Shyena" },
+    { name: "description", content: "Simple, transparent pricing for Shyena AI assurance. Choose the right engagement for your team." },
   ]}),
   component: PricingPage,
 });
 
 const plans = [
-  { name: "Pilot", title: "Prove the value", body: "Start with one critical AI journey, application flow or security scenario.", items: ["Focused proof of value", "System assessment", "Test & evaluation workflow", "Evidence-backed findings"], cta: "Start a pilot" },
-  { name: "Enterprise", title: "Scale assurance", body: "Connect Shyena to your engineering, delivery and observability ecosystem.", items: ["Multiple systems and journeys", "Existing automation integration", "Security and quality assurance", "Governance and release evidence"], cta: "Discuss enterprise" },
-  { name: "Strategic", title: "Build the capability", body: "Establish autonomous quality engineering as an operating model across the organisation.", items: ["Named technical ownership", "Platform onboarding", "Continuous improvement", "Critical incident support options"], cta: "Talk to Shyena" },
+  { name: "Starter", price: "€0", cadence: "", body: "Get started with core features.", items: ["AI agent testing", "Core evaluations", "Sample datasets", "Documentation"] },
+  { name: "Team", price: "€499", cadence: "/ month", body: "For growing teams.", items: ["Everything in Starter", "Advanced evaluations", "Trace evidence", "Release reporting", "Priority support"], popular: true },
+  { name: "Business", price: "Custom", cadence: "", body: "For large organisations.", items: ["Everything in Team", "Enterprise integrations", "Security assurance", "Governance & controls", "Dedicated support"] },
 ] as const;
 
 function PricingPage() {
-  return <main className="overflow-x-hidden bg-white text-slate-950">
-    <section className="border-b border-slate-300"><div className="mx-auto max-w-[1440px] px-5 py-14 sm:px-8 sm:py-20 lg:px-10 lg:py-24"><div className="max-w-4xl"><div className="mb-6 border-l-4 border-[#ffb703] pl-4 font-mono text-xs font-bold uppercase tracking-[0.2em] text-slate-600">Pricing</div><h1 className="font-[Sora] text-[clamp(2.8rem,7vw,6rem)] font-extrabold leading-[0.92] tracking-[-0.065em]">Buy the outcome.<br /><span className="text-[#a87900]">Scale when it works.</span></h1><p className="mt-6 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">Shyena pricing is shaped around the system, assurance scope and level of support—not arbitrary test-count limits.</p></div></div></section>
-    <section className="border-b border-slate-300 bg-[#f8fafc]"><div className="mx-auto max-w-[1440px] px-5 py-12 sm:px-8 sm:py-16 lg:px-10 lg:py-20"><div className="grid gap-4 lg:grid-cols-3">{plans.map((plan) => <div key={plan.name} className="flex flex-col border border-slate-300 bg-white p-6 sm:p-8"><div className="font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-[#a87900]">{plan.name}</div><h2 className="mt-5 font-[Sora] text-2xl font-extrabold tracking-[-0.035em]">{plan.title}</h2><p className="mt-3 text-sm leading-7 text-slate-600">{plan.body}</p><ul className="mt-7 space-y-3 border-t border-slate-300 pt-6 text-sm text-slate-700">{plan.items.map((item) => <li key={item} className="flex gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#a87900]" />{item}</li>)}</ul><Link to="/contact" className="mt-8 inline-flex h-11 items-center justify-center gap-2 border border-[#ffb703] bg-[#ffb703] px-5 text-xs font-extrabold uppercase text-slate-950">{plan.cta}<ArrowRight className="h-4 w-4" /></Link></div>)}</div></div></section>
-    <section className="bg-[#0b0920] text-white"><div className="mx-auto max-w-[1440px] px-5 py-14 text-center sm:px-8 sm:py-20 lg:px-10 lg:py-24"><div className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-[#ffb703]">Simple principle</div><h2 className="mx-auto mt-5 max-w-4xl font-[Sora] text-[clamp(2.3rem,5vw,4.8rem)] font-extrabold leading-[0.95] tracking-[-0.06em]">Start small. Prove it. Scale the assurance.</h2><p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/60 sm:text-lg sm:leading-8">Bring one critical journey and we will define the right scope for a measurable proof of value.</p><Link to="/contact" className="mt-8 inline-flex h-12 items-center gap-2 border border-[#ffb703] bg-[#ffb703] px-7 text-sm font-extrabold uppercase text-slate-950">Discuss scope <ArrowRight className="h-5 w-5" /></Link></div></section>
-  </main>;
+  return (
+    <main className="overflow-x-hidden bg-white text-[#17213f]">
+      <section className="border-b border-[#e6e8ed] bg-white">
+        <div className="mx-auto max-w-[1280px] px-5 py-14 sm:px-8 sm:py-18 lg:px-10 lg:py-20">
+          <div className="text-xs font-semibold uppercase tracking-[.16em] text-[#e87512]">Pricing</div>
+          <h1 className="mt-4 font-[Sora] text-[clamp(2.8rem,6vw,5rem)] font-extrabold leading-[.96] tracking-[-.055em]">Simple, transparent pricing.</h1>
+          <p className="mt-5 max-w-2xl text-lg leading-8 text-[#69707d]">Choose the right plan for your team. Scale as your AI assurance requirements grow.</p>
+          <div className="mt-7 inline-flex rounded-full border border-[#e2e5ea] bg-[#fafafa] p-1 text-xs font-semibold"><span className="rounded-full bg-[#ff5a0a] px-4 py-2 text-white">Monthly</span><span className="px-4 py-2 text-[#596273]">Annual (Save 20%)</span></div>
+        </div>
+      </section>
+
+      <section className="bg-[#fafbfc]">
+        <div className="mx-auto max-w-[1280px] px-5 py-12 sm:px-8 lg:px-10 lg:py-16">
+          <div className="grid gap-4 lg:grid-cols-3">
+            {plans.map((plan) => (
+              <article key={plan.name} className={`relative flex flex-col rounded-xl border bg-white p-7 lg:p-8 ${plan.popular ? "border-[#ff5a0a] shadow-[0_25px_60px_-40px_rgba(255,90,10,.45)]" : "border-[#e0e3e8]"}`}>
+                {plan.popular && <div className="absolute right-5 top-5 rounded-full bg-[#ff5a0a] px-3 py-1 text-[10px] font-bold uppercase tracking-[.08em] text-white">Most popular</div>}
+                <div className="text-sm font-bold text-[#17213f]">{plan.name}</div>
+                <div className="mt-7 flex items-end gap-1"><span className="font-[Sora] text-4xl font-extrabold tracking-[-.04em] text-[#17213f]">{plan.price}</span>{plan.cadence && <span className="pb-1 text-sm text-[#69707d]">{plan.cadence}</span>}</div>
+                <p className="mt-3 text-sm leading-6 text-[#69707d]">{plan.body}</p>
+                <ul className="mt-7 flex-1 space-y-3 border-t border-[#eceef1] pt-6">{plan.items.map((item) => <li key={item} className="flex gap-3 text-sm text-[#4f5968]"><span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#fff0e7] text-[#ff5a0a]"><Check className="h-3 w-3" /></span>{item}</li>)}</ul>
+                <Link to="/contact" className={`mt-8 inline-flex h-11 items-center justify-center gap-2 rounded-lg px-5 text-sm font-semibold ${plan.popular ? "bg-[#ff5a0a] text-white hover:bg-[#e94f04]" : "border border-[#d8dce3] bg-white text-[#17213f] hover:border-[#17213f]"}`}>{plan.name === "Starter" ? "Get started" : plan.name === "Team" ? "Start a trial" : "Contact sales"}<ArrowRight className="h-4 w-4" /></Link>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-[#e6e8ed] bg-white"><div className="mx-auto max-w-[900px] px-5 py-16 text-center sm:px-8 lg:py-20"><div className="text-xs font-semibold uppercase tracking-[.16em] text-[#e87512]">Need enterprise assurance?</div><h2 className="mt-4 font-[Sora] text-3xl font-extrabold tracking-[-.04em] text-[#17213f] sm:text-4xl">Bring your critical AI journeys.</h2><p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-[#69707d]">We can scope platform onboarding, security testing, governance and release evidence around your systems.</p><Link to="/contact" className="mt-7 inline-flex h-11 items-center gap-2 rounded-lg bg-[#ff5a0a] px-6 text-sm font-semibold text-white hover:bg-[#e94f04]">Talk to Shyena <ArrowRight className="h-4 w-4" /></Link></div></section>
+    </main>
+  );
 }
