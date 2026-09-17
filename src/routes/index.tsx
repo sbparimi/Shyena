@@ -79,11 +79,73 @@ function HomePage() {
             <p className="mx-auto mt-7 max-w-[760px] text-[19px] leading-8 text-[#5d6470] sm:text-[21px]">Simulation-based testing, evaluation and security that shows what your agent did, why it failed and whether it is ready to ship.</p>
             <div className="mt-9 flex flex-wrap justify-center gap-3"><Link to="/contact" className="inline-flex h-12 items-center gap-2 rounded-md bg-[#e87512] px-6 text-sm font-semibold text-white transition hover:bg-[#d96900]">Book a demo <ArrowRight className="h-4 w-4" /></Link><Link to="/ai-agent-testing" className="inline-flex h-12 items-center gap-2 rounded-md border border-[#d8dce3] bg-white px-6 text-sm font-semibold text-[#17233f] transition hover:border-[#17233f]">Explore agent testing <ArrowRight className="h-4 w-4" /></Link></div>
           </div>
-          <div className="mx-auto mt-16 max-w-[1040px] overflow-hidden rounded-xl border border-[#dedfe3] bg-[#fbfbfb] shadow-[0_25px_70px_-45px_rgba(23,35,63,.35)]">
-            <div className="flex items-center gap-2 border-b border-[#e7e7e7] bg-white px-5 py-3"><span className="h-2.5 w-2.5 rounded-full bg-[#d1d5db]" /><span className="h-2.5 w-2.5 rounded-full bg-[#d1d5db]" /><span className="h-2.5 w-2.5 rounded-full bg-[#d1d5db]" /><span className="ml-3 font-mono text-[10px] uppercase tracking-[.16em] text-[#9ca3af]">Shyena · agent assurance workspace</span></div>
-            <div className="grid gap-0 md:grid-cols-[1fr_1.25fr]">
-              <div className="border-b border-[#e8e8e8] bg-white p-6 text-left md:border-b-0 md:border-r sm:p-8"><div className="font-mono text-[10px] uppercase tracking-[.18em] text-[#e87512]">Simulation</div><div className="mt-4 text-xl font-bold text-[#17233f]">Change customer address</div><div className="mt-5 space-y-2">{["Customer asks for address change", "Agent identifies account", "Identity verification", "Update address", "Confirmation"].map((step, i) => <div key={step} className="flex items-center gap-3 rounded-md border border-[#ececec] bg-[#fafafa] px-3 py-2.5 text-sm text-[#4b5563]"><span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#fff1e6] text-[10px] font-bold text-[#e87512]">{i + 1}</span>{step}</div>)}</div></div>
-              <div className="bg-[#fbfbfb] p-6 text-left sm:p-8"><div className="flex items-center justify-between"><div><div className="font-mono text-[10px] uppercase tracking-[.18em] text-[#9ca3af]">Evaluation</div><div className="mt-2 text-lg font-bold text-[#17233f]">Execution evidence</div></div><span className="rounded-full bg-[#fff3e8] px-3 py-1 text-[11px] font-bold text-[#d96900]">REVIEW</span></div><div className="mt-6 grid gap-2 sm:grid-cols-2">{[["Journey", "17 / 17", "PASS"], ["Business rules", "14 / 15", "FINDING"], ["Semantic quality", "0.91", "SCORED"], ["Tool execution", "Complete", "PASS"], ["Security", "No critical", "PASS"], ["Trace evidence", "Linked", "VERIFIED"]].map(([label, value, state]) => <div key={label} className="rounded-md border border-[#e5e5e5] bg-white p-3.5"><div className="text-xs font-semibold text-[#6b7280]">{label}</div><div className="mt-1 text-lg font-bold text-[#17233f]">{value}</div><div className="mt-1 font-mono text-[9px] uppercase tracking-[.12em] text-[#9ca3af]">{state}</div></div>)}</div><div className="mt-5 flex items-center gap-2 border-t border-[#e5e5e5] pt-5 text-xs text-[#667085]"><ShieldCheck className="h-4 w-4 text-[#e87512]" /> Every finding remains linked to execution evidence.</div></div>
+          <div className="mx-auto mt-16 max-w-[1100px]">
+            <div className="grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:items-end">
+              <div className="text-left">
+                <div className="font-mono text-[10px] font-semibold uppercase tracking-[.18em] text-[#e87512]">See it evaluate your own agent</div>
+                <h2 className="mt-4 font-[Sora] text-[clamp(2rem,4vw,3.6rem)] font-extrabold leading-[1.02] tracking-[-.045em] text-[#17233f]">From business journey<br />to release decision.</h2>
+                <p className="mt-5 max-w-xl text-base leading-7 text-[#626976] sm:text-lg">Bring one real business scenario. Shyena executes the agent, evaluates its decisions and actions, and preserves the evidence behind every finding.</p>
+                <div className="mt-7 grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
+                  {[["01", "Simulate", "Run the real customer journey."], ["02", "Evaluate", "Check rules, responses, routing and tools."], ["03", "Decide", "See what needs review before release."]].map(([number, title, text]) => (
+                    <div key={number} className="flex gap-3 rounded-lg border border-[#e5e7eb] bg-white p-3.5">
+                      <span className="font-mono text-[10px] font-semibold text-[#e87512]">{number}</span>
+                      <div><div className="text-sm font-bold text-[#17233f]">{title}</div><div className="mt-0.5 text-xs leading-5 text-[#69707d]">{text}</div></div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="overflow-hidden rounded-xl border border-[#dedfe3] bg-[#fbfbfb] shadow-[0_25px_70px_-45px_rgba(23,35,63,.35)]">
+                <div className="flex items-center gap-2 border-b border-[#e7e7e7] bg-white px-5 py-3">
+                  <span className="h-2.5 w-2.5 rounded-full bg-[#d1d5db]" /><span className="h-2.5 w-2.5 rounded-full bg-[#d1d5db]" /><span className="h-2.5 w-2.5 rounded-full bg-[#d1d5db]" />
+                  <span className="ml-3 font-mono text-[10px] uppercase tracking-[.16em] text-[#9ca3af]">Shyena · agent assurance workspace</span>
+                </div>
+                <div className="grid gap-0 md:grid-cols-[0.9fr_1.25fr]">
+                  <div className="border-b border-[#e8e8e8] bg-white p-5 text-left md:border-b-0 md:border-r sm:p-7">
+                    <div className="font-mono text-[10px] uppercase tracking-[.18em] text-[#e87512]">01 · Business journey</div>
+                    <div className="mt-3 text-lg font-bold text-[#17233f]">Change customer address</div>
+                    <p className="mt-2 text-xs leading-5 text-[#69707d]">A real customer goal is executed end-to-end.</p>
+                    <div className="mt-5 space-y-2">
+                      {["Customer asks for address change", "Agent identifies account", "Identity verification", "Update address", "Confirmation"].map((step, i) => (
+                        <div key={step} className="flex items-center gap-3 rounded-md border border-[#ececec] bg-[#fafafa] px-3 py-2.5 text-sm text-[#4b5563]">
+                          <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#fff1e6] text-[10px] font-bold text-[#e87512]">{i + 1}</span>{step}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="bg-[#fbfbfb] p-5 text-left sm:p-7">
+                    <div className="flex items-start justify-between gap-4">
+                      <div><div className="font-mono text-[10px] uppercase tracking-[.18em] text-[#9ca3af]">02 · Evaluation evidence</div><div className="mt-2 text-lg font-bold text-[#17233f]">What happened is measurable.</div></div>
+                      <span className="shrink-0 rounded-full bg-[#fff3e8] px-3 py-1 text-[10px] font-bold text-[#d96900]">REVIEW REQUIRED</span>
+                    </div>
+                    <div className="mt-5 grid gap-2 sm:grid-cols-2">
+                      {[
+                        ["Journey completion", "17 / 17", "ALL STEPS PASSED"],
+                        ["Business rules", "14 / 15", "1 FINDING"],
+                        ["Response quality", "0.91", "SEMANTIC SCORE"],
+                        ["Tool execution", "Complete", "ACTIONS VERIFIED"],
+                        ["Security", "No critical", "NO CRITICAL FINDINGS"],
+                        ["Evidence", "Trace linked", "AUDITABLE"],
+                      ].map(([label, value, state]) => (
+                        <div key={label} className="rounded-md border border-[#e5e5e5] bg-white p-3.5">
+                          <div className="text-[11px] font-semibold text-[#6b7280]">{label}</div>
+                          <div className="mt-1 text-lg font-bold text-[#17233f]">{value}</div>
+                          <div className="mt-1 font-mono text-[8px] uppercase tracking-[.12em] text-[#9ca3af]">{state}</div>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="mt-5 rounded-lg border border-[#f1d6bf] bg-[#fff8f2] p-4">
+                      <div className="font-mono text-[9px] font-semibold uppercase tracking-[.16em] text-[#a34c00]">03 · Decision signal</div>
+                      <div className="mt-1 text-base font-bold text-[#17233f]">Review required before release</div>
+                      <p className="mt-1 text-xs leading-5 text-[#5f6672]">The journey completed successfully, but 1 business-rule finding requires review.</p>
+                    </div>
+                    <div className="mt-4 flex items-center gap-2 border-t border-[#e5e5e5] pt-4 text-xs text-[#667085]">
+                      <ShieldCheck className="h-4 w-4 text-[#e87512]" /> Every finding remains linked to execution evidence.
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
