@@ -17,6 +17,12 @@ Understand → Test → Evaluate → Secure → Prove.
 
 Every release signal should be traceable to the underlying execution, conversation, finding, affected component and evidence.
 
+## Autonomous quality engineering
+
+- [Autonomous Testing](https://www.shyena.eu/autonomous-testing): goal-driven application exploration, test engineering, execution, failure investigation and release evidence.
+- [Customers](https://www.shyena.eu/customers): enterprise customer and assurance context.
+- [Security](https://www.shyena.eu/security): AI security assurance, trust boundaries, credentials, evidence and release governance.
+
 ## Documentation
 
 - [Documentation](https://www.shyena.eu/docs)
@@ -26,9 +32,10 @@ Every release signal should be traceable to the underlying execution, conversati
 - [Reporting & Release Evidence](https://www.shyena.eu/docs/reporting)
 - [Troubleshooting](https://www.shyena.eu/docs/troubleshooting)
 
-## Research
+## Research and resources
 
-- [Insights](https://www.shyena.eu/blog)
+- [Resources](https://www.shyena.eu/resources): guides, case studies, webinars and learning resources.
+- [Insights](https://www.shyena.eu/blog): engineering research and field notes.
 - [AI Agent Testing](https://www.shyena.eu/blog/ai-agent-testing-is-a-systems-problem)
 - [Conversational AI Testing](https://www.shyena.eu/blog/why-conversational-ai-needs-a-different-testing-model)
 - [Execution Integrity](https://www.shyena.eu/blog/the-problem-with-green-checkmarks-on-broken-conversations)
@@ -40,4 +47,5 @@ Every release signal should be traceable to the underlying execution, conversati
 
 - [Pricing](https://www.shyena.eu/pricing)
 - [Professional Services](https://www.shyena.eu/services)
+- [About](https://www.shyena.eu/about)
 - [Contact](https://www.shyena.eu/contact)
