@@ -1,11 +1,30 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ExecutivePage } from "@/components/site/executive-page";
 
+const SITE_URL = "https://www.shyena.eu";
+const CANONICAL = `${SITE_URL}/vera`;
+const TITLE = "VERA — AI Agent Testing & Evaluation | Shyena";
+const DESCRIPTION = "VERA tests real AI agent journeys, evaluates behaviour and outcomes, and turns execution evidence into release-ready decisions.";
+
 export const Route = createFileRoute("/vera")({
-  head: () => ({ meta: [
-    { title: "VERA — AI Testing & Evaluation | Shyena" },
-    { name: "description", content: "VERA tests real AI agent journeys, evaluates behaviour and outcomes, and turns execution evidence into release decisions." },
-  ]}),
+  head: () => ({
+    meta: [
+      { title: TITLE },
+      { name: "description", content: DESCRIPTION },
+      { name: "robots", content: "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" },
+      { property: "og:title", content: TITLE },
+      { property: "og:description", content: DESCRIPTION },
+      { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "Shyena" },
+      { property: "og:url", content: CANONICAL },
+      { property: "og:image", content: `${SITE_URL}/shyena-logo-lockup.svg?v=20260917` },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: TITLE },
+      { name: "twitter:description", content: DESCRIPTION },
+      { name: "twitter:image", content: `${SITE_URL}/shyena-logo-lockup.svg?v=20260917` },
+    ],
+    links: [{ rel: "canonical", href: CANONICAL }],
+  }),
   component: VeraPage,
 });
 
