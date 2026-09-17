@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Check, ChevronRight, ShieldCheck, Sparkles } from "lucide-react";
+import { ArrowRight, Check, ChevronRight, ShieldCheck } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -31,16 +31,42 @@ const evaluation = [
 const integrations = ["Cognigy", "Agentforce", "LangGraph", "LangChain", "CrewAI", "RAG", "AWS Bedrock", "Azure OpenAI", "Playwright", "OpenTelemetry", "GitHub Actions", "GitLab CI"];
 
 const customers = [
-  ["BMW", "https://cdn.simpleicons.org/bmw/1f1f1f", "BMW"],
-  ["Walmart", "https://cdn.simpleicons.org/walmart/0071ce", "W"],
-  ["Optum", "https://cdn.simpleicons.org/optum/002677", "optum"],
-  ["adidas", "https://cdn.simpleicons.org/adidas/111111", "adidas"],
-  ["Philips", "https://cdn.simpleicons.org/philips/0066b3", "PHILIPS"],
-  ["CGI", "https://cdn.simpleicons.org/cgi/151515", "CGI"],
-  ["TCS", "https://cdn.simpleicons.org/tcs/0055b8", "TCS"],
-  ["Crossover", "https://cdn.simpleicons.org/crossover/111111", "CROSSOVER"],
-  ["Andela", "https://cdn.simpleicons.org/andela/173b3f", "andela"],
+  ["BMW", "https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/bmw.svg"],
+  ["Walmart", "https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/walmart.svg"],
+  ["Optum", "https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/optum.svg"],
+  ["adidas", "https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/adidas.svg"],
+  ["Philips", "https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/philips.svg"],
+  ["CGI", "https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/cgi.svg"],
+  ["TCS", "https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/tcs.svg"],
+  ["Crossover", "https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/crossover.svg"],
+  ["Andela", "https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/andela.svg"],
 ] as const;
+
+const seoPhase2 = [
+  ["01", "Content expansion", "Publish in-depth guides, pillar pages, long-form resources and use cases for high-intent AI testing queries."],
+  ["02", "Technical SEO", "Strengthen internal linking, schema, Core Web Vitals, indexability, canonical structure and crawl paths."],
+  ["03", "Comparison & alternative pages", "Create useful Shyena-vs alternatives, category comparisons and decision-support content without keyword stuffing."],
+  ["04", "Documentation SEO", "Make product documentation discoverable for long-tail searches around agent testing, evaluation and release assurance."],
+  ["05", "Authority & backlinks", "Build credible industry mentions, partner references, expert content and digital PR around AI quality engineering."],
+  ["06", "Measure & iterate", "Track rankings, impressions, CTR, conversions and emerging search queries in Search Console and analytics."],
+] as const;
+
+function LogoCard({ name, logo }: { name: string; logo: string }) {
+  return (
+    <div className="group flex min-w-0 flex-col items-center justify-between rounded-xl border border-[#e4e6ea] bg-white px-4 py-6 transition duration-300 hover:-translate-y-0.5 hover:border-[#d5d9e0] hover:shadow-[0_15px_35px_-25px_rgba(23,35,63,.45)]">
+      <div className="flex h-16 w-full items-center justify-center overflow-hidden">
+        <img
+          src={logo}
+          alt={`${name} logo`}
+          loading="lazy"
+          className="block max-h-12 w-auto max-w-[118px] object-contain opacity-85 transition duration-300 group-hover:opacity-100"
+          onError={(e) => { e.currentTarget.style.display = "none"; }}
+        />
+      </div>
+      <div className="mt-4 flex min-h-[24px] w-full items-center justify-center text-center text-[14px] font-semibold leading-5 text-[#17233f]">{name}</div>
+    </div>
+  );
+}
 
 function HomePage() {
   return (
@@ -73,9 +99,11 @@ function HomePage() {
 
       <section className="border-y border-[#e8e8e8] bg-[#fafafa]"><div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24"><div className="grid gap-12 lg:grid-cols-[.8fr_1.2fr] lg:items-start"><div><div className="text-sm font-semibold text-[#e87512]">Autonomous testing</div><h2 className="mt-4 font-[Sora] text-[clamp(2.5rem,5vw,4.3rem)] font-extrabold leading-[.98] tracking-[-.055em] text-[#17233f]">Let your AI test your AI.</h2><p className="mt-6 text-lg leading-8 text-[#626976]">Start with a business goal. Shyena turns it into executable test intent, runs the journey, evaluates the trace and preserves the evidence.</p></div><div className="grid gap-3">{[["01","Goal","Describe the outcome in plain language."],["02","Plan","Generate realistic scenarios and assertions."],["03","Run","Execute conversations and agent actions."],["04","Judge","Evaluate behaviour and execution integrity."],["05","Prove","Create release evidence and a decision."]].map(([n,t,d])=><div key={n} className="flex gap-5 rounded-lg border border-[#e1e3e7] bg-white p-5"><span className="font-mono text-[10px] font-semibold text-[#e87512]">{n}</span><div><div className="font-semibold text-[#17233f]">{t}</div><div className="mt-1 text-sm text-[#69707d]">{d}</div></div><Check className="ml-auto h-4 w-4 shrink-0 text-[#c5c9d0]" /></div>)}</div></div></div></section>
 
-      <section className="border-y border-[#e8e8e8] bg-white"><div className="mx-auto max-w-[1280px] px-5 py-16 sm:px-8 lg:px-10 lg:py-20"><div className="text-center"><div className="text-sm font-semibold text-[#e87512]">Customers</div><h2 className="mt-3 font-[Sora] text-[clamp(2rem,4vw,3.4rem)] font-extrabold tracking-[-.045em] text-[#17233f]">Trusted by teams at leading organizations.</h2><p className="mx-auto mt-4 max-w-2xl text-sm leading-6 text-[#69707d]">Quality engineering and AI assurance across enterprise technology, retail, healthcare, automotive and professional services.</p></div><div className="mt-10 grid grid-cols-2 overflow-hidden rounded-2xl border border-[#e4e6ea] bg-white sm:grid-cols-3 lg:grid-cols-5">{customers.map(([name,logo,fallback])=><div key={name} className="group flex min-h-[150px] flex-col items-center justify-center border-b border-r border-[#e8eaed] bg-white px-5 py-7 transition duration-300 hover:bg-[#fafafa] hover:shadow-[inset_0_-2px_0_#e87512]"><div className="relative flex h-12 w-full max-w-[160px] items-center justify-center"><span aria-hidden="true" className="absolute inset-0 flex items-center justify-center text-xl font-black tracking-[-.04em] text-[#17233f] transition duration-300 group-hover:text-[#e87512]">{fallback}</span><img src={logo} alt="" loading="lazy" onError={(event)=>{event.currentTarget.style.display="none";}} className="relative z-10 max-h-11 w-auto max-w-[150px] object-contain opacity-80 grayscale transition duration-300 group-hover:opacity-100 group-hover:grayscale-0" /></div><span className="mt-5 text-xs font-semibold uppercase tracking-[.16em] text-[#7a808b] transition group-hover:text-[#17233f]">{name}</span></div>)}</div><p className="mt-5 text-center text-[11px] leading-5 text-[#9aa0aa]">Customer names and logos are shown for identification and should only be used where Shyena has authorization to reference the relationship.</p></div></section>
+      <section className="border-y border-[#e8e8e8] bg-white"><div className="mx-auto max-w-[1280px] px-5 py-16 sm:px-8 lg:px-10 lg:py-20"><div className="text-center"><div className="text-sm font-semibold text-[#e87512]">Customers</div><h2 className="mt-3 font-[Sora] text-[clamp(2rem,4vw,3.4rem)] font-extrabold tracking-[-.045em] text-[#17233f]">Trusted by industry leaders.</h2><p className="mx-auto mt-4 max-w-2xl text-sm leading-6 text-[#69707d]">Enterprise teams use Shyena to test, evaluate, secure and prove their AI systems.</p></div><div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-9">{customers.map(([name,logo])=><LogoCard key={name} name={name} logo={logo} />)}</div><p className="mt-6 text-center text-[11px] leading-5 text-[#7a8290]">Logos are used for identification purposes only and remain the property of their respective owners.</p></div></section>
 
-      <section className="bg-white"><div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24"><div className="flex flex-col justify-between gap-8 md:flex-row md:items-end"><div><div className="text-sm font-semibold text-[#e87512]">Integrations</div><h2 className="mt-4 font-[Sora] text-[clamp(2.4rem,4.5vw,4rem)] font-extrabold leading-[.98] tracking-[-.05em] text-[#17233f]">Works with your existing stack.</h2></div><Link to="/docs" className="text-sm font-semibold text-[#17233f]">View documentation <ArrowRight className="ml-1 inline h-4 w-4" /></Link></div><div className="mt-10 flex flex-wrap gap-2">{integrations.map((item)=><span key={item} className="rounded-md border border-[#e0e2e6] bg-[#fafafa] px-4 py-2.5 text-sm font-medium text-[#5f6672]">{item}</span>)}</div></div></section>
+      <section className="border-y border-[#e8e8e8] bg-[#fafafa]"><div className="mx-auto max-w-[1280px] px-5 py-16 sm:px-8 lg:px-10 lg:py-20"><div className="grid gap-10 lg:grid-cols-[1fr_420px] lg:items-start"><div><div className="text-sm font-semibold uppercase tracking-[.16em] text-[#e87512]">Phase 2 · SEO growth</div><h2 className="mt-4 font-[Sora] text-[clamp(2.3rem,4.5vw,4.1rem)] font-extrabold leading-[.98] tracking-[-.05em] text-[#17233f]">Build authority and expand visibility.</h2><p className="mt-5 max-w-3xl text-lg leading-8 text-[#626976]">The product foundation is established. Phase 2 focuses on scaling organic discovery with high-value content, stronger technical signals, comparison intent, documentation and credible authority.</p></div><div className="rounded-2xl border border-[#f3d7c1] bg-[#fff5ed] p-7"><div className="text-sm font-semibold text-[#e87512]">Primary SEO goal</div><div className="mt-3 text-xl font-bold leading-7 text-[#17233f]">Become a trusted resource for AI agent testing, evaluation and release assurance.</div><div className="mt-4 text-sm leading-6 text-[#69707d]">Content · Technical SEO · Authority · Product-led discovery · Measurement</div></div></div><div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">{seoPhase2.map(([n,title,text])=><article key={n} className="rounded-xl border border-[#e1e3e7] bg-white p-6 transition hover:-translate-y-0.5 hover:border-[#d4d8df] hover:shadow-[0_18px_40px_-30px_rgba(23,35,63,.45)]"><div className="flex items-center gap-3"><span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#fff1e6] font-mono text-[10px] font-bold text-[#e87512]">{n}</span><h3 className="text-[15px] font-bold text-[#17233f]">{title}</h3></div><p className="mt-4 text-sm leading-6 text-[#69707d]">{text}</p></article>)}</div><div className="mt-8 flex flex-wrap gap-3"><Link to="/resources" className="inline-flex h-11 items-center gap-2 rounded-md bg-[#e87512] px-5 text-sm font-semibold text-white transition hover:bg-[#d96900]">Explore our resources <ArrowRight className="h-4 w-4" /></Link><Link to="/docs" className="inline-flex h-11 items-center gap-2 rounded-md border border-[#d8dce3] bg-white px-5 text-sm font-semibold text-[#17233f] transition hover:border-[#17233f]">See documentation <ArrowRight className="h-4 w-4" /></Link></div></div></section>
+
+      <section className="border-y border-[#e8e8e8] bg-white"><div className="mx-auto max-w-[1280px] px-5 py-16 sm:px-8 lg:px-10 lg:py-20"><div className="flex flex-col justify-between gap-8 md:flex-row md:items-end"><div><div className="text-sm font-semibold text-[#e87512]">Integrations</div><h2 className="mt-4 font-[Sora] text-[clamp(2.4rem,4.5vw,4rem)] font-extrabold leading-[.98] tracking-[-.05em] text-[#17233f]">Works with your existing stack.</h2></div><Link to="/docs" className="text-sm font-semibold text-[#17233f]">View documentation <ArrowRight className="ml-1 inline h-4 w-4" /></Link></div><div className="mt-10 flex flex-wrap gap-2">{integrations.map((item)=><span key={item} className="rounded-md border border-[#e0e2e6] bg-[#fafafa] px-4 py-2.5 text-sm font-medium text-[#5f6672]">{item}</span>)}</div></div></section>
 
       <section className="bg-[#17233f] text-white"><div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24"><div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end"><div><div className="text-sm font-semibold text-[#f59a4b]">Production readiness</div><h2 className="mt-4 max-w-4xl font-[Sora] text-[clamp(2.6rem,5vw,5rem)] font-extrabold leading-[.98] tracking-[-.055em]">Know what happened.<br />Know whether to ship.</h2><p className="mt-6 max-w-2xl text-lg leading-8 text-white/65">Bring one critical AI journey. Shyena shows how it can be tested, evaluated, secured and connected to release evidence.</p></div><Link to="/contact" className="inline-flex h-12 items-center gap-2 rounded-md bg-[#e87512] px-6 text-sm font-semibold text-white transition hover:bg-[#f18a32]">Book a demo <ArrowRight className="h-4 w-4" /></Link></div></div></section>
     </main>
