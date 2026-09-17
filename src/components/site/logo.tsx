@@ -2,37 +2,38 @@ type LogoProps = {
   size?: "header" | "footer";
 };
 
-// Use the real brand asset directly. The previous lockup SVG wrapped a nested
-// <image> and Logo itself returned a Link, which was then wrapped by another
-// Link in the global header. That produced invalid nested anchors and could
-// leave the top-left logo invisible after hydration.
-const LOCKUP_SRC = "/shyena-logo-exact.webp?v=20260917";
-const MARK_SRC = "/shyena-mark-vertical.svg?v=20260917";
-
+// Keep the primary brand lockup inline so the global header never depends on
+// a missing/broken raster asset. This renders directly in the browser.
 export function Logo({ size = "header" }: LogoProps) {
-  const dimensions = size === "footer"
-    ? "h-[54px] w-[168px] sm:h-[60px] sm:w-[188px]"
-    : "h-[50px] w-[158px] sm:h-[54px] sm:w-[170px] lg:h-[58px] lg:w-[178px]";
+  const mark = size === "footer" ? "h-9 w-9" : "h-8 w-8 sm:h-9 sm:w-9";
+  const word = size === "footer" ? "text-[29px]" : "text-[25px] sm:text-[28px]";
 
   return (
     <span
       aria-label="Shyena — AI Assurance for What's Next"
       title="Shyena — AI Assurance for What's Next"
-      className="group inline-flex shrink-0 select-none leading-none"
+      className="inline-flex shrink-0 items-center gap-2.5 select-none leading-none"
     >
-      <img
-        src={LOCKUP_SRC}
-        alt="Shyena — AI Assurance for What's Next"
-        width={1440}
-        height={580}
-        decoding="async"
-        fetchPriority="high"
-        className={`block object-contain transition-transform duration-200 group-hover:scale-[1.01] ${dimensions}`}
-      />
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 40 40"
+        className={`${mark} shrink-0`}
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path d="M20 2L25.5 14.5L38 20L25.5 25.5L20 38L14.5 25.5L2 20L14.5 14.5L20 2Z" fill="#17233F" />
+        <path d="M20 8L22.8 17.2L32 20L22.8 22.8L20 32L17.2 22.8L8 20L17.2 17.2L20 8Z" fill="#E87512" />
+      </svg>
+      <span className={`font-[Sora] ${word} font-extrabold tracking-[-0.055em] text-[#17233F]`}>Shyena</span>
     </span>
   );
 }
 
 export function BrandMark({ className = "h-10 w-7" }: { className?: string }) {
-  return <img src={MARK_SRC} alt="Shyena" width={64} height={96} decoding="async" className={`block object-contain ${className}`} />;
+  return (
+    <svg aria-label="Shyena" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className={className} role="img">
+      <path d="M20 2L25.5 14.5L38 20L25.5 25.5L20 38L14.5 25.5L2 20L14.5 14.5L20 2Z" fill="#17233F" />
+      <path d="M20 8L22.8 17.2L32 20L22.8 22.8L20 32L17.2 22.8L8 20L17.2 17.2L20 8Z" fill="#E87512" />
+    </svg>
+  );
 }
