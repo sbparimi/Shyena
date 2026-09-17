@@ -1,33 +1,43 @@
 # Shyena
 
-> Shyena is an AI agent assurance platform for testing, evaluating and security-assessing conversational, voice and agentic AI before production. Its product architecture is Nexus (system-map intelligence, powered by CIS), Vera (quality and evaluation, powered by ECAAP), and Chakra (adversarial/security assurance).
+> Autonomous quality engineering for AI systems and enterprise software.
 
-Shyena runs agentic test journeys against supported live agent surfaces, evaluates behavior with deterministic assertions and AI evaluation, preserves runtime evidence, and turns the evidence chain into a release verdict. Product names shown publicly are Nexus, Vera and Chakra; CIS and ECAAP are underlying technology layers.
+Shyena helps engineering teams understand AI systems, test realistic agent behaviour, secure trust boundaries and produce evidence-backed release decisions.
 
 ## Products
 
-- [Nexus](https://shyena.eu/nexus): understand the agent through structural system-map intelligence, flow discovery, conditions, orchestration and high-coverage test specification generation.
-- [Vera](https://shyena.eu/vera): evaluate conversational and voice AI using agentic execution, LLM-judged quality, deterministic checks, orchestration evaluation and release gating.
-- [Chakra](https://shyena.eu/chakra): adversarial and security assurance for agentic AI.
+- [Nexus](https://www.shyena.eu/nexus): understand agent logic, orchestration, dependencies and test coverage.
+- [Vera](https://www.shyena.eu/vera): test and evaluate conversational and agentic AI journeys.
+- [Chakra](https://www.shyena.eu/chakra): secure agentic AI systems with adversarial testing and evidence.
+- [CIS](https://www.shyena.eu/cis): deterministic system intelligence and test-generation foundations.
 
 ## Platform assurance lifecycle
 
-Test → Evaluate → Attack → Prove → Verdict.
+Understand → Test → Evaluate → Secure → Prove.
 
 Every release signal should be traceable to the underlying execution, conversation, finding, affected component and evidence.
 
-## Pricing
+## Documentation
 
-- [Pricing](https://shyena.eu/pricing): SaaS platform subscription with included assurance/security consumption, contracted overage rates, and separately priced professional services such as pilots, training, custom development and bespoke framework adapters.
+- [Documentation](https://www.shyena.eu/docs)
+- [Getting Started](https://www.shyena.eu/docs/getting-started)
+- [Writing Test Specs](https://www.shyena.eu/docs/writing-test-specs)
+- [Evaluation Model](https://www.shyena.eu/docs/evaluation-model)
+- [Reporting & Release Evidence](https://www.shyena.eu/docs/reporting)
+- [Troubleshooting](https://www.shyena.eu/docs/troubleshooting)
 
-## Company
+## Research
 
-- [Services](https://shyena.eu/services)
-- [About](https://shyena.eu/about)
-- [Contact](https://shyena.eu/contact)
+- [Insights](https://www.shyena.eu/blog)
+- [AI Agent Testing](https://www.shyena.eu/blog/ai-agent-testing-is-a-systems-problem)
+- [Conversational AI Testing](https://www.shyena.eu/blog/why-conversational-ai-needs-a-different-testing-model)
+- [Execution Integrity](https://www.shyena.eu/blog/the-problem-with-green-checkmarks-on-broken-conversations)
+- [Cognigy Agent Testing](https://www.shyena.eu/blog/how-to-test-a-cognigy-agent)
+- [Cognigy Agent Security Testing](https://www.shyena.eu/blog/cognigy-agent-security-testing-with-ziran)
+- [LLM-as-Judge](https://www.shyena.eu/blog/what-llm-as-judge-actually-means-in-practice)
 
-## Resources
+## Commercial
 
-- [Documentation](https://shyena.eu/docs)
-- [Evaluation Model](https://shyena.eu/docs/evaluation-model)
-- [Blog](https://shyena.eu/blog)
+- [Pricing](https://www.shyena.eu/pricing)
+- [Professional Services](https://www.shyena.eu/services)
+- [Contact](https://www.shyena.eu/contact)
