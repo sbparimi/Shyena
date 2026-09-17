@@ -1,10 +1,23 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ExecutivePage } from "@/components/site/executive-page";
 
+const SITE = "https://www.shyena.eu";
+
 export const Route = createFileRoute("/security")({
   head: () => ({ meta: [
-    { title: "AI Security Testing | Shyena" },
-    { name: "description", content: "Security testing for AI agents and enterprise applications, with adversarial scenarios, control validation and evidence-backed risk." },
+    { title: "AI Security Testing & AI Agent Security | Shyena" },
+    { name: "description", content: "Test AI agents and enterprise systems for prompt injection, unsafe behaviour, trust-boundary failures and control gaps with evidence-backed security assurance." },
+    { name: "robots", content: "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" },
+    { property: "og:title", content: "AI Security Testing & AI Agent Security | Shyena" },
+    { property: "og:description", content: "Adversarial AI security testing, control validation and reproducible evidence for production release decisions." },
+    { property: "og:type", content: "website" },
+    { property: "og:site_name", content: "Shyena" },
+    { property: "og:url", content: `${SITE}/security` },
+    { property: "og:image", content: `${SITE}/shyena-logo-lockup.svg?v=20260917` },
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:title", content: "AI Security Testing & AI Agent Security | Shyena" },
+    { name: "twitter:description", content: "Adversarial AI security testing and evidence-backed release assurance." },
+    { name: "twitter:image", content: `${SITE}/shyena-logo-lockup.svg?v=20260917` },
   ]}),
   component: SecurityPage,
 });
