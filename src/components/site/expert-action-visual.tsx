@@ -5,17 +5,9 @@ type ExpertVisual = {
   name: string;
   role: string;
   skills: string[];
+  gender: "woman" | "man";
   compact?: boolean;
 };
-
-const WOMAN_FIRST_NAMES = new Set([
-  "aisha", "anna", "amira", "chloe", "elena", "fatima", "ines",
-  "kavya", "lisa", "maria", "maya", "noor", "priya", "sara", "sofia"
-]);
-
-function isWoman(name: string) {
-  return WOMAN_FIRST_NAMES.has(name.trim().split(/\s+/)[0].toLowerCase());
-}
 
 function initials(name: string) {
   return name.split(" ").map((part) => part[0]).join("").slice(0, 2);
@@ -34,10 +26,10 @@ function actionFor(product: string) {
   return { verb: "MAPPING", label: "System flow", signal: "LINKED", accent: "#e7bf67" };
 }
 
-export function ExpertActionVisual({ name, role, skills, compact = false }: ExpertVisual) {
+export function ExpertActionVisual({ name, role, skills, gender, compact = false }: ExpertVisual) {
   const product = pickProduct(skills);
   const action = actionFor(product);
-  const woman = isWoman(name);
+  const woman = gender === "woman";
   const pointerX = useMotionValue(0);
   const pointerY = useMotionValue(0);
   const rotateY = useSpring(pointerX, { stiffness: 110, damping: 20, mass: 0.7 });
@@ -66,15 +58,15 @@ export function ExpertActionVisual({ name, role, skills, compact = false }: Expe
       transition={{ type: "spring", stiffness: 180, damping: 22 }}
       aria-label={`${name} demonstrating ${product} inside Shyena`}
     >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_35%,rgba(101,230,212,0.16),transparent_24%),radial-gradient(circle_at_22%_90%,rgba(18,62,145,0.34),transparent_45%)]" />
-      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-[linear-gradient(to_top,rgba(0,0,0,.42),transparent)]" />\n      <div className="absolute right-3 top-12 z-30 rounded-lg border border-white/15 bg-black/35 px-2.5 py-2 text-right backdrop-blur-xl">\n        <div className="text-[7px] font-bold uppercase tracking-[0.16em] text-white/45">AI GENERATED EXPERT</div>\n        <div className="mt-0.5 text-[9px] font-semibold text-white">{woman ? "WOMAN" : "MAN"}</div>\n      </div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_35%,rgba(101,230,212,0.12),transparent_24%),radial-gradient(circle_at_22%_90%,rgba(18,62,145,0.30),transparent_45%)]" />
+      <div className="absolute inset-x-0 bottom-0 h-2/5 bg-[linear-gradient(to_top,rgba(0,0,0,.38),transparent)]" />
 
       <motion.div
         className="absolute left-3 top-3 z-20 rounded-full border border-white/10 bg-black/30 px-2.5 py-1 text-[8px] font-bold tracking-[0.16em] text-white/55 backdrop-blur"
         animate={{ opacity: [0.45, 0.85, 0.45] }}
         transition={{ duration: 2.8, repeat: Infinity }}
       >
-        SHYENA · LIVE DEMO
+        SHYENA
       </motion.div>
 
       <div className="absolute left-[4%] top-[20%] z-10 w-[49%]">
@@ -117,8 +109,8 @@ export function ExpertActionVisual({ name, role, skills, compact = false }: Expe
         </div>
       </motion.div>
 
-      <div className="absolute bottom-3 left-3 rounded-full border border-white/10 bg-black/25 px-2 py-1 text-[8px] font-semibold text-white/45 backdrop-blur">
-        WALK → OPEN → SHOWCASE
+      <div className="absolute bottom-3 left-3 rounded-full border border-white/10 bg-black/20 px-2 py-1 text-[8px] font-semibold text-white/40 backdrop-blur">
+        {product} · LIVE
       </div>
     </motion.div>
   );
@@ -126,8 +118,12 @@ export function ExpertActionVisual({ name, role, skills, compact = false }: Expe
 
 const SYNTHETIC_FEMALE_AVATARS = [
   "https://raw.githubusercontent.com/Prompt-Haus/OpenPeople/main/openpeople/data/curated/P001/assets/studio_portrait.jpg",
+  "https://raw.githubusercontent.com/Prompt-Haus/OpenPeople/main/openpeople/data/curated/P002/assets/studio_portrait.jpg",
   "https://raw.githubusercontent.com/Prompt-Haus/OpenPeople/main/openpeople/data/curated/P003/assets/studio_portrait.jpg",
   "https://raw.githubusercontent.com/Prompt-Haus/OpenPeople/main/openpeople/data/curated/P004/assets/studio_portrait.jpg",
+  "https://raw.githubusercontent.com/Prompt-Haus/OpenPeople/main/openpeople/data/curated/P006/assets/studio_portrait.jpg",
+  "https://raw.githubusercontent.com/Prompt-Haus/OpenPeople/main/openpeople/data/curated/P009/assets/studio_portrait.jpg",
+  "https://raw.githubusercontent.com/Prompt-Haus/OpenPeople/main/openpeople/data/curated/P010/assets/studio_portrait.jpg",
 ];
 
 const SYNTHETIC_MALE_AVATARS = [
@@ -146,24 +142,25 @@ function Portrait({ woman, accent, name }: { woman: boolean; accent: string; nam
   const src = avatarFor(name, woman);
   return (
     <motion.div
-      className="absolute left-1/2 top-[-2%] h-[72%] w-[74%] -translate-x-1/2"
+      className="absolute left-1/2 top-[-1%] h-[78%] w-[76%] -translate-x-1/2"
       initial={{ opacity: 0, y: 18, scale: 0.94 }}
       animate={{ opacity: 1, y: [18, 4, -2, 4, 18], scale: [0.94, 1, 1.04, 1, 0.94], rotateY: [-5, 3, -5] }}
       transition={{ duration: 7.2, times: [0, .22, .45, .72, 1], repeat: Infinity, ease: [0.45, 0.05, 0.2, 0.95] }}
       style={{ transformStyle: "preserve-3d", transformPerspective: 1100 }}
     >
       <div
-        className="absolute inset-0 overflow-hidden rounded-[32%_32%_18%_18%] border border-white/20 bg-[#09111f] shadow-[0_30px_70px_rgba(0,0,0,.62)]"
+        className="absolute inset-0 overflow-hidden rounded-[26px] border border-white/20 bg-[#09111f] shadow-[0_30px_70px_rgba(0,0,0,.62)]"
         style={{ boxShadow: `0 30px 70px rgba(0,0,0,.62), 0 0 45px ${accent}22` }}
       >
         <motion.img
           src={src}
           alt={`Synthetic AI-generated ${woman ? "woman" : "man"} expert portrait for ${name}`}
-          className="h-full w-full object-cover object-[50%_24%]"
+          className="h-full w-full object-cover object-[50%_16%]"
           animate={{ scale: [1.04, 1.08, 1.04], x: [-2, 2, -2] }}
           transition={{ duration: 6.8, repeat: Infinity, ease: "easeInOut" }}
           loading="lazy"
           draggable={false}
+          referrerPolicy="no-referrer"
         />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,8,16,.02)_20%,rgba(4,8,16,.08)_52%,rgba(4,8,16,.86)_100%)]" />
         <motion.div
@@ -173,10 +170,7 @@ function Portrait({ woman, accent, name }: { woman: boolean; accent: string; nam
         />
         <div className="absolute inset-x-[18%] bottom-3 h-1 rounded-full blur-md" style={{ backgroundColor: accent, opacity: .65 }} />
       </div>
-      <div className="absolute inset-x-[18%] top-[8%] h-8 rounded-full bg-white/10 blur-2xl" />
-      <div className="absolute right-[-6%] top-[25%] rounded-full border border-white/15 bg-black/45 px-2 py-1 text-[7px] font-bold tracking-[0.14em] text-white/75 backdrop-blur-xl">
-        {woman ? "AI WOMAN" : "AI MAN"}
-      </div>
+      <div className="absolute inset-x-[20%] top-[7%] h-7 rounded-full bg-white/8 blur-2xl" />
     </motion.div>
   );
 }
