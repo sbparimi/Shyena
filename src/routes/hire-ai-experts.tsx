@@ -97,16 +97,16 @@ function HireAIExpertsPage() {
   const discussUrl = (expert: Expert) => `/contact?expert=${encodeURIComponent(expert.name)}&role=${encodeURIComponent(expert.role)}&location=${encodeURIComponent(`${expert.mode} — ${expert.location}`)}&skills=${encodeURIComponent(expert.skills.join(", "))}`;
 
   return (
-    <main className="min-h-screen bg-[#f4f1ea] text-[#151419]">
-      <section className="relative overflow-hidden border-b border-[#d8d1c3] bg-[#f7f4ec]">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_82%_20%,rgba(101,230,212,0.18),transparent_26%),radial-gradient(circle_at_15%_5%,rgba(231,191,103,0.18),transparent_24%)]" />
+    <main className="min-h-screen bg-[#090909] text-white">
+      <section className="relative overflow-hidden border-b border-white/10 bg-[#090909]">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_82%_18%,rgba(255,212,59,0.16),transparent_24%),radial-gradient(circle_at_12%_8%,rgba(255,255,255,0.06),transparent_24%)]" />
         <div className="relative mx-auto max-w-7xl px-6 pb-14 pt-16 lg:px-8 lg:pb-20 lg:pt-20">
           <div className="max-w-4xl">
-            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#d5c49b] bg-white/75 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.16em] text-[#8a6500]">
+            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#ffd43b]/40 bg-[#ffd43b]/10 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.16em] text-[#ffd43b]">
               <Sparkles className="h-3.5 w-3.5" /> AI testing & quality engineering network
             </div>
-            <h1 className="text-4xl font-semibold tracking-[-0.04em] text-[#0e172b] md:text-6xl">Hire autonomous AI testers who can prove your system works.</h1>
-            <p className="mt-6 max-w-3xl text-lg leading-8 text-[#4b5563]">Deploy specialists who combine browser automation, API testing, LLM evaluation, observability and enterprise application expertise. Remote and hybrid profiles across Europe.</p>
+            <h1 className="text-4xl font-semibold tracking-[-0.045em] text-white md:text-6xl">Hire autonomous AI testers who can prove your system works.</h1>
+            <p className="mt-6 max-w-3xl text-lg leading-8 text-white/65">Deploy specialists who combine browser automation, API testing, LLM evaluation, observability and enterprise application expertise. Remote and hybrid profiles across Europe.</p>
           </div>
           <div className="mt-10 grid gap-3 sm:grid-cols-3">
             <Stat value={`${experts.length}+`} label="specialist profiles" />
@@ -116,26 +116,26 @@ function HireAIExpertsPage() {
         </div>
       </section>
 
-      <section className="sticky top-0 z-20 border-b border-[#d8d1c3] bg-[#f4f1ea]/95 py-4 backdrop-blur">
+      <section className="sticky top-0 z-20 border-b border-white/10 bg-[#090909]/95 py-4 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl flex-col gap-3 px-6 lg:px-8">
           <div className="flex flex-col gap-3 lg:flex-row">
             <label className="relative flex-1">
               <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#7b8190]" />
-              <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search Playwright, DeepEval, Promptfoo, Salesforce, Oracle Fusion…" className="h-12 w-full rounded-xl border border-[#cfc8bb] bg-white pl-11 pr-4 text-sm outline-none transition focus:border-[#123e91] focus:ring-2 focus:ring-[#123e91]/10" />
+              <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search Playwright, DeepEval, Promptfoo, Salesforce, Oracle Fusion…" className="h-12 w-full rounded-xl border border-white/15 bg-[#111111] pl-11 pr-4 text-sm text-white outline-none transition placeholder:text-white/35 focus:border-[#ffd43b] focus:ring-2 focus:ring-[#ffd43b]/10" />
             </label>
-            <select value={location} onChange={(e) => setLocation(e.target.value)} className="h-12 rounded-xl border border-[#cfc8bb] bg-white px-4 text-sm outline-none focus:border-[#123e91]">
+            <select value={location} onChange={(e) => setLocation(e.target.value)} className="h-12 rounded-xl border border-white/15 bg-[#111111] px-4 text-sm text-white outline-none focus:border-[#ffd43b]">
               {allLocations.map((item) => <option key={item}>{item}</option>)}
             </select>
-            <select value={discipline} onChange={(e) => setDiscipline(e.target.value)} className="h-12 rounded-xl border border-[#cfc8bb] bg-white px-4 text-sm outline-none focus:border-[#123e91]">
+            <select value={discipline} onChange={(e) => setDiscipline(e.target.value)} className="h-12 rounded-xl border border-white/15 bg-[#111111] px-4 text-sm text-white outline-none focus:border-[#ffd43b]">
               {allSkills.map((item) => <option key={item}>{item}</option>)}
             </select>
-            <select value={mode} onChange={(e) => setMode(e.target.value)} className="h-12 rounded-xl border border-[#cfc8bb] bg-white px-4 text-sm outline-none focus:border-[#123e91]">
+            <select value={mode} onChange={(e) => setMode(e.target.value)} className="h-12 rounded-xl border border-white/15 bg-[#111111] px-4 text-sm text-white outline-none focus:border-[#ffd43b]">
               <option>All modes</option><option>Remote</option><option>Hybrid</option>
             </select>
           </div>
-          <div className="flex items-center justify-between text-xs text-[#69707d]">
+          <div className="flex items-center justify-between text-xs text-white/45">
             <span className="inline-flex items-center gap-2"><Filter className="h-3.5 w-3.5" /> {filtered.length} profiles match your requirements</span>
-            {(query || location !== "All locations" || discipline !== "All disciplines" || mode !== "All modes") && <button onClick={() => { setQuery(""); setLocation("All locations"); setDiscipline("All disciplines"); setMode("All modes"); }} className="font-semibold text-[#123e91]">Clear filters</button>}
+            {(query || location !== "All locations" || discipline !== "All disciplines" || mode !== "All modes") && <button onClick={() => { setQuery(""); setLocation("All locations"); setDiscipline("All disciplines"); setMode("All modes"); }} className="font-semibold text-[#ffd43b]">Clear filters</button>}
           </div>
         </div>
       </section>
@@ -143,36 +143,36 @@ function HireAIExpertsPage() {
       <section className="mx-auto max-w-7xl px-6 py-12 lg:px-8 lg:py-16">
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {filtered.map((expert) => (
-            <article key={expert.id} className="group flex h-full flex-col rounded-2xl border border-[#d8d1c3] bg-white p-4 shadow-[0_8px_30px_rgba(15,23,42,0.04)] transition duration-200 hover:-translate-y-0.5 hover:border-[#9db0d3] hover:shadow-[0_18px_45px_rgba(15,23,42,0.09)]">
+            <article key={expert.id} className="group flex h-full flex-col rounded-2xl border border-white/10 bg-[#101010] p-4 shadow-[0_12px_40px_rgba(0,0,0,.35)] transition duration-200 hover:-translate-y-0.5 hover:border-[#ffd43b]/40 hover:shadow-[0_22px_55px_rgba(0,0,0,.5)]">
               <div className="relative">
                 <ExpertActionVisual name={expert.name} role={expert.role} skills={expert.skills} gender={expert.gender} compact />
-                <span className="absolute right-3 top-3 inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-[#07101f]/75 px-2.5 py-1 text-[10px] font-bold text-[#65e6d4] backdrop-blur"><CheckCircle2 className="h-3 w-3" /> {expert.status}</span>
+                <span className="absolute right-3 top-3 inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-[#07101f]/75 px-2.5 py-1 text-[10px] font-bold text-[#ffd43b] backdrop-blur"><CheckCircle2 className="h-3 w-3" /> {expert.status}</span>
               </div>
               <div className="mt-5">
-                <h2 className="text-lg font-semibold tracking-tight text-[#0e172b]">{expert.name}</h2>
-                <p className="mt-1 min-h-10 text-sm font-medium leading-5 text-[#123e91]">{expert.role}</p>
+                <h2 className="text-lg font-semibold tracking-tight text-white">{expert.name}</h2>
+                <p className="mt-1 min-h-10 text-sm font-medium leading-5 text-[#ffd43b]">{expert.role}</p>
               </div>
-              <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-xs text-[#69707d]">
+              <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-xs text-white/45">
                 <span className="inline-flex items-center gap-1"><MapPin className="h-3.5 w-3.5" /> {expert.mode} · {expert.location}</span>
                 <span className="inline-flex items-center gap-1"><Clock3 className="h-3.5 w-3.5" /> {expert.experience}</span>
               </div>
-              <p className="mt-5 flex-1 text-sm leading-6 text-[#505866]">{expert.summary}</p>
-              <div className="mt-5 flex flex-wrap gap-1.5">{expert.skills.slice(0, 4).map((skill) => <span key={skill} className="rounded-full border border-[#d8d1c3] bg-[#faf8f3] px-2.5 py-1 text-[11px] font-semibold text-[#404653]">{skill}</span>)}</div>
-              <div className="mt-6 flex gap-2 border-t border-[#ece7dd] pt-5">
-                <button onClick={() => setSelected(expert)} className="flex-1 rounded-lg border border-[#cfc8bb] px-3 py-2.5 text-sm font-semibold text-[#0e172b] transition hover:border-[#123e91] hover:text-[#123e91]">View full profile</button>
-                <a href={discussUrl(expert)} className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg bg-[#123e91] px-3 py-2.5 text-sm font-semibold text-white transition hover:bg-[#0d2f70]">Discuss <ArrowRight className="h-4 w-4" /></a>
+              <p className="mt-5 flex-1 text-sm leading-6 text-white/60">{expert.summary}</p>
+              <div className="mt-5 flex flex-wrap gap-1.5">{expert.skills.slice(0, 4).map((skill) => <span key={skill} className="rounded-full border border-white/10 bg-white/[.04] px-2.5 py-1 text-[11px] font-semibold text-white/65">{skill}</span>)}</div>
+              <div className="mt-6 flex gap-2 border-t border-white/10 pt-5">
+                <button onClick={() => setSelected(expert)} className="flex-1 rounded-lg border border-[#cfc8bb] px-3 py-2.5 text-sm font-semibold text-white transition hover:border-[#123e91] hover:text-[#ffd43b]">View full profile</button>
+                <a href={discussUrl(expert)} className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg bg-[#ffd43b] px-3 py-2.5 text-sm font-semibold text-[#0a0a0a] transition hover:bg-[#ffe16a]">Discuss <ArrowRight className="h-4 w-4" /></a>
               </div>
             </article>
           ))}
         </div>
-        <p className="mt-5 text-center text-[11px] leading-5 text-[#7b8190]">Profile portraits are synthetic imagery from OpenPeople and are used under CC BY 4.0.</p>
-        {filtered.length === 0 && <div className="rounded-2xl border border-dashed border-[#cfc8bb] bg-white p-16 text-center"><Search className="mx-auto h-8 w-8 text-[#8c929e]" /><h2 className="mt-4 text-xl font-semibold text-[#0e172b]">No matching specialist</h2><p className="mt-2 text-sm text-[#69707d]">Try a broader skill, location or delivery mode.</p></div>}
+        <p className="mt-5 text-center text-[11px] leading-5 text-white/35">Profile portraits are synthetic imagery from OpenPeople and are used under CC BY 4.0.</p>
+        {filtered.length === 0 && <div className="rounded-2xl border border-dashed border-white/15 bg-[#101010] p-16 text-center"><Search className="mx-auto h-8 w-8 text-[#8c929e]" /><h2 className="mt-4 text-xl font-semibold text-white">No matching specialist</h2><p className="mt-2 text-sm text-white/45">Try a broader skill, location or delivery mode.</p></div>}
       </section>
 
-      <section className="border-y border-[#d8d1c3] bg-[#0e172b] text-white">
+      <section className="border-y border-white/10 bg-[#111111] text-white">
         <div className="mx-auto flex max-w-7xl flex-col gap-6 px-6 py-12 lg:flex-row lg:items-center lg:justify-between lg:px-8">
-          <div><div className="text-xs font-bold uppercase tracking-[0.18em] text-[#65e6d4]">Need a specific capability?</div><h2 className="mt-2 text-3xl font-semibold tracking-tight">Tell us the system, stack and outcome.</h2><p className="mt-3 max-w-2xl text-sm leading-6 text-white/70">Shyena can match the engagement to the testing surface: browser, API, CRM, ERP, LLM, RAG, agent or security.</p></div>
-          <a href="/contact" className="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg bg-[#e7bf67] px-6 py-3 text-sm font-bold text-[#151419] hover:bg-[#f0ce82]">Request an expert <ArrowRight className="h-4 w-4" /></a>
+          <div><div className="text-xs font-bold uppercase tracking-[0.18em] text-[#ffd43b]">Need a specific capability?</div><h2 className="mt-2 text-3xl font-semibold tracking-tight">Tell us the system, stack and outcome.</h2><p className="mt-3 max-w-2xl text-sm leading-6 text-white/70">Shyena can match the engagement to the testing surface: browser, API, CRM, ERP, LLM, RAG, agent or security.</p></div>
+          <a href="/contact" className="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg bg-[#ffd43b] px-6 py-3 text-sm font-bold text-[#0a0a0a] hover:bg-[#ffe16a]">Request an expert <ArrowRight className="h-4 w-4" /></a>
         </div>
       </section>
 
@@ -182,24 +182,24 @@ function HireAIExpertsPage() {
 }
 
 function Stat({ value, label }: { value: string; label: string }) {
-  return <div className="rounded-xl border border-[#d8d1c3] bg-white/80 px-5 py-4"><div className="text-xl font-semibold text-[#0e172b]">{value}</div><div className="mt-1 text-xs uppercase tracking-[0.14em] text-[#747a86]">{label}</div></div>;
+  return <div className="rounded-xl border border-[#d8d1c3] bg-white/80 px-5 py-4"><div className="text-xl font-semibold text-white">{value}</div><div className="mt-1 text-xs uppercase tracking-[0.14em] text-[#747a86]">{label}</div></div>;
 }
 
 function ProfileModal({ expert, onClose, discussUrl }: { expert: Expert; onClose: () => void; discussUrl: string }) {
   return <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#0e172b]/65 p-4" onMouseDown={(event) => { if (event.target === event.currentTarget) onClose(); }}>
     <div className="max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-2xl border border-[#d8d1c3] bg-[#f7f4ec] shadow-2xl">
-      <div className="flex items-start justify-between border-b border-[#d8d1c3] bg-white p-6"><div className="flex items-center gap-4"><div className="flex h-14 w-14 items-center justify-center rounded-xl bg-[#123e91] font-bold text-white">{expert.name.split(" ").map((part) => part[0]).join("").slice(0, 2)}</div><div><div className="text-xs font-bold uppercase tracking-[0.14em] text-[#a87900]">Specialist profile</div><h2 className="mt-1 text-2xl font-semibold text-[#0e172b]">{expert.name}</h2><p className="mt-1 text-sm font-medium text-[#123e91]">{expert.role}</p></div></div><button onClick={onClose} aria-label="Close profile" className="rounded-lg p-2 text-[#69707d] hover:bg-[#f4f1ea] hover:text-[#0e172b]"><X className="h-5 w-5" /></button></div>
+      <div className="flex items-start justify-between border-b border-[#d8d1c3] bg-white p-6"><div className="flex items-center gap-4"><div className="flex h-14 w-14 items-center justify-center rounded-xl bg-[#123e91] font-bold text-white">{expert.name.split(" ").map((part) => part[0]).join("").slice(0, 2)}</div><div><div className="text-xs font-bold uppercase tracking-[0.14em] text-[#a87900]">Specialist profile</div><h2 className="mt-1 text-2xl font-semibold text-white">{expert.name}</h2><p className="mt-1 text-sm font-medium text-[#ffd43b]">{expert.role}</p></div></div><button onClick={onClose} aria-label="Close profile" className="rounded-lg p-2 text-white/45 hover:bg-[#f4f1ea] hover:text-white"><X className="h-5 w-5" /></button></div>
       <div className="p-6 lg:p-8">
         <ExpertActionVisual name={expert.name} role={expert.role} skills={expert.skills} gender={expert.gender} />
         <div className="mt-6 grid gap-4 sm:grid-cols-3"><Info label="Delivery" value={`${expert.mode} · ${expert.location}`} /><Info label="Experience" value={expert.experience} /><Info label="Engagement" value={expert.engagement.join(" · ")} /></div>
         <div className="mt-8 grid gap-8 lg:grid-cols-[1.2fr_0.8fr]"><div><h3 className="text-xs font-bold uppercase tracking-[0.15em] text-[#a87900]">Profile</h3><p className="mt-3 text-base leading-7 text-[#4b5563]">{expert.summary}</p><h3 className="mt-7 text-xs font-bold uppercase tracking-[0.15em] text-[#a87900]">Typical focus</h3><ul className="mt-3 space-y-2">{expert.focus.map((item) => <li key={item} className="flex gap-2 text-sm text-[#404653]"><Zap className="mt-0.5 h-4 w-4 shrink-0 text-[#167e6a]" /> {item}</li>)}</ul><h3 className="mt-7 text-xs font-bold uppercase tracking-[0.15em] text-[#a87900]">Delivery capability</h3><p className="mt-3 text-sm leading-6 text-[#4b5563]">{expert.delivery}</p></div><div><h3 className="text-xs font-bold uppercase tracking-[0.15em] text-[#a87900]">Core expertise</h3><div className="mt-3 flex flex-wrap gap-2">{expert.skills.map((skill) => <span key={skill} className="rounded-full border border-[#d8d1c3] bg-white px-3 py-1.5 text-xs font-semibold text-[#404653]">{skill}</span>)}</div><h3 className="mt-7 text-xs font-bold uppercase tracking-[0.15em] text-[#a87900]">Profile tags</h3><div className="mt-3 flex flex-wrap gap-2">{expert.tags.map((tag) => <span key={tag} className="rounded-full bg-[#dff3f1] px-3 py-1.5 text-xs font-semibold text-[#167e6a]">{tag}</span>)}</div></div></div>
         <div className="mt-8 rounded-xl border border-[#d5c49b] bg-[#fff4cc] p-4"><div className="flex items-start gap-3"><BriefcaseBusiness className="mt-0.5 h-5 w-5 text-[#8a6500]" /><div><div className="font-semibold text-[#3b2d08]">Discuss this specialist</div><p className="mt-1 text-sm leading-6 text-[#5c4a16]">The contact form will be prefilled with this profile and its relevant skills.</p></div></div></div>
-        <div className="mt-6 flex flex-col gap-3 sm:flex-row"><a href={discussUrl} className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg bg-[#123e91] px-5 py-3 text-sm font-bold text-white hover:bg-[#0d2f70]">Discuss this expert <ArrowRight className="h-4 w-4" /></a><button onClick={onClose} className="rounded-lg border border-[#cfc8bb] bg-white px-5 py-3 text-sm font-semibold text-[#0e172b]">Close profile</button></div>
+        <div className="mt-6 flex flex-col gap-3 sm:flex-row"><a href={discussUrl} className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg bg-[#123e91] px-5 py-3 text-sm font-bold text-white hover:bg-[#0d2f70]">Discuss this expert <ArrowRight className="h-4 w-4" /></a><button onClick={onClose} className="rounded-lg border border-[#cfc8bb] bg-white px-5 py-3 text-sm font-semibold text-white">Close profile</button></div>
       </div>
     </div>
   </div>;
 }
 
 function Info({ label, value }: { label: string; value: string }) {
-  return <div className="rounded-xl border border-[#d8d1c3] bg-white p-4"><div className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#7b8190]">{label}</div><div className="mt-1 text-sm font-semibold text-[#0e172b]">{value}</div></div>;
+  return <div className="rounded-xl border border-[#d8d1c3] bg-white p-4"><div className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#7b8190]">{label}</div><div className="mt-1 text-sm font-semibold text-white">{value}</div></div>;
 }
