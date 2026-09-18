@@ -65,20 +65,20 @@ function HomePage() {
       <section className="relative overflow-hidden bg-[#05070b] text-white">
         <style>{`
           @keyframes shyena-float { 0%,100% { transform: translate3d(0,0,0) rotateX(58deg) rotateZ(-12deg); } 50% { transform: translate3d(0,-10px,0) rotateX(58deg) rotateZ(-9deg); } }
-          @keyframes shyena-orbit { from { transform: rotateZ(0deg) rotateX(68deg); } to { transform: rotateZ(360deg) rotateX(68deg); } }
-          @keyframes shyena-nexus { 0%,10% { transform: translate3d(-118px,-42px,-30px) rotateY(12deg) rotateX(4deg) scale(.9); opacity:.68; z-index:2; } 22%,40% { transform: translate3d(0,-8px,230px) rotateY(0deg) rotateX(0deg) scale(1.08); opacity:1; z-index:8; } 52%,100% { transform: translate3d(-118px,-42px,-30px) rotateY(12deg) rotateX(4deg) scale(.9); opacity:.68; z-index:2; } }
-          @keyframes shyena-vera { 0%,34% { transform: translate3d(128px,-56px,-20px) rotateY(-12deg) rotateX(4deg) scale(.9); opacity:.68; z-index:2; } 46%,64% { transform: translate3d(0,-2px,245px) rotateY(0deg) rotateX(0deg) scale(1.1); opacity:1; z-index:9; } 76%,100% { transform: translate3d(128px,-56px,-20px) rotateY(-12deg) rotateX(4deg) scale(.9); opacity:.68; z-index:2; } }
-          @keyframes shyena-chakra { 0%,58% { transform: translate3d(0,105px,-10px) rotateY(0deg) rotateX(-5deg) scale(.9); opacity:.68; z-index:2; } 70%,88% { transform: translate3d(0,10px,260px) rotateY(0deg) rotateX(0deg) scale(1.12); opacity:1; z-index:10; } 100% { transform: translate3d(0,105px,-10px) rotateY(0deg) rotateX(-5deg) scale(.9); opacity:.68; z-index:2; } }
-          @keyframes shyena-scan { 0% { transform: translateY(-120%); opacity:0; } 15%,70% { opacity:.55; } 100% { transform: translateY(120%); opacity:0; } }
-          .shyena-grid { background-image: linear-gradient(rgba(255,255,255,.055) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.055) 1px, transparent 1px); background-size: 56px 56px; }
-          .shyena-glow { box-shadow: 0 0 90px rgba(232,117,18,.14), inset 0 0 60px rgba(70,110,255,.08); }
-          .shyena-face { background: linear-gradient(135deg, rgba(255,255,255,.18), rgba(85,115,255,.05) 42%, rgba(232,117,18,.1)); border: 1px solid rgba(255,255,255,.16); backdrop-filter: blur(8px); }
-          .shyena-product { transform-style: preserve-3d; will-change: transform, opacity; transition: filter .35s ease; }
-          .shyena-product:hover { filter: brightness(1.12); }
-          @media (prefers-reduced-motion: reduce) {
-            .shyena-product, .shyena-orbit-motion { animation: none !important; }
-          }
-        `}</style>
+          @keyframes shyena-orbit { from { transform: rotateX(67deg) rotateZ(0deg); } to { transform: rotateX(67deg) rotateZ(360deg); } }
+          @keyframes shyena-nexus-cinematic { 0%,8% { transform:translate3d(-180px,-34px,-90px) rotateY(18deg) rotateX(8deg) scale(.78); opacity:.42; filter:blur(.4px) saturate(.72); z-index:2; } 18%,36% { transform:translate3d(-8px,-18px,310px) rotateY(0) rotateX(0) scale(1.12); opacity:1; filter:blur(0) saturate(1.08); z-index:12; } 48%,100% { transform:translate3d(-180px,-34px,-90px) rotateY(18deg) rotateX(8deg) scale(.78); opacity:.42; filter:blur(.4px) saturate(.72); z-index:2; } }
+          @keyframes shyena-vera-cinematic { 0%,32% { transform:translate3d(175px,-70px,-80px) rotateY(-18deg) rotateX(8deg) scale(.78); opacity:.42; filter:blur(.4px) saturate(.72); z-index:2; } 42%,60% { transform:translate3d(0,-12px,330px) rotateY(0) rotateX(0) scale(1.14); opacity:1; filter:blur(0) saturate(1.08); z-index:13; } 72%,100% { transform:translate3d(175px,-70px,-80px) rotateY(-18deg) rotateX(8deg) scale(.78); opacity:.42; filter:blur(.4px) saturate(.72); z-index:2; } }
+          @keyframes shyena-chakra-cinematic { 0%,56% { transform:translate3d(0,115px,-70px) rotateY(0) rotateX(-10deg) scale(.78); opacity:.42; filter:blur(.4px) saturate(.72); z-index:2; } 68%,88% { transform:translate3d(0,12px,350px) rotateY(0) rotateX(0) scale(1.16); opacity:1; filter:blur(0) saturate(1.08); z-index:14; } 100% { transform:translate3d(0,115px,-70px) rotateY(0) rotateX(-10deg) scale(.78); opacity:.42; filter:blur(.4px) saturate(.72); z-index:2; } }
+          @keyframes shyena-breathe { 0%,100% { transform:translate3d(0,0,0); opacity:.55; } 50% { transform:translate3d(0,-8px,0); opacity:.9; } }
+          @keyframes shyena-sheen { 0% { transform:translateX(-140%) skewX(-18deg); opacity:0; } 18%,48% { opacity:.18; } 70%,100% { transform:translateX(180%) skewX(-18deg); opacity:0; } }
+          @keyframes shyena-scan { 0% { transform:translateY(-120%); opacity:0; } 15%,70% { opacity:.55; } 100% { transform:translateY(120%); opacity:0; } }
+          .shyena-grid { background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px); background-size:64px 64px; }
+          .shyena-product { transform-style:preserve-3d; will-change:transform,opacity,filter; backface-visibility:hidden; }
+          .shyena-product::before { content:""; position:absolute; inset:1px; border-radius:inherit; pointer-events:none; background:linear-gradient(115deg,rgba(255,255,255,.16),transparent 24%,transparent 68%,rgba(255,255,255,.035)); }
+          .shyena-product::after { content:""; position:absolute; left:-45%; top:-20%; width:28%; height:150%; pointer-events:none; background:linear-gradient(90deg,transparent,rgba(255,255,255,.32),transparent); transform:skewX(-18deg); opacity:0; animation:shyena-sheen 9s ease-in-out infinite; }
+          .shyena-horizon { box-shadow:0 0 80px rgba(85,103,255,.16),0 0 140px rgba(232,117,18,.06); }
+          @media (prefers-reduced-motion:reduce) { .shyena-product,.shyena-orbit-motion { animation:none !important; } }
+                `}</style>
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,rgba(70,96,255,.16),transparent_32%),radial-gradient(circle_at_80%_70%,rgba(232,117,18,.10),transparent_30%)]" />
         <div className="shyena-grid pointer-events-none absolute inset-0 opacity-40 [mask-image:linear-gradient(to_bottom,black,transparent_92%)]" />
         <div className="relative mx-auto max-w-[1440px] px-5 pb-16 pt-8 sm:px-8 lg:px-12 lg:pb-24 lg:pt-10">
