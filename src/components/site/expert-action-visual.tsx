@@ -9,7 +9,7 @@ type ExpertVisual = {
 };
 
 const WOMAN_FIRST_NAMES = new Set([
-  "aisha", "aisha", "anna", "amira", "chloe", "elena", "fatima", "ines",
+  "aisha", "anna", "amira", "chloe", "elena", "fatima", "ines",
   "kavya", "lisa", "maria", "maya", "noor", "priya", "sara", "sofia"
 ]);
 
@@ -67,7 +67,7 @@ export function ExpertActionVisual({ name, role, skills, compact = false }: Expe
       aria-label={`${name} demonstrating ${product} inside Shyena`}
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_35%,rgba(101,230,212,0.16),transparent_24%),radial-gradient(circle_at_22%_90%,rgba(18,62,145,0.34),transparent_45%)]" />
-      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-[linear-gradient(to_top,rgba(0,0,0,.42),transparent)]" />
+      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-[linear-gradient(to_top,rgba(0,0,0,.42),transparent)]" />\n      <div className="absolute right-3 top-12 z-30 rounded-lg border border-white/15 bg-black/35 px-2.5 py-2 text-right backdrop-blur-xl">\n        <div className="text-[7px] font-bold uppercase tracking-[0.16em] text-white/45">AI GENERATED EXPERT</div>\n        <div className="mt-0.5 text-[9px] font-semibold text-white">{woman ? "WOMAN" : "MAN"}</div>\n      </div>
 
       <motion.div
         className="absolute left-3 top-3 z-20 rounded-full border border-white/10 bg-black/30 px-2.5 py-1 text-[8px] font-bold tracking-[0.16em] text-white/55 backdrop-blur"
@@ -77,7 +77,7 @@ export function ExpertActionVisual({ name, role, skills, compact = false }: Expe
         SHYENA · LIVE DEMO
       </motion.div>
 
-      <div className="absolute left-[5%] top-[23%] w-[47%]">
+      <div className="absolute left-[4%] top-[20%] z-10 w-[49%]">
         <div className="mb-2 flex items-center gap-2">
           <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: action.accent }} />
           <span className="text-[9px] font-bold tracking-[0.18em] text-white/50">{product}</span>
@@ -127,12 +127,12 @@ export function ExpertActionVisual({ name, role, skills, compact = false }: Expe
 function Portrait({ woman, accent }: { woman: boolean; accent: string }) {
   return (
     <motion.div
-      className="absolute left-1/2 top-0 h-[52%] w-[58%] -translate-x-1/2"
-      animate={{ rotateY: [-5, 4, -5], y: [0, -2, 0] }}
-      transition={{ duration: 5.8, repeat: Infinity, ease: "easeInOut" }}
+      className="absolute left-1/2 top-[-1%] h-[62%] w-[72%] -translate-x-1/2"
+      animate={{ rotateY: [-4, 3, -4], y: [0, -3, 0] }}
+      transition={{ duration: 6.4, repeat: Infinity, ease: "easeInOut" }}
       style={{ transformStyle: "preserve-3d" }}
     >
-      <svg viewBox="0 0 220 240" className="h-full w-full overflow-visible" role="img" aria-label={woman ? "AI-rendered woman avatar" : "AI-rendered man avatar"}>
+      <svg viewBox="0 0 220 240" className="h-full w-full overflow-visible drop-shadow-[0_22px_35px_rgba(0,0,0,.5)]" role="img" aria-label={woman ? "AI-rendered woman avatar" : "AI-rendered man avatar"}>
         <defs>
           <radialGradient id="skin" cx="35%" cy="25%" r="80%">
             <stop offset="0%" stopColor="#f4c6aa" />
@@ -208,7 +208,7 @@ function Portrait({ woman, accent }: { woman: boolean; accent: string }) {
 function Suitcase({ accent, product }: { accent: string; product: string }) {
   return (
     <motion.div
-      className="absolute bottom-[11%] left-[-8%] z-20 h-[30%] w-[78%]"
+      className="absolute bottom-[9%] left-[-10%] z-20 h-[31%] w-[82%]"
       style={{ transformStyle: "preserve-3d" }}
     >
       <motion.div
