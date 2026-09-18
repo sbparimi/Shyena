@@ -92,7 +92,7 @@ export function ExpertActionVisual({ name, role, skills, compact = false }: Expe
       </div>
 
       <motion.div
-        className="absolute right-[7%] bottom-[4%] h-[88%] w-[41%]"
+        className="absolute right-[3%] bottom-[2%] h-[94%] w-[48%]"
         style={{ x: avatarX, y: avatarY, transformStyle: "preserve-3d" }}
         animate={{
           y: [22, 7, -8, -8, 7, 22],
@@ -127,59 +127,80 @@ export function ExpertActionVisual({ name, role, skills, compact = false }: Expe
 function Portrait({ woman, accent }: { woman: boolean; accent: string }) {
   return (
     <motion.div
-      className="absolute left-1/2 top-[3%] h-[47%] w-[48%] -translate-x-1/2"
-      animate={{ rotateY: [-5, 4, -5], x: [-1, 1, -1] }}
+      className="absolute left-1/2 top-0 h-[52%] w-[58%] -translate-x-1/2"
+      animate={{ rotateY: [-5, 4, -5], y: [0, -2, 0] }}
       transition={{ duration: 5.8, repeat: Infinity, ease: "easeInOut" }}
       style={{ transformStyle: "preserve-3d" }}
     >
-      {/* AI-photoreal portrait treatment: skin lighting, facial planes, eyes, hair and ears */}
-      <div
-        className="absolute inset-x-[14%] top-[16%] h-[76%] rounded-[47%_47%_43%_43%] border border-white/20 shadow-[0_16px_38px_rgba(0,0,0,.48)]"
-        style={{
-          background: "radial-gradient(circle at 35% 30%, #f2c4a7 0%, #d99a7b 32%, #a9675a 66%, #6d4145 100%)",
-          boxShadow: `inset -16px -10px 22px rgba(54,20,24,.24), inset 10px 8px 20px rgba(255,235,218,.18), 0 16px 38px rgba(0,0,0,.48)`,
-        }}
-      />
+      <svg viewBox="0 0 220 240" className="h-full w-full overflow-visible" role="img" aria-label={woman ? "AI-rendered woman avatar" : "AI-rendered man avatar"}>
+        <defs>
+          <radialGradient id="skin" cx="35%" cy="25%" r="80%">
+            <stop offset="0%" stopColor="#f4c6aa" />
+            <stop offset="38%" stopColor="#d99878" />
+            <stop offset="72%" stopColor="#a9685a" />
+            <stop offset="100%" stopColor="#633d43" />
+          </radialGradient>
+          <linearGradient id="hair" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor={woman ? "#493039" : "#3a414c"} />
+            <stop offset="58%" stopColor={woman ? "#1d151d" : "#171c24"} />
+            <stop offset="100%" stopColor="#090b10" />
+          </linearGradient>
+          <linearGradient id="shirt" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#315f94" />
+            <stop offset="55%" stopColor="#122e59" />
+            <stop offset="100%" stopColor="#06101e" />
+          </linearGradient>
+          <filter id="softShadow" x="-30%" y="-30%" width="160%" height="180%">
+            <feDropShadow dx="0" dy="14" stdDeviation="12" floodOpacity=".42" />
+          </filter>
+          <filter id="faceLight">
+            <feGaussianBlur stdDeviation="5" />
+          </filter>
+        </defs>
 
-      <div className="absolute left-[7%] top-[40%] h-[24%] w-[9%] rounded-full border border-white/10 bg-[#b87561]" />
-      <div className="absolute right-[7%] top-[40%] h-[24%] w-[9%] rounded-full border border-white/10 bg-[#b87561]" />
+        {/* premium studio-lit 3D bust */}
+        <ellipse cx="110" cy="228" rx="75" ry="12" fill={accent} opacity=".18" filter="url(#faceLight)" />
+        <path d="M38 238 C42 188 68 170 110 169 C152 170 178 188 182 238Z" fill="url(#shirt)" stroke="rgba(255,255,255,.16)" filter="url(#softShadow)" />
+        <path d="M88 155 L88 184 Q110 199 132 184 L132 155Z" fill="url(#skin)" />
+        <ellipse cx="110" cy="104" rx="57" ry="72" fill="url(#skin)" stroke="rgba(255,255,255,.22)" />
 
-      <div
-        className={`absolute left-[4%] top-[2%] h-[48%] w-[92%] rounded-[52%_52%_30%_30%] shadow-[0_8px_22px_rgba(0,0,0,.48)] ${woman ? "bg-[linear-gradient(120deg,#3a2228,#17131a_62%,#0b0d13)]" : "bg-[linear-gradient(120deg,#313744,#151a23_60%,#0a0d13)]"}`}
-      />
-      {woman && (
-        <>
-          <div className="absolute -left-[1%] top-[25%] h-[59%] w-[25%] rounded-[55%_35%_45%_55%] bg-[#21171f] shadow-[inset_-5px_0_8px_rgba(255,255,255,.05)]" />
-          <div className="absolute -right-[1%] top-[25%] h-[59%] w-[25%] rounded-[35%_55%_55%_45%] bg-[#21171f] shadow-[inset_5px_0_8px_rgba(255,255,255,.05)]" />
-          <div className="absolute left-[17%] top-[7%] h-[34%] w-[12%] rotate-[22deg] rounded-full bg-[#4b2c35]/70 blur-[1px]" />
-        </>
-      )}
-      {!woman && (
-        <>
-          <div className="absolute left-[12%] top-[9%] h-[27%] w-[76%] rounded-[55%_55%_25%_25%] bg-[#1b222c]" />
-          <div className="absolute left-[13%] top-[28%] h-[8%] w-[74%] rounded-full bg-[#141921]" />
-          <div className="absolute left-1/2 top-[5%] h-[7%] w-[18%] -translate-x-1/2 rounded-full bg-white/8 blur-sm" />
-        </>
-      )}
+        {/* ears */}
+        <ellipse cx="52" cy="108" rx="11" ry="20" fill="#b87361" />
+        <ellipse cx="168" cy="108" rx="11" ry="20" fill="#b87361" />
 
-      {/* Brow / eye line */}
-      <div className="absolute left-[19%] top-[49%] h-[4px] w-[22%] rotate-[-4deg] rounded-full bg-[#5c3436]/80" />
-      <div className="absolute right-[19%] top-[49%] h-[4px] w-[22%] rotate-[4deg] rounded-full bg-[#5c3436]/80" />
-      <div className="absolute left-[22%] top-[53%] h-[8px] w-[12px] rounded-[50%] bg-[#f6e6d8] shadow-[0_1px_5px_rgba(0,0,0,.28)]">
-        <span className="absolute left-1/2 top-1/2 h-[4px] w-[4px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#27303a]" />
-      </div>
-      <div className="absolute right-[22%] top-[53%] h-[8px] w-[12px] rounded-[50%] bg-[#f6e6d8] shadow-[0_1px_5px_rgba(0,0,0,.28)]">
-        <span className="absolute left-1/2 top-1/2 h-[4px] w-[4px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#27303a]" />
-      </div>
+        {/* hair / silhouette */}
+        {woman ? (
+          <>
+            <path d="M53 103 C42 46 73 18 112 20 C158 20 181 51 169 119 L153 143 L148 79 C135 61 111 54 82 64 C75 91 67 111 60 130Z" fill="url(#hair)" />
+            <path d="M55 78 C58 35 84 18 116 21 C143 24 160 39 165 64 C138 48 102 43 72 59Z" fill="#33232b" opacity=".55" />
+            <path d="M57 92 C47 126 53 155 76 173 L87 147 L72 91Z" fill="url(#hair)" />
+            <path d="M163 89 C174 124 168 154 144 174 L134 147 L149 89Z" fill="url(#hair)" />
+          </>
+        ) : (
+          <>
+            <path d="M54 93 C49 53 68 25 108 21 C148 18 171 42 166 88 L151 74 C143 57 126 48 102 49 C80 51 68 64 63 87Z" fill="url(#hair)" />
+            <path d="M65 50 C88 27 125 23 151 45" fill="none" stroke="#59616c" strokeOpacity=".32" strokeWidth="8" strokeLinecap="round" />
+          </>
+        )}
 
-      {/* Nose / cheek light / mouth */}
-      <div className="absolute left-1/2 top-[53%] h-[18%] w-[8%] -translate-x-1/2 rounded-[45%] bg-[linear-gradient(to_right,rgba(96,47,47,.18),rgba(255,225,207,.24),rgba(96,47,47,.18))]" />
-      <div className="absolute left-[29%] top-[62%] h-[8%] w-[13%] rounded-full bg-[#f5c3a5]/16 blur-[5px]" />
-      <div className="absolute right-[29%] top-[62%] h-[8%] w-[13%] rounded-full bg-[#f5c3a5]/16 blur-[5px]" />
-      <div className="absolute left-1/2 top-[72%] h-[6px] w-[25px] -translate-x-1/2 rounded-[50%] bg-[#7e4146]/75" />
-      <div className="absolute left-1/2 top-[72%] h-px w-[18px] -translate-x-1/2 bg-[#f4c5b5]/50" />
+        {/* brow + eyes */}
+        <path d="M73 98 Q86 90 98 97" fill="none" stroke="#58363a" strokeWidth="4" strokeLinecap="round" />
+        <path d="M122 97 Q135 90 148 98" fill="none" stroke="#58363a" strokeWidth="4" strokeLinecap="round" />
+        <ellipse cx="87" cy="108" rx="9" ry="6" fill="#fff1e7" />
+        <ellipse cx="133" cy="108" rx="9" ry="6" fill="#fff1e7" />
+        <circle cx="88" cy="108" r="3.3" fill="#26313c" />
+        <circle cx="132" cy="108" r="3.3" fill="#26313c" />
+        <circle cx="89" cy="107" r="1" fill="white" />
+        <circle cx="133" cy="107" r="1" fill="white" />
 
-      <div className="absolute left-1/2 bottom-[-8%] h-2 w-[54%] -translate-x-1/2 rounded-full blur-md" style={{ backgroundColor: accent, opacity: .32 }} />
+        {/* nose / cheek planes */}
+        <path d="M110 104 C104 122 103 132 110 137 C116 140 120 136 121 132" fill="none" stroke="#8b514f" strokeOpacity=".58" strokeWidth="3" strokeLinecap="round" />
+        <ellipse cx="80" cy="130" rx="15" ry="9" fill="#ffd5bb" opacity=".14" filter="url(#faceLight)" />
+        <ellipse cx="140" cy="130" rx="15" ry="9" fill="#ffd5bb" opacity=".14" filter="url(#faceLight)" />
+        <path d="M96 151 Q110 158 124 151" fill="none" stroke="#783f45" strokeWidth="4" strokeLinecap="round" />
+        <path d="M99 150 Q110 153 121 150" fill="none" stroke="#f7c6b5" strokeOpacity=".55" strokeWidth="1.5" strokeLinecap="round" />
+      </svg>
+      <div className="absolute inset-x-[20%] bottom-[-5%] h-3 rounded-full blur-lg" style={{ backgroundColor: accent, opacity: .28 }} />
     </motion.div>
   );
 }
@@ -187,7 +208,7 @@ function Portrait({ woman, accent }: { woman: boolean; accent: string }) {
 function Suitcase({ accent, product }: { accent: string; product: string }) {
   return (
     <motion.div
-      className="absolute bottom-[13%] left-[-7%] z-20 h-[27%] w-[70%]"
+      className="absolute bottom-[11%] left-[-8%] z-20 h-[30%] w-[78%]"
       style={{ transformStyle: "preserve-3d" }}
     >
       <motion.div
