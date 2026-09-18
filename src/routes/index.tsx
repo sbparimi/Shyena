@@ -195,7 +195,7 @@ function HomePage() {
                     <div className="mt-3 font-[Sora] text-[26px] font-extrabold tracking-[-.045em]">Measure the truth.</div>
                     <p className="mt-2 text-[11px] leading-5 text-white/45">Behaviour, semantics and execution evidence.</p>
                   </div>
-                </div>
+                </motion.div>
 
                 <motion.div className="shyena-product shyena-chakra absolute bottom-[4%] left-1/2 w-[300px] -translate-x-1/2 overflow-hidden rounded-[24px] border border-[#f18a32]/50 bg-[#160b06]/97 shadow-[0_65px_130px_rgba(0,0,0,.82),0_0_80px_rgba(232,117,18,.12)] backdrop-blur-xl sm:w-[370px]"
                   initial={{ x: 0, y: 115, z: -70, rotateY: 0, rotateX: -10, scale: .78, opacity: .42 }}
