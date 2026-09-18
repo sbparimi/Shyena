@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Check, ChevronRight, ShieldCheck } from "lucide-react";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -60,6 +61,29 @@ function LogoCard({ name, logo }: { name: string; logo: string }) {
 }
 
 function HomePage() {
+  const pointerX = useMotionValue(0);
+  const pointerY = useMotionValue(0);
+  const rotateY = useSpring(pointerX, { stiffness: 90, damping: 22, mass: 0.7 });
+  const rotateX = useSpring(pointerY, { stiffness: 90, damping: 22, mass: 0.7 });
+
+  const handleHeroPointer = (event: React.PointerEvent<HTMLDivElement>) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    pointerX.set(((event.clientX - rect.left) / rect.width - 0.5) * 7);
+    pointerY.set(((event.clientY - rect.top) / rect.height - 0.5) * -5);
+  };
+
+  const resetHeroPointer = () => {
+    pointerX.set(0);
+    pointerY.set(0);
+  };
+
+  const sequenceTransition = {
+    duration: 12,
+    repeat: Infinity,
+    ease: [0.45, 0.05, 0.2, 0.95] as const,
+    times: [0, 0.08, 0.18, 0.36, 0.48, 1] as const,
+  };
+
   return (
     <main className="min-h-screen bg-white text-[#17233f]">
       <section className="relative overflow-hidden bg-[#05070b] text-white">
@@ -108,18 +132,30 @@ function HomePage() {
               </div>
             </div>
 
-            <div className="relative mx-auto h-[540px] w-full max-w-[860px] [perspective:1800px] sm:h-[650px]">
+            <motion.div
+              className="relative mx-auto h-[540px] w-full max-w-[860px] [perspective:1800px] sm:h-[650px]"
+              onPointerMove={handleHeroPointer}
+              onPointerLeave={resetHeroPointer}
+              style={{ rotateX, rotateY }}
+            >
               <div className="absolute inset-0 rounded-[50%] bg-[radial-gradient(ellipse_at_center,rgba(63,86,255,.24),transparent_58%)] blur-3xl" />
               <div className="absolute left-1/2 top-[54%] h-[2px] w-[78%] -translate-x-1/2 bg-gradient-to-r from-transparent via-white/25 to-transparent shadow-[0_0_45px_rgba(100,120,255,.25)]" />
               <div className="absolute left-1/2 top-[54%] h-[170px] w-[68%] -translate-x-1/2 rounded-[50%] border border-white/[.07] bg-white/[.012] [transform:rotateX(72deg)_translateZ(-120px)]" />
               
               <div className="absolute inset-0 [transform-style:preserve-3d]">
-                <div className="shyena-orbit-motion absolute left-1/2 top-[53%] h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/[.07] [animation:shyena-orbit_30s_linear_infinite] sm:h-[560px] sm:w-[560px]">
-                  <span className="absolute left-[7%] top-[20%] h-1.5 w-1.5 rounded-full bg-white shadow-[0_0_16px_white]" />
+                <motion.div className="shyena-orbit-motion absolute left-1/2 top-[53%] h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/[.07] [animation:shyena-orbit_30s_linear_infinite] sm:h-[560px] sm:w-[560px]">
+                  <motion.span animate={{ rotate: 360 }} transition={{ duration: 30, repeat: Infinity, ease: "linear" }} className="absolute left-[7%] top-[20%] h-1.5 w-1.5 rounded-full bg-white shadow-[0_0_16px_white]" />
+                  </motion.span>
                   <span className="absolute bottom-[13%] right-[9%] h-1.5 w-1.5 rounded-full bg-[#e87512] shadow-[0_0_18px_#e87512]" />
                 </div>
 
-                <div className="shyena-product shyena-nexus absolute left-[2%] top-[14%] w-[270px] overflow-hidden rounded-[24px] border border-[#6877ff]/45 bg-[#080d1c]/96 shadow-[0_55px_120px_rgba(0,0,0,.78),0_0_70px_rgba(104,119,255,.12)] backdrop-blur-xl sm:w-[330px]">
+                <motion.div
+                  className="shyena-product shyena-nexus absolute left-[2%] top-[14%] w-[270px] overflow-hidden rounded-[24px] border border-[#6877ff]/45 bg-[#080d1c]/96 shadow-[0_55px_120px_rgba(0,0,0,.78),0_0_70px_rgba(104,119,255,.12)] backdrop-blur-xl sm:w-[330px]"
+                  initial={{ x: -180, y: -34, z: -90, rotateY: 18, rotateX: 8, scale: 0.78, opacity: 0.42 }}
+                  animate={{ x: [-180, -180, -8, -8, -180, -180], y: [-34,-34,-18,-18,-34,-34], z: [-90,-90,310,310,-90,-90], rotateY:[18,18,0,0,18,18], rotateX:[8,8,0,0,8,8], scale:[.78,.78,1.12,1.12,.78,.78], opacity:[.42,.42,1,1,.42,.42] }}
+                  transition={sequenceTransition}
+                  whileHover={{ scale: 1.15, opacity: 1 }}
+                >
                   <div className="relative h-[190px] overflow-hidden border-b border-white/10 bg-[#070b17] sm:h-[225px]">
                     <div className="absolute inset-0 opacity-40" style={{backgroundImage:"linear-gradient(rgba(104,119,255,.14) 1px,transparent 1px),linear-gradient(90deg,rgba(104,119,255,.14) 1px,transparent 1px)",backgroundSize:"28px 28px"}} />
                     <div className="absolute left-5 top-5 font-mono text-[8px] uppercase tracking-[.22em] text-[#8b96ff]">NEXUS / SYSTEM MAP</div>
@@ -139,7 +175,12 @@ function HomePage() {
                   </div>
                 </div>
 
-                <div className="shyena-product shyena-vera absolute right-[0%] top-[6%] w-[270px] overflow-hidden rounded-[24px] border border-[#55d6ad]/45 bg-[#071312]/96 shadow-[0_55px_120px_rgba(0,0,0,.78),0_0_70px_rgba(85,214,173,.1)] backdrop-blur-xl sm:w-[330px]">
+                <motion.div className="shyena-product shyena-vera absolute right-[0%] top-[6%] w-[270px] overflow-hidden rounded-[24px] border border-[#55d6ad]/45 bg-[#071312]/96 shadow-[0_55px_120px_rgba(0,0,0,.78),0_0_70px_rgba(85,214,173,.1)] backdrop-blur-xl sm:w-[330px]"
+                  initial={{ x: 175, y: -70, z: -80, rotateY: -18, rotateX: 8, scale: .78, opacity: .42 }}
+                  animate={{ x:[175,175,0,0,175,175], y:[-70,-70,-12,-12,-70,-70], z:[-80,-80,330,330,-80,-80], rotateY:[-18,-18,0,0,-18,-18], rotateX:[8,8,0,0,8,8], scale:[.78,.78,1.14,1.14,.78,.78], opacity:[.42,.42,1,1,.42,.42] }}
+                  transition={{...sequenceTransition, times:[0,.32,.42,.60,.72,1] as const}}
+                  whileHover={{ scale: 1.17, opacity: 1 }}
+                >
                   <div className="relative h-[190px] overflow-hidden border-b border-white/10 bg-[#06100f] sm:h-[225px]">
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(85,214,173,.16),transparent_42%)]" />
                     <div className="absolute left-5 top-5 font-mono text-[8px] uppercase tracking-[.22em] text-[#6ee7b7]">VERA / EVALUATION</div>
@@ -157,7 +198,12 @@ function HomePage() {
                   </div>
                 </div>
 
-                <div className="shyena-product shyena-chakra absolute bottom-[4%] left-1/2 w-[300px] -translate-x-1/2 overflow-hidden rounded-[24px] border border-[#f18a32]/50 bg-[#160b06]/97 shadow-[0_65px_130px_rgba(0,0,0,.82),0_0_80px_rgba(232,117,18,.12)] backdrop-blur-xl sm:w-[370px]">
+                <motion.div className="shyena-product shyena-chakra absolute bottom-[4%] left-1/2 w-[300px] -translate-x-1/2 overflow-hidden rounded-[24px] border border-[#f18a32]/50 bg-[#160b06]/97 shadow-[0_65px_130px_rgba(0,0,0,.82),0_0_80px_rgba(232,117,18,.12)] backdrop-blur-xl sm:w-[370px]"
+                  initial={{ x: 0, y: 115, z: -70, rotateY: 0, rotateX: -10, scale: .78, opacity: .42 }}
+                  animate={{ x:[0,0,0,0,0,0], y:[115,115,12,12,115,115], z:[-70,-70,350,350,-70,-70], rotateY:[0,0,0,0,0,0], rotateX:[-10,-10,0,0,-10,-10], scale:[.78,.78,1.16,1.16,.78,.78], opacity:[.42,.42,1,1,.42,.42] }}
+                  transition={{...sequenceTransition, times:[0,.56,.68,.88,1,1] as const}}
+                  whileHover={{ scale: 1.19, opacity: 1 }}
+                >
                   <div className="relative h-[205px] overflow-hidden border-b border-white/10 bg-[#100805] sm:h-[245px]">
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_55%,rgba(232,117,18,.18),transparent_44%)]" />
                     <div className="absolute left-5 top-5 font-mono text-[8px] uppercase tracking-[.22em] text-[#ffad69]">CHAKRA / ADVERSARIAL</div>
@@ -175,7 +221,7 @@ function HomePage() {
                     <div className="mt-3 font-[Sora] text-[28px] font-extrabold tracking-[-.045em]">Break the unsafe path.</div>
                     <p className="mt-2 text-[11px] leading-5 text-white/45">Attack critical paths and expose unsafe behaviour.</p>
                   </div>
-                </div>
+                </motion.div>
               </div>
 
               <div className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 rounded-full border border-white/10 bg-black/45 px-4 py-2 font-mono text-[8px] uppercase tracking-[.22em] text-white/45 shadow-[0_15px_50px_rgba(0,0,0,.45)] backdrop-blur-xl">understand → evaluate → secure</div>
