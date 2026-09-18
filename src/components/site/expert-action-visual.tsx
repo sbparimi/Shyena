@@ -2,6 +2,7 @@ import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import type { PointerEvent as ReactPointerEvent } from "react";
 
 type ExpertVisual = {
+  id: string;
   name: string;
   role: string;
   skills: string[];
@@ -15,21 +16,46 @@ function avatarFor(name: string, woman: boolean) {
   return source[hash % source.length];
 }
 
-const SYNTHETIC_FEMALE_AVATARS = [
-  "https://raw.githubusercontent.com/Prompt-Haus/OpenPeople/main/openpeople/data/curated/P001/assets/studio_portrait.jpg",
-  "https://raw.githubusercontent.com/Prompt-Haus/OpenPeople/main/openpeople/data/curated/P002/assets/studio_portrait.jpg",
-  "https://raw.githubusercontent.com/Prompt-Haus/OpenPeople/main/openpeople/data/curated/P003/assets/studio_portrait.jpg",
-  "https://raw.githubusercontent.com/Prompt-Haus/OpenPeople/main/openpeople/data/curated/P004/assets/studio_portrait.jpg",
-  "https://raw.githubusercontent.com/Prompt-Haus/OpenPeople/main/openpeople/data/curated/P006/assets/studio_portrait.jpg",
-  "https://raw.githubusercontent.com/Prompt-Haus/OpenPeople/main/openpeople/data/curated/P009/assets/studio_portrait.jpg",
-  "https://raw.githubusercontent.com/Prompt-Haus/OpenPeople/main/openpeople/data/curated/P010/assets/studio_portrait.jpg",
-];
+const AVATAR_BY_EXPERT_ID: Record<string, string> = {
+  "marcus-van-der-berg": "P005",
+  "ankit-sharma": "P007",
+  "viktor-petrov": "P008",
+  "hans-mueller": "P014",
+  "elena-kowalski": "P001",
+  "david-chen": "P016",
+  "maria-santos": "P002",
+  "pavel-horvat": "P018",
+  "lisa-thompson": "P003",
+  "anna-novak": "P004",
+  "sofia-lindberg": "P006",
+  "rahul-mehta": "P019",
+  "aisha-khan": "P009",
+  "daniel-weber": "P022",
+  "priya-nair": "P010",
+  "thomas-keller": "P024",
+  "noor-el-amrani": "P011",
+  "james-okafor": "P025",
+  "elena-rossi": "P012",
+  "martin-novak": "P027",
+  "kavya-rao": "P013",
+  "lucas-meyer": "P029",
+  "sara-haddad": "P015",
+  "mateusz-zielinski": "P030",
+  "ines-ferreira": "P017",
+  "amira-yusuf": "P020",
+  "george-wilson": "P031",
+  "maya-patel": "P021",
+  "jonas-berg": "P032",
+  "fatima-alvarez": "P023",
+  "erik-jansen": "P026",
+  "chloe-martin": "P028",
+  "adrian-popescu": "P034",
+};
 
-const SYNTHETIC_MALE_AVATARS = [
-  "https://raw.githubusercontent.com/Prompt-Haus/OpenPeople/main/openpeople/data/curated/P005/assets/studio_portrait.jpg",
-  "https://raw.githubusercontent.com/Prompt-Haus/OpenPeople/main/openpeople/data/curated/P007/assets/studio_portrait.jpg",
-  "https://raw.githubusercontent.com/Prompt-Haus/OpenPeople/main/openpeople/data/curated/P008/assets/studio_portrait.jpg",
-];
+function avatarUrl(id: string) {
+  const person = AVATAR_BY_EXPERT_ID[id] ?? "P001";
+  return `https://raw.githubusercontent.com/Prompt-Haus/OpenPeople/main/openpeople/data/curated/${person}/assets/studio_portrait.jpg`;
+}
 
 function specialtyFor(skills: string[]) {
   const text = skills.join(" ").toLowerCase();
@@ -60,7 +86,7 @@ function Portrait({ woman, name }: { woman: boolean; name: string }) {
   );
 }
 
-export function ExpertActionVisual({ name, role, skills, gender, compact = false }: ExpertVisual) {
+export function ExpertActionVisual({ id, name, role, skills, gender, compact = false }: ExpertVisual) {
   const pointerX = useMotionValue(0);
   const pointerY = useMotionValue(0);
   const rotateY = useSpring(pointerX, { stiffness: 120, damping: 24, mass: 0.7 });
@@ -89,7 +115,7 @@ export function ExpertActionVisual({ name, role, skills, gender, compact = false
       transition={{ type: "spring", stiffness: 180, damping: 24 }}
       aria-label={`${name} synthetic profile portrait`}
     >
-      <Portrait woman={woman} name={name} />
+      <Portrait woman={woman} id={id} name={name} />
 
       <div className="absolute left-3 top-3 z-10 rounded-full border border-white/20 bg-black/55 px-2.5 py-1 text-[8px] font-bold tracking-[0.16em] text-white/80 backdrop-blur-md">
         SHYENA
