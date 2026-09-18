@@ -73,7 +73,10 @@ function HomePage() {
           @keyframes shyena-sheen { 0% { transform:translateX(-140%) skewX(-18deg); opacity:0; } 18%,48% { opacity:.18; } 70%,100% { transform:translateX(180%) skewX(-18deg); opacity:0; } }
           @keyframes shyena-scan { 0% { transform:translateY(-120%); opacity:0; } 15%,70% { opacity:.55; } 100% { transform:translateY(120%); opacity:0; } }
           .shyena-grid { background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px); background-size:64px 64px; }
-          .shyena-product { transform-style:preserve-3d; will-change:transform,opacity,filter; backface-visibility:hidden; }
+          .shyena-product { transform-style:preserve-3d; will-change:transform,opacity,filter; backface-visibility:hidden; isolation:isolate; }
+          .shyena-nexus { animation:shyena-nexus-cinematic 12s cubic-bezier(.45,.05,.2,.95) infinite; }
+          .shyena-vera { animation:shyena-vera-cinematic 12s cubic-bezier(.45,.05,.2,.95) infinite; }
+          .shyena-chakra { animation:shyena-chakra-cinematic 12s cubic-bezier(.45,.05,.2,.95) infinite; }
           .shyena-product::before { content:""; position:absolute; inset:1px; border-radius:inherit; pointer-events:none; background:linear-gradient(115deg,rgba(255,255,255,.16),transparent 24%,transparent 68%,rgba(255,255,255,.035)); }
           .shyena-product::after { content:""; position:absolute; left:-45%; top:-20%; width:28%; height:150%; pointer-events:none; background:linear-gradient(90deg,transparent,rgba(255,255,255,.32),transparent); transform:skewX(-18deg); opacity:0; animation:shyena-sheen 9s ease-in-out infinite; }
           .shyena-horizon { box-shadow:0 0 80px rgba(85,103,255,.16),0 0 140px rgba(232,117,18,.06); }
@@ -82,13 +85,9 @@ function HomePage() {
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,rgba(70,96,255,.16),transparent_32%),radial-gradient(circle_at_80%_70%,rgba(232,117,18,.10),transparent_30%)]" />
         <div className="shyena-grid pointer-events-none absolute inset-0 opacity-40 [mask-image:linear-gradient(to_bottom,black,transparent_92%)]" />
         <div className="relative mx-auto max-w-[1440px] px-5 pb-16 pt-8 sm:px-8 lg:px-12 lg:pb-24 lg:pt-10">
-          <nav className="flex items-center justify-between border-b border-white/10 pb-5">
-            <div className="font-[Sora] text-lg font-extrabold tracking-[-.04em]">SHYENA<span className="text-[#e87512]">.</span></div>
-            <div className="hidden items-center gap-7 text-[11px] font-medium uppercase tracking-[.16em] text-white/55 md:flex">
-              <span>Agent Testing</span><span>Assurance</span><span>Security</span><span>Autonomous QA</span>
-            </div>
-            <Link to="/contact" className="rounded-full border border-white/20 px-4 py-2 text-[10px] font-semibold uppercase tracking-[.12em] text-white transition hover:border-white/50">Contact</Link>
-          </nav>
+          <div className="mb-2 flex items-center justify-end">
+            <span className="font-mono text-[8px] uppercase tracking-[.24em] text-white/25">SHYENA · QUALITY INTELLIGENCE</span>
+          </div>
 
           <div className="grid items-center gap-10 py-12 lg:grid-cols-[.72fr_1.28fr] lg:gap-4 lg:py-16">
             <div className="relative z-10 max-w-[610px]">
@@ -109,17 +108,17 @@ function HomePage() {
               </div>
             </div>
 
-            <div className="relative mx-auto h-[480px] w-full max-w-[760px] [perspective:1200px] sm:h-[600px]">
-              <div className="absolute inset-[8%_4%_12%] rounded-full bg-[#4c63ff]/10 blur-3xl" />
+            <div className="relative mx-auto h-[500px] w-full max-w-[820px] [perspective:1800px] sm:h-[620px]">
+              <div className="absolute inset-[7%_2%_10%] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(70,92,255,.22),rgba(70,92,255,.07)_35%,transparent_70%)] blur-2xl" />
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="shyena-orbit-motion absolute h-[390px] w-[390px] rounded-full border border-white/10 [transform:rotateX(68deg)] [animation:shyena-orbit_22s_linear_infinite] sm:h-[500px] sm:w-[500px]">
                   <span className="absolute left-1/2 top-0 h-2.5 w-2.5 -translate-x-1/2 rounded-full bg-[#e87512] shadow-[0_0_18px_#e87512]" />
                 </div>
 
-                <div className="absolute left-1/2 top-1/2 h-[310px] w-[520px] -translate-x-1/2 -translate-y-1/2 [transform-style:preserve-3d] [animation:shyena-float_8s_ease-in-out_infinite] sm:h-[350px] sm:w-[600px]">
+                <div className="absolute left-1/2 top-1/2 h-[330px] w-[600px] -translate-x-1/2 -translate-y-1/2 [transform-style:preserve-3d] [animation:shyena-breathe_9s_ease-in-out_infinite] sm:h-[390px] sm:w-[720px]">
                   <div className="absolute left-1/2 top-1/2 h-[210px] w-[310px] -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-white/10 bg-white/[.025] shadow-[0_50px_120px_rgba(0,0,0,.45)] [transform:translateZ(-40px)_rotateX(12deg)_rotateZ(-4deg)] sm:h-[240px] sm:w-[360px]" />
                   
-                  <Link to="/nexus" aria-label="Open NEXUS — understand your AI system" className="shyena-product shyena-nexus absolute left-[2%] top-[18%] w-[190px] rounded-2xl border border-[#6877ff]/30 bg-[#0d1222]/90 p-4 shadow-[0_30px_70px_rgba(0,0,0,.55)] backdrop-blur-md sm:w-[220px]">
+                  <Link to="/nexus" aria-label="Open NEXUS — understand your AI system" className="shyena-product shyena-nexus absolute left-[2%] top-[18%] w-[250px] overflow-hidden rounded-[22px] border border-[#6877ff]/35 bg-[#0a0f1f]/88 p-5 shadow-[0_40px_100px_rgba(0,0,0,.7),0_0_45px_rgba(104,119,255,.08)] backdrop-blur-xl shadow-[0_30px_70px_rgba(0,0,0,.55)] backdrop-blur-md sm:w-[220px]">
                     <div className="flex items-center justify-between">
                       <span className="font-mono text-[9px] font-bold tracking-[.18em] text-[#8b96ff]">01 · NEXUS</span>
                       <span className="h-2 w-2 rounded-full bg-[#8b96ff] shadow-[0_0_12px_#6877ff]" />
@@ -129,7 +128,7 @@ function HomePage() {
                     <div className="mt-4 flex gap-1.5"><span className="rounded bg-white/5 px-2 py-1 font-mono text-[8px] text-white/40">FLOW</span><span className="rounded bg-white/5 px-2 py-1 font-mono text-[8px] text-white/40">TOOLS</span><span className="rounded bg-white/5 px-2 py-1 font-mono text-[8px] text-white/40">RULES</span></div>
                   </Link>
 
-                  <Link to="/vera" aria-label="Open VERA — test and evaluate" className="shyena-product shyena-vera absolute right-[2%] top-[7%] w-[190px] rounded-2xl border border-[#55d6ad]/30 bg-[#0b1716]/90 p-4 shadow-[0_30px_70px_rgba(0,0,0,.55)] backdrop-blur-md sm:w-[220px]">
+                  <Link to="/vera" aria-label="Open VERA — test and evaluate" className="shyena-product shyena-vera absolute right-[2%] top-[7%] w-[250px] overflow-hidden rounded-[22px] border border-[#55d6ad]/35 bg-[#081513]/88 p-5 shadow-[0_40px_100px_rgba(0,0,0,.7),0_0_45px_rgba(85,214,173,.07)] backdrop-blur-xl shadow-[0_30px_70px_rgba(0,0,0,.55)] backdrop-blur-md sm:w-[220px]">
                     <div className="flex items-center justify-between">
                       <span className="font-mono text-[9px] font-bold tracking-[.18em] text-[#6ee7b7]">02 · VERA</span>
                       <span className="h-2 w-2 rounded-full bg-[#6ee7b7] shadow-[0_0_12px_#55d6ad]" />
@@ -139,7 +138,7 @@ function HomePage() {
                     <div className="mt-4 grid grid-cols-2 gap-1.5 font-mono text-[8px]"><span className="rounded bg-white/5 px-2 py-1 text-white/40">SEMANTIC <b className="text-white/80">0.91</b></span><span className="rounded bg-white/5 px-2 py-1 text-white/40">TRACE <b className="text-[#6ee7b7]">LINKED</b></span></div>
                   </Link>
 
-                  <Link to="/chakra" aria-label="Open CHAKRA — secure your agents" className="shyena-product shyena-chakra absolute bottom-[5%] left-1/2 w-[210px] -translate-x-1/2 rounded-2xl border border-[#f18a32]/35 bg-[#1a110b]/95 p-4 shadow-[0_35px_80px_rgba(0,0,0,.65)] backdrop-blur-md sm:w-[250px]">
+                  <Link to="/chakra" aria-label="Open CHAKRA — secure your agents" className="shyena-product shyena-chakra absolute bottom-[5%] left-1/2 w-[270px] -translate-x-1/2 overflow-hidden rounded-[22px] border border-[#f18a32]/40 bg-[#170d07]/90 p-5 shadow-[0_45px_110px_rgba(0,0,0,.72),0_0_55px_rgba(232,117,18,.09)] backdrop-blur-xl shadow-[0_35px_80px_rgba(0,0,0,.65)] backdrop-blur-md sm:w-[250px]">
                     <div className="flex items-center justify-between">
                       <span className="font-mono text-[9px] font-bold tracking-[.18em] text-[#ffad69]">03 · CHAKRA</span>
                       <span className="h-2 w-2 rounded-full bg-[#f18a32] shadow-[0_0_12px_#e87512]" />
@@ -149,8 +148,9 @@ function HomePage() {
                     <div className="mt-4 flex items-center justify-between rounded-lg bg-white/5 px-2.5 py-2"><span className="font-mono text-[8px] text-white/35">SECURITY</span><span className="font-mono text-[9px] font-bold text-[#6ee7b7]">NO CRITICAL</span></div>
                   </Link>
 
-                  <div className="pointer-events-none absolute left-1/2 top-1/2 h-px w-[420px] -translate-x-1/2 bg-gradient-to-r from-transparent via-white/20 to-transparent [transform:translateZ(180px)_rotateZ(-12deg)]" />
-                  <div className="pointer-events-none absolute left-1/2 top-[13%] -translate-x-1/2 rounded-full border border-white/10 bg-black/30 px-3 py-1.5 font-mono text-[8px] uppercase tracking-[.18em] text-white/35 backdrop-blur-sm">understand → evaluate → secure</div>
+                  <div className="pointer-events-none absolute left-1/2 top-1/2 h-px w-[520px] -translate-x-1/2 bg-gradient-to-r from-transparent via-white/25 to-transparent [transform:translateZ(220px)_rotateZ(-10deg)]" />
+                  <div className="pointer-events-none absolute left-1/2 top-[8%] -translate-x-1/2 rounded-full border border-white/10 bg-black/35 px-4 py-2 font-mono text-[8px] uppercase tracking-[.22em] text-white/40 shadow-[0_10px_40px_rgba(0,0,0,.35)] backdrop-blur-xl">understand → evaluate → secure</div>
+                  <div className="pointer-events-none absolute left-1/2 top-[52%] h-[120px] w-[420px] -translate-x-1/2 rounded-full bg-[#e87512]/[.035] blur-3xl" />
                 </div>
               </div>
 
