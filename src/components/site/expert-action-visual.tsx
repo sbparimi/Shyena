@@ -8,21 +8,24 @@ type ExpertVisual = {
   compact?: boolean;
 };
 
-const productMap = [
-  { key: "NEXUS", match: ["strategy", "enterprise", "governance", "fusion", "salesforce", "cognigy", "architecture", "integration", "api"] },
-  { key: "VERA", match: ["eval", "llm", "rag", "deepeval", "promptfoo", "playwright", "testing", "qa", "performance", "accessibility", "automation"] },
-  { key: "CHAKRA", match: ["security", "red team", "owasp", "prompt injection", "adversarial"] },
-] as const;
+const WOMAN_FIRST_NAMES = new Set([
+  "aisha", "aisha", "anna", "amira", "chloe", "elena", "fatima", "ines",
+  "kavya", "lisa", "maria", "maya", "noor", "priya", "sara", "sofia"
+]);
 
-function pickProduct(skills: string[]) {
-  const text = skills.join(" ").toLowerCase();
-  if (text.includes("security") || text.includes("red team") || text.includes("owasp") || text.includes("prompt injection")) return "CHAKRA";
-  if (text.includes("eval") || text.includes("deepeval") || text.includes("promptfoo") || text.includes("testing") || text.includes("qa") || text.includes("playwright")) return "VERA";
-  return "NEXUS";
+function isWoman(name: string) {
+  return WOMAN_FIRST_NAMES.has(name.trim().split(/\s+/)[0].toLowerCase());
 }
 
 function initials(name: string) {
   return name.split(" ").map((part) => part[0]).join("").slice(0, 2);
+}
+
+function pickProduct(skills: string[]) {
+  const text = skills.join(" ").toLowerCase();
+  if (/(security|red team|owasp|prompt injection|adversarial)/.test(text)) return "CHAKRA";
+  if (/(eval|deepeval|promptfoo|testing|qa|playwright|automation|rag|performance|accessibility)/.test(text)) return "VERA";
+  return "NEXUS";
 }
 
 function actionFor(product: string) {
@@ -34,12 +37,13 @@ function actionFor(product: string) {
 export function ExpertActionVisual({ name, role, skills, compact = false }: ExpertVisual) {
   const product = pickProduct(skills);
   const action = actionFor(product);
+  const woman = isWoman(name);
   const pointerX = useMotionValue(0);
   const pointerY = useMotionValue(0);
-  const rotateY = useSpring(pointerX, { stiffness: 120, damping: 18, mass: 0.65 });
-  const rotateX = useSpring(pointerY, { stiffness: 120, damping: 18, mass: 0.65 });
-  const avatarX = useTransform(rotateY, [-8, 8], [-5, 5]);
-  const avatarY = useTransform(rotateX, [-6, 6], [4, -4]);
+  const rotateY = useSpring(pointerX, { stiffness: 110, damping: 20, mass: 0.7 });
+  const rotateX = useSpring(pointerY, { stiffness: 110, damping: 20, mass: 0.7 });
+  const avatarX = useTransform(rotateY, [-8, 8], [-7, 7]);
+  const avatarY = useTransform(rotateX, [-6, 6], [5, -5]);
 
   const onPointerMove = (event: ReactPointerEvent<HTMLDivElement>) => {
     const rect = event.currentTarget.getBoundingClientRect();
@@ -54,82 +58,128 @@ export function ExpertActionVisual({ name, role, skills, compact = false }: Expe
 
   return (
     <motion.div
-      className={`relative overflow-hidden rounded-[22px] border border-[#1f3359] bg-[#07101f] ${compact ? "h-[190px]" : "h-[250px]"}`}
+      className={`relative overflow-hidden rounded-[22px] border border-[#243b63] bg-[#050b16] ${compact ? "h-[205px]" : "h-[300px]"}`}
       onPointerMove={onPointerMove}
       onPointerLeave={reset}
-      style={{ rotateX, rotateY, transformPerspective: 1000 }}
-      whileHover={{ scale: 1.015 }}
-      transition={{ type: "spring", stiffness: 180, damping: 20 }}
+      style={{ rotateX, rotateY, transformPerspective: 1200 }}
+      whileHover={{ scale: 1.012 }}
+      transition={{ type: "spring", stiffness: 180, damping: 22 }}
+      aria-label={`${name} demonstrating ${product} inside Shyena`}
     >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_35%,rgba(101,230,212,0.16),transparent_24%),radial-gradient(circle_at_22%_90%,rgba(18,62,145,0.32),transparent_42%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_35%,rgba(101,230,212,0.16),transparent_24%),radial-gradient(circle_at_22%_90%,rgba(18,62,145,0.34),transparent_45%)]" />
+      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-[linear-gradient(to_top,rgba(0,0,0,.42),transparent)]" />
+
       <motion.div
-        className="absolute -right-12 -top-16 h-40 w-40 rounded-full border border-[#65e6d4]/20"
-        animate={{ rotate: 360 }}
-        transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
-      />
-      <motion.div
-        className="absolute left-[7%] top-[12%] text-[8px] font-bold tracking-[0.2em] text-white/35"
-        animate={{ opacity: [0.35, 0.65, 0.35] }}
+        className="absolute left-3 top-3 z-20 rounded-full border border-white/10 bg-black/30 px-2.5 py-1 text-[8px] font-bold tracking-[0.16em] text-white/55 backdrop-blur"
+        animate={{ opacity: [0.45, 0.85, 0.45] }}
         transition={{ duration: 2.8, repeat: Infinity }}
       >
-        SHYENA / EXPERT ACTION
+        SHYENA · LIVE DEMO
       </motion.div>
 
-      <div className="absolute left-[5%] top-[27%] w-[48%]">
+      <div className="absolute left-[5%] top-[23%] w-[47%]">
         <div className="mb-2 flex items-center gap-2">
           <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: action.accent }} />
-          <span className="text-[9px] font-bold tracking-[0.18em] text-white/55">{product}</span>
+          <span className="text-[9px] font-bold tracking-[0.18em] text-white/50">{product}</span>
         </div>
-        <div className="rounded-xl border border-white/10 bg-white/[0.055] p-3 backdrop-blur-md">
+        <div className="rounded-xl border border-white/10 bg-white/[.055] p-3 shadow-[0_20px_60px_rgba(0,0,0,.35)] backdrop-blur-xl">
           <div className="flex items-center justify-between">
-            <span className="text-[9px] font-semibold uppercase tracking-[0.14em] text-white/50">{action.label}</span>
-            <motion.span
-              className="text-[9px] font-bold"
-              style={{ color: action.accent }}
-              animate={{ opacity: [0.45, 1, 0.45] }}
-              transition={{ duration: 1.8, repeat: Infinity }}
-            >
-              {action.signal}
-            </motion.span>
+            <span className="text-[8px] font-semibold uppercase tracking-[0.14em] text-white/45">{action.label}</span>
+            <motion.span className="text-[9px] font-bold" style={{ color: action.accent }} animate={{ opacity: [0.45, 1, 0.45] }} transition={{ duration: 1.8, repeat: Infinity }}>{action.signal}</motion.span>
           </div>
           <ProductGraphic product={product} accent={action.accent} />
         </div>
       </div>
 
       <motion.div
-        className="absolute right-[7%] bottom-[4%] h-[86%] w-[38%]"
+        className="absolute right-[7%] bottom-[4%] h-[88%] w-[41%]"
         style={{ x: avatarX, y: avatarY, transformStyle: "preserve-3d" }}
-        animate={{ y: [2, -7, 2], rotateZ: [-1, 1, -1] }}
-        transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut" }}
+        animate={{
+          y: [22, 7, -8, -8, 7, 22],
+          scale: [0.88, 0.96, 1.08, 1.08, 0.96, 0.88],
+          rotateZ: [-1.5, 0.5, 0, 0, -0.5, -1.5],
+        }}
+        transition={{ duration: 7.2, times: [0, .24, .43, .64, .82, 1], repeat: Infinity, ease: [0.45, 0.05, 0.2, 0.95] }}
       >
-        <div className="absolute bottom-0 left-1/2 h-[78%] w-[72%] -translate-x-1/2 rounded-[45%_45%_18%_18%] border border-white/10 bg-gradient-to-b from-[#193a6d] via-[#102750] to-[#081426] shadow-[0_25px_50px_rgba(0,0,0,0.45)]" />
-        <div className="absolute left-1/2 top-[8%] h-[45%] w-[43%] -translate-x-1/2 rounded-[48%_48%_45%_45%] border border-white/15 bg-gradient-to-br from-[#dca98a] via-[#b87962] to-[#754b48] shadow-[0_10px_25px_rgba(0,0,0,0.35)]">
-          <div className="absolute left-[19%] top-[48%] h-1 w-1 rounded-full bg-[#1a1720]" />
-          <div className="absolute right-[19%] top-[48%] h-1 w-1 rounded-full bg-[#1a1720]" />
-          <div className="absolute left-1/2 top-[62%] h-1 w-5 -translate-x-1/2 rounded-full bg-[#6c3f42]/70" />
-          <div className="absolute -top-[8%] left-[5%] h-[30%] w-[90%] rounded-[50%_50%_30%_30%] bg-[#18202e]" />
-        </div>
-        <div className="absolute left-[2%] top-[43%] h-3 w-[40%] origin-right -rotate-[20deg] rounded-full bg-gradient-to-r from-[#c68b70] to-[#a76759]" />
+        <div className="absolute bottom-0 left-1/2 h-[69%] w-[68%] -translate-x-1/2 rounded-[42%_42%_16%_16%] border border-white/10 bg-gradient-to-b from-[#244d83] via-[#102b55] to-[#071223] shadow-[0_28px_60px_rgba(0,0,0,.55)]" />
+        <Portrait woman={woman} accent={action.accent} />
+
         <motion.div
-          className="absolute left-[-2%] top-[37%] h-9 w-14 rounded-lg border border-[#65e6d4]/30 bg-[#0d1e35]/95 shadow-[0_8px_20px_rgba(0,0,0,0.35)]"
-          animate={{ x: [-2, 5, -2], y: [0, -3, 0] }}
-          transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <div className="px-2 pt-1 text-[6px] font-bold tracking-[0.12em]" style={{ color: action.accent }}>{action.verb}</div>
-          <div className="mx-2 mt-1 h-1 rounded-full bg-white/10"><motion.div className="h-full rounded-full" style={{ backgroundColor: action.accent }} animate={{ width: ["35%", "82%", "35%"] }} transition={{ duration: 2.2, repeat: Infinity }} /></div>
-        </motion.div>
-        <div className="absolute bottom-[8%] left-1/2 -translate-x-1/2 text-center">
+          className="absolute left-[2%] top-[43%] z-10 h-3 w-[38%] origin-right rounded-full bg-gradient-to-r from-[#b56f59] to-[#8c5149]"
+          animate={{ rotate: [-22, -34, -22, -8, -22], x: [0, 4, 0, -2, 0] }}
+          transition={{ duration: 7.2, times: [0,.24,.43,.64,1], repeat: Infinity, ease: "easeInOut" }}
+        />
+
+        <Suitcase accent={action.accent} product={product} />
+        <div className="absolute bottom-[6%] left-1/2 -translate-x-1/2 text-center">
           <div className="text-[9px] font-bold tracking-[0.12em] text-white">{initials(name)}</div>
-          <div className="mt-0.5 max-w-[150px] truncate text-[7px] text-white/45">{role}</div>
+          <div className="mt-0.5 max-w-[170px] truncate text-[7px] text-white/45">{role}</div>
         </div>
       </motion.div>
 
+      <div className="absolute bottom-3 left-3 rounded-full border border-white/10 bg-black/25 px-2 py-1 text-[8px] font-semibold text-white/45 backdrop-blur">
+        WALK → OPEN → SHOWCASE
+      </div>
+    </motion.div>
+  );
+}
+
+function Portrait({ woman, accent }: { woman: boolean; accent: string }) {
+  return (
+    <motion.div
+      className="absolute left-1/2 top-[5%] h-[43%] w-[42%] -translate-x-1/2"
+      animate={{ rotateY: [-4, 3, -4] }}
+      transition={{ duration: 5.4, repeat: Infinity, ease: "easeInOut" }}
+      style={{ transformStyle: "preserve-3d" }}
+    >
+      <div className="absolute inset-x-[10%] top-[18%] h-[76%] rounded-[48%_48%_44%_44%] border border-white/15 bg-gradient-to-br from-[#d9a383] via-[#b97863] to-[#744b48] shadow-[0_12px_30px_rgba(0,0,0,.35)]" />
+      <div className={`absolute left-[3%] top-[4%] h-[43%] w-[94%] rounded-[50%_50%_32%_32%] ${woman ? "bg-gradient-to-b from-[#2d1c25] to-[#15121a]" : "bg-gradient-to-b from-[#202733] to-[#10151e]"}`} />
+      {woman && <div className="absolute -left-[1%] top-[24%] h-[55%] w-[26%] rounded-full bg-[#241a23]" />}
+      {woman && <div className="absolute -right-[1%] top-[24%] h-[55%] w-[26%] rounded-full bg-[#241a23]" />}
+      <div className="absolute left-[22%] top-[52%] h-1.5 w-1.5 rounded-full bg-[#17141b]" />
+      <div className="absolute right-[22%] top-[52%] h-1.5 w-1.5 rounded-full bg-[#17141b]" />
+      <div className="absolute left-1/2 top-[67%] h-1 w-5 -translate-x-1/2 rounded-full bg-[#6c3f42]/70" />
+      <div className="absolute left-1/2 bottom-[-4%] h-2 w-[48%] -translate-x-1/2 rounded-full blur-md" style={{ backgroundColor: accent, opacity: .28 }} />
+    </motion.div>
+  );
+}
+
+function Suitcase({ accent, product }: { accent: string; product: string }) {
+  return (
+    <motion.div
+      className="absolute bottom-[13%] left-[-7%] z-20 h-[27%] w-[70%]"
+      style={{ transformStyle: "preserve-3d" }}
+    >
       <motion.div
-        className="absolute bottom-3 left-3 rounded-full border border-white/10 bg-black/25 px-2 py-1 text-[8px] font-semibold text-white/50 backdrop-blur"
-        animate={{ x: [0, 4, 0] }}
-        transition={{ duration: 3, repeat: Infinity }}
+        className="absolute bottom-0 left-0 h-[58%] w-full rounded-[9px] border border-white/15 bg-gradient-to-b from-[#182c4b] to-[#07101f] shadow-[0_18px_35px_rgba(0,0,0,.55)]"
+        animate={{ rotateX: [0, -2, 0] }}
+        transition={{ duration: 3.4, repeat: Infinity, ease: "easeInOut" }}
       >
-        LIVE PRODUCT INTERACTION
+        <div className="absolute left-[8%] top-1/2 h-px w-[84%] bg-white/10" />
+        <div className="absolute right-[8%] top-[20%] h-2 w-2 rounded-sm border border-white/20" />
+      </motion.div>
+      <motion.div
+        className="absolute left-0 top-[7%] h-[52%] w-full origin-bottom rounded-[9px_9px_4px_4px] border border-white/15 bg-gradient-to-br from-[#223d64] to-[#0a1424] shadow-[0_15px_30px_rgba(0,0,0,.4)]"
+        animate={{ rotateX: [88, 22, 88, 88], y: [8, -1, 8, 8] }}
+        transition={{ duration: 7.2, times: [0,.43,.64,1], repeat: Infinity, ease: "easeInOut" }}
+        style={{ transformOrigin: "50% 100%" }}
+      >
+        <div className="absolute left-[8%] top-2 h-px w-[84%] bg-white/15" />
+        <div className="absolute left-1/2 -top-2 h-3 w-12 -translate-x-1/2 rounded-t-md border border-white/15 bg-[#101d32]" />
+      </motion.div>
+      <motion.div
+        className="absolute left-[11%] top-[35%] z-30 flex h-[46%] w-[78%] items-center justify-center rounded-md border border-white/15 bg-[#07101f]/95 shadow-[0_8px_25px_rgba(0,0,0,.5)]"
+        animate={{ y: [8, 0, -7, -7, 0, 8], opacity: [0, .1, 1, 1, .1, 0] }}
+        transition={{ duration: 7.2, times: [0,.24,.43,.64,.82,1], repeat: Infinity, ease: "easeInOut" }}
+      >
+        <div className="w-[82%]">
+          <div className="flex items-center justify-between text-[6px] font-bold tracking-[0.14em] text-white/55">
+            <span>{product}</span><span style={{ color: accent }}>LIVE</span>
+          </div>
+          <div className="mt-1 h-1 rounded-full bg-white/10">
+            <motion.div className="h-full rounded-full" style={{ backgroundColor: accent }} animate={{ width: ["18%", "92%", "18%"] }} transition={{ duration: 2.4, repeat: Infinity }} />
+          </div>
+        </div>
       </motion.div>
     </motion.div>
   );
@@ -139,34 +189,26 @@ function ProductGraphic({ product, accent }: { product: string; accent: string }
   if (product === "CHAKRA") {
     return (
       <svg viewBox="0 0 180 72" className="mt-3 h-16 w-full">
-        <g fill="none" stroke={accent} strokeOpacity="0.45">
-          <circle cx="90" cy="36" r="25" /><circle cx="90" cy="36" r="16" /><circle cx="90" cy="36" r="7" />
-        </g>
+        <g fill="none" stroke={accent} strokeOpacity=".45"><circle cx="90" cy="36" r="25" /><circle cx="90" cy="36" r="16" /><circle cx="90" cy="36" r="7" /></g>
         <motion.path d="M8 18 C42 5 62 68 90 36 S137 8 172 55" fill="none" stroke={accent} strokeWidth="2" strokeDasharray="5 6" animate={{ strokeDashoffset: [0, -44] }} transition={{ duration: 2, repeat: Infinity, ease: "linear" }} />
-        {[["8","18"],["54","49"],["90","36"],["138","20"],["172","55"]].map(([cx,cy], i) => <motion.circle key={i} cx={cx} cy={cy} r="3" fill={accent} animate={{ opacity: [0.3,1,0.3], scale: [0.8,1.25,0.8] }} transition={{ duration: 1.4, delay: i * 0.12, repeat: Infinity }} />)}
+        {[["8","18"],["54","49"],["90","36"],["138","20"],["172","55"]].map(([cx, cy], i) => <motion.circle key={i} cx={cx} cy={cy} r="3" fill={accent} animate={{ opacity: [.3,1,.3], scale: [.8,1.25,.8] }} transition={{ duration: 1.4, delay: i * .12, repeat: Infinity }} />)}
       </svg>
     );
   }
   if (product === "VERA") {
     return (
       <svg viewBox="0 0 180 72" className="mt-3 h-16 w-full">
-        <g fill="none" stroke={accent} strokeOpacity="0.38">
-          <circle cx="90" cy="36" r="27" /><circle cx="90" cy="36" r="18" /><circle cx="90" cy="36" r="9" />
-        </g>
-        <motion.circle cx="90" cy="36" r="4" fill={accent} animate={{ r: [3, 7, 3] }} transition={{ duration: 1.7, repeat: Infinity }} />
-        <motion.path d="M30 58 L60 42 L83 49 L112 24 L150 34" fill="none" stroke={accent} strokeWidth="2" animate={{ pathLength: [0.2, 1, 0.2] }} transition={{ duration: 2.6, repeat: Infinity }} />
-        <text x="7" y="12" fill="white" fillOpacity="0.45" fontSize="7">SEMANTIC</text>
-        <text x="142" y="64" fill={accent} fontSize="9" fontWeight="700">0.91</text>
+        <g fill="none" stroke={accent} strokeOpacity=".38"><circle cx="90" cy="36" r="27" /><circle cx="90" cy="36" r="18" /><circle cx="90" cy="36" r="9" /></g>
+        <motion.circle cx="90" cy="36" r="4" fill={accent} animate={{ r: [3,7,3] }} transition={{ duration: 1.7, repeat: Infinity }} />
+        <motion.path d="M30 58 L60 42 L83 49 L112 24 L150 34" fill="none" stroke={accent} strokeWidth="2" animate={{ pathLength: [.2,1,.2] }} transition={{ duration: 2.6, repeat: Infinity }} />
+        <text x="7" y="12" fill="white" fillOpacity=".45" fontSize="7">SEMANTIC</text><text x="142" y="64" fill={accent} fontSize="9" fontWeight="700">0.91</text>
       </svg>
     );
   }
   return (
     <svg viewBox="0 0 180 72" className="mt-3 h-16 w-full">
-      <g fill="none" stroke={accent} strokeOpacity="0.38" strokeWidth="1.5">
-        <path d="M14 52 H52 V36 H88 V20 H126 V40 H166" />
-        <path d="M14 60 H40 V47 H70 V58 H108 V34 H146 V50 H166" strokeOpacity="0.18" />
-      </g>
-      {[["14","52"],["52","36"],["88","20"],["126","40"],["166","40"]].map(([cx,cy], i) => <motion.circle key={i} cx={cx} cy={cy} r="4" fill={accent} animate={{ opacity: [0.35,1,0.35] }} transition={{ duration: 1.8, delay: i * 0.16, repeat: Infinity }} />)}
+      <g fill="none" stroke={accent} strokeOpacity=".38" strokeWidth="1.5"><path d="M14 52 H52 V36 H88 V20 H126 V40 H166" /><path d="M14 60 H40 V47 H70 V58 H108 V34 H146 V50 H166" strokeOpacity=".18" /></g>
+      {[["14","52"],["52","36"],["88","20"],["126","40"],["166","40"]].map(([cx, cy], i) => <motion.circle key={i} cx={cx} cy={cy} r="4" fill={accent} animate={{ opacity: [.35,1,.35] }} transition={{ duration: 1.8, delay: i * .16, repeat: Infinity }} />)}
     </svg>
   );
 }
