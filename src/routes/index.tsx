@@ -62,129 +62,100 @@ function LogoCard({ name, logo }: { name: string; logo: string }) {
 function HomePage() {
   return (
     <main className="min-h-screen bg-white text-[#17233f]">
-      <section className="border-b border-[#e9e9e9] bg-white">
-        <div className="mx-auto max-w-[1280px] px-5 pb-20 pt-20 sm:px-8 lg:px-10 lg:pb-28 lg:pt-28">
-          <div className="mx-auto max-w-[1050px] text-center">
-            <div className="inline-flex items-center rounded-full border border-[#f1d6bf] bg-[#fff8f2] px-3.5 py-1.5 text-[12px] font-semibold text-[#d96900]">AI quality engineering for production agents</div>
-            <h1 className="mt-7 font-[Sora] text-[clamp(3.2rem,7vw,6.8rem)] font-extrabold leading-[.95] tracking-[-.065em] text-[#17233f]">Make complex AI agents<br /><span className="text-[#e87512]">reliable in production.</span></h1>
-            <p className="mx-auto mt-7 max-w-[760px] text-[19px] leading-8 text-[#5d6470] sm:text-[21px]">Simulation-based testing, evaluation and security that shows what your agent did, why it failed and whether it is ready to ship.</p>
-            <div className="mt-9 flex flex-wrap justify-center gap-3"><Link to="/contact" className="inline-flex h-12 items-center gap-2 rounded-md bg-[#e87512] px-6 text-sm font-semibold text-white transition hover:bg-[#d96900]">Book a demo <ArrowRight className="h-4 w-4" /></Link><Link to="/ai-agent-testing" className="inline-flex h-12 items-center gap-2 rounded-md border border-[#d8dce3] bg-white px-6 text-sm font-semibold text-[#17233f] transition hover:border-[#17233f]">Explore agent testing <ArrowRight className="h-4 w-4" /></Link></div>
+      <section className="relative overflow-hidden bg-[#05070b] text-white">
+        <style>{`
+          @keyframes shyena-float { 0%,100% { transform: translate3d(0,0,0) rotateX(58deg) rotateZ(-12deg); } 50% { transform: translate3d(0,-12px,0) rotateX(58deg) rotateZ(-9deg); } }
+          @keyframes shyena-orbit { from { transform: rotateZ(0deg) rotateX(62deg); } to { transform: rotateZ(360deg) rotateX(62deg); } }
+          @keyframes shyena-pulse { 0%,100% { opacity:.35; transform: scale(.94); } 50% { opacity:1; transform: scale(1); } }
+          @keyframes shyena-scan { 0% { transform: translateY(-120%); opacity:0; } 15%,70% { opacity:.55; } 100% { transform: translateY(120%); opacity:0; } }
+          .shyena-grid { background-image: linear-gradient(rgba(255,255,255,.055) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.055) 1px, transparent 1px); background-size: 56px 56px; }
+          .shyena-glow { box-shadow: 0 0 90px rgba(232,117,18,.14), inset 0 0 60px rgba(70,110,255,.08); }
+          .shyena-face { background: linear-gradient(135deg, rgba(255,255,255,.18), rgba(85,115,255,.05) 42%, rgba(232,117,18,.1)); border: 1px solid rgba(255,255,255,.16); backdrop-filter: blur(8px); }
+        `}</style>
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,rgba(70,96,255,.16),transparent_32%),radial-gradient(circle_at_80%_70%,rgba(232,117,18,.10),transparent_30%)]" />
+        <div className="shyena-grid pointer-events-none absolute inset-0 opacity-40 [mask-image:linear-gradient(to_bottom,black,transparent_92%)]" />
+        <div className="relative mx-auto max-w-[1440px] px-5 pb-16 pt-8 sm:px-8 lg:px-12 lg:pb-24 lg:pt-10">
+          <nav className="flex items-center justify-between border-b border-white/10 pb-5">
+            <div className="font-[Sora] text-lg font-extrabold tracking-[-.04em]">SHYENA<span className="text-[#e87512]">.</span></div>
+            <div className="hidden items-center gap-7 text-[11px] font-medium uppercase tracking-[.16em] text-white/55 md:flex">
+              <span>Agent Testing</span><span>Assurance</span><span>Security</span><span>Autonomous QA</span>
+            </div>
+            <Link to="/contact" className="rounded-full border border-white/20 px-4 py-2 text-[10px] font-semibold uppercase tracking-[.12em] text-white transition hover:border-white/50">Contact</Link>
+          </nav>
+
+          <div className="grid items-center gap-10 py-12 lg:grid-cols-[.72fr_1.28fr] lg:gap-4 lg:py-16">
+            <div className="relative z-10 max-w-[610px]">
+              <div className="inline-flex items-center gap-2 rounded-full border border-[#e87512]/30 bg-[#e87512]/10 px-3.5 py-1.5 font-mono text-[10px] font-semibold uppercase tracking-[.15em] text-[#ffad69]">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#e87512] shadow-[0_0_12px_rgba(232,117,18,.9)]" />
+                AI quality engineering
+              </div>
+              <h1 className="mt-7 font-[Sora] text-[clamp(3.5rem,7vw,7.8rem)] font-extrabold leading-[.86] tracking-[-.075em]">Make complex<br /><span className="text-[#f18a32]">AI agents</span><br />reliable.</h1>
+              <p className="mt-7 max-w-xl text-base leading-7 text-white/55 sm:text-lg sm:leading-8">Simulate real business journeys. Evaluate execution. Trace every finding. Know what happened before you ship.</p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Link to="/contact" className="inline-flex h-11 items-center gap-2 rounded-full bg-[#e87512] px-5 text-sm font-semibold text-white transition hover:bg-[#f18a32]">Book a demo <ArrowRight className="h-4 w-4" /></Link>
+                <Link to="/ai-agent-testing" className="inline-flex h-11 items-center gap-2 rounded-full border border-white/15 bg-white/[.04] px-5 text-sm font-semibold text-white/80 transition hover:border-white/35 hover:text-white">Explore Shyena <ArrowRight className="h-4 w-4" /></Link>
+              </div>
+              <div className="mt-10 grid max-w-md grid-cols-3 border-y border-white/10 py-4">
+                <div><div className="font-mono text-[9px] uppercase tracking-[.15em] text-white/35">Simulation</div><div className="mt-1 text-sm font-semibold">Real journeys</div></div>
+                <div className="border-l border-white/10 pl-4"><div className="font-mono text-[9px] uppercase tracking-[.15em] text-white/35">Evidence</div><div className="mt-1 text-sm font-semibold">Trace linked</div></div>
+                <div className="border-l border-white/10 pl-4"><div className="font-mono text-[9px] uppercase tracking-[.15em] text-white/35">Decision</div><div className="mt-1 text-sm font-semibold">Release signal</div></div>
+              </div>
+            </div>
+
+            <div className="relative mx-auto h-[480px] w-full max-w-[760px] [perspective:1100px] sm:h-[600px]">
+              <div className="absolute inset-[10%_5%_8%] rounded-[50%] bg-[#4c63ff]/10 blur-3xl" />
+              <div className="absolute left-1/2 top-1/2 h-[350px] w-[350px] -translate-x-1/2 -translate-y-1/2 [transform-style:preserve-3d] sm:h-[440px] sm:w-[440px]">
+                <div className="absolute inset-0 rounded-[32%] border border-white/10 bg-white/[.015] [transform:rotateX(64deg)_rotateZ(45deg)]" />
+                <div className="absolute inset-[12%] rounded-[28%] border border-[#5570ff]/25 bg-[#5570ff]/[.035] [transform:rotateX(64deg)_rotateZ(45deg)] shyena-glow" />
+                <div className="absolute left-1/2 top-1/2 h-[180px] w-[180px] -translate-x-1/2 -translate-y-1/2 [transform-style:preserve-3d] [animation:shyena-float_7s_ease-in-out_infinite] sm:h-[235px] sm:w-[235px]">
+                  <div className="shyena-face absolute inset-0 rounded-[28px] shadow-[0_40px_100px_rgba(0,0,0,.6)] [transform:translateZ(90px)] sm:[transform:translateZ(118px)]" />
+                  <div className="shyena-face absolute inset-0 rounded-[28px] [transform:rotateY(90deg)_translateZ(90px)] sm:[transform:rotateY(90deg)_translateZ(118px)]" />
+                  <div className="shyena-face absolute inset-0 rounded-[28px] [transform:rotateX(90deg)_translateZ(90px)] sm:[transform:rotateX(90deg)_translateZ(118px)]" />
+                  <div className="absolute inset-[18%] flex items-center justify-center rounded-full border border-white/15 bg-black/35 [transform:translateZ(96px)] sm:[transform:translateZ(124px)]">
+                    <div className="h-16 w-16 rounded-full border border-[#f18a32]/50 bg-[#e87512]/10 shadow-[0_0_45px_rgba(232,117,18,.25)] sm:h-20 sm:w-20" />
+                    <div className="absolute h-2.5 w-2.5 rounded-full bg-[#f6a05d] shadow-[0_0_18px_#e87512] [animation:shyena-pulse_2.2s_ease-in-out_infinite]" />
+                  </div>
+                  <div className="absolute left-1/2 top-1/2 h-[285px] w-[285px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/10 [transform:rotateX(70deg)] [animation:shyena-orbit_18s_linear_infinite] sm:h-[360px] sm:w-[360px]">
+                    <span className="absolute -left-1.5 top-1/2 h-3 w-3 rounded-full bg-[#e87512] shadow-[0_0_20px_#e87512]" />
+                  </div>
+                </div>
+
+                <div className="absolute left-[2%] top-[8%] w-44 rounded-xl border border-white/10 bg-black/55 p-3 backdrop-blur-md [transform:translateZ(170px)_rotateX(-3deg)] sm:w-52">
+                  <div className="font-mono text-[8px] uppercase tracking-[.15em] text-[#7f8cff]">01 · SIMULATE</div>
+                  <div className="mt-2 text-xs font-semibold">Change customer address</div>
+                  <div className="mt-2 h-1 overflow-hidden rounded-full bg-white/10"><div className="h-full w-[82%] bg-[#7f8cff]" /></div>
+                  <div className="mt-1 font-mono text-[8px] text-white/35">17 steps discovered</div>
+                </div>
+
+                <div className="absolute bottom-[3%] right-[-2%] w-48 rounded-xl border border-white/10 bg-black/60 p-3 backdrop-blur-md [transform:translateZ(190px)_rotateX(4deg)] sm:w-56">
+                  <div className="flex items-center justify-between"><span className="font-mono text-[8px] uppercase tracking-[.15em] text-[#f18a32]">RELEASE SIGNAL</span><span className="h-1.5 w-1.5 rounded-full bg-[#f18a32] shadow-[0_0_10px_#e87512]" /></div>
+                  <div className="mt-2 text-sm font-bold">REVIEW REQUIRED</div>
+                  <div className="mt-1 text-[9px] leading-4 text-white/40">1 business-rule finding linked to execution evidence.</div>
+                </div>
+
+                <div className="absolute right-[4%] top-[18%] w-40 rounded-xl border border-white/10 bg-black/50 p-3 backdrop-blur-md [transform:translateZ(210px)] sm:w-48">
+                  <div className="font-mono text-[8px] uppercase tracking-[.15em] text-[#6ee7b7]">02 · EVALUATE</div>
+                  <div className="mt-2 grid grid-cols-2 gap-2 text-[9px]">
+                    <div className="rounded-md bg-white/5 p-2"><span className="block text-white/35">Semantic</span><b>0.91</b></div>
+                    <div className="rounded-md bg-white/5 p-2"><span className="block text-white/35">Security</span><b>Clear</b></div>
+                  </div>
+                </div>
+
+                <div className="absolute bottom-[22%] left-[-5%] hidden w-36 rounded-xl border border-white/10 bg-black/45 p-3 backdrop-blur-md [transform:translateZ(155px)] sm:block">
+                  <div className="font-mono text-[8px] uppercase tracking-[.15em] text-white/35">TRACE</div>
+                  <div className="mt-2 space-y-1 font-mono text-[8px] text-white/45"><div>→ intent.route</div><div>→ identity.verify</div><div className="text-[#f18a32]">→ address.update</div><div>→ confirmation</div></div>
+                </div>
+              </div>
+              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 font-mono text-[8px] uppercase tracking-[.22em] text-white/25">SHYENA · AGENT ASSURANCE ENGINE · LIVE EXECUTION MODEL</div>
+            </div>
           </div>
-          <div className="mx-auto mt-16 max-w-[1180px]">
-            <div className="text-center">
-              <div className="font-mono text-[10px] font-semibold uppercase tracking-[.18em] text-[#e87512]">Real agent. Real task. Real evidence.</div>
-              <h2 className="mt-4 font-[Sora] text-[clamp(2.1rem,4.5vw,4.2rem)] font-extrabold leading-[1] tracking-[-.05em] text-[#17233f]">See it evaluate your own agent.</h2>
-              <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-[#626976] sm:text-lg">One business scenario goes through execution, evaluation and evidence—ending in a release signal your team can act on.</p>
-            </div>
 
-            <div className="relative mx-auto mt-10 max-w-5xl">
-              <div className="hidden h-px bg-[#dfe4eb] md:block absolute left-[13%] right-[13%] top-6" />
-              <div className="grid gap-6 md:grid-cols-3">
-                {[
-                  ["01", "Simulate", "Run a real customer journey through the agent.", "bg-[#eef6ff] text-[#2376d8]"],
-                  ["02", "Evaluate", "Check rules, responses, routing, tools and security.", "bg-[#f3efff] text-[#7357c7]"],
-                  ["03", "Decide", "Turn execution evidence into a release signal.", "bg-[#ecfaf2] text-[#15945a]"],
-                ].map(([number, title, text, badge]) => (
-                  <div key={number} className="relative z-10 flex items-start gap-3 rounded-xl border border-[#e4e7ec] bg-white p-4 text-left shadow-[0_12px_35px_-28px_rgba(23,35,63,.5)] md:block md:border-0 md:p-0 md:text-center md:shadow-none">
-                    <div className={`mx-0 flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-sm font-extrabold md:mx-auto ${badge}`}>{number}</div>
-                    <div className="pt-0.5 md:pt-4"><div className="text-base font-bold text-[#17233f]">{title}</div><p className="mt-1 text-xs leading-5 text-[#69707d] sm:text-sm">{text}</p></div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="mt-10 overflow-hidden rounded-2xl border border-[#dfe3e8] bg-[#f8fafc] shadow-[0_30px_80px_-50px_rgba(23,35,63,.45)]">
-              <div className="flex items-center justify-between gap-4 border-b border-[#e5e8ed] bg-white px-4 py-3 sm:px-5">
-                <div className="flex min-w-0 items-center gap-2">
-                  <span className="h-2.5 w-2.5 rounded-full bg-[#ef4444]" /><span className="h-2.5 w-2.5 rounded-full bg-[#f59e0b]" /><span className="h-2.5 w-2.5 rounded-full bg-[#22c55e]" />
-                  <span className="ml-2 truncate font-mono text-[9px] uppercase tracking-[.16em] text-[#8b93a1] sm:text-[10px]">Shyena · agent assurance workspace</span>
-                </div>
-                <span className="hidden shrink-0 text-[10px] font-semibold text-[#64748b] sm:block">Customer Service Agent · Live</span>
-              </div>
-
-              <div className="grid lg:grid-cols-[.9fr_1.25fr_.82fr]">
-                <div className="border-b border-[#e5e8ed] bg-white p-5 sm:p-7 lg:border-b-0 lg:border-r">
-                  <div className="font-mono text-[9px] font-semibold uppercase tracking-[.16em] text-[#2376d8]">Business scenario</div>
-                  <h3 className="mt-3 text-lg font-bold tracking-[-.02em] text-[#17233f]">Change customer address</h3>
-                  <p className="mt-1 text-xs leading-5 text-[#69707d]">A real customer goal executed end-to-end.</p>
-                  <div className="relative mt-5 space-y-2.5">
-                    {["Customer asks for address change", "Agent identifies account", "Identity verification", "Update address", "Confirmation"].map((step, i) => (
-                      <div key={step} className="flex items-center gap-2.5 rounded-lg border border-[#e8ebef] bg-[#fbfcfd] px-3 py-2.5 text-xs font-medium text-[#46505f] sm:text-sm">
-                        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#eef6ff] text-[10px] font-extrabold text-[#2376d8]">{i + 1}</span>{step}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="border-b border-[#e5e8ed] bg-[#f8fafc] p-5 sm:p-7 lg:border-b-0 lg:border-r">
-                  <div className="flex items-start justify-between gap-3">
-                    <div><div className="font-mono text-[9px] font-semibold uppercase tracking-[.16em] text-[#7357c7]">Agent execution + evaluation</div><h3 className="mt-2 text-lg font-bold tracking-[-.02em] text-[#17233f]">Journey completed</h3></div>
-                    <span className="shrink-0 rounded-full bg-[#eafaf1] px-2.5 py-1 text-[9px] font-bold text-[#13834f]">17 / 17 PASSED</span>
-                  </div>
-                  <div className="mt-5 grid gap-2 sm:grid-cols-2">
-                    {[
-                      ["Business rules", "14 / 15", "1 finding", "bg-[#fff8ed]"],
-                      ["Response quality", "0.91", "semantic score", "bg-[#f7f3ff]"],
-                      ["Tool execution", "Complete", "actions verified", "bg-[#eef7ff]"],
-                      ["Security", "No critical", "findings", "bg-[#eefaf3]"],
-                    ].map(([label, value, state, bg]) => (
-                      <div key={label} className={`rounded-lg border border-[#e6e9ed] ${bg} p-3`}>
-                        <div className="text-[10px] font-semibold text-[#687180]">{label}</div>
-                        <div className="mt-1 text-base font-extrabold text-[#17233f] sm:text-lg">{value}</div>
-                        <div className="mt-0.5 font-mono text-[8px] uppercase tracking-[.1em] text-[#8b93a1]">{state}</div>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="mt-3 flex items-center justify-between rounded-lg border border-[#e6e9ed] bg-white px-3 py-2.5">
-                    <div><div className="text-[10px] font-semibold text-[#687180]">Evidence trace</div><div className="text-xs font-bold text-[#17233f]">Linked to execution</div></div>
-                    <span className="rounded-full bg-[#eefaf3] px-2 py-1 font-mono text-[8px] font-bold uppercase tracking-[.1em] text-[#13834f]">Auditable</span>
-                  </div>
-                </div>
-
-                <div className="bg-white p-5 sm:p-7">
-                  <div className="font-mono text-[9px] font-semibold uppercase tracking-[.16em] text-[#e87512]">Release signal</div>
-                  <div className="mt-3 rounded-xl border border-[#f0d4bc] bg-[#fff8f2] p-4">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#fff0e5] text-lg">!</div>
-                    <h3 className="mt-3 text-base font-extrabold leading-5 text-[#17233f]">Review required<br />before release</h3>
-                    <p className="mt-2 text-xs leading-5 text-[#5f6672]">The journey works, but one business-rule finding needs review.</p>
-                  </div>
-                  <div className="mt-4 space-y-2.5">
-                    {[
-                      ["Journey works end-to-end", "All expected steps completed"],
-                      ["1 business-rule finding", "Needs review before release"],
-                      ["No critical security issues", "No critical finding detected"],
-                      ["Evidence available", "Results linked to execution"],
-                    ].map(([title, text], i) => (
-                      <div key={title} className="flex gap-2.5">
-                        <span className={`mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full text-[9px] font-bold ${i === 1 ? "bg-[#fff0e5] text-[#e87512]" : "bg-[#eafaf1] text-[#15945a]"}`}>{i === 1 ? "!" : "✓"}</span>
-                        <div><div className="text-[11px] font-semibold text-[#263247]">{title}</div><div className="text-[10px] leading-4 text-[#7a8290]">{text}</div></div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex flex-col gap-3 border-t border-[#e5e8ed] bg-white p-4 sm:flex-row sm:items-center sm:justify-between sm:px-5">
-                <div className="flex items-center gap-2 text-[11px] text-[#687180]"><ShieldCheck className="h-4 w-4 text-[#e87512]" /> Every finding stays linked to execution evidence.</div>
-                <div className="flex gap-2">
-                  <Link to="/ai-agent-testing" className="inline-flex h-9 items-center justify-center rounded-md border border-[#cfd5de] px-3.5 text-[11px] font-semibold text-[#17233f] hover:border-[#17233f]">Run your own scenario <ArrowRight className="ml-1.5 h-3.5 w-3.5" /></Link>
-                  <Link to="/contact" className="inline-flex h-9 items-center justify-center rounded-md bg-[#e87512] px-3.5 text-[11px] font-semibold text-white hover:bg-[#d96900]">Book a demo <ArrowRight className="ml-1.5 h-3.5 w-3.5" /></Link>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-              {[
-                ["Test real business journeys", "Not just prompts"],
-                ["Validate what matters", "Rules, tools, security and responses"],
-                ["Get traceable evidence", "For engineering and governance"],
-                ["Make a release decision", "Go, review or no-go"],
-              ].map(([title, text]) => (
-                <div key={title} className="rounded-lg border border-[#e6e9ed] bg-white p-3.5 text-center">
-                  <div className="text-xs font-bold text-[#17233f]">{title}</div>
-                  <div className="mt-1 text-[10px] leading-4 text-[#7a8290]">{text}</div>
-                </div>
-              ))}
+          <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[.025] px-5 py-4 sm:px-7">
+            <div className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/[.06] to-transparent [animation:shyena-scan_6s_ease-in-out_infinite]" />
+            <div className="relative grid gap-4 text-center sm:grid-cols-3 sm:text-left">
+              <div><div className="font-mono text-[9px] uppercase tracking-[.16em] text-white/30">SIMULATE</div><div className="mt-1 text-sm font-semibold">Real business journeys</div></div>
+              <div className="border-white/10 sm:border-l sm:pl-6"><div className="font-mono text-[9px] uppercase tracking-[.16em] text-white/30">EVALUATE</div><div className="mt-1 text-sm font-semibold">Rules · semantics · orchestration · security</div></div>
+              <div className="border-white/10 sm:border-l sm:pl-6"><div className="font-mono text-[9px] uppercase tracking-[.16em] text-white/30">PROVE</div><div className="mt-1 text-sm font-semibold">Traceable evidence for release</div></div>
             </div>
           </div>
         </div>
