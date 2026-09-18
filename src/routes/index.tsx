@@ -102,53 +102,55 @@ function HomePage() {
               </div>
             </div>
 
-            <div className="relative mx-auto h-[480px] w-full max-w-[760px] [perspective:1100px] sm:h-[600px]">
-              <div className="absolute inset-[10%_5%_8%] rounded-[50%] bg-[#4c63ff]/10 blur-3xl" />
-              <div className="absolute left-1/2 top-1/2 h-[350px] w-[350px] -translate-x-1/2 -translate-y-1/2 [transform-style:preserve-3d] sm:h-[440px] sm:w-[440px]">
-                <div className="absolute inset-0 rounded-[32%] border border-white/10 bg-white/[.015] [transform:rotateX(64deg)_rotateZ(45deg)]" />
-                <div className="absolute inset-[12%] rounded-[28%] border border-[#5570ff]/25 bg-[#5570ff]/[.035] [transform:rotateX(64deg)_rotateZ(45deg)] shyena-glow" />
-                <div className="absolute left-1/2 top-1/2 h-[180px] w-[180px] -translate-x-1/2 -translate-y-1/2 [transform-style:preserve-3d] [animation:shyena-float_7s_ease-in-out_infinite] sm:h-[235px] sm:w-[235px]">
-                  <div className="shyena-face absolute inset-0 rounded-[28px] shadow-[0_40px_100px_rgba(0,0,0,.6)] [transform:translateZ(90px)] sm:[transform:translateZ(118px)]" />
-                  <div className="shyena-face absolute inset-0 rounded-[28px] [transform:rotateY(90deg)_translateZ(90px)] sm:[transform:rotateY(90deg)_translateZ(118px)]" />
-                  <div className="shyena-face absolute inset-0 rounded-[28px] [transform:rotateX(90deg)_translateZ(90px)] sm:[transform:rotateX(90deg)_translateZ(118px)]" />
-                  <div className="absolute inset-[18%] flex items-center justify-center rounded-full border border-white/15 bg-black/35 [transform:translateZ(96px)] sm:[transform:translateZ(124px)]">
-                    <div className="h-16 w-16 rounded-full border border-[#f18a32]/50 bg-[#e87512]/10 shadow-[0_0_45px_rgba(232,117,18,.25)] sm:h-20 sm:w-20" />
-                    <div className="absolute h-2.5 w-2.5 rounded-full bg-[#f6a05d] shadow-[0_0_18px_#e87512] [animation:shyena-pulse_2.2s_ease-in-out_infinite]" />
+            <div className="relative mx-auto h-[480px] w-full max-w-[760px] [perspective:1200px] sm:h-[600px]">
+              <div className="absolute inset-[8%_4%_12%] rounded-full bg-[#4c63ff]/10 blur-3xl" />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="absolute h-[390px] w-[390px] rounded-full border border-white/10 [transform:rotateX(68deg)] [animation:shyena-orbit_22s_linear_infinite] sm:h-[500px] sm:w-[500px]">
+                  <span className="absolute left-1/2 top-0 h-2.5 w-2.5 -translate-x-1/2 rounded-full bg-[#e87512] shadow-[0_0_18px_#e87512]" />
+                </div>
+
+                <div className="absolute left-1/2 top-1/2 h-[310px] w-[520px] -translate-x-1/2 -translate-y-1/2 [transform-style:preserve-3d] [animation:shyena-float_8s_ease-in-out_infinite] sm:h-[350px] sm:w-[600px]">
+                  <div className="absolute left-1/2 top-1/2 h-[210px] w-[310px] -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-white/10 bg-white/[.025] shadow-[0_50px_120px_rgba(0,0,0,.45)] [transform:translateZ(-40px)_rotateX(12deg)_rotateZ(-4deg)] sm:h-[240px] sm:w-[360px]" />
+                  
+                  <div className="absolute left-[2%] top-[18%] w-[190px] rounded-2xl border border-[#6877ff]/30 bg-[#0d1222]/90 p-4 shadow-[0_30px_70px_rgba(0,0,0,.55)] backdrop-blur-md [transform:translateZ(95px)_rotateY(8deg)_rotateX(3deg)] sm:w-[220px]">
+                    <div className="flex items-center justify-between">
+                      <span className="font-mono text-[9px] font-bold tracking-[.18em] text-[#8b96ff]">01 · NEXUS</span>
+                      <span className="h-2 w-2 rounded-full bg-[#8b96ff] shadow-[0_0_12px_#6877ff]" />
+                    </div>
+                    <div className="mt-3 font-[Sora] text-2xl font-extrabold tracking-[-.04em]">Understand</div>
+                    <p className="mt-2 text-[11px] leading-5 text-white/45">Map flows, tools, rules and system behaviour.</p>
+                    <div className="mt-4 flex gap-1.5"><span className="rounded bg-white/5 px-2 py-1 font-mono text-[8px] text-white/40">FLOW</span><span className="rounded bg-white/5 px-2 py-1 font-mono text-[8px] text-white/40">TOOLS</span><span className="rounded bg-white/5 px-2 py-1 font-mono text-[8px] text-white/40">RULES</span></div>
                   </div>
-                  <div className="absolute left-1/2 top-1/2 h-[285px] w-[285px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/10 [transform:rotateX(70deg)] [animation:shyena-orbit_18s_linear_infinite] sm:h-[360px] sm:w-[360px]">
-                    <span className="absolute -left-1.5 top-1/2 h-3 w-3 rounded-full bg-[#e87512] shadow-[0_0_20px_#e87512]" />
+
+                  <div className="absolute right-[2%] top-[7%] w-[190px] rounded-2xl border border-[#55d6ad]/30 bg-[#0b1716]/90 p-4 shadow-[0_30px_70px_rgba(0,0,0,.55)] backdrop-blur-md [transform:translateZ(150px)_rotateY(-8deg)_rotateX(3deg)] sm:w-[220px]">
+                    <div className="flex items-center justify-between">
+                      <span className="font-mono text-[9px] font-bold tracking-[.18em] text-[#6ee7b7]">02 · VERA</span>
+                      <span className="h-2 w-2 rounded-full bg-[#6ee7b7] shadow-[0_0_12px_#55d6ad]" />
+                    </div>
+                    <div className="mt-3 font-[Sora] text-2xl font-extrabold tracking-[-.04em]">Evaluate</div>
+                    <p className="mt-2 text-[11px] leading-5 text-white/45">Test behaviour, semantics and execution evidence.</p>
+                    <div className="mt-4 grid grid-cols-2 gap-1.5 font-mono text-[8px]"><span className="rounded bg-white/5 px-2 py-1 text-white/40">SEMANTIC <b className="text-white/80">0.91</b></span><span className="rounded bg-white/5 px-2 py-1 text-white/40">TRACE <b className="text-[#6ee7b7]">LINKED</b></span></div>
                   </div>
-                </div>
 
-                <div className="absolute left-[2%] top-[8%] w-44 rounded-xl border border-white/10 bg-black/55 p-3 backdrop-blur-md [transform:translateZ(170px)_rotateX(-3deg)] sm:w-52">
-                  <div className="font-mono text-[8px] uppercase tracking-[.15em] text-[#7f8cff]">01 · SIMULATE</div>
-                  <div className="mt-2 text-xs font-semibold">Change customer address</div>
-                  <div className="mt-2 h-1 overflow-hidden rounded-full bg-white/10"><div className="h-full w-[82%] bg-[#7f8cff]" /></div>
-                  <div className="mt-1 font-mono text-[8px] text-white/35">17 steps discovered</div>
-                </div>
-
-                <div className="absolute bottom-[3%] right-[-2%] w-48 rounded-xl border border-white/10 bg-black/60 p-3 backdrop-blur-md [transform:translateZ(190px)_rotateX(4deg)] sm:w-56">
-                  <div className="flex items-center justify-between"><span className="font-mono text-[8px] uppercase tracking-[.15em] text-[#f18a32]">RELEASE SIGNAL</span><span className="h-1.5 w-1.5 rounded-full bg-[#f18a32] shadow-[0_0_10px_#e87512]" /></div>
-                  <div className="mt-2 text-sm font-bold">REVIEW REQUIRED</div>
-                  <div className="mt-1 text-[9px] leading-4 text-white/40">1 business-rule finding linked to execution evidence.</div>
-                </div>
-
-                <div className="absolute right-[4%] top-[18%] w-40 rounded-xl border border-white/10 bg-black/50 p-3 backdrop-blur-md [transform:translateZ(210px)] sm:w-48">
-                  <div className="font-mono text-[8px] uppercase tracking-[.15em] text-[#6ee7b7]">02 · EVALUATE</div>
-                  <div className="mt-2 grid grid-cols-2 gap-2 text-[9px]">
-                    <div className="rounded-md bg-white/5 p-2"><span className="block text-white/35">Semantic</span><b>0.91</b></div>
-                    <div className="rounded-md bg-white/5 p-2"><span className="block text-white/35">Security</span><b>Clear</b></div>
+                  <div className="absolute bottom-[5%] left-1/2 w-[210px] -translate-x-1/2 rounded-2xl border border-[#f18a32]/35 bg-[#1a110b]/95 p-4 shadow-[0_35px_80px_rgba(0,0,0,.65)] backdrop-blur-md [transform:translateZ(210px)_rotateX(-2deg)] sm:w-[250px]">
+                    <div className="flex items-center justify-between">
+                      <span className="font-mono text-[9px] font-bold tracking-[.18em] text-[#ffad69]">03 · CHAKRA</span>
+                      <span className="h-2 w-2 rounded-full bg-[#f18a32] shadow-[0_0_12px_#e87512]" />
+                    </div>
+                    <div className="mt-3 font-[Sora] text-2xl font-extrabold tracking-[-.04em]">Secure</div>
+                    <p className="mt-2 text-[11px] leading-5 text-white/45">Attack critical paths and expose unsafe behaviour.</p>
+                    <div className="mt-4 flex items-center justify-between rounded-lg bg-white/5 px-2.5 py-2"><span className="font-mono text-[8px] text-white/35">SECURITY</span><span className="font-mono text-[9px] font-bold text-[#6ee7b7]">NO CRITICAL</span></div>
                   </div>
-                </div>
 
-                <div className="absolute bottom-[22%] left-[-5%] hidden w-36 rounded-xl border border-white/10 bg-black/45 p-3 backdrop-blur-md [transform:translateZ(155px)] sm:block">
-                  <div className="font-mono text-[8px] uppercase tracking-[.15em] text-white/35">TRACE</div>
-                  <div className="mt-2 space-y-1 font-mono text-[8px] text-white/45"><div>→ intent.route</div><div>→ identity.verify</div><div className="text-[#f18a32]">→ address.update</div><div>→ confirmation</div></div>
+                  <div className="absolute left-1/2 top-1/2 h-px w-[420px] -translate-x-1/2 bg-gradient-to-r from-transparent via-white/20 to-transparent [transform:translateZ(180px)_rotateZ(-12deg)]" />
                 </div>
               </div>
-              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 font-mono text-[8px] uppercase tracking-[.22em] text-white/25">SHYENA · AGENT ASSURANCE ENGINE · LIVE EXECUTION MODEL</div>
-            </div>
-          </div>
+
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-center">
+                <div className="font-mono text-[8px] uppercase tracking-[.22em] text-white/25">SHYENA PLATFORM</div>
+                <div className="mt-1 text-[11px] font-medium text-white/45">NEXUS → VERA → CHAKRA</div>
+              </div>
+            </div>          </div>
 
           <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[.025] px-5 py-4 sm:px-7">
             <div className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/[.06] to-transparent [animation:shyena-scan_6s_ease-in-out_infinite]" />
