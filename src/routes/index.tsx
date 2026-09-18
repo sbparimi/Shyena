@@ -145,7 +145,6 @@ function HomePage() {
               <div className="absolute inset-0 [transform-style:preserve-3d]">
                 <motion.div className="shyena-orbit-motion absolute left-1/2 top-[53%] h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/[.07] [animation:shyena-orbit_30s_linear_infinite] sm:h-[560px] sm:w-[560px]">
                   <motion.span animate={{ rotate: 360 }} transition={{ duration: 30, repeat: Infinity, ease: "linear" }} className="absolute left-[7%] top-[20%] h-1.5 w-1.5 rounded-full bg-white shadow-[0_0_16px_white]" />
-                  </motion.span>
                   <span className="absolute bottom-[13%] right-[9%] h-1.5 w-1.5 rounded-full bg-[#e87512] shadow-[0_0_18px_#e87512]" />
                 </div>
 
