@@ -172,7 +172,7 @@ function HomePage() {
                     <div className="mt-3 font-[Sora] text-[26px] font-extrabold tracking-[-.045em]">Map the system.</div>
                     <p className="mt-2 text-[11px] leading-5 text-white/45">Flows, tools, rules and system behaviour.</p>
                   </div>
-                </div>
+                </motion.div>
 
                 <motion.div className="shyena-product shyena-vera absolute right-[0%] top-[6%] w-[270px] overflow-hidden rounded-[24px] border border-[#55d6ad]/45 bg-[#071312]/96 shadow-[0_55px_120px_rgba(0,0,0,.78),0_0_70px_rgba(85,214,173,.1)] backdrop-blur-xl sm:w-[330px]"
                   initial={{ x: 175, y: -70, z: -80, rotateY: -18, rotateX: 8, scale: .78, opacity: .42 }}
