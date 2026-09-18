@@ -61,13 +61,9 @@ export function ExpertActionVisual({ name, role, skills, gender, compact = false
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_35%,rgba(101,230,212,0.12),transparent_24%),radial-gradient(circle_at_22%_90%,rgba(18,62,145,0.30),transparent_45%)]" />
       <div className="absolute inset-x-0 bottom-0 h-2/5 bg-[linear-gradient(to_top,rgba(0,0,0,.38),transparent)]" />
 
-      <motion.div
-        className="absolute left-3 top-3 z-20 rounded-full border border-white/10 bg-black/30 px-2.5 py-1 text-[8px] font-bold tracking-[0.16em] text-white/55 backdrop-blur"
-        animate={{ opacity: [0.45, 0.85, 0.45] }}
-        transition={{ duration: 2.8, repeat: Infinity }}
-      >
+      <div className="absolute left-3 top-3 z-20 rounded-full border border-white/10 bg-black/20 px-2.5 py-1 text-[8px] font-bold tracking-[0.16em] text-white/45 backdrop-blur">
         SHYENA
-      </motion.div>
+      </div>
 
       <div className="absolute left-[4%] top-[20%] z-10 w-[49%]">
         <div className="mb-2 flex items-center gap-2">
