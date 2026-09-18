@@ -127,19 +127,59 @@ export function ExpertActionVisual({ name, role, skills, compact = false }: Expe
 function Portrait({ woman, accent }: { woman: boolean; accent: string }) {
   return (
     <motion.div
-      className="absolute left-1/2 top-[5%] h-[43%] w-[42%] -translate-x-1/2"
-      animate={{ rotateY: [-4, 3, -4] }}
-      transition={{ duration: 5.4, repeat: Infinity, ease: "easeInOut" }}
+      className="absolute left-1/2 top-[3%] h-[47%] w-[48%] -translate-x-1/2"
+      animate={{ rotateY: [-5, 4, -5], x: [-1, 1, -1] }}
+      transition={{ duration: 5.8, repeat: Infinity, ease: "easeInOut" }}
       style={{ transformStyle: "preserve-3d" }}
     >
-      <div className="absolute inset-x-[10%] top-[18%] h-[76%] rounded-[48%_48%_44%_44%] border border-white/15 bg-gradient-to-br from-[#d9a383] via-[#b97863] to-[#744b48] shadow-[0_12px_30px_rgba(0,0,0,.35)]" />
-      <div className={`absolute left-[3%] top-[4%] h-[43%] w-[94%] rounded-[50%_50%_32%_32%] ${woman ? "bg-gradient-to-b from-[#2d1c25] to-[#15121a]" : "bg-gradient-to-b from-[#202733] to-[#10151e]"}`} />
-      {woman && <div className="absolute -left-[1%] top-[24%] h-[55%] w-[26%] rounded-full bg-[#241a23]" />}
-      {woman && <div className="absolute -right-[1%] top-[24%] h-[55%] w-[26%] rounded-full bg-[#241a23]" />}
-      <div className="absolute left-[22%] top-[52%] h-1.5 w-1.5 rounded-full bg-[#17141b]" />
-      <div className="absolute right-[22%] top-[52%] h-1.5 w-1.5 rounded-full bg-[#17141b]" />
-      <div className="absolute left-1/2 top-[67%] h-1 w-5 -translate-x-1/2 rounded-full bg-[#6c3f42]/70" />
-      <div className="absolute left-1/2 bottom-[-4%] h-2 w-[48%] -translate-x-1/2 rounded-full blur-md" style={{ backgroundColor: accent, opacity: .28 }} />
+      {/* AI-photoreal portrait treatment: skin lighting, facial planes, eyes, hair and ears */}
+      <div
+        className="absolute inset-x-[14%] top-[16%] h-[76%] rounded-[47%_47%_43%_43%] border border-white/20 shadow-[0_16px_38px_rgba(0,0,0,.48)]"
+        style={{
+          background: "radial-gradient(circle at 35% 30%, #f2c4a7 0%, #d99a7b 32%, #a9675a 66%, #6d4145 100%)",
+          boxShadow: `inset -16px -10px 22px rgba(54,20,24,.24), inset 10px 8px 20px rgba(255,235,218,.18), 0 16px 38px rgba(0,0,0,.48)`,
+        }}
+      />
+
+      <div className="absolute left-[7%] top-[40%] h-[24%] w-[9%] rounded-full border border-white/10 bg-[#b87561]" />
+      <div className="absolute right-[7%] top-[40%] h-[24%] w-[9%] rounded-full border border-white/10 bg-[#b87561]" />
+
+      <div
+        className={`absolute left-[4%] top-[2%] h-[48%] w-[92%] rounded-[52%_52%_30%_30%] shadow-[0_8px_22px_rgba(0,0,0,.48)] ${woman ? "bg-[linear-gradient(120deg,#3a2228,#17131a_62%,#0b0d13)]" : "bg-[linear-gradient(120deg,#313744,#151a23_60%,#0a0d13)]"}`}
+      />
+      {woman && (
+        <>
+          <div className="absolute -left-[1%] top-[25%] h-[59%] w-[25%] rounded-[55%_35%_45%_55%] bg-[#21171f] shadow-[inset_-5px_0_8px_rgba(255,255,255,.05)]" />
+          <div className="absolute -right-[1%] top-[25%] h-[59%] w-[25%] rounded-[35%_55%_55%_45%] bg-[#21171f] shadow-[inset_5px_0_8px_rgba(255,255,255,.05)]" />
+          <div className="absolute left-[17%] top-[7%] h-[34%] w-[12%] rotate-[22deg] rounded-full bg-[#4b2c35]/70 blur-[1px]" />
+        </>
+      )}
+      {!woman && (
+        <>
+          <div className="absolute left-[12%] top-[9%] h-[27%] w-[76%] rounded-[55%_55%_25%_25%] bg-[#1b222c]" />
+          <div className="absolute left-[13%] top-[28%] h-[8%] w-[74%] rounded-full bg-[#141921]" />
+          <div className="absolute left-1/2 top-[5%] h-[7%] w-[18%] -translate-x-1/2 rounded-full bg-white/8 blur-sm" />
+        </>
+      )}
+
+      {/* Brow / eye line */}
+      <div className="absolute left-[19%] top-[49%] h-[4px] w-[22%] rotate-[-4deg] rounded-full bg-[#5c3436]/80" />
+      <div className="absolute right-[19%] top-[49%] h-[4px] w-[22%] rotate-[4deg] rounded-full bg-[#5c3436]/80" />
+      <div className="absolute left-[22%] top-[53%] h-[8px] w-[12px] rounded-[50%] bg-[#f6e6d8] shadow-[0_1px_5px_rgba(0,0,0,.28)]">
+        <span className="absolute left-1/2 top-1/2 h-[4px] w-[4px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#27303a]" />
+      </div>
+      <div className="absolute right-[22%] top-[53%] h-[8px] w-[12px] rounded-[50%] bg-[#f6e6d8] shadow-[0_1px_5px_rgba(0,0,0,.28)]">
+        <span className="absolute left-1/2 top-1/2 h-[4px] w-[4px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#27303a]" />
+      </div>
+
+      {/* Nose / cheek light / mouth */}
+      <div className="absolute left-1/2 top-[53%] h-[18%] w-[8%] -translate-x-1/2 rounded-[45%] bg-[linear-gradient(to_right,rgba(96,47,47,.18),rgba(255,225,207,.24),rgba(96,47,47,.18))]" />
+      <div className="absolute left-[29%] top-[62%] h-[8%] w-[13%] rounded-full bg-[#f5c3a5]/16 blur-[5px]" />
+      <div className="absolute right-[29%] top-[62%] h-[8%] w-[13%] rounded-full bg-[#f5c3a5]/16 blur-[5px]" />
+      <div className="absolute left-1/2 top-[72%] h-[6px] w-[25px] -translate-x-1/2 rounded-[50%] bg-[#7e4146]/75" />
+      <div className="absolute left-1/2 top-[72%] h-px w-[18px] -translate-x-1/2 bg-[#f4c5b5]/50" />
+
+      <div className="absolute left-1/2 bottom-[-8%] h-2 w-[54%] -translate-x-1/2 rounded-full blur-md" style={{ backgroundColor: accent, opacity: .32 }} />
     </motion.div>
   );
 }
