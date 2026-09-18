@@ -1,4 +1,4 @@
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 import type { PointerEvent as ReactPointerEvent } from "react";
 
 type ExpertVisual = {
@@ -9,12 +9,6 @@ type ExpertVisual = {
   gender: "woman" | "man";
   compact?: boolean;
 };
-
-function avatarFor(name: string, woman: boolean) {
-  const source = woman ? SYNTHETIC_FEMALE_AVATARS : SYNTHETIC_MALE_AVATARS;
-  const hash = [...name].reduce((sum, char) => sum + char.charCodeAt(0), 0);
-  return source[hash % source.length];
-}
 
 const AVATAR_BY_EXPERT_ID: Record<string, string> = {
   "marcus-van-der-berg": "P005",
@@ -53,7 +47,8 @@ const AVATAR_BY_EXPERT_ID: Record<string, string> = {
 };
 
 function avatarUrl(id: string) {
-  const person = AVATAR_BY_EXPERT_ID[id] ?? "P001";
+  const person = AVATAR_BY_EXPERT_ID[id];
+  if (!person) return null;
   return `https://raw.githubusercontent.com/Prompt-Haus/OpenPeople/main/openpeople/data/curated/${person}/assets/studio_portrait.jpg`;
 }
 
@@ -64,8 +59,8 @@ function specialtyFor(skills: string[]) {
   return "NEXUS";
 }
 
-function Portrait({ woman, name }: { woman: boolean; name: string }) {
-  const src = avatarFor(name, woman);
+function Portrait({ id, woman, name }: { id: string; woman: boolean; name: string }) {
+  const src = avatarUrl(id);
   return (
     <motion.div
       className="absolute inset-0"
@@ -73,14 +68,18 @@ function Portrait({ woman, name }: { woman: boolean; name: string }) {
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.55, ease: "easeOut" }}
     >
-      <img
-        src={src}
-        alt={`Synthetic AI-generated ${woman ? "woman" : "man"} expert portrait for ${name}`}
-        className="h-full w-full object-cover object-[50%_18%]"
-        loading="lazy"
-        draggable={false}
-        referrerPolicy="no-referrer"
-      />
+      {src ? (
+        <img
+          src={src}
+          alt={`Synthetic AI-generated ${woman ? "woman" : "man"} expert portrait for ${name}`}
+          className="h-full w-full object-cover object-[50%_18%]"
+          loading="lazy"
+          draggable={false}
+          referrerPolicy="no-referrer"
+        />
+      ) : (
+        <div className="h-full w-full bg-[radial-gradient(circle_at_50%_25%,#3a3a3a_0%,#111_42%,#050505_100%)]" />
+      )}
       <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
     </motion.div>
   );
