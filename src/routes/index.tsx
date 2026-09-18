@@ -64,13 +64,20 @@ function HomePage() {
     <main className="min-h-screen bg-white text-[#17233f]">
       <section className="relative overflow-hidden bg-[#05070b] text-white">
         <style>{`
-          @keyframes shyena-float { 0%,100% { transform: translate3d(0,0,0) rotateX(58deg) rotateZ(-12deg); } 50% { transform: translate3d(0,-12px,0) rotateX(58deg) rotateZ(-9deg); } }
-          @keyframes shyena-orbit { from { transform: rotateZ(0deg) rotateX(62deg); } to { transform: rotateZ(360deg) rotateX(62deg); } }
-          @keyframes shyena-pulse { 0%,100% { opacity:.35; transform: scale(.94); } 50% { opacity:1; transform: scale(1); } }
+          @keyframes shyena-float { 0%,100% { transform: translate3d(0,0,0) rotateX(58deg) rotateZ(-12deg); } 50% { transform: translate3d(0,-10px,0) rotateX(58deg) rotateZ(-9deg); } }
+          @keyframes shyena-orbit { from { transform: rotateZ(0deg) rotateX(68deg); } to { transform: rotateZ(360deg) rotateX(68deg); } }
+          @keyframes shyena-nexus { 0%,10% { transform: translate3d(-118px,-42px,-30px) rotateY(12deg) rotateX(4deg) scale(.9); opacity:.68; z-index:2; } 22%,40% { transform: translate3d(0,-8px,230px) rotateY(0deg) rotateX(0deg) scale(1.08); opacity:1; z-index:8; } 52%,100% { transform: translate3d(-118px,-42px,-30px) rotateY(12deg) rotateX(4deg) scale(.9); opacity:.68; z-index:2; } }
+          @keyframes shyena-vera { 0%,34% { transform: translate3d(128px,-56px,-20px) rotateY(-12deg) rotateX(4deg) scale(.9); opacity:.68; z-index:2; } 46%,64% { transform: translate3d(0,-2px,245px) rotateY(0deg) rotateX(0deg) scale(1.1); opacity:1; z-index:9; } 76%,100% { transform: translate3d(128px,-56px,-20px) rotateY(-12deg) rotateX(4deg) scale(.9); opacity:.68; z-index:2; } }
+          @keyframes shyena-chakra { 0%,58% { transform: translate3d(0,105px,-10px) rotateY(0deg) rotateX(-5deg) scale(.9); opacity:.68; z-index:2; } 70%,88% { transform: translate3d(0,10px,260px) rotateY(0deg) rotateX(0deg) scale(1.12); opacity:1; z-index:10; } 100% { transform: translate3d(0,105px,-10px) rotateY(0deg) rotateX(-5deg) scale(.9); opacity:.68; z-index:2; } }
           @keyframes shyena-scan { 0% { transform: translateY(-120%); opacity:0; } 15%,70% { opacity:.55; } 100% { transform: translateY(120%); opacity:0; } }
           .shyena-grid { background-image: linear-gradient(rgba(255,255,255,.055) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.055) 1px, transparent 1px); background-size: 56px 56px; }
           .shyena-glow { box-shadow: 0 0 90px rgba(232,117,18,.14), inset 0 0 60px rgba(70,110,255,.08); }
           .shyena-face { background: linear-gradient(135deg, rgba(255,255,255,.18), rgba(85,115,255,.05) 42%, rgba(232,117,18,.1)); border: 1px solid rgba(255,255,255,.16); backdrop-filter: blur(8px); }
+          .shyena-product { transform-style: preserve-3d; will-change: transform, opacity; transition: filter .35s ease; }
+          .shyena-product:hover { filter: brightness(1.12); }
+          @media (prefers-reduced-motion: reduce) {
+            .shyena-product, .shyena-orbit-motion { animation: none !important; }
+          }
         `}</style>
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,rgba(70,96,255,.16),transparent_32%),radial-gradient(circle_at_80%_70%,rgba(232,117,18,.10),transparent_30%)]" />
         <div className="shyena-grid pointer-events-none absolute inset-0 opacity-40 [mask-image:linear-gradient(to_bottom,black,transparent_92%)]" />
@@ -105,14 +112,14 @@ function HomePage() {
             <div className="relative mx-auto h-[480px] w-full max-w-[760px] [perspective:1200px] sm:h-[600px]">
               <div className="absolute inset-[8%_4%_12%] rounded-full bg-[#4c63ff]/10 blur-3xl" />
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="absolute h-[390px] w-[390px] rounded-full border border-white/10 [transform:rotateX(68deg)] [animation:shyena-orbit_22s_linear_infinite] sm:h-[500px] sm:w-[500px]">
+                <div className="shyena-orbit-motion absolute h-[390px] w-[390px] rounded-full border border-white/10 [transform:rotateX(68deg)] [animation:shyena-orbit_22s_linear_infinite] sm:h-[500px] sm:w-[500px]">
                   <span className="absolute left-1/2 top-0 h-2.5 w-2.5 -translate-x-1/2 rounded-full bg-[#e87512] shadow-[0_0_18px_#e87512]" />
                 </div>
 
                 <div className="absolute left-1/2 top-1/2 h-[310px] w-[520px] -translate-x-1/2 -translate-y-1/2 [transform-style:preserve-3d] [animation:shyena-float_8s_ease-in-out_infinite] sm:h-[350px] sm:w-[600px]">
                   <div className="absolute left-1/2 top-1/2 h-[210px] w-[310px] -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-white/10 bg-white/[.025] shadow-[0_50px_120px_rgba(0,0,0,.45)] [transform:translateZ(-40px)_rotateX(12deg)_rotateZ(-4deg)] sm:h-[240px] sm:w-[360px]" />
                   
-                  <div className="absolute left-[2%] top-[18%] w-[190px] rounded-2xl border border-[#6877ff]/30 bg-[#0d1222]/90 p-4 shadow-[0_30px_70px_rgba(0,0,0,.55)] backdrop-blur-md [transform:translateZ(95px)_rotateY(8deg)_rotateX(3deg)] sm:w-[220px]">
+                  <Link to="/nexus" aria-label="Open NEXUS — understand your AI system" className="shyena-product shyena-nexus absolute left-[2%] top-[18%] w-[190px] rounded-2xl border border-[#6877ff]/30 bg-[#0d1222]/90 p-4 shadow-[0_30px_70px_rgba(0,0,0,.55)] backdrop-blur-md sm:w-[220px]">
                     <div className="flex items-center justify-between">
                       <span className="font-mono text-[9px] font-bold tracking-[.18em] text-[#8b96ff]">01 · NEXUS</span>
                       <span className="h-2 w-2 rounded-full bg-[#8b96ff] shadow-[0_0_12px_#6877ff]" />
@@ -120,9 +127,9 @@ function HomePage() {
                     <div className="mt-3 font-[Sora] text-2xl font-extrabold tracking-[-.04em]">Understand</div>
                     <p className="mt-2 text-[11px] leading-5 text-white/45">Map flows, tools, rules and system behaviour.</p>
                     <div className="mt-4 flex gap-1.5"><span className="rounded bg-white/5 px-2 py-1 font-mono text-[8px] text-white/40">FLOW</span><span className="rounded bg-white/5 px-2 py-1 font-mono text-[8px] text-white/40">TOOLS</span><span className="rounded bg-white/5 px-2 py-1 font-mono text-[8px] text-white/40">RULES</span></div>
-                  </div>
+                  </Link>
 
-                  <div className="absolute right-[2%] top-[7%] w-[190px] rounded-2xl border border-[#55d6ad]/30 bg-[#0b1716]/90 p-4 shadow-[0_30px_70px_rgba(0,0,0,.55)] backdrop-blur-md [transform:translateZ(150px)_rotateY(-8deg)_rotateX(3deg)] sm:w-[220px]">
+                  <Link to="/vera" aria-label="Open VERA — test and evaluate" className="shyena-product shyena-vera absolute right-[2%] top-[7%] w-[190px] rounded-2xl border border-[#55d6ad]/30 bg-[#0b1716]/90 p-4 shadow-[0_30px_70px_rgba(0,0,0,.55)] backdrop-blur-md sm:w-[220px]">
                     <div className="flex items-center justify-between">
                       <span className="font-mono text-[9px] font-bold tracking-[.18em] text-[#6ee7b7]">02 · VERA</span>
                       <span className="h-2 w-2 rounded-full bg-[#6ee7b7] shadow-[0_0_12px_#55d6ad]" />
@@ -130,9 +137,9 @@ function HomePage() {
                     <div className="mt-3 font-[Sora] text-2xl font-extrabold tracking-[-.04em]">Evaluate</div>
                     <p className="mt-2 text-[11px] leading-5 text-white/45">Test behaviour, semantics and execution evidence.</p>
                     <div className="mt-4 grid grid-cols-2 gap-1.5 font-mono text-[8px]"><span className="rounded bg-white/5 px-2 py-1 text-white/40">SEMANTIC <b className="text-white/80">0.91</b></span><span className="rounded bg-white/5 px-2 py-1 text-white/40">TRACE <b className="text-[#6ee7b7]">LINKED</b></span></div>
-                  </div>
+                  </Link>
 
-                  <div className="absolute bottom-[5%] left-1/2 w-[210px] -translate-x-1/2 rounded-2xl border border-[#f18a32]/35 bg-[#1a110b]/95 p-4 shadow-[0_35px_80px_rgba(0,0,0,.65)] backdrop-blur-md [transform:translateZ(210px)_rotateX(-2deg)] sm:w-[250px]">
+                  <Link to="/chakra" aria-label="Open CHAKRA — secure your agents" className="shyena-product shyena-chakra absolute bottom-[5%] left-1/2 w-[210px] -translate-x-1/2 rounded-2xl border border-[#f18a32]/35 bg-[#1a110b]/95 p-4 shadow-[0_35px_80px_rgba(0,0,0,.65)] backdrop-blur-md sm:w-[250px]">
                     <div className="flex items-center justify-between">
                       <span className="font-mono text-[9px] font-bold tracking-[.18em] text-[#ffad69]">03 · CHAKRA</span>
                       <span className="h-2 w-2 rounded-full bg-[#f18a32] shadow-[0_0_12px_#e87512]" />
@@ -140,9 +147,10 @@ function HomePage() {
                     <div className="mt-3 font-[Sora] text-2xl font-extrabold tracking-[-.04em]">Secure</div>
                     <p className="mt-2 text-[11px] leading-5 text-white/45">Attack critical paths and expose unsafe behaviour.</p>
                     <div className="mt-4 flex items-center justify-between rounded-lg bg-white/5 px-2.5 py-2"><span className="font-mono text-[8px] text-white/35">SECURITY</span><span className="font-mono text-[9px] font-bold text-[#6ee7b7]">NO CRITICAL</span></div>
-                  </div>
+                  </Link>
 
-                  <div className="absolute left-1/2 top-1/2 h-px w-[420px] -translate-x-1/2 bg-gradient-to-r from-transparent via-white/20 to-transparent [transform:translateZ(180px)_rotateZ(-12deg)]" />
+                  <div className="pointer-events-none absolute left-1/2 top-1/2 h-px w-[420px] -translate-x-1/2 bg-gradient-to-r from-transparent via-white/20 to-transparent [transform:translateZ(180px)_rotateZ(-12deg)]" />
+                  <div className="pointer-events-none absolute left-1/2 top-[13%] -translate-x-1/2 rounded-full border border-white/10 bg-black/30 px-3 py-1.5 font-mono text-[8px] uppercase tracking-[.18em] text-white/35 backdrop-blur-sm">understand → evaluate → secure</div>
                 </div>
               </div>
 
