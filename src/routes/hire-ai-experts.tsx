@@ -98,25 +98,33 @@ function HireAIExpertsPage() {
 
   return (
     <main className="min-h-screen bg-[#090909] text-white">
-      <section className="relative overflow-hidden border-b border-white/10 bg-[#090909]">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_82%_18%,rgba(255,212,59,0.16),transparent_24%),radial-gradient(circle_at_12%_8%,rgba(255,255,255,0.06),transparent_24%)]" />
-        <div className="relative mx-auto max-w-7xl px-6 pb-14 pt-16 lg:px-8 lg:pb-20 lg:pt-20">
-          <div className="max-w-4xl">
-            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#ffd43b]/40 bg-[#ffd43b]/10 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.16em] text-[#ffd43b]">
-              <Sparkles className="h-3.5 w-3.5" /> AI testing & quality engineering network
+      <section className="relative overflow-hidden border-b border-white/10 bg-[#070707]">
+        <div className="absolute -left-24 top-24 h-[520px] w-[55%] -skew-x-[28deg] bg-[#ffd43b]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_20%,rgba(255,212,59,0.18),transparent_24%),linear-gradient(135deg,transparent_0%,rgba(255,255,255,0.025)_48%,transparent_49%)]" />
+        <div className="relative mx-auto grid max-w-7xl gap-10 px-6 pb-14 pt-14 lg:grid-cols-[1.05fr_.95fr] lg:items-end lg:px-8 lg:pb-20 lg:pt-20">
+          <div className="max-w-3xl">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-black/20 bg-black/90 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.16em] text-[#ffd43b]">
+              <Sparkles className="h-3.5 w-3.5" /> SHYENA · HIRE EXPERTS
             </div>
-            <h1 className="text-4xl font-semibold tracking-[-0.045em] text-white md:text-6xl">Hire autonomous AI testers who can prove your system works.</h1>
-            <p className="mt-6 max-w-3xl text-lg leading-8 text-white/65">Deploy specialists who combine browser automation, API testing, LLM evaluation, observability and enterprise application expertise. Remote and hybrid profiles across Europe.</p>
+            <h1 className="text-5xl font-black leading-[0.94] tracking-[-0.055em] text-white md:text-7xl">
+              Stop guessing about AI quality.<br />
+              <span className="text-[#ffd43b]">Prove it.</span>
+            </h1>
+            <p className="mt-7 max-w-2xl text-base font-medium leading-7 text-white/70 md:text-lg">
+              Put an expert on the problem: agent evaluation, autonomous QA, AI security, RAG, Playwright, APIs, Salesforce and Oracle Fusion.
+            </p>
           </div>
-          <div className="mt-10 grid gap-3 sm:grid-cols-3">
-            <Stat value={`${experts.length}+`} label="specialist profiles" />
-            <Stat value="Remote + Hybrid" label="delivery modes" />
-            <Stat value="UI → API → AI" label="assurance coverage" />
+          <div className="relative ml-auto w-full max-w-md">
+            <div className="absolute -inset-6 rounded-[34px] bg-[#ffd43b]/10 blur-3xl" />
+            <div className="relative rounded-[28px] border border-white/15 bg-[#101010]/90 p-2 shadow-[0_35px_90px_rgba(0,0,0,.55)]">
+              <div className="grid grid-cols-2 gap-2">
+                <div className="rounded-2xl bg-white/[.06] p-4"><div className="text-3xl font-black text-white">{experts.length}+</div><div className="mt-1 text-[10px] font-bold uppercase tracking-[.16em] text-white/45">Specialists</div></div>
+                <div className="rounded-2xl bg-[#ffd43b] p-4 text-black"><div className="text-3xl font-black">UI</div><div className="mt-1 text-[10px] font-bold uppercase tracking-[.16em]">→ API → AI</div></div>
+              </div>
+            </div>
           </div>
         </div>
-      </section>
-
-      <section className="sticky top-0 z-20 border-b border-white/10 bg-[#090909]/95 py-4 backdrop-blur-xl">
+      </section>     <section className="sticky top-0 z-20 border-b border-white/10 bg-[#090909]/95 py-4 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl flex-col gap-3 px-6 lg:px-8">
           <div className="flex flex-col gap-3 lg:flex-row">
             <label className="relative flex-1">
