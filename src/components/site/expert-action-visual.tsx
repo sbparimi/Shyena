@@ -158,7 +158,7 @@ function Portrait({ woman, accent, name }: { woman: boolean; accent: string; nam
           draggable={false}
           referrerPolicy="no-referrer"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,8,16,.02)_20%,rgba(4,8,16,.08)_52%,rgba(4,8,16,.86)_100%)]" />
+        <div className="absolute inset-x-0 bottom-0 h-[38%] bg-[linear-gradient(to_top,rgba(4,8,16,.76),transparent)]" />
         <motion.div
           className="absolute inset-y-0 left-[-45%] w-[34%] rotate-[14deg] bg-white/20 blur-xl"
           animate={{ x: ["0%", "410%"] }}
