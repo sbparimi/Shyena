@@ -224,7 +224,7 @@ function HomePage() {
               </div>
 
               <div className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 rounded-full border border-white/10 bg-black/45 px-4 py-2 font-mono text-[8px] uppercase tracking-[.22em] text-white/45 shadow-[0_15px_50px_rgba(0,0,0,.45)] backdrop-blur-xl">understand → evaluate → secure</div>
-            </div>          </div>
+            </motion.div>          </div>
 
           <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[.025] px-5 py-4 sm:px-7">
             <div className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/[.06] to-transparent [animation:shyena-scan_6s_ease-in-out_infinite]" />
