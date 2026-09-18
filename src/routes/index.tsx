@@ -146,7 +146,7 @@ function HomePage() {
                 <motion.div className="shyena-orbit-motion absolute left-1/2 top-[53%] h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/[.07] [animation:shyena-orbit_30s_linear_infinite] sm:h-[560px] sm:w-[560px]">
                   <motion.span animate={{ rotate: 360 }} transition={{ duration: 30, repeat: Infinity, ease: "linear" }} className="absolute left-[7%] top-[20%] h-1.5 w-1.5 rounded-full bg-white shadow-[0_0_16px_white]" />
                   <span className="absolute bottom-[13%] right-[9%] h-1.5 w-1.5 rounded-full bg-[#e87512] shadow-[0_0_18px_#e87512]" />
-                </div>
+                </motion.div>
 
                 <motion.div
                   className="shyena-product shyena-nexus absolute left-[2%] top-[14%] w-[270px] overflow-hidden rounded-[24px] border border-[#6877ff]/45 bg-[#080d1c]/96 shadow-[0_55px_120px_rgba(0,0,0,.78),0_0_70px_rgba(104,119,255,.12)] backdrop-blur-xl sm:w-[330px]"
