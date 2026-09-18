@@ -145,7 +145,7 @@ function HireAIExpertsPage() {
           {filtered.map((expert) => (
             <article key={expert.id} className="group flex h-full flex-col rounded-2xl border border-[#d8d1c3] bg-white p-4 shadow-[0_8px_30px_rgba(15,23,42,0.04)] transition duration-200 hover:-translate-y-0.5 hover:border-[#9db0d3] hover:shadow-[0_18px_45px_rgba(15,23,42,0.09)]">
               <div className="relative">
-                <ExpertActionVisual name={expert.name} role={expert.role} skills={expert.skills} compact />
+                <ExpertActionVisual name={expert.name} role={expert.role} skills={expert.skills} gender={expert.gender} compact />
                 <span className="absolute right-3 top-3 inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-[#07101f]/75 px-2.5 py-1 text-[10px] font-bold text-[#65e6d4] backdrop-blur"><CheckCircle2 className="h-3 w-3" /> {expert.status}</span>
               </div>
               <div className="mt-5">
@@ -165,6 +165,7 @@ function HireAIExpertsPage() {
             </article>
           ))}
         </div>
+        <p className="mt-5 text-center text-[11px] leading-5 text-[#7b8190]">Profile portraits are synthetic imagery from OpenPeople and are used under CC BY 4.0.</p>
         {filtered.length === 0 && <div className="rounded-2xl border border-dashed border-[#cfc8bb] bg-white p-16 text-center"><Search className="mx-auto h-8 w-8 text-[#8c929e]" /><h2 className="mt-4 text-xl font-semibold text-[#0e172b]">No matching specialist</h2><p className="mt-2 text-sm text-[#69707d]">Try a broader skill, location or delivery mode.</p></div>}
       </section>
 
@@ -189,7 +190,7 @@ function ProfileModal({ expert, onClose, discussUrl }: { expert: Expert; onClose
     <div className="max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-2xl border border-[#d8d1c3] bg-[#f7f4ec] shadow-2xl">
       <div className="flex items-start justify-between border-b border-[#d8d1c3] bg-white p-6"><div className="flex items-center gap-4"><div className="flex h-14 w-14 items-center justify-center rounded-xl bg-[#123e91] font-bold text-white">{expert.name.split(" ").map((part) => part[0]).join("").slice(0, 2)}</div><div><div className="text-xs font-bold uppercase tracking-[0.14em] text-[#a87900]">Specialist profile</div><h2 className="mt-1 text-2xl font-semibold text-[#0e172b]">{expert.name}</h2><p className="mt-1 text-sm font-medium text-[#123e91]">{expert.role}</p></div></div><button onClick={onClose} aria-label="Close profile" className="rounded-lg p-2 text-[#69707d] hover:bg-[#f4f1ea] hover:text-[#0e172b]"><X className="h-5 w-5" /></button></div>
       <div className="p-6 lg:p-8">
-        <ExpertActionVisual name={expert.name} role={expert.role} skills={expert.skills} />
+        <ExpertActionVisual name={expert.name} role={expert.role} skills={expert.skills} gender={expert.gender} />
         <div className="mt-6 grid gap-4 sm:grid-cols-3"><Info label="Delivery" value={`${expert.mode} · ${expert.location}`} /><Info label="Experience" value={expert.experience} /><Info label="Engagement" value={expert.engagement.join(" · ")} /></div>
         <div className="mt-8 grid gap-8 lg:grid-cols-[1.2fr_0.8fr]"><div><h3 className="text-xs font-bold uppercase tracking-[0.15em] text-[#a87900]">Profile</h3><p className="mt-3 text-base leading-7 text-[#4b5563]">{expert.summary}</p><h3 className="mt-7 text-xs font-bold uppercase tracking-[0.15em] text-[#a87900]">Typical focus</h3><ul className="mt-3 space-y-2">{expert.focus.map((item) => <li key={item} className="flex gap-2 text-sm text-[#404653]"><Zap className="mt-0.5 h-4 w-4 shrink-0 text-[#167e6a]" /> {item}</li>)}</ul><h3 className="mt-7 text-xs font-bold uppercase tracking-[0.15em] text-[#a87900]">Delivery capability</h3><p className="mt-3 text-sm leading-6 text-[#4b5563]">{expert.delivery}</p></div><div><h3 className="text-xs font-bold uppercase tracking-[0.15em] text-[#a87900]">Core expertise</h3><div className="mt-3 flex flex-wrap gap-2">{expert.skills.map((skill) => <span key={skill} className="rounded-full border border-[#d8d1c3] bg-white px-3 py-1.5 text-xs font-semibold text-[#404653]">{skill}</span>)}</div><h3 className="mt-7 text-xs font-bold uppercase tracking-[0.15em] text-[#a87900]">Profile tags</h3><div className="mt-3 flex flex-wrap gap-2">{expert.tags.map((tag) => <span key={tag} className="rounded-full bg-[#dff3f1] px-3 py-1.5 text-xs font-semibold text-[#167e6a]">{tag}</span>)}</div></div></div>
         <div className="mt-8 rounded-xl border border-[#d5c49b] bg-[#fff4cc] p-4"><div className="flex items-start gap-3"><BriefcaseBusiness className="mt-0.5 h-5 w-5 text-[#8a6500]" /><div><div className="font-semibold text-[#3b2d08]">Discuss this specialist</div><p className="mt-1 text-sm leading-6 text-[#5c4a16]">The contact form will be prefilled with this profile and its relevant skills.</p></div></div></div>
