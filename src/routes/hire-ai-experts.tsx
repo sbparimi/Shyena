@@ -97,53 +97,53 @@ function HireAIExpertsPage() {
   const discussUrl = (expert: Expert) => `/contact?expert=${encodeURIComponent(expert.name)}&role=${encodeURIComponent(expert.role)}&location=${encodeURIComponent(`${expert.mode} — ${expert.location}`)}&skills=${encodeURIComponent(expert.skills.join(", "))}`;
 
   return (
-    <main className="min-h-screen bg-[#090909] text-white">
-      <section className="relative overflow-hidden border-b border-white/10 bg-[#070707]">
-        <div className="absolute -left-24 top-24 h-[520px] w-[55%] -skew-x-[28deg] bg-[#ffd43b]" />
+    <main className="min-h-screen bg-white text-[#17233f]">
+      <section className="relative overflow-hidden border-b border-[#e8e8e8] bg-[#17233f]">
+        <div className="absolute -left-24 top-24 h-[520px] w-[55%] -skew-x-[28deg] bg-[#e87512]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_20%,rgba(255,212,59,0.18),transparent_24%),linear-gradient(135deg,transparent_0%,rgba(255,255,255,0.025)_48%,transparent_49%)]" />
-        <div className="relative mx-auto grid max-w-7xl gap-10 px-6 pb-14 pt-14 lg:grid-cols-[1.05fr_.95fr] lg:items-end lg:px-8 lg:pb-20 lg:pt-20">
+        <div className="relative mx-auto grid max-w-[1280px] gap-10 px-5 pb-14 pt-14 sm:px-8 lg:grid-cols-[1.05fr_.95fr] lg:items-end lg:px-10 lg:pb-20 lg:pt-20">
           <div className="max-w-3xl">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-black/20 bg-black/90 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.16em] text-[#ffd43b]">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.16em] text-[#f59a4b] backdrop-blur">
               <Sparkles className="h-3.5 w-3.5" /> SHYENA · HIRE EXPERTS
             </div>
-            <h1 className="text-5xl font-black leading-[0.94] tracking-[-0.055em] text-white md:text-7xl">
+            <h1 className="font-[Sora] text-5xl font-extrabold leading-[0.94] tracking-[-0.055em] text-white md:text-7xl">
               Stop guessing about AI quality.<br />
-              <span className="text-[#ffd43b]">Prove it.</span>
+              <span className="text-[#f59a4b]">Prove it.</span>
             </h1>
-            <p className="mt-7 max-w-2xl text-base font-medium leading-7 text-white/70 md:text-lg">
+            <p className="mt-7 max-w-2xl text-base font-medium leading-7 text-white/65 md:text-lg">
               Put an expert on the problem: agent evaluation, autonomous QA, AI security, RAG, Playwright, APIs, Salesforce and Oracle Fusion.
             </p>
           </div>
           <div className="relative ml-auto w-full max-w-md">
-            <div className="absolute -inset-6 rounded-[34px] bg-[#ffd43b]/10 blur-3xl" />
-            <div className="relative rounded-[28px] border border-white/15 bg-[#101010]/90 p-2 shadow-[0_35px_90px_rgba(0,0,0,.55)]">
+            <div className="absolute -inset-6 rounded-[34px] bg-[#e87512]/10 blur-3xl" />
+            <div className="relative rounded-[28px] border border-[#dfe2e7] bg-white/90 p-2 shadow-[0_35px_90px_rgba(0,0,0,.55)]">
               <div className="grid grid-cols-2 gap-2">
-                <div className="rounded-2xl bg-white/[.06] p-4"><div className="text-3xl font-black text-white">{experts.length}+</div><div className="mt-1 text-[10px] font-bold uppercase tracking-[.16em] text-white/45">Specialists</div></div>
-                <div className="rounded-2xl bg-[#ffd43b] p-4 text-black"><div className="text-3xl font-black">UI</div><div className="mt-1 text-[10px] font-bold uppercase tracking-[.16em]">→ API → AI</div></div>
+                <div className="rounded-2xl bg-[#f7f8fa] p-4"><div className="text-3xl font-black text-[#17233f]">{experts.length}+</div><div className="mt-1 text-[10px] font-bold uppercase tracking-[.16em] text-[#69707d]">Specialists</div></div>
+                <div className="rounded-2xl bg-[#e87512] p-4 text-black"><div className="text-3xl font-black">UI</div><div className="mt-1 text-[10px] font-bold uppercase tracking-[.16em]">→ API → AI</div></div>
               </div>
             </div>
           </div>
         </div>
-      </section>     <section className="sticky top-0 z-20 border-b border-white/10 bg-[#090909]/95 py-4 backdrop-blur-xl">
+      </section>     <section className="sticky top-0 z-20 border-b border-[#e8e8e8] bg-white/95 py-4 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl flex-col gap-3 px-6 lg:px-8">
           <div className="flex flex-col gap-3 lg:flex-row">
             <label className="relative flex-1">
-              <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-white/40" />
-              <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search Playwright, DeepEval, Promptfoo, Salesforce, Oracle Fusion…" className="h-12 w-full rounded-xl border border-white/15 bg-[#111111] pl-11 pr-4 text-sm text-white outline-none transition placeholder:text-white/35 focus:border-[#ffd43b] focus:ring-2 focus:ring-[#ffd43b]/10" />
+              <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#17233f]/40" />
+              <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search Playwright, DeepEval, Promptfoo, Salesforce, Oracle Fusion…" className="h-12 w-full rounded-xl border border-[#dfe2e7] bg-[#f7f8fa] pl-11 pr-4 text-sm text-[#17233f] outline-none transition placeholder:text-[#7a8290] focus:border-[#e87512] focus:ring-2 focus:ring-[#ffd43b]/10" />
             </label>
-            <select value={location} onChange={(e) => setLocation(e.target.value)} className="h-12 rounded-xl border border-white/15 bg-[#111111] px-4 text-sm text-white outline-none focus:border-[#ffd43b]">
+            <select value={location} onChange={(e) => setLocation(e.target.value)} className="h-12 rounded-xl border border-[#dfe2e7] bg-[#f7f8fa] px-4 text-sm text-[#17233f] outline-none focus:border-[#e87512]">
               {allLocations.map((item) => <option key={item}>{item}</option>)}
             </select>
-            <select value={discipline} onChange={(e) => setDiscipline(e.target.value)} className="h-12 rounded-xl border border-white/15 bg-[#111111] px-4 text-sm text-white outline-none focus:border-[#ffd43b]">
+            <select value={discipline} onChange={(e) => setDiscipline(e.target.value)} className="h-12 rounded-xl border border-[#dfe2e7] bg-[#f7f8fa] px-4 text-sm text-[#17233f] outline-none focus:border-[#e87512]">
               {allSkills.map((item) => <option key={item}>{item}</option>)}
             </select>
-            <select value={mode} onChange={(e) => setMode(e.target.value)} className="h-12 rounded-xl border border-white/15 bg-[#111111] px-4 text-sm text-white outline-none focus:border-[#ffd43b]">
+            <select value={mode} onChange={(e) => setMode(e.target.value)} className="h-12 rounded-xl border border-[#dfe2e7] bg-[#f7f8fa] px-4 text-sm text-[#17233f] outline-none focus:border-[#e87512]">
               <option>All modes</option><option>Remote</option><option>Hybrid</option>
             </select>
           </div>
-          <div className="flex items-center justify-between text-xs text-white/45">
+          <div className="flex items-center justify-between text-xs text-[#69707d]">
             <span className="inline-flex items-center gap-2"><Filter className="h-3.5 w-3.5" /> {filtered.length} profiles match your requirements</span>
-            {(query || location !== "All locations" || discipline !== "All disciplines" || mode !== "All modes") && <button onClick={() => { setQuery(""); setLocation("All locations"); setDiscipline("All disciplines"); setMode("All modes"); }} className="font-semibold text-[#ffd43b]">Clear filters</button>}
+            {(query || location !== "All locations" || discipline !== "All disciplines" || mode !== "All modes") && <button onClick={() => { setQuery(""); setLocation("All locations"); setDiscipline("All disciplines"); setMode("All modes"); }} className="font-semibold text-[#e87512]">Clear filters</button>}
           </div>
         </div>
       </section>
@@ -151,36 +151,36 @@ function HireAIExpertsPage() {
       <section className="mx-auto max-w-7xl px-6 py-12 lg:px-8 lg:py-16">
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {filtered.map((expert) => (
-            <article key={expert.id} className="group flex h-full flex-col rounded-2xl border border-white/10 bg-[#101010] p-4 shadow-[0_12px_40px_rgba(0,0,0,.35)] transition duration-200 hover:-translate-y-0.5 hover:border-[#ffd43b]/40 hover:shadow-[0_22px_55px_rgba(0,0,0,.5)]">
+            <article key={expert.id} className="group flex h-full flex-col rounded-2xl border border-[#e8e8e8] bg-white p-4 shadow-[0_12px_40px_rgba(23,35,63,.08)] transition duration-200 hover:-translate-y-0.5 hover:border-[#e87512]/40 hover:shadow-[0_22px_55px_rgba(23,35,63,.14)]">
               <div className="relative">
                 <ExpertActionVisual id={expert.id} name={expert.name} role={expert.role} skills={expert.skills} gender={expert.gender} compact />
-                <span className="absolute right-3 top-3 inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-[#07101f]/75 px-2.5 py-1 text-[10px] font-bold text-[#ffd43b] backdrop-blur"><CheckCircle2 className="h-3 w-3" /> {expert.status}</span>
+                <span className="absolute right-3 top-3 inline-flex items-center gap-1.5 rounded-full border border-[#e8e8e8] bg-white/95 px-2.5 py-1 text-[10px] font-bold text-[#e87512] backdrop-blur"><CheckCircle2 className="h-3 w-3" /> {expert.status}</span>
               </div>
               <div className="mt-5">
-                <h2 className="text-lg font-semibold tracking-tight text-white">{expert.name}</h2>
-                <p className="mt-1 min-h-10 text-sm font-medium leading-5 text-[#ffd43b]">{expert.role}</p>
+                <h2 className="text-lg font-semibold tracking-tight text-[#17233f]">{expert.name}</h2>
+                <p className="mt-1 min-h-10 text-sm font-medium leading-5 text-[#e87512]">{expert.role}</p>
               </div>
-              <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-xs text-white/45">
+              <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-xs text-[#69707d]">
                 <span className="inline-flex items-center gap-1"><MapPin className="h-3.5 w-3.5" /> {expert.mode} · {expert.location}</span>
                 <span className="inline-flex items-center gap-1"><Clock3 className="h-3.5 w-3.5" /> {expert.experience}</span>
               </div>
-              <p className="mt-5 flex-1 text-sm leading-6 text-white/60">{expert.summary}</p>
-              <div className="mt-5 flex flex-wrap gap-1.5">{expert.skills.slice(0, 4).map((skill) => <span key={skill} className="rounded-full border border-white/10 bg-white/[.04] px-2.5 py-1 text-[11px] font-semibold text-white/65">{skill}</span>)}</div>
-              <div className="mt-6 flex gap-2 border-t border-white/10 pt-5">
-                <button onClick={() => setSelected(expert)} className="flex-1 rounded-lg border border-[#cfc8bb] px-3 py-2.5 text-sm font-semibold text-white transition hover:border-[#123e91] hover:text-[#ffd43b]">View full profile</button>
-                <a href={discussUrl(expert)} className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg bg-[#ffd43b] px-3 py-2.5 text-sm font-semibold text-[#0a0a0a] transition hover:bg-[#ffe16a]">Discuss <ArrowRight className="h-4 w-4" /></a>
+              <p className="mt-5 flex-1 text-sm leading-6 text-[#626976]">{expert.summary}</p>
+              <div className="mt-5 flex flex-wrap gap-1.5">{expert.skills.slice(0, 4).map((skill) => <span key={skill} className="rounded-full border border-[#e8e8e8] bg-[#fafafa] px-2.5 py-1 text-[11px] font-semibold text-[#5f6672]">{skill}</span>)}</div>
+              <div className="mt-6 flex gap-2 border-t border-[#e8e8e8] pt-5">
+                <button onClick={() => setSelected(expert)} className="flex-1 rounded-lg border border-[#d8dce3] px-3 py-2.5 text-sm font-semibold text-[#17233f] transition hover:border-[#17233f] hover:text-[#e87512]">View full profile</button>
+                <a href={discussUrl(expert)} className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg bg-[#e87512] px-3 py-2.5 text-sm font-semibold text-[#17233f] transition hover:bg-[#f18a32]">Discuss <ArrowRight className="h-4 w-4" /></a>
               </div>
             </article>
           ))}
         </div>
-        <p className="mt-5 text-center text-[11px] leading-5 text-white/35">Profile portraits are synthetic imagery from OpenPeople and are used under CC BY 4.0.</p>
-        {filtered.length === 0 && <div className="rounded-2xl border border-dashed border-white/15 bg-[#101010] p-16 text-center"><Search className="mx-auto h-8 w-8 text-[#8c929e]" /><h2 className="mt-4 text-xl font-semibold text-white">No matching specialist</h2><p className="mt-2 text-sm text-white/45">Try a broader skill, location or delivery mode.</p></div>}
+        <p className="mt-5 text-center text-[11px] leading-5 text-[#7a8290]">Profile portraits are synthetic imagery from OpenPeople and are used under CC BY 4.0.</p>
+        {filtered.length === 0 && <div className="rounded-2xl border border-dashed border-[#dfe2e7] bg-white p-16 text-center"><Search className="mx-auto h-8 w-8 text-[#8c929e]" /><h2 className="mt-4 text-xl font-semibold text-[#17233f]">No matching specialist</h2><p className="mt-2 text-sm text-[#69707d]">Try a broader skill, location or delivery mode.</p></div>}
       </section>
 
-      <section className="border-y border-white/10 bg-[#111111] text-white">
+      <section className="border-y border-[#e8e8e8] bg-[#17233f] text-[#17233f]">
         <div className="mx-auto flex max-w-7xl flex-col gap-6 px-6 py-12 lg:flex-row lg:items-center lg:justify-between lg:px-8">
-          <div><div className="text-xs font-bold uppercase tracking-[0.18em] text-[#ffd43b]">Need a specific capability?</div><h2 className="mt-2 text-3xl font-semibold tracking-tight">Tell us the system, stack and outcome.</h2><p className="mt-3 max-w-2xl text-sm leading-6 text-white/70">Shyena can match the engagement to the testing surface: browser, API, CRM, ERP, LLM, RAG, agent or security.</p></div>
-          <a href="/contact" className="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg bg-[#ffd43b] px-6 py-3 text-sm font-bold text-[#0a0a0a] hover:bg-[#ffe16a]">Request an expert <ArrowRight className="h-4 w-4" /></a>
+          <div><div className="text-xs font-bold uppercase tracking-[0.18em] text-[#e87512]">Need a specific capability?</div><h2 className="mt-2 text-3xl font-semibold tracking-tight">Tell us the system, stack and outcome.</h2><p className="mt-3 max-w-2xl text-sm leading-6 text-[#626976]">Shyena can match the engagement to the testing surface: browser, API, CRM, ERP, LLM, RAG, agent or security.</p></div>
+          <a href="/contact" className="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg bg-[#e87512] px-6 py-3 text-sm font-bold text-[#17233f] hover:bg-[#f18a32]">Request an expert <ArrowRight className="h-4 w-4" /></a>
         </div>
       </section>
 
@@ -190,24 +190,24 @@ function HireAIExpertsPage() {
 }
 
 function Stat({ value, label }: { value: string; label: string }) {
-  return <div className="rounded-xl border border-[#d8d1c3] bg-white/80 px-5 py-4"><div className="text-xl font-semibold text-white">{value}</div><div className="mt-1 text-xs uppercase tracking-[0.14em] text-[#747a86]">{label}</div></div>;
+  return <div className="rounded-xl border border-[#e1e3e7] bg-[#fafafa] px-5 py-4"><div className="text-xl font-semibold text-[#17233f]">{value}</div><div className="mt-1 text-xs uppercase tracking-[0.14em] text-[#69707d]">{label}</div></div>;
 }
 
 function ProfileModal({ expert, onClose, discussUrl }: { expert: Expert; onClose: () => void; discussUrl: string }) {
-  return <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm" onMouseDown={(event) => { if (event.target === event.currentTarget) onClose(); }}>
-    <div className="max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-2xl border border-white/10 bg-[#0b0b0b] shadow-2xl">
-      <div className="flex items-start justify-between border-b border-white/10 bg-[#101010] p-6"><div className="flex items-center gap-4"><div className="flex h-14 w-14 items-center justify-center rounded-xl bg-[#ffd43b] font-bold text-[#0a0a0a]">{expert.name.split(" ").map((part) => part[0]).join("").slice(0, 2)}</div><div><div className="text-xs font-bold uppercase tracking-[0.14em] text-[#ffd43b]">Specialist profile</div><h2 className="mt-1 text-2xl font-semibold text-white">{expert.name}</h2><p className="mt-1 text-sm font-medium text-[#ffd43b]">{expert.role}</p></div></div><button onClick={onClose} aria-label="Close profile" className="rounded-lg p-2 text-white/45 hover:bg-[#f4f1ea] hover:text-white"><X className="h-5 w-5" /></button></div>
+  return <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#17233f]/75 p-4 backdrop-blur-sm" onMouseDown={(event) => { if (event.target === event.currentTarget) onClose(); }}>
+    <div className="max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-2xl border border-[#e1e3e7] bg-white shadow-2xl">
+      <div className="flex items-start justify-between border-b border-[#e8e8e8] bg-white p-6"><div className="flex items-center gap-4"><div className="flex h-14 w-14 items-center justify-center rounded-xl bg-[#e87512] font-bold text-[#17233f]">{expert.name.split(" ").map((part) => part[0]).join("").slice(0, 2)}</div><div><div className="text-xs font-bold uppercase tracking-[0.14em] text-[#e87512]">Specialist profile</div><h2 className="mt-1 text-2xl font-semibold text-[#17233f]">{expert.name}</h2><p className="mt-1 text-sm font-medium text-[#e87512]">{expert.role}</p></div></div><button onClick={onClose} aria-label="Close profile" className="rounded-lg p-2 text-[#69707d] hover:bg-[#f7f8fa] hover:text-[#17233f]"><X className="h-5 w-5" /></button></div>
       <div className="p-6 lg:p-8">
         <ExpertActionVisual id={expert.id} name={expert.name} role={expert.role} skills={expert.skills} gender={expert.gender} />
         <div className="mt-6 grid gap-4 sm:grid-cols-3"><Info label="Delivery" value={`${expert.mode} · ${expert.location}`} /><Info label="Experience" value={expert.experience} /><Info label="Engagement" value={expert.engagement.join(" · ")} /></div>
-        <div className="mt-8 grid gap-8 lg:grid-cols-[1.2fr_0.8fr]"><div><h3 className="text-xs font-bold uppercase tracking-[0.15em] text-[#ffd43b]">Profile</h3><p className="mt-3 text-base leading-7 text-white/60">{expert.summary}</p><h3 className="mt-7 text-xs font-bold uppercase tracking-[0.15em] text-[#ffd43b]">Typical focus</h3><ul className="mt-3 space-y-2">{expert.focus.map((item) => <li key={item} className="flex gap-2 text-sm text-white/65"><Zap className="mt-0.5 h-4 w-4 shrink-0 text-[#167e6a]" /> {item}</li>)}</ul><h3 className="mt-7 text-xs font-bold uppercase tracking-[0.15em] text-[#ffd43b]">Delivery capability</h3><p className="mt-3 text-sm leading-6 text-white/60">{expert.delivery}</p></div><div><h3 className="text-xs font-bold uppercase tracking-[0.15em] text-[#ffd43b]">Core expertise</h3><div className="mt-3 flex flex-wrap gap-2">{expert.skills.map((skill) => <span key={skill} className="rounded-full border border-[#d8d1c3] bg-white px-3 py-1.5 text-xs font-semibold text-white/65">{skill}</span>)}</div><h3 className="mt-7 text-xs font-bold uppercase tracking-[0.15em] text-[#ffd43b]">Profile tags</h3><div className="mt-3 flex flex-wrap gap-2">{expert.tags.map((tag) => <span key={tag} className="rounded-full bg-[#ffd43b]/10 px-3 py-1.5 text-xs font-semibold text-[#ffd43b]">{tag}</span>)}</div></div></div>
-        <div className="mt-8 rounded-xl border border-[#ffd43b]/25 bg-[#ffd43b]/10 p-4"><div className="flex items-start gap-3"><BriefcaseBusiness className="mt-0.5 h-5 w-5 text-[#8a6500]" /><div><div className="font-semibold text-white">Discuss this specialist</div><p className="mt-1 text-sm leading-6 text-white/60">The contact form will be prefilled with this profile and its relevant skills.</p></div></div></div>
-        <div className="mt-6 flex flex-col gap-3 sm:flex-row"><a href={discussUrl} className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg bg-[#ffd43b] px-5 py-3 text-sm font-bold text-[#0a0a0a] hover:bg-[#ffe16a]">Discuss this expert <ArrowRight className="h-4 w-4" /></a><button onClick={onClose} className="rounded-lg border border-[#cfc8bb] bg-white px-5 py-3 text-sm font-semibold text-white">Close profile</button></div>
+        <div className="mt-8 grid gap-8 lg:grid-cols-[1.2fr_0.8fr]"><div><h3 className="text-xs font-bold uppercase tracking-[0.15em] text-[#e87512]">Profile</h3><p className="mt-3 text-base leading-7 text-[#626976]">{expert.summary}</p><h3 className="mt-7 text-xs font-bold uppercase tracking-[0.15em] text-[#e87512]">Typical focus</h3><ul className="mt-3 space-y-2">{expert.focus.map((item) => <li key={item} className="flex gap-2 text-sm text-[#5f6672]"><Zap className="mt-0.5 h-4 w-4 shrink-0 text-[#167e6a]" /> {item}</li>)}</ul><h3 className="mt-7 text-xs font-bold uppercase tracking-[0.15em] text-[#e87512]">Delivery capability</h3><p className="mt-3 text-sm leading-6 text-[#626976]">{expert.delivery}</p></div><div><h3 className="text-xs font-bold uppercase tracking-[0.15em] text-[#e87512]">Core expertise</h3><div className="mt-3 flex flex-wrap gap-2">{expert.skills.map((skill) => <span key={skill} className="rounded-full border border-[#e1e3e7] bg-white px-3 py-1.5 text-xs font-semibold text-[#5f6672]">{skill}</span>)}</div><h3 className="mt-7 text-xs font-bold uppercase tracking-[0.15em] text-[#e87512]">Profile tags</h3><div className="mt-3 flex flex-wrap gap-2">{expert.tags.map((tag) => <span key={tag} className="rounded-full bg-[#e87512]/10 px-3 py-1.5 text-xs font-semibold text-[#e87512]">{tag}</span>)}</div></div></div>
+        <div className="mt-8 rounded-xl border border-[#e87512]/25 bg-[#e87512]/10 p-4"><div className="flex items-start gap-3"><BriefcaseBusiness className="mt-0.5 h-5 w-5 text-[#e87512]" /><div><div className="font-semibold text-[#17233f]">Discuss this specialist</div><p className="mt-1 text-sm leading-6 text-[#626976]">The contact form will be prefilled with this profile and its relevant skills.</p></div></div></div>
+        <div className="mt-6 flex flex-col gap-3 sm:flex-row"><a href={discussUrl} className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg bg-[#e87512] px-5 py-3 text-sm font-bold text-[#17233f] hover:bg-[#f18a32]">Discuss this expert <ArrowRight className="h-4 w-4" /></a><button onClick={onClose} className="rounded-lg border border-[#d8dce3] bg-white px-5 py-3 text-sm font-semibold text-[#17233f]">Close profile</button></div>
       </div>
     </div>
   </div>;
 }
 
 function Info({ label, value }: { label: string; value: string }) {
-  return <div className="rounded-xl border border-white/10 bg-[#101010] p-4"><div className="text-[11px] font-bold uppercase tracking-[0.12em] text-white/40">{label}</div><div className="mt-1 text-sm font-semibold text-white">{value}</div></div>;
+  return <div className="rounded-xl border border-[#e8e8e8] bg-white p-4"><div className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#17233f]/40">{label}</div><div className="mt-1 text-sm font-semibold text-[#17233f]">{value}</div></div>;
 }
