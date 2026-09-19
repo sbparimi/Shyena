@@ -4,7 +4,7 @@ import { ArrowRight, Quote } from "lucide-react";
 const SITE = "https://www.shyena.eu";
 
 export const Route = createFileRoute("/customers")({
-  head: () => ({ meta: [
+  head: () => ({ links: [{ rel: "canonical", href: "https://www.shyena.eu/customers" }], meta: [
     { title: "Customers | AI Assurance & Quality Engineering | Shyena" },
     { name: "description", content: "See how enterprise teams use Shyena to test, evaluate, secure and prove AI systems with evidence-backed assurance." },
     { name: "robots", content: "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" },
