@@ -32,6 +32,40 @@ const evaluation = [
 
 const integrations = ["Cognigy", "Agentforce", "LangGraph", "LangChain", "CrewAI", "RAG", "AWS Bedrock", "Azure OpenAI", "Playwright", "OpenTelemetry", "GitHub Actions", "GitLab CI"];
 
+mport { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRight, Check, ChevronRight, ShieldCheck } from "lucide-react";
+import { motion, useMotionValue, useSpring } from "framer-motion";
+
+export const Route = createFileRoute("/")({
+  head: () => ({
+    links: [{ rel: "canonical", href: "https://www.shyena.eu/" }],
+    meta: [
+      { title: "Shyena | AI Agent Testing, Evaluation & Security" },
+      { name: "description", content: "Test, evaluate and secure AI agents with realistic simulations, trace evidence and release-ready assurance." },
+      { property: "og:title", content: "Shyena | AI Agent Testing, Evaluation & Security" },
+      { property: "og:description", content: "Realistic AI agent testing, evaluation and security with evidence-backed release decisions." },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://www.shyena.eu/" },
+    ],
+  }),
+  component: HomePage,
+});
+
+const platform = [
+  ["NEXUS", "Understand your AI system", "Map flows, orchestration, tools, dependencies and business-critical journeys before you test.", "/nexus"],
+  ["VERA", "Test and evaluate", "Simulate realistic users, run multi-turn journeys and evaluate outcomes, semantics and execution integrity.", "/vera"],
+  ["CHAKRA", "Secure your agents", "Red-team prompts, tools, trust boundaries and unsafe execution paths before production.", "/chakra"],
+] as const;
+
+const evaluation = [
+  ["Deterministic", "Facts your system must satisfy: APIs, business rules, states, routes and tool contracts."],
+  ["Semantic", "Judge relevance, correctness, tone and business meaning across responses and conversations."],
+  ["Orchestrator", "Verify that the agent selected the right intent, route, tool and next action."],
+  ["Security", "Detect prompt injection, policy breaks, unsafe tool calls and trust-boundary failures."],
+] as const;
+
+const integrations = ["Cognigy", "Agentforce", "LangGraph", "LangChain", "CrewAI", "RAG", "AWS Bedrock", "Azure OpenAI", "Playwright", "OpenTelemetry", "GitHub Actions", "GitLab CI"];
+
 const customers = [
   ["BMW", "https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/bmw.svg"],
   ["Walmart", "https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/walmart.svg"],
@@ -43,23 +77,6 @@ const customers = [
   ["Crossover", "https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/crossover.svg"],
   ["Andela", "https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/andela.svg"],
 ] as const;
-
-function LogoCard({ name, logo }: { name: string; logo: string }) {
-  return (
-    <div className="group flex min-w-0 flex-col items-center justify-between rounded-xl border border-[#e4e6ea] bg-white px-4 py-6 transition duration-300 hover:-translate-y-0.5 hover:border-[#d5d9e0] hover:shadow-[0_15px_35px_-25px_rgba(23,35,63,.45)]">
-      <div className="flex h-16 w-full items-center justify-center overflow-hidden">
-        <img
-          src={logo}
-          alt={`${name} logo`}
-          loading="lazy"
-          className="block max-h-12 w-auto max-w-[118px] object-contain opacity-85 transition duration-300 group-hover:opacity-100"
-          onError={(e) => { e.currentTarget.style.display = "none"; }}
-        />
-      </div>
-      <div className="mt-4 flex min-h-[24px] w-full items-center justify-center text-center text-[14px] font-semibold leading-5 text-[#17233f]">{name}</div>
-    </div>
-  );
-}
 
 function HomePage() {
   const pointerX = useMotionValue(0);
@@ -359,7 +376,7 @@ function HomePage() {
         </div>
       </section>
 
-      <section className="border-y border-[#e8e8e8] bg-white"><div className="mx-auto max-w-[1280px] px-5 py-16 sm:px-8 lg:px-10 lg:py-20"><div className="text-center"><div className="text-sm font-semibold text-[#e87512]">Customers</div><h2 className="mt-3 font-[Sora] text-[clamp(2rem,4vw,3.4rem)] font-extrabold tracking-[-.045em] text-[#17233f]">Trusted by industry leaders.</h2><p className="mx-auto mt-4 max-w-2xl text-sm leading-6 text-[#69707d]">Enterprise teams use Shyena to test, evaluate, secure and prove their AI systems.</p></div><div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-9">{customers.map(([name,logo])=><LogoCard key={name} name={name} logo={logo} />)}</div><p className="mt-6 text-center text-[11px] leading-5 text-[#7a8290]">Logos are used for identification purposes only and remain the property of their respective owners.</p></div></section>
+      <section className="border-y border-[#e8e8e8] bg-white"><div className="mx-auto max-w-[1280px] px-5 py-16 sm:px-8 lg:px-10 lg:py-20"><div className="text-center"><div className="text-sm font-semibold text-[#e87512]">Enterprise environments</div><h2 className="mt-3 font-[Sora] text-[clamp(2rem,4vw,3.4rem)] font-extrabold tracking-[-.045em] text-[#17233f]">Built for complex enterprise workflows.</h2><p className="mx-auto mt-4 max-w-2xl text-sm leading-6 text-[#69707d]">Designed for teams operating AI agents and enterprise applications across regulated, customer-facing and mission-critical workflows.</p></div><div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">{[["CRM & service","Customer journeys, case management and assisted service workflows."],["ERP & operations","Business processes, approvals, transactions and exception paths."],["Commerce & digital","Checkout, account, identity and high-volume customer journeys."],["Healthcare & regulated","Evidence, policy controls, security boundaries and release governance."]].map(([name,body])=><div key={name} className="rounded-xl border border-[#e4e6ea] bg-[#fafbfc] p-5"><div className="text-sm font-bold text-[#17233f]">{name}</div><p className="mt-2 text-xs leading-5 text-[#69707d]">{body}</p></div>)}</div></div></section>
 
 
       <section className="border-y border-[#e8e8e8] bg-white">
