@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ExecutivePage } from "@/components/site/executive-page";
 
 export const Route = createFileRoute("/services")({
-  head: () => ({ meta: [
+  head: () => ({ links: [{ rel: "canonical", href: "https://www.shyena.eu/services" }], meta: [
     { title: "AI Quality Engineering Services | Shyena" },
     { name: "description", content: "Shyena services help organisations implement autonomous testing, AI evaluation, security assurance and enterprise quality engineering." },
   ]}),
