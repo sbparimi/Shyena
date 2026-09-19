@@ -1,0 +1,3 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { QualityIntelligencePage } from "../components/site/quality-intelligence-page";
+export const Route = createFileRoute("/developers")({ head: () => ({ meta: [{ title: "Shyena Developer Workflow | AI Assurance API" }, { name: "description", content: "Bring AI assurance into engineering workflows with reproducible runs, evidence retrieval and release gates." }] }), component: () => <QualityIntelligencePage module="developers" /> });
