@@ -32,51 +32,7 @@ const evaluation = [
 
 const integrations = ["Cognigy", "Agentforce", "LangGraph", "LangChain", "CrewAI", "RAG", "AWS Bedrock", "Azure OpenAI", "Playwright", "OpenTelemetry", "GitHub Actions", "GitLab CI"];
 
-mport { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Check, ChevronRight, ShieldCheck } from "lucide-react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
 
-export const Route = createFileRoute("/")({
-  head: () => ({
-    links: [{ rel: "canonical", href: "https://www.shyena.eu/" }],
-    meta: [
-      { title: "Shyena | AI Agent Testing, Evaluation & Security" },
-      { name: "description", content: "Test, evaluate and secure AI agents with realistic simulations, trace evidence and release-ready assurance." },
-      { property: "og:title", content: "Shyena | AI Agent Testing, Evaluation & Security" },
-      { property: "og:description", content: "Realistic AI agent testing, evaluation and security with evidence-backed release decisions." },
-      { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://www.shyena.eu/" },
-    ],
-  }),
-  component: HomePage,
-});
-
-const platform = [
-  ["NEXUS", "Understand your AI system", "Map flows, orchestration, tools, dependencies and business-critical journeys before you test.", "/nexus"],
-  ["VERA", "Test and evaluate", "Simulate realistic users, run multi-turn journeys and evaluate outcomes, semantics and execution integrity.", "/vera"],
-  ["CHAKRA", "Secure your agents", "Red-team prompts, tools, trust boundaries and unsafe execution paths before production.", "/chakra"],
-] as const;
-
-const evaluation = [
-  ["Deterministic", "Facts your system must satisfy: APIs, business rules, states, routes and tool contracts."],
-  ["Semantic", "Judge relevance, correctness, tone and business meaning across responses and conversations."],
-  ["Orchestrator", "Verify that the agent selected the right intent, route, tool and next action."],
-  ["Security", "Detect prompt injection, policy breaks, unsafe tool calls and trust-boundary failures."],
-] as const;
-
-const integrations = ["Cognigy", "Agentforce", "LangGraph", "LangChain", "CrewAI", "RAG", "AWS Bedrock", "Azure OpenAI", "Playwright", "OpenTelemetry", "GitHub Actions", "GitLab CI"];
-
-const customers = [
-  ["BMW", "https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/bmw.svg"],
-  ["Walmart", "https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/walmart.svg"],
-  ["Optum", "https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/optum.svg"],
-  ["adidas", "https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/adidas.svg"],
-  ["Philips", "https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/philips.svg"],
-  ["CGI", "https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/cgi.svg"],
-  ["TCS", "https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/tcs.svg"],
-  ["Crossover", "https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/crossover.svg"],
-  ["Andela", "https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/andela.svg"],
-] as const;
 
 
 function ShyenaAssuranceArchitecture() {
