@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-function ShyenaAssuranceArchitecture() {
+export function ShyenaAssuranceArchitecture() {
   const groups = [
     { title: "BUILD", className: "left-[3%] top-[7%] w-[31%]", items: ["NEXUS", "VERA", "CHAKRA", "AUTONOMOUS QA"] },
     { title: "TEST", className: "right-[3%] top-[12%] w-[27%]", items: ["JOURNEYS", "EVALUATION", "EXPERIMENTS"] },
