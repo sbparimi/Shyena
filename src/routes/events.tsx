@@ -3,6 +3,7 @@ import { ArrowRight, CalendarDays, Clock3, Video } from "lucide-react";
 
 export const Route = createFileRoute("/events")({
   head: () => ({
+    links: [{ rel: "canonical", href: "https://www.shyena.eu/events" }],
     meta: [
       { title: "Events & Working Sessions | Shyena" },
       { name: "description", content: "Join Shyena working sessions, product briefings and engineering discussions around AI quality engineering." },
