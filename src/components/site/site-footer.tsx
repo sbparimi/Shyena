@@ -4,8 +4,8 @@ import { Logo } from "./logo";
 
 const COLUMNS = [
   { title: "Product", links: [{ label: "Nexus", to: "/nexus" }, { label: "Vera", to: "/vera" }, { label: "Chakra", to: "/chakra" }, { label: "Pricing", to: "/pricing" }, { label: "Integrations", to: "/integrations" }] },
-  { title: "Resources", links: [{ label: "Blog", to: "/blog" }, { label: "Case studies", to: "/blog" }, { label: "Guides", to: "/blog" }, { label: "Webinars", to: "/blog" }, { label: "Docs", to: "/docs" }] },
-  { title: "Company", links: [{ label: "About", to: "/about" }, { label: "Careers", to: "/about" }, { label: "Contact", to: "/contact" }, { label: "Privacy", to: "/privacy" }, { label: "Terms", to: "/terms" }] },
+  { title: "Resources", links: [{ label: "Blog", to: "/blog" }, { label: "Documentation", to: "/docs" }, { label: "Events & sessions", to: "/events" }, { label: "Metrics", to: "/metrics" }, { label: "Integrations", to: "/integrations" }] },
+  { title: "Company", links: [{ label: "About", to: "/about" }, { label: "Customers", to: "/customers" }, { label: "Security & trust", to: "/security" }, { label: "Pricing", to: "/pricing" }, { label: "Contact", to: "/contact" }] },
 ] as const;
 
 export function SiteFooter() {
