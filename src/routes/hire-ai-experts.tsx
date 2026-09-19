@@ -63,11 +63,11 @@ const allSkills = ["All disciplines", "Playwright", "DeepEval", "Promptfoo", "Ph
 export const Route = createFileRoute("/hire-ai-experts")({
   head: () => ({
     meta: [
-      { title: "Hire Autonomous AI Testers & AI QA Experts | Shyena" },
-      { name: "description", content: "Hire remote and hybrid AI testing specialists for Playwright, DeepEval, Promptfoo, Phoenix Arize, API testing, Salesforce, Oracle Fusion AI, Cognigy, RAG and autonomous quality engineering." },
+      { title: "Talk to AI Testing & QA Experts | Shyena" },
+      { name: "description", content: "Talk to remote and hybrid AI testing specialists for Playwright, DeepEval, Promptfoo, Phoenix Arize, API testing, Salesforce, Oracle Fusion AI, Cognigy, RAG and autonomous quality engineering." },
       { name: "keywords", content: "hire AI testers, autonomous testing experts, Playwright experts, DeepEval experts, Promptfoo experts, Phoenix Arize, API testing, Salesforce testing, Oracle Fusion AI testing, Cognigy testing, AI QA Europe" },
-      { property: "og:title", content: "Hire Autonomous AI Testers & AI QA Experts | Shyena" },
-      { property: "og:description", content: "Find remote and hybrid specialists for autonomous browser testing, LLM evaluation, AI security, enterprise application QA and release assurance." },
+      { property: "og:title", content: "Talk to AI Testing & QA Experts | Shyena" },
+      { property: "og:description", content: "Talk to remote and hybrid specialists for autonomous browser testing, LLM evaluation, AI security, enterprise application QA and release assurance." },
       { property: "og:type", content: "website" },
     ],
     links: [{ rel: "canonical", href: "https://shyena.eu/hire-ai-experts" }],
@@ -104,7 +104,7 @@ function HireAIExpertsPage() {
         <div className="relative mx-auto grid max-w-[1280px] gap-10 px-5 pb-14 pt-14 sm:px-8 lg:grid-cols-[1.05fr_.95fr] lg:items-end lg:px-10 lg:pb-20 lg:pt-20">
           <div className="max-w-3xl">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.16em] text-[#f59a4b] backdrop-blur">
-              <Sparkles className="h-3.5 w-3.5" /> SHYENA · HIRE EXPERTS
+              <Sparkles className="h-3.5 w-3.5" /> SHYENA · TALK TO EXPERTS
             </div>
             <h1 className="font-[Sora] text-5xl font-extrabold leading-[0.94] tracking-[-0.055em] text-white md:text-7xl">
               Stop guessing about AI quality.<br />
@@ -168,7 +168,7 @@ function HireAIExpertsPage() {
               <div className="mt-5 flex flex-wrap gap-1.5">{expert.skills.slice(0, 4).map((skill) => <span key={skill} className="rounded-full border border-[#e8e8e8] bg-[#fafafa] px-2.5 py-1 text-[11px] font-semibold text-[#5f6672]">{skill}</span>)}</div>
               <div className="mt-6 flex gap-2 border-t border-[#e8e8e8] pt-5">
                 <button onClick={() => setSelected(expert)} className="flex-1 rounded-lg border border-[#d8dce3] px-3 py-2.5 text-sm font-semibold text-[#17233f] transition hover:border-[#17233f] hover:text-[#e87512]">View full profile</button>
-                <a href={discussUrl(expert)} className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg bg-[#e87512] px-3 py-2.5 text-sm font-semibold text-white transition hover:bg-[#f18a32]">Discuss <ArrowRight className="h-4 w-4" /></a>
+                <a href={discussUrl(expert)} className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg bg-[#e87512] px-3 py-2.5 text-sm font-semibold text-white transition hover:bg-[#f18a32]">Talk <ArrowRight className="h-4 w-4" /></a>
               </div>
             </article>
           ))}
@@ -180,7 +180,7 @@ function HireAIExpertsPage() {
       <section className="border-y border-[#17233f] bg-[#17233f] text-white">
         <div className="mx-auto flex max-w-7xl flex-col gap-6 px-6 py-12 lg:flex-row lg:items-center lg:justify-between lg:px-8">
           <div><div className="text-xs font-bold uppercase tracking-[0.18em] text-[#e87512]">Need a specific capability?</div><h2 className="mt-2 font-[Sora] text-3xl font-extrabold tracking-tight text-white">Tell us the system, stack and outcome.</h2><p className="mt-3 max-w-2xl text-sm leading-6 text-white/65">Shyena can match the engagement to the testing surface: browser, API, CRM, ERP, LLM, RAG, agent or security.</p></div>
-          <a href="/contact" className="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg bg-[#e87512] px-6 py-3 text-sm font-bold text-white hover:bg-[#f18a32]">Request an expert <ArrowRight className="h-4 w-4" /></a>
+          <a href="/contact" className="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg bg-[#e87512] px-6 py-3 text-sm font-bold text-white hover:bg-[#f18a32]">Talk to an expert <ArrowRight className="h-4 w-4" /></a>
         </div>
       </section>
 
@@ -201,8 +201,8 @@ function ProfileModal({ expert, onClose, discussUrl }: { expert: Expert; onClose
         <ExpertActionVisual id={expert.id} name={expert.name} role={expert.role} skills={expert.skills} gender={expert.gender} />
         <div className="mt-6 grid gap-4 sm:grid-cols-3"><Info label="Delivery" value={`${expert.mode} · ${expert.location}`} /><Info label="Experience" value={expert.experience} /><Info label="Engagement" value={expert.engagement.join(" · ")} /></div>
         <div className="mt-8 grid gap-8 lg:grid-cols-[1.2fr_0.8fr]"><div><h3 className="text-xs font-bold uppercase tracking-[0.15em] text-[#e87512]">Profile</h3><p className="mt-3 text-base leading-7 text-[#626976]">{expert.summary}</p><h3 className="mt-7 text-xs font-bold uppercase tracking-[0.15em] text-[#e87512]">Typical focus</h3><ul className="mt-3 space-y-2">{expert.focus.map((item) => <li key={item} className="flex gap-2 text-sm text-[#5f6672]"><Zap className="mt-0.5 h-4 w-4 shrink-0 text-[#167e6a]" /> {item}</li>)}</ul><h3 className="mt-7 text-xs font-bold uppercase tracking-[0.15em] text-[#e87512]">Delivery capability</h3><p className="mt-3 text-sm leading-6 text-[#626976]">{expert.delivery}</p></div><div><h3 className="text-xs font-bold uppercase tracking-[0.15em] text-[#e87512]">Core expertise</h3><div className="mt-3 flex flex-wrap gap-2">{expert.skills.map((skill) => <span key={skill} className="rounded-full border border-[#e1e3e7] bg-white px-3 py-1.5 text-xs font-semibold text-[#5f6672]">{skill}</span>)}</div><h3 className="mt-7 text-xs font-bold uppercase tracking-[0.15em] text-[#e87512]">Profile tags</h3><div className="mt-3 flex flex-wrap gap-2">{expert.tags.map((tag) => <span key={tag} className="rounded-full bg-[#e87512]/10 px-3 py-1.5 text-xs font-semibold text-[#e87512]">{tag}</span>)}</div></div></div>
-        <div className="mt-8 rounded-xl border border-[#e87512]/25 bg-[#e87512]/10 p-4"><div className="flex items-start gap-3"><BriefcaseBusiness className="mt-0.5 h-5 w-5 text-[#e87512]" /><div><div className="font-semibold text-[#17233f]">Discuss this specialist</div><p className="mt-1 text-sm leading-6 text-[#626976]">The contact form will be prefilled with this profile and its relevant skills.</p></div></div></div>
-        <div className="mt-6 flex flex-col gap-3 sm:flex-row"><a href={discussUrl} className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg bg-[#e87512] px-5 py-3 text-sm font-bold text-white hover:bg-[#f18a32]">Discuss this expert <ArrowRight className="h-4 w-4" /></a><button onClick={onClose} className="rounded-lg border border-[#d8dce3] bg-white px-5 py-3 text-sm font-semibold text-[#17233f]">Close profile</button></div>
+        <div className="mt-8 rounded-xl border border-[#e87512]/25 bg-[#e87512]/10 p-4"><div className="flex items-start gap-3"><BriefcaseBusiness className="mt-0.5 h-5 w-5 text-[#e87512]" /><div><div className="font-semibold text-[#17233f]">Talk to this expert</div><p className="mt-1 text-sm leading-6 text-[#626976]">The contact form will be prefilled with this profile and its relevant skills.</p></div></div></div>
+        <div className="mt-6 flex flex-col gap-3 sm:flex-row"><a href={discussUrl} className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg bg-[#e87512] px-5 py-3 text-sm font-bold text-white hover:bg-[#f18a32]">Talk to this expert <ArrowRight className="h-4 w-4" /></a><button onClick={onClose} className="rounded-lg border border-[#d8dce3] bg-white px-5 py-3 text-sm font-semibold text-[#17233f]">Close profile</button></div>
       </div>
     </div>
   </div>;
