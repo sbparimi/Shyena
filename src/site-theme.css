@@ -71,6 +71,10 @@
 
 
 /* Modern action system — consistent across the public site. */
+:where(a.shyena-action-primary,a.shyena-action-secondary,a.shyena-action-dark){min-height:44px;border-radius:12px;font-weight:600;letter-spacing:-.01em;transition:transform .18s ease,box-shadow .18s ease,background-color .18s ease,border-color .18s ease,color .18s ease;-webkit-tap-highlight-color:transparent}
+:where(a.shyena-action-primary,a.shyena-action-secondary,a.shyena-action-dark):hover{transform:translateY(-1px)}
+:where(a.shyena-action-primary,a.shyena-action-secondary,a.shyena-action-dark):active{transform:translateY(0) scale(.985);transition-duration:.08s}
+:where(a.shyena-action-primary,a.shyena-action-secondary,a.shyena-action-dark):focus-visible{outline:2px solid #e87512;outline-offset:3px;box-shadow:0 0 0 5px rgba(232,117,18,.14)}
 .site-theme :where(a.inline-flex,button.inline-flex){
   min-height:44px;
   border-radius:12px;
