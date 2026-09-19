@@ -123,10 +123,10 @@ export function ExpertActionVisual({ id, name, role, skills, gender, compact = f
       <div className="absolute bottom-0 left-0 right-0 z-10 p-4">
         <div className="flex items-end justify-between gap-3">
           <div className="min-w-0">
-            <div className="text-[8px] font-bold uppercase tracking-[0.18em] text-[#ffd43b]">{product} · EXPERT</div>
+            <div className="text-[8px] font-bold uppercase tracking-[0.18em] text-[#e87512]">{product} · EXPERT</div>
             <div className="mt-1 truncate text-[11px] font-semibold text-white/75">{role}</div>
           </div>
-          <div className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#ffd43b] shadow-[0_0_14px_rgba(255,212,59,.9)]" />
+          <div className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#e87512] shadow-[0_0_14px_rgba(232,117,18,.9)]" />
         </div>
       </div>
     </motion.div>
