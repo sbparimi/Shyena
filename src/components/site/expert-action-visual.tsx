@@ -82,7 +82,7 @@ function TemplateAvatar({ woman }: { woman: boolean }) {
         <div className="mt-1 text-[10px] font-semibold text-[#17213f]">Assurance specialist</div>
       </div>
       <div className="absolute bottom-5 right-5 flex h-9 w-9 items-center justify-center rounded-full bg-[#e87512] text-white shadow-lg">
-        <span className="text-[11px] font-black">{woman ? "W" : "M"}</span>
+        <span className="h-2.5 w-2.5 rounded-full bg-white/90" />
       </div>
     </div>
   );
