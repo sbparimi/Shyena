@@ -103,19 +103,19 @@
   color:#fff;
   box-shadow:0 10px 24px -14px rgba(232,117,18,.65);
 }
-.shyena-action-primary:hover{background:#d9670a;border-color:#d9670a;box-shadow:0 14px 28px -16px rgba(232,117,18,.72)}
+.site-theme .shyena-action-primary:hover{background:#d9670a;border-color:#d9670a;box-shadow:0 14px 28px -16px rgba(232,117,18,.72)}
 .site-theme .shyena-action-secondary{
   background:#fff;
   border:1px solid #cfd5df;
   color:#17213f;
 }
-.shyena-action-secondary:hover{border-color:#17213f;background:#f8fafc}
+.site-theme .shyena-action-secondary:hover{border-color:#17213f;background:#f8fafc}
 .site-theme .shyena-action-dark{
   background:#17213f;
   border:1px solid #17213f;
   color:#fff;
 }
-.shyena-action-dark:hover{background:#0f1730;border-color:#0f1730}
+.site-theme .shyena-action-dark:hover{background:#0f1730;border-color:#0f1730}
 @media (prefers-reduced-motion:reduce){
   .site-theme :where(a.inline-flex,button.inline-flex){transition:none!important}
   .site-theme :where(a.inline-flex,button.inline-flex):hover,
