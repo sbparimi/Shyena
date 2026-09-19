@@ -34,7 +34,7 @@ function buildHireHref(skills: string[]) {
   const params = new URLSearchParams();
   if (skills.length) params.set("skills", skills.join(", "));
   params.set("source", window.location.pathname);
-  return `/hire-ai-experts?${params.toString()}`;
+  return "/experts";
 }
 
 function isVisible(element: HTMLElement): boolean {
