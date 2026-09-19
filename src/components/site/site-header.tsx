@@ -277,7 +277,7 @@ export function SiteHeader() {
             <Link
               to="/contact"
               onClick={closeAll}
-              className="group inline-flex items-center justify-center gap-2 px-4 text-[13px] shyena-action-primary"
+              className="group inline-flex h-10 items-center justify-center gap-2 rounded-lg bg-[#e87512] px-4 text-[13px] font-semibold text-white shadow-[0_10px_24px_-14px_rgba(232,117,18,.7)] transition hover:-translate-y-px hover:bg-[#d9670a]"
             >
               Talk to experts
               <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
@@ -319,7 +319,7 @@ export function SiteHeader() {
             </nav>
             <div className="mt-4 grid grid-cols-2 gap-2">
               <button type="button" onClick={() => { setSearchOpen(true); setMobileOpen(false); }} className="inline-flex h-11 items-center justify-center gap-2 rounded-xl border border-[#dfe3e8] text-[13px] font-semibold text-[#17233f]"><Search className="h-4 w-4" /> Search</button>
-              <Link to="/contact" onClick={closeAll} className="inline-flex items-center justify-center gap-2 px-4 text-[13px] shyena-action-primary">Talk to experts <ArrowRight className="h-4 w-4" /></Link>
+              <Link to="/contact" onClick={closeAll} className="inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-[#e87512] text-[13px] font-semibold text-white">Talk to experts <ArrowRight className="h-4 w-4" /></Link>
             </div>
           </div>
         )}
