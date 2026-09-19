@@ -71,8 +71,8 @@ function createHireExpertsLink(href: string, skills: string[]): HTMLAnchorElemen
   link.href = href;
   link.dataset.hireExpertsSource = window.location.pathname;
   link.className = "inline-flex h-11 items-center justify-center gap-2 rounded-lg border border-[#17213f] bg-white px-4 text-xs font-semibold text-[#17213f] transition hover:border-[#ff5a0a] hover:text-[#ff5a0a]";
-  link.title = skills.length ? `Find experts for: ${skills.join(", ")}` : "View Shyena experts";
-  link.textContent = "Hire Experts";
+  link.title = skills.length ? `Talk to experts for: ${skills.join(", ")}` : "Talk to Shyena experts";
+  link.textContent = "Talk to Experts";
   return link;
 }
 
