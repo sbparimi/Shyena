@@ -82,7 +82,7 @@ const MENUS = {
         links: [
           { label: "Events & sessions", description: "Working sessions, product briefings and announcements.", to: "/events", icon: CalendarDays },
           { label: "Developers", description: "API-first workflows, evidence and CI/CD.", to: "/developers", icon: Command },
-          { label: "Talk to experts", description: "Bring a real journey and review the evidence.", to: "/hire-ai-experts", icon: Sparkles },
+          { label: "Talk to experts", description: "Bring a real journey and review the evidence.", to: "/experts", icon: Sparkles },
         ],
       },
     ],
