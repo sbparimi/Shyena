@@ -4,6 +4,7 @@ import { ExecutivePage } from "@/components/site/executive-page";
 const SITE = "https://www.shyena.eu";
 
 export const Route = createFileRoute("/security")({
+  head: () => ({ meta: [{ title: "Security & Trust | Shyena" }, { name: "description", content: "Security, access, data boundaries, evidence integrity, credentials and release governance for Shyena AI assurance." }], links: [{ rel: "canonical", href: "https://www.shyena.eu/security" }] }),
   head: () => ({ meta: [
     { title: "AI Security Testing & AI Agent Security | Shyena" },
     { name: "description", content: "Test AI agents and enterprise systems for prompt injection, unsafe behaviour, trust-boundary failures and control gaps with evidence-backed security assurance." },
