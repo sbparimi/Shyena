@@ -47,7 +47,9 @@ export const Route = createFileRoute("/api/contact")({
         const message = cleanText(input.message, MAX_MESSAGE_LENGTH);
         const name = [firstName, lastName].filter(Boolean).join(" ");
 
-        if (!inquiryReason || !firstName || !lastName || !email || !phone || !company || !jobTitle || !companySize || !country || !message) {
+        const honeypot = cleanText(input.website, 200);
+        if (honeypot) return Response.json({ error: "Unable to submit this request." }, { status: 400 });
+        if (!inquiryReason || !firstName || !lastName || !email || !company || !message) {
           return Response.json({ error: "All fields are required" }, { status: 400 });
         }
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || !isWorkEmail(email)) {
