@@ -46,9 +46,6 @@ function ShyenaAssuranceArchitecture() {
   return (
     <motion.div
       className="relative mx-auto h-[500px] w-full max-w-[820px] [perspective:1600px] sm:h-[590px]"
-      onPointerMove={handleHeroPointer}
-      onPointerLeave={resetHeroPointer}
-      style={{ rotateX, rotateY }}
       aria-label="Shyena assurance architecture"
     >
       <div className="absolute inset-5 rounded-[38px] bg-[radial-gradient(circle_at_50%_48%,rgba(88,157,215,.20),transparent_34%),radial-gradient(circle_at_50%_90%,rgba(232,117,18,.07),transparent_40%)] blur-2xl" />
