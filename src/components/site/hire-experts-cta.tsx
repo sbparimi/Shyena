@@ -70,7 +70,7 @@ function createHireExpertsLink(href: string, skills: string[]): HTMLAnchorElemen
   const link = document.createElement("a");
   link.href = href;
   link.dataset.hireExpertsSource = window.location.pathname;
-  link.className = "inline-flex h-11 items-center justify-center gap-2 rounded-lg border border-[#17213f] bg-white px-4 text-xs font-semibold text-[#17213f] transition hover:border-[#ff5a0a] hover:text-[#ff5a0a]";
+  link.className = "inline-flex shyena-action-secondary items-center justify-center gap-2 px-4 text-xs";
   link.title = skills.length ? `Talk to experts for: ${skills.join(", ")}` : "Talk to Shyena experts";
   link.textContent = "Talk to Experts";
   return link;
@@ -94,7 +94,7 @@ function addExpertCtas() {
   });
 
   groups.forEach((members) => {
-    if (members.some((element) => element.dataset.shyenaHireExpertAttached === "true")) return;
+    if (members.some((element) => element.dataset.shyenaHireExpertAttached === "true")) return;\n    // Do not stack a global expert CTA inside pricing/product cards that already have a deliberate action.\n    if (members.some((element) => element.closest("article"))) return;
 
     const lastCta = members[members.length - 1];
     const wrapper = document.createElement("span");
