@@ -1,62 +1,100 @@
 import { motion } from "framer-motion";
 
-export function ShyenaAssuranceArchitecture() {
-  const groups = [
-    { title: "BUILD", className: "left-[3%] top-[7%] w-[31%]", items: ["NEXUS", "VERA", "CHAKRA", "AUTONOMOUS QA"] },
-    { title: "TEST", className: "right-[3%] top-[12%] w-[27%]", items: ["JOURNEYS", "EVALUATION", "EXPERIMENTS"] },
-    { title: "MONITOR", className: "left-[3%] bottom-[8%] w-[28%]", items: ["TRACES", "EVIDENCE", "FINDINGS", "METRICS"] },
-    { title: "DEPLOY", className: "right-[3%] bottom-[8%] w-[27%]", items: ["CI/CD", "RELEASE GATES", "ENVIRONMENTS", "INTEGRATIONS"] },
-  ];
+const groups = [
+  { title: "BUILD", items: ["NEXUS", "VERA", "CHAKRA", "AUTONOMOUS QA"], position: "left-5 top-[66px] sm:left-7" },
+  { title: "TEST", items: ["JOURNEYS", "EVALUATION", "EXPERIMENTS"], position: "right-5 top-[92px] sm:right-7" },
+  { title: "MONITOR", items: ["TRACES", "EVIDENCE", "FINDINGS", "METRICS"], position: "left-5 bottom-[38px] sm:left-7" },
+  { title: "DEPLOY", items: ["CI/CD", "RELEASE GATES", "ENVIRONMENTS", "INTEGRATIONS"], position: "right-5 bottom-[38px] sm:right-7" },
+] as const;
 
+export function ShyenaAssuranceArchitecture() {
   return (
-    <motion.div
-      className="relative mx-auto h-[500px] w-full max-w-[820px] [perspective:1600px] sm:h-[590px]"
-      aria-label="Shyena assurance architecture"
+    <div
+      className="relative mx-auto h-[520px] w-full max-w-[800px] sm:h-[560px]"
+      aria-label="Shyena AI assurance architecture"
     >
-      <div className="absolute inset-5 rounded-[38px] bg-[radial-gradient(circle_at_50%_48%,rgba(88,157,215,.20),transparent_34%),radial-gradient(circle_at_50%_90%,rgba(232,117,18,.07),transparent_40%)] blur-2xl" />
-      <motion.div
-        className="relative h-full w-full overflow-hidden rounded-[34px] border border-[#29445b] bg-[#0a121b] shadow-[0_45px_120px_rgba(0,0,0,.55)]"
-        animate={{ y: [0, -3, 0] }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-      >
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_48%,rgba(92,166,224,.09),transparent_34%),linear-gradient(145deg,rgba(255,255,255,.035),transparent_30%,transparent_72%,rgba(232,117,18,.025))]" />
-        <div className="shyena-grid pointer-events-none absolute inset-0 opacity-20" />
-        <div className="relative flex h-14 items-center justify-center border-b border-white/10 bg-[#13283a]/90">
-          <div className="flex items-center gap-3">
-            <div className="flex h-7 w-7 items-center justify-center rounded-[8px] border border-[#7ac9ff]/60 bg-[#72c8ff]/90 text-[#07101a] shadow-[0_0_20px_rgba(114,200,255,.18)]"><span className="text-sm font-black tracking-[-.12em]">S</span></div>
-            <div className="font-[Sora] text-lg font-bold tracking-[-.035em] text-[#9ed8ff] sm:text-xl">Shyena <span className="font-normal text-[#7fb6d8]">Assurance Engine</span></div>
+      <div className="absolute inset-8 rounded-[32px] bg-[radial-gradient(circle_at_50%_52%,rgba(104,119,255,.14),transparent_38%),radial-gradient(circle_at_85%_85%,rgba(232,117,18,.07),transparent_32%)] blur-3xl" />
+
+      <div className="relative h-full w-full overflow-hidden rounded-[30px] border border-white/[.12] bg-[#070b14] shadow-[0_40px_100px_-45px_rgba(0,0,0,.8)]">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_48%,rgba(104,119,255,.08),transparent_36%),linear-gradient(135deg,rgba(255,255,255,.025),transparent_35%,transparent_72%,rgba(232,117,18,.025))]" />
+        <div className="shyena-grid pointer-events-none absolute inset-0 opacity-30" />
+
+        <div className="relative z-50 flex h-14 items-center justify-center border-b border-white/[.09] bg-[#0d1322]/95">
+          <div className="flex items-center gap-2.5">
+            <img
+              src="/shyena-mark.svg?v=20260917"
+              alt=""
+              aria-hidden="true"
+              className="h-7 w-7 object-contain"
+            />
+            <span className="font-[Sora] text-base font-bold tracking-[-.035em] text-white sm:text-lg">
+              Shyena <span className="font-medium text-white/45">Assurance Engine</span>
+            </span>
           </div>
         </div>
-        <div className="absolute inset-x-0 top-14 bottom-0">
-          <div className="absolute left-1/2 top-1/2 h-[74%] w-[57%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-black/70 shadow-[0_0_90px_rgba(55,117,169,.16)]" />
-          <motion.div className="absolute left-1/2 top-1/2 h-[68%] w-[53%] -translate-x-1/2 -translate-y-1/2 rounded-full border-[5px] border-[#72c8ff]/80 shadow-[0_0_25px_rgba(114,200,255,.24),inset_0_0_35px_rgba(114,200,255,.10)]" animate={{ rotate: 360 }} transition={{ duration: 24, repeat: Infinity, ease: "linear" }}>
-            <span className="absolute -right-2 top-[12%] h-5 w-5 rounded-full bg-[#72c8ff] shadow-[0_0_18px_rgba(114,200,255,.95)]" />
-            <span className="absolute bottom-[12%] left-[7%] h-4 w-4 rounded-full bg-[#72c8ff] shadow-[0_0_18px_rgba(114,200,255,.95)]" />
+
+        <div className="absolute inset-x-0 bottom-0 top-14">
+          <div className="absolute left-1/2 top-[47%] h-[58%] w-[46%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#03060c] shadow-[0_0_80px_rgba(104,119,255,.12),inset_0_0_70px_rgba(104,119,255,.06)]" />
+
+          <motion.div
+            className="absolute left-1/2 top-[47%] h-[63%] w-[50%] -translate-x-1/2 -translate-y-1/2 rounded-full border-[3px] border-[#6877ff]/75 shadow-[0_0_28px_rgba(104,119,255,.16)]"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+          >
+            <span className="absolute -right-1 top-[17%] h-2.5 w-2.5 rounded-full bg-[#e87512] shadow-[0_0_14px_rgba(232,117,18,.8)]" />
+            <span className="absolute bottom-[15%] left-[8%] h-2 w-2 rounded-full bg-[#6877ff] shadow-[0_0_12px_rgba(104,119,255,.8)]" />
           </motion.div>
-          <motion.div className="absolute left-1/2 top-1/2 h-[74%] w-[59%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#6aa7ce]/45" animate={{ rotate: -360 }} transition={{ duration: 34, repeat: Infinity, ease: "linear" }}>
-            <span className="absolute left-[19%] top-0 h-1 w-24 rounded-full bg-[#72c8ff]/75" />
-            <span className="absolute bottom-[8%] right-[18%] h-1 w-20 rounded-full bg-[#72c8ff]/65" />
+
+          <motion.div
+            className="absolute left-1/2 top-[47%] h-[70%] w-[56%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#6877ff]/20"
+            animate={{ rotate: -360 }}
+            transition={{ duration: 46, repeat: Infinity, ease: "linear" }}
+          >
+            <span className="absolute left-[18%] top-0 h-px w-20 bg-[#e87512]/60" />
+            <span className="absolute bottom-[7%] right-[17%] h-px w-16 bg-[#6877ff]/55" />
           </motion.div>
-          <motion.div className="absolute left-1/2 top-1/2 h-[51%] w-[39%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#29445b]/70 bg-[#020609]/95 shadow-[inset_0_0_60px_rgba(56,108,148,.13),0_0_35px_rgba(0,0,0,.55)]" animate={{ scale: [1, 1.015, 1] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }} />
-          <div className="absolute left-1/2 top-1/2 z-20 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-3">
-            <div className="rounded-full border border-[#69b8e9]/50 bg-[#11202c]/95 px-7 py-3 font-mono text-sm text-[#d7efff] shadow-[0_0_25px_rgba(114,200,255,.08)] sm:text-base">Evidence</div>
-            <div className="rounded-full border border-[#69b8e9]/40 bg-[#11202c]/95 px-8 py-3 font-mono text-sm text-[#c4e4f6] shadow-[0_0_25px_rgba(114,200,255,.07)] sm:text-base">Verdict</div>
+
+          <div className="absolute left-1/2 top-[47%] z-20 flex h-[34%] w-[25%] min-w-[170px] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full border border-white/[.08] bg-[#050912]/90 shadow-[inset_0_0_45px_rgba(104,119,255,.06)]">
+            <div className="text-[10px] font-semibold uppercase tracking-[.22em] text-[#e87512]">Assurance</div>
+            <div className="mt-3 rounded-full border border-[#6877ff]/35 bg-[#0c1322] px-6 py-2 font-mono text-sm text-white/85">Evidence</div>
+            <div className="mt-2 rounded-full border border-white/10 bg-[#0c1322] px-6 py-2 font-mono text-sm text-white/60">Verdict</div>
           </div>
-          <div className="absolute left-1/2 top-1/2 z-10 h-[86%] w-[66%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-[#527e9e]/35" />
+
           {groups.map((group) => (
-            <div key={group.title} className={`absolute z-30 rounded-[26px] border border-[#72c8ff]/65 bg-[#173047]/[.78] p-4 shadow-[0_18px_55px_rgba(0,0,0,.24)] backdrop-blur-md sm:p-5 ${group.className}`}>
-              <div className="mb-4 text-center font-mono text-base font-medium tracking-[.04em] text-[#d5edfc] sm:text-lg">{group.title}</div>
-              <div className="space-y-2">{group.items.map((item) => <div key={item} className="flex h-9 items-center rounded-full border border-[#5b9bca]/60 bg-[#08131d]/70 px-3 font-mono text-[8px] font-medium text-[#d0e9f9] sm:h-10 sm:px-4 sm:text-[9px]"><span className="mr-2 h-2 w-2 shrink-0 rounded-[3px] border border-[#72c8ff]/75 bg-[#72c8ff]/15" />{item}</div>)}</div>
+            <div
+              key={group.title}
+              className={`absolute z-30 w-[29%] min-w-[184px] rounded-[20px] border border-[#6877ff]/25 bg-[#101827]/95 p-3.5 shadow-[0_20px_50px_-30px_rgba(0,0,0,.8)] backdrop-blur-md sm:w-[27%] sm:p-4 ${group.position}`}
+            >
+              <div className="mb-3 flex items-center justify-between">
+                <span className="font-mono text-[12px] font-semibold tracking-[.16em] text-white/80 sm:text-[13px]">{group.title}</span>
+                <span className="h-1.5 w-1.5 rounded-full bg-[#e87512] shadow-[0_0_10px_rgba(232,117,18,.65)]" />
+              </div>
+              <div className="space-y-1.5">
+                {group.items.map((item) => (
+                  <div
+                    key={item}
+                    className="flex h-8 items-center rounded-lg border border-white/[.07] bg-[#080e1a]/90 px-2.5 font-mono text-[8px] font-medium tracking-[.02em] text-white/60 sm:h-9 sm:px-3 sm:text-[9px]"
+                  >
+                    <span className="mr-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#6877ff]/75" />
+                    {item}
+                  </div>
+                ))}
+              </div>
             </div>
           ))}
-          <div className="absolute bottom-[1%] left-1/2 z-40 w-[28%] -translate-x-1/2 rounded-[24px] border border-dashed border-[#72c8ff]/60 bg-[#173047]/90 p-3 text-center shadow-[0_18px_45px_rgba(0,0,0,.3)] backdrop-blur-md sm:p-4">
-            <div className="font-mono text-sm font-medium text-[#d5edfc] sm:text-base">GOVERN</div>
-            <div className="mt-3 flex h-9 items-center justify-center rounded-full border border-[#5b9bca]/60 bg-[#08131d]/75 px-3 font-mono text-[8px] text-[#d0e9f9] sm:h-10 sm:text-[9px]">RELEASE POLICY</div>
+
+          <div className="absolute bottom-[3%] left-1/2 z-40 w-[27%] min-w-[190px] -translate-x-1/2 rounded-[18px] border border-[#e87512]/30 bg-[#101827]/95 px-4 py-3 text-center shadow-[0_20px_50px_-30px_rgba(0,0,0,.8)] backdrop-blur-md">
+            <div className="font-mono text-[11px] font-semibold tracking-[.16em] text-white/75">GOVERN</div>
+            <div className="mt-2 rounded-lg border border-white/[.07] bg-[#080e1a] px-3 py-2 font-mono text-[8px] tracking-[.04em] text-white/50">
+              RELEASE POLICY
+            </div>
           </div>
-          <div className="absolute bottom-3 left-1/2 z-50 -translate-x-1/2 whitespace-nowrap font-mono text-[6px] uppercase tracking-[.20em] text-white/25 sm:text-[7px]">NEXUS · VERA · CHAKRA · EVIDENCE · DECISION</div>
+
+          <div className="absolute bottom-2 left-1/2 z-50 -translate-x-1/2 whitespace-nowrap font-mono text-[6px] uppercase tracking-[.18em] text-white/20">
+            NEXUS · VERA · CHAKRA · EVIDENCE · DECISION
+          </div>
         </div>
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   );
 }
-
