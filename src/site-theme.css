@@ -68,3 +68,56 @@
 @media(max-width:767px){.site-theme section[class*="bg-white"],.site-theme section[class*="bg-slate-50"],.site-theme section[class*="bg-slate-100"]{border-radius:0}.site-theme table{font-size:.8125rem}.site-theme [class*="overflow-x-auto"]{-webkit-overflow-scrolling:touch}.shyena-video-controls-host>div:first-child{left:10px!important;right:10px!important;top:10px!important;max-width:calc(100% - 20px)!important}.site-theme .shyena-concept-header{align-items:flex-start;flex-direction:column;gap:.25rem}.site-theme .shyena-concept-figure{border-radius:14px}.site-theme .shyena-article-visual>div>p{font-size:.94rem}}
 
 /* Editorial system: Insights figures are explanatory engineering diagrams, not decorative hero art. */
+
+
+/* Modern action system — consistent across the public site. */
+.site-theme :where(a.inline-flex,button.inline-flex){
+  min-height:44px;
+  border-radius:12px;
+  font-weight:600;
+  letter-spacing:-.01em;
+  transition:transform .18s ease,box-shadow .18s ease,background-color .18s ease,border-color .18s ease,color .18s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+.site-theme :where(a.inline-flex,button.inline-flex):hover{
+  transform:translateY(-1px);
+}
+.site-theme :where(a.inline-flex,button.inline-flex):active{
+  transform:translateY(0) scale(.985);
+  transition-duration:.08s;
+}
+.site-theme :where(a.inline-flex,button.inline-flex):focus-visible{
+  outline:2px solid #e87512;
+  outline-offset:3px;
+  box-shadow:0 0 0 5px rgba(232,117,18,.14);
+}
+.site-theme :where(a.inline-flex,button.inline-flex)[aria-disabled="true"],
+.site-theme :where(a.inline-flex,button.inline-flex):disabled{
+  cursor:not-allowed;
+  opacity:.55;
+  transform:none;
+}
+.site-theme .shyena-action-primary{
+  background:#e87512;
+  border:1px solid #e87512;
+  color:#fff;
+  box-shadow:0 10px 24px -14px rgba(232,117,18,.65);
+}
+.site-theme .shyena-action-primary:hover{background:#d9670a;border-color:#d9670a;box-shadow:0 14px 28px -16px rgba(232,117,18,.72)}
+.site-theme .shyena-action-secondary{
+  background:#fff;
+  border:1px solid #cfd5df;
+  color:#17213f;
+}
+.site-theme .shyena-action-secondary:hover{border-color:#17213f;background:#f8fafc}
+.site-theme .shyena-action-dark{
+  background:#17213f;
+  border:1px solid #17213f;
+  color:#fff;
+}
+.site-theme .shyena-action-dark:hover{background:#0f1730;border-color:#0f1730}
+@media (prefers-reduced-motion:reduce){
+  .site-theme :where(a.inline-flex,button.inline-flex){transition:none!important}
+  .site-theme :where(a.inline-flex,button.inline-flex):hover,
+  .site-theme :where(a.inline-flex,button.inline-flex):active{transform:none!important}
+}
