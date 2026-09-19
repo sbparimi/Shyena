@@ -98,28 +98,45 @@ function HireAIExpertsPage() {
 
   return (
     <main className="min-h-screen bg-white text-[#17233f]">
-      <section className="relative overflow-hidden border-b border-[#e8e8e8] bg-[#17233f]">
-        <div className="absolute -left-24 top-24 h-[520px] w-[55%] -skew-x-[28deg] bg-[#e87512]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_20%,rgba(255,212,59,0.18),transparent_24%),linear-gradient(135deg,transparent_0%,rgba(255,255,255,0.025)_48%,transparent_49%)]" />
-        <div className="relative mx-auto grid max-w-[1280px] gap-10 px-5 pb-14 pt-14 sm:px-8 lg:grid-cols-[1.05fr_.95fr] lg:items-end lg:px-10 lg:pb-20 lg:pt-20">
+      <section className="relative overflow-hidden border-b border-[#e2e5ea] bg-white">
+        <div className="absolute inset-x-0 top-0 h-1 bg-[#e87512]" />
+        <div className="absolute -right-24 top-10 h-72 w-72 rounded-full bg-[#e87512]/10 blur-3xl" />
+        <div className="absolute left-1/2 top-0 h-full w-px bg-[#e2e5ea]/70" />
+        <div className="relative mx-auto grid max-w-[1280px] gap-12 px-5 pb-16 pt-14 sm:px-8 lg:grid-cols-[1.05fr_.95fr] lg:items-center lg:px-10 lg:pb-20 lg:pt-20">
           <div className="max-w-3xl">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.16em] text-[#f59a4b] backdrop-blur">
-              <Sparkles className="h-3.5 w-3.5" /> SHYENA · TALK TO EXPERTS
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#e87512]/25 bg-[#fff7ed] px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.16em] text-[#a6530b]">
+              <Sparkles className="h-3.5 w-3.5 text-[#e87512]" /> SHYENA · TALK TO EXPERTS
             </div>
-            <h1 className="font-[Sora] text-5xl font-extrabold leading-[0.94] tracking-[-0.055em] text-white md:text-7xl">
+            <h1 className="font-[Sora] text-5xl font-extrabold leading-[0.94] tracking-[-0.055em] text-[#17213f] md:text-7xl">
               Stop guessing about AI quality.<br />
-              <span className="text-[#f59a4b]">Prove it.</span>
+              <span className="text-[#e87512]">Prove it.</span>
             </h1>
-            <p className="mt-7 max-w-2xl text-base font-medium leading-7 text-white/65 md:text-lg">
+            <p className="mt-7 max-w-2xl text-base font-medium leading-7 text-[#596273] md:text-lg">
               Put an expert on the problem: agent evaluation, autonomous QA, AI security, RAG, Playwright, APIs, Salesforce and Oracle Fusion.
             </p>
+            <div className="mt-8 flex flex-wrap gap-2 text-xs font-semibold text-[#596273]">
+              {["AI evaluation", "Autonomous QA", "AI security", "RAG & agents"].map((item) => (
+                <span key={item} className="rounded-full border border-[#e2e5ea] bg-[#fafbfc] px-3 py-2">{item}</span>
+              ))}
+            </div>
           </div>
           <div className="relative ml-auto w-full max-w-md">
             <div className="absolute -inset-6 rounded-[34px] bg-[#e87512]/10 blur-3xl" />
-            <div className="relative rounded-[28px] border border-[#dfe2e7] bg-white/[.06] p-2 shadow-[0_35px_90px_rgba(0,0,0,.35)] backdrop-blur-xl">
-              <div className="grid grid-cols-2 gap-2">
-                <div className="rounded-2xl bg-[#f7f8fa] p-4"><div className="text-3xl font-black text-[#17233f]">{experts.length}+</div><div className="mt-1 text-[10px] font-bold uppercase tracking-[.16em] text-[#69707d]">Specialists</div></div>
-                <div className="rounded-2xl bg-[#e87512] p-4 text-white"><div className="text-3xl font-black">UI</div><div className="mt-1 text-[10px] font-bold uppercase tracking-[.16em]">→ API → AI</div></div>
+            <div className="relative overflow-hidden rounded-[28px] border border-[#263252] bg-[#17213f] p-3 shadow-[0_35px_90px_-30px_rgba(23,33,63,.45)]">
+              <div className="rounded-[22px] border border-white/10 bg-white/[.06] p-3">
+                <div className="mb-3 flex items-center justify-between border-b border-white/10 px-2 pb-3">
+                  <span className="text-[10px] font-bold uppercase tracking-[.18em] text-white/55">Expert coverage</span>
+                  <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[.12em] text-[#f3a35f]"><span className="h-1.5 w-1.5 rounded-full bg-[#e87512]" /> Available now</span>
+                </div>
+                <div className="grid grid-cols-2 gap-2">
+                  <div className="rounded-2xl bg-white p-5"><div className="text-4xl font-black text-[#17213f]">{experts.length}+</div><div className="mt-1 text-[10px] font-bold uppercase tracking-[.16em] text-[#69707d]">Specialists</div></div>
+                  <div className="rounded-2xl bg-[#e87512] p-5 text-white"><div className="text-4xl font-black">UI</div><div className="mt-1 text-[10px] font-bold uppercase tracking-[.16em]">→ API → AI</div></div>
+                </div>
+                <div className="mt-2 grid grid-cols-3 gap-2 text-[10px] font-semibold text-white/65">
+                  <span className="rounded-xl border border-white/10 px-3 py-2">33 profiles</span>
+                  <span className="rounded-xl border border-white/10 px-3 py-2">Europe</span>
+                  <span className="rounded-xl border border-white/10 px-3 py-2">Remote</span>
+                </div>
               </div>
             </div>
           </div>
