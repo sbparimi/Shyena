@@ -35,7 +35,7 @@ export function SeoLanding({ config }: { config: SeoLandingConfig }) {
 }
 
 export function seoHead(config: SeoLandingConfig) {
-  return { meta: [
+  return { links: [{ rel: "canonical", href: `https://www.shyena.eu${config.path}` }], meta: [
     { title: `${config.title} | Shyena` },
     { name: "description", content: config.description },
     { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
