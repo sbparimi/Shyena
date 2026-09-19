@@ -5,6 +5,7 @@ import { ExecutivePage } from "@/components/site/executive-page";
 const SITE = "https://www.shyena.eu";
 
 export const Route = createFileRoute("/autonomous-testing")({
+  head: () => ({ meta: [{ title: "Autonomous Testing | Shyena" }, { name: "description", content: "Autonomous quality engineering that explores applications, engineers tests, executes journeys, investigates failures and produces release evidence." }], links: [{ rel: "canonical", href: "https://www.shyena.eu/autonomous-testing" }] }),
   head: () => ({ meta: [
     { title: "Autonomous AI Testing & Quality Engineering | Shyena" },
     { name: "description", content: "Autonomous AI testing that understands requirements, assesses risk, engineers tests, executes journeys, investigates failures and produces release evidence." },
