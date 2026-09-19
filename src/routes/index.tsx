@@ -4,6 +4,7 @@ import { motion, useMotionValue, useSpring } from "framer-motion";
 
 export const Route = createFileRoute("/")({
   head: () => ({
+    links: [{ rel: "canonical", href: "https://www.shyena.eu/" }],
     meta: [
       { title: "Shyena | AI Agent Testing, Evaluation & Security" },
       { name: "description", content: "Test, evaluate and secure AI agents with realistic simulations, trace evidence and release-ready assurance." },
