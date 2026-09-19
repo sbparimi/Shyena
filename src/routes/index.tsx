@@ -97,8 +97,7 @@ function HomePage() {
           @keyframes shyena-sheen { 0% { transform:translateX(-140%) skewX(-18deg); opacity:0; } 18%,48% { opacity:.18; } 70%,100% { transform:translateX(180%) skewX(-18deg); opacity:0; } }
           @keyframes shyena-scan { 0% { transform:translateY(-120%); opacity:0; } 15%,70% { opacity:.55; } 100% { transform:translateY(120%); opacity:0; } }
           .shyena-grid { background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px); background-size:64px 64px; }
-          .shyena-product { transform-style:preserve-3d; will-change:transform,opacity,filter; backface-visibility:hidden; isolation:isolate; }
-          .shyena-nexus { animation:shyena-nexus-cinematic 12s cubic-bezier(.45,.05,.2,.95) infinite; }
+          .shyena-product { transform-style:preserve-3d; will-change:transform,opacity,filter; backface-visibility:hidden; isolation:isolate; }          .shyena-nexus { animation:shyena-nexus-cinematic 12s cubic-bezier(.45,.05,.2,.95) infinite; }
           .shyena-vera { animation:shyena-vera-cinematic 12s cubic-bezier(.45,.05,.2,.95) infinite; }
           .shyena-chakra { animation:shyena-chakra-cinematic 12s cubic-bezier(.45,.05,.2,.95) infinite; }
           .shyena-product::before { content:""; position:absolute; inset:1px; border-radius:inherit; pointer-events:none; background:linear-gradient(115deg,rgba(255,255,255,.16),transparent 24%,transparent 68%,rgba(255,255,255,.035)); }
@@ -197,8 +196,7 @@ function HomePage() {
                   <div className="p-5">
                     <div className="flex items-center justify-between"><span className="font-mono text-[9px] font-bold tracking-[.2em] text-[#6ee7b7]">02 · VERA</span><span className="rounded-full border border-[#55d6ad]/25 px-2 py-1 font-mono text-[8px] text-[#6ee7b7]">EVALUATE</span></div>
                     <div className="mt-3 font-[Sora] text-[26px] font-extrabold tracking-[-.045em]">Measure the truth.</div>
-                    <p className="mt-2 text-[11px] leading-5 text-white/45">Behaviour, semantics and execution evidence.</p>
-                  </div>
+                    <p className="mt-2 text-[11px] leading-5 text-white/45">Behaviour, semantics and execution evidence.</p>                  </div>
                 </motion.div>
 
                 <motion.div className="shyena-product shyena-chakra absolute bottom-[4%] left-1/2 w-[300px] -translate-x-1/2 overflow-hidden rounded-[24px] border border-[#f18a32]/50 bg-[#160b06]/97 shadow-[0_65px_130px_rgba(0,0,0,.82),0_0_80px_rgba(232,117,18,.12)] backdrop-blur-xl sm:w-[370px]"
@@ -266,6 +264,38 @@ function HomePage() {
                 <p className="mt-3 text-xs leading-5 text-[#69707d]">{text}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-[#e8e8e8] bg-[#f8fafc]">
+        <div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
+          <div className="grid gap-10 lg:grid-cols-[.8fr_1.2fr] lg:items-end">
+            <div>
+              <div className="text-sm font-semibold text-[#e87512]">AI quality engineering</div>
+              <h2 className="mt-4 font-[Sora] text-[clamp(2.4rem,5vw,4.3rem)] font-extrabold leading-[.98] tracking-[-.055em] text-[#17233f]">One quality system from development to production.</h2>
+              <p className="mt-6 max-w-xl text-lg leading-8 text-[#626976]">Understand the system. Test realistic journeys. Evaluate behavior. Observe production. Investigate failures. Secure the boundary. Prove the release.</p>
+              <Link to="/platform" className="mt-7 inline-flex h-11 items-center gap-2 rounded-md bg-[#17233f] px-5 text-sm font-semibold text-white transition hover:bg-[#24335a]">Explore the platform <ArrowRight className="h-4 w-4" /></Link>
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2">
+              <Link key={title} to={to} className="group rounded-2xl border border-[#dfe3e9] bg-white p-6 transition hover:-translate-y-1 hover:border-[#e87512]/40 hover:shadow-[0_20px_45px_-30px_rgba(23,35,63,.35)]"><div className="font-mono text-[9px] font-bold tracking-[.16em] text-[#e87512]">01</div><h3 className="mt-5 text-xl font-bold text-[#17233f]">Understand</h3><p className="mt-2 text-sm leading-6 text-[#69707d]">Map agents, tools, dependencies and critical journeys.</p><span className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-[#17233f]">Explore <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" /></span></Link><Link key={title} to={to} className="group rounded-2xl border border-[#dfe3e9] bg-white p-6 transition hover:-translate-y-1 hover:border-[#e87512]/40 hover:shadow-[0_20px_45px_-30px_rgba(23,35,63,.35)]"><div className="font-mono text-[9px] font-bold tracking-[.16em] text-[#e87512]">02</div><h3 className="mt-5 text-xl font-bold text-[#17233f]">Evaluate</h3><p className="mt-2 text-sm leading-6 text-[#69707d]">Combine deterministic, semantic and trajectory evidence.</p><span className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-[#17233f]">Explore <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" /></span></Link><Link key={title} to={to} className="group rounded-2xl border border-[#dfe3e9] bg-white p-6 transition hover:-translate-y-1 hover:border-[#e87512]/40 hover:shadow-[0_20px_45px_-30px_rgba(23,35,63,.35)]"><div className="font-mono text-[9px] font-bold tracking-[.16em] text-[#e87512]">03</div><h3 className="mt-5 text-xl font-bold text-[#17233f]">Observe</h3><p className="mt-2 text-sm leading-6 text-[#69707d]">Trace production behavior, quality, latency and cost.</p><span className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-[#17233f]">Explore <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" /></span></Link><Link key={title} to={to} className="group rounded-2xl border border-[#dfe3e9] bg-white p-6 transition hover:-translate-y-1 hover:border-[#e87512]/40 hover:shadow-[0_20px_45px_-30px_rgba(23,35,63,.35)]"><div className="font-mono text-[9px] font-bold tracking-[.16em] text-[#e87512]">04</div><h3 className="mt-5 text-xl font-bold text-[#17233f]">Prove</h3><p className="mt-2 text-sm leading-6 text-[#69707d]">Connect findings to evidence and release decisions.</p><span className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-[#17233f]">Explore <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" /></span></Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-[#e8e8e8] bg-[#07101f] text-white">
+        <div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
+          <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
+            <div>
+              <div className="text-sm font-semibold text-[#f18a32]">Production evidence</div>
+              <h2 className="mt-4 max-w-4xl font-[Sora] text-[clamp(2.4rem,5vw,4.5rem)] font-extrabold leading-[.98] tracking-[-.055em]">Don't just detect the failure. Find where it came from.</h2>
+              <p className="mt-6 max-w-2xl text-lg leading-8 text-white/55">Trace the path from user goal to agent decision, retrieval, tool call, API state, finding and release disposition.</p>
+            </div>
+            <Link to="/observability" className="inline-flex h-11 items-center gap-2 rounded-md border border-white/15 bg-white/[.04] px-5 text-sm font-semibold text-white">Explore observability <ArrowRight className="h-4 w-4" /></Link>
+          </div>
+          <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-6">
+            <div className="rounded-2xl border border-white/10 bg-white/[.035] p-5"><div className="font-mono text-[9px] tracking-[.16em] text-white/30">01</div><div className="mt-8 text-sm font-bold">USER</div><div className="mt-2 h-px bg-gradient-to-r from-[#6877ff]/60 to-transparent"></div><div className="mt-3 text-[10px] text-white/35">Evidence captured</div></div><div className="rounded-2xl border border-white/10 bg-white/[.035] p-5"><div className="font-mono text-[9px] tracking-[.16em] text-white/30">02</div><div className="mt-8 text-sm font-bold">AGENT</div><div className="mt-2 h-px bg-gradient-to-r from-[#6877ff]/60 to-transparent"></div><div className="mt-3 text-[10px] text-white/35">Evidence captured</div></div><div className="rounded-2xl border border-white/10 bg-white/[.035] p-5"><div className="font-mono text-[9px] tracking-[.16em] text-white/30">03</div><div className="mt-8 text-sm font-bold">MODEL</div><div className="mt-2 h-px bg-gradient-to-r from-[#6877ff]/60 to-transparent"></div><div className="mt-3 text-[10px] text-white/35">Evidence captured</div></div><div className="rounded-2xl border border-white/10 bg-white/[.035] p-5"><div className="font-mono text-[9px] tracking-[.16em] text-white/30">04</div><div className="mt-8 text-sm font-bold">RAG</div><div className="mt-2 h-px bg-gradient-to-r from-[#6877ff]/60 to-transparent"></div><div className="mt-3 text-[10px] text-white/35">Evidence captured</div></div><div className="rounded-2xl border border-white/10 bg-white/[.035] p-5"><div className="font-mono text-[9px] tracking-[.16em] text-white/30">05</div><div className="mt-8 text-sm font-bold">TOOL</div><div className="mt-2 h-px bg-gradient-to-r from-[#6877ff]/60 to-transparent"></div><div className="mt-3 text-[10px] text-white/35">Evidence captured</div></div><div className="rounded-2xl border border-white/10 bg-white/[.035] p-5"><div className="font-mono text-[9px] tracking-[.16em] text-white/30">06</div><div className="mt-8 text-sm font-bold">OUTCOME</div><div className="mt-2 h-px bg-gradient-to-r from-[#6877ff]/60 to-transparent"></div><div className="mt-3 text-[10px] text-white/35">Business result</div></div>
           </div>
         </div>
       </section>
