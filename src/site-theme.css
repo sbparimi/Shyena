@@ -71,10 +71,6 @@
 
 
 /* Modern action system — consistent across the public site. */
-:where(a.shyena-action-primary,a.shyena-action-secondary,a.shyena-action-dark){min-height:44px;border-radius:12px;font-weight:600;letter-spacing:-.01em;transition:transform .18s ease,box-shadow .18s ease,background-color .18s ease,border-color .18s ease,color .18s ease;-webkit-tap-highlight-color:transparent}
-:where(a.shyena-action-primary,a.shyena-action-secondary,a.shyena-action-dark):hover{transform:translateY(-1px)}
-:where(a.shyena-action-primary,a.shyena-action-secondary,a.shyena-action-dark):active{transform:translateY(0) scale(.985);transition-duration:.08s}
-:where(a.shyena-action-primary,a.shyena-action-secondary,a.shyena-action-dark):focus-visible{outline:2px solid #e87512;outline-offset:3px;box-shadow:0 0 0 5px rgba(232,117,18,.14)}
 .site-theme :where(a.inline-flex,button.inline-flex){
   min-height:44px;
   border-radius:12px;
@@ -101,20 +97,20 @@
   opacity:.55;
   transform:none;
 }
-.shyena-action-primary{
+.site-theme .shyena-action-primary{
   background:#e87512;
   border:1px solid #e87512;
   color:#fff;
   box-shadow:0 10px 24px -14px rgba(232,117,18,.65);
 }
 .shyena-action-primary:hover{background:#d9670a;border-color:#d9670a;box-shadow:0 14px 28px -16px rgba(232,117,18,.72)}
-.shyena-action-secondary{
+.site-theme .shyena-action-secondary{
   background:#fff;
   border:1px solid #cfd5df;
   color:#17213f;
 }
 .shyena-action-secondary:hover{border-color:#17213f;background:#f8fafc}
-.shyena-action-dark{
+.site-theme .shyena-action-dark{
   background:#17213f;
   border:1px solid #17213f;
   color:#fff;
