@@ -132,7 +132,7 @@ function HomePage() {
             </div>
 
             <motion.div
-              className="relative mx-auto h-[560px] w-full max-w-[860px] [perspective:1600px] sm:h-[680px]"
+              className="relative mx-auto h-[440px] w-full max-w-[760px] [perspective:1600px] sm:h-[520px]"
               onPointerMove={handleHeroPointer}
               onPointerLeave={resetHeroPointer}
               style={{ rotateX, rotateY }}
@@ -141,7 +141,7 @@ function HomePage() {
               <div className="pointer-events-none absolute left-1/2 top-1/2 h-[78%] w-[78%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#17213f]/70 bg-[#17213f]/[.035] shadow-[0_40px_100px_rgba(23,33,63,.22)]" />
 
               <motion.div
-                className="absolute left-1/2 top-1/2 h-[370px] w-[370px] -translate-x-1/2 -translate-y-1/2 rounded-full sm:h-[500px] sm:w-[500px]"
+                className="absolute left-1/2 top-1/2 h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full sm:h-[410px] sm:w-[410px]"
                 animate={{ rotate: 360 }}
                 transition={{ duration: 26, repeat: Infinity, ease: "linear" }}
               >
@@ -154,12 +154,12 @@ function HomePage() {
               </motion.div>
 
               <motion.div
-                className="absolute left-1/2 top-1/2 z-20 flex h-[178px] w-[178px] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full border border-[#17213f]/25 bg-white/95 shadow-[0_30px_80px_rgba(23,33,63,.22),0_0_0_12px_rgba(23,33,63,.035)] backdrop-blur-xl sm:h-[220px] sm:w-[220px]"
+                className="absolute left-1/2 top-1/2 z-20 flex h-[150px] w-[150px] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full border border-[#17213f]/25 bg-white/95 shadow-[0_30px_80px_rgba(23,33,63,.22),0_0_0_12px_rgba(23,33,63,.035)] backdrop-blur-xl sm:h-[180px] sm:w-[180px]"
                 animate={{ boxShadow: ["0 30px 80px rgba(23,33,63,.20),0 0 0 12px rgba(23,33,63,.035)", "0 34px 95px rgba(232,117,18,.18),0 0 0 18px rgba(232,117,18,.045)", "0 30px 80px rgba(23,33,63,.20),0 0 0 12px rgba(23,33,63,.035)"] }}
                 transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
               >
                 <div className="font-mono text-[9px] font-bold uppercase tracking-[.24em] text-[#e87512]">SHYENA</div>
-                <div className="mt-2 text-center font-[Sora] text-[22px] font-extrabold leading-[.98] tracking-[-.055em] text-[#17213f] sm:text-[27px]">AI assurance<br />engine</div>
+                <div className="mt-2 text-center font-[Sora] text-[19px] font-extrabold leading-[.98] tracking-[-.055em] text-[#17213f] sm:text-[22px]">AI assurance<br />engine</div>
                 <div className="mt-4 flex items-center gap-1.5 rounded-full border border-[#17213f]/10 bg-[#f8fafc] px-3 py-1.5 font-mono text-[8px] uppercase tracking-[.14em] text-[#69707d]">
                   <span className="h-1.5 w-1.5 rounded-full bg-[#e87512] shadow-[0_0_10px_rgba(232,117,18,.7)]" />
                   evidence connected
@@ -167,32 +167,32 @@ function HomePage() {
               </motion.div>
 
               <div className="absolute left-1/2 top-1/2 z-30 h-full w-full -translate-x-1/2 -translate-y-1/2">
-                <div className="absolute left-1/2 top-[2%] -translate-x-1/2 rounded-2xl border border-[#17213f]/15 bg-white/92 px-5 py-4 text-center shadow-[0_18px_50px_rgba(23,33,63,.12)] backdrop-blur-xl sm:min-w-[210px]">
+                <div className="absolute left-1/2 top-[2%] -translate-x-1/2 rounded-2xl border border-[#17213f]/15 bg-white/92 px-4 py-3 text-center shadow-[0_18px_50px_rgba(23,33,63,.12)] backdrop-blur-xl sm:min-w-[180px]">
                   <div className="font-mono text-[9px] font-bold tracking-[.18em] text-[#e87512]">01 · UNDERSTAND</div>
                   <div className="mt-1 font-[Sora] text-sm font-bold text-[#17213f]">NEXUS</div>
                   <div className="mt-1 text-[10px] text-[#69707d]">Map system logic & journeys</div>
                 </div>
 
-                <div className="absolute right-[1%] top-[31%] rounded-2xl border border-[#17213f]/15 bg-white/92 px-5 py-4 text-left shadow-[0_18px_50px_rgba(23,33,63,.12)] backdrop-blur-xl sm:min-w-[210px]">
+                <div className="absolute right-[1%] top-[31%] rounded-2xl border border-[#17213f]/15 bg-white/92 px-4 py-3 text-left shadow-[0_18px_50px_rgba(23,33,63,.12)] backdrop-blur-xl sm:min-w-[180px]">
                   <div className="font-mono text-[9px] font-bold tracking-[.18em] text-[#e87512]">02 · TEST & EVALUATE</div>
                   <div className="mt-1 font-[Sora] text-sm font-bold text-[#17213f]">VERA</div>
                   <div className="mt-1 text-[10px] text-[#69707d]">Behaviour, semantics & integrity</div>
                 </div>
 
-                <div className="absolute bottom-[6%] left-1/2 -translate-x-1/2 rounded-2xl border border-[#17213f]/15 bg-white/92 px-5 py-4 text-center shadow-[0_18px_50px_rgba(23,33,63,.12)] backdrop-blur-xl sm:min-w-[210px]">
+                <div className="absolute bottom-[4%] left-1/2 -translate-x-1/2 rounded-2xl border border-[#17213f]/15 bg-white/92 px-4 py-3 text-center shadow-[0_18px_50px_rgba(23,33,63,.12)] backdrop-blur-xl sm:min-w-[180px]">
                   <div className="font-mono text-[9px] font-bold tracking-[.18em] text-[#e87512]">03 · SECURE</div>
                   <div className="mt-1 font-[Sora] text-sm font-bold text-[#17213f]">CHAKRA</div>
                   <div className="mt-1 text-[10px] text-[#69707d]">Attack paths & boundaries</div>
                 </div>
 
-                <div className="absolute left-[1%] top-[31%] rounded-2xl border border-[#17213f]/15 bg-white/92 px-5 py-4 text-left shadow-[0_18px_50px_rgba(23,33,63,.12)] backdrop-blur-xl sm:min-w-[210px]">
+                <div className="absolute left-[1%] top-[31%] rounded-2xl border border-[#17213f]/15 bg-white/92 px-4 py-3 text-left shadow-[0_18px_50px_rgba(23,33,63,.12)] backdrop-blur-xl sm:min-w-[180px]">
                   <div className="font-mono text-[9px] font-bold tracking-[.18em] text-[#e87512]">04 · PROVE</div>
                   <div className="mt-1 font-[Sora] text-sm font-bold text-[#17213f]">EVIDENCE</div>
                   <div className="mt-1 text-[10px] text-[#69707d]">Findings → verdict → release</div>
                 </div>
               </div>
 
-              <div className="absolute bottom-[2%] left-1/2 z-40 -translate-x-1/2 whitespace-nowrap rounded-full border border-[#17213f]/15 bg-white/90 px-4 py-2 font-mono text-[8px] uppercase tracking-[.2em] text-[#69707d] shadow-[0_12px_35px_rgba(23,33,63,.10)] backdrop-blur-xl">
+              <div className="absolute bottom-[-1%] left-1/2 z-40 -translate-x-1/2 whitespace-nowrap rounded-full border border-[#17213f]/15 bg-white/90 px-4 py-2 font-mono text-[8px] uppercase tracking-[.2em] text-[#69707d] shadow-[0_12px_35px_rgba(23,33,63,.10)] backdrop-blur-xl">
                 UNDERSTAND → EVALUATE → SECURE → PROVE
               </div>
             </motion.div>          </div>
