@@ -1,25 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://www.shyena.eu/</loc></url>
+  <url><loc>https://www.shyena.eu/platform</loc></url>
   <url><loc>https://www.shyena.eu/nexus</loc></url>
   <url><loc>https://www.shyena.eu/vera</loc></url>
   <url><loc>https://www.shyena.eu/chakra</loc></url>
-  <url><loc>https://www.shyena.eu/cis</loc></url>
-  <url><loc>https://www.shyena.eu/product</loc></url>
+  <url><loc>https://www.shyena.eu/observability</loc></url>
+  <url><loc>https://www.shyena.eu/evaluation</loc></url>
+  <url><loc>https://www.shyena.eu/experiments</loc></url>
+  <url><loc>https://www.shyena.eu/datasets</loc></url>
+  <url><loc>https://www.shyena.eu/metrics</loc></url>
+  <url><loc>https://www.shyena.eu/integrations</loc></url>
+  <url><loc>https://www.shyena.eu/developers</loc></url>
+  <url><loc>https://www.shyena.eu/ai-agent-testing</loc></url>
+  <url><loc>https://www.shyena.eu/ai-agent-evaluation</loc></url>
+  <url><loc>https://www.shyena.eu/ai-agent-testing-platform</loc></url>
+  <url><loc>https://www.shyena.eu/ai-agent-security-testing</loc></url>
+  <url><loc>https://www.shyena.eu/ai-production-readiness</loc></url>
+  <url><loc>https://www.shyena.eu/ai-regression-testing</loc></url>
+  <url><loc>https://www.shyena.eu/ai-release-assurance</loc></url>
+  <url><loc>https://www.shyena.eu/ai-testing-framework</loc></url>
+  <url><loc>https://www.shyena.eu/conversational-ai-testing</loc></url>
+  <url><loc>https://www.shyena.eu/cognigy-testing</loc></url>
+  <url><loc>https://www.shyena.eu/llm-evaluation</loc></url>
   <url><loc>https://www.shyena.eu/autonomous-testing</loc></url>
+  <url><loc>https://www.shyena.eu/autonomous-ai-testing</loc></url>
   <url><loc>https://www.shyena.eu/customers</loc></url>
-  <url><loc>https://www.shyena.eu/resources</loc></url>
-  <url><loc>https://www.shyena.eu/pricing</loc></url>
   <url><loc>https://www.shyena.eu/services</loc></url>
+  <url><loc>https://www.shyena.eu/events</loc></url>
+  <url><loc>https://www.shyena.eu/experts</loc></url>
+  <url><loc>https://www.shyena.eu/pricing</loc></url>
   <url><loc>https://www.shyena.eu/security</loc></url>
   <url><loc>https://www.shyena.eu/about</loc></url>
   <url><loc>https://www.shyena.eu/contact</loc></url>
+  <url><loc>https://www.shyena.eu/resources</loc></url>
   <url><loc>https://www.shyena.eu/docs</loc></url>
-  <url><loc>https://www.shyena.eu/docs/evaluation-model</loc></url>
   <url><loc>https://www.shyena.eu/docs/getting-started</loc></url>
   <url><loc>https://www.shyena.eu/docs/writing-test-specs</loc></url>
+  <url><loc>https://www.shyena.eu/docs/evaluation-model</loc></url>
+  <url><loc>https://www.shyena.eu/docs/environments</loc></url>
+  <url><loc>https://www.shyena.eu/docs/integrations</loc></url>
+  <url><loc>https://www.shyena.eu/docs/api-reference</loc></url>
   <url><loc>https://www.shyena.eu/docs/reporting</loc></url>
   <url><loc>https://www.shyena.eu/docs/troubleshooting</loc></url>
+  <url><loc>https://www.shyena.eu/docs/sage-content-engineering</loc></url>
   <url><loc>https://www.shyena.eu/blog</loc></url>
   <url><loc>https://www.shyena.eu/blog/ai-agent-testing-is-a-systems-problem</loc></url>
   <url><loc>https://www.shyena.eu/blog/why-conversational-ai-needs-a-different-testing-model</loc></url>
