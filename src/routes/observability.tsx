@@ -1,0 +1,3 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { QualityIntelligencePage } from "../components/site/quality-intelligence-page";
+export const Route = createFileRoute("/observability")({ head: () => ({ meta: [{ title: "Production AI Observability | Shyena" }, { name: "description", content: "Trace agent behavior from user request through model, retrieval, tools, APIs and business outcomes." }] }), component: () => <QualityIntelligencePage module="observability" /> });
