@@ -4,9 +4,10 @@ import { ChevronDown, Menu, Search, X, ArrowRight } from "lucide-react";
 import { Logo } from "./logo";
 
 const NAV = [
-  { label: "Platform", to: "/nexus", dropdown: true },
+  { label: "Platform", to: "/platform", dropdown: true },
   { label: "Solutions", to: "/ai-agent-testing", dropdown: true },
   { label: "Customers", to: "/customers" },
+  { label: "Engineering", to: "/observability", dropdown: true },
   { label: "Resources", to: "/blog", dropdown: true },
   { label: "Docs", to: "/docs" },
   { label: "Pricing", to: "/pricing" },
@@ -15,6 +16,14 @@ const NAV = [
 const MOBILE_NAV = [
   ...NAV.map(({ label, to }) => ({ label, to })),
   { label: "AI Agent Testing", to: "/ai-agent-testing" },
+  { label: "AI Quality Platform", to: "/platform" },
+  { label: "Observability", to: "/observability" },
+  { label: "Evaluation", to: "/evaluation" },
+  { label: "Datasets", to: "/datasets" },
+  { label: "Experiments", to: "/experiments" },
+  { label: "Metrics", to: "/metrics" },
+  { label: "Integrations", to: "/integrations" },
+  { label: "Developers", to: "/developers" },
   { label: "AI Evaluation", to: "/ai-agent-evaluation" },
   { label: "Cognigy Testing", to: "/cognigy-testing" },
 ] as const;
