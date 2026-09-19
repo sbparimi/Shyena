@@ -268,7 +268,7 @@ export function SiteHeader() {
               type="button"
               onClick={() => { setSearchOpen(true); setOpenMenu(null); }}
               aria-label="Search Shyena"
-              className="inline-flex h-10 items-center gap-2 rounded-lg border border-transparent px-2.5 text-[#5d6573] transition hover:border-[#e3e6eb] hover:bg-[#f7f8fa] hover:text-[#17233f]"
+              className="inline-flex h-10 items-center gap-2 rounded-lg border border-transparent px-2.5 text-[#5d6573] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#e87512] focus-visible:ring-offset-2 hover:border-[#e3e6eb] hover:bg-[#f7f8fa] hover:text-[#17233f]"
             >
               <Search className="h-[17px] w-[17px]" />
               <span className="hidden xl:inline text-[12px]">Search</span>
@@ -289,7 +289,7 @@ export function SiteHeader() {
             onClick={() => setMobileOpen((value) => !value)}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
-            className="ml-auto inline-flex h-10 w-10 items-center justify-center rounded-lg border border-[#dfe3e8] bg-white text-[#17213f] lg:hidden"
+            className="ml-auto inline-flex h-10 w-10 items-center justify-center rounded-lg border border-[#dfe3e8] bg-white text-[#17213f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#e87512] focus-visible:ring-offset-2 lg:hidden"
           >
             {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
