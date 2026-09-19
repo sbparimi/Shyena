@@ -50,7 +50,7 @@ export const Route = createFileRoute("/api/contact")({
         const honeypot = cleanText(input.website, 200);
         if (honeypot) return Response.json({ error: "Unable to submit this request." }, { status: 400 });
         if (!inquiryReason || !firstName || !lastName || !email || !company || !message) {
-          return Response.json({ error: "All fields are required" }, { status: 400 });
+          return Response.json({ error: "Please complete the required fields." }, { status: 400 });
         }
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || !isWorkEmail(email)) {
           return Response.json({ error: "Please use your company work email. Personal email providers such as Gmail, Outlook and Yahoo are not accepted." }, { status: 400 });
