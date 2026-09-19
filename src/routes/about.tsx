@@ -4,7 +4,7 @@ import { ExecutivePage } from "@/components/site/executive-page";
 const SITE = "https://www.shyena.eu";
 
 export const Route = createFileRoute("/about")({
-  head: () => ({ meta: [
+  head: () => ({ links: [{ rel: "canonical", href: "https://www.shyena.eu/about" }], meta: [
     { title: "About Shyena | AI Quality Engineering & Assurance" },
     { name: "description", content: "Learn how Shyena builds autonomous quality engineering and evidence-backed assurance for AI agents and enterprise software." },
     { name: "robots", content: "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" },
