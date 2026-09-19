@@ -78,6 +78,9 @@ function createHireExpertsLink(href: string, skills: string[]): HTMLAnchorElemen
 }
 
 function addExpertCtas() {
+  // Contact and pricing already have intentional conversion actions; do not add a second CTA.
+  if (window.location.pathname === "/contact" || window.location.pathname === "/pricing") return;
+
   const main = document.querySelector("main") as HTMLElement | null;
   if (!main) return;
 
