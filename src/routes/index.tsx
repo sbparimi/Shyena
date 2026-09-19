@@ -132,68 +132,144 @@ function HomePage() {
             </div>
 
             <motion.div
-              className="relative mx-auto h-[440px] w-full max-w-[760px] [perspective:1600px] sm:h-[520px]"
+              className="relative mx-auto h-[440px] w-full max-w-[780px] [perspective:1600px] sm:h-[520px]"
               onPointerMove={handleHeroPointer}
               onPointerLeave={resetHeroPointer}
               style={{ rotateX, rotateY }}
             >
-              <div className="pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(circle_at_center,rgba(232,117,18,.14),transparent_34%),radial-gradient(circle_at_center,rgba(23,33,63,.82),transparent_66%)] blur-2xl" />
-              <div className="pointer-events-none absolute left-1/2 top-1/2 h-[78%] w-[78%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#17213f]/70 bg-[#17213f]/[.035] shadow-[0_40px_100px_rgba(23,33,63,.22)]" />
+              <div className="pointer-events-none absolute inset-6 rounded-[32px] bg-[radial-gradient(circle_at_55%_35%,rgba(232,117,18,.10),transparent_28%),radial-gradient(circle_at_50%_80%,rgba(77,104,190,.18),transparent_55%)] blur-2xl" />
 
               <motion.div
-                className="absolute left-1/2 top-1/2 h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full sm:h-[410px] sm:w-[410px]"
-                animate={{ rotate: 360 }}
-                transition={{ duration: 26, repeat: Infinity, ease: "linear" }}
+                className="relative h-full w-full overflow-hidden rounded-[28px] border border-white/12 bg-[#0d1528] shadow-[0_40px_100px_rgba(0,0,0,.45)]"
+                animate={{ y: [0, -3, 0] }}
+                transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
               >
-                <div className="absolute inset-0 rounded-full border border-[#17213f]/20" />
-                <div className="absolute inset-[9px] rounded-full border border-[#17213f]/10" />
-                <div className="absolute inset-[-1px] rounded-full bg-[conic-gradient(from_0deg,transparent_0deg,transparent_24deg,#e87512_25deg,#e87512_72deg,transparent_73deg,transparent_142deg,rgba(23,33,63,.24)_143deg,rgba(23,33,63,.24)_218deg,transparent_219deg,transparent_360deg)] [mask:linear-gradient(#000_0_0)_content-box,linear-gradient(#000_0_0)] [mask-composite:exclude] p-[3px]" />
-                <span className="absolute left-1/2 top-[-5px] h-3 w-3 -translate-x-1/2 rounded-full bg-[#e87512] shadow-[0_0_24px_rgba(232,117,18,.95)]" />
-                <span className="absolute bottom-[7%] left-[12%] h-2 w-2 rounded-full bg-[#17213f]/70" />
-                <span className="absolute right-[8%] top-[27%] h-2 w-2 rounded-full bg-[#17213f]/45" />
+                <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,.055),transparent_28%,transparent_72%,rgba(232,117,18,.035))]" />
+                <div className="shyena-grid pointer-events-none absolute inset-0 opacity-20" />
+
+                <div className="relative flex h-11 items-center justify-between border-b border-white/10 bg-[#101a30] px-4 sm:px-5">
+                  <div className="flex items-center gap-3">
+                    <div className="flex gap-1.5">
+                      <span className="h-2 w-2 rounded-full bg-white/20" />
+                      <span className="h-2 w-2 rounded-full bg-white/15" />
+                      <span className="h-2 w-2 rounded-full bg-white/10" />
+                    </div>
+                    <div className="h-4 w-px bg-white/10" />
+                    <div className="font-mono text-[9px] font-semibold uppercase tracking-[.18em] text-white/55">SHYENA / ASSURANCE CONTROL PLANE</div>
+                  </div>
+                  <div className="hidden items-center gap-2 rounded-full border border-[#e87512]/25 bg-[#e87512]/8 px-2.5 py-1 font-mono text-[8px] uppercase tracking-[.14em] text-[#ffad69] sm:flex">
+                    <span className="h-1.5 w-1.5 rounded-full bg-[#e87512]" />
+                    Live evidence
+                  </div>
+                </div>
+
+                <div className="relative grid h-[calc(100%-44px)] grid-cols-[92px_1fr] sm:grid-cols-[112px_1fr]">
+                  <aside className="border-r border-white/8 bg-[#0a1121]/80 p-3 sm:p-4">
+                    <div className="font-mono text-[7px] uppercase tracking-[.18em] text-white/25">Workspace</div>
+                    <div className="mt-5 space-y-1.5">
+                      <div className="rounded-lg border border-[#e87512]/20 bg-[#e87512]/10 px-2.5 py-2 text-[9px] font-semibold text-[#ffb77d]">Overview</div>
+                      <div className="rounded-lg px-2.5 py-2 text-[9px] text-white/38">Journeys</div>
+                      <div className="rounded-lg px-2.5 py-2 text-[9px] text-white/38">Evidence</div>
+                      <div className="rounded-lg px-2.5 py-2 text-[9px] text-white/38">Findings</div>
+                      <div className="rounded-lg px-2.5 py-2 text-[9px] text-white/38">Releases</div>
+                    </div>
+                    <div className="mt-8 border-t border-white/8 pt-4">
+                      <div className="font-mono text-[7px] uppercase tracking-[.18em] text-white/25">Engines</div>
+                      <div className="mt-3 space-y-2 text-[8px] text-white/42">
+                        <div className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-[#e87512]" />NEXUS</div>
+                        <div className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-[#7c8cff]" />VERA</div>
+                        <div className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-[#62b5a0]" />CHAKRA</div>
+                      </div>
+                    </div>
+                  </aside>
+
+                  <div className="min-w-0 overflow-hidden p-3 sm:p-5">
+                    <div className="flex items-start justify-between gap-3">
+                      <div>
+                        <div className="font-mono text-[8px] uppercase tracking-[.18em] text-[#e87512]">Release assessment</div>
+                        <div className="mt-1 font-[Sora] text-base font-bold tracking-[-.025em] text-white sm:text-xl">Customer address change</div>
+                        <div className="mt-1 text-[8px] text-white/35 sm:text-[9px]">Production candidate · v2.18.4 · 24 checks</div>
+                      </div>
+                      <div className="shrink-0 rounded-lg border border-[#e87512]/25 bg-[#e87512]/8 px-2.5 py-2 text-right">
+                        <div className="font-mono text-[7px] uppercase tracking-[.14em] text-white/35">Decision</div>
+                        <div className="mt-0.5 text-[10px] font-bold text-[#ffad69]">REVIEW</div>
+                      </div>
+                    </div>
+
+                    <div className="mt-4 grid grid-cols-3 gap-2">
+                      <div className="rounded-xl border border-white/8 bg-white/[.035] p-2.5">
+                        <div className="font-mono text-[7px] uppercase tracking-[.12em] text-white/30">Quality</div>
+                        <div className="mt-1 text-sm font-bold text-white sm:text-base">0.94</div>
+                        <div className="mt-1 h-1 overflow-hidden rounded-full bg-white/8"><div className="h-full w-[94%] rounded-full bg-[#e87512]" /></div>
+                      </div>
+                      <div className="rounded-xl border border-white/8 bg-white/[.035] p-2.5">
+                        <div className="font-mono text-[7px] uppercase tracking-[.12em] text-white/30">Integrity</div>
+                        <div className="mt-1 text-sm font-bold text-white sm:text-base">PASS</div>
+                        <div className="mt-1 flex items-center gap-1.5 text-[7px] text-[#76c7ae]"><span className="h-1.5 w-1.5 rounded-full bg-[#62b5a0]" />14 / 14 checks</div>
+                      </div>
+                      <div className="rounded-xl border border-white/8 bg-white/[.035] p-2.5">
+                        <div className="font-mono text-[7px] uppercase tracking-[.12em] text-white/30">Security</div>
+                        <div className="mt-1 text-sm font-bold text-white sm:text-base">PASS</div>
+                        <div className="mt-1 flex items-center gap-1.5 text-[7px] text-[#76c7ae]"><span className="h-1.5 w-1.5 rounded-full bg-[#62b5a0]" />0 critical</div>
+                      </div>
+                    </div>
+
+                    <div className="mt-3 rounded-xl border border-white/8 bg-[#0a1121]/75 p-3">
+                      <div className="flex items-center justify-between">
+                        <div className="font-mono text-[7px] uppercase tracking-[.16em] text-white/30">Execution evidence</div>
+                        <div className="font-mono text-[7px] text-white/25">17 turns · 1m 42s</div>
+                      </div>
+                      <div className="relative mt-4 grid grid-cols-5 gap-1.5">
+                        {[
+                          ["Goal","USER"],
+                          ["Route","NEXUS"],
+                          ["Eval","VERA"],
+                          ["Boundary","CHAKRA"],
+                          ["Verdict","PROVE"],
+                        ].map(([label,engine], index) => (
+                          <div key={label} className="relative min-w-0">
+                            <div className="flex items-center">
+                              <div className="relative z-10 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-[#121d34] text-[7px] font-bold text-white/70 sm:h-8 sm:w-8">{String(index + 1).padStart(2,"0")}</div>
+                              {index < 4 && <div className="h-px flex-1 bg-white/10" />}
+                            </div>
+                            <div className="mt-2 truncate text-[7px] font-semibold text-white/65 sm:text-[8px]">{label}</div>
+                            <div className="mt-0.5 truncate font-mono text-[6px] uppercase tracking-[.08em] text-white/25 sm:text-[7px]">{engine}</div>
+                          </div>
+                        ))}
+                        <motion.div
+                          className="pointer-events-none absolute left-0 top-[14px] h-px w-1/5 origin-left bg-[#e87512] shadow-[0_0_12px_rgba(232,117,18,.8)]"
+                          animate={{ x: ["0%", "400%"] }}
+                          transition={{ duration: 3.8, repeat: Infinity, ease: "easeInOut" }}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="mt-3 grid gap-2 sm:grid-cols-[1.2fr_.8fr]">
+                      <div className="rounded-xl border border-white/8 bg-white/[.025] p-3">
+                        <div className="flex items-center justify-between">
+                          <div className="font-mono text-[7px] uppercase tracking-[.16em] text-white/30">Finding</div>
+                          <span className="rounded-full bg-[#e87512]/10 px-2 py-0.5 font-mono text-[6px] uppercase tracking-[.1em] text-[#ffad69]">1 review</span>
+                        </div>
+                        <div className="mt-2 text-[8px] font-semibold text-white/75 sm:text-[9px]">Policy exception requires approval</div>
+                        <div className="mt-1 text-[7px] leading-4 text-white/30">Evidence linked to orchestration step 11 and release policy.</div>
+                      </div>
+                      <div className="rounded-xl border border-[#62b5a0]/15 bg-[#62b5a0]/5 p-3">
+                        <div className="font-mono text-[7px] uppercase tracking-[.16em] text-[#76c7ae]">Evidence confidence</div>
+                        <div className="mt-2 font-[Sora] text-xl font-bold text-white">96%</div>
+                        <div className="mt-1 text-[7px] text-white/30">Trace + logs + assertions</div>
+                      </div>
+                    </div>
+
+                    <div className="mt-3 flex items-center justify-between border-t border-white/8 pt-3">
+                      <div className="font-mono text-[7px] uppercase tracking-[.14em] text-white/25">AI reasons · deterministic systems verify · evidence proves</div>
+                      <div className="hidden rounded-md border border-white/10 px-2 py-1 font-mono text-[7px] text-white/35 sm:block">VIEW REPORT →</div>
+                    </div>
+                  </div>
+                </div>
               </motion.div>
 
-              <motion.div
-                className="absolute left-1/2 top-1/2 z-20 flex h-[150px] w-[150px] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full border border-[#17213f]/25 bg-white/95 shadow-[0_30px_80px_rgba(23,33,63,.22),0_0_0_12px_rgba(23,33,63,.035)] backdrop-blur-xl sm:h-[180px] sm:w-[180px]"
-                animate={{ boxShadow: ["0 30px 80px rgba(23,33,63,.20),0 0 0 12px rgba(23,33,63,.035)", "0 34px 95px rgba(232,117,18,.18),0 0 0 18px rgba(232,117,18,.045)", "0 30px 80px rgba(23,33,63,.20),0 0 0 12px rgba(23,33,63,.035)"] }}
-                transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
-              >
-                <div className="font-mono text-[9px] font-bold uppercase tracking-[.24em] text-[#e87512]">SHYENA</div>
-                <div className="mt-2 text-center font-[Sora] text-[19px] font-extrabold leading-[.98] tracking-[-.055em] text-[#17213f] sm:text-[22px]">AI assurance<br />engine</div>
-                <div className="mt-4 flex items-center gap-1.5 rounded-full border border-[#17213f]/10 bg-[#f8fafc] px-3 py-1.5 font-mono text-[8px] uppercase tracking-[.14em] text-[#69707d]">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#e87512] shadow-[0_0_10px_rgba(232,117,18,.7)]" />
-                  evidence connected
-                </div>
-              </motion.div>
-
-              <div className="absolute left-1/2 top-1/2 z-30 h-full w-full -translate-x-1/2 -translate-y-1/2">
-                <div className="absolute left-1/2 top-[2%] -translate-x-1/2 rounded-2xl border border-[#17213f]/15 bg-white/92 px-4 py-3 text-center shadow-[0_18px_50px_rgba(23,33,63,.12)] backdrop-blur-xl sm:min-w-[180px]">
-                  <div className="font-mono text-[9px] font-bold tracking-[.18em] text-[#e87512]">01 · UNDERSTAND</div>
-                  <div className="mt-1 font-[Sora] text-sm font-bold text-[#17213f]">NEXUS</div>
-                  <div className="mt-1 text-[10px] text-[#69707d]">Map system logic & journeys</div>
-                </div>
-
-                <div className="absolute right-[1%] top-[31%] rounded-2xl border border-[#17213f]/15 bg-white/92 px-4 py-3 text-left shadow-[0_18px_50px_rgba(23,33,63,.12)] backdrop-blur-xl sm:min-w-[180px]">
-                  <div className="font-mono text-[9px] font-bold tracking-[.18em] text-[#e87512]">02 · TEST & EVALUATE</div>
-                  <div className="mt-1 font-[Sora] text-sm font-bold text-[#17213f]">VERA</div>
-                  <div className="mt-1 text-[10px] text-[#69707d]">Behaviour, semantics & integrity</div>
-                </div>
-
-                <div className="absolute bottom-[4%] left-1/2 -translate-x-1/2 rounded-2xl border border-[#17213f]/15 bg-white/92 px-4 py-3 text-center shadow-[0_18px_50px_rgba(23,33,63,.12)] backdrop-blur-xl sm:min-w-[180px]">
-                  <div className="font-mono text-[9px] font-bold tracking-[.18em] text-[#e87512]">03 · SECURE</div>
-                  <div className="mt-1 font-[Sora] text-sm font-bold text-[#17213f]">CHAKRA</div>
-                  <div className="mt-1 text-[10px] text-[#69707d]">Attack paths & boundaries</div>
-                </div>
-
-                <div className="absolute left-[1%] top-[31%] rounded-2xl border border-[#17213f]/15 bg-white/92 px-4 py-3 text-left shadow-[0_18px_50px_rgba(23,33,63,.12)] backdrop-blur-xl sm:min-w-[180px]">
-                  <div className="font-mono text-[9px] font-bold tracking-[.18em] text-[#e87512]">04 · PROVE</div>
-                  <div className="mt-1 font-[Sora] text-sm font-bold text-[#17213f]">EVIDENCE</div>
-                  <div className="mt-1 text-[10px] text-[#69707d]">Findings → verdict → release</div>
-                </div>
-              </div>
-
-              <div className="absolute bottom-[-1%] left-1/2 z-40 -translate-x-1/2 whitespace-nowrap rounded-full border border-[#17213f]/15 bg-white/90 px-4 py-2 font-mono text-[8px] uppercase tracking-[.2em] text-[#69707d] shadow-[0_12px_35px_rgba(23,33,63,.10)] backdrop-blur-xl">
-                UNDERSTAND → EVALUATE → SECURE → PROVE
+              <div className="pointer-events-none absolute -bottom-1 left-1/2 flex -translate-x-1/2 items-center gap-2 whitespace-nowrap rounded-full border border-white/10 bg-[#0d1528]/90 px-3 py-1.5 font-mono text-[7px] uppercase tracking-[.18em] text-white/35 shadow-[0_12px_30px_rgba(0,0,0,.28)] backdrop-blur-xl">
+                Understand <span className="text-[#e87512]">→</span> Evaluate <span className="text-[#e87512]">→</span> Secure <span className="text-[#e87512]">→</span> Prove
               </div>
             </motion.div>          </div>
 
