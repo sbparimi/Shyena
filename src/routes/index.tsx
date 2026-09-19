@@ -155,11 +155,13 @@ function HomePage() {
                       <span className="h-2 w-2 rounded-full bg-white/10" />
                     </div>
                     <div className="h-4 w-px bg-white/10" />
-                    <div className="font-mono text-[9px] font-semibold uppercase tracking-[.18em] text-white/55">SHYENA / ASSURANCE CONTROL PLANE</div>
+                    <div className="flex items-center gap-2"><span className="text-lg font-extrabold tracking-[-.04em] text-white">Shyena</span><span className="h-4 w-px bg-white/15" /><div className="font-mono text-[9px] font-semibold uppercase tracking-[.18em] text-white/55">ASSURANCE CONTROL PLANE</div></div>
                   </div>
-                  <div className="hidden items-center gap-2 rounded-full border border-[#e87512]/25 bg-[#e87512]/8 px-2.5 py-1 font-mono text-[8px] uppercase tracking-[.14em] text-[#ffad69] sm:flex">
-                    <span className="h-1.5 w-1.5 rounded-full bg-[#e87512]" />
-                    Live evidence
+                  <div className="hidden items-center gap-3 sm:flex">
+                    <div className="items-center gap-2 rounded-full border border-[#62b5a0]/20 bg-[#62b5a0]/8 px-2.5 py-1 font-mono text-[8px] uppercase tracking-[.14em] text-[#76c7ae]">
+                      <span className="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-[#62b5a0]" />Live evidence
+                    </div>
+                    <div className="rounded-full border border-white/10 bg-white/[.03] px-2.5 py-1 font-mono text-[8px] uppercase tracking-[.14em] text-white/45">Production⌄</div>
                   </div>
                 </div>
 
@@ -188,11 +190,11 @@ function HomePage() {
                       <div>
                         <div className="font-mono text-[8px] uppercase tracking-[.18em] text-[#e87512]">Release assessment</div>
                         <div className="mt-1 font-[Sora] text-base font-bold tracking-[-.025em] text-white sm:text-xl">Customer address change</div>
-                        <div className="mt-1 text-[8px] text-white/35 sm:text-[9px]">Production candidate · v2.18.4 · 24 checks</div>
+                        <div className="mt-1 flex flex-wrap items-center gap-2 text-[8px] text-white/35 sm:text-[9px]"><span>Production candidate · v2.18.4 · 24 checks</span><span className="rounded-full border border-[#62b5a0]/20 bg-[#62b5a0]/8 px-2 py-0.5 font-mono text-[7px] text-[#76c7ae]">Ready for review</span></div>
                       </div>
                       <div className="shrink-0 rounded-lg border border-[#e87512]/25 bg-[#e87512]/8 px-2.5 py-2 text-right">
                         <div className="font-mono text-[7px] uppercase tracking-[.14em] text-white/35">Decision</div>
-                        <div className="mt-0.5 text-[10px] font-bold text-[#ffad69]">REVIEW</div>
+                        <div className="mt-0.5 text-[10px] font-bold text-[#ffad69]">REVIEW →</div>
                       </div>
                     </div>
 
@@ -219,28 +221,35 @@ function HomePage() {
                         <div className="font-mono text-[7px] uppercase tracking-[.16em] text-white/30">Execution evidence</div>
                         <div className="font-mono text-[7px] text-white/25">17 turns · 1m 42s</div>
                       </div>
-                      <div className="relative mt-4 grid grid-cols-5 gap-1.5">
-                        {[
-                          ["Goal","USER"],
-                          ["Route","NEXUS"],
-                          ["Eval","VERA"],
-                          ["Boundary","CHAKRA"],
-                          ["Verdict","PROVE"],
-                        ].map(([label,engine], index) => (
-                          <div key={label} className="relative min-w-0">
-                            <div className="flex items-center">
-                              <div className="relative z-10 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-[#121d34] text-[7px] font-bold text-white/70 sm:h-8 sm:w-8">{String(index + 1).padStart(2,"0")}</div>
-                              {index < 4 && <div className="h-px flex-1 bg-white/10" />}
-                            </div>
-                            <div className="mt-2 truncate text-[7px] font-semibold text-white/65 sm:text-[8px]">{label}</div>
-                            <div className="mt-0.5 truncate font-mono text-[6px] uppercase tracking-[.08em] text-white/25 sm:text-[7px]">{engine}</div>
-                          </div>
-                        ))}
-                        <motion.div
-                          className="pointer-events-none absolute left-0 top-[14px] h-px w-1/5 origin-left bg-[#e87512] shadow-[0_0_12px_rgba(232,117,18,.8)]"
-                          animate={{ x: ["0%", "400%"] }}
-                          transition={{ duration: 3.8, repeat: Infinity, ease: "easeInOut" }}
-                        />
+                      <div className="relative mt-3 flex items-center gap-1 sm:gap-2">
+                        <div className="relative z-10 min-w-0 flex-1">
+                          <div className="flex items-center"><div className="flex h-7 w-7 items-center justify-center rounded-full border border-[#5577a8]/45 bg-[#121d34] text-[7px] font-bold text-white/75 sm:h-8 sm:w-8">01</div><div className="h-px flex-1 bg-white/10" /></div>
+                          <div className="mt-2 text-[7px] font-semibold text-white/65 sm:text-[8px]">Goal</div><div className="mt-0.5 font-mono text-[6px] uppercase tracking-[.08em] text-white/25 sm:text-[7px]">USER</div><div className="mt-0.5 hidden text-[6px] text-white/25 sm:block">Understand intent</div>
+                        </div>
+                        <div className="relative z-10 min-w-0 flex-1">
+                          <div className="flex items-center"><div className="flex h-7 w-7 items-center justify-center rounded-full border border-[#5577a8]/45 bg-[#121d34] text-[7px] font-bold text-white/75 sm:h-8 sm:w-8">02</div><div className="h-px flex-1 bg-white/10" /></div>
+                          <div className="mt-2 text-[7px] font-semibold text-white/65 sm:text-[8px]">Route</div><div className="mt-0.5 font-mono text-[6px] uppercase tracking-[.08em] text-white/25 sm:text-[7px]">NEXUS</div><div className="mt-0.5 hidden text-[6px] text-white/25 sm:block">Map system logic</div>
+                        </div>
+                        <div className="relative z-20 flex h-[82px] w-[82px] shrink-0 items-center justify-center sm:h-[98px] sm:w-[98px]">
+                          <motion.div className="absolute inset-0 rounded-full border border-[#e87512]/30" animate={{rotate:360}} transition={{duration:12,repeat:Infinity,ease:"linear"}} />
+                          <motion.div className="absolute inset-[8px] rounded-full border-[5px] border-[#26354f] border-t-[#e87512] border-r-[#e87512]" animate={{rotate:360}} transition={{duration:5,repeat:Infinity,ease:"linear"}} />
+                          <div className="absolute inset-[18px] rounded-full border border-white/10 bg-[#0d172b] shadow-[0_0_28px_rgba(232,117,18,.14)]" />
+                          <div className="relative text-center"><div className="font-[Sora] text-base font-extrabold tracking-[-.05em] text-white">S</div><div className="mt-0.5 text-[6px] font-bold tracking-[.18em] text-white">SHYENA</div><div className="mt-0.5 font-mono text-[5px] uppercase tracking-[.08em] text-white/45">AI ASSURANCE</div></div>
+                          {[0,90,180,270].map((deg)=><motion.span key={deg} className="absolute left-1/2 top-1/2 h-1.5 w-1.5 rounded-full bg-[#e87512] shadow-[0_0_8px_rgba(232,117,18,.9)]" style={{transformOrigin:"0 0"}} animate={{rotate:360}} transition={{duration:4,repeat:Infinity,ease:"linear",delay:deg/360}} />)}
+                        </div>
+                        <div className="relative z-10 min-w-0 flex-1">
+                          <div className="flex items-center"><div className="flex h-7 w-7 items-center justify-center rounded-full border border-[#5577a8]/45 bg-[#121d34] text-[7px] font-bold text-white/75 sm:h-8 sm:w-8">03</div><div className="h-px flex-1 bg-white/10" /></div>
+                          <div className="mt-2 text-[7px] font-semibold text-white/65 sm:text-[8px]">Eval</div><div className="mt-0.5 font-mono text-[6px] uppercase tracking-[.08em] text-white/25 sm:text-[7px]">VERA</div><div className="mt-0.5 hidden text-[6px] text-white/25 sm:block">Test & evaluate</div>
+                        </div>
+                        <div className="relative z-10 min-w-0 flex-1">
+                          <div className="flex items-center"><div className="flex h-7 w-7 items-center justify-center rounded-full border border-[#5577a8]/45 bg-[#121d34] text-[7px] font-bold text-white/75 sm:h-8 sm:w-8">04</div><div className="h-px flex-1 bg-white/10" /></div>
+                          <div className="mt-2 text-[7px] font-semibold text-white/65 sm:text-[8px]">Boundary</div><div className="mt-0.5 font-mono text-[6px] uppercase tracking-[.08em] text-white/25 sm:text-[7px]">CHAKRA</div><div className="mt-0.5 hidden text-[6px] text-white/25 sm:block">Security checks</div>
+                        </div>
+                        <div className="relative z-10 min-w-0 flex-1">
+                          <div className="flex items-center"><div className="flex h-7 w-7 items-center justify-center rounded-full border border-[#5577a8]/45 bg-[#121d34] text-[7px] font-bold text-white/75 sm:h-8 sm:w-8">05</div></div>
+                          <div className="mt-2 text-[7px] font-semibold text-white/65 sm:text-[8px]">Verdict</div><div className="mt-0.5 font-mono text-[6px] uppercase tracking-[.08em] text-white/25 sm:text-[7px]">PROVE</div><div className="mt-0.5 hidden text-[6px] text-white/25 sm:block">Release decision</div>
+                        </div>
+                        <motion.div className="pointer-events-none absolute left-[4%] top-[15px] h-px w-[92%] bg-gradient-to-r from-[#e87512]/0 via-[#e87512] to-[#e87512]/0" animate={{opacity:[0,.8,0],scaleX:[.2,1,.2]}} transition={{duration:3.5,repeat:Infinity,ease:"easeInOut"}} />
                       </div>
                     </div>
 
