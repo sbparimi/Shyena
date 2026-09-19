@@ -1,0 +1,3 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { QualityIntelligencePage } from "../components/site/quality-intelligence-page";
+export const Route = createFileRoute("/experiments")({ head: () => ({ meta: [{ title: "AI Evaluation Experiments | Shyena" }, { name: "description", content: "Compare models, prompts, retrieval and agent versions and prove what changed." }] }), component: () => <QualityIntelligencePage module="experiments" /> });
