@@ -116,10 +116,10 @@ function HireAIExpertsPage() {
           </div>
           <div className="relative ml-auto w-full max-w-md">
             <div className="absolute -inset-6 rounded-[34px] bg-[#e87512]/10 blur-3xl" />
-            <div className="relative rounded-[28px] border border-[#dfe2e7] bg-white/90 p-2 shadow-[0_35px_90px_rgba(0,0,0,.55)]">
+            <div className="relative rounded-[28px] border border-[#dfe2e7] bg-white/[.06] p-2 shadow-[0_35px_90px_rgba(0,0,0,.35)] backdrop-blur-xl">
               <div className="grid grid-cols-2 gap-2">
                 <div className="rounded-2xl bg-[#f7f8fa] p-4"><div className="text-3xl font-black text-[#17233f]">{experts.length}+</div><div className="mt-1 text-[10px] font-bold uppercase tracking-[.16em] text-[#69707d]">Specialists</div></div>
-                <div className="rounded-2xl bg-[#e87512] p-4 text-black"><div className="text-3xl font-black">UI</div><div className="mt-1 text-[10px] font-bold uppercase tracking-[.16em]">→ API → AI</div></div>
+                <div className="rounded-2xl bg-[#e87512] p-4 text-white"><div className="text-3xl font-black">UI</div><div className="mt-1 text-[10px] font-bold uppercase tracking-[.16em]">→ API → AI</div></div>
               </div>
             </div>
           </div>
@@ -129,7 +129,7 @@ function HireAIExpertsPage() {
           <div className="flex flex-col gap-3 lg:flex-row">
             <label className="relative flex-1">
               <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#17233f]/40" />
-              <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search Playwright, DeepEval, Promptfoo, Salesforce, Oracle Fusion…" className="h-12 w-full rounded-xl border border-[#dfe2e7] bg-[#f7f8fa] pl-11 pr-4 text-sm text-[#17233f] outline-none transition placeholder:text-[#7a8290] focus:border-[#e87512] focus:ring-2 focus:ring-[#ffd43b]/10" />
+              <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search Playwright, DeepEval, Promptfoo, Salesforce, Oracle Fusion…" className="h-12 w-full rounded-xl border border-[#dfe2e7] bg-[#f7f8fa] pl-11 pr-4 text-sm text-[#17233f] outline-none transition placeholder:text-[#7a8290] focus:border-[#e87512] focus:ring-2 focus:ring-[#e87512]/10" />
             </label>
             <select value={location} onChange={(e) => setLocation(e.target.value)} className="h-12 rounded-xl border border-[#dfe2e7] bg-[#f7f8fa] px-4 text-sm text-[#17233f] outline-none focus:border-[#e87512]">
               {allLocations.map((item) => <option key={item}>{item}</option>)}
@@ -168,7 +168,7 @@ function HireAIExpertsPage() {
               <div className="mt-5 flex flex-wrap gap-1.5">{expert.skills.slice(0, 4).map((skill) => <span key={skill} className="rounded-full border border-[#e8e8e8] bg-[#fafafa] px-2.5 py-1 text-[11px] font-semibold text-[#5f6672]">{skill}</span>)}</div>
               <div className="mt-6 flex gap-2 border-t border-[#e8e8e8] pt-5">
                 <button onClick={() => setSelected(expert)} className="flex-1 rounded-lg border border-[#d8dce3] px-3 py-2.5 text-sm font-semibold text-[#17233f] transition hover:border-[#17233f] hover:text-[#e87512]">View full profile</button>
-                <a href={discussUrl(expert)} className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg bg-[#e87512] px-3 py-2.5 text-sm font-semibold text-[#17233f] transition hover:bg-[#f18a32]">Discuss <ArrowRight className="h-4 w-4" /></a>
+                <a href={discussUrl(expert)} className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg bg-[#e87512] px-3 py-2.5 text-sm font-semibold text-white transition hover:bg-[#f18a32]">Discuss <ArrowRight className="h-4 w-4" /></a>
               </div>
             </article>
           ))}
@@ -177,10 +177,10 @@ function HireAIExpertsPage() {
         {filtered.length === 0 && <div className="rounded-2xl border border-dashed border-[#dfe2e7] bg-white p-16 text-center"><Search className="mx-auto h-8 w-8 text-[#8c929e]" /><h2 className="mt-4 text-xl font-semibold text-[#17233f]">No matching specialist</h2><p className="mt-2 text-sm text-[#69707d]">Try a broader skill, location or delivery mode.</p></div>}
       </section>
 
-      <section className="border-y border-[#e8e8e8] bg-[#17233f] text-[#17233f]">
+      <section className="border-y border-[#17233f] bg-[#17233f] text-white">
         <div className="mx-auto flex max-w-7xl flex-col gap-6 px-6 py-12 lg:flex-row lg:items-center lg:justify-between lg:px-8">
-          <div><div className="text-xs font-bold uppercase tracking-[0.18em] text-[#e87512]">Need a specific capability?</div><h2 className="mt-2 text-3xl font-semibold tracking-tight">Tell us the system, stack and outcome.</h2><p className="mt-3 max-w-2xl text-sm leading-6 text-[#626976]">Shyena can match the engagement to the testing surface: browser, API, CRM, ERP, LLM, RAG, agent or security.</p></div>
-          <a href="/contact" className="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg bg-[#e87512] px-6 py-3 text-sm font-bold text-[#17233f] hover:bg-[#f18a32]">Request an expert <ArrowRight className="h-4 w-4" /></a>
+          <div><div className="text-xs font-bold uppercase tracking-[0.18em] text-[#e87512]">Need a specific capability?</div><h2 className="mt-2 font-[Sora] text-3xl font-extrabold tracking-tight text-white">Tell us the system, stack and outcome.</h2><p className="mt-3 max-w-2xl text-sm leading-6 text-white/65">Shyena can match the engagement to the testing surface: browser, API, CRM, ERP, LLM, RAG, agent or security.</p></div>
+          <a href="/contact" className="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg bg-[#e87512] px-6 py-3 text-sm font-bold text-white hover:bg-[#f18a32]">Request an expert <ArrowRight className="h-4 w-4" /></a>
         </div>
       </section>
 
@@ -202,7 +202,7 @@ function ProfileModal({ expert, onClose, discussUrl }: { expert: Expert; onClose
         <div className="mt-6 grid gap-4 sm:grid-cols-3"><Info label="Delivery" value={`${expert.mode} · ${expert.location}`} /><Info label="Experience" value={expert.experience} /><Info label="Engagement" value={expert.engagement.join(" · ")} /></div>
         <div className="mt-8 grid gap-8 lg:grid-cols-[1.2fr_0.8fr]"><div><h3 className="text-xs font-bold uppercase tracking-[0.15em] text-[#e87512]">Profile</h3><p className="mt-3 text-base leading-7 text-[#626976]">{expert.summary}</p><h3 className="mt-7 text-xs font-bold uppercase tracking-[0.15em] text-[#e87512]">Typical focus</h3><ul className="mt-3 space-y-2">{expert.focus.map((item) => <li key={item} className="flex gap-2 text-sm text-[#5f6672]"><Zap className="mt-0.5 h-4 w-4 shrink-0 text-[#167e6a]" /> {item}</li>)}</ul><h3 className="mt-7 text-xs font-bold uppercase tracking-[0.15em] text-[#e87512]">Delivery capability</h3><p className="mt-3 text-sm leading-6 text-[#626976]">{expert.delivery}</p></div><div><h3 className="text-xs font-bold uppercase tracking-[0.15em] text-[#e87512]">Core expertise</h3><div className="mt-3 flex flex-wrap gap-2">{expert.skills.map((skill) => <span key={skill} className="rounded-full border border-[#e1e3e7] bg-white px-3 py-1.5 text-xs font-semibold text-[#5f6672]">{skill}</span>)}</div><h3 className="mt-7 text-xs font-bold uppercase tracking-[0.15em] text-[#e87512]">Profile tags</h3><div className="mt-3 flex flex-wrap gap-2">{expert.tags.map((tag) => <span key={tag} className="rounded-full bg-[#e87512]/10 px-3 py-1.5 text-xs font-semibold text-[#e87512]">{tag}</span>)}</div></div></div>
         <div className="mt-8 rounded-xl border border-[#e87512]/25 bg-[#e87512]/10 p-4"><div className="flex items-start gap-3"><BriefcaseBusiness className="mt-0.5 h-5 w-5 text-[#e87512]" /><div><div className="font-semibold text-[#17233f]">Discuss this specialist</div><p className="mt-1 text-sm leading-6 text-[#626976]">The contact form will be prefilled with this profile and its relevant skills.</p></div></div></div>
-        <div className="mt-6 flex flex-col gap-3 sm:flex-row"><a href={discussUrl} className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg bg-[#e87512] px-5 py-3 text-sm font-bold text-[#17233f] hover:bg-[#f18a32]">Discuss this expert <ArrowRight className="h-4 w-4" /></a><button onClick={onClose} className="rounded-lg border border-[#d8dce3] bg-white px-5 py-3 text-sm font-semibold text-[#17233f]">Close profile</button></div>
+        <div className="mt-6 flex flex-col gap-3 sm:flex-row"><a href={discussUrl} className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg bg-[#e87512] px-5 py-3 text-sm font-bold text-white hover:bg-[#f18a32]">Discuss this expert <ArrowRight className="h-4 w-4" /></a><button onClick={onClose} className="rounded-lg border border-[#d8dce3] bg-white px-5 py-3 text-sm font-semibold text-[#17233f]">Close profile</button></div>
       </div>
     </div>
   </div>;
