@@ -1,0 +1,3 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { QualityIntelligencePage } from "../components/site/quality-intelligence-page";
+export const Route = createFileRoute("/metrics")({ head: () => ({ meta: [{ title: "AI Quality Metrics | Shyena" }, { name: "description", content: "Measure agent, conversation, RAG, security, application and business outcomes." }] }), component: () => <QualityIntelligencePage module="metrics" /> });
