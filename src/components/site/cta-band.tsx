@@ -23,10 +23,10 @@ export function CtaBand() {
               size="lg"
               className="h-12 w-full min-w-[190px] rounded-xl bg-[#e87512] px-7 text-sm font-semibold normal-case tracking-normal text-white hover:bg-[#d9670a] sm:w-auto"
             >
-              <Link to="/contact">
+              <a href="/contact#contact-form">
                 Book a walkthrough
                 <ArrowRight className="h-4 w-4" />
-              </Link>
+              </a>
             </Button>
             <Button
               asChild
@@ -34,7 +34,7 @@ export function CtaBand() {
               variant="outline"
               className="h-12 w-full min-w-[190px] rounded-xl border-white/30 bg-transparent px-7 text-sm font-semibold normal-case tracking-normal text-white hover:border-white/50 hover:bg-white/10 hover:text-white sm:w-auto"
             >
-              <Link to="/contact">See how it works</Link>
+              <Link to="/vera">See how it works</Link>
             </Button>
           </div>
         </div>
