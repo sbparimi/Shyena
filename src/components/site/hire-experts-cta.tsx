@@ -70,6 +70,7 @@ function createHireExpertsLink(href: string, skills: string[]): HTMLAnchorElemen
   const link = document.createElement("a");
   link.href = href;
   link.dataset.hireExpertsSource = window.location.pathname;
+  link.dataset.shyenaHireExpertLink = "true";
   link.className = "inline-flex h-11 items-center justify-center gap-2 rounded-lg border border-[#17213f] bg-white px-4 text-xs font-semibold text-[#17213f] transition hover:border-[#ff5a0a] hover:text-[#ff5a0a]";
   link.title = skills.length ? `Talk to experts for: ${skills.join(", ")}` : "Talk to Shyena experts";
   link.textContent = "Talk to Experts";
@@ -82,8 +83,9 @@ function addExpertCtas() {
 
   const skills = getPageSkills();
   const href = buildHireHref(skills);
-  const candidates = Array.from(main.querySelectorAll<HTMLElement>("a, button"))
-    .filter((element) => isVisible(element) && isKeyCta(element));
+  const candidates = Array.from(
+    main.querySelectorAll<HTMLElement>("a:not([data-shyena-hire-expert-link='true']), button"),
+  ).filter((element) => isVisible(element) && isKeyCta(element));
 
   const groups = new Map<HTMLElement, HTMLElement[]>();
   candidates.forEach((element) => {
@@ -94,7 +96,14 @@ function addExpertCtas() {
   });
 
   groups.forEach((members) => {
-    if (members.some((element) => element.dataset.shyenaHireExpertAttached === "true")) return;
+    // Never attach a contextual CTA to a group that already has one.
+    // This also prevents the MutationObserver from recursively attaching
+    // "Talk to Experts" to the CTA it just created.
+    const group = members[0]?.parentElement;
+    if (
+      members.some((element) => element.dataset.shyenaHireExpertAttached === "true") ||
+      group?.querySelector("[data-shyena-hire-expert-link='true']")
+    ) return;
 
     const lastCta = members[members.length - 1];
     const wrapper = document.createElement("span");
