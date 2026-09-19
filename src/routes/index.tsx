@@ -132,103 +132,72 @@ function HomePage() {
             </div>
 
             <motion.div
-              className="relative mx-auto h-[540px] w-full max-w-[860px] [perspective:1800px] sm:h-[650px]"
+              className="relative mx-auto h-[560px] w-full max-w-[860px] [perspective:1600px] sm:h-[680px]"
               onPointerMove={handleHeroPointer}
               onPointerLeave={resetHeroPointer}
               style={{ rotateX, rotateY }}
             >
-              <div className="absolute inset-0 rounded-[50%] bg-[radial-gradient(ellipse_at_center,rgba(63,86,255,.24),transparent_58%)] blur-3xl" />
-              <div className="absolute left-1/2 top-[54%] h-[2px] w-[78%] -translate-x-1/2 bg-gradient-to-r from-transparent via-white/25 to-transparent shadow-[0_0_45px_rgba(100,120,255,.25)]" />
-              <div className="absolute left-1/2 top-[54%] h-[170px] w-[68%] -translate-x-1/2 rounded-[50%] border border-white/[.07] bg-white/[.012] [transform:rotateX(72deg)_translateZ(-120px)]" />
-              
-              <div className="absolute inset-0 [transform-style:preserve-3d]">
-                <motion.div
-                  className="shyena-orbit-motion absolute left-1/2 top-[53%] h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/[.07] sm:h-[560px] sm:w-[560px]"
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-                >
-                  <span className="absolute left-[7%] top-[20%] h-1.5 w-1.5 rounded-full bg-white shadow-[0_0_16px_white]" />
-                  <span className="absolute bottom-[13%] right-[9%] h-1.5 w-1.5 rounded-full bg-[#e87512] shadow-[0_0_18px_#e87512]" />
-                </motion.div>
+              <div className="pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(circle_at_center,rgba(232,117,18,.14),transparent_34%),radial-gradient(circle_at_center,rgba(23,33,63,.82),transparent_66%)] blur-2xl" />
+              <div className="pointer-events-none absolute left-1/2 top-1/2 h-[78%] w-[78%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#17213f]/70 bg-[#17213f]/[.035] shadow-[0_40px_100px_rgba(23,33,63,.22)]" />
 
-                <motion.div
-                  className="shyena-product shyena-nexus absolute left-[2%] top-[14%] w-[270px] overflow-hidden rounded-[24px] border border-[#6877ff]/45 bg-[#080d1c]/96 shadow-[0_55px_120px_rgba(0,0,0,.78),0_0_70px_rgba(104,119,255,.12)] backdrop-blur-xl sm:w-[330px]"
-                  initial={{ x: -180, y: -34, z: -90, rotateY: 18, rotateX: 8, scale: 0.78, opacity: 0.42 }}
-                  animate={{ x: [-180, -180, -8, -8, -180, -180], y: [-34,-34,-18,-18,-34,-34], z: [-90,-90,310,310,-90,-90], rotateY:[18,18,0,0,18,18], rotateX:[8,8,0,0,8,8], scale:[.78,.78,1.12,1.12,.78,.78], opacity:[.42,.42,1,1,.42,.42] }}
-                  transition={sequenceTransition}
-                  whileHover={{ scale: 1.15, opacity: 1 }}
-                >
-                  <div className="relative h-[190px] overflow-hidden border-b border-white/10 bg-[#070b17] sm:h-[225px]">
-                    <div className="absolute inset-0 opacity-40" style={{backgroundImage:"linear-gradient(rgba(104,119,255,.14) 1px,transparent 1px),linear-gradient(90deg,rgba(104,119,255,.14) 1px,transparent 1px)",backgroundSize:"28px 28px"}} />
-                    <div className="absolute left-5 top-5 font-mono text-[8px] uppercase tracking-[.22em] text-[#8b96ff]">NEXUS / SYSTEM MAP</div>
-                    <svg viewBox="0 0 360 190" className="absolute inset-x-4 bottom-1 h-[155px] w-[calc(100%-2rem)]">
-                      <path d="M48 110 C100 55 126 145 174 96 S248 42 312 78" fill="none" stroke="#6877ff" strokeWidth="2" opacity=".8"/>
-                      <path d="M174 96 C206 116 226 138 258 132" fill="none" stroke="#6877ff" strokeWidth="1.5" opacity=".45"/>
-                      <circle cx="48" cy="110" r="9" fill="#0b1024" stroke="#8b96ff" strokeWidth="2"/><circle cx="174" cy="96" r="13" fill="#6877ff"/><circle cx="312" cy="78" r="10" fill="#0b1024" stroke="#8b96ff" strokeWidth="2"/>
-                      <rect x="88" y="66" width="15" height="15" rx="3" fill="#e87512"/><rect x="244" y="123" width="15" height="15" rx="3" fill="#55d6ad"/>
-                      <text x="34" y="140" fill="rgba(255,255,255,.45)" fontSize="9">FLOW</text><text x="157" y="79" fill="white" fontSize="9">AGENT</text><text x="292" y="102" fill="rgba(255,255,255,.45)" fontSize="9">TOOL</text>
-                    </svg>
-                    <div className="absolute bottom-3 left-4 right-4 h-px bg-gradient-to-r from-transparent via-[#6877ff]/50 to-transparent" />
-                  </div>
-                  <div className="p-5">
-                    <div className="flex items-center justify-between"><span className="font-mono text-[9px] font-bold tracking-[.2em] text-[#8b96ff]">01 · NEXUS</span><span className="rounded-full border border-[#6877ff]/25 px-2 py-1 font-mono text-[8px] text-[#8b96ff]">UNDERSTAND</span></div>
-                    <div className="mt-3 font-[Sora] text-[26px] font-extrabold tracking-[-.045em]">Map the system.</div>
-                    <p className="mt-2 text-[11px] leading-5 text-white/45">Flows, tools, rules and system behaviour.</p>
-                  </div>
-                </motion.div>
+              <motion.div
+                className="absolute left-1/2 top-1/2 h-[370px] w-[370px] -translate-x-1/2 -translate-y-1/2 rounded-full sm:h-[500px] sm:w-[500px]"
+                animate={{ rotate: 360 }}
+                transition={{ duration: 26, repeat: Infinity, ease: "linear" }}
+              >
+                <div className="absolute inset-0 rounded-full border border-[#17213f]/20" />
+                <div className="absolute inset-[9px] rounded-full border border-[#17213f]/10" />
+                <div className="absolute inset-[-1px] rounded-full bg-[conic-gradient(from_0deg,transparent_0deg,transparent_24deg,#e87512_25deg,#e87512_72deg,transparent_73deg,transparent_142deg,rgba(23,33,63,.24)_143deg,rgba(23,33,63,.24)_218deg,transparent_219deg,transparent_360deg)] [mask:linear-gradient(#000_0_0)_content-box,linear-gradient(#000_0_0)] [mask-composite:exclude] p-[3px]" />
+                <span className="absolute left-1/2 top-[-5px] h-3 w-3 -translate-x-1/2 rounded-full bg-[#e87512] shadow-[0_0_24px_rgba(232,117,18,.95)]" />
+                <span className="absolute bottom-[7%] left-[12%] h-2 w-2 rounded-full bg-[#17213f]/70" />
+                <span className="absolute right-[8%] top-[27%] h-2 w-2 rounded-full bg-[#17213f]/45" />
+              </motion.div>
 
-                <motion.div className="shyena-product shyena-vera absolute right-[0%] top-[6%] w-[270px] overflow-hidden rounded-[24px] border border-[#55d6ad]/45 bg-[#071312]/96 shadow-[0_55px_120px_rgba(0,0,0,.78),0_0_70px_rgba(85,214,173,.1)] backdrop-blur-xl sm:w-[330px]"
-                  initial={{ x: 175, y: -70, z: -80, rotateY: -18, rotateX: 8, scale: .78, opacity: .42 }}
-                  animate={{ x:[175,175,0,0,175,175], y:[-70,-70,-12,-12,-70,-70], z:[-80,-80,330,330,-80,-80], rotateY:[-18,-18,0,0,-18,-18], rotateX:[8,8,0,0,8,8], scale:[.78,.78,1.14,1.14,.78,.78], opacity:[.42,.42,1,1,.42,.42] }}
-                  transition={{...sequenceTransition, times:[0,.32,.42,.60,.72,1] as const}}
-                  whileHover={{ scale: 1.17, opacity: 1 }}
-                >
-                  <div className="relative h-[190px] overflow-hidden border-b border-white/10 bg-[#06100f] sm:h-[225px]">
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(85,214,173,.16),transparent_42%)]" />
-                    <div className="absolute left-5 top-5 font-mono text-[8px] uppercase tracking-[.22em] text-[#6ee7b7]">VERA / EVALUATION</div>
-                    <svg viewBox="0 0 360 190" className="absolute inset-x-4 bottom-1 h-[155px] w-[calc(100%-2rem)]">
-                      <circle cx="180" cy="102" r="60" fill="none" stroke="#55d6ad" strokeWidth="1" opacity=".25"/><circle cx="180" cy="102" r="43" fill="none" stroke="#55d6ad" strokeWidth="2" opacity=".5"/><circle cx="180" cy="102" r="25" fill="none" stroke="#6ee7b7" strokeWidth="5" opacity=".9"/><circle cx="180" cy="102" r="8" fill="#6ee7b7"/>
-                      <path d="M42 102 H155 M205 102 H318" stroke="#55d6ad" strokeWidth="2" opacity=".65"/><path d="M180 42 V77 M180 127 V162" stroke="#55d6ad" strokeWidth="1" opacity=".35"/>
-                      <text x="153" y="106" fill="#071312" fontSize="8" fontWeight="700">0.91</text><text x="32" y="90" fill="rgba(255,255,255,.42)" fontSize="8">TRACE</text><text x="270" y="90" fill="rgba(255,255,255,.42)" fontSize="8">SEMANTIC</text>
-                    </svg>
-                    <div className="absolute right-5 top-5 h-2 w-2 rounded-full bg-[#6ee7b7] shadow-[0_0_18px_#55d6ad]" />
-                  </div>
-                  <div className="p-5">
-                    <div className="flex items-center justify-between"><span className="font-mono text-[9px] font-bold tracking-[.2em] text-[#6ee7b7]">02 · VERA</span><span className="rounded-full border border-[#55d6ad]/25 px-2 py-1 font-mono text-[8px] text-[#6ee7b7]">EVALUATE</span></div>
-                    <div className="mt-3 font-[Sora] text-[26px] font-extrabold tracking-[-.045em]">Measure the truth.</div>
-                    <p className="mt-2 text-[11px] leading-5 text-white/45">Behaviour, semantics and execution evidence.</p>                  </div>
-                </motion.div>
+              <motion.div
+                className="absolute left-1/2 top-1/2 z-20 flex h-[178px] w-[178px] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full border border-[#17213f]/25 bg-white/95 shadow-[0_30px_80px_rgba(23,33,63,.22),0_0_0_12px_rgba(23,33,63,.035)] backdrop-blur-xl sm:h-[220px] sm:w-[220px]"
+                animate={{ boxShadow: ["0 30px 80px rgba(23,33,63,.20),0 0 0 12px rgba(23,33,63,.035)", "0 34px 95px rgba(232,117,18,.18),0 0 0 18px rgba(232,117,18,.045)", "0 30px 80px rgba(23,33,63,.20),0 0 0 12px rgba(23,33,63,.035)"] }}
+                transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <div className="font-mono text-[9px] font-bold uppercase tracking-[.24em] text-[#e87512]">SHYENA</div>
+                <div className="mt-2 text-center font-[Sora] text-[22px] font-extrabold leading-[.98] tracking-[-.055em] text-[#17213f] sm:text-[27px]">AI assurance<br />engine</div>
+                <div className="mt-4 flex items-center gap-1.5 rounded-full border border-[#17213f]/10 bg-[#f8fafc] px-3 py-1.5 font-mono text-[8px] uppercase tracking-[.14em] text-[#69707d]">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#e87512] shadow-[0_0_10px_rgba(232,117,18,.7)]" />
+                  evidence connected
+                </div>
+              </motion.div>
 
-                <motion.div className="shyena-product shyena-chakra absolute bottom-[4%] left-1/2 w-[300px] -translate-x-1/2 overflow-hidden rounded-[24px] border border-[#f18a32]/50 bg-[#160b06]/97 shadow-[0_65px_130px_rgba(0,0,0,.82),0_0_80px_rgba(232,117,18,.12)] backdrop-blur-xl sm:w-[370px]"
-                  initial={{ x: 0, y: 115, z: -70, rotateY: 0, rotateX: -10, scale: .78, opacity: .42 }}
-                  animate={{ x:[0,0,0,0,0,0], y:[115,115,12,12,115,115], z:[-70,-70,350,350,-70,-70], rotateY:[0,0,0,0,0,0], rotateX:[-10,-10,0,0,-10,-10], scale:[.78,.78,1.16,1.16,.78,.78], opacity:[.42,.42,1,1,.42,.42] }}
-                  transition={{...sequenceTransition, times:[0,.56,.68,.88,1,1] as const}}
-                  whileHover={{ scale: 1.19, opacity: 1 }}
-                >
-                  <div className="relative h-[205px] overflow-hidden border-b border-white/10 bg-[#100805] sm:h-[245px]">
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_55%,rgba(232,117,18,.18),transparent_44%)]" />
-                    <div className="absolute left-5 top-5 font-mono text-[8px] uppercase tracking-[.22em] text-[#ffad69]">CHAKRA / ADVERSARIAL</div>
-                    <svg viewBox="0 0 420 210" className="absolute inset-x-4 bottom-0 h-[175px] w-[calc(100%-2rem)]">
-                      <g fill="none" stroke="#e87512" opacity=".5"><circle cx="210" cy="112" r="68"/><circle cx="210" cy="112" r="49"/><circle cx="210" cy="112" r="30"/></g>
-                      <path d="M210 20 L210 82 M210 142 L210 204 M118 112 L178 112 M242 112 L302 112" stroke="#ffad69" strokeWidth="2"/>
-                      <path d="M76 48 L157 92 M344 48 L263 92 M76 176 L157 132 M344 176 L263 132" stroke="#e87512" strokeWidth="2" opacity=".7"/>
-                      <path d="M210 72 L250 96 L236 145 L184 145 L170 96 Z" fill="rgba(232,117,18,.13)" stroke="#ffad69" strokeWidth="2"/>
-                      <path d="M178 112 L194 112 M226 112 L242 112" stroke="#fff" strokeWidth="3"/>
-                      <circle cx="210" cy="112" r="8" fill="#ffad69"/><rect x="68" y="40" width="12" height="12" rx="2" fill="#55d6ad"/><rect x="340" y="40" width="12" height="12" rx="2" fill="#8b96ff"/><rect x="68" y="170" width="12" height="12" rx="2" fill="#8b96ff"/><rect x="340" y="170" width="12" height="12" rx="2" fill="#55d6ad"/>
-                    </svg>
-                  </div>
-                  <div className="p-5">
-                    <div className="flex items-center justify-between"><span className="font-mono text-[9px] font-bold tracking-[.2em] text-[#ffad69]">03 · CHAKRA</span><span className="rounded-full border border-[#e87512]/30 px-2 py-1 font-mono text-[8px] text-[#ffad69]">SECURE</span></div>
-                    <div className="mt-3 font-[Sora] text-[28px] font-extrabold tracking-[-.045em]">Break the unsafe path.</div>
-                    <p className="mt-2 text-[11px] leading-5 text-white/45">Attack critical paths and expose unsafe behaviour.</p>
-                  </div>
-                </motion.div>
+              <div className="absolute left-1/2 top-1/2 z-30 h-full w-full -translate-x-1/2 -translate-y-1/2">
+                <div className="absolute left-1/2 top-[2%] -translate-x-1/2 rounded-2xl border border-[#17213f]/15 bg-white/92 px-5 py-4 text-center shadow-[0_18px_50px_rgba(23,33,63,.12)] backdrop-blur-xl sm:min-w-[210px]">
+                  <div className="font-mono text-[9px] font-bold tracking-[.18em] text-[#e87512]">01 · UNDERSTAND</div>
+                  <div className="mt-1 font-[Sora] text-sm font-bold text-[#17213f]">NEXUS</div>
+                  <div className="mt-1 text-[10px] text-[#69707d]">Map system logic & journeys</div>
+                </div>
+
+                <div className="absolute right-[1%] top-[31%] rounded-2xl border border-[#17213f]/15 bg-white/92 px-5 py-4 text-left shadow-[0_18px_50px_rgba(23,33,63,.12)] backdrop-blur-xl sm:min-w-[210px]">
+                  <div className="font-mono text-[9px] font-bold tracking-[.18em] text-[#e87512]">02 · TEST & EVALUATE</div>
+                  <div className="mt-1 font-[Sora] text-sm font-bold text-[#17213f]">VERA</div>
+                  <div className="mt-1 text-[10px] text-[#69707d]">Behaviour, semantics & integrity</div>
+                </div>
+
+                <div className="absolute bottom-[6%] left-1/2 -translate-x-1/2 rounded-2xl border border-[#17213f]/15 bg-white/92 px-5 py-4 text-center shadow-[0_18px_50px_rgba(23,33,63,.12)] backdrop-blur-xl sm:min-w-[210px]">
+                  <div className="font-mono text-[9px] font-bold tracking-[.18em] text-[#e87512]">03 · SECURE</div>
+                  <div className="mt-1 font-[Sora] text-sm font-bold text-[#17213f]">CHAKRA</div>
+                  <div className="mt-1 text-[10px] text-[#69707d]">Attack paths & boundaries</div>
+                </div>
+
+                <div className="absolute left-[1%] top-[31%] rounded-2xl border border-[#17213f]/15 bg-white/92 px-5 py-4 text-left shadow-[0_18px_50px_rgba(23,33,63,.12)] backdrop-blur-xl sm:min-w-[210px]">
+                  <div className="font-mono text-[9px] font-bold tracking-[.18em] text-[#e87512]">04 · PROVE</div>
+                  <div className="mt-1 font-[Sora] text-sm font-bold text-[#17213f]">EVIDENCE</div>
+                  <div className="mt-1 text-[10px] text-[#69707d]">Findings → verdict → release</div>
+                </div>
               </div>
 
-              <div className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 rounded-full border border-white/10 bg-black/45 px-4 py-2 font-mono text-[8px] uppercase tracking-[.22em] text-white/45 shadow-[0_15px_50px_rgba(0,0,0,.45)] backdrop-blur-xl">understand → evaluate → secure</div>
+              <div className="absolute bottom-[2%] left-1/2 z-40 -translate-x-1/2 whitespace-nowrap rounded-full border border-[#17213f]/15 bg-white/90 px-4 py-2 font-mono text-[8px] uppercase tracking-[.2em] text-[#69707d] shadow-[0_12px_35px_rgba(23,33,63,.10)] backdrop-blur-xl">
+                UNDERSTAND → EVALUATE → SECURE → PROVE
+              </div>
             </motion.div>          </div>
 
-          <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[.025] px-5 py-4 sm:px-7">
+          <div className="relative overflow-hidden rounded-2xl          <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[.025] px-5 py-4 sm:px-7">
             <div className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/[.06] to-transparent [animation:shyena-scan_6s_ease-in-out_infinite]" />
             <div className="relative grid gap-4 text-center sm:grid-cols-3 sm:text-left">
               <div><div className="font-mono text-[9px] uppercase tracking-[.16em] text-white/30">SIMULATE</div><div className="mt-1 text-sm font-semibold">Real business journeys</div></div>
