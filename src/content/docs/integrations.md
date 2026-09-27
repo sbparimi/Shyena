@@ -151,7 +151,7 @@ Every integration should document:
 
 ```yaml
 integration:
-  name: cognigy
+  name: agent-platform
   authentication: api-key
   inbound_events:
     - conversation.started
