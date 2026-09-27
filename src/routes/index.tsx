@@ -13,6 +13,45 @@ export const Route = createFileRoute("/")({
       { property: "og:description", content: "Realistic AI agent testing, evaluation and security with evidence-backed release decisions." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://www.shyena.eu/" },
+      { property: "og:site_name", content: "Shyena" },
+      { property: "og:image", content: "https://www.shyena.eu/shyena-logo-exact.webp" },
+      { property: "og:image:alt", content: "Shyena AI assurance platform" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Shyena | AI Agent Testing, Evaluation & Security" },
+      { name: "twitter:description", content: "Realistic AI agent testing, evaluation and security with evidence-backed release decisions." },
+      { name: "twitter:image", content: "https://www.shyena.eu/shyena-logo-exact.webp" },
+    ],
+    scripts: [
+      { type: "application/ld+json", children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://www.shyena.eu/#organization",
+        name: "Shyena",
+        url: "https://www.shyena.eu/",
+        logo: "https://www.shyena.eu/shyena-logo-exact.webp",
+        description: "AI quality engineering and evidence-backed assurance for AI agents and enterprise software.",
+        knowsAbout: [
+          "AI agent testing",
+          "AI agent evaluation",
+          "conversational AI testing",
+          "LLM evaluation",
+          "RAG testing",
+          "AI agent security testing",
+          "AI regression testing",
+          "AI release assurance",
+          "autonomous quality engineering",
+        ],
+      }) },
+      { type: "application/ld+json", children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://www.shyena.eu/#website",
+        url: "https://www.shyena.eu/",
+        name: "Shyena",
+        description: "AI agent testing, evaluation, security and release assurance.",
+        publisher: { "@id": "https://www.shyena.eu/#organization" },
+        inLanguage: "en",
+      }) },
     ],
   }),
   component: HomePage,
@@ -31,7 +70,7 @@ const evaluation = [
   ["Security", "Detect prompt injection, policy breaks, unsafe tool calls and trust-boundary failures."],
 ] as const;
 
-const integrations = ["Cognigy", "Agentforce", "LangGraph", "LangChain", "CrewAI", "RAG", "AWS Bedrock", "Azure OpenAI", "Playwright", "OpenTelemetry", "GitHub Actions", "GitLab CI"];
+const integrations = ["Agent frameworks", "LLM providers", "RAG systems", "Tool-using agents", "Playwright", "OpenTelemetry", "GitHub Actions", "GitLab CI", "REST APIs", "Web applications", "Cloud platforms", "Enterprise applications"];
 
 
 
