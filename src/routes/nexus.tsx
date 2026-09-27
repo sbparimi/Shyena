@@ -57,7 +57,7 @@ function NexusPage() {
     ]}
     proofTitle="Built for agentic systems"
     proof={[
-      { label: "Live source", value: "Cognigy" },
+      { label: "Source", value: "Platform-agnostic" },
       { label: "Model", value: "System-aware" },
       { label: "Analysis", value: "Graph + dependency" },
       { label: "Output", value: "Test intent" },
