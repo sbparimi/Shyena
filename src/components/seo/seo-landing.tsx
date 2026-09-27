@@ -35,19 +35,62 @@ export function SeoLanding({ config }: { config: SeoLandingConfig }) {
 }
 
 export function seoHead(config: SeoLandingConfig) {
-  return { links: [{ rel: "canonical", href: `https://www.shyena.eu${config.path}` }], meta: [
-    { title: `${config.title} | Shyena` },
-    { name: "description", content: config.description },
-    { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
-    { property: "og:title", content: `${config.title} | Shyena` },
-    { property: "og:description", content: config.description },
-    { property: "og:type", content: "website" },
-    { property: "og:url", content: `https://www.shyena.eu${config.path}` },
-    { property: "og:image", content: "https://www.shyena.eu/shyena-logo-exact.webp" },
-    { property: "og:image:alt", content: "Shyena AI assurance platform" },
-    { name: "twitter:card", content: "summary_large_image" },
-    { name: "twitter:image", content: "https://www.shyena.eu/shyena-logo-exact.webp" },
-  ] };
+  const url = `https://www.shyena.eu${config.path}`;
+  const title = `${config.title} | Shyena`;
+  return {
+    links: [{ rel: "canonical", href: url }],
+    meta: [
+      { title },
+      { name: "description", content: config.description },
+      { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
+      { property: "og:title", content: title },
+      { property: "og:description", content: config.description },
+      { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "Shyena" },
+      { property: "og:url", content: url },
+      { property: "og:image", content: "https://www.shyena.eu/shyena-logo-exact.webp" },
+      { property: "og:image:alt", content: "Shyena AI assurance platform" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: title },
+      { name: "twitter:description", content: config.description },
+      { name: "twitter:image", content: "https://www.shyena.eu/shyena-logo-exact.webp" },
+    ],
+    scripts: [
+      { type: "application/ld+json", children: JSON.stringify(webPageSchema(config)) },
+      { type: "application/ld+json", children: JSON.stringify(breadcrumbSchema(config)) },
+      { type: "application/ld+json", children: JSON.stringify(faqSchema(config)) },
+    ],
+  };
+}
+
+export function webPageSchema(config: SeoLandingConfig) {
+  const url = `https://www.shyena.eu${config.path}`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${url}#webpage`,
+    url,
+    name: config.title,
+    description: config.description,
+    isPartOf: { "@id": "https://www.shyena.eu/#website" },
+    about: {
+      "@type": "Thing",
+      name: config.eyebrow,
+    },
+    inLanguage: "en",
+  };
+}
+
+export function breadcrumbSchema(config: SeoLandingConfig) {
+  const label = config.title.replace(/\s*\|\s*Shyena$/i, "");
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Shyena", item: "https://www.shyena.eu/" },
+      { "@type": "ListItem", position: 2, name: label, item: `https://www.shyena.eu${config.path}` },
+    ],
+  };
 }
 
 export function faqSchema(config: SeoLandingConfig) {
