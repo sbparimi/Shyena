@@ -39,8 +39,6 @@ Every release signal should be traceable to the underlying execution, conversati
 - [AI Agent Testing](https://www.shyena.eu/blog/ai-agent-testing-is-a-systems-problem)
 - [Conversational AI Testing](https://www.shyena.eu/blog/why-conversational-ai-needs-a-different-testing-model)
 - [Execution Integrity](https://www.shyena.eu/blog/the-problem-with-green-checkmarks-on-broken-conversations)
-- [Cognigy Agent Testing](https://www.shyena.eu/blog/how-to-test-a-cognigy-agent)
-- [Cognigy Agent Security Testing](https://www.shyena.eu/blog/cognigy-agent-security-testing-with-ziran)
 - [LLM-as-Judge](https://www.shyena.eu/blog/what-llm-as-judge-actually-means-in-practice)
 
 ## Commercial
