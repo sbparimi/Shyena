@@ -3,8 +3,14 @@ import { ExecutivePage } from "@/components/site/executive-page";
 
 export const Route = createFileRoute("/services")({
   head: () => ({ links: [{ rel: "canonical", href: "https://www.shyena.eu/services" }], meta: [
-    { title: "AI Quality Engineering Services | Shyena" },
-    { name: "description", content: "Shyena services help organisations implement autonomous testing, AI evaluation, security assurance and enterprise quality engineering." },
+    { title: "AI QA Consulting & Quality Engineering Services | Shyena" },
+    { name: "description", content: "AI QA consulting and quality engineering services for agent testing, LLM evaluation, RAG assurance, AI security testing and release governance." },
+    { name: "robots", content: "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" },
+    { property: "og:title", content: "AI QA Consulting & Quality Engineering Services | Shyena" },
+    { property: "og:description", content: "AI agent testing, LLM evaluation, RAG assurance, security testing and evidence-backed release governance." },
+    { property: "og:type", content: "website" },
+    { property: "og:site_name", content: "Shyena" },
+    { property: "og:url", content: "https://www.shyena.eu/services" },
   ]}),
   component: ServicesPage,
 });
