@@ -3,7 +3,9 @@ import { ArrowRight, Check } from "lucide-react";
 const SITE="https://www.shyena.eu";
 
 const services=[
- {title:"AI Act Transparency & Risk Scan",price:"Custom pricing",cadence:"1–2 weeks",body:"Article 50 disclosure checks, a risk classification walkthrough, a four-layer evaluation sample, accessibility checks and a prioritised findings report."},
+ {title:"Autonomous QA Pilot",price:"Custom pricing",cadence:"2–4 weeks",body:"Connect one AI or application system, discover critical journeys, generate and execute an autonomous test suite, evaluate agent behaviour and deliver a release-quality findings report."},
+ {title:"Agentic Evaluation Programme",price:"€7,500",cadence:"30–60 days · one AI system",body:"Continuous evaluation of multi-turn journeys, deterministic rules, semantic quality, orchestration, tool calls, model drift and adversarial behaviour."},
+ {title:"Continuous Autonomous QA",price:"Custom pricing",cadence:"ongoing",body:"Always-on release testing, failure reproduction, regression expansion, production-to-test learning and evidence-backed release decisions."},
  {title:"AI Assurance Pilot",price:"€7,500",cadence:"30–60 days · one AI system",body:"A focused assurance engagement combining realistic journey testing, four-layer evaluation, security checks and traceable evidence for engineering and release decisions."},
  {title:"Governance Evidence Retainer",price:"Custom pricing",cadence:"monthly",body:"Scheduled re-evaluation, release regression, updated evidence packs and a requirement-to-evidence traceability matrix."}
 ];
