@@ -55,7 +55,7 @@ export const Route = createFileRoute("/")({
     meta: [
       { title:"Shyena Autonomous QA | Agentic AI Testing & Evaluation" },
       { name:"description", content:"Shyena autonomously discovers journeys, generates and executes tests, evaluates AI-agent behaviour, diagnoses failures and expands regression coverage." },
-      { property:"og:title", content:"Shyena: AI Assurance Engineer for AI agents | Evaluation, security & EU AI Act evidence" },
+      { property:"og:title", content:"Shyena Autonomous QA | Agentic AI Testing & Evaluation" },
       { property:"og:description", content:"Test AI agents with realistic journeys, evaluate behaviour, attack critical paths and produce traceable evidence before release." },
       { property:"og:type", content:"website" }, { property:"og:url", content:SITE+"/" }, { property:"og:site_name", content:"Shyena" },
       { property:"og:image", content:SITE+"/shyena-logo-exact.webp" }, { name:"twitter:card", content:"summary_large_image" },
