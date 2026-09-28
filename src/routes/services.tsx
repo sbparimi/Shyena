@@ -26,7 +26,7 @@ const offers = [
   {
     eyebrow: "01 · Readiness",
     title: "AI Act Transparency & Risk Scan",
-    price: "[PARIMI TO CONFIRM: price]",
+    price: "Custom pricing",
     cadence: "fixed fee · 1–2 weeks",
     body: "A focused assessment of a production AI system covering Article 50 disclosure checks, a risk classification walkthrough, a four-layer evaluation of a sample of critical journeys, an accessibility check of the chat interface and a findings report with a prioritised fix list.",
     items: ["Article 50 disclosure checks", "Risk classification walkthrough", "Four-layer evaluation of critical journeys", "Accessibility check of the chat interface", "Prioritised findings and fix list"],
@@ -42,7 +42,7 @@ const offers = [
   {
     eyebrow: "03 · Governance",
     title: "Governance Evidence Retainer",
-    price: "[PARIMI TO CONFIRM: price]",
+    price: "Custom pricing",
     cadence: "monthly",
     body: "Ongoing assurance for teams that need scheduled re-evaluation, release regression and an updated evidence pack and traceability matrix each cycle.",
     items: ["Scheduled re-evaluation", "Release regression", "Updated evidence pack", "Requirement-to-evidence traceability matrix", "Recurring governance review"],
