@@ -30,8 +30,6 @@ const CATEGORIES = [
   ["api-reference", "API Reference", "Client → API → Run → Evidence → Verdict", Code, "/docs/api-reference"],
   ["reporting", "Reporting & Release Evidence", "Release → Gates → Evidence → Findings → Decision", LayoutDashboard, "/docs/reporting"],
   ["troubleshooting", "Troubleshooting", "Failure → Classification → Evidence → Root Cause → Resolution", LifeBuoy, "/docs/troubleshooting"],
-  ["sage-content-engineering", "SAGE Content Engineering", "Research → Verify → Draft → Review → Publish", Workflow, "/docs/sage-content-engineering"],
-  ["ai-assurance-tokenomics", "AI Assurance Tokenomics", "Tokens → Behaviour → Assurance → Value → Impact", Coins, "/docs/ai-assurance-tokenomics"],
 ] as const;
 
 function DocsOverview() {
