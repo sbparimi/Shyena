@@ -18,7 +18,7 @@ function ProductScreen() {
     <div className="relative overflow-hidden rounded-[28px] border border-[#26365b] bg-[#07101f] shadow-[0_45px_100px_-45px_rgba(7,16,31,.8)]">
       <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
         <div className="flex items-center gap-3"><div className="h-2 w-2 rounded-full bg-[#e87512] shadow-[0_0_14px_#e87512]" /><span className="font-mono text-[10px] font-semibold tracking-[.18em] text-white/55">SHYENA / QUALITY COMMAND CENTER</span></div>
-        <span className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-2.5 py-1 font-mono text-[9px] text-emerald-300">RELEASE 24.09</span>
+        <span className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 font-mono text-[9px] text-white/45">EVIDENCE VIEW</span>
       </div>
       <div className="grid gap-0 lg:grid-cols-[1.3fr_.7fr]">
         <div className="p-5 sm:p-7">
@@ -28,11 +28,11 @@ function ProductScreen() {
             ))}
           </div>
           <div className="mt-5 rounded-2xl border border-white/10 bg-[#0a1528] p-5">
-            <div className="flex items-center justify-between"><span className="text-sm font-semibold text-white">Execution evidence</span><span className="font-mono text-[9px] text-white/35">12,482 EVENTS</span></div>
+            <div className="flex items-center justify-between"><span className="text-sm font-semibold text-white">Execution evidence</span><span className="font-mono text-[9px] text-white/35">EXECUTION EVIDENCE</span></div>
             <div className="mt-7 flex items-center justify-between gap-2">
               {["USER","AGENT","LLM","RAG","TOOL","API","OUTCOME"].map((x,i) => <div key={x} className="flex min-w-0 flex-1 items-center gap-2"><div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-[#6877ff]/30 bg-[#6877ff]/10 font-mono text-[7px] text-[#9aa4ff]">{i+1}</div>{i<6 && <div className="h-px w-full bg-gradient-to-r from-[#6877ff]/45 to-transparent" />}</div>)}
             </div>
-            <div className="mt-4 grid grid-cols-2 gap-3 text-[10px] text-white/45 sm:grid-cols-4"><span>Latency <b className="text-white">1.82s</b></span><span>Tokens <b className="text-white">3,842</b></span><span>Quality <b className="text-white">0.91</b></span><span>Outcome <b className="text-emerald-300">SUCCESS</b></span></div>
+            <div className="mt-4 grid grid-cols-2 gap-3 text-[10px] text-white/45 sm:grid-cols-4"><span>Latency <b className="text-white">Observed</b></span><span>Tokens <b className="text-white">Observed</b></span><span>Quality <b className="text-white">Evaluated</b></span><span>Outcome <b className="text-emerald-300">Recorded</b></span></div>
           </div>
         </div>
         <div className="border-t border-white/10 bg-[#091527] p-5 lg:border-l lg:border-t-0 sm:p-7">
