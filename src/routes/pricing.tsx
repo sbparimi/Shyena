@@ -15,7 +15,7 @@ const platform=[
  {name:"Strategic",body:"For broader AI estates and tailored assurance operations.",items:["Enterprise assurance scope","Custom evaluators and policies","Private deployment options","Advanced integrations","Dedicated engagement"]},
 ];
 const faq=[
- ["Can we start without buying the platform?","Yes. Start with the AI Act Transparency & Risk Scan or the €7,500 AI Assurance Pilot."],
+ ["Can we start without buying the platform?","Yes. Start with an Autonomous QA Pilot or the €7,500 Agentic Evaluation Programme."],
  ["What does the pilot cover?","One AI system, representative assurance journeys, four-layer evaluation, security checks and an evidence-backed release assessment."],
  ["Are platform plans priced per user?","No per-seat pricing is described here. Commercial scope is based on systems, assurance capacity and engagement requirements."],
  ["Are cloud and model costs included?","Customer cloud, model and API usage is scoped separately where applicable."],
