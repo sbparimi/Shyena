@@ -60,7 +60,7 @@ export const Route = createFileRoute("/")({
       { property:"og:type", content:"website" }, { property:"og:url", content:SITE+"/" }, { property:"og:site_name", content:"Shyena" },
       { property:"og:image", content:SITE+"/shyena-logo-exact.webp" }, { name:"twitter:card", content:"summary_large_image" },
       { name:"twitter:title", content:"Shyena Autonomous QA | Agentic AI Testing & Evaluation" },
-      { name:"twitter:description", content:"AI assurance, evaluation, security testing and governance evidence for production AI agents." },
+      { name:"twitter:description", content:"Autonomous QA, agentic evaluation, security testing and continuous regression for production AI systems." },
       { name:"twitter:image", content:SITE+"/shyena-logo-exact.webp" }
     ],
     scripts:[
