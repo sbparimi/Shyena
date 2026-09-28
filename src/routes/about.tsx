@@ -40,7 +40,7 @@ function AboutPage() {
             <div>
               <div className="text-sm font-semibold text-[#e87512]">Who's behind Shyena</div>
               <h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em]">Parimi</h2>
-              <div className="mb-4 rounded-xl border border-dashed border-[#dfe3e8] bg-white p-4 text-xs text-[#69707d]">[PARIMI TO CONFIRM: founder photo]</div><a href="https://linkedin.com/in/sparimi" target="_blank" rel="noreferrer" className="mt-4 inline-flex items-center gap-2 text-sm font-semibold underline decoration-[#e87512] decoration-2 underline-offset-4">LinkedIn <span aria-hidden="true">↗</span></a>
+              <a href="https://linkedin.com/in/sparimi" target="_blank" rel="noreferrer" className="mt-4 inline-flex items-center gap-2 text-sm font-semibold underline decoration-[#e87512] decoration-2 underline-offset-4">LinkedIn <span aria-hidden="true">↗</span></a>
             </div>
             <div className="rounded-2xl border border-[#e1e4e9] bg-[#fafbfc] p-7 sm:p-8">
               <p className="text-lg leading-8 text-[#4f5968]">Parimi's background is in test leadership and conversational-AI quality engineering, with Shyena built around the practical problem of turning complex AI behaviour into repeatable evaluation and release evidence.</p>
