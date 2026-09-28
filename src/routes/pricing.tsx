@@ -27,7 +27,7 @@ export const Route=createFileRoute("/pricing")({head:()=>({links:[{rel:"canonica
  {property:"og:description",content:"AI Act scan, assurance pilot, governance retainer and platform options."},
  {property:"og:url",content:SITE+"/pricing"},
  {name:"twitter:card",content:"summary_large_image"},
- {name:"twitter:title",content:"Pricing | Shyena AI Assurance Engineer"},
+ {name:"twitter:title",content:"Pricing | Shyena Autonomous QA"},
  {name:"twitter:description",content:"Start small with an AI assurance service, then scale to the platform."}
 ]}),component:PricingPage});
 
