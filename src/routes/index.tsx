@@ -14,47 +14,78 @@ const faq = [
   ["Can we start small?", "Yes. Start with an Autonomous QA Pilot or the €7,500 Agentic Evaluation Programme."]
 ];
 
-function ReportMetric({label,value,detail,accent="orange"}:{label:string;value:string;detail?:string;accent?:string}) {
-  const tone = accent==="red" ? "text-red-600 bg-red-50 border-red-100" : accent==="green" ? "text-emerald-600 bg-emerald-50 border-emerald-100" : accent==="amber" ? "text-amber-600 bg-amber-50 border-amber-100" : "text-[#e87512] bg-[#fff5ec] border-[#f5dcc5]";
-  return <div className={`min-w-0 rounded-lg border p-3 ${tone}`}>
-    <div className="text-[8px] font-bold uppercase tracking-[.13em] opacity-70">{label}</div>
-    <div className="mt-1 text-xl font-extrabold tracking-[-.04em]">{value}</div>
-    {detail && <div className="mt-1 text-[8px] leading-4 opacity-70">{detail}</div>}
+function TerminalMetric({label,value,detail,accent="orange"}:{label:string;value:string;detail?:string;accent?:string}) {
+  const tone = accent==="red"
+    ? "border-red-400/20 bg-red-500/10 text-red-300"
+    : accent==="green"
+    ? "border-emerald-400/20 bg-emerald-500/10 text-emerald-300"
+    : accent==="amber"
+    ? "border-amber-400/20 bg-amber-500/10 text-amber-300"
+    : "border-white/10 bg-white/[.035] text-white/85";
+  return <div className={\`min-w-0 rounded-md border px-2.5 py-2 \${tone}\`}>
+    <div className="font-mono text-[7px] font-bold uppercase tracking-[.13em] opacity-55">{label}</div>
+    <div className="mt-0.5 font-mono text-sm font-extrabold tracking-[-.03em] sm:text-base">{value}</div>
+    {detail && <div className="mt-0.5 font-mono text-[7px] leading-3.5 opacity-55">{detail}</div>}
   </div>;
 }
 
-function MiniBars({items}:{items:Array<[string,number,string]>}) {
-  return <div className="space-y-2">{items.map(([label,value,tone])=><div key={label}>
-    <div className="mb-1 flex justify-between text-[8px] font-semibold text-[#687180]"><span>{label}</span><span>{value}%</span></div>
-    <div className="h-1.5 overflow-hidden rounded-full bg-[#e9edf1]"><div className={`h-full rounded-full ${tone}`} style={{width:`${value}%`}}/></div>
+function TerminalBars({items}:{items:Array<[string,number,string]>}) {
+  return <div className="space-y-1.5">{items.map(([label,value,tone])=><div key={label}>
+    <div className="mb-0.5 flex justify-between font-mono text-[7px] text-white/45"><span>{label}</span><span>{value}%</span></div>
+    <div className="h-1 overflow-hidden rounded-full bg-white/5"><div className={\`h-full rounded-full \${tone}\`} style={{width:\`\${value}%\`}}/></div>
   </div>)}</div>;
 }
 
-function HeroReport({stage}:{stage:any}) {
-  const common = <div className="grid min-w-0 grid-cols-2 gap-2">
-    {stage.metrics.map((m:any)=><ReportMetric key={m.label} {...m}/>)}
+function TerminalReport({stage}:{stage:any}) {
+  const metrics = <div className="grid min-w-0 grid-cols-2 gap-1.5 sm:grid-cols-4">
+    {stage.metrics.map((m:any)=><TerminalMetric key={m.label} {...m}/>)}
   </div>;
 
-  const visual = stage.kind==="impact"
-    ? <div className="mt-3 rounded-lg border border-[#e4e8ed] bg-white p-3"><div className="mb-2 text-[8px] font-bold uppercase tracking-[.13em] text-[#8b929d]">Critical path heatmap</div><div className="grid grid-cols-7 gap-1">{["RFQ","REQ","INV","PRICE","MARGIN","QUOTE","CUSTOMER"].map((x:any,i:number)=><div key={x} className="text-center"><div className={`h-7 rounded ${i===3||i===4 ? "bg-red-400" : i===2||i===5 ? "bg-amber-300" : "bg-emerald-300"}`}/><div className="mt-1 truncate text-[6px] font-bold text-[#687180]">{x}</div></div>)}</div></div>
+  const visual = stage.kind==="intake"
+    ? <div className="mt-2 grid grid-cols-3 gap-1.5 font-mono text-[7px]">
+        {[["CHANGE","31 files"],["GRAPH","12 nodes"],["JOURNEYS","14 affected"]].map(([a,b])=><div key={a} className="rounded-md border border-white/8 bg-white/[.025] px-2 py-1.5"><div className="text-white/35">{a}</div><div className="mt-0.5 font-bold text-white/75">{b}</div></div>)}
+      </div>
+    : stage.kind==="impact"
+    ? <div className="mt-2 rounded-md border border-white/8 bg-black/10 p-2">
+        <div className="mb-1.5 flex items-center justify-between font-mono text-[7px] uppercase tracking-[.12em] text-white/35"><span>Critical path risk</span><span>P0 2 · P1 6 · P2 9</span></div>
+        <div className="grid grid-cols-7 gap-1">{["RFQ","REQ","INV","PRICE","MARGIN","QUOTE","CUSTOMER"].map((x:string,i:number)=><div key={x} className="text-center"><div className={\`h-5 rounded-sm \${i===3||i===4 ? "bg-red-400/75" : i===2||i===5 ? "bg-amber-300/70" : "bg-emerald-300/60"}\`}/><div className="mt-0.5 truncate font-mono text-[6px] text-white/35">{x}</div></div>)}</div>
+      </div>
     : stage.kind==="playbook"
-    ? <div className="mt-3 rounded-lg border border-[#e4e8ed] bg-white p-3"><div className="mb-2 flex items-center justify-between text-[8px] font-bold uppercase tracking-[.13em] text-[#8b929d]"><span>Generated coverage</span><span className="text-[#e87512]">46 cases</span></div><MiniBars items={[["Smoke",80,"bg-[#e87512]"],["Release",92,"bg-[#e87512]"],["E2E",100,"bg-[#17213f]"],["P0/P1 risk paths",76,"bg-red-400"]]}/></div>
+    ? <div className="mt-2 rounded-md border border-white/8 bg-black/10 p-2">
+        <div className="mb-1.5 flex items-center justify-between font-mono text-[7px] uppercase tracking-[.12em] text-white/35"><span>Coverage composition</span><span className="text-white/65">46 executable</span></div>
+        <TerminalBars items={[["Smoke",80,"bg-[#f18a32]"],["Release",92,"bg-[#f18a32]"],["E2E",100,"bg-emerald-400/80"],["P0/P1 risk paths",76,"bg-red-400/80"]]}/>
+      </div>
     : stage.kind==="execute"
-    ? <div className="mt-3 rounded-lg border border-[#e4e8ed] bg-white p-3"><div className="mb-2 text-[8px] font-bold uppercase tracking-[.13em] text-[#8b929d]">Execution matrix</div><div className="grid grid-cols-3 gap-2 text-center text-[8px] font-bold"><div className="rounded bg-emerald-50 p-2 text-emerald-700">DEV<br/><span className="text-base">8/8</span></div><div className="rounded bg-emerald-50 p-2 text-emerald-700">TEST<br/><span className="text-base">14/14</span></div><div className="rounded bg-amber-50 p-2 text-amber-700">UAT<br/><span className="text-base">11/13</span></div></div></div>
+    ? <div className="mt-2 grid grid-cols-3 gap-1.5 font-mono text-[7px] text-center">
+        {[["DEV","8/8","green"],["TEST","14/14","green"],["UAT","11/13","amber"]].map(([env,value,tone])=><div key={env} className={\`rounded-md border px-2 py-1.5 \${tone==="green" ? "border-emerald-400/15 bg-emerald-500/8 text-emerald-300" : "border-amber-400/15 bg-amber-500/8 text-amber-300"}\`}><div className="text-white/35">{env}</div><div className="mt-0.5 text-sm font-extrabold">{value}</div><div className="text-[6px] opacity-55">{tone==="green" ? "PASS" : "RUNNING"}</div></div>)}
+      </div>
     : stage.kind==="actions"
-    ? <div className="mt-3 rounded-lg border border-[#e4e8ed] bg-white p-3"><div className="mb-2 text-[8px] font-bold uppercase tracking-[.13em] text-[#8b929d]">CI evidence stream</div><MiniBars items={[["Checkout + graph",100,"bg-emerald-500"],["Contract + smoke",100,"bg-emerald-500"],["Agent evaluation",100,"bg-emerald-500"],["UAT + evidence",62,"bg-amber-400"]]}/></div>
+    ? <div className="mt-2 rounded-md border border-white/8 bg-black/10 p-2">
+        <div className="mb-1.5 flex items-center justify-between font-mono text-[7px] uppercase tracking-[.12em] text-white/35"><span>Evidence stream</span><span className="text-emerald-300/80">6/8 passed</span></div>
+        <TerminalBars items={[["Checkout + graph",100,"bg-emerald-400/80"],["Contract + smoke",100,"bg-emerald-400/80"],["Agent evaluation",100,"bg-emerald-400/80"],["UAT + evidence",62,"bg-amber-400/80"]]}/>
+      </div>
     : stage.kind==="diagnose"
-    ? <div className="mt-3 rounded-lg border border-red-100 bg-red-50 p-3"><div className="flex items-center justify-between"><div className="text-[8px] font-bold uppercase tracking-[.13em] text-red-700">Autonomous RCA</div><span className="rounded bg-red-600 px-2 py-1 text-[7px] font-bold text-white">P1</span></div><div className="mt-2 grid grid-cols-3 gap-2 text-[8px]"><div><b>Trigger</b><br/>price refresh</div><div><b>Propagation</b><br/>approval cache</div><div><b>Decision</b><br/>guard missing</div></div><div className="mt-2 rounded bg-white/70 p-2 text-[8px] font-semibold text-red-800">Regression case generated · SHY-F-001 · replay 3/3</div></div>
-    : <div className="mt-3 rounded-lg border border-[#e4e8ed] bg-white p-3"><div className="mb-2 flex items-center justify-between"><div className="text-[8px] font-bold uppercase tracking-[.13em] text-[#8b929d]">Release gate</div><span className="rounded bg-red-600 px-2 py-1 text-[7px] font-bold text-white">BLOCK</span></div><div className="grid grid-cols-3 gap-2 text-center text-[8px]"><div className="rounded bg-emerald-50 p-2 text-emerald-700"><b>42</b><br/>PASS</div><div className="rounded bg-amber-50 p-2 text-amber-700"><b>3</b><br/>REVIEW</div><div className="rounded bg-red-50 p-2 text-red-700"><b>1</b><br/>FAIL</div></div></div>;
+    ? <div className="mt-2 rounded-md border border-red-400/15 bg-red-500/8 p-2 font-mono text-[7px]">
+        <div className="flex items-center justify-between"><span className="font-bold uppercase tracking-[.12em] text-red-300">RCA chain</span><span className="rounded bg-red-500/80 px-1.5 py-0.5 font-bold text-white">P1</span></div>
+        <div className="mt-1.5 grid grid-cols-3 gap-1.5 text-white/55"><div><span className="text-white/30">TRIGGER</span><br/><b className="text-white/75">price refresh</b></div><div><span className="text-white/30">PROPAGATION</span><br/><b className="text-white/75">approval cache</b></div><div><span className="text-white/30">DECISION</span><br/><b className="text-white/75">guard missing</b></div></div>
+        <div className="mt-1.5 rounded border border-white/8 bg-black/15 px-2 py-1 text-red-200/85">Regression SHY-F-001 · replay 3/3 · permanent coverage added</div>
+      </div>
+    : <div className="mt-2 rounded-md border border-red-400/15 bg-red-500/8 p-2 font-mono text-[7px]">
+        <div className="flex items-center justify-between"><span className="font-bold uppercase tracking-[.12em] text-white/55">Release gate</span><span className="rounded bg-red-500/85 px-2 py-0.5 font-bold text-white">BLOCK</span></div>
+        <div className="mt-1.5 grid grid-cols-3 gap-1.5 text-center"><div className="rounded bg-emerald-500/10 py-1 text-emerald-300"><b className="text-sm">42</b><br/><span className="text-[6px] opacity-60">PASS</span></div><div className="rounded bg-amber-500/10 py-1 text-amber-300"><b className="text-sm">3</b><br/><span className="text-[6px] opacity-60">REVIEW</span></div><div className="rounded bg-red-500/10 py-1 text-red-300"><b className="text-sm">1</b><br/><span className="text-[6px] opacity-60">FAIL</span></div></div>
+      </div>;
 
-  return <div className="min-w-0 w-full rounded-2xl border border-[#dfe3e8] bg-white p-4 shadow-[0_25px_80px_-55px_rgba(0,0,0,.65)] sm:p-5">
-    <div className="flex items-center justify-between border-b border-[#e8ebef] pb-3">
-      <div><div className="text-[8px] font-bold uppercase tracking-[.16em] text-[#e87512]">Executive view · illustrative</div><div className="mt-1 text-sm font-extrabold tracking-[-.02em]">{stage.reportTitle}</div></div>
-      <div className="rounded-full border border-[#e8ebef] bg-[#fafbfc] px-2 py-1 font-mono text-[7px] text-[#7d8591]">RFQ-2026-184</div>
+  return <div className="mt-3 rounded-lg border border-white/10 bg-[#111720] p-2.5 shadow-inner sm:p-3">
+    <div className="flex items-center justify-between gap-3 border-b border-white/8 pb-2">
+      <div className="min-w-0">
+        <div className="font-mono text-[7px] font-bold uppercase tracking-[.17em] text-[#f18a32]">SHYENA · STAGE REPORT · ILLUSTRATIVE</div>
+        <div className="mt-0.5 truncate font-mono text-[10px] font-bold text-white/85">{stage.reportTitle}</div>
+      </div>
+      <div className="shrink-0 rounded border border-white/10 bg-white/[.025] px-1.5 py-1 font-mono text-[6px] text-white/35">RFQ-2026-184</div>
     </div>
-    <div className="mt-3">{common}</div>
+    <div className="mt-2">{metrics}</div>
     {visual}
-    <div className="mt-3 border-t border-[#e8ebef] pt-3 text-[8px] leading-4 text-[#69707d]"><b className="text-[#17213f]">Executive takeaway:</b> {stage.takeaway}</div>
+    <div className="mt-2 border-t border-white/8 pt-2 font-mono text-[7px] leading-3.5 text-white/45"><span className="font-bold text-white/65">OUTCOME</span> · {stage.takeaway}</div>
   </div>;
 }
 
@@ -125,31 +156,27 @@ function IllustrativeRun() {
 
   const selectStage=(i:number)=>{setActive(i);setTick(0);};
 
-  return <div className="min-w-0 w-full space-y-0">
+  return <div className="min-w-0 w-full">
     <div className="min-w-0 w-full overflow-hidden rounded-[18px] border border-white/10 bg-[#0d1117] shadow-[0_35px_100px_-45px_rgba(0,0,0,.95)] ring-1 ring-black/20">
-      <div className="flex items-center gap-2 border-b border-white/10 bg-[#171b22] px-4 py-3"><span className="h-3 w-3 rounded-full bg-[#ff5f57]"/><span className="h-3 w-3 rounded-full bg-[#febc2e]"/><span className="h-3 w-3 rounded-full bg-[#28c840]"/><span className="ml-3 flex-1 text-center font-mono text-[10px] text-white/35">shyena — zsh — 120×42</span><span className="font-mono text-[9px] text-white/25">iTerm2</span></div>
+      <div className="flex items-center gap-2 border-b border-white/10 bg-[#171b22] px-4 py-3">
+        <span className="h-3 w-3 rounded-full bg-[#ff5f57]"/><span className="h-3 w-3 rounded-full bg-[#febc2e]"/><span className="h-3 w-3 rounded-full bg-[#28c840]"/>
+        <span className="ml-3 flex-1 text-center font-mono text-[10px] text-white/35">shyena — zsh — 120×42</span><span className="font-mono text-[9px] text-white/25">iTerm2</span>
+      </div>
       <div className="border-b border-white/10 bg-[#11151c] px-3 py-2"><div className="flex items-center gap-2 overflow-x-auto">{stages.map((item,i)=><button type="button" key={item.label} onClick={()=>selectStage(i)} className={i===active ? "shrink-0 rounded-md bg-white/10 px-2.5 py-1.5 font-mono text-[9px] font-semibold text-white" : "shrink-0 rounded-md px-2.5 py-1.5 font-mono text-[9px] font-semibold text-white/30 hover:text-white/60"}>{item.label}</button>)}</div></div>
-      <div className="min-h-[355px] p-4 font-mono text-[9px] leading-[1.65] sm:p-5 sm:text-[10px]">
+      <div className="p-4 font-mono text-[9px] leading-[1.65] sm:p-5 sm:text-[10px]">
         <div className="text-white/25">Last login: today on ttys001</div>
         <div className="mt-2 text-white"><span className="text-[#28c840]">~/projects/vanilla-steel</span> <span className="text-white/45">% </span><span>{stage.command.slice(2,2+typedChars)}</span><span className="animate-pulse text-white/80">▌</span></div>
         <div className="mt-1 font-bold text-[#f18a32]">→ {stage.label}</div>
         <div className="mt-3 space-y-0.5 text-white/65">{stage.lines.slice(0,visibleLines).map((line,i)=><div key={i} className={line.includes("FAIL")||line.includes("BLOCK")?"font-bold text-[#ff8b43]":line.includes("PASS")?"text-[#58d68d]":line.includes("TC-")||line.includes("P0")||line.includes("P1")||line.includes("P2")?"text-white":""}>{line||" "}</div>)}</div>
         <div className="mt-3 h-1 overflow-hidden rounded-full bg-white/5"><div className="h-full bg-[#f18a32] transition-all duration-100" style={{width: progress + "%"}}/></div>
         {visibleLines>=stage.lines.length&&phase==="terminal"&&<div className="mt-3 border-t border-white/10 pt-3 font-bold text-white">{stage.result}</div>}
-        <div className="mt-3 text-white/20">▌</div>
+        {phase==="report" && <TerminalReport stage={stage}/>}
+        {phase==="terminal" && <div className="mt-3 border-t border-white/8 pt-2 text-[7px] text-white/25">Executing stage · report renders here when evidence is ready</div>}
       </div>
       <div className="border-t border-white/10 bg-[#11151c] px-4 py-3 text-[9px] text-white/30">Synthetic Vanilla Steel RFQ demonstration · no customer repository or PR is accessed</div>
     </div>
-    <div className={phase==="report" ? "min-w-0 w-full overflow-hidden border-x border-b border-[#dfe3e8] bg-[#f7f8fa] opacity-100 transition-all duration-500" : "min-w-0 w-full overflow-hidden border-x border-b border-[#dfe3e8] bg-[#f7f8fa] opacity-45 transition-all duration-500"}>
-      <div className="min-w-0 p-3 sm:p-4">
-        <div className="mb-2 flex items-center justify-between px-1">
-          <div className="font-mono text-[8px] font-bold uppercase tracking-[.16em] text-[#8b929d]">Stage outcome · illustrative</div>
-          <div className={phase==="report" ? "font-mono text-[8px] font-bold uppercase tracking-[.12em] text-emerald-600" : "font-mono text-[8px] font-bold uppercase tracking-[.12em] text-[#a0a6b0]"}>{phase==="report" ? "EXECUTION COMPLETE" : "EXECUTING"}</div>
-        </div>
-        <HeroReport stage={stage}/>
-      </div>
-    </div>
   </div>;
+}
 }
 
 function OutcomeCard({title,body,items,mock}:{title:string;body:string;items:string[];mock:React.ReactNode}) {
