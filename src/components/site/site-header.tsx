@@ -6,10 +6,10 @@ import { Logo } from "./logo";
 const NAV = [
   ["Platform", "/platform"],
   ["Govern", "/govern"],
-  ["Services", "/services"],
   ["Pricing", "/pricing"],
-  ["Resources", "/blog"],
-  ["Company", "/about"],
+  ["Docs", "/docs"],
+  ["Blog", "/blog"],
+  ["About", "/about"],
 ] as const;
 
 export function SiteHeader() {
@@ -50,7 +50,7 @@ export function SiteHeader() {
           <button type="button" onClick={() => setSearchOpen(true)} aria-label="Search Shyena" className="inline-flex h-10 items-center gap-2 rounded-lg border border-transparent px-2.5 text-[#5d6573] transition hover:border-[#e3e6eb] hover:bg-[#f7f8fa] hover:text-[#17233f]">
             <Search className="h-[17px] w-[17px]" /><span className="hidden xl:inline text-[12px]">Search</span><kbd className="hidden rounded border border-[#dfe3e8] bg-white px-1.5 py-0.5 font-mono text-[9px] text-[#8b929d] xl:inline">⌘K</kbd>
           </button>
-          <Link to="/contact" onClick={closeAll} className="group inline-flex h-10 items-center justify-center gap-2 rounded-lg bg-[#e87512] px-4 text-[13px] font-semibold text-white shadow-[0_10px_24px_-14px_rgba(232,117,18,.7)] transition hover:-translate-y-px hover:bg-[#d9670a]">Talk to experts <ArrowRight className="h-3.5 w-3.5" /></Link>
+          <Link to="/contact" onClick={closeAll} className="group inline-flex h-10 items-center justify-center gap-2 rounded-lg bg-[#e87512] px-4 text-[13px] font-semibold text-white shadow-[0_10px_24px_-14px_rgba(232,117,18,.7)] transition hover:-translate-y-px hover:bg-[#d9670a]">Book a 30-min call <ArrowRight className="h-3.5 w-3.5" /></Link>
         </div>
         <button type="button" onClick={() => setMobileOpen(v => !v)} aria-label={mobileOpen ? "Close menu" : "Open menu"} aria-expanded={mobileOpen} className="ml-auto inline-flex h-10 w-10 items-center justify-center rounded-lg border border-[#dfe3e8] bg-white text-[#17213f] lg:hidden">
           {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -60,7 +60,7 @@ export function SiteHeader() {
         <div className="border-t border-[#e8eaf0] bg-white px-5 pb-6 pt-3 shadow-[0_20px_50px_-35px_rgba(23,35,63,.45)] lg:hidden">
           <nav aria-label="Mobile navigation" className="grid gap-1">
             {NAV.map(([label, to]) => <Link key={to} to={to} onClick={closeAll} className={`flex min-h-12 items-center justify-between rounded-xl border border-[#e5e7eb] px-4 text-[14px] font-bold ${active(to) ? "bg-[#f7f8fa] text-[#17233f]" : "text-[#4f5765]"}`}>{label}<ArrowRight className="h-4 w-4" /></Link>)}
-            <Link to="/contact" onClick={closeAll} className="mt-2 flex min-h-12 items-center justify-center rounded-xl bg-[#e87512] px-4 text-[14px] font-bold text-white">Talk to experts <ArrowRight className="ml-2 h-4 w-4" /></Link>
+            <Link to="/contact" onClick={closeAll} className="mt-2 flex min-h-12 items-center justify-center rounded-xl bg-[#e87512] px-4 text-[14px] font-bold text-white">Book a 30-min call <ArrowRight className="ml-2 h-4 w-4" /></Link>
           </nav>
         </div>
       )}
