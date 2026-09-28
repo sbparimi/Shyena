@@ -23,7 +23,7 @@ const faq=[
 export const Route=createFileRoute("/pricing")({head:()=>({links:[{rel:"canonical",href:SITE+"/pricing"}],meta:[
  {title:"Pricing | Shyena Autonomous QA"},
  {name:"description",content:"Start with an AI assurance service and scale to continuous platform assurance for production AI agents."},
- {property:"og:title",content:"Pricing | Shyena AI Assurance Engineer"},
+ {property:"og:title",content:"Pricing | Shyena Autonomous QA"},
  {property:"og:description",content:"AI Act scan, assurance pilot, governance retainer and platform options."},
  {property:"og:url",content:SITE+"/pricing"},
  {name:"twitter:card",content:"summary_large_image"},
