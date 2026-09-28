@@ -1,68 +1,26 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { ExecutivePage } from "@/components/site/executive-page";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRight, Check, ShieldCheck } from "lucide-react";
 
-const SITE_URL = "https://www.shyena.eu";
-const CANONICAL = `${SITE_URL}/nexus`;
-const TITLE = "NEXUS — AI System Understanding & Test Intelligence | Shyena";
-const DESCRIPTION = "NEXUS maps AI agent architecture, orchestration, dependencies and critical journeys so assurance starts with an understanding of the real system.";
+const SITE="https://www.shyena.eu";
+const FAQ=[["Does Nexus replace architecture documentation?","No. It creates an assurance-oriented view of the runtime system and its critical journeys."],["Can it work with conversational AI?","Yes. The model is designed around agent flows, orchestration, tools and multi-turn journeys."],["What happens next?","The mapped journeys become inputs for evaluation and security testing."]];
 
-export const Route = createFileRoute("/nexus")({
-  head: () => ({
-    meta: [
-      { title: TITLE },
-      { name: "description", content: DESCRIPTION },
-      { name: "robots", content: "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" },
-      { property: "og:title", content: TITLE },
-      { property: "og:description", content: DESCRIPTION },
-      { property: "og:type", content: "website" },
-      { property: "og:site_name", content: "Shyena" },
-      { property: "og:url", content: CANONICAL },
-      { property: "og:image", content: `${SITE_URL}/shyena-logo-lockup.svg?v=20260917` },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: TITLE },
-      { name: "twitter:description", content: DESCRIPTION },
-      { name: "twitter:image", content: `${SITE_URL}/shyena-logo-lockup.svg?v=20260917` },
-    ],
-    links: [{ rel: "canonical", href: CANONICAL }],
-  }),
-  component: NexusPage,
-});
+export const Route=createFileRoute("/nexus")({
+ head:()=>({links:[{rel:"canonical",href:SITE+"/nexus"}],meta:[
+  {title:"Map your agent (Nexus) | Shyena AI Assurance"},
+  {name:"description",content:"Understand the real system before you decide what to test."},
+  {property:"og:title",content:"Map your agent (Nexus) | Shyena AI Assurance"},
+  {property:"og:description",content:"Understand the real system before you decide what to test."},
+  {property:"og:url",content:SITE+"/nexus"},
+  {name:"twitter:card",content:"summary_large_image"},
+  {name:"twitter:title",content:"Map your agent (Nexus) | Shyena AI Assurance"},
+  {name:"twitter:description",content:"Understand the real system before you decide what to test."}
+ ]}),component:Page});
 
-function NexusPage() {
-  return <ExecutivePage
-    eyebrow="NEXUS · Understand"
-    title="Understand your AI system."
-    accent="Before you test it."
-    intro="NEXUS builds a structural view of your agent—architecture, orchestration, dependencies, decisions and critical journeys—so your quality strategy is based on how the system actually works."
-    primaryLabel="Assess my system"
-    capabilities={[
-      { title: "Map the system", body: "Discover flows, decisions, integrations, dependencies and business-critical paths." },
-      { title: "Find critical journeys", body: "Identify the routes, branches and outcomes that matter most to customers and the business." },
-      { title: "Create test intelligence", body: "Turn system understanding into traceable test intent and coverage obligations." },
-    ]}
-    workflow={[
-      { step: "01", title: "Connect", body: "Read the live agent and available system definitions." },
-      { step: "02", title: "Model", body: "Build a canonical map of logic, decisions and dependencies." },
-      { step: "03", title: "Analyse", body: "Find critical paths, branches, risks and coverage gaps." },
-      { step: "04", title: "Design", body: "Create implementation-independent test intent." },
-      { step: "05", title: "Trace", body: "Keep requirements, journeys and tests connected." },
-      { step: "06", title: "Handoff", body: "Give VERA and the execution layer a system-aware test plan." },
-    ]}
-    outcomeTitle="Stop testing the system you think you built. Test the system you actually run."
-    outcomes={[
-      { title: "System visibility", body: "See architecture and orchestration before a test is executed." },
-      { title: "Coverage intelligence", body: "Expose branches and journeys hidden from conventional suites." },
-      { title: "Traceability", body: "Connect requirements, capabilities, journeys and tests." },
-      { title: "Less authoring", body: "Start from system intelligence instead of manually reconstructing it." },
-    ]}
-    proofTitle="Built for agentic systems"
-    proof={[
-      { label: "Source", value: "Platform-agnostic" },
-      { label: "Model", value: "System-aware" },
-      { label: "Analysis", value: "Graph + dependency" },
-      { label: "Output", value: "Test intent" },
-    ]}
-    finalTitle="Know the system before you ask it to prove itself."
-    finalBody="Bring one real agent or business flow. NEXUS shows the structure, critical journeys and test obligations that should drive assurance."
-  />;
-}
+function Page(){return <main className="bg-white text-[#17213f]">
+ <section className="bg-[#07101f] text-white"><div className="mx-auto max-w-[1200px] px-5 py-20 sm:px-8 lg:px-10 lg:py-28"><div className="max-w-4xl"><div className="font-mono text-[10px] font-bold uppercase tracking-[.2em] text-[#f18a32]">Nexus · Map your agent</div><h1 className="mt-5 font-[Sora] text-[clamp(3rem,6vw,6rem)] font-extrabold leading-[.9] tracking-[-.065em]">Map your agent.<br/><span className="text-[#f18a32]">Understand the real system before you decide what to test.</span></h1><p className="mt-7 max-w-3xl text-lg leading-8 text-white/60">Understand the real system before you decide what to test.</p><div className="mt-8 flex flex-wrap gap-3"><Link to="/contact" className="inline-flex h-11 items-center gap-2 rounded-lg bg-[#e87512] px-5 text-sm font-bold text-white">Book a 30-min call <ArrowRight className="h-4 w-4"/></Link><Link to="/sample-report" className="inline-flex h-11 items-center gap-2 rounded-lg border border-white/15 px-5 text-sm font-bold text-white/80">See sample evidence <ArrowRight className="h-4 w-4"/></Link></div></div></div></section>
+ <section className="border-b border-[#e6e8ed] bg-[#fafbfc]"><div className="mx-auto max-w-[1200px] px-5 py-16 sm:px-8 lg:px-10 lg:py-20"><div className="rounded-2xl border border-[#e1e4e9] bg-white p-6 sm:p-8"><div className="mb-4 font-mono text-[9px] font-bold uppercase tracking-[.16em] text-[#8b929d]">Illustrative Nexus evidence</div><div className="grid gap-3 md:grid-cols-3"><div className="rounded-xl border border-[#dfe3e8] bg-[#fafbfc] p-5"><div className="text-xs font-bold text-[#e87512]">Input</div><div className="mt-2 text-sm font-semibold">Agent flow + business journey</div></div><div className="rounded-xl border border-[#dfe3e8] bg-[#fafbfc] p-5"><div className="text-xs font-bold text-[#e87512]">Evidence</div><div className="mt-2 text-sm font-semibold">Journey graph + dependency path</div></div><div className="rounded-xl border border-[#dfe3e8] bg-[#fafbfc] p-5"><div className="text-xs font-bold text-[#e87512]">Output</div><div className="mt-2 text-sm font-semibold">Assurance target</div></div></div></div></div></section>
+ <section><div className="mx-auto max-w-[1200px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24"><div className="grid gap-12 lg:grid-cols-[.75fr_1.25fr]"><div><div className="text-sm font-bold text-[#e87512]">What it checks</div><h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em]">Concrete checks, not a black-box score.</h2></div><div className="grid gap-3 sm:grid-cols-2"><div className="rounded-xl border border-[#e1e4e9] bg-[#fafbfc] p-5"><Check className="h-5 w-5 text-[#e87512]"/><div className="mt-4 text-sm font-bold">Flow structure and branching</div></div><div className="rounded-xl border border-[#e1e4e9] bg-[#fafbfc] p-5"><Check className="h-5 w-5 text-[#e87512]"/><div className="mt-4 text-sm font-bold">Intent and route decisions</div></div><div className="rounded-xl border border-[#e1e4e9] bg-[#fafbfc] p-5"><Check className="h-5 w-5 text-[#e87512]"/><div className="mt-4 text-sm font-bold">Tool and API dependencies</div></div><div className="rounded-xl border border-[#e1e4e9] bg-[#fafbfc] p-5"><Check className="h-5 w-5 text-[#e87512]"/><div className="mt-4 text-sm font-bold">Critical business journeys</div></div><div className="rounded-xl border border-[#e1e4e9] bg-[#fafbfc] p-5"><Check className="h-5 w-5 text-[#e87512]"/><div className="mt-4 text-sm font-bold">Recovery and handover paths</div></div><div className="rounded-xl border border-[#e1e4e9] bg-[#fafbfc] p-5"><Check className="h-5 w-5 text-[#e87512]"/><div className="mt-4 text-sm font-bold">Coverage gaps between requirements and execution</div></div></div></div></div></section>
+ <section className="border-y border-[#e6e8ed] bg-[#fafbfc]"><div className="mx-auto max-w-[1200px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24"><div className="grid gap-10 lg:grid-cols-[.8fr_1.2fr]"><div><div className="text-sm font-bold text-[#e87512]">What you get</div><h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em]">An artefact your engineering team can act on.</h2></div><ul className="grid gap-3 sm:grid-cols-2"><li className="flex gap-3 rounded-xl border border-[#e1e4e9] bg-white p-5 text-sm leading-6 text-[#596273]"><ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-[#e87512]"/>A system-aware journey map</li><li className="flex gap-3 rounded-xl border border-[#e1e4e9] bg-white p-5 text-sm leading-6 text-[#596273]"><ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-[#e87512]"/>Prioritised assurance targets</li><li className="flex gap-3 rounded-xl border border-[#e1e4e9] bg-white p-5 text-sm leading-6 text-[#596273]"><ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-[#e87512]"/>Implementation-independent test intent</li><li className="flex gap-3 rounded-xl border border-[#e1e4e9] bg-white p-5 text-sm leading-6 text-[#596273]"><ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-[#e87512]"/>Traceable links between journeys and system components</li></ul></div></div></section>
+ <section><div className="mx-auto max-w-[900px] px-5 py-20 sm:px-8 lg:py-24"><div className="text-center"><div className="text-sm font-bold text-[#e87512]">FAQ</div><h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em]">Questions about Nexus.</h2></div><div className="mt-9 space-y-3"><details className="rounded-xl border border-[#e1e4e9] bg-white p-5"><summary className="cursor-pointer list-none font-bold">Does Nexus replace architecture documentation?</summary><p className="mt-3 text-sm leading-6 text-[#69707d]">No. It creates an assurance-oriented view of the runtime system and its critical journeys.</p></details><details className="rounded-xl border border-[#e1e4e9] bg-white p-5"><summary className="cursor-pointer list-none font-bold">Can it work with conversational AI?</summary><p className="mt-3 text-sm leading-6 text-[#69707d]">Yes. The model is designed around agent flows, orchestration, tools and multi-turn journeys.</p></details><details className="rounded-xl border border-[#e1e4e9] bg-white p-5"><summary className="cursor-pointer list-none font-bold">What happens next?</summary><p className="mt-3 text-sm leading-6 text-[#69707d]">The mapped journeys become inputs for evaluation and security testing.</p></details></div></div></section>
+ <section className="bg-[#17213f] text-white"><div className="mx-auto max-w-[900px] px-5 py-16 text-center sm:px-8 lg:py-20"><h2 className="font-[Sora] text-3xl font-extrabold tracking-[-.04em]">See Nexus against one real AI journey.</h2><Link to="/contact" className="mt-8 inline-flex h-11 items-center gap-2 rounded-lg bg-[#e87512] px-5 text-sm font-bold">Book a 30-min call <ArrowRight className="h-4 w-4"/></Link></div></section>
+ </main>}
