@@ -3,9 +3,9 @@ import { ArrowRight, Linkedin, Github } from "lucide-react";
 import { Logo } from "./logo";
 
 const COLUMNS = [
-  { title: "Product", links: [{ label: "Nexus", to: "/nexus" }, { label: "Vera", to: "/vera" }, { label: "Chakra", to: "/chakra" }, { label: "Pricing", to: "/pricing" }, { label: "Integrations", to: "/integrations" }] },
-  { title: "Resources", links: [{ label: "Blog", to: "/blog" }, { label: "Documentation", to: "/docs" }, { label: "Events & sessions", to: "/events" }, { label: "Metrics", to: "/metrics" }, { label: "Integrations", to: "/integrations" }] },
-  { title: "Company", links: [{ label: "About", to: "/about" }, { label: "Customers", to: "/customers" }, { label: "Security & trust", to: "/security" }, { label: "Pricing", to: "/pricing" }, { label: "Contact", to: "/contact" }] },
+  { title: "Platform", links: [{ label: "Nexus", to: "/nexus" }, { label: "Vera", to: "/vera" }, { label: "Chakra", to: "/chakra" }, { label: "Govern", to: "/govern" }, { label: "Platform overview", to: "/platform" }] },
+  { title: "Resources", links: [{ label: "Blog", to: "/blog" }, { label: "Documentation", to: "/docs" }, { label: "Metrics", to: "/metrics" }, { label: "Services", to: "/services" }, { label: "Pricing", to: "/pricing" }] },
+  { title: "Company", links: [{ label: "About", to: "/about" }, { label: "Design partners", to: "/customers" }, { label: "Security & trust", to: "/security" }, { label: "Contact", to: "/contact" }] },
 ] as const;
 
 export function SiteFooter() {
@@ -25,7 +25,14 @@ export function SiteFooter() {
             {COLUMNS.map((column) => <div key={column.title}><h3 className="text-xs font-bold uppercase tracking-[0.14em] text-[#17213f]">{column.title}</h3><ul className="mt-5 space-y-3">{column.links.map((link) => <li key={`${column.title}-${link.label}`}><Link to={link.to} className="text-sm text-[#667085] transition-colors hover:text-[#e87512]">{link.label}</Link></li>)}</ul></div>)}
           </div>
         </div>
-        <div className="mt-12 flex flex-col gap-4 border-t border-[#e5e7eb] pt-6 text-xs text-[#7a8290] sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-8 border-t border-[#e5e7eb] pt-5 text-xs leading-5 text-[#7a8290]">
+  <div>[PARIMI TO CONFIRM: legal form, KVK number, business address, VAT number]</div>
+</div>
+<div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-[#7a8290]">
+  <Link to="/privacy" className="hover:text-[#e87512]">Privacy Policy</Link>
+  <Link to="/cookies" className="hover:text-[#e87512]">Cookie notice</Link>
+</div>
+<div className="mt-6 flex flex-col gap-4 border-t border-[#e5e7eb] pt-6 text-xs text-[#7a8290] sm:flex-row sm:items-center sm:justify-between">
           <div>© {new Date().getFullYear()} Shyena. All rights reserved.</div>
           <div className="flex items-center gap-2">Built for a more trustworthy AI future <ArrowRight className="h-3.5 w-3.5" /></div>
         </div>
