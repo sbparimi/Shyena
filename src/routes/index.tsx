@@ -16,138 +16,166 @@ const faq = [
 function IllustrativeRun() {
   const stages = [
     {
-      command: "$ shyena qa --pr 284 --repo .",
-      label: "PR INTAKE",
+      command: "$ shyena qa --pr 284 --rfq RFQ-2026-184 --repo .",
+      label: "INTAKE + REPO SCAN",
       lines: [
-        "Repository      ./customer-service",
-        "Pull request    #284  ·  feature/refund-agent",
-        "Base            main",
-        "Changed files   17",
-        "Lines           +428 / -96",
+        "Scenario        VANILLA STEEL · synthetic RFQ demo",
+        "RFQ             RFQ-2026-184 · hot-rolled steel",
+        "PR              #284 · pricing + quotation workflow",
+        "Repository      ./vanilla-steel-quote",
+        "Changed files   31 · +684 / -142",
         "",
-        "Scanning git history and dependency graph...",
-        "Mapping changed files → journeys → services → agents",
+        "Scanning git diff, history and dependency graph...",
+        "Mapping changes → RFQ → inventory → pricing → quote",
+        "Tracing ERP / API / agent boundaries...",
         "Impact analysis complete"
       ],
-      result: "17 files changed · 9 journeys affected · 4 services in scope"
+      result: "12 workflow nodes · 7 APIs · 5 agents · 14 journeys affected"
     },
     {
-      command: "$ shyena impact --pr 284",
-      label: "CHANGE IMPACT",
+      command: "$ shyena impact --pr 284 --workflow rfq",
+      label: "RFQ IMPACT MAP",
       lines: [
-        "Changed: src/agents/refund.ts",
-        "Changed: src/api/refunds.ts",
-        "Changed: src/auth/session.ts",
-        "Changed: tests/fixtures/refund.yaml",
+        "RFQ intake → requirement extraction",
+        "  Grade: S355 · Thickness: 12mm · Width: 1500mm",
+        "  Quantity: 240 MT · Delivery: Rotterdam",
         "",
-        "Affected journeys",
-        "  J-014 Refund request",
-        "  J-019 Refund after authentication",
-        "  J-027 Failed payment recovery",
-        "  J-031 Agent escalation",
+        "Inventory → stock availability + reservation",
+        "Supplier → mill lead time + minimum lot",
+        "Pricing → base price + freight + margin",
+        "Quotation → currency + validity + Incoterms",
+        "Approval → margin threshold + authority",
+        "Customer → quote delivery + response handling",
         "",
-        "Risk propagation complete"
+        "Critical-path propagation complete"
       ],
-      result: "P0 1 · P1 3 · P2 5 impacted journeys"
+      result: "P0 2 · P1 6 · P2 9 impacted business paths"
     },
     {
-      command: "$ shyena playbook generate --pr 284",
+      command: "$ shyena playbook generate --pr 284 --rfq RFQ-2026-184",
       label: "TAML PLAYBOOK",
       lines: [
-        "Generating test playbook from change impact...",
+        "Synthesising playbook from PR + workflow impact...",
         "",
-        "TC-014  refund_happy_path",
+        "TC-RFQ-001  rfq_intake_complete",
         "  smoke · release · e2e · P0",
-        "TC-019  authenticated_refund",
-        "  release · e2e · P1",
-        "TC-027  failed_payment_recovery",
+        "TC-RFQ-007  stock_and_allocation",
+        "  release · e2e · P0",
+        "TC-RFQ-014  supplier_price_resolution",
         "  e2e · P1",
-        "TC-031  escalation_after_tool_failure",
-        "  e2e · security · P1",
+        "TC-RFQ-021  margin_approval_gate",
+        "  release · e2e · P1",
+        "TC-RFQ-027  quotation_generation",
+        "  smoke · release · e2e · P1",
+        "TC-RFQ-034  customer_quote_response",
+        "  e2e · P2",
         "",
-        "Playbook compiled · 28 executable cases"
+        "Playbook compiled · 46 executable cases"
       ],
-      result: "Smoke 6 · Release 12 · E2E 28 · P0 2 · P1 11 · P2 15"
+      result: "Smoke 8 · Release 18 · E2E 46 · P0 3 · P1 17 · P2 26"
     },
     {
-      command: "$ shyena test --playbook pr-284",
-      label: "MULTI-ENGINE EXECUTION",
+      command: "$ shyena test --playbook vanilla-steel-rfq",
+      label: "AUTONOMOUS EXECUTION",
       lines: [
-        "[TEST]  Playwright browser journeys ........ RUNNING",
-        "[TEST]  API contract checks ................ RUNNING",
-        "[CLAUDE] Agent reasoning evaluation ........ RUNNING",
-        "[CLAUDE] Tool selection + arguments ........ RUNNING",
-        "[CLAUDE] Multi-turn goal completion ........ RUNNING",
+        "[PLAYWRIGHT]  RFQ portal login ................. RUN",
+        "[PLAYWRIGHT]  Upload RFQ + parse requirements .... RUN",
+        "[AGENT]      Requirement extraction ............. RUN",
+        "[API]        Inventory availability ............ RUN",
+        "[API]        Supplier pricing .................. RUN",
+        "[CLAUDE]     Quote reasoning + tool choice ...... RUN",
+        "[CLAUDE]     Margin / policy interpretation .... RUN",
         "",
-        "[TEST]  DEV environment ................... PASS",
-        "[TEST]  TEST environment .................. PASS",
-        "[CLAUDE] TEST agent evaluation ............. REVIEW",
-        "[TEST]  UAT release journeys .............. RUNNING"
+        "[DEV]        8/8 smoke ........................ PASS",
+        "[TEST]       14/14 release .................... PASS",
+        "[UAT]        11/13 quotation journeys ......... RUN"
       ],
-      result: "Playwright + Claude execution active across TEST / DEV / UAT"
+      result: "Playwright + API + Claude execution · 33/46 cases completed"
     },
     {
-      command: "$ shyena github-action run --pr 284",
-      label: "CI/CD RELEASE STAGES",
+      command: "$ shyena github-action run --pr 284 --rfq RFQ-2026-184",
+      label: "GITHUB ACTIONS",
       lines: [
-        "GitHub Actions · qa-pr-284",
+        "GitHub Actions · vanilla-steel-rfq-284",
         "",
-        "01  lint + typecheck .................... PASS",
-        "02  unit + API regression ................ PASS",
-        "03  Playwright smoke ..................... PASS",
-        "04  Playwright release .................. PASS",
-        "05  Claude agent evaluation .............. PASS",
-        "06  E2E impacted journeys ............... FAIL",
-        "07  UAT release gate .................... BLOCKED",
+        "01  checkout + dependency graph .......... PASS",
+        "02  unit + contract tests ................. PASS",
+        "03  Playwright smoke ...................... PASS",
+        "04  Playwright RFQ release ................ PASS",
+        "05  Claude agent evaluation ............... PASS",
+        "06  pricing + margin policy ............... PASS",
+        "07  UAT quotation E2E .................... RUN",
+        "08  release evidence ..................... WAIT",
         "",
-        "Collecting traces, screenshots and logs..."
+        "Collecting screenshots · traces · API logs"
       ],
-      result: "6/7 stages passed · release gate BLOCKED"
+      result: "6 stages passed · UAT stage executing · evidence streaming"
     },
     {
-      command: "$ shyena diagnose --run 284",
-      label: "FAILURE DIAGNOSIS",
+      command: "$ shyena diagnose --run vanilla-steel-284",
+      label: "LIVE FAILURE DIAGNOSIS",
       lines: [
-        "Failure reproduced: TC-027",
-        "Journey: failed payment → refund recovery",
+        "Failure reproduced: TC-RFQ-021",
+        "Journey: supplier price → margin approval",
         "",
-        "Expected  Agent requests refund status",
-        "Actual    Agent calls refund_create",
-        "Trace     tool selection mismatch",
+        "Expected  Quote blocked below margin threshold",
+        "Actual    Quote submitted for approval",
+        "Trace     margin policy tool returned stale value",
         "",
-        "Root cause candidate",
-        "  refund intent branch changed in PR #284",
-        "  missing guard before refund_create",
+        "Cross-checking git diff + API trace + screenshot",
+        "Changed   pricing/margin-policy.ts",
+        "Impact    approval gate + quotation service",
         "",
-        "Generating permanent regression test..."
+        "Generating permanent regression case..."
       ],
-      result: "1 P1 defect reproduced · regression test generated"
+      result: "1 P1 defect reproduced · regression added to release pack"
     },
     {
-      command: "$ shyena report --pr 284 --release",
-      label: "RELEASE REPORT",
+      command: "$ shyena report --rfq RFQ-2026-184 --release",
+      label: "QUOTATION ASSURANCE REPORT",
       lines: [
-        "Shyena Autonomous QA Report",
-        "PR #284 · feature/refund-agent",
+        "SHYENA AUTONOMOUS QA · VANILLA STEEL",
+        "RFQ-2026-184 · PR #284",
         "",
-        "Tests executed ....................... 28",
-        "Passed ................................ 24",
+        "RFQ journeys executed ................ 46",
+        "Passed ................................ 42",
         "Failed ................................ 1",
         "Review ................................ 3",
         "P0 .................................... 0",
         "P1 .................................... 1",
-        "P2 .................................... 3",
+        "P2 .................................... 2",
         "",
-        "Evidence: traces · screenshots · logs · diffs",
-        "Playbook: pr-284.taml",
+        "Evidence: git diff · traces · screenshots",
+        "          API logs · Playwright · Claude",
+        "Playbook: vanilla-steel-rfq.taml",
         "",
         "RELEASE VERDICT  ✕ BLOCK"
       ],
-      result: "Report generated · evidence pack attached · RELEASE BLOCKED"
+      result: "Report generated · quotation evidence pack attached · RELEASE BLOCKED"
     }
   ];
+
   const [active, setActive] = React.useState(0);
+  const [tick, setTick] = React.useState(0);
+
+  React.useEffect(() => {
+    const timer = window.setInterval(() => setTick(v => v + 1), 120);
+    return () => window.clearInterval(timer);
+  }, []);
+
+  React.useEffect(() => {
+    const timer = window.setInterval(() => {
+      setActive(v => (v + 1) % stages.length);
+    }, 5200);
+    return () => window.clearInterval(timer);
+  }, [stages.length]);
+
   const stage = stages[active];
+  const frame = tick % 43;
+  const visibleLines = Math.min(stage.lines.length, Math.max(1, Math.floor(frame / 1.55) + 1));
+  const typedChars = Math.min(stage.command.length - 2, Math.max(0, Math.floor(frame * 1.9)));
+  const progress = Math.min(100, Math.round((frame / 43) * 100));
+
   return <div className="overflow-hidden rounded-[18px] border border-white/10 bg-[#0d1117] shadow-[0_35px_100px_-45px_rgba(0,0,0,.95)] ring-1 ring-black/20">
     <div className="flex items-center gap-2 border-b border-white/10 bg-[#171b22] px-4 py-3">
       <span className="h-3 w-3 rounded-full bg-[#ff5f57]"/><span className="h-3 w-3 rounded-full bg-[#febc2e]"/><span className="h-3 w-3 rounded-full bg-[#28c840]"/>
@@ -155,21 +183,22 @@ function IllustrativeRun() {
       <span className="font-mono text-[9px] text-white/25">iTerm2</span>
     </div>
     <div className="border-b border-white/10 bg-[#11151c] px-3 py-2 sm:px-4">
-      <div className="flex gap-1 overflow-x-auto">
-        {stages.map((item,i)=><button type="button" key={item.label} onClick={()=>setActive(i)} className={`shrink-0 rounded-md px-2.5 py-1.5 font-mono text-[9px] font-semibold transition ${i===active ? "bg-white/10 text-white" : "text-white/35 hover:text-white/65"}`}>{item.label}</button>)}
+      <div className="flex items-center gap-2 overflow-x-auto">
+        {stages.map((item,i)=><button type="button" key={item.label} onClick={()=>{setActive(i);setTick(0)}} className={`shrink-0 rounded-md px-2.5 py-1.5 font-mono text-[9px] font-semibold transition ${i===active ? "bg-white/10 text-white" : "text-white/30 hover:text-white/60"}`}>{item.label}</button>)}
       </div>
     </div>
-    <div className="min-h-[390px] p-4 font-mono text-[9px] leading-[1.65] sm:p-6 sm:text-[10px]">
+    <div className="min-h-[410px] p-4 font-mono text-[9px] leading-[1.65] sm:p-6 sm:text-[10px]">
       <div className="text-white/25">Last login: today on ttys001</div>
-      <div className="mt-2 text-white"><span className="text-[#28c840]">~/projects/customer-service</span> <span className="text-white/45">% </span><span>{stage.command.slice(2)}</span></div>
+      <div className="mt-2 text-white"><span className="text-[#28c840]">~/projects/vanilla-steel</span> <span className="text-white/45">% </span><span>{stage.command.slice(2, 2 + typedChars)}</span><span className="animate-pulse text-white/80">▌</span></div>
       <div className="mt-1 font-bold text-[#f18a32]">→ {stage.label}</div>
       <div className="mt-3 space-y-0.5 text-white/65">
-        {stage.lines.map((line,i)=><div key={i} className={line.includes("FAIL") || line.includes("BLOCK") ? "font-bold text-[#ff8b43]" : line.includes("PASS") ? "text-[#58d68d]" : line.includes("TC-") || line.includes("P0") || line.includes("P1") || line.includes("P2") ? "text-white" : ""}>{line || " "}</div>)}
+        {stage.lines.slice(0, visibleLines).map((line,i)=><div key={i} className={line.includes("FAIL") || line.includes("BLOCK") ? "font-bold text-[#ff8b43]" : line.includes("PASS") ? "text-[#58d68d]" : line.includes("TC-") || line.includes("P0") || line.includes("P1") || line.includes("P2") ? "text-white" : ""}>{line || " "}</div>)}
       </div>
-      <div className="mt-3 border-t border-white/10 pt-3 font-bold text-white">{stage.result}</div>
+      <div className="mt-3 h-1 overflow-hidden rounded-full bg-white/5"><div className="h-full bg-[#f18a32] transition-all duration-100" style={{width:`${progress}%`}}/></div>
+      {visibleLines >= stage.lines.length && <div className="mt-3 border-t border-white/10 pt-3 font-bold text-white">{stage.result}</div>}
       <div className="mt-3 text-white/20">▌</div>
     </div>
-    <div className="border-t border-white/10 bg-[#11151c] px-4 py-3 text-[9px] text-white/30">Synthetic product demonstration · representative autonomous QA workflow · no customer repository or PR is accessed</div>
+    <div className="border-t border-white/10 bg-[#11151c] px-4 py-3 text-[9px] text-white/30">Synthetic Vanilla Steel RFQ demonstration · autonomous QA workflow · no customer repository or PR is accessed</div>
   </div>;
 }
 
