@@ -21,7 +21,7 @@ const faq=[
 ];
 
 export const Route=createFileRoute("/pricing")({head:()=>({links:[{rel:"canonical",href:SITE+"/pricing"}],meta:[
- {title:"Pricing | Shyena AI Assurance Engineer"},
+ {title:"Pricing | Shyena Autonomous QA"},
  {name:"description",content:"Start with an AI assurance service and scale to continuous platform assurance for production AI agents."},
  {property:"og:title",content:"Pricing | Shyena AI Assurance Engineer"},
  {property:"og:description",content:"AI Act scan, assurance pilot, governance retainer and platform options."},
