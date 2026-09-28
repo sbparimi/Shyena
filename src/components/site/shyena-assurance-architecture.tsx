@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
 
 const groups = [
-  { title: "BUILD", items: ["NEXUS", "VERA", "CHAKRA", "AUTONOMOUS QA"], position: "left-5 top-[66px] sm:left-7" },
+  { title: "BUILD", items: ["NEXUS · UNDERSTAND", "VERA · EVALUATE", "CHAKRA · DEFEND"], position: "left-5 top-[66px] sm:left-7" },
   { title: "TEST", items: ["JOURNEYS", "EVALUATION", "EXPERIMENTS"], position: "right-5 top-[92px] sm:right-7" },
   { title: "MONITOR", items: ["TRACES", "EVIDENCE", "FINDINGS", "METRICS"], position: "left-5 bottom-[38px] sm:left-7" },
-  { title: "DEPLOY", items: ["CI/CD", "RELEASE GATES", "ENVIRONMENTS", "INTEGRATIONS"], position: "right-5 bottom-[38px] sm:right-7" },
+  { title: "GOVERN", items: ["PROVE", "TRACEABILITY", "RELEASE POLICY", "EVIDENCE PACK"], position: "right-5 bottom-[38px] sm:right-7" },
 ] as const;
 
 export function ShyenaAssuranceArchitecture() {
