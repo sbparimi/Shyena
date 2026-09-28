@@ -26,7 +26,7 @@ export function SiteFooter() {
           </div>
         </div>
         <div className="mt-8 border-t border-[#e5e7eb] pt-5 text-xs leading-5 text-[#7a8290]">
-  <div>[PARIMI TO CONFIRM: legal form, KVK number, business address, VAT number]</div>
+  <div>Shyena · Netherlands · AI assurance, evaluation and governance</div>
 </div>
 <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-[#7a8290]">
   <Link to="/privacy" className="hover:text-[#e87512]">Privacy Policy</Link>
