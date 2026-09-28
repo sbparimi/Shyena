@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ArrowRight, Check } from "lucide-react";
-import { Link } from "@tanstack/react-router";
 
 const SITE = "https://www.shyena.eu";
 
