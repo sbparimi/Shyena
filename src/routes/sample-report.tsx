@@ -1,8 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import type { ReactNode } from "react";
 import { ArrowLeft, ArrowRight, Download, ExternalLink } from "lucide-react";
 
-const Section = ({title, kicker, children}:{title:string;kicker?:string;children:React.ReactNode}) => <section className="border-t border-[#dfe3e8] pt-8"><div className="font-mono text-[10px] font-bold uppercase tracking-[.18em] text-[#e87512]">{kicker}</div><h2 className="mt-2 text-2xl font-extrabold tracking-tight">{title}</h2><div className="mt-5">{children}</div></section>;
-const Badge=({children,tone="neutral"}:{children:React.ReactNode;tone?:string})=><span className={`inline-flex rounded-md px-2 py-1 text-[10px] font-bold uppercase tracking-wide ${tone==="fail"?"bg-red-50 text-red-700":tone==="pass"?"bg-emerald-50 text-emerald-700":tone==="warn"?"bg-amber-50 text-amber-700":"bg-slate-100 text-slate-700"}`}>{children}</span>;
+const Section = ({title, kicker, children}:{title:string;kicker?:string;children:ReactNode}) => <section className="border-t border-[#dfe3e8] pt-8"><div className="font-mono text-[10px] font-bold uppercase tracking-[.18em] text-[#e87512]">{kicker}</div><h2 className="mt-2 text-2xl font-extrabold tracking-tight">{title}</h2><div className="mt-5">{children}</div></section>;
+const Badge=({children,tone="neutral"}:{children:ReactNode;tone?:string})=><span className={`inline-flex rounded-md px-2 py-1 text-[10px] font-bold uppercase tracking-wide ${tone==="fail"?"bg-red-50 text-red-700":tone==="pass"?"bg-emerald-50 text-emerald-700":tone==="warn"?"bg-amber-50 text-amber-700":"bg-slate-100 text-slate-700"}`}>{children}</span>;
 const Row=({a,b,c}:{a:string;b:string;c?:React.ReactNode})=><div className="grid grid-cols-[1.2fr_2fr_.8fr] gap-4 border-t border-[#e8eaee] py-3 text-sm"><div className="font-semibold">{a}</div><div className="text-[#5f6877]">{b}</div><div>{c}</div></div>;
 
 export const Route=createFileRoute("/sample-report")({head:()=>({links:[{rel:"canonical",href:"https://www.shyena.eu/sample-report"}],meta:[
