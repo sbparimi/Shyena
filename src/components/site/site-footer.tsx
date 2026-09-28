@@ -21,7 +21,7 @@ export function SiteFooter() {
               <a href="https://github.com/sbparimi/Shyena" aria-label="Shyena on GitHub" className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[#e1e4e9] text-[#596273] transition hover:border-[#17213f] hover:text-[#17213f]"><Github className="h-4 w-4" /></a>
             </div>
           </div>
-          <div className="grid gap-10 sm:grid-cols-3">
+          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
             {COLUMNS.map((column) => <div key={column.title}><h3 className="text-xs font-bold uppercase tracking-[0.14em] text-[#17213f]">{column.title}</h3><ul className="mt-5 space-y-3">{column.links.map((link) => <li key={`${column.title}-${link.label}`}><Link to={link.to} className="text-sm text-[#667085] transition-colors hover:text-[#e87512]">{link.label}</Link></li>)}</ul></div>)}
           </div>
         </div>
