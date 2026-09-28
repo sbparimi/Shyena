@@ -40,6 +40,7 @@ function SecurityPage() {
           <div className="grid gap-4 md:grid-cols-2">
             {[
               ["Customer-hosted infrastructure", "Where the engagement uses customer-hosted infrastructure, the customer retains control of that infrastructure and its associated access policies."],
+              ["Access", "[PARIMI TO CONFIRM: least-privilege access model and whether test environments are the preferred engagement boundary]"],
               ["Customer-funded LLM/API usage", "LLM and API usage is funded by the customer and remains subject to the terms and controls of the selected providers."],
               ["Data handling", "[PARIMI TO CONFIRM: what Shyena stores, where it is stored, retention period and deletion-on-request process]. Data handling should be limited to what is required for the agreed assurance scope."],
               ["DPA", "DPA available on request. Where personal data is processed on behalf of a customer, applicable data-processing terms should be agreed before processing begins."],
