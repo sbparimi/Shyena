@@ -12,7 +12,7 @@ const ACTS = [
 
 export const Route = createFileRoute("/docs/ai-assurance-tokenomics")({
   head: () => ({
-    meta: [
+    meta: [{ name: "robots", content: "noindex,nofollow" },
       { title: "AI Assurance Tokenomics | Shyena Docs" },
       { name: "description", content: "AI Assurance Tokenomics: connecting tokens, agent behaviour, assurance effort, value and business impact." },
       { property: "og:title", content: "AI Assurance Tokenomics | Shyena Docs" },
