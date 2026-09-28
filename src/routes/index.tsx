@@ -4,13 +4,13 @@ import { ArrowRight, Check, ShieldCheck } from "lucide-react";
 const SITE = "https://www.shyena.eu";
 
 const faq = [
-  ["Is Shyena just another test automation tool?", "No. Shyena maps your agent, generates journey tests, evaluates behaviour on four layers, probes security and produces governance evidence. Test automation only runs scripts you wrote."],
+  ["Is Shyena just another test automation tool?", "No. Shyena is autonomous QA: it discovers coverage, generates journeys, executes them, evaluates agent behaviour, diagnoses failures and feeds new cases back into regression. Governance evidence is a downstream output."],
   ["How is it different from LLM evaluation libraries?", "Those libraries primarily score model outputs. Shyena evaluates complete business journeys, including routing, APIs, tools, execution integrity and security, then links findings to release decisions."],
   ["Does Shyena make us EU AI Act compliant?", "No. Shyena produces technical evidence that can support legal and compliance work. It is not legal advice or a certification body."],
   ["Which platforms do you support?", "Shyena is designed for agentic and conversational AI systems, with integrations across agent orchestration, browser automation, APIs, CI/CD and observability. Contact us for your stack."],
   ["Do you need access to production?", "No for the initial assessment. The preferred boundary is a customer-controlled test or staging environment using scoped API credentials and least-privilege access. Read-only logs are preferred where logs are needed. Production access is only used when explicitly agreed for the engagement."],
   ["Where does our data go?", "Engagement architecture is designed around customer-controlled environments and customer-funded model/API accounts. See Security for the current boundary."],
-  ["Can we start small?", "Yes. Start with the AI Act Transparency & Risk Scan or the €7,500 AI Assurance Pilot."]
+  ["Can we start small?", "Yes. Start with an Autonomous QA Pilot or the €7,500 Agentic Evaluation Programme."]
 ];
 
 function IllustrativeRun() {
@@ -19,7 +19,7 @@ function IllustrativeRun() {
     ["10:04", "test", "Simulated realistic multi-turn conversations"],
     ["10:06", "judge", "Detected answer-quality and business-rule findings"],
     ["10:07", "attack", "Probed prompt-injection and unsafe tool paths"],
-    ["10:08", "govern", "Mapped evidence to a governance requirement"],
+    ["10:08", "report", "Created reproducible release evidence"],
     ["10:09", "verdict", "BLOCK release · evidence pack attached"],
   ];
   return <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#07101f] shadow-[0_30px_90px_-45px_rgba(7,16,31,.8)]">
@@ -83,21 +83,21 @@ function HomePage() {
             <Link to="/sample-report" className="inline-flex h-12 items-center gap-2 rounded-lg border border-white/15 px-5 text-sm font-bold text-white/85">See a sample report <ArrowRight className="h-4 w-4"/></Link>
           </div>
           <div className="mt-8 flex flex-wrap gap-x-5 gap-y-2 text-xs font-semibold text-white/45">
-            <span>Built in the Netherlands</span><span>Founder-led</span><span>Evidence mapped to the EU AI Act and ISO/IEC 42001</span>
+            <span>Built in the Netherlands</span><span>Founder-led</span><span>Autonomous QA · Agentic evaluation</span>
           </div>
         </div>
         <IllustrativeRun/>
       </div>
     </section>
 
-    <section className="border-b border-[#e6e8ed] bg-[#fff8f2]"><div className="mx-auto max-w-[1280px] px-5 py-4 text-center font-mono text-[10px] font-bold uppercase tracking-[.12em] text-[#a55410]">EU AI Act Art. 50 applies now · High-risk obligations from Dec 2027 · Is your evidence ready?</div></section>
+    <section className="border-b border-[#e6e8ed] bg-[#fff8f2]"><div className="mx-auto max-w-[1280px] px-5 py-4 text-center font-mono text-[10px] font-bold uppercase tracking-[.12em] text-[#a55410]">AUTONOMOUS QA · TEST EVERY RELEASE · EVALUATE EVERY AGENT</div></section>
 
     <section className="bg-white"><div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
       <div className="max-w-3xl"><div className="text-sm font-bold text-[#e87512]">How Shyena works</div><h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em] sm:text-5xl">Assurance that runs where your AI does.</h2><p className="mt-5 text-lg leading-8 text-[#69707d]">From release testing to production learning to audit preparation, the same evidence chain connects what happened to what you decide.</p></div>
       <div className="mt-10 grid gap-4 lg:grid-cols-3">
         <OutcomeCard title="Before every release" body="Every change gets tested." items={["Journey generation","Four-layer evaluation","Security probes","Release gate"]} mock={<Mock><div className="flex items-center justify-between text-sm font-bold"><span>Release 2.8</span><span className="text-red-600">BLOCKED</span></div><div className="mt-3 text-xs text-[#69707d]">3 P1 findings · evidence attached</div></Mock>}/>
         <OutcomeCard title="In production" body="Every conversation teaches the next test." items={["Conversation monitoring","Failure detection","Drift signals","New regression tests"]} mock={<Mock><div className="text-sm font-bold">Production failure → regression</div><div className="mt-3 flex items-center gap-2 text-xs text-[#69707d]"><span className="rounded bg-white px-2 py-1">Trace</span><ArrowRight className="h-3 w-3"/><span className="rounded bg-white px-2 py-1">Finding</span><ArrowRight className="h-3 w-3"/><span className="rounded bg-white px-2 py-1">Test</span></div></Mock>}/>
-        <OutcomeCard title="At audit time" body="Every obligation has evidence." items={["Art. 50 checks","Requirement-to-evidence matrix","Evidence pack","Re-run history"]} mock={<Mock><div className="grid grid-cols-[1fr_1fr_auto] gap-2 text-[9px]"><span className="font-bold">Requirement</span><span className="font-bold">Evidence</span><span className="font-bold">Status</span><span>AI disclosure</span><span>Trace #A12</span><span className="text-red-600">OPEN</span><span>Release gate</span><span>Run #184</span><span className="text-emerald-600">PASS</span></div></Mock>}/>
+        <OutcomeCard title="Every model change" body="Regression runs itself." items={["Model-version comparison","Behaviour drift detection","Journey replay","New regression cases"]} mock={<Mock><div className="text-sm font-bold">Model v4.2 → v4.3</div><div className="mt-3 text-xs text-[#69707d]">3 behavioural changes · 1 release blocker</div></Mock>}/>
       </div>
       <p className="mt-8 text-center text-sm font-semibold text-[#596273]">No test scripts to maintain. No evidence to assemble by hand.</p>
     </div></section>
@@ -120,7 +120,7 @@ function HomePage() {
     </div></section>
 
     <section className="border-y border-[#e6e8ed] bg-[#07101f] text-white"><div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
-      <div className="grid gap-10 lg:grid-cols-[.8fr_1.2fr] lg:items-center"><div><div className="text-sm font-bold text-[#f18a32]">Sample release assurance report</div><h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em] sm:text-5xl">Know whether to ship, and prove why.</h2><p className="mt-5 text-base leading-7 text-white/60">A synthetic example showing how Shyena connects journey evidence, evaluation layers, security findings and governance mapping.</p><Link to="/sample-report" className="mt-7 inline-flex h-11 items-center gap-2 rounded-lg bg-[#e87512] px-5 text-sm font-bold text-white">Open sample report <ArrowRight className="h-4 w-4"/></Link></div>
+      <div className="grid gap-10 lg:grid-cols-[.8fr_1.2fr] lg:items-center"><div><div className="text-sm font-bold text-[#f18a32]">Sample release assurance report</div><h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em] sm:text-5xl">Know whether to ship, and prove why.</h2><p className="mt-5 text-base leading-7 text-white/60">A synthetic example showing autonomous journey execution, agent evaluation, security findings, failure reproduction and the evidence behind a release verdict.</p><Link to="/sample-report" className="mt-7 inline-flex h-11 items-center gap-2 rounded-lg bg-[#e87512] px-5 text-sm font-bold text-white">Open sample report <ArrowRight className="h-4 w-4"/></Link></div>
       <Mock><div className="text-[#17213f]"><div className="flex items-center justify-between"><span className="font-bold">Customer Service Bot v2.8</span><span className="rounded bg-red-100 px-2 py-1 text-xs font-bold text-red-700">BLOCK</span></div><div className="mt-5 grid grid-cols-2 gap-2 text-xs"><span>Deterministic</span><b>PASS</b><span>Semantic</span><b>REVIEW</b><span>Orchestration</span><b>FAIL</b><span>Security</span><b>FAIL</b></div><div className="mt-5 border-t border-[#dfe3e8] pt-4 text-xs text-[#69707d]">Sample report · Synthetic demo bot · No client data</div></div></Mock></div>
     </div></section>
 
@@ -128,7 +128,7 @@ function HomePage() {
 
     <section className="border-y border-[#e6e8ed] bg-[#fafbfc]"><div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24"><div className="grid gap-8 lg:grid-cols-3"><div className="rounded-2xl border border-[#e1e4e9] bg-white p-7"><div className="text-sm font-bold text-[#e87512]">Proof</div><h3 className="mt-3 text-2xl font-extrabold">Design partner programme</h3><p className="mt-3 text-sm leading-6 text-[#69707d]">A small number of European organisations can work directly with the founder during an assurance pilot.</p><Link to="/design-partners" className="mt-5 inline-flex text-sm font-bold">Apply as a design partner <ArrowRight className="ml-1 h-4 w-4"/></Link></div><div className="rounded-2xl border border-[#e1e4e9] bg-white p-7"><div className="text-sm font-bold text-[#e87512]">Founder-led</div><h3 className="mt-3 text-2xl font-extrabold">Built close to the engineering problem.</h3><p className="mt-3 text-sm leading-6 text-[#69707d]">Parimi's background is in test leadership and conversational-AI quality engineering.</p><Link to="/about" className="mt-5 inline-flex text-sm font-bold">Meet the founder <ArrowRight className="ml-1 h-4 w-4"/></Link></div><div className="rounded-2xl border border-[#e1e4e9] bg-white p-7"><div className="text-sm font-bold text-[#e87512]">Knowledge</div><h3 className="mt-3 text-2xl font-extrabold">Engineering thinking, published.</h3><p className="mt-3 text-sm leading-6 text-[#69707d]">Read practical work on LLM evaluation, conversational testing and AI-agent assurance.</p><Link to="/blog" className="mt-5 inline-flex text-sm font-bold">Read the blog <ArrowRight className="ml-1 h-4 w-4"/></Link></div></div></div></section>
 
-    <section className="bg-white"><div className="mx-auto max-w-[1000px] px-5 py-20 sm:px-8 lg:py-24"><div className="text-center"><div className="text-sm font-bold text-[#e87512]">Start small</div><h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em] sm:text-5xl">The AI Act Transparency & Risk Scan.</h2><p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-[#69707d]">A focused 1–2 week engagement to assess transparency, sample critical journeys, accessibility and evidence gaps.</p><Link to="/pricing" className="mt-7 inline-flex h-11 items-center gap-2 rounded-lg border border-[#17213f] px-5 text-sm font-bold">See pricing <ArrowRight className="h-4 w-4"/></Link></div></div></section>
+    <section className="bg-white"><div className="mx-auto max-w-[1000px] px-5 py-20 sm:px-8 lg:py-24"><div className="text-center"><div className="text-sm font-bold text-[#e87512]">Start small</div><h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em] sm:text-5xl">Autonomous QA Pilot.</h2><p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-[#69707d]">A focused engagement that connects one real system, discovers critical journeys, executes autonomous tests and shows where meaningful coverage can replace manual effort.</p><Link to="/pricing" className="mt-7 inline-flex h-11 items-center gap-2 rounded-lg border border-[#17213f] px-5 text-sm font-bold">See pricing <ArrowRight className="h-4 w-4"/></Link></div></div></section>
 
     <section className="border-y border-[#e6e8ed] bg-[#fafbfc]"><div className="mx-auto max-w-[1000px] px-5 py-20 sm:px-8 lg:py-24"><div className="text-center"><div className="text-sm font-bold text-[#e87512]">FAQ</div><h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em]">Questions buyers ask.</h2></div><div className="mt-10 space-y-3">{faq.map(([q,a])=><details key={q} className="rounded-xl border border-[#e1e4e9] bg-white p-5"><summary className="cursor-pointer list-none font-bold">{q}</summary><p className="mt-3 max-w-3xl text-sm leading-6 text-[#69707d]">{a}</p></details>)}</div></div></section>
 
