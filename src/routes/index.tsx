@@ -22,7 +22,7 @@ function TerminalMetric({label,value,detail,accent="orange"}:{label:string;value
     : accent==="amber"
     ? "border-amber-400/20 bg-amber-500/10 text-amber-300"
     : "border-white/10 bg-white/[.035] text-white/85";
-  return <div className={\`min-w-0 rounded-md border px-2.5 py-2 \${tone}\`}>
+  return <div className={`min-w-0 rounded-md border px-2.5 py-2 ${tone}`}>
     <div className="font-mono text-[7px] font-bold uppercase tracking-[.13em] opacity-55">{label}</div>
     <div className="mt-0.5 font-mono text-sm font-extrabold tracking-[-.03em] sm:text-base">{value}</div>
     {detail && <div className="mt-0.5 font-mono text-[7px] leading-3.5 opacity-55">{detail}</div>}
@@ -32,7 +32,7 @@ function TerminalMetric({label,value,detail,accent="orange"}:{label:string;value
 function TerminalBars({items}:{items:Array<[string,number,string]>}) {
   return <div className="space-y-1.5">{items.map(([label,value,tone])=><div key={label}>
     <div className="mb-0.5 flex justify-between font-mono text-[7px] text-white/45"><span>{label}</span><span>{value}%</span></div>
-    <div className="h-1 overflow-hidden rounded-full bg-white/5"><div className={\`h-full rounded-full \${tone}\`} style={{width:\`\${value}%\`}}/></div>
+    <div className="h-1 overflow-hidden rounded-full bg-white/5"><div className={`h-full rounded-full ${tone}`} style={{width:`${value}%`}}/></div>
   </div>)}</div>;
 }
 
@@ -48,7 +48,7 @@ function TerminalReport({stage}:{stage:any}) {
     : stage.kind==="impact"
     ? <div className="mt-2 rounded-md border border-white/8 bg-black/10 p-2">
         <div className="mb-1.5 flex items-center justify-between font-mono text-[7px] uppercase tracking-[.12em] text-white/35"><span>Critical path risk</span><span>P0 2 · P1 6 · P2 9</span></div>
-        <div className="grid grid-cols-7 gap-1">{["RFQ","REQ","INV","PRICE","MARGIN","QUOTE","CUSTOMER"].map((x:string,i:number)=><div key={x} className="text-center"><div className={\`h-5 rounded-sm \${i===3||i===4 ? "bg-red-400/75" : i===2||i===5 ? "bg-amber-300/70" : "bg-emerald-300/60"}\`}/><div className="mt-0.5 truncate font-mono text-[6px] text-white/35">{x}</div></div>)}</div>
+        <div className="grid grid-cols-7 gap-1">{["RFQ","REQ","INV","PRICE","MARGIN","QUOTE","CUSTOMER"].map((x:string,i:number)=><div key={x} className="text-center"><div className={`h-5 rounded-sm ${i===3||i===4 ? "bg-red-400/75" : i===2||i===5 ? "bg-amber-300/70" : "bg-emerald-300/60"}`}/><div className="mt-0.5 truncate font-mono text-[6px] text-white/35">{x}</div></div>)}</div>
       </div>
     : stage.kind==="playbook"
     ? <div className="mt-2 rounded-md border border-white/8 bg-black/10 p-2">
@@ -57,7 +57,7 @@ function TerminalReport({stage}:{stage:any}) {
       </div>
     : stage.kind==="execute"
     ? <div className="mt-2 grid grid-cols-3 gap-1.5 font-mono text-[7px] text-center">
-        {[["DEV","8/8","green"],["TEST","14/14","green"],["UAT","11/13","amber"]].map(([env,value,tone])=><div key={env} className={\`rounded-md border px-2 py-1.5 \${tone==="green" ? "border-emerald-400/15 bg-emerald-500/8 text-emerald-300" : "border-amber-400/15 bg-amber-500/8 text-amber-300"}\`}><div className="text-white/35">{env}</div><div className="mt-0.5 text-sm font-extrabold">{value}</div><div className="text-[6px] opacity-55">{tone==="green" ? "PASS" : "RUNNING"}</div></div>)}
+        {[["DEV","8/8","green"],["TEST","14/14","green"],["UAT","11/13","amber"]].map(([env,value,tone])=><div key={env} className={`rounded-md border px-2 py-1.5 ${tone==="green" ? "border-emerald-400/15 bg-emerald-500/8 text-emerald-300" : "border-amber-400/15 bg-amber-500/8 text-amber-300"}`}><div className="text-white/35">{env}</div><div className="mt-0.5 text-sm font-extrabold">{value}</div><div className="text-[6px] opacity-55">{tone==="green" ? "PASS" : "RUNNING"}</div></div>)}
       </div>
     : stage.kind==="actions"
     ? <div className="mt-2 rounded-md border border-white/8 bg-black/10 p-2">
