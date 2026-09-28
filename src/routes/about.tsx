@@ -28,7 +28,7 @@ function AboutPage() {
         <div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 lg:px-10 lg:py-28">
           <div className="max-w-5xl">
             <div className="font-mono text-[10px] font-bold uppercase tracking-[.2em] text-[#f18a32]">About Shyena</div>
-            <h1 className="mt-5 font-[Sora] text-[clamp(3rem,6vw,6rem)] font-extrabold leading-[.9] tracking-[-.065em]">Quality engineering for AI systems that need evidence.</h1>
+            <h1 className="mt-5 font-[Sora] text-[clamp(3rem,6vw,6rem)] font-extrabold leading-[.9] tracking-[-.065em]">Built by a test lead who got tired of green checkmarks on broken conversations.</h1>
             <p className="mt-7 max-w-3xl text-lg leading-8 text-white/60">Shyena is a founder-led AI assurance offering focused on realistic evaluation, security testing, traceable evidence and governance workflows.</p>
           </div>
         </div>
@@ -44,7 +44,7 @@ function AboutPage() {
             </div>
             <div className="rounded-2xl border border-[#e1e4e9] bg-[#fafbfc] p-7 sm:p-8">
               <p className="text-lg leading-8 text-[#4f5968]">Parimi's background is in test leadership and conversational-AI quality engineering, with Shyena built around the practical problem of turning complex AI behaviour into repeatable evaluation and release evidence.</p>
-              <p className="mt-5 text-lg leading-8 text-[#4f5968]">Being small is intentional: design and engineering decisions stay close to the work, with direct access to the engineer who built the platform.</p>
+              <p className="mt-5 text-lg leading-8 text-[#4f5968]">Being small is intentional: design and engineering decisions stay close to the work, with direct access to the founder who built the platform.</p>
             </div>
           </div>
         </div>
