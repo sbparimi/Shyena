@@ -1,68 +1,26 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { ExecutivePage } from "@/components/site/executive-page";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRight, Check, ShieldCheck } from "lucide-react";
 
-const SITE_URL = "https://www.shyena.eu";
-const CANONICAL = `${SITE_URL}/vera`;
-const TITLE = "VERA — AI Agent Testing & Evaluation | Shyena";
-const DESCRIPTION = "VERA tests real AI agent journeys, evaluates behaviour and outcomes, and turns execution evidence into release-ready decisions.";
+const SITE="https://www.shyena.eu";
+const FAQ=[["Is Vera only an LLM-as-judge?","No. Semantic judgement is one layer. Deterministic and execution-integrity checks remain explicit."],["Does it test multi-turn conversations?","Yes. The assurance model is designed around realistic journeys rather than isolated prompts."],["Can a semantic pass hide a failure?","No. Hard deterministic and security gates remain explicit."]];
 
-export const Route = createFileRoute("/vera")({
-  head: () => ({
-    meta: [
-      { title: TITLE },
-      { name: "description", content: DESCRIPTION },
-      { name: "robots", content: "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" },
-      { property: "og:title", content: TITLE },
-      { property: "og:description", content: DESCRIPTION },
-      { property: "og:type", content: "website" },
-      { property: "og:site_name", content: "Shyena" },
-      { property: "og:url", content: CANONICAL },
-      { property: "og:image", content: `${SITE_URL}/shyena-logo-lockup.svg?v=20260917` },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: TITLE },
-      { name: "twitter:description", content: DESCRIPTION },
-      { name: "twitter:image", content: `${SITE_URL}/shyena-logo-lockup.svg?v=20260917` },
-    ],
-    links: [{ rel: "canonical", href: CANONICAL }],
-  }),
-  component: VeraPage,
-});
+export const Route=createFileRoute("/vera")({
+ head:()=>({links:[{rel:"canonical",href:SITE+"/vera"}],meta:[
+  {title:"Judge every answer (Vera) | Shyena AI Assurance"},
+  {name:"description",content:"Run realistic journeys and evaluate whether the business outcome was actually achieved."},
+  {property:"og:title",content:"Judge every answer (Vera) | Shyena AI Assurance"},
+  {property:"og:description",content:"Run realistic journeys and evaluate whether the business outcome was actually achieved."},
+  {property:"og:url",content:SITE+"/vera"},
+  {name:"twitter:card",content:"summary_large_image"},
+  {name:"twitter:title",content:"Judge every answer (Vera) | Shyena AI Assurance"},
+  {name:"twitter:description",content:"Run realistic journeys and evaluate whether the business outcome was actually achieved."}
+ ]}),component:Page});
 
-function VeraPage() {
-  return <ExecutivePage
-    eyebrow="VERA · Test & Evaluate"
-    title="Test real AI behaviour."
-    accent="Prove the outcome."
-    intro="VERA runs realistic agent journeys and evaluates what actually happened—not just whether an automation step passed. It combines deterministic checks, semantic evaluation and execution evidence into a release-ready verdict."
-    primaryLabel="See VERA in action"
-    capabilities={[
-      { title: "Run real journeys", body: "Execute multi-turn customer journeys across web, API and agent experiences." },
-      { title: "Evaluate behaviour", body: "Check outcomes, business rules, routing, state, tool use and execution integrity." },
-      { title: "Prove the result", body: "Collect evidence and produce a requirement-level verdict instead of a raw test status." },
-    ]}
-    workflow={[
-      { step: "01", title: "Start with intent", body: "Use a business requirement and implementation-independent test contract." },
-      { step: "02", title: "Plan", body: "Select journeys, data, environments and the right execution engine." },
-      { step: "03", title: "Execute", body: "Run the journey through the application or agent." },
-      { step: "04", title: "Observe", body: "Capture DOM, network, API, logs, traces and business events." },
-      { step: "05", title: "Evaluate", body: "Combine deterministic proof with bounded semantic reasoning." },
-      { step: "06", title: "Verdict", body: "Return pass, fail, blocked or review with evidence and impact." },
-    ]}
-    outcomeTitle="A failed automation step is not the same thing as a failed requirement."
-    outcomes={[
-      { title: "Outcome-level validation", body: "Judge whether the customer or business goal was actually satisfied." },
-      { title: "Execution integrity", body: "Detect routing, state, tool and orchestration failures that final-answer checks miss." },
-      { title: "Evidence", body: "Keep the signals needed to reproduce and defend the finding." },
-      { title: "Release readiness", body: "Turn quality results into a clear engineering decision." },
-    ]}
-    proofTitle="One evaluation model"
-    proof={[
-      { label: "Deterministic", value: "Rules & invariants" },
-      { label: "Semantic", value: "Behaviour & intent" },
-      { label: "Execution", value: "Runtime integrity" },
-      { label: "Verdict", value: "Evidence-backed" },
-    ]}
-    finalTitle="Don't ask only: did the test pass?"
-    finalBody="Ask whether the requirement was actually satisfied. VERA connects the answer to runtime evidence, risk and release impact."
-  />;
-}
+function Page(){return <main className="bg-white text-[#17213f]">
+ <section className="bg-[#07101f] text-white"><div className="mx-auto max-w-[1200px] px-5 py-20 sm:px-8 lg:px-10 lg:py-28"><div className="max-w-4xl"><div className="font-mono text-[10px] font-bold uppercase tracking-[.2em] text-[#f18a32]">Vera · Judge every answer</div><h1 className="mt-5 font-[Sora] text-[clamp(3rem,6vw,6rem)] font-extrabold leading-[.9] tracking-[-.065em]">Judge every answer.<br/><span className="text-[#f18a32]">Run realistic journeys and evaluate whether the business outcome was actually achieved.</span></h1><p className="mt-7 max-w-3xl text-lg leading-8 text-white/60">Run realistic journeys and evaluate whether the business outcome was actually achieved.</p><div className="mt-8 flex flex-wrap gap-3"><Link to="/contact" className="inline-flex h-11 items-center gap-2 rounded-lg bg-[#e87512] px-5 text-sm font-bold text-white">Book a 30-min call <ArrowRight className="h-4 w-4"/></Link><Link to="/sample-report" className="inline-flex h-11 items-center gap-2 rounded-lg border border-white/15 px-5 text-sm font-bold text-white/80">See sample evidence <ArrowRight className="h-4 w-4"/></Link></div></div></div></section>
+ <section className="border-b border-[#e6e8ed] bg-[#fafbfc]"><div className="mx-auto max-w-[1200px] px-5 py-16 sm:px-8 lg:px-10 lg:py-20"><div className="rounded-2xl border border-[#e1e4e9] bg-white p-6 sm:p-8"><div className="mb-4 font-mono text-[9px] font-bold uppercase tracking-[.16em] text-[#8b929d]">Illustrative Vera evidence</div><div className="grid gap-3 md:grid-cols-3"><div className="rounded-xl border border-[#dfe3e8] bg-[#fafbfc] p-5"><div className="text-xs font-bold text-[#e87512]">Input</div><div className="mt-2 text-sm font-semibold">User goal + conversation</div></div><div className="rounded-xl border border-[#dfe3e8] bg-[#fafbfc] p-5"><div className="text-xs font-bold text-[#e87512]">Evidence</div><div className="mt-2 text-sm font-semibold">Turn-by-turn verdict + trace</div></div><div className="rounded-xl border border-[#dfe3e8] bg-[#fafbfc] p-5"><div className="text-xs font-bold text-[#e87512]">Output</div><div className="mt-2 text-sm font-semibold">Release finding</div></div></div></div></div></section>
+ <section><div className="mx-auto max-w-[1200px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24"><div className="grid gap-12 lg:grid-cols-[.75fr_1.25fr]"><div><div className="text-sm font-bold text-[#e87512]">What it checks</div><h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em]">Concrete checks, not a black-box score.</h2></div><div className="grid gap-3 sm:grid-cols-2"><div className="rounded-xl border border-[#e1e4e9] bg-[#fafbfc] p-5"><Check className="h-5 w-5 text-[#e87512]"/><div className="mt-4 text-sm font-bold">Task completion</div></div><div className="rounded-xl border border-[#e1e4e9] bg-[#fafbfc] p-5"><Check className="h-5 w-5 text-[#e87512]"/><div className="mt-4 text-sm font-bold">Business-rule adherence</div></div><div className="rounded-xl border border-[#e1e4e9] bg-[#fafbfc] p-5"><Check className="h-5 w-5 text-[#e87512]"/><div className="mt-4 text-sm font-bold">Answer relevance and correctness</div></div><div className="rounded-xl border border-[#e1e4e9] bg-[#fafbfc] p-5"><Check className="h-5 w-5 text-[#e87512]"/><div className="mt-4 text-sm font-bold">Intent and routing</div></div><div className="rounded-xl border border-[#e1e4e9] bg-[#fafbfc] p-5"><Check className="h-5 w-5 text-[#e87512]"/><div className="mt-4 text-sm font-bold">Tool selection and execution</div></div><div className="rounded-xl border border-[#e1e4e9] bg-[#fafbfc] p-5"><Check className="h-5 w-5 text-[#e87512]"/><div className="mt-4 text-sm font-bold">State and trajectory integrity</div></div></div></div></div></section>
+ <section className="border-y border-[#e6e8ed] bg-[#fafbfc]"><div className="mx-auto max-w-[1200px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24"><div className="grid gap-10 lg:grid-cols-[.8fr_1.2fr]"><div><div className="text-sm font-bold text-[#e87512]">What you get</div><h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em]">An artefact your engineering team can act on.</h2></div><ul className="grid gap-3 sm:grid-cols-2"><li className="flex gap-3 rounded-xl border border-[#e1e4e9] bg-white p-5 text-sm leading-6 text-[#596273]"><ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-[#e87512]"/>Turn-by-turn evidence</li><li className="flex gap-3 rounded-xl border border-[#e1e4e9] bg-white p-5 text-sm leading-6 text-[#596273]"><ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-[#e87512]"/>Deterministic assertions</li><li className="flex gap-3 rounded-xl border border-[#e1e4e9] bg-white p-5 text-sm leading-6 text-[#596273]"><ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-[#e87512]"/>Bounded semantic evaluation</li><li className="flex gap-3 rounded-xl border border-[#e1e4e9] bg-white p-5 text-sm leading-6 text-[#596273]"><ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-[#e87512]"/>Release-ready findings and verdicts</li></ul></div></div></section>
+ <section><div className="mx-auto max-w-[900px] px-5 py-20 sm:px-8 lg:py-24"><div className="text-center"><div className="text-sm font-bold text-[#e87512]">FAQ</div><h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em]">Questions about Vera.</h2></div><div className="mt-9 space-y-3"><details className="rounded-xl border border-[#e1e4e9] bg-white p-5"><summary className="cursor-pointer list-none font-bold">Is Vera only an LLM-as-judge?</summary><p className="mt-3 text-sm leading-6 text-[#69707d]">No. Semantic judgement is one layer. Deterministic and execution-integrity checks remain explicit.</p></details><details className="rounded-xl border border-[#e1e4e9] bg-white p-5"><summary className="cursor-pointer list-none font-bold">Does it test multi-turn conversations?</summary><p className="mt-3 text-sm leading-6 text-[#69707d]">Yes. The assurance model is designed around realistic journeys rather than isolated prompts.</p></details><details className="rounded-xl border border-[#e1e4e9] bg-white p-5"><summary className="cursor-pointer list-none font-bold">Can a semantic pass hide a failure?</summary><p className="mt-3 text-sm leading-6 text-[#69707d]">No. Hard deterministic and security gates remain explicit.</p></details></div></div></section>
+ <section className="bg-[#17213f] text-white"><div className="mx-auto max-w-[900px] px-5 py-16 text-center sm:px-8 lg:py-20"><h2 className="font-[Sora] text-3xl font-extrabold tracking-[-.04em]">See Vera against one real AI journey.</h2><Link to="/contact" className="mt-8 inline-flex h-11 items-center gap-2 rounded-lg bg-[#e87512] px-5 text-sm font-bold">Book a 30-min call <ArrowRight className="h-4 w-4"/></Link></div></section>
+ </main>}
