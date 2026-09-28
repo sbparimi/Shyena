@@ -14,25 +14,80 @@ const faq = [
 ];
 
 function IllustrativeRun() {
-  const lines = [
-    ["10:02", "map", "Found representative intents and customer journeys"],
-    ["10:04", "test", "Simulated realistic multi-turn conversations"],
-    ["10:06", "judge", "Detected answer-quality and business-rule findings"],
-    ["10:07", "attack", "Probed prompt-injection and unsafe tool paths"],
-    ["10:08", "report", "Created reproducible release evidence"],
-    ["10:09", "verdict", "BLOCK release · evidence pack attached"],
+  const commands = [
+    ["shyena run", "Full autonomous QA run", [
+      "Discovering application journeys",
+      "Generating targeted regression tests",
+      "Executing browser + API journeys",
+      "Evaluating AI-agent behaviour",
+      "Diagnosing failures",
+      "Building release evidence"
+    ]],
+    ["shyena discover", "Discover journeys", [
+      "Scanning available application paths",
+      "Mapping customer-critical journeys",
+      "Prioritising risk and change impact",
+      "Coverage map ready"
+    ]],
+    ["shyena agent evaluate", "Evaluate an AI agent", [
+      "Checking goal completion",
+      "Validating tool selection + arguments",
+      "Evaluating multi-turn behaviour",
+      "Checking grounding and guardrails",
+      "Agent evaluation complete"
+    ]],
+    ["shyena security test", "Attack critical paths", [
+      "Probing prompt injection",
+      "Testing unsafe tool paths",
+      "Checking boundary enforcement",
+      "Reproducing security findings",
+      "Security evidence captured"
+    ]],
+    ["shyena diagnose", "Diagnose failures", [
+      "Correlating trace + test evidence",
+      "Reproducing failure",
+      "Isolating likely failure point",
+      "Generating regression case"
+    ]],
+    ["shyena release", "Release decision", [
+      "Running release gate",
+      "Checking deterministic results",
+      "Checking agent evaluation",
+      "Checking security findings",
+      "Evidence pack generated"
+    ]]
   ];
-  return <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#07101f] shadow-[0_30px_90px_-45px_rgba(7,16,31,.8)]">
-    <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
-      <span className="font-mono text-[10px] font-bold uppercase tracking-[.18em] text-white/45">Illustrative run</span>
-      <span className="rounded-full border border-white/10 px-2.5 py-1 font-mono text-[9px] text-white/35">SYNTHETIC</span>
+  const [active, setActive] = React.useState(0);
+  const [command, title, output] = commands[active];
+  return <div className="overflow-hidden rounded-[18px] border border-white/10 bg-[#0d1117] shadow-[0_35px_100px_-45px_rgba(0,0,0,.95)] ring-1 ring-black/20">
+    <div className="flex items-center gap-2 border-b border-white/10 bg-[#171b22] px-4 py-3">
+      <span className="h-3 w-3 rounded-full bg-[#ff5f57]"/><span className="h-3 w-3 rounded-full bg-[#febc2e]"/><span className="h-3 w-3 rounded-full bg-[#28c840]"/>
+      <span className="ml-3 flex-1 text-center font-mono text-[10px] text-white/35">shyena — zsh — 120×38</span>
+      <span className="font-mono text-[9px] text-white/25">iTerm2</span>
     </div>
-    <div className="space-y-3 p-5 font-mono text-[11px] leading-5 sm:p-7">
-      <div className="text-white/35">$ shyena assure --agent customer-service-bot</div>
-      {lines.map(([time,phase,text],i)=><div key={phase} className="grid grid-cols-[42px_52px_1fr] gap-2">
-        <span className="text-white/30">{time}</span><span className={i===5 ? "text-[#ff8b43]" : "text-[#8fa1ff]"}>{phase}</span><span className={i===5 ? "font-bold text-white" : "text-white/65"}>{text}</span>
-      </div>)}
+    <div className="border-b border-white/10 bg-[#11151c] px-3 py-2 sm:px-4">
+      <div className="flex gap-1 overflow-x-auto">
+        {commands.map(([cmd],i)=><button type="button" key={cmd} onClick={()=>setActive(i)} className={`shrink-0 rounded-md px-2.5 py-1.5 font-mono text-[9px] font-semibold transition ${i===active ? "bg-white/10 text-white" : "text-white/35 hover:text-white/65"}`}>{cmd}</button>)}
+      </div>
     </div>
+    <div className="min-h-[310px] p-4 font-mono text-[10px] leading-5 sm:p-6 sm:text-[11px]">
+      <div className="text-white/35">Last login: today on ttys001</div>
+      <div className="mt-3 text-white"><span className="text-[#28c840]">~/projects/customer-ai</span> <span className="text-white/45">% </span><span>{command}</span></div>
+      <div className="mt-1 text-[#f18a32]">→ {title}</div>
+      <div className="mt-4 space-y-1.5">
+        {output.map((line,i)=><div key={line} className="flex gap-2"><span className="text-[#28c840]">{i===output.length-1 ? "✓" : "•"}</span><span className={i===output.length-1 ? "text-white" : "text-white/60"}>{line}</span></div>)}
+      </div>
+      <div className="mt-5 border-t border-white/10 pt-4">
+        {active===0 && <><div className="flex justify-between text-white/50"><span>Journeys</span><span className="text-white">42 discovered</span></div><div className="flex justify-between text-white/50"><span>Tests</span><span className="text-white">126 executed</span></div><div className="mt-2 font-bold text-[#ff8b43]">✕ RELEASE BLOCKED · 2 findings require attention</div></>}
+        {active===1 && <div className="font-bold text-white">✓ Journey map ready for autonomous execution</div>}
+        {active===2 && <div className="font-bold text-white">✓ Agent verdict: REVIEW · evidence attached</div>}
+        {active===3 && <div className="font-bold text-[#ff8b43]">✕ Security verdict: FAIL · reproducible finding</div>}
+        {active===4 && <div className="font-bold text-white">✓ Root cause isolated · regression generated</div>}
+        {active===5 && <div className="font-bold text-[#ff8b43]">✕ RELEASE BLOCKED · evidence pack attached</div>}
+      </div>
+      <div className="mt-4 text-white/25">▌</div>
+    </div>
+    <div className="border-t border-white/10 bg-[#11151c] px-4 py-3 text-[9px] text-white/30">Synthetic product demonstration · CLI commands represent the Shyena workflow</div>
   </div>;
 }
 
