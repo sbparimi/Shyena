@@ -14,192 +14,136 @@ const faq = [
   ["Can we start small?", "Yes. Start with an Autonomous QA Pilot or the €7,500 Agentic Evaluation Programme."]
 ];
 
+function ReportMetric({label,value,detail,accent="orange"}:{label:string;value:string;detail?:string;accent?:string}) {
+  const tone = accent==="red" ? "text-red-600 bg-red-50 border-red-100" : accent==="green" ? "text-emerald-600 bg-emerald-50 border-emerald-100" : accent==="amber" ? "text-amber-600 bg-amber-50 border-amber-100" : "text-[#e87512] bg-[#fff5ec] border-[#f5dcc5]";
+  return <div className={\`rounded-lg border p-3 \${tone}\`}>
+    <div className="text-[8px] font-bold uppercase tracking-[.13em] opacity-70">{label}</div>
+    <div className="mt-1 text-xl font-extrabold tracking-[-.04em]">{value}</div>
+    {detail && <div className="mt-1 text-[8px] leading-4 opacity-70">{detail}</div>}
+  </div>;
+}
+
+function MiniBars({items}:{items:Array<[string,number,string]>}) {
+  return <div className="space-y-2">{items.map(([label,value,tone])=><div key={label}>
+    <div className="mb-1 flex justify-between text-[8px] font-semibold text-[#687180]"><span>{label}</span><span>{value}%</span></div>
+    <div className="h-1.5 overflow-hidden rounded-full bg-[#e9edf1]"><div className={\`h-full rounded-full \${tone}\`} style={{width:\`\${value}%\`}}/></div>
+  </div>)}</div>;
+}
+
+function HeroReport({stage}:{stage:any}) {
+  const common = <div className="grid grid-cols-2 gap-2">
+    {stage.metrics.map((m:any)=><ReportMetric key={m.label} {...m}/>)}
+  </div>;
+
+  const visual = stage.kind==="impact"
+    ? <div className="mt-3 rounded-lg border border-[#e4e8ed] bg-white p-3"><div className="mb-2 text-[8px] font-bold uppercase tracking-[.13em] text-[#8b929d]">Critical path heatmap</div><div className="grid grid-cols-7 gap-1">{["RFQ","REQ","INV","PRICE","MARGIN","QUOTE","CUSTOMER"].map((x:any,i:number)=><div key={x} className="text-center"><div className={\`h-7 rounded \${i===3||i===4 ? "bg-red-400" : i===2||i===5 ? "bg-amber-300" : "bg-emerald-300"}\`}/><div className="mt-1 truncate text-[6px] font-bold text-[#687180]">{x}</div></div>)}</div></div>
+    : stage.kind==="playbook"
+    ? <div className="mt-3 rounded-lg border border-[#e4e8ed] bg-white p-3"><div className="mb-2 flex items-center justify-between text-[8px] font-bold uppercase tracking-[.13em] text-[#8b929d]"><span>Generated coverage</span><span className="text-[#e87512]">46 cases</span></div><MiniBars items={[[\"Smoke\",80,\"bg-[#e87512]\"],[\"Release\",92,\"bg-[#e87512]\"],[\"E2E\",100,\"bg-[#17213f]\"],[\"P0/P1 risk paths\",76,\"bg-red-400\"]]}/></div>
+    : stage.kind==="execute"
+    ? <div className="mt-3 rounded-lg border border-[#e4e8ed] bg-white p-3"><div className="mb-2 text-[8px] font-bold uppercase tracking-[.13em] text-[#8b929d]">Execution matrix</div><div className="grid grid-cols-3 gap-2 text-center text-[8px] font-bold"><div className="rounded bg-emerald-50 p-2 text-emerald-700">DEV<br/><span className="text-base">8/8</span></div><div className="rounded bg-emerald-50 p-2 text-emerald-700">TEST<br/><span className="text-base">14/14</span></div><div className="rounded bg-amber-50 p-2 text-amber-700">UAT<br/><span className="text-base">11/13</span></div></div></div>
+    : stage.kind==="actions"
+    ? <div className="mt-3 rounded-lg border border-[#e4e8ed] bg-white p-3"><div className="mb-2 text-[8px] font-bold uppercase tracking-[.13em] text-[#8b929d]">CI evidence stream</div><MiniBars items={[[\"Checkout + graph\",100,\"bg-emerald-500\"],[\"Contract + smoke\",100,\"bg-emerald-500\"],[\"Agent evaluation\",100,\"bg-emerald-500\"],[\"UAT + evidence\",62,\"bg-amber-400\"]]}/></div>
+    : stage.kind==="diagnose"
+    ? <div className="mt-3 rounded-lg border border-red-100 bg-red-50 p-3"><div className="flex items-center justify-between"><div className="text-[8px] font-bold uppercase tracking-[.13em] text-red-700">Autonomous RCA</div><span className="rounded bg-red-600 px-2 py-1 text-[7px] font-bold text-white">P1</span></div><div className="mt-2 grid grid-cols-3 gap-2 text-[8px]"><div><b>Trigger</b><br/>price refresh</div><div><b>Propagation</b><br/>approval cache</div><div><b>Decision</b><br/>guard missing</div></div><div className="mt-2 rounded bg-white/70 p-2 text-[8px] font-semibold text-red-800">Regression case generated · SHY-F-001 · replay 3/3</div></div>
+    : <div className="mt-3 rounded-lg border border-[#e4e8ed] bg-white p-3"><div className="mb-2 flex items-center justify-between"><div className="text-[8px] font-bold uppercase tracking-[.13em] text-[#8b929d]">Release gate</div><span className="rounded bg-red-600 px-2 py-1 text-[7px] font-bold text-white">BLOCK</span></div><div className="grid grid-cols-3 gap-2 text-center text-[8px]"><div className="rounded bg-emerald-50 p-2 text-emerald-700"><b>42</b><br/>PASS</div><div className="rounded bg-amber-50 p-2 text-amber-700"><b>3</b><br/>REVIEW</div><div className="rounded bg-red-50 p-2 text-red-700"><b>1</b><br/>FAIL</div></div></div>;
+
+  return <div className="rounded-2xl border border-[#dfe3e8] bg-white p-4 shadow-[0_25px_80px_-55px_rgba(0,0,0,.65)] sm:p-5">
+    <div className="flex items-center justify-between border-b border-[#e8ebef] pb-3">
+      <div><div className="text-[8px] font-bold uppercase tracking-[.16em] text-[#e87512]">Executive view · illustrative</div><div className="mt-1 text-sm font-extrabold tracking-[-.02em]">{stage.reportTitle}</div></div>
+      <div className="rounded-full border border-[#e8ebef] bg-[#fafbfc] px-2 py-1 font-mono text-[7px] text-[#7d8591]">RFQ-2026-184</div>
+    </div>
+    <div className="mt-3">{common}</div>
+    {visual}
+    <div className="mt-3 border-t border-[#e8ebef] pt-3 text-[8px] leading-4 text-[#69707d]"><b className="text-[#17213f]">Executive takeaway:</b> {stage.takeaway}</div>
+  </div>;
+}
+
 function IllustrativeRun() {
   const stages = [
     {
-      command: "$ shyena qa --pr 284 --rfq RFQ-2026-184 --repo .",
-      label: "INTAKE + REPO SCAN",
-      lines: [
-        "Scenario        VANILLA STEEL · synthetic RFQ demo",
-        "RFQ             RFQ-2026-184 · hot-rolled steel",
-        "PR              #284 · pricing + quotation workflow",
-        "Repository      ./vanilla-steel-quote",
-        "Changed files   31 · +684 / -142",
-        "",
-        "Scanning git diff, history and dependency graph...",
-        "Mapping changes → RFQ → inventory → pricing → quote",
-        "Tracing ERP / API / agent boundaries...",
-        "Impact analysis complete"
-      ],
-      result: "12 workflow nodes · 7 APIs · 5 agents · 14 journeys affected"
+      command: "$ shyena qa --pr 284 --rfq RFQ-2026-184 --repo .", label: "INTAKE + REPO SCAN", kind:"intake",
+      lines:["Scenario        VANILLA STEEL · synthetic RFQ demo","RFQ             RFQ-2026-184 · hot-rolled steel","PR              #284 · pricing + quotation workflow","Repository      ./vanilla-steel-quote","Changed files   31 · +684 / -142","","Scanning git diff, history and dependency graph...","Mapping changes → RFQ → inventory → pricing → quote","Tracing ERP / API / agent boundaries...","Impact analysis complete"],
+      result:"12 workflow nodes · 7 APIs · 5 agents · 14 journeys affected",
+      reportTitle:"Change intelligence", takeaway:"31 changed files resolve into 12 workflow nodes and 14 affected customer journeys. Testing is scoped to the change surface rather than the whole repository.",
+      metrics:[{label:"Changed files",value:"31",detail:"+684 / -142"},{label:"Affected journeys",value:"14",detail:"mapped from PR impact"},{label:"APIs",value:"7",detail:"critical boundaries"},{label:"Agent nodes",value:"5",detail:"reasoning/tool paths"}]
     },
     {
-      command: "$ shyena impact --pr 284 --workflow rfq",
-      label: "RFQ IMPACT MAP",
-      lines: [
-        "RFQ intake → requirement extraction",
-        "  Grade: S355 · Thickness: 12mm · Width: 1500mm",
-        "  Quantity: 240 MT · Delivery: Rotterdam",
-        "",
-        "Inventory → stock availability + reservation",
-        "Supplier → mill lead time + minimum lot",
-        "Pricing → base price + freight + margin",
-        "Quotation → currency + validity + Incoterms",
-        "Approval → margin threshold + authority",
-        "Customer → quote delivery + response handling",
-        "",
-        "Critical-path propagation complete"
-      ],
-      result: "P0 2 · P1 6 · P2 9 impacted business paths"
+      command: "$ shyena impact --pr 284 --workflow rfq", label: "RFQ IMPACT MAP", kind:"impact",
+      lines:["RFQ intake → requirement extraction","  Grade: S355 · Thickness: 12mm · Width: 1500mm","  Quantity: 240 MT · Delivery: Rotterdam","","Inventory → stock availability + reservation","Supplier → mill lead time + minimum lot","Pricing → base price + freight + margin","Quotation → currency + validity + Incoterms","Approval → margin threshold + authority","Customer → quote delivery + response handling","","Critical-path propagation complete"],
+      result:"P0 2 · P1 6 · P2 9 impacted business paths",
+      reportTitle:"Business impact map", takeaway:"The critical path concentrates risk around inventory, pricing and margin approval. Those paths become release-gate coverage.",
+      metrics:[{label:"P0 paths",value:"2",detail:"release critical",accent:"red"},{label:"P1 paths",value:"6",detail:"high impact",accent:"amber"},{label:"P2 paths",value:"9",detail:"secondary impact"},{label:"Workflow nodes",value:"12",detail:"propagation mapped"}]
     },
     {
-      command: "$ shyena playbook generate --pr 284 --rfq RFQ-2026-184",
-      label: "TAML PLAYBOOK",
-      lines: [
-        "Synthesising playbook from PR + workflow impact...",
-        "",
-        "TC-RFQ-001  rfq_intake_complete",
-        "  smoke · release · e2e · P0",
-        "TC-RFQ-007  stock_and_allocation",
-        "  release · e2e · P0",
-        "TC-RFQ-014  supplier_price_resolution",
-        "  e2e · P1",
-        "TC-RFQ-021  margin_approval_gate",
-        "  release · e2e · P1",
-        "TC-RFQ-027  quotation_generation",
-        "  smoke · release · e2e · P1",
-        "TC-RFQ-034  customer_quote_response",
-        "  e2e · P2",
-        "",
-        "Playbook compiled · 46 executable cases"
-      ],
-      result: "Smoke 8 · Release 18 · E2E 46 · P0 3 · P1 17 · P2 26"
+      command: "$ shyena playbook generate --pr 284 --rfq RFQ-2026-184", label: "TAML PLAYBOOK", kind:"playbook",
+      lines:["Synthesising playbook from PR + workflow impact...","","TC-RFQ-001  rfq_intake_complete","  smoke · release · e2e · P0","TC-RFQ-007  stock_and_allocation","  release · e2e · P0","TC-RFQ-014  supplier_price_resolution","  e2e · P1","TC-RFQ-021  margin_approval_gate","  release · e2e · P1","TC-RFQ-027  quotation_generation","  smoke · release · e2e · P1","TC-RFQ-034  customer_quote_response","  e2e · P2","","Playbook compiled · 46 executable cases"],
+      result:"Smoke 8 · Release 18 · E2E 46 · P0 3 · P1 17 · P2 26",
+      reportTitle:"Generated release playbook", takeaway:"The change impact is converted into executable coverage: 46 cases spanning smoke, release and end-to-end paths, with priority attached to business risk.",
+      metrics:[{label:"Executable cases",value:"46",detail:"generated from impact"},{label:"Release cases",value:"18",detail:"release-gate scope"},{label:"P0",value:"3",detail:"critical paths",accent:"red"},{label:"P1",value:"17",detail:"high-risk paths",accent:"amber"}]
     },
     {
-      command: "$ shyena test --playbook vanilla-steel-rfq",
-      label: "AUTONOMOUS EXECUTION",
-      lines: [
-        "[PLAYWRIGHT]  RFQ portal login ................. RUN",
-        "[PLAYWRIGHT]  Upload RFQ + parse requirements .... RUN",
-        "[AGENT]      Requirement extraction ............. RUN",
-        "[API]        Inventory availability ............ RUN",
-        "[API]        Supplier pricing .................. RUN",
-        "[CLAUDE]     Quote reasoning + tool choice ...... RUN",
-        "[CLAUDE]     Margin / policy interpretation .... RUN",
-        "",
-        "[DEV]        8/8 smoke ........................ PASS",
-        "[TEST]       14/14 release .................... PASS",
-        "[UAT]        11/13 quotation journeys ......... RUN"
-      ],
-      result: "Playwright + API + Claude execution · 33/46 cases completed"
+      command: "$ shyena test --playbook vanilla-steel-rfq", label: "AUTONOMOUS EXECUTION", kind:"execute",
+      lines:["[PLAYWRIGHT]  RFQ portal login ................. RUN","[PLAYWRIGHT]  Upload RFQ + parse requirements .... RUN","[AGENT]      Requirement extraction ............. RUN","[API]        Inventory availability ............ RUN","[API]        Supplier pricing .................. RUN","[CLAUDE]     Quote reasoning + tool choice ...... RUN","[CLAUDE]     Margin / policy interpretation .... RUN","","[DEV]        8/8 smoke ........................ PASS","[TEST]       14/14 release .................... PASS","[UAT]        11/13 quotation journeys ......... RUN"],
+      result:"Playwright + API + Claude execution · 33/46 cases completed",
+      reportTitle:"Autonomous execution", takeaway:"The same playbook is exercised across browser, API and agent boundaries. The report separates completed evidence from journeys still running.",
+      metrics:[{label:"Completed",value:"33/46",detail:"cases executed"},{label:"Smoke",value:"8/8",detail:"PASS",accent:"green"},{label:"Release",value:"14/14",detail:"PASS",accent:"green"},{label:"UAT",value:"11/13",detail:"in execution",accent:"amber"}]
     },
     {
-      command: "$ shyena github-action run --pr 284 --rfq RFQ-2026-184",
-      label: "GITHUB ACTIONS",
-      lines: [
-        "GitHub Actions · vanilla-steel-rfq-284",
-        "",
-        "01  checkout + dependency graph .......... PASS",
-        "02  unit + contract tests ................. PASS",
-        "03  Playwright smoke ...................... PASS",
-        "04  Playwright RFQ release ................ PASS",
-        "05  Claude agent evaluation ............... PASS",
-        "06  pricing + margin policy ............... PASS",
-        "07  UAT quotation E2E .................... RUN",
-        "08  release evidence ..................... WAIT",
-        "",
-        "Collecting screenshots · traces · API logs"
-      ],
-      result: "6 stages passed · UAT stage executing · evidence streaming"
+      command: "$ shyena github-action run --pr 284 --rfq RFQ-2026-184", label: "GITHUB ACTIONS", kind:"actions",
+      lines:["GitHub Actions · vanilla-steel-rfq-284","","01  checkout + dependency graph .......... PASS","02  unit + contract tests ................. PASS","03  Playwright smoke ...................... PASS","04  Playwright RFQ release ................ PASS","05  Claude agent evaluation ............... PASS","06  pricing + margin policy ............... PASS","07  UAT quotation E2E .................... RUN","08  release evidence ..................... WAIT","","Collecting screenshots · traces · API logs"],
+      result:"6 stages passed · UAT stage executing · evidence streaming",
+      reportTitle:"CI evidence stream", takeaway:"Release evidence is assembled as execution happens: traces, screenshots and API logs remain attached to the decision instead of being reconstructed later.",
+      metrics:[{label:"CI stages passed",value:"6/8",detail:"pipeline progress"},{label:"Agent eval",value:"PASS",detail:"Claude evaluation",accent:"green"},{label:"Policy checks",value:"PASS",detail:"pricing + margin",accent:"green"},{label:"Evidence",value:"STREAM",detail:"traces + screenshots"}]
     },
     {
-      command: "$ shyena diagnose --run vanilla-steel-284",
-      label: "LIVE FAILURE DIAGNOSIS",
-      lines: [
-        "Failure reproduced: TC-RFQ-021",
-        "Journey: supplier price → margin approval",
-        "",
-        "Expected  Quote blocked below margin threshold",
-        "Actual    Quote submitted for approval",
-        "Trace     margin policy tool returned stale value",
-        "",
-        "Cross-checking git diff + API trace + screenshot",
-        "Changed   pricing/margin-policy.ts",
-        "Impact    approval gate + quotation service",
-        "",
-        "Generating permanent regression case..."
-      ],
-      result: "1 P1 defect reproduced · regression added to release pack"
+      command: "$ shyena diagnose --run vanilla-steel-284", label: "LIVE FAILURE DIAGNOSIS", kind:"diagnose",
+      lines:["Failure reproduced: TC-RFQ-021","Journey: supplier price → margin approval","","Expected  Quote blocked below margin threshold","Actual    Quote submitted for approval","Trace     margin policy tool returned stale value","","Cross-checking git diff + API trace + screenshot","Changed   pricing/margin-policy.ts","Impact    approval gate + quotation service","","Generating permanent regression case..."],
+      result:"1 P1 defect reproduced · regression added to release pack",
+      reportTitle:"Autonomous bug report + RCA", takeaway:"The failure is reproduced, localized to a stale policy value at the margin guard, and converted into a permanent regression case. No manual evidence stitching is required.",
+      metrics:[{label:"Finding",value:"P1",detail:"release blocker",accent:"red"},{label:"Reproduced",value:"3/3",detail:"consecutive replays",accent:"green"},{label:"RCA confidence",value:"HIGH",detail:"evidence aligned",accent:"green"},{label:"Regression",value:"ADDED",detail:"permanent coverage"}]
     },
     {
-      command: "$ shyena report --rfq RFQ-2026-184 --release",
-      label: "QUOTATION ASSURANCE REPORT",
-      lines: [
-        "SHYENA AUTONOMOUS QA · VANILLA STEEL",
-        "RFQ-2026-184 · PR #284",
-        "",
-        "RFQ journeys executed ................ 46",
-        "Passed ................................ 42",
-        "Failed ................................ 1",
-        "Review ................................ 3",
-        "P0 .................................... 0",
-        "P1 .................................... 1",
-        "P2 .................................... 2",
-        "",
-        "Evidence: git diff · traces · screenshots",
-        "          API logs · Playwright · Claude",
-        "Playbook: vanilla-steel-rfq.taml",
-        "",
-        "RELEASE VERDICT  ✕ BLOCK"
-      ],
-      result: "Report generated · quotation evidence pack attached · RELEASE BLOCKED"
+      command: "$ shyena report --rfq RFQ-2026-184 --release", label: "QUOTATION ASSURANCE REPORT", kind:"report",
+      lines:["SHYENA AUTONOMOUS QA · VANILLA STEEL","RFQ-2026-184 · PR #284","","RFQ journeys executed ................ 46","Passed ................................ 42","Failed ................................ 1","Review ................................ 3","P0 .................................... 0","P1 .................................... 1","P2 .................................... 2","","Evidence: git diff · traces · screenshots","          API logs · Playwright · Claude","Playbook: vanilla-steel-rfq.taml","","RELEASE VERDICT  ✕ BLOCK"],
+      result:"Report generated · quotation evidence pack attached · RELEASE BLOCKED",
+      reportTitle:"Release assurance decision", takeaway:"46 journeys resolve to 42 PASS, 3 REVIEW and 1 FAIL. The P1 approval defect blocks release; the report also carries the RCA, CAPA and verification path.",
+      metrics:[{label:"Journeys",value:"46",detail:"executed"},{label:"PASS",value:"42",detail:"91.3%",accent:"green"},{label:"P1",value:"1",detail:"blocking finding",accent:"red"},{label:"Verdict",value:"BLOCK",detail:"release gate",accent:"red"}]
     }
   ];
 
-  const [active, setActive] = React.useState(0);
-  const [tick, setTick] = React.useState(0);
+  const [active,setActive]=React.useState(0);
+  const [tick,setTick]=React.useState(0);
+  const stage=stages[active];
+  const phase=tick<38 ? "terminal" : "report";
+  const terminalFrame=Math.min(38,tick);
+  const visibleLines=Math.min(stage.lines.length,Math.max(1,Math.floor(terminalFrame/2)+1));
+  const typedChars=Math.min(stage.command.length-2,Math.max(0,Math.floor(terminalFrame*1.45)));
+  const progress=phase==="report" ? 100 : Math.min(100,Math.round((terminalFrame/38)*100));
 
-  React.useEffect(() => {
-    const timer = window.setInterval(() => setTick(v => v + 1), 120);
-    return () => window.clearInterval(timer);
-  }, []);
+  React.useEffect(()=>{ const timer=window.setInterval(()=>setTick(v=>v+1),140); return()=>window.clearInterval(timer); },[]);
+  React.useEffect(()=>{ if(tick>=62){setActive(v=>(v+1)%stages.length);setTick(0);} },[tick,stages.length]);
 
-  React.useEffect(() => {
-    const timer = window.setInterval(() => {
-      setActive(v => (v + 1) % stages.length);
-    }, 5200);
-    return () => window.clearInterval(timer);
-  }, [stages.length]);
+  const selectStage=(i:number)=>{setActive(i);setTick(0);};
 
-  const stage = stages[active];
-  const frame = tick % 43;
-  const visibleLines = Math.min(stage.lines.length, Math.max(1, Math.floor(frame / 1.55) + 1));
-  const typedChars = Math.min(stage.command.length - 2, Math.max(0, Math.floor(frame * 1.9)));
-  const progress = Math.min(100, Math.round((frame / 43) * 100));
-
-  return <div className="overflow-hidden rounded-[18px] border border-white/10 bg-[#0d1117] shadow-[0_35px_100px_-45px_rgba(0,0,0,.95)] ring-1 ring-black/20">
-    <div className="flex items-center gap-2 border-b border-white/10 bg-[#171b22] px-4 py-3">
-      <span className="h-3 w-3 rounded-full bg-[#ff5f57]"/><span className="h-3 w-3 rounded-full bg-[#febc2e]"/><span className="h-3 w-3 rounded-full bg-[#28c840]"/>
-      <span className="ml-3 flex-1 text-center font-mono text-[10px] text-white/35">shyena — zsh — 120×42</span>
-      <span className="font-mono text-[9px] text-white/25">iTerm2</span>
-    </div>
-    <div className="border-b border-white/10 bg-[#11151c] px-3 py-2 sm:px-4">
-      <div className="flex items-center gap-2 overflow-x-auto">
-        {stages.map((item,i)=><button type="button" key={item.label} onClick={()=>{setActive(i);setTick(0)}} className={`shrink-0 rounded-md px-2.5 py-1.5 font-mono text-[9px] font-semibold transition ${i===active ? "bg-white/10 text-white" : "text-white/30 hover:text-white/60"}`}>{item.label}</button>)}
+  return <div className="space-y-3">
+    <div className="overflow-hidden rounded-[18px] border border-white/10 bg-[#0d1117] shadow-[0_35px_100px_-45px_rgba(0,0,0,.95)] ring-1 ring-black/20">
+      <div className="flex items-center gap-2 border-b border-white/10 bg-[#171b22] px-4 py-3"><span className="h-3 w-3 rounded-full bg-[#ff5f57]"/><span className="h-3 w-3 rounded-full bg-[#febc2e]"/><span className="h-3 w-3 rounded-full bg-[#28c840]"/><span className="ml-3 flex-1 text-center font-mono text-[10px] text-white/35">shyena — zsh — 120×42</span><span className="font-mono text-[9px] text-white/25">iTerm2</span></div>
+      <div className="border-b border-white/10 bg-[#11151c] px-3 py-2"><div className="flex items-center gap-2 overflow-x-auto">{stages.map((item,i)=><button type="button" key={item.label} onClick={()=>selectStage(i)} className={\`shrink-0 rounded-md px-2.5 py-1.5 font-mono text-[9px] font-semibold transition \${i===active ? "bg-white/10 text-white" : "text-white/30 hover:text-white/60"}\`}>{item.label}</button>)}</div></div>
+      <div className="min-h-[355px] p-4 font-mono text-[9px] leading-[1.65] sm:p-5 sm:text-[10px]">
+        <div className="text-white/25">Last login: today on ttys001</div>
+        <div className="mt-2 text-white"><span className="text-[#28c840]">~/projects/vanilla-steel</span> <span className="text-white/45">% </span><span>{stage.command.slice(2,2+typedChars)}</span><span className="animate-pulse text-white/80">▌</span></div>
+        <div className="mt-1 font-bold text-[#f18a32]">→ {stage.label}</div>
+        <div className="mt-3 space-y-0.5 text-white/65">{stage.lines.slice(0,visibleLines).map((line,i)=><div key={i} className={line.includes("FAIL")||line.includes("BLOCK")?"font-bold text-[#ff8b43]":line.includes("PASS")?"text-[#58d68d]":line.includes("TC-")||line.includes("P0")||line.includes("P1")||line.includes("P2")?"text-white":""}>{line||" "}</div>)}</div>
+        <div className="mt-3 h-1 overflow-hidden rounded-full bg-white/5"><div className="h-full bg-[#f18a32] transition-all duration-100" style={{width:\`\${progress}%\`}}/></div>
+        {visibleLines>=stage.lines.length&&phase==="terminal"&&<div className="mt-3 border-t border-white/10 pt-3 font-bold text-white">{stage.result}</div>}
+        <div className="mt-3 text-white/20">▌</div>
       </div>
+      <div className="border-t border-white/10 bg-[#11151c] px-4 py-3 text-[9px] text-white/30">Synthetic Vanilla Steel RFQ demonstration · no customer repository or PR is accessed</div>
     </div>
-    <div className="min-h-[410px] p-4 font-mono text-[9px] leading-[1.65] sm:p-6 sm:text-[10px]">
-      <div className="text-white/25">Last login: today on ttys001</div>
-      <div className="mt-2 text-white"><span className="text-[#28c840]">~/projects/vanilla-steel</span> <span className="text-white/45">% </span><span>{stage.command.slice(2, 2 + typedChars)}</span><span className="animate-pulse text-white/80">▌</span></div>
-      <div className="mt-1 font-bold text-[#f18a32]">→ {stage.label}</div>
-      <div className="mt-3 space-y-0.5 text-white/65">
-        {stage.lines.slice(0, visibleLines).map((line,i)=><div key={i} className={line.includes("FAIL") || line.includes("BLOCK") ? "font-bold text-[#ff8b43]" : line.includes("PASS") ? "text-[#58d68d]" : line.includes("TC-") || line.includes("P0") || line.includes("P1") || line.includes("P2") ? "text-white" : ""}>{line || " "}</div>)}
-      </div>
-      <div className="mt-3 h-1 overflow-hidden rounded-full bg-white/5"><div className="h-full bg-[#f18a32] transition-all duration-100" style={{width:`${progress}%`}}/></div>
-      {visibleLines >= stage.lines.length && <div className="mt-3 border-t border-white/10 pt-3 font-bold text-white">{stage.result}</div>}
-      <div className="mt-3 text-white/20">▌</div>
+    <div className={\`transition-all duration-500 \${phase==="report" ? "translate-y-0 opacity-100" : "translate-y-2 opacity-50"}\`}>
+      <HeroReport stage={stage}/>
     </div>
-    <div className="border-t border-white/10 bg-[#11151c] px-4 py-3 text-[9px] text-white/30">Synthetic Vanilla Steel RFQ demonstration · autonomous QA workflow · no customer repository or PR is accessed</div>
+    <div className="text-center font-mono text-[8px] font-bold uppercase tracking-[.16em] text-white/30">{phase==="terminal" ? "Executing stage · report unlocks when evidence is ready" : "Executive report highlight · next stage begins after review"}</div>
   </div>;
 }
 
@@ -284,11 +228,6 @@ function HomePage() {
       <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end"><div><div className="text-sm font-bold text-[#e87512]">Works with</div><h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em]">Fit the assurance layer to your stack.</h2></div><p className="max-w-xl text-sm leading-6 text-[#69707d]">Agent orchestration, browser automation, CI/CD, observability and model infrastructure can remain in place.</p></div>
       <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">{[["Agent systems","Connect the assurance layer to the agent or orchestration interface."],["Browser journeys","Exercise customer-facing flows through browser automation."],["APIs & tools","Validate API calls, tool usage and business-rule outcomes."],["CI/CD & evidence","Run assurance in release workflows and preserve evidence." ]].map(([title,body])=><div key={title} className="rounded-2xl border border-[#dfe3e8] bg-[#fafbfc] p-5"><div className="text-sm font-bold">{title}</div><p className="mt-2 text-xs leading-5 text-[#69707d]">{body}</p></div>)}</div>
       <p className="mt-4 text-xs text-[#8b929d]">Integration scope is agreed against your architecture; Shyena does not require replacing the systems already used to build or operate your AI agent.</p>
-    </div></section>
-
-    <section className="border-y border-[#e6e8ed] bg-[#07101f] text-white"><div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
-      <div className="grid gap-10 lg:grid-cols-[.8fr_1.2fr] lg:items-center"><div><div className="text-sm font-bold text-[#f18a32]">Sample release assurance report</div><h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em] sm:text-5xl">Know whether to ship, and prove why.</h2><p className="mt-5 text-base leading-7 text-white/60">A synthetic example showing autonomous journey execution, agent evaluation, security findings, failure reproduction and the evidence behind a release verdict.</p><Link to="/sample-report" className="mt-7 inline-flex h-11 items-center gap-2 rounded-lg bg-[#e87512] px-5 text-sm font-bold text-white">Open sample report <ArrowRight className="h-4 w-4"/></Link></div>
-      <Mock><div className="text-[#17213f]"><div className="flex items-center justify-between"><span className="font-bold">Customer Service Bot v2.8</span><span className="rounded bg-red-100 px-2 py-1 text-xs font-bold text-red-700">BLOCK</span></div><div className="mt-5 grid grid-cols-2 gap-2 text-xs"><span>Deterministic</span><b>PASS</b><span>Semantic</span><b>REVIEW</b><span>Orchestration</span><b>FAIL</b><span>Security</span><b>FAIL</b></div><div className="mt-5 border-t border-[#dfe3e8] pt-4 text-xs text-[#69707d]">Sample report · Synthetic demo bot · No client data</div></div></Mock></div>
     </div></section>
 
     <section className="bg-white"><div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24"><div className="max-w-3xl"><div className="text-sm font-bold text-[#e87512]">Outcomes</div><h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em] sm:text-5xl">The result is evidence you can use.</h2></div><div className="mt-9 grid gap-3 md:grid-cols-4">{["Catch journey failures that answer-quality scores miss.","Turn production failures into permanent tests.","Give auditors evidence, not screenshots.","Make release decisions you can defend."].map(x=><div key={x} className="rounded-2xl border border-[#e1e4e9] bg-[#fafbfc] p-6 text-sm font-semibold leading-6">{x}</div>)}</div></div></section>
