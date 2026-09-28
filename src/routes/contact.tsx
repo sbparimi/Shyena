@@ -9,7 +9,7 @@ import { CtaBand } from "@/components/site/cta-band";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 export const Route = createFileRoute("/contact")({
-  head: () => ({ meta: [{ title: "Contact & Demo | Shyena" }, { name: "description", content: "Talk to Shyena about AI assurance, specialist engineering engagements and evidence-backed testing and release decisions." }], links: [{ rel: "canonical", href: "https://shyena.eu/contact" }] }),
+  head: () => ({ meta: [{ title: "Contact & Demo | Shyena" }, { name: "description", content: "Talk to Shyena about AI assurance, specialist engineering engagements and evidence-backed testing and release decisions." }], links: [{ rel: "canonical", href: "https://www.shyena.eu/contact" }] }),
   component: ContactPage,
 });
 
