@@ -125,7 +125,49 @@ function SampleReport(){return <main className="bg-[#f5f7fa] text-[#17213f]">
 ].map(([id,p,title,desc,rep,impact])=><div key={id} className="rounded-xl border border-[#e3e6eb] p-4"><div className="flex flex-wrap items-center gap-2"><span className="font-mono text-xs font-bold">{id}</span><Badge tone={p==="P1"?"fail":"warn"}>{p}</Badge><span className="font-bold">{title}</span><Badge tone={impact==="BLOCK"?"fail":"warn"}>{impact}</Badge></div><p className="mt-2 text-sm leading-6 text-[#667080]">{desc}</p><div className="mt-2 font-mono text-[10px] text-[#89919d]">Reproduced: {rep}</div></div>)}</div>
 </Section>
 
-<Section kicker="10 · Release gate" title="Evidence-backed decision">
+<Section kicker="10 · Autonomous bug report" title="Production-grade defect record">
+<div className="rounded-2xl border border-[#e3e6eb] bg-[#fbfcfd] p-5">
+<div className="grid gap-4 md:grid-cols-4">{[["BUG","SHY-F-001","P1"],["STATUS","OPEN","BLOCKING"],["REPRO","3 / 3","REPRODUCIBLE"],["OWNER","Pricing platform","ACTION"]].map(([a,b,d])=><div key={a}><div className="text-[9px] font-bold uppercase tracking-[.15em] text-[#8a93a1]">{a}</div><div className="mt-2 font-mono text-sm font-black">{b}</div><div className="mt-1 text-[9px] font-bold text-[#e45b5b]">{d}</div></div>)}</div>
+<div className="mt-6 border-t border-[#e3e6eb] pt-5"><div className="font-bold">Observed defect</div><p className="mt-2 text-sm leading-6 text-[#687181]">The quotation orchestration path can invoke quotation.create while the authoritative approval state remains PENDING following a supplier-price refresh.</p></div>
+<div className="mt-5 grid gap-4 md:grid-cols-2"><div><div className="text-xs font-bold">Expected</div><p className="mt-1 text-sm text-[#687181]">The quote remains blocked until an authoritative APPROVED state is returned and correlated to the current price version.</p></div><div><div className="text-xs font-bold">Actual</div><p className="mt-1 text-sm text-[#687181]">The agent proceeds with quote creation using the stale orchestration state.</p></div></div>
+<div className="mt-5"><div className="text-xs font-bold">Evidence attached</div><div className="mt-2 flex flex-wrap gap-2">{["PR diff","agent trace","API response","Playwright trace","screenshot","replay 3/3","policy rule","CI stage"].map(x=><span key={x} className="rounded-md bg-white px-2 py-1 text-[10px] font-semibold text-[#687181] ring-1 ring-[#e3e6eb]">{x}</span>)}</div></div>
+</div>
+</Section>
+
+<Section kicker="11 · Autonomous RCA" title="Root-cause analysis with evidence chain">
+<div className="grid gap-3 lg:grid-cols-4">{[
+["Trigger","Supplier price refresh","New commercial context enters orchestration"],
+["Propagation","Approval state cache","Pending state is not invalidated"],
+["Decision defect","Tool guard missing","quotation.create lacks authoritative approval check"],
+["Business impact","Quote can issue","Commercial commitment can bypass approval"]
+].map(([a,b,d])=><div key={a} className="relative rounded-xl border border-[#e3e6eb] bg-white p-4"><div className="text-[9px] font-bold uppercase tracking-[.15em] text-[#e87512]">{a}</div><div className="mt-2 font-bold">{b}</div><div className="mt-2 text-xs leading-5 text-[#687181]">{d}</div></div>)}</div>
+<div className="mt-5 rounded-xl bg-[#0b1322] p-5 font-mono text-[10px] leading-6 text-white/70"><div className="text-[#58d68d]">ROOT CAUSE CONFIDENCE · HIGH · synthetic evidence</div><div>pricing/margin-policy.ts → approval cache → quotation orchestrator → agent tool call</div><div className="text-[#ff8b43]">Missing invariant: current_quote.price_version MUST equal approved.price_version</div><div>Counterfactual replay: forcing approval-state refresh → PASS</div><div>Regression replay: original trajectory → FAIL · defect reproduced</div></div>
+</Section>
+
+<Section kicker="12 · Corrective + preventive action" title="CAPA-style improvement plan">
+<div className="overflow-x-auto"><div className="min-w-[850px] rounded-xl border border-[#e3e6eb]"><Row a="Action" b="Control objective / acceptance criterion" c="Status"/><Row a="CA-001 · Enforce approval at tool boundary" b="quotation.create rejects PENDING; verify authoritative approval + matching price_version" c={<Badge tone="fail">OPEN</Badge>}/><Row a="CA-002 · Invalidate commercial context" b="Price refresh invalidates approval cache and forces re-evaluation" c={<Badge tone="warn">PLANNED</Badge>}/><Row a="PA-001 · Add negative-path regression" b="Permanent TAML case blocks quote issuance for every approval bypass variant" c={<Badge tone="warn">PLANNED</Badge>}/><Row a="PA-002 · Add invariant monitor" b="Runtime control detects quote issuance without approved state and emits release evidence" c={<Badge tone="warn">PLANNED</Badge>}/><Row a="PA-003 · Policy/version binding" b="Every commercial decision records policy version, price version and approval reference" c={<Badge tone="warn">PLANNED</Badge>}/></div></div>
+</Section>
+
+<Section kicker="13 · Improvement actions" title="From defect correction to system improvement">
+<div className="grid gap-3 md:grid-cols-3">{[
+["Coverage expansion","Generate mutation variants around approval, stale price, amendment and concurrent update paths.","46 → 61 regression cases"],
+["Agent guardrails","Move critical commercial controls from prompt-level behaviour to deterministic tool/API invariants.","2 new hard gates"],
+["Observability","Persist decision evidence linking agent trajectory, tool call, policy version and business transaction.","100% critical-path traceability target"]
+].map(([a,b,d])=><div key={a} className="rounded-xl border border-[#e3e6eb] bg-[#fafbfc] p-4"><div className="font-bold">{a}</div><p className="mt-2 text-sm leading-6 text-[#687181]">{b}</p><div className="mt-4 font-mono text-[10px] font-bold text-[#e87512]">{d}</div></div>)}</div>
+</Section>
+
+<Section kicker="14 · Closure & verification" title="What must be true before the finding closes?">
+<div className="grid gap-3 md:grid-cols-2">{[
+["Code fix verified","CA-001 passes unit, API, Playwright and impacted E2E tests."],
+["Original failure eliminated","Original trajectory passes on replay across three consecutive runs."],
+["Regression permanent","Negative-path TAML case is committed to release suite."],
+["Adversarial variants pass","Approval bypass variants fail safely without issuing a quotation."],
+["Observability verified","Evidence contains approval ID, price version, policy version and trace ID."],
+["Release gate reopened","No P1/P0 blocking findings remain on the impacted business path."]
+].map(([a,b])=><div key={a} className="rounded-xl border border-[#e3e6eb] p-4"><div className="flex items-center gap-2"><span className="h-2 w-2 rounded-full bg-[#e87512]"/><div className="font-bold">{a}</div></div><p className="mt-2 text-sm leading-6 text-[#687181]">{b}</p></div>)}</div>
+</Section>
+
+<Section kicker="15 · Release gate" title="Evidence-backed decision">
 <div className="overflow-x-auto"><div className="min-w-[700px] rounded-xl border border-[#e3e6eb]"><Row a="Smoke suite" b="8 / 8 passed" c={<Badge tone="pass">PASS</Badge>}/><Row a="Release suite" b="16 / 18 passed · 2 review" c={<Badge tone="warn">REVIEW</Badge>}/><Row a="E2E impacted journeys" b="39 / 46 passed · 4 review · 3 failed" c={<Badge tone="fail">FAIL</Badge>}/><Row a="Agent evaluation" b="5 pass · 3 review · 1 fail" c={<Badge tone="fail">FAIL</Badge>}/><Row a="Security" b="4 pass · 1 review · 1 fail" c={<Badge tone="fail">FAIL</Badge>}/><Row a="Critical business controls" b="7 pass · 2 fail" c={<Badge tone="fail">FAIL</Badge>}/></div></div>
 <div className="mt-6 rounded-xl border border-red-200 bg-red-50 p-5"><div className="font-black text-red-800">RELEASE BLOCKED</div><p className="mt-2 text-sm leading-6 text-red-800/80">The blocking evidence is reproducible and tied to a changed production path. The quotation workflow must not progress until approval integrity is restored, stale commercial context is prevented, and the amended-RFQ customer identity regression is fixed and re-executed.</p></div>
 </Section>
