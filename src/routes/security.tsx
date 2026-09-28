@@ -42,7 +42,7 @@ function SecurityPage() {
               ["Customer-hosted infrastructure", "Where the engagement uses customer-hosted infrastructure, the customer retains control of that infrastructure and its associated access policies."],
               ["Customer-funded LLM/API usage", "LLM and API usage is funded by the customer and remains subject to the terms and controls of the selected providers."],
               ["Data handling", "Data handling should be limited to what is required for the agreed assurance scope. Retention, environments, access and deletion are defined for the engagement rather than assumed by default."],
-              ["DPA", "[PARIMI TO CONFIRM: DPA availability and contracting process]"],
+              ["DPA", "Data-processing terms are handled according to the scope and architecture of the engagement. Where personal data is processed on behalf of a customer, the applicable data-processing terms should be agreed before processing begins."],
             ].map(([title, body]) => <article key={title} className="rounded-2xl border border-[#e1e4e9] bg-[#fafbfc] p-7"><Check className="h-5 w-5 text-[#e87512]" /><h2 className="mt-5 text-xl font-bold">{title}</h2><p className="mt-3 text-sm leading-6 text-[#69707d]">{body}</p></article>)}
           </div>
         </div>
