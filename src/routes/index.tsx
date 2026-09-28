@@ -53,8 +53,8 @@ export const Route = createFileRoute("/")({
   head: () => ({
     links: [{ rel:"canonical", href:SITE+"/" }],
     meta: [
-      { title:"Shyena: AI Assurance Engineer for AI agents | Evaluation, security & EU AI Act evidence" },
-      { name:"description", content:"Shyena is an AI Assurance Engineer for AI agents: realistic journey testing, four-layer evaluation, security testing and evidence mapped to the EU AI Act and ISO/IEC 42001." },
+      { title:"Shyena Autonomous QA | Agentic AI Testing & Evaluation" },
+      { name:"description", content:"Shyena autonomously discovers journeys, generates and executes tests, evaluates AI-agent behaviour, diagnoses failures and expands regression coverage." },
       { property:"og:title", content:"Shyena: AI Assurance Engineer for AI agents | Evaluation, security & EU AI Act evidence" },
       { property:"og:description", content:"Test AI agents with realistic journeys, evaluate behaviour, attack critical paths and produce traceable evidence before release." },
       { property:"og:type", content:"website" }, { property:"og:url", content:SITE+"/" }, { property:"og:site_name", content:"Shyena" },
