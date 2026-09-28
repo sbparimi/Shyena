@@ -115,8 +115,8 @@ function HomePage() {
 
     <section className="bg-white"><div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
       <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end"><div><div className="text-sm font-bold text-[#e87512]">Works with</div><h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em]">Fit the assurance layer to your stack.</h2></div><p className="max-w-xl text-sm leading-6 text-[#69707d]">Agent orchestration, browser automation, CI/CD, observability and model infrastructure can remain in place.</p></div>
-      <div className="mt-8 flex flex-wrap gap-2">{["Cognigy","Playwright","GitHub Actions","GitLab CI","OpenTelemetry","AWS Bedrock","LangGraph"].map(x=><span key={x} className="rounded-full border border-[#dfe3e8] bg-[#fafbfc] px-4 py-2 text-sm font-semibold">{x}</span>)}</div>
-      <p className="mt-4 text-xs text-[#8b929d]">[PARIMI TO CONFIRM: exact production-supported integration list]</p>
+      <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">{[["Agent systems","Connect the assurance layer to the agent or orchestration interface."],["Browser journeys","Exercise customer-facing flows through browser automation."],["APIs & tools","Validate API calls, tool usage and business-rule outcomes."],["CI/CD & evidence","Run assurance in release workflows and preserve evidence." ]].map(([title,body])=><div key={title} className="rounded-2xl border border-[#dfe3e8] bg-[#fafbfc] p-5"><div className="text-sm font-bold">{title}</div><p className="mt-2 text-xs leading-5 text-[#69707d]">{body}</p></div>)}</div>
+      <p className="mt-4 text-xs text-[#8b929d]">Integration scope is agreed against your architecture; Shyena does not require replacing the systems already used to build or operate your AI agent.</p>
     </div></section>
 
     <section className="border-y border-[#e6e8ed] bg-[#07101f] text-white"><div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
