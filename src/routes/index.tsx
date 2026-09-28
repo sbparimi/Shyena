@@ -16,7 +16,7 @@ const faq = [
 
 function ReportMetric({label,value,detail,accent="orange"}:{label:string;value:string;detail?:string;accent?:string}) {
   const tone = accent==="red" ? "text-red-600 bg-red-50 border-red-100" : accent==="green" ? "text-emerald-600 bg-emerald-50 border-emerald-100" : accent==="amber" ? "text-amber-600 bg-amber-50 border-amber-100" : "text-[#e87512] bg-[#fff5ec] border-[#f5dcc5]";
-  return <div className={\`rounded-lg border p-3 \${tone}\`}>
+  return <div className={`rounded-lg border p-3 \${tone}`}>
     <div className="text-[8px] font-bold uppercase tracking-[.13em] opacity-70">{label}</div>
     <div className="mt-1 text-xl font-extrabold tracking-[-.04em]">{value}</div>
     {detail && <div className="mt-1 text-[8px] leading-4 opacity-70">{detail}</div>}
@@ -26,7 +26,7 @@ function ReportMetric({label,value,detail,accent="orange"}:{label:string;value:s
 function MiniBars({items}:{items:Array<[string,number,string]>}) {
   return <div className="space-y-2">{items.map(([label,value,tone])=><div key={label}>
     <div className="mb-1 flex justify-between text-[8px] font-semibold text-[#687180]"><span>{label}</span><span>{value}%</span></div>
-    <div className="h-1.5 overflow-hidden rounded-full bg-[#e9edf1]"><div className={\`h-full rounded-full \${tone}\`} style={{width:\`\${value}%\`}}/></div>
+    <div className="h-1.5 overflow-hidden rounded-full bg-[#e9edf1]"><div className={`h-full rounded-full \${tone}`} style={{width:`\${value}%`}}/></div>
   </div>)}</div>;
 }
 
@@ -36,13 +36,13 @@ function HeroReport({stage}:{stage:any}) {
   </div>;
 
   const visual = stage.kind==="impact"
-    ? <div className="mt-3 rounded-lg border border-[#e4e8ed] bg-white p-3"><div className="mb-2 text-[8px] font-bold uppercase tracking-[.13em] text-[#8b929d]">Critical path heatmap</div><div className="grid grid-cols-7 gap-1">{["RFQ","REQ","INV","PRICE","MARGIN","QUOTE","CUSTOMER"].map((x:any,i:number)=><div key={x} className="text-center"><div className={\`h-7 rounded \${i===3||i===4 ? "bg-red-400" : i===2||i===5 ? "bg-amber-300" : "bg-emerald-300"}\`}/><div className="mt-1 truncate text-[6px] font-bold text-[#687180]">{x}</div></div>)}</div></div>
+    ? <div className="mt-3 rounded-lg border border-[#e4e8ed] bg-white p-3"><div className="mb-2 text-[8px] font-bold uppercase tracking-[.13em] text-[#8b929d]">Critical path heatmap</div><div className="grid grid-cols-7 gap-1">{["RFQ","REQ","INV","PRICE","MARGIN","QUOTE","CUSTOMER"].map((x:any,i:number)=><div key={x} className="text-center"><div className={`h-7 rounded \${i===3||i===4 ? "bg-red-400" : i===2||i===5 ? "bg-amber-300" : "bg-emerald-300"}`}/><div className="mt-1 truncate text-[6px] font-bold text-[#687180]">{x}</div></div>)}</div></div>
     : stage.kind==="playbook"
-    ? <div className="mt-3 rounded-lg border border-[#e4e8ed] bg-white p-3"><div className="mb-2 flex items-center justify-between text-[8px] font-bold uppercase tracking-[.13em] text-[#8b929d]"><span>Generated coverage</span><span className="text-[#e87512]">46 cases</span></div><MiniBars items={[[\"Smoke\",80,\"bg-[#e87512]\"],[\"Release\",92,\"bg-[#e87512]\"],[\"E2E\",100,\"bg-[#17213f]\"],[\"P0/P1 risk paths\",76,\"bg-red-400\"]]}/></div>
+    ? <div className="mt-3 rounded-lg border border-[#e4e8ed] bg-white p-3"><div className="mb-2 flex items-center justify-between text-[8px] font-bold uppercase tracking-[.13em] text-[#8b929d]"><span>Generated coverage</span><span className="text-[#e87512]">46 cases</span></div><MiniBars items={[["Smoke",80,"bg-[#e87512]"],["Release",92,"bg-[#e87512]"],["E2E",100,"bg-[#17213f]"],["P0/P1 risk paths",76,"bg-red-400"]]}/></div>
     : stage.kind==="execute"
     ? <div className="mt-3 rounded-lg border border-[#e4e8ed] bg-white p-3"><div className="mb-2 text-[8px] font-bold uppercase tracking-[.13em] text-[#8b929d]">Execution matrix</div><div className="grid grid-cols-3 gap-2 text-center text-[8px] font-bold"><div className="rounded bg-emerald-50 p-2 text-emerald-700">DEV<br/><span className="text-base">8/8</span></div><div className="rounded bg-emerald-50 p-2 text-emerald-700">TEST<br/><span className="text-base">14/14</span></div><div className="rounded bg-amber-50 p-2 text-amber-700">UAT<br/><span className="text-base">11/13</span></div></div></div>
     : stage.kind==="actions"
-    ? <div className="mt-3 rounded-lg border border-[#e4e8ed] bg-white p-3"><div className="mb-2 text-[8px] font-bold uppercase tracking-[.13em] text-[#8b929d]">CI evidence stream</div><MiniBars items={[[\"Checkout + graph\",100,\"bg-emerald-500\"],[\"Contract + smoke\",100,\"bg-emerald-500\"],[\"Agent evaluation\",100,\"bg-emerald-500\"],[\"UAT + evidence\",62,\"bg-amber-400\"]]}/></div>
+    ? <div className="mt-3 rounded-lg border border-[#e4e8ed] bg-white p-3"><div className="mb-2 text-[8px] font-bold uppercase tracking-[.13em] text-[#8b929d]">CI evidence stream</div><MiniBars items={[["Checkout + graph",100,"bg-emerald-500"],["Contract + smoke",100,"bg-emerald-500"],["Agent evaluation",100,"bg-emerald-500"],["UAT + evidence",62,"bg-amber-400"]]}/></div>
     : stage.kind==="diagnose"
     ? <div className="mt-3 rounded-lg border border-red-100 bg-red-50 p-3"><div className="flex items-center justify-between"><div className="text-[8px] font-bold uppercase tracking-[.13em] text-red-700">Autonomous RCA</div><span className="rounded bg-red-600 px-2 py-1 text-[7px] font-bold text-white">P1</span></div><div className="mt-2 grid grid-cols-3 gap-2 text-[8px]"><div><b>Trigger</b><br/>price refresh</div><div><b>Propagation</b><br/>approval cache</div><div><b>Decision</b><br/>guard missing</div></div><div className="mt-2 rounded bg-white/70 p-2 text-[8px] font-semibold text-red-800">Regression case generated · SHY-F-001 · replay 3/3</div></div>
     : <div className="mt-3 rounded-lg border border-[#e4e8ed] bg-white p-3"><div className="mb-2 flex items-center justify-between"><div className="text-[8px] font-bold uppercase tracking-[.13em] text-[#8b929d]">Release gate</div><span className="rounded bg-red-600 px-2 py-1 text-[7px] font-bold text-white">BLOCK</span></div><div className="grid grid-cols-3 gap-2 text-center text-[8px]"><div className="rounded bg-emerald-50 p-2 text-emerald-700"><b>42</b><br/>PASS</div><div className="rounded bg-amber-50 p-2 text-amber-700"><b>3</b><br/>REVIEW</div><div className="rounded bg-red-50 p-2 text-red-700"><b>1</b><br/>FAIL</div></div></div>;
@@ -128,19 +128,19 @@ function IllustrativeRun() {
   return <div className="space-y-3">
     <div className="overflow-hidden rounded-[18px] border border-white/10 bg-[#0d1117] shadow-[0_35px_100px_-45px_rgba(0,0,0,.95)] ring-1 ring-black/20">
       <div className="flex items-center gap-2 border-b border-white/10 bg-[#171b22] px-4 py-3"><span className="h-3 w-3 rounded-full bg-[#ff5f57]"/><span className="h-3 w-3 rounded-full bg-[#febc2e]"/><span className="h-3 w-3 rounded-full bg-[#28c840]"/><span className="ml-3 flex-1 text-center font-mono text-[10px] text-white/35">shyena — zsh — 120×42</span><span className="font-mono text-[9px] text-white/25">iTerm2</span></div>
-      <div className="border-b border-white/10 bg-[#11151c] px-3 py-2"><div className="flex items-center gap-2 overflow-x-auto">{stages.map((item,i)=><button type="button" key={item.label} onClick={()=>selectStage(i)} className={\`shrink-0 rounded-md px-2.5 py-1.5 font-mono text-[9px] font-semibold transition \${i===active ? "bg-white/10 text-white" : "text-white/30 hover:text-white/60"}\`}>{item.label}</button>)}</div></div>
+      <div className="border-b border-white/10 bg-[#11151c] px-3 py-2"><div className="flex items-center gap-2 overflow-x-auto">{stages.map((item,i)=><button type="button" key={item.label} onClick={()=>selectStage(i)} className={`shrink-0 rounded-md px-2.5 py-1.5 font-mono text-[9px] font-semibold transition \${i===active ? "bg-white/10 text-white" : "text-white/30 hover:text-white/60"}`}>{item.label}</button>)}</div></div>
       <div className="min-h-[355px] p-4 font-mono text-[9px] leading-[1.65] sm:p-5 sm:text-[10px]">
         <div className="text-white/25">Last login: today on ttys001</div>
         <div className="mt-2 text-white"><span className="text-[#28c840]">~/projects/vanilla-steel</span> <span className="text-white/45">% </span><span>{stage.command.slice(2,2+typedChars)}</span><span className="animate-pulse text-white/80">▌</span></div>
         <div className="mt-1 font-bold text-[#f18a32]">→ {stage.label}</div>
         <div className="mt-3 space-y-0.5 text-white/65">{stage.lines.slice(0,visibleLines).map((line,i)=><div key={i} className={line.includes("FAIL")||line.includes("BLOCK")?"font-bold text-[#ff8b43]":line.includes("PASS")?"text-[#58d68d]":line.includes("TC-")||line.includes("P0")||line.includes("P1")||line.includes("P2")?"text-white":""}>{line||" "}</div>)}</div>
-        <div className="mt-3 h-1 overflow-hidden rounded-full bg-white/5"><div className="h-full bg-[#f18a32] transition-all duration-100" style={{width:\`\${progress}%\`}}/></div>
+        <div className="mt-3 h-1 overflow-hidden rounded-full bg-white/5"><div className="h-full bg-[#f18a32] transition-all duration-100" style={{width:`\${progress}%`}}/></div>
         {visibleLines>=stage.lines.length&&phase==="terminal"&&<div className="mt-3 border-t border-white/10 pt-3 font-bold text-white">{stage.result}</div>}
         <div className="mt-3 text-white/20">▌</div>
       </div>
       <div className="border-t border-white/10 bg-[#11151c] px-4 py-3 text-[9px] text-white/30">Synthetic Vanilla Steel RFQ demonstration · no customer repository or PR is accessed</div>
     </div>
-    <div className={\`transition-all duration-500 \${phase==="report" ? "translate-y-0 opacity-100" : "translate-y-2 opacity-50"}\`}>
+    <div className={`transition-all duration-500 \${phase==="report" ? "translate-y-0 opacity-100" : "translate-y-2 opacity-50"}`}>
       <HeroReport stage={stage}/>
     </div>
     <div className="text-center font-mono text-[8px] font-bold uppercase tracking-[.16em] text-white/30">{phase==="terminal" ? "Executing stage · report unlocks when evidence is ready" : "Executive report highlight · next stage begins after review"}</div>
