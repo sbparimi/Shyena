@@ -6,7 +6,7 @@ import { GeneratedMarkdown, getGeneratedDoc } from "@/content/generated-content-
 
 export const Route = createFileRoute("/docs/sage-content-engineering")({
   head: () => ({
-    meta: [
+    meta: [{ name: "robots", content: "noindex,nofollow" },
       { title: "SAGE Content Engineering — Shyena Docs" },
       {
         name: "description",
