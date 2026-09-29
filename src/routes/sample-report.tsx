@@ -14,52 +14,93 @@ const Pipeline=()=>{const items=[["PR scan","100","31 files"],["Impact map","100
 
 const ShyenaVisualBadge=({name,caption}:{name:string;caption:string})=><div className="flex items-center justify-between gap-3"><div className="font-mono text-[10px] font-black tracking-[.16em] text-white">{name}</div><div className="font-mono text-[9px] uppercase tracking-[.14em] text-[#f18a32]">{caption}</div></div>;
 
-const ReportVisuals=()=> <div className="mt-8 space-y-4">
-<div className="rounded-2xl border border-[#07101f] bg-[#07101f] p-5 text-white sm:p-6">
-<div className="font-mono text-[10px] font-bold uppercase tracking-[.18em] text-[#f18a32]">SHYENA AUTONOMOUS QA · COMMAND CENTER</div>
-<div className="mt-2 flex flex-col justify-between gap-4 sm:flex-row sm:items-end"><div><h3 className="text-xl font-extrabold">From change intelligence to release decision</h3><p className="mt-1 max-w-2xl text-xs leading-5 text-white/45">Synthetic Vanilla Steel RFQ evidence model. Illustrative only.</p></div><div className="rounded-lg border border-white/10 bg-white/[.04] px-3 py-2 font-mono text-[9px] text-white/55">RFQ-2026-184 · PR #284</div></div>
-<div className="mt-5 grid gap-2 sm:grid-cols-4">
-<div className="rounded-xl border border-white/10 bg-orange-400/10 p-3"><ShyenaVisualBadge name="NEXUS" caption="discover + impact"/><div className="mt-3 font-mono text-sm font-black">14 journeys</div></div>
-<div className="rounded-xl border border-white/10 bg-emerald-400/10 p-3"><ShyenaVisualBadge name="VERA" caption="execute + verify"/><div className="mt-3 font-mono text-sm font-black">46 cases</div></div>
-<div className="rounded-xl border border-white/10 bg-red-400/10 p-3"><ShyenaVisualBadge name="CHAKRA" caption="attack + diagnose"/><div className="mt-3 font-mono text-sm font-black">1 P1</div></div>
-<div className="rounded-xl border border-white/10 bg-amber-400/10 p-3"><ShyenaVisualBadge name="GOVERN" caption="prove + release"/><div className="mt-3 font-mono text-sm font-black">BLOCK</div></div>
+const MiniBars=({values,tone="purple"}:{values:number[];tone?:string})=><div className="mt-4 flex h-16 items-end gap-1">{values.map((v,i)=><div key={i} className={\`flex-1 rounded-t-sm \${tone==="green"?"bg-emerald-400/75":tone==="teal"?"bg-cyan-400/75":tone==="orange"?"bg-orange-400/75":"bg-violet-400/80"}\`} style={{height:\`\${Math.max(10,v)}%\`}}/> )}</div>;
+
+const Sparkline=({values,tone="purple"}:{values:number[];tone?:string})=><div className="mt-3 flex h-10 items-end gap-[2px]">{values.map((v,i)=><span key={i} className={\`w-full rounded-t \${tone==="teal"?"bg-cyan-400/75":tone==="green"?"bg-emerald-400/75":"bg-violet-400/75"}\`} style={{height:\`\${Math.max(8,v)}%\`}}/> )}</div>;
+
+const ReportVisuals=()=> <div className="mt-8 overflow-hidden rounded-[24px] border border-[#16243b] bg-[#060c18] text-white shadow-2xl">
+<div className="flex min-h-[760px]">
+<aside className="hidden w-[176px] shrink-0 border-r border-white/10 bg-[#08101d] p-4 sm:block">
+<div className="flex items-center gap-2"><div className="grid h-8 w-8 place-items-center rounded-lg bg-orange-400 text-sm font-black text-[#08101d]">S</div><div><div className="text-sm font-black tracking-wide">SHYENA</div><div className="text-[7px] uppercase tracking-[.16em] text-white/35">AI assurance</div></div></div>
+<div className="mt-8 space-y-1 text-[10px] font-semibold">
+<div className="rounded-lg bg-violet-500/25 px-3 py-2 text-white">Overview</div>
+{["Autonomous QA","Agent Evaluation","Change Impact","Security","Evidence","Release Gate"].map(x=><div key={x} className="rounded-lg px-3 py-2 text-white/50">{x}</div>)}
 </div>
-<div className="mt-4 flex flex-wrap items-center gap-2 font-mono text-[8px] text-white/40"><span>NEXUS</span><span>→</span><span>VERA</span><span>→</span><span>CHAKRA</span><span>→</span><span>GOVERN</span><span className="ml-auto text-[#f18a32]">AUTONOMOUS ASSURANCE LOOP</span></div>
+<div className="mt-8 border-t border-white/10 pt-5">
+<div className="text-[8px] uppercase tracking-[.15em] text-white/30">Shyena products</div>
+{[["NEXUS","Discover · Impact"],["VERA","Execute · Verify"],["CHAKRA","Attack · Diagnose"],["GOVERN","Prove · Release"]].map(([a,b],i)=><div key={a} className="mt-3 flex items-center gap-2"><span className={\`grid h-7 w-7 place-items-center rounded-md \${i===0?"bg-violet-500/25":i===1?"bg-cyan-500/20":i===2?"bg-red-500/20":"bg-emerald-500/20"}\`}>{i+1}</span><div><div className="text-[9px] font-bold">{a}</div><div className="text-[7px] text-white/35">{b}</div></div></div>)}
 </div>
-<div className="grid gap-4 lg:grid-cols-2">
-<div className="rounded-2xl bg-[#0b1322] p-5 text-white"><ShyenaVisualBadge name="NEXUS" caption="impact graph"/><div className="mt-5 grid grid-cols-4 gap-2">
-<div className="rounded-lg border border-white/10 p-2"><div className="text-[9px] text-white/45">RFQ</div><div className="mt-2 h-1.5 rounded bg-emerald-400/70"/></div>
-<div className="rounded-lg border border-white/10 p-2"><div className="text-[9px] text-white/45">INVENTORY</div><div className="mt-2 h-1.5 rounded bg-emerald-400/70"/></div>
-<div className="rounded-lg border border-white/10 p-2"><div className="text-[9px] text-white/45">PRICING</div><div className="mt-2 h-1.5 rounded bg-amber-300/80"/></div>
-<div className="rounded-lg border border-white/10 p-2"><div className="text-[9px] text-white/45">APPROVAL</div><div className="mt-2 h-1.5 rounded bg-red-400/80"/></div>
-<div className="rounded-lg border border-white/10 p-2"><div className="text-[9px] text-white/45">QUOTE</div><div className="mt-2 h-1.5 rounded bg-amber-300/80"/></div>
-<div className="rounded-lg border border-white/10 p-2"><div className="text-[9px] text-white/45">CUSTOMER</div><div className="mt-2 h-1.5 rounded bg-emerald-400/70"/></div>
-<div className="rounded-lg border border-white/10 p-2"><div className="text-[9px] text-white/45">ERP / API</div><div className="mt-2 h-1.5 rounded bg-emerald-400/70"/></div>
-<div className="rounded-lg border border-white/10 p-2"><div className="text-[9px] text-white/45">AGENT</div><div className="mt-2 h-1.5 rounded bg-amber-300/80"/></div>
-</div><div className="mt-4 font-mono text-[8px] text-white/35">12 nodes · 14 impacted journeys · approval path carries release risk</div></div>
-<div className="rounded-2xl bg-[#0b1322] p-5 text-white"><ShyenaVisualBadge name="VERA" caption="execution matrix"/><div className="mt-5 grid grid-cols-12 gap-1">
-<span className="h-5 rounded-sm bg-emerald-400/75"/><span className="h-5 rounded-sm bg-emerald-400/75"/><span className="h-5 rounded-sm bg-emerald-400/75"/><span className="h-5 rounded-sm bg-emerald-400/75"/><span className="h-5 rounded-sm bg-amber-300/80"/><span className="h-5 rounded-sm bg-emerald-400/75"/><span className="h-5 rounded-sm bg-emerald-400/75"/><span className="h-5 rounded-sm bg-emerald-400/75"/><span className="h-5 rounded-sm bg-emerald-400/75"/><span className="h-5 rounded-sm bg-amber-300/80"/><span className="h-5 rounded-sm bg-emerald-400/75"/><span className="h-5 rounded-sm bg-emerald-400/75"/>
-<span className="h-5 rounded-sm bg-emerald-400/75"/><span className="h-5 rounded-sm bg-emerald-400/75"/><span className="h-5 rounded-sm bg-emerald-400/75"/><span className="h-5 rounded-sm bg-emerald-400/75"/><span className="h-5 rounded-sm bg-emerald-400/75"/><span className="h-5 rounded-sm bg-amber-300/80"/><span className="h-5 rounded-sm bg-emerald-400/75"/><span className="h-5 rounded-sm bg-red-400/80"/><span className="h-5 rounded-sm bg-emerald-400/75"/><span className="h-5 rounded-sm bg-emerald-400/75"/><span className="h-5 rounded-sm bg-emerald-400/75"/><span className="h-5 rounded-sm bg-emerald-400/75"/>
-<span className="h-5 rounded-sm bg-emerald-400/75"/><span className="h-5 rounded-sm bg-emerald-400/75"/><span className="h-5 rounded-sm bg-emerald-400/75"/><span className="h-5 rounded-sm bg-emerald-400/75"/><span className="h-5 rounded-sm bg-amber-300/80"/><span className="h-5 rounded-sm bg-emerald-400/75"/><span className="h-5 rounded-sm bg-emerald-400/75"/><span className="h-5 rounded-sm bg-emerald-400/75"/><span className="h-5 rounded-sm bg-emerald-400/75"/><span className="h-5 rounded-sm bg-emerald-400/75"/><span className="h-5 rounded-sm bg-emerald-400/75"/><span className="h-5 rounded-sm bg-emerald-400/75"/>
-<span className="h-5 rounded-sm bg-emerald-400/75"/><span className="h-5 rounded-sm bg-emerald-400/75"/>
-</div><div className="mt-4 grid grid-cols-3 gap-2 text-center font-mono"><div className="rounded-lg bg-emerald-400/10 p-2"><b className="text-lg text-emerald-300">42</b><div className="text-[8px] text-white/35">PASS</div></div><div className="rounded-lg bg-amber-400/10 p-2"><b className="text-lg text-amber-300">3</b><div className="text-[8px] text-white/35">REVIEW</div></div><div className="rounded-lg bg-red-400/10 p-2"><b className="text-lg text-red-300">1</b><div className="text-[8px] text-white/35">FAIL</div></div></div></div>
+</aside>
+
+<div className="min-w-0 flex-1 p-4 sm:p-5 lg:p-6">
+<div className="flex flex-col gap-3 border-b border-white/10 pb-4 sm:flex-row sm:items-center sm:justify-between">
+<div><div className="text-[8px] text-white/30">PROJECT</div><div className="text-xs font-semibold">Vanilla Steel <span className="text-white/30">(Illustrative)</span> · RFQ-2026-184</div></div>
+<div className="flex items-center gap-2"><div className="rounded-lg border border-white/10 bg-white/[.03] px-3 py-2 text-[9px] text-white/45">Search journeys, tests, findings...</div><div className="h-7 w-7 rounded-full border border-white/10 bg-white/5 text-center text-xs leading-7">S</div></div>
 </div>
-<div className="grid gap-4 lg:grid-cols-2">
-<div className="rounded-2xl bg-[#0b1322] p-5 text-white"><ShyenaVisualBadge name="CHAKRA" caption="attack + diagnose"/><div className="mt-5 space-y-2 font-mono text-[9px]">
-<div className="flex justify-between rounded-md border border-white/10 p-2"><span className="text-white/55">Replay approval journey</span><span className="text-emerald-300">PASS</span></div>
-<div className="flex justify-between rounded-md border border-white/10 p-2"><span className="text-white/55">Correlate API + policy</span><span className="text-emerald-300">PASS</span></div>
-<div className="flex justify-between rounded-md border border-white/10 p-2"><span className="text-white/55">Reproduce approval bypass</span><span className="text-red-300">FAIL</span></div>
-<div className="flex justify-between rounded-md border border-white/10 p-2"><span className="text-white/55">Generate permanent regression</span><span className="text-emerald-300">PASS</span></div>
-</div></div>
-<div className="rounded-2xl border border-red-400/15 bg-[#170e12] p-5 text-white"><ShyenaVisualBadge name="GOVERN" caption="release intelligence"/><div className="mt-5 grid grid-cols-5 gap-1">
-<div className="rounded-lg bg-white/5 p-2 text-center"><div className="text-[7px] text-white/30">TRIGGER</div><div className="mt-1 text-[9px]">Price refresh</div></div>
-<div className="rounded-lg bg-white/5 p-2 text-center"><div className="text-[7px] text-white/30">PROPAGATION</div><div className="mt-1 text-[9px]">Stale policy</div></div>
-<div className="rounded-lg bg-white/5 p-2 text-center"><div className="text-[7px] text-white/30">DECISION</div><div className="mt-1 text-[9px]">Margin guard</div></div>
-<div className="rounded-lg bg-white/5 p-2 text-center"><div className="text-[7px] text-white/30">IMPACT</div><div className="mt-1 text-[9px]">Approval bypass</div></div>
-<div className="rounded-lg bg-red-500/20 p-2 text-center"><div className="text-[7px] text-red-200/50">GATE</div><div className="mt-1 text-[9px] text-red-200">BLOCK</div></div>
-</div><div className="mt-4 font-mono text-[9px] text-white/45">RCA reproduced 3/3 · regression added · evidence linked</div></div>
+
+<div className="mt-5 flex flex-col justify-between gap-2 sm:flex-row sm:items-end"><div><div className="font-mono text-[9px] font-bold uppercase tracking-[.18em] text-orange-400">AUTONOMOUS QA · RELEASE ASSURANCE</div><h3 className="mt-1 text-xl font-extrabold tracking-tight sm:text-2xl">Shyena Assurance Command Center</h3><p className="mt-1 text-[10px] text-white/35">Synthetic enterprise evidence · change → execution → evaluation → release</p></div><div className="rounded-lg border border-red-400/20 bg-red-500/10 px-3 py-2"><div className="text-[7px] uppercase tracking-[.15em] text-red-200/50">Release verdict</div><div className="font-mono text-sm font-black text-red-300">BLOCKED</div></div></div>
+
+<div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+{[
+["Web Journeys","14","monitored journeys","purple"],["AI Agents","3","agent personas","teal"],["APIs & Services","12","critical endpoints","green"],["Test Execution","46","automated cases","purple"]
+].map(([a,b,c,t])=><div key={a} className="rounded-xl border border-white/10 bg-[#0b1322] p-3"><div className="flex items-center justify-between"><span className="text-[9px] font-semibold text-white/65">{a}</span><span className="rounded-md bg-emerald-400/10 px-2 py-1 text-[7px] font-bold text-emerald-300">OPERATIONAL</span></div><div className="mt-2 flex items-end justify-between"><div><div className="font-mono text-2xl font-black">{b}</div><div className="text-[8px] text-white/30">{c}</div></div><Sparkline tone={t==="teal"?"teal":t==="green"?"green":"purple"} values={[18,35,22,55,42,72,48,86,61]}/></div></div>)}
+</div>
+
+<div className="mt-4 grid gap-4 lg:grid-cols-[1.55fr_1fr]">
+<div className="rounded-xl border border-white/10 bg-[#0b1322] p-4">
+<div className="flex items-center justify-between"><div><div className="text-sm font-bold">Autonomous Journey Execution</div><div className="mt-1 text-[8px] text-white/35">Cases executed across impacted business paths</div></div><span className="rounded-md bg-violet-500/15 px-2 py-1 font-mono text-[8px] text-violet-300">VERA</span></div>
+<div className="mt-3 grid grid-cols-4 gap-2">{[["46","total"],["42","passed"],["3","review"],["1","failed"]].map(([n,l],i)=><div key={l} className="rounded-lg border border-white/10 p-2"><div className={\`font-mono text-lg font-black \${i===3?"text-red-300":i===2?"text-amber-300":i===1?"text-emerald-300":"text-white"}\`}>{n}</div><div className="text-[7px] uppercase text-white/30">{l}</div></div>)}</div>
+<MiniBars values={[42,66,51,72,58,88,73,92,79,61,83,96,67,78,54,70,86,62,75,91]} tone="green"/>
+<div className="mt-2 flex justify-between text-[7px] text-white/25"><span>09:00</span><span>09:30</span><span>10:00</span><span>10:15</span></div>
+</div>
+
+<div className="rounded-xl border border-white/10 bg-[#0b1322] p-4">
+<div className="flex items-center justify-between"><div><div className="text-sm font-bold">Agent Response Quality</div><div className="mt-1 text-[8px] text-white/35">Trajectory-level evaluation</div></div><span className="rounded-md bg-violet-500/15 px-2 py-1 font-mono text-[8px] text-violet-300">NEXUS</span></div>
+<div className="mt-4 grid grid-cols-2 gap-2">{[["92%","Intent accuracy"],["87%","Grounding"],["81%","Tool selection"],["94%","Policy compliance"]].map(([n,l],i)=><div key={l} className="rounded-lg border border-white/10 p-2"><div className={\`font-mono text-lg font-black \${i===2?"text-amber-300":"text-emerald-300"}\`}>{n}</div><div className="text-[7px] text-white/30">{l}</div></div>)}</div>
+<div className="mt-4 space-y-2">{[["Intent accuracy",92,"green"],["Grounding",87,"teal"],["Tool selection",81,"orange"],["Policy compliance",94,"green"]].map(([l,v,t])=><div key={l}><div className="flex justify-between text-[7px] text-white/45"><span>{l}</span><span>{v}%</span></div><div className="mt-1 h-1 rounded-full bg-white/5"><div className={\`h-full rounded-full \${t==="orange"?"bg-orange-400":"bg-cyan-400"}\`} style={{width:\`\${v}%\`}}/></div></div>)}</div>
 </div>
 </div>
+
+<div className="mt-4 grid gap-4 lg:grid-cols-[1.55fr_1fr]">
+<div className="rounded-xl border border-white/10 bg-[#0b1322] p-4">
+<div className="flex items-center justify-between"><div><div className="text-sm font-bold">Token / Model Evaluation</div><div className="mt-1 text-[8px] text-white/35">Runtime behaviour and response quality</div></div><span className="rounded-md bg-red-500/15 px-2 py-1 font-mono text-[8px] text-red-300">CHAKRA</span></div>
+<div className="mt-3 grid grid-cols-3 gap-2">{[["2.4K","avg tokens / response"],["820ms","avg latency"],["96%","response relevance"]].map(([n,l])=><div key={l} className="rounded-lg border border-white/10 p-2"><div className="font-mono text-base font-black">{n}</div><div className="text-[7px] text-white/30">{l}</div></div>)}</div>
+<MiniBars values={[55,72,42,81,68,94,58,77,49,83,66,88,53,73,91,62,78,57,84,69]} tone="purple"/>
+</div>
+
+<div className="rounded-xl border border-white/10 bg-[#0b1322] p-4">
+<div className="flex items-center justify-between"><div><div className="text-sm font-bold">Release Risk</div><div className="mt-1 text-[8px] text-white/35">GOVERN release intelligence</div></div><span className="rounded-md bg-emerald-500/15 px-2 py-1 font-mono text-[8px] text-emerald-300">GOVERN</span></div>
+<div className="mt-5 flex items-center gap-4"><div className="grid h-24 w-24 place-items-center rounded-full border-[12px] border-red-400/80 border-l-white/10 border-b-white/10"><div className="text-center"><div className="font-mono text-2xl font-black text-red-300">1</div><div className="text-[7px] uppercase text-white/35">high risk</div></div></div><div className="space-y-2 text-[8px]"><div><span className="mr-2 inline-block h-2 w-2 rounded-full bg-red-400"/>High <b className="ml-3">1</b></div><div><span className="mr-2 inline-block h-2 w-2 rounded-full bg-orange-400"/>Medium <b className="ml-1">2</b></div><div><span className="mr-2 inline-block h-2 w-2 rounded-full bg-amber-300"/>Low <b className="ml-3">3</b></div><div><span className="mr-2 inline-block h-2 w-2 rounded-full bg-slate-400"/>Info <b className="ml-4">5</b></div></div></div>
+<div className="mt-4 grid grid-cols-4 gap-1">{["DISCOVER","EXECUTE","DIAGNOSE","RELEASE"].map((x,i)=><div key={x} className={\`h-2 rounded-sm \${i===3?"bg-red-400/80":i===2?"bg-orange-400/80":"bg-emerald-400/70"}\`}/>)}</div>
+</div>
+</div>
+
+<div className="mt-4 grid gap-4 lg:grid-cols-[1.55fr_1fr]">
+<div className="rounded-xl border border-white/10 bg-[#0b1322] p-4">
+<div className="flex items-center justify-between"><div><div className="text-sm font-bold">Assurance Pipeline</div><div className="mt-1 text-[8px] text-white/35">Autonomous evidence loop</div></div><span className="font-mono text-[8px] text-orange-300">SHYENA</span></div>
+<div className="mt-4 grid grid-cols-6 gap-1">{[["NEXUS","14"],["VERA","46"],["CHAKRA","6"],["EVIDENCE","31"],["GOVERN","9"],["GATE","BLOCK"]].map(([a,b],i)=><div key={a} className={\`rounded-lg border p-2 \${i===5?"border-red-400/30 bg-red-400/10":"border-white/10 bg-white/[.025]"}\`}><div className="text-[7px] font-bold text-white/55">{a}</div><div className={\`mt-2 font-mono text-xs font-black \${i===5?"text-red-300":"text-white"}\`}>{b}</div></div>)}</div>
+<div className="mt-4 h-1 rounded-full bg-white/5"><div className="h-full w-[84%] rounded-full bg-gradient-to-r from-violet-400 via-cyan-400 to-orange-400"/></div>
+</div>
+
+<div className="rounded-xl border border-red-400/15 bg-[#140d13] p-4">
+<div className="flex items-center justify-between"><div><div className="text-sm font-bold">Recent Findings</div><div className="mt-1 text-[8px] text-white/35">Evidence requiring attention</div></div><span className="text-[8px] text-violet-300">View all</span></div>
+<div className="mt-3 space-y-2">{[
+["CRITICAL","Prompt injection detected","Agent accepted hidden instruction"],
+["HIGH","Tool selection regression","Incorrect pricing tool selected"],
+["MEDIUM","RAG grounding drift","Policy source version mismatch"],
+["MEDIUM","Business rule failure","Approval guard not enforced"]
+].map(([sev,title,desc],i)=><div key={title} className="rounded-lg border border-white/10 bg-white/[.025] p-2.5"><div className="flex items-center gap-2"><span className={\`rounded px-1.5 py-0.5 text-[6px] font-black \${i===0?"bg-red-500/20 text-red-300":i===1?"bg-orange-500/20 text-orange-300":"bg-amber-400/15 text-amber-300"}\`}>{sev}</span><span className="text-[9px] font-bold">{title}</span></div><div className="mt-1 text-[7px] leading-4 text-white/35">{desc}</div></div>)}</div>
+</div>
+</div>
+
+<div className="mt-4 rounded-xl border border-white/10 bg-[#08101d] p-3">
+<div className="flex flex-wrap items-center justify-center gap-2 text-[8px] font-bold">{[["NEXUS","Discover · Impact"],["VERA","Execute · Verify"],["CHAKRA","Attack · Diagnose"],["GOVERN","Prove · Release"]].map(([a,b],i)=><div key={a} className="flex items-center gap-2"><div className={\`rounded-lg border px-3 py-2 \${i===2?"border-red-400/30 bg-red-400/10":"border-white/10 bg-white/[.025]"}\`}><span>{a}</span><span className="ml-2 text-[7px] text-white/30">{b}</span></div>{i<3&&<span className="text-white/20">→</span>}</div>)}<div className="rounded-lg border border-red-400/30 bg-red-500/10 px-4 py-2 font-mono text-red-300">RELEASE BLOCKED · 1 P1</div></div>
+</div>
+
+<div className="mt-3 text-center font-mono text-[7px] uppercase tracking-[.18em] text-white/20">Synthetic Vanilla Steel RFQ demonstration · no customer repository, production system or real run accessed</div>
+</div>
+</div>
+</div>;
 
 export const Route=createFileRoute("/sample-report")({head:()=>({links:[{rel:"canonical",href:"https://www.shyena.eu/sample-report"}],meta:[
 {title:"Sample Autonomous QA Report | Shyena"},
