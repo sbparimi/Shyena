@@ -4,8 +4,8 @@ import { Logo } from "./logo";
 
 const COLUMNS = [
   { title: "Platform", links: [{ label: "Nexus", to: "/nexus" }, { label: "Vera", to: "/vera" }, { label: "Chakra", to: "/chakra" }, { label: "Govern", to: "/govern" }, { label: "Platform overview", to: "/platform" }] },
-  { title: "Resources", links: [{ label: "Blog", to: "/blog" }, { label: "Documentation", to: "/docs" }, { label: "Metrics", to: "/metrics" }, { label: "Services", to: "/services" }, { label: "Pricing", to: "/pricing" }] },
-  { title: "Company", links: [{ label: "About", to: "/about" }, { label: "Design partners", to: "/customers" }, { label: "Security & trust", to: "/security" }, { label: "Contact", to: "/contact" }] },
+  { title: "Resources", links: [{ label: "Interactive demo", to: "/demo" }, { label: "Blog", to: "/blog" }, { label: "Documentation", to: "/docs" }, { label: "Pricing", to: "/pricing" }] },
+  { title: "Company", links: [{ label: "About", to: "/about" }, { label: "Design partners", to: "/design-partners" }, { label: "Security & trust", to: "/security" }, { label: "Contact", to: "/contact" }] },
 ] as const;
 
 export function SiteFooter() {
@@ -15,7 +15,7 @@ export function SiteFooter() {
         <div className="grid gap-12 lg:grid-cols-[1.5fr_2fr]">
           <div>
             <Link to="/" aria-label="Shyena home" className="inline-flex"><Logo size="footer" /></Link>
-            <p className="mt-5 max-w-sm text-sm leading-6 text-[#667085]">Test, evaluate and secure AI systems with confidence. Evidence-backed assurance for production agents.</p>
+            <p className="mt-5 max-w-sm text-sm leading-6 text-[#667085]">Autonomous QA that discovers what to test, proves what happened and preserves the evidence behind every release decision.</p>
             <div className="mt-6 flex items-center gap-2">
               <a href="https://www.linkedin.com/company/shyena-ai/" aria-label="Shyena on LinkedIn" className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[#e1e4e9] text-[#596273] transition hover:border-[#17213f] hover:text-[#17213f]"><Linkedin className="h-4 w-4" /></a>
               <a href="https://github.com/sbparimi/Shyena" aria-label="Shyena on GitHub" className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[#e1e4e9] text-[#596273] transition hover:border-[#17213f] hover:text-[#17213f]"><Github className="h-4 w-4" /></a>
