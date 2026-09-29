@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import * as React from "react";
 import type { ReactNode } from "react";
 import { ArrowLeft, ArrowRight, Download, ExternalLink } from "lucide-react";
 
@@ -14,93 +15,149 @@ const Pipeline=()=>{const items=[["PR scan","100","31 files"],["Impact map","100
 
 const ShyenaVisualBadge=({name,caption}:{name:string;caption:string})=><div className="flex items-center justify-between gap-3"><div className="font-mono text-[10px] font-black tracking-[.16em] text-white">{name}</div><div className="font-mono text-[9px] uppercase tracking-[.14em] text-[#f18a32]">{caption}</div></div>;
 
-const MiniBars=({values,tone="purple"}:{values:number[];tone?:string})=><div className="mt-4 flex h-16 items-end gap-1">{values.map((v,i)=><div key={i} className={`flex-1 rounded-t-sm ${tone==="green"?"bg-emerald-400/75":tone==="teal"?"bg-cyan-400/75":tone==="orange"?"bg-orange-400/75":"bg-violet-400/80"}`} style={{height:`${Math.max(10,v)}%`}}/> )}</div>;
+const MiniBars=({values,tone="purple"}:{values:number[];tone?:string})=><div className="mt-4 flex h-16 items-end gap-1">{values.map((v,i)=><div key={i} className={\`flex-1 rounded-t-sm transition-all duration-500 \${tone==="green"?"bg-emerald-400/75":tone==="teal"?"bg-cyan-400/75":tone==="orange"?"bg-orange-400/75":"bg-violet-400/80"}\`} style={{height:\`\${Math.max(10,v)}%\`}}/> )}</div>;
 
-const Sparkline=({values,tone="purple"}:{values:number[];tone?:string})=><div className="mt-3 flex h-10 items-end gap-[2px]">{values.map((v,i)=><span key={i} className={`w-full rounded-t ${tone==="teal"?"bg-cyan-400/75":tone==="green"?"bg-emerald-400/75":"bg-violet-400/75"}`} style={{height:`${Math.max(8,v)}%`}}/> )}</div>;
+const Sparkline=({values,tone="purple",pulse=false}:{values:number[];tone?:string;pulse?:boolean})=><div className="mt-3 flex h-10 items-end gap-[2px]">{values.map((v,i)=><span key={i} className={\`w-full rounded-t transition-all duration-500 \${tone==="teal"?"bg-cyan-400/75":tone==="green"?"bg-emerald-400/75":"bg-violet-400/75"} \${pulse&&i===values.length-1?"animate-pulse":""}\`} style={{height:\`\${Math.max(8,v)}%\`}}/> )}</div>;
 
-const ReportVisuals=()=> <div className="mt-8 overflow-hidden rounded-[24px] border border-[#16243b] bg-[#060c18] text-white shadow-2xl">
-<div className="flex min-h-[760px]">
-<aside className="hidden w-[176px] shrink-0 border-r border-white/10 bg-[#08101d] p-4 sm:block">
-<div className="flex items-center gap-2"><div className="grid h-8 w-8 place-items-center rounded-lg bg-orange-400 text-sm font-black text-[#08101d]">S</div><div><div className="text-sm font-black tracking-wide">SHYENA</div><div className="text-[7px] uppercase tracking-[.16em] text-white/35">AI assurance</div></div></div>
-<div className="mt-8 space-y-1 text-[10px] font-semibold">
-<div className="rounded-lg bg-violet-500/25 px-3 py-2 text-white">Overview</div>
-{["Autonomous QA","Agent Evaluation","Change Impact","Security","Evidence","Release Gate"].map(x=><div key={x} className="rounded-lg px-3 py-2 text-white/50">{x}</div>)}
-</div>
-<div className="mt-8 border-t border-white/10 pt-5">
-<div className="text-[8px] uppercase tracking-[.15em] text-white/30">Shyena products</div>
-{[["NEXUS","Discover · Impact"],["VERA","Execute · Verify"],["CHAKRA","Attack · Diagnose"],["GOVERN","Prove · Release"]].map(([a,b],i)=><div key={a} className="mt-3 flex items-center gap-2"><span className={`grid h-7 w-7 place-items-center rounded-md ${i===0?"bg-violet-500/25":i===1?"bg-cyan-500/20":i===2?"bg-red-500/20":"bg-emerald-500/20"}`}>{i+1}</span><div><div className="text-[9px] font-bold">{a}</div><div className="text-[7px] text-white/35">{b}</div></div></div>)}
-</div>
-</aside>
+const ReportVisuals=()=> {
+  const tabs=[
+    ["overview","Overview"],
+    ["qa","Autonomous QA"],
+    ["agent","Agent Evaluation"],
+    ["impact","Change Impact"],
+    ["security","Security"],
+    ["evidence","Evidence"],
+    ["release","Release Gate"]
+  ] as const;
+  const [active,setActive]=React.useState<(typeof tabs)[number][0]>("overview");
+  const [selectedFinding,setSelectedFinding]=React.useState<string|null>(null);
+  const [replaying,setReplaying]=React.useState(false);
+  const [pulse,setPulse]=React.useState(0);
 
-<div className="min-w-0 flex-1 p-4 sm:p-5 lg:p-6">
-<div className="flex flex-col gap-3 border-b border-white/10 pb-4 sm:flex-row sm:items-center sm:justify-between">
-<div><div className="text-[8px] text-white/30">PROJECT</div><div className="text-xs font-semibold">Vanilla Steel <span className="text-white/30">(Illustrative)</span> · RFQ-2026-184</div></div>
-<div className="flex items-center gap-2"><div className="rounded-lg border border-white/10 bg-white/[.03] px-3 py-2 text-[9px] text-white/45">Search journeys, tests, findings...</div><div className="h-7 w-7 rounded-full border border-white/10 bg-white/5 text-center text-xs leading-7">S</div></div>
-</div>
+  React.useEffect(()=>{
+    const id=window.setInterval(()=>setPulse(v=>(v+1)%100),1200);
+    return()=>window.clearInterval(id);
+  },[]);
 
-<div className="mt-5 flex flex-col justify-between gap-2 sm:flex-row sm:items-end"><div><div className="font-mono text-[9px] font-bold uppercase tracking-[.18em] text-orange-400">AUTONOMOUS QA · RELEASE ASSURANCE</div><h3 className="mt-1 text-xl font-extrabold tracking-tight sm:text-2xl">Shyena Assurance Command Center</h3><p className="mt-1 text-[10px] text-white/35">Synthetic enterprise evidence · change → execution → evaluation → release</p></div><div className="rounded-lg border border-red-400/20 bg-red-500/10 px-3 py-2"><div className="text-[7px] uppercase tracking-[.15em] text-red-200/50">Release verdict</div><div className="font-mono text-sm font-black text-red-300">BLOCKED</div></div></div>
+  React.useEffect(()=>{
+    if(!replaying)return;
+    const id=window.setTimeout(()=>setReplaying(false),1800);
+    return()=>window.clearTimeout(id);
+  },[replaying]);
 
-<div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-{[
-["Web Journeys","14","monitored journeys","purple"],["AI Agents","3","agent personas","teal"],["APIs & Services","12","critical endpoints","green"],["Test Execution","46","automated cases","purple"]
-].map(([a,b,c,t])=><div key={a} className="rounded-xl border border-white/10 bg-[#0b1322] p-3"><div className="flex items-center justify-between"><span className="text-[9px] font-semibold text-white/65">{a}</span><span className="rounded-md bg-emerald-400/10 px-2 py-1 text-[7px] font-bold text-emerald-300">OPERATIONAL</span></div><div className="mt-2 flex items-end justify-between"><div><div className="font-mono text-2xl font-black">{b}</div><div className="text-[8px] text-white/30">{c}</div></div><Sparkline tone={t==="teal"?"teal":t==="green"?"green":"purple"} values={[18,35,22,55,42,72,48,86,61]}/></div></div>)}
-</div>
+  const findings=[
+    ["F-001","CRITICAL","Prompt injection detected","Agent accepted hidden instruction in a synthetic RFQ attachment.","CHAKRA"],
+    ["F-002","HIGH","Tool selection regression","Incorrect pricing tool selected after supplier-price refresh.","VERA"],
+    ["F-003","MEDIUM","RAG grounding drift","Policy source version mismatch detected during evaluation.","NEXUS"],
+    ["F-004","MEDIUM","Business rule failure","Approval guard was not enforced before quotation creation.","GOVERN"]
+  ] as const;
 
-<div className="mt-4 grid gap-4 lg:grid-cols-[1.55fr_1fr]">
-<div className="rounded-xl border border-white/10 bg-[#0b1322] p-4">
-<div className="flex items-center justify-between"><div><div className="text-sm font-bold">Autonomous Journey Execution</div><div className="mt-1 text-[8px] text-white/35">Cases executed across impacted business paths</div></div><span className="rounded-md bg-violet-500/15 px-2 py-1 font-mono text-[8px] text-violet-300">VERA</span></div>
-<div className="mt-3 grid grid-cols-4 gap-2">{[["46","total"],["42","passed"],["3","review"],["1","failed"]].map(([n,l],i)=><div key={l} className="rounded-lg border border-white/10 p-2"><div className={`font-mono text-lg font-black ${i===3?"text-red-300":i===2?"text-amber-300":i===1?"text-emerald-300":"text-white"}`}>{n}</div><div className="text-[7px] uppercase text-white/30">{l}</div></div>)}</div>
-<MiniBars values={[42,66,51,72,58,88,73,92,79,61,83,96,67,78,54,70,86,62,75,91]} tone="green"/>
-<div className="mt-2 flex justify-between text-[7px] text-white/25"><span>09:00</span><span>09:30</span><span>10:00</span><span>10:15</span></div>
-</div>
+  const focus=active==="overview"
+    ? "overview"
+    : active==="qa"
+    ? "qa"
+    : active==="agent"
+    ? "agent"
+    : active==="impact"
+    ? "impact"
+    : active==="security"
+    ? "security"
+    : active==="evidence"
+    ? "evidence"
+    : "release";
 
-<div className="rounded-xl border border-white/10 bg-[#0b1322] p-4">
-<div className="flex items-center justify-between"><div><div className="text-sm font-bold">Agent Response Quality</div><div className="mt-1 text-[8px] text-white/35">Trajectory-level evaluation</div></div><span className="rounded-md bg-violet-500/15 px-2 py-1 font-mono text-[8px] text-violet-300">NEXUS</span></div>
-<div className="mt-4 grid grid-cols-2 gap-2">{[["92%","Intent accuracy"],["87%","Grounding"],["81%","Tool selection"],["94%","Policy compliance"]].map(([n,l],i)=><div key={l} className="rounded-lg border border-white/10 p-2"><div className={`font-mono text-lg font-black ${i===2?"text-amber-300":"text-emerald-300"}`}>{n}</div><div className="text-[7px] text-white/30">{l}</div></div>)}</div>
-<div className="mt-4 space-y-2">{[["Intent accuracy",92,"green"],["Grounding",87,"teal"],["Tool selection",81,"orange"],["Policy compliance",94,"green"]].map(([l,v,t])=><div key={l}><div className="flex justify-between text-[7px] text-white/45"><span>{l}</span><span>{v}%</span></div><div className="mt-1 h-1 rounded-full bg-white/5"><div className={`h-full rounded-full ${t==="orange"?"bg-orange-400":"bg-cyan-400"}`} style={{width:`${v}%`}}/></div></div>)}</div>
-</div>
-</div>
+  const metricsByFocus:{
+    [key:string]:Array<[string,string,string,string]>
+  }={
+    overview:[["Web Journeys","14","monitored journeys","purple"],["AI Agents","3","agent personas","teal"],["APIs & Services","12","critical endpoints","green"],["Test Execution","46","automated cases","purple"]],
+    qa:[["Generated","46","executable cases","purple"],["Executed","46","journeys","green"],["Passed","42","91.3%","green"],["Review","3","manual attention","orange"]],
+    agent:[["Intent","92%","accuracy","green"],["Grounding","87%","retrieval quality","teal"],["Tool choice","81%","trajectory score","orange"],["Policy","94%","compliance checks","green"]],
+    impact:[["Changed files","31","PR #284","purple"],["Affected paths","14","business journeys","teal"],["Critical paths","8","P0/P1","orange"],["Graph nodes","12","mapped dependencies","green"]],
+    security:[["Adversarial","12","attack cases","purple"],["Blocked","9","unsafe actions","green"],["Review","2","needs analysis","orange"],["Failed","1","control gap","red"]],
+    evidence:[["Artifacts","31","evidence objects","purple"],["Traces","18","execution traces","teal"],["Screenshots","27","UI evidence","green"],["Linked","100%","finding coverage","green"]],
+    release:[["PASS","42","journeys","green"],["REVIEW","3","journeys","orange"],["FAIL","1","P1 finding","red"],["VERDICT","BLOCK","release gate","red"]]
+  };
 
-<div className="mt-4 grid gap-4 lg:grid-cols-[1.55fr_1fr]">
-<div className="rounded-xl border border-white/10 bg-[#0b1322] p-4">
-<div className="flex items-center justify-between"><div><div className="text-sm font-bold">Token / Model Evaluation</div><div className="mt-1 text-[8px] text-white/35">Runtime behaviour and response quality</div></div><span className="rounded-md bg-red-500/15 px-2 py-1 font-mono text-[8px] text-red-300">CHAKRA</span></div>
-<div className="mt-3 grid grid-cols-3 gap-2">{[["2.4K","avg tokens / response"],["820ms","avg latency"],["96%","response relevance"]].map(([n,l])=><div key={l} className="rounded-lg border border-white/10 p-2"><div className="font-mono text-base font-black">{n}</div><div className="text-[7px] text-white/30">{l}</div></div>)}</div>
-<MiniBars values={[55,72,42,81,68,94,58,77,49,83,66,88,53,73,91,62,78,57,84,69]} tone="purple"/>
-</div>
+  const chartValues=focus==="agent"?[72,84,67,91,78,88,81,94,86,79,92,83,89,76]
+    :focus==="impact"?[34,48,42,61,55,72,66,81,69,88,74,93,82,90]
+    :focus==="security"?[48,62,74,58,81,67,89,72,94,83,91,76,88,96]
+    :[42,66,51,72,58,88,73,92,79,61,83,96,67,78,54,70,86,62,75,91];
 
-<div className="rounded-xl border border-white/10 bg-[#0b1322] p-4">
-<div className="flex items-center justify-between"><div><div className="text-sm font-bold">Release Risk</div><div className="mt-1 text-[8px] text-white/35">GOVERN release intelligence</div></div><span className="rounded-md bg-emerald-500/15 px-2 py-1 font-mono text-[8px] text-emerald-300">GOVERN</span></div>
-<div className="mt-5 flex items-center gap-4"><div className="grid h-24 w-24 place-items-center rounded-full border-[12px] border-red-400/80 border-l-white/10 border-b-white/10"><div className="text-center"><div className="font-mono text-2xl font-black text-red-300">1</div><div className="text-[7px] uppercase text-white/35">high risk</div></div></div><div className="space-y-2 text-[8px]"><div><span className="mr-2 inline-block h-2 w-2 rounded-full bg-red-400"/>High <b className="ml-3">1</b></div><div><span className="mr-2 inline-block h-2 w-2 rounded-full bg-orange-400"/>Medium <b className="ml-1">2</b></div><div><span className="mr-2 inline-block h-2 w-2 rounded-full bg-amber-300"/>Low <b className="ml-3">3</b></div><div><span className="mr-2 inline-block h-2 w-2 rounded-full bg-slate-400"/>Info <b className="ml-4">5</b></div></div></div>
-<div className="mt-4 grid grid-cols-4 gap-1">{["DISCOVER","EXECUTE","DIAGNOSE","RELEASE"].map((x,i)=><div key={x} className={`h-2 rounded-sm ${i===3?"bg-red-400/80":i===2?"bg-orange-400/80":"bg-emerald-400/70"}`}/>)}</div>
-</div>
-</div>
+  return <div className="mt-8 overflow-hidden rounded-[24px] border border-[#16243b] bg-[#060c18] text-white shadow-2xl">
+    <div className="flex min-h-[760px]">
+      <aside className="hidden w-[176px] shrink-0 border-r border-white/10 bg-[#08101d] p-4 sm:block">
+        <div className="flex items-center gap-2"><div className="grid h-8 w-8 place-items-center rounded-lg bg-orange-400 text-sm font-black text-[#08101d]">S</div><div><div className="text-sm font-black tracking-wide">SHYENA</div><div className="text-[7px] uppercase tracking-[.16em] text-white/35">AI assurance</div></div></div>
+        <div className="mt-8 space-y-1 text-[10px] font-semibold">
+          {tabs.map(([key,label])=><button type="button" key={key} onClick={()=>setActive(key)} className={\`w-full rounded-lg px-3 py-2 text-left transition-all \${active===key?"bg-violet-500/25 text-white shadow-[inset_2px_0_0_#a78bfa]":"text-white/50 hover:bg-white/[.04] hover:text-white/80"}\`}>{label}</button>)}
+        </div>
+        <div className="mt-8 border-t border-white/10 pt-5">
+          <div className="text-[8px] uppercase tracking-[.15em] text-white/30">Shyena products</div>
+          {[["NEXUS","Discover · Impact"],["VERA","Execute · Verify"],["CHAKRA","Attack · Diagnose"],["GOVERN","Prove · Release"]].map(([a,b],i)=><button type="button" key={a} onClick={()=>setActive(i===0?"impact":i===1?"qa":i===2?"security":"release")} className="mt-3 flex w-full items-center gap-2 text-left hover:text-white"><span className={\`grid h-7 w-7 place-items-center rounded-md \${i===0?"bg-violet-500/25":i===1?"bg-cyan-500/20":i===2?"bg-red-500/20":"bg-emerald-500/20"}\`}>{i+1}</span><span><span className="block text-[9px] font-bold">{a}</span><span className="block text-[7px] text-white/35">{b}</span></span></button>)}
+        </div>
+      </aside>
 
-<div className="mt-4 grid gap-4 lg:grid-cols-[1.55fr_1fr]">
-<div className="rounded-xl border border-white/10 bg-[#0b1322] p-4">
-<div className="flex items-center justify-between"><div><div className="text-sm font-bold">Assurance Pipeline</div><div className="mt-1 text-[8px] text-white/35">Autonomous evidence loop</div></div><span className="font-mono text-[8px] text-orange-300">SHYENA</span></div>
-<div className="mt-4 grid grid-cols-6 gap-1">{[["NEXUS","14"],["VERA","46"],["CHAKRA","6"],["EVIDENCE","31"],["GOVERN","9"],["GATE","BLOCK"]].map(([a,b],i)=><div key={a} className={`rounded-lg border p-2 ${i===5?"border-red-400/30 bg-red-400/10":"border-white/10 bg-white/[.025]"}`}><div className="text-[7px] font-bold text-white/55">{a}</div><div className={`mt-2 font-mono text-xs font-black ${i===5?"text-red-300":"text-white"}`}>{b}</div></div>)}</div>
-<div className="mt-4 h-1 rounded-full bg-white/5"><div className="h-full w-[84%] rounded-full bg-gradient-to-r from-violet-400 via-cyan-400 to-orange-400"/></div>
-</div>
+      <div className="min-w-0 flex-1 p-4 sm:p-5 lg:p-6">
+        <div className="flex flex-col gap-3 border-b border-white/10 pb-4 sm:flex-row sm:items-center sm:justify-between">
+          <div><div className="text-[8px] text-white/30">PROJECT</div><div className="text-xs font-semibold">Vanilla Steel <span className="text-white/30">(Illustrative)</span> · RFQ-2026-184</div></div>
+          <div className="flex items-center gap-2"><div className="rounded-lg border border-white/10 bg-white/[.03] px-3 py-2 text-[9px] text-white/45">Live assurance evidence</div><button type="button" onClick={()=>setReplaying(true)} className={\`rounded-lg border px-3 py-2 font-mono text-[8px] font-bold uppercase tracking-[.12em] transition-all \${replaying?"border-orange-400/40 bg-orange-400/10 text-orange-300":"border-white/10 bg-white/5 text-white/55 hover:border-white/20 hover:text-white"}\`}>{replaying?"REPLAYING…":"Replay evidence"}</button></div>
+        </div>
 
-<div className="rounded-xl border border-red-400/15 bg-[#140d13] p-4">
-<div className="flex items-center justify-between"><div><div className="text-sm font-bold">Recent Findings</div><div className="mt-1 text-[8px] text-white/35">Evidence requiring attention</div></div><span className="text-[8px] text-violet-300">View all</span></div>
-<div className="mt-3 space-y-2">{[
-["CRITICAL","Prompt injection detected","Agent accepted hidden instruction"],
-["HIGH","Tool selection regression","Incorrect pricing tool selected"],
-["MEDIUM","RAG grounding drift","Policy source version mismatch"],
-["MEDIUM","Business rule failure","Approval guard not enforced"]
-].map(([sev,title,desc],i)=><div key={title} className="rounded-lg border border-white/10 bg-white/[.025] p-2.5"><div className="flex items-center gap-2"><span className={`rounded px-1.5 py-0.5 text-[6px] font-black ${i===0?"bg-red-500/20 text-red-300":i===1?"bg-orange-500/20 text-orange-300":"bg-amber-400/15 text-amber-300"}`}>{sev}</span><span className="text-[9px] font-bold">{title}</span></div><div className="mt-1 text-[7px] leading-4 text-white/35">{desc}</div></div>)}</div>
-</div>
-</div>
+        <div className="mt-5 flex flex-col justify-between gap-2 sm:flex-row sm:items-end">
+          <div><div className="font-mono text-[9px] font-bold uppercase tracking-[.18em] text-orange-400">AUTONOMOUS QA · INTERACTIVE REPORT</div><h3 className="mt-1 text-xl font-extrabold tracking-tight sm:text-2xl">Shyena Assurance Command Center</h3><p className="mt-1 text-[10px] text-white/35">Click any section to inspect its evidence · live motion is illustrative</p></div>
+          <div className={\`rounded-lg border px-3 py-2 transition-all duration-500 \${replaying?"border-orange-400/30 bg-orange-500/10":"border-red-400/20 bg-red-500/10"}\`}><div className="text-[7px] uppercase tracking-[.15em] text-red-200/50">Release verdict</div><div className="font-mono text-sm font-black text-red-300">{replaying?"RE-EVALUATING":"BLOCKED"}</div></div>
+        </div>
 
-<div className="mt-4 rounded-xl border border-white/10 bg-[#08101d] p-3">
-<div className="flex flex-wrap items-center justify-center gap-2 text-[8px] font-bold">{[["NEXUS","Discover · Impact"],["VERA","Execute · Verify"],["CHAKRA","Attack · Diagnose"],["GOVERN","Prove · Release"]].map(([a,b],i)=><div key={a} className="flex items-center gap-2"><div className={`rounded-lg border px-3 py-2 ${i===2?"border-red-400/30 bg-red-400/10":"border-white/10 bg-white/[.025]"}`}><span>{a}</span><span className="ml-2 text-[7px] text-white/30">{b}</span></div>{i<3&&<span className="text-white/20">→</span>}</div>)}<div className="rounded-lg border border-red-400/30 bg-red-500/10 px-4 py-2 font-mono text-red-300">RELEASE BLOCKED · 1 P1</div></div>
-</div>
+        <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {metricsByFocus[focus].map(([a,b,c,t],i)=><button type="button" key={a} onClick={()=>setActive(i===0?"qa":i===1?"agent":i===2?"evidence":"release")} className="rounded-xl border border-white/10 bg-[#0b1322] p-3 text-left transition-all duration-300 hover:-translate-y-0.5 hover:border-violet-400/30 hover:bg-[#0e182a]">
+            <div className="flex items-center justify-between"><span className="text-[9px] font-semibold text-white/65">{a}</span><span className={\`rounded-md px-2 py-1 text-[7px] font-bold \${t==="red"?"bg-red-400/10 text-red-300":"bg-emerald-400/10 text-emerald-300"}\`}>{replaying?"UPDATING":"OPERATIONAL"}</span></div>
+            <div className="mt-2 flex items-end justify-between"><div><div className="font-mono text-2xl font-black">{b}</div><div className="text-[8px] text-white/30">{c}</div></div><Sparkline tone={t==="teal"?"teal":t==="green"?"green":t==="orange"?"orange":"purple"} values={[18,35,22,55,42,72,48,86,61]} pulse={pulse%3===i%3}/></div>
+          </button>)}
+        </div>
 
-<div className="mt-3 text-center font-mono text-[7px] uppercase tracking-[.18em] text-white/20">Synthetic Vanilla Steel RFQ demonstration · no customer repository, production system or real run accessed</div>
-</div>
-</div>
-</div>;
+        <div className="mt-4 grid gap-4 lg:grid-cols-[1.55fr_1fr]">
+          <div className="rounded-xl border border-white/10 bg-[#0b1322] p-4">
+            <div className="flex items-center justify-between"><div><div className="text-sm font-bold">{focus==="impact"?"Change Impact Graph":focus==="agent"?"Agent Evaluation Trajectory":focus==="security"?"Adversarial Evaluation":"Autonomous Journey Execution"}</div><div className="mt-1 text-[8px] text-white/35">Click a KPI or sidebar section to change the view</div></div><span className="rounded-md bg-violet-500/15 px-2 py-1 font-mono text-[8px] text-violet-300">{focus.toUpperCase()}</span></div>
+            <div className="mt-4 grid grid-cols-4 gap-2">{[["46","total"],["42","passed"],["3","review"],["1","failed"]].map(([n,l],i)=><button type="button" key={l} onClick={()=>setActive(i===3?"release":i===2?"agent":"qa")} className="rounded-lg border border-white/10 p-2 text-left transition hover:border-white/25"><div className={\`font-mono text-lg font-black \${i===3?"text-red-300":i===2?"text-amber-300":i===1?"text-emerald-300":"text-white"}\`}>{n}</div><div className="text-[7px] uppercase text-white/30">{l}</div></button>)}</div>
+            <MiniBars values={replaying?chartValues.map(v=>Math.min(100,v+8)):chartValues} tone={focus==="security"?"orange":focus==="agent"?"teal":"green"}/>
+            <div className="mt-2 flex justify-between text-[7px] text-white/25"><span>09:00</span><span>09:30</span><span>10:00</span><span>10:15</span><span>LIVE</span></div>
+          </div>
+
+          <div className="rounded-xl border border-white/10 bg-[#0b1322] p-4">
+            <div className="flex items-center justify-between"><div><div className="text-sm font-bold">Agent Response Quality</div><div className="mt-1 text-[8px] text-white/35">Trajectory-level evaluation</div></div><span className="rounded-md bg-violet-500/15 px-2 py-1 font-mono text-[8px] text-violet-300">NEXUS</span></div>
+            <div className="mt-4 grid grid-cols-2 gap-2">{[["92%","Intent accuracy"],["87%","Grounding"],["81%","Tool selection"],["94%","Policy compliance"]].map(([n,l],i)=><button type="button" key={l} onClick={()=>setActive("agent")} className="rounded-lg border border-white/10 p-2 text-left transition hover:border-violet-400/30"><div className={\`font-mono text-lg font-black \${i===2?"text-amber-300":"text-emerald-300"}\`}>{n}</div><div className="text-[7px] text-white/30">{l}</div></button>)}</div>
+            <div className="mt-4 space-y-2">{[["Intent accuracy",92,"green"],["Grounding",87,"teal"],["Tool selection",81,"orange"],["Policy compliance",94,"green"]].map(([l,v,t])=><button type="button" key={l} onClick={()=>setActive("agent")} className="block w-full text-left"><div className="flex justify-between text-[7px] text-white/45"><span>{l}</span><span>{v}%</span></div><div className="mt-1 h-1 rounded-full bg-white/5"><div className={\`h-full rounded-full transition-all duration-700 \${t==="orange"?"bg-orange-400":"bg-cyan-400"}\`} style={{width:\`\${replaying?Math.max(0,Number(v)-5):v}%\`}}/></div></button>)}</div>
+          </div>
+        </div>
+
+        <div className="mt-4 grid gap-4 lg:grid-cols-[1.15fr_.85fr]">
+          <div className="rounded-xl border border-white/10 bg-[#0b1322] p-4">
+            <div className="flex items-center justify-between"><div><div className="text-sm font-bold">Assurance Pipeline</div><div className="mt-1 text-[8px] text-white/35">NEXUS → VERA → CHAKRA → GOVERN</div></div><span className="font-mono text-[8px] text-orange-300">{replaying?"REPLAYING":"LIVE"}</span></div>
+            <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
+              {[["NEXUS","Discover","impact"],["VERA","Execute","qa"],["CHAKRA","Diagnose","security"],["GOVERN","Release","release"]].map(([name,desc,key],i)=><button type="button" key={name} onClick={()=>setActive(key as any)} className={\`rounded-lg border p-3 text-left transition-all duration-300 \${active===key?"border-violet-400/40 bg-violet-500/10":"border-white/10 bg-white/[.025] hover:border-white/20"}\`}><div className="flex items-center justify-between"><span className="text-[8px] font-bold text-white/55">{name}</span><span className={\`h-2 w-2 rounded-full \${i===3?"bg-red-400":"bg-emerald-400"} \${pulse%2===0?"animate-pulse":""}\`}/></div><div className="mt-3 font-mono text-sm font-black">{i===0?"14":i===1?"46":i===2?"6":"BLOCK"}</div><div className="mt-1 text-[7px] text-white/30">{desc}</div></button>)}
+            </div>
+          </div>
+
+          <div className="rounded-xl border border-white/10 bg-[#0b1322] p-4">
+            <div className="flex items-center justify-between"><div><div className="text-sm font-bold">Recent Findings</div><div className="mt-1 text-[8px] text-white/35">Click a finding to inspect evidence</div></div><button type="button" onClick={()=>setActive("evidence")} className="text-[8px] text-violet-300 hover:text-violet-200">View evidence</button></div>
+            <div className="mt-3 space-y-2">{findings.map(([id,sev,title,desc,product],i)=><button type="button" key={id} onClick={()=>setSelectedFinding(selectedFinding===id?null:id)} className={\`w-full rounded-lg border p-2.5 text-left transition-all \${selectedFinding===id?"border-violet-400/40 bg-violet-500/10":"border-white/10 bg-white/[.025] hover:border-white/20"}\`}>
+              <div className="flex items-center gap-2"><span className={\`rounded px-1.5 py-0.5 text-[6px] font-black \${sev==="CRITICAL"?"bg-red-500/20 text-red-300":sev==="HIGH"?"bg-orange-500/20 text-orange-300":"bg-amber-400/15 text-amber-300"}\`}>{sev}</span><span className="font-mono text-[7px] text-white/30">{id}</span><span className="text-[9px] font-bold">{title}</span></div>
+              <div className="mt-1 text-[7px] leading-4 text-white/35">{desc}</div>
+              {selectedFinding===id&&<div className="mt-2 border-t border-white/10 pt-2 text-[7px] text-white/55"><span className="font-bold text-white/75">Evidence path:</span> {product} → trace → reproduction → regression → release decision. <span className="ml-1 text-orange-300">Open details →</span></div>}
+            </button>)}</div>
+          </div>
+        </div>
+
+        <div className="mt-4 rounded-xl border border-white/10 bg-[#08101d] p-3">
+          <div className="flex flex-wrap items-center justify-center gap-2 text-[8px] font-bold">
+            {[["NEXUS","Discover · Impact","impact"],["VERA","Execute · Verify","qa"],["CHAKRA","Attack · Diagnose","security"],["GOVERN","Prove · Release","release"]].map(([a,b,key],i)=><React.Fragment key={a}><button type="button" onClick={()=>setActive(key as any)} className={\`rounded-lg border px-3 py-2 transition-all \${active===key?"border-violet-400/40 bg-violet-500/10":"border-white/10 bg-white/[.025] hover:border-white/20"}\`}><span>{a}</span><span className="ml-2 text-[7px] text-white/30">{b}</span></button>{i<3&&<span className="text-white/20">→</span>}</React.Fragment>)}<button type="button" onClick={()=>setActive("release")} className="rounded-lg border border-red-400/30 bg-red-500/10 px-4 py-2 font-mono text-red-300 transition hover:bg-red-500/15">RELEASE {replaying?"RE-EVALUATING":"BLOCKED"} · 1 P1</button>
+          </div>
+        </div>
+
+        <div className="mt-3 text-center font-mono text-[7px] uppercase tracking-[.18em] text-white/20">Synthetic Vanilla Steel RFQ demonstration · interactive evidence surface · no customer repository, production system or real run accessed</div>
+      </div>
+    </div>
+  </div>;
+};
 
 export const Route=createFileRoute("/sample-report")({head:()=>({links:[{rel:"canonical",href:"https://www.shyena.eu/sample-report"}],meta:[
 {title:"Sample Autonomous QA Report | Shyena"},
