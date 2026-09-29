@@ -14,9 +14,9 @@ const Pipeline=()=>{const items=[["PR scan","100","31 files"],["Impact map","100
 
 const ShyenaVisualBadge=({name,caption}:{name:string;caption:string})=><div className="flex items-center justify-between gap-3"><div className="font-mono text-[10px] font-black tracking-[.16em] text-white">{name}</div><div className="font-mono text-[9px] uppercase tracking-[.14em] text-[#f18a32]">{caption}</div></div>;
 
-const MiniBars=({values,tone="purple"}:{values:number[];tone?:string})=><div className="mt-4 flex h-16 items-end gap-1">{values.map((v,i)=><div key={i} className={\`flex-1 rounded-t-sm \${tone==="green"?"bg-emerald-400/75":tone==="teal"?"bg-cyan-400/75":tone==="orange"?"bg-orange-400/75":"bg-violet-400/80"}\`} style={{height:\`\${Math.max(10,v)}%\`}}/> )}</div>;
+const MiniBars=({values,tone="purple"}:{values:number[];tone?:string})=><div className="mt-4 flex h-16 items-end gap-1">{values.map((v,i)=><div key={i} className={`flex-1 rounded-t-sm ${tone==="green"?"bg-emerald-400/75":tone==="teal"?"bg-cyan-400/75":tone==="orange"?"bg-orange-400/75":"bg-violet-400/80"}`} style={{height:`${Math.max(10,v)}%`}}/> )}</div>;
 
-const Sparkline=({values,tone="purple"}:{values:number[];tone?:string})=><div className="mt-3 flex h-10 items-end gap-[2px]">{values.map((v,i)=><span key={i} className={\`w-full rounded-t \${tone==="teal"?"bg-cyan-400/75":tone==="green"?"bg-emerald-400/75":"bg-violet-400/75"}\`} style={{height:\`\${Math.max(8,v)}%\`}}/> )}</div>;
+const Sparkline=({values,tone="purple"}:{values:number[];tone?:string})=><div className="mt-3 flex h-10 items-end gap-[2px]">{values.map((v,i)=><span key={i} className={`w-full rounded-t ${tone==="teal"?"bg-cyan-400/75":tone==="green"?"bg-emerald-400/75":"bg-violet-400/75"}`} style={{height:`${Math.max(8,v)}%`}}/> )}</div>;
 
 const ReportVisuals=()=> <div className="mt-8 overflow-hidden rounded-[24px] border border-[#16243b] bg-[#060c18] text-white shadow-2xl">
 <div className="flex min-h-[760px]">
@@ -28,7 +28,7 @@ const ReportVisuals=()=> <div className="mt-8 overflow-hidden rounded-[24px] bor
 </div>
 <div className="mt-8 border-t border-white/10 pt-5">
 <div className="text-[8px] uppercase tracking-[.15em] text-white/30">Shyena products</div>
-{[["NEXUS","Discover · Impact"],["VERA","Execute · Verify"],["CHAKRA","Attack · Diagnose"],["GOVERN","Prove · Release"]].map(([a,b],i)=><div key={a} className="mt-3 flex items-center gap-2"><span className={\`grid h-7 w-7 place-items-center rounded-md \${i===0?"bg-violet-500/25":i===1?"bg-cyan-500/20":i===2?"bg-red-500/20":"bg-emerald-500/20"}\`}>{i+1}</span><div><div className="text-[9px] font-bold">{a}</div><div className="text-[7px] text-white/35">{b}</div></div></div>)}
+{[["NEXUS","Discover · Impact"],["VERA","Execute · Verify"],["CHAKRA","Attack · Diagnose"],["GOVERN","Prove · Release"]].map(([a,b],i)=><div key={a} className="mt-3 flex items-center gap-2"><span className={`grid h-7 w-7 place-items-center rounded-md ${i===0?"bg-violet-500/25":i===1?"bg-cyan-500/20":i===2?"bg-red-500/20":"bg-emerald-500/20"}`}>{i+1}</span><div><div className="text-[9px] font-bold">{a}</div><div className="text-[7px] text-white/35">{b}</div></div></div>)}
 </div>
 </aside>
 
@@ -49,15 +49,15 @@ const ReportVisuals=()=> <div className="mt-8 overflow-hidden rounded-[24px] bor
 <div className="mt-4 grid gap-4 lg:grid-cols-[1.55fr_1fr]">
 <div className="rounded-xl border border-white/10 bg-[#0b1322] p-4">
 <div className="flex items-center justify-between"><div><div className="text-sm font-bold">Autonomous Journey Execution</div><div className="mt-1 text-[8px] text-white/35">Cases executed across impacted business paths</div></div><span className="rounded-md bg-violet-500/15 px-2 py-1 font-mono text-[8px] text-violet-300">VERA</span></div>
-<div className="mt-3 grid grid-cols-4 gap-2">{[["46","total"],["42","passed"],["3","review"],["1","failed"]].map(([n,l],i)=><div key={l} className="rounded-lg border border-white/10 p-2"><div className={\`font-mono text-lg font-black \${i===3?"text-red-300":i===2?"text-amber-300":i===1?"text-emerald-300":"text-white"}\`}>{n}</div><div className="text-[7px] uppercase text-white/30">{l}</div></div>)}</div>
+<div className="mt-3 grid grid-cols-4 gap-2">{[["46","total"],["42","passed"],["3","review"],["1","failed"]].map(([n,l],i)=><div key={l} className="rounded-lg border border-white/10 p-2"><div className={`font-mono text-lg font-black ${i===3?"text-red-300":i===2?"text-amber-300":i===1?"text-emerald-300":"text-white"}`}>{n}</div><div className="text-[7px] uppercase text-white/30">{l}</div></div>)}</div>
 <MiniBars values={[42,66,51,72,58,88,73,92,79,61,83,96,67,78,54,70,86,62,75,91]} tone="green"/>
 <div className="mt-2 flex justify-between text-[7px] text-white/25"><span>09:00</span><span>09:30</span><span>10:00</span><span>10:15</span></div>
 </div>
 
 <div className="rounded-xl border border-white/10 bg-[#0b1322] p-4">
 <div className="flex items-center justify-between"><div><div className="text-sm font-bold">Agent Response Quality</div><div className="mt-1 text-[8px] text-white/35">Trajectory-level evaluation</div></div><span className="rounded-md bg-violet-500/15 px-2 py-1 font-mono text-[8px] text-violet-300">NEXUS</span></div>
-<div className="mt-4 grid grid-cols-2 gap-2">{[["92%","Intent accuracy"],["87%","Grounding"],["81%","Tool selection"],["94%","Policy compliance"]].map(([n,l],i)=><div key={l} className="rounded-lg border border-white/10 p-2"><div className={\`font-mono text-lg font-black \${i===2?"text-amber-300":"text-emerald-300"}\`}>{n}</div><div className="text-[7px] text-white/30">{l}</div></div>)}</div>
-<div className="mt-4 space-y-2">{[["Intent accuracy",92,"green"],["Grounding",87,"teal"],["Tool selection",81,"orange"],["Policy compliance",94,"green"]].map(([l,v,t])=><div key={l}><div className="flex justify-between text-[7px] text-white/45"><span>{l}</span><span>{v}%</span></div><div className="mt-1 h-1 rounded-full bg-white/5"><div className={\`h-full rounded-full \${t==="orange"?"bg-orange-400":"bg-cyan-400"}\`} style={{width:\`\${v}%\`}}/></div></div>)}</div>
+<div className="mt-4 grid grid-cols-2 gap-2">{[["92%","Intent accuracy"],["87%","Grounding"],["81%","Tool selection"],["94%","Policy compliance"]].map(([n,l],i)=><div key={l} className="rounded-lg border border-white/10 p-2"><div className={`font-mono text-lg font-black ${i===2?"text-amber-300":"text-emerald-300"}`}>{n}</div><div className="text-[7px] text-white/30">{l}</div></div>)}</div>
+<div className="mt-4 space-y-2">{[["Intent accuracy",92,"green"],["Grounding",87,"teal"],["Tool selection",81,"orange"],["Policy compliance",94,"green"]].map(([l,v,t])=><div key={l}><div className="flex justify-between text-[7px] text-white/45"><span>{l}</span><span>{v}%</span></div><div className="mt-1 h-1 rounded-full bg-white/5"><div className={`h-full rounded-full ${t==="orange"?"bg-orange-400":"bg-cyan-400"}`} style={{width:`${v}%`}}/></div></div>)}</div>
 </div>
 </div>
 
@@ -71,14 +71,14 @@ const ReportVisuals=()=> <div className="mt-8 overflow-hidden rounded-[24px] bor
 <div className="rounded-xl border border-white/10 bg-[#0b1322] p-4">
 <div className="flex items-center justify-between"><div><div className="text-sm font-bold">Release Risk</div><div className="mt-1 text-[8px] text-white/35">GOVERN release intelligence</div></div><span className="rounded-md bg-emerald-500/15 px-2 py-1 font-mono text-[8px] text-emerald-300">GOVERN</span></div>
 <div className="mt-5 flex items-center gap-4"><div className="grid h-24 w-24 place-items-center rounded-full border-[12px] border-red-400/80 border-l-white/10 border-b-white/10"><div className="text-center"><div className="font-mono text-2xl font-black text-red-300">1</div><div className="text-[7px] uppercase text-white/35">high risk</div></div></div><div className="space-y-2 text-[8px]"><div><span className="mr-2 inline-block h-2 w-2 rounded-full bg-red-400"/>High <b className="ml-3">1</b></div><div><span className="mr-2 inline-block h-2 w-2 rounded-full bg-orange-400"/>Medium <b className="ml-1">2</b></div><div><span className="mr-2 inline-block h-2 w-2 rounded-full bg-amber-300"/>Low <b className="ml-3">3</b></div><div><span className="mr-2 inline-block h-2 w-2 rounded-full bg-slate-400"/>Info <b className="ml-4">5</b></div></div></div>
-<div className="mt-4 grid grid-cols-4 gap-1">{["DISCOVER","EXECUTE","DIAGNOSE","RELEASE"].map((x,i)=><div key={x} className={\`h-2 rounded-sm \${i===3?"bg-red-400/80":i===2?"bg-orange-400/80":"bg-emerald-400/70"}\`}/>)}</div>
+<div className="mt-4 grid grid-cols-4 gap-1">{["DISCOVER","EXECUTE","DIAGNOSE","RELEASE"].map((x,i)=><div key={x} className={`h-2 rounded-sm ${i===3?"bg-red-400/80":i===2?"bg-orange-400/80":"bg-emerald-400/70"}`}/>)}</div>
 </div>
 </div>
 
 <div className="mt-4 grid gap-4 lg:grid-cols-[1.55fr_1fr]">
 <div className="rounded-xl border border-white/10 bg-[#0b1322] p-4">
 <div className="flex items-center justify-between"><div><div className="text-sm font-bold">Assurance Pipeline</div><div className="mt-1 text-[8px] text-white/35">Autonomous evidence loop</div></div><span className="font-mono text-[8px] text-orange-300">SHYENA</span></div>
-<div className="mt-4 grid grid-cols-6 gap-1">{[["NEXUS","14"],["VERA","46"],["CHAKRA","6"],["EVIDENCE","31"],["GOVERN","9"],["GATE","BLOCK"]].map(([a,b],i)=><div key={a} className={\`rounded-lg border p-2 \${i===5?"border-red-400/30 bg-red-400/10":"border-white/10 bg-white/[.025]"}\`}><div className="text-[7px] font-bold text-white/55">{a}</div><div className={\`mt-2 font-mono text-xs font-black \${i===5?"text-red-300":"text-white"}\`}>{b}</div></div>)}</div>
+<div className="mt-4 grid grid-cols-6 gap-1">{[["NEXUS","14"],["VERA","46"],["CHAKRA","6"],["EVIDENCE","31"],["GOVERN","9"],["GATE","BLOCK"]].map(([a,b],i)=><div key={a} className={`rounded-lg border p-2 ${i===5?"border-red-400/30 bg-red-400/10":"border-white/10 bg-white/[.025]"}`}><div className="text-[7px] font-bold text-white/55">{a}</div><div className={`mt-2 font-mono text-xs font-black ${i===5?"text-red-300":"text-white"}`}>{b}</div></div>)}</div>
 <div className="mt-4 h-1 rounded-full bg-white/5"><div className="h-full w-[84%] rounded-full bg-gradient-to-r from-violet-400 via-cyan-400 to-orange-400"/></div>
 </div>
 
@@ -89,12 +89,12 @@ const ReportVisuals=()=> <div className="mt-8 overflow-hidden rounded-[24px] bor
 ["HIGH","Tool selection regression","Incorrect pricing tool selected"],
 ["MEDIUM","RAG grounding drift","Policy source version mismatch"],
 ["MEDIUM","Business rule failure","Approval guard not enforced"]
-].map(([sev,title,desc],i)=><div key={title} className="rounded-lg border border-white/10 bg-white/[.025] p-2.5"><div className="flex items-center gap-2"><span className={\`rounded px-1.5 py-0.5 text-[6px] font-black \${i===0?"bg-red-500/20 text-red-300":i===1?"bg-orange-500/20 text-orange-300":"bg-amber-400/15 text-amber-300"}\`}>{sev}</span><span className="text-[9px] font-bold">{title}</span></div><div className="mt-1 text-[7px] leading-4 text-white/35">{desc}</div></div>)}</div>
+].map(([sev,title,desc],i)=><div key={title} className="rounded-lg border border-white/10 bg-white/[.025] p-2.5"><div className="flex items-center gap-2"><span className={`rounded px-1.5 py-0.5 text-[6px] font-black ${i===0?"bg-red-500/20 text-red-300":i===1?"bg-orange-500/20 text-orange-300":"bg-amber-400/15 text-amber-300"}`}>{sev}</span><span className="text-[9px] font-bold">{title}</span></div><div className="mt-1 text-[7px] leading-4 text-white/35">{desc}</div></div>)}</div>
 </div>
 </div>
 
 <div className="mt-4 rounded-xl border border-white/10 bg-[#08101d] p-3">
-<div className="flex flex-wrap items-center justify-center gap-2 text-[8px] font-bold">{[["NEXUS","Discover · Impact"],["VERA","Execute · Verify"],["CHAKRA","Attack · Diagnose"],["GOVERN","Prove · Release"]].map(([a,b],i)=><div key={a} className="flex items-center gap-2"><div className={\`rounded-lg border px-3 py-2 \${i===2?"border-red-400/30 bg-red-400/10":"border-white/10 bg-white/[.025]"}\`}><span>{a}</span><span className="ml-2 text-[7px] text-white/30">{b}</span></div>{i<3&&<span className="text-white/20">→</span>}</div>)}<div className="rounded-lg border border-red-400/30 bg-red-500/10 px-4 py-2 font-mono text-red-300">RELEASE BLOCKED · 1 P1</div></div>
+<div className="flex flex-wrap items-center justify-center gap-2 text-[8px] font-bold">{[["NEXUS","Discover · Impact"],["VERA","Execute · Verify"],["CHAKRA","Attack · Diagnose"],["GOVERN","Prove · Release"]].map(([a,b],i)=><div key={a} className="flex items-center gap-2"><div className={`rounded-lg border px-3 py-2 ${i===2?"border-red-400/30 bg-red-400/10":"border-white/10 bg-white/[.025]"}`}><span>{a}</span><span className="ml-2 text-[7px] text-white/30">{b}</span></div>{i<3&&<span className="text-white/20">→</span>}</div>)}<div className="rounded-lg border border-red-400/30 bg-red-500/10 px-4 py-2 font-mono text-red-300">RELEASE BLOCKED · 1 P1</div></div>
 </div>
 
 <div className="mt-3 text-center font-mono text-[7px] uppercase tracking-[.18em] text-white/20">Synthetic Vanilla Steel RFQ demonstration · no customer repository, production system or real run accessed</div>
