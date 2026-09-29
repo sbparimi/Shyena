@@ -39,6 +39,19 @@ const ReportVisuals=()=> {
     return()=>window.clearInterval(id);
   },[]);
 
+  // The report is a guided motion surface: it advances through the evidence views
+  // automatically so visitors can understand the workflow without clicking tabs.
+  React.useEffect(()=>{
+    if(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches)return;
+    const id=window.setInterval(()=>{
+      setActive(current=>{
+        const index=tabs.findIndex(([key])=>key===current);
+        return tabs[(index+1)%tabs.length][0];
+      });
+    },5000);
+    return()=>window.clearInterval(id);
+  },[]);
+
   React.useEffect(()=>{
     if(!replaying)return;
     const id=window.setTimeout(()=>setReplaying(false),1800);
@@ -103,11 +116,11 @@ const ReportVisuals=()=> {
         </div>
 
         <div className="mt-5 flex flex-col justify-between gap-2 sm:flex-row sm:items-end">
-          <div><div className="font-mono text-[9px] font-bold uppercase tracking-[.18em] text-orange-400">AUTONOMOUS QA · INTERACTIVE REPORT</div><h3 className="mt-1 text-xl font-extrabold tracking-tight sm:text-2xl">Shyena Assurance Command Center</h3><p className="mt-1 text-[10px] text-white/35">Click any section to inspect its evidence · live motion is illustrative</p></div>
+          <div><div className="font-mono text-[9px] font-bold uppercase tracking-[.18em] text-orange-400">AUTONOMOUS QA · INTERACTIVE REPORT</div><h3 className="mt-1 text-xl font-extrabold tracking-tight sm:text-2xl">Shyena Assurance Command Center</h3><p className="mt-1 text-[10px] text-white/35">Auto-playing evidence journey · click any section to inspect manually</p></div>
           <div className={`rounded-lg border px-3 py-2 transition-all duration-500 ${replaying?"border-orange-400/30 bg-orange-500/10":"border-red-400/20 bg-red-500/10"}`}><div className="text-[7px] uppercase tracking-[.15em] text-red-200/50">Release verdict</div><div className="font-mono text-sm font-black text-red-300">{replaying?"RE-EVALUATING":"BLOCKED"}</div></div>
         </div>
 
-        <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div key={focus} className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4 animate-in fade-in duration-500">
           {metricsByFocus[focus].map(([a,b,c,t],i)=><button type="button" key={a} onClick={()=>setActive(i===0?"qa":i===1?"agent":i===2?"evidence":"release")} className="rounded-xl border border-white/10 bg-[#0b1322] p-3 text-left transition-all duration-300 hover:-translate-y-0.5 hover:border-violet-400/30 hover:bg-[#0e182a]">
             <div className="flex items-center justify-between"><span className="text-[9px] font-semibold text-white/65">{a}</span><span className={`rounded-md px-2 py-1 text-[7px] font-bold ${t==="red"?"bg-red-400/10 text-red-300":"bg-emerald-400/10 text-emerald-300"}`}>{replaying?"UPDATING":"OPERATIONAL"}</span></div>
             <div className="mt-2 flex items-end justify-between"><div><div className="font-mono text-2xl font-black">{b}</div><div className="text-[8px] text-white/30">{c}</div></div><Sparkline tone={t==="teal"?"teal":t==="green"?"green":t==="orange"?"orange":"purple"} values={[18,35,22,55,42,72,48,86,61]} pulse={pulse%3===i%3}/></div>
