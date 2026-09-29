@@ -165,9 +165,9 @@ function IllustrativeRun() {
       <div className="border-b border-white/10 bg-[#11151c] px-3 py-2"><div className="flex items-center gap-2 overflow-x-auto">{stages.map((item,i)=><button type="button" key={item.label} onClick={()=>selectStage(i)} className={i===active ? "shrink-0 rounded-md bg-white/10 px-2.5 py-1.5 font-mono text-[9px] font-semibold text-white" : "shrink-0 rounded-md px-2.5 py-1.5 font-mono text-[9px] font-semibold text-white/30 hover:text-white/60"}>{item.label}</button>)}</div></div>
       <div className="p-4 font-mono text-[9px] leading-[1.65] sm:p-5 sm:text-[10px]">
         <div className="text-white/25">Last login: today on ttys001</div>
-        <div className="mt-2 text-white"><span className="text-[#28c840]">~/projects/vanilla-steel</span> <span className="text-white/45">% </span><span>{stage.command.slice(2,2+typedChars)}</span><span className="animate-pulse text-white/80">▌</span></div>
-        <div className="mt-1 font-bold text-[#f18a32]">→ {stage.label}</div>
-        <div className="mt-3 space-y-0.5 text-white/65">{stage.lines.slice(0,visibleLines).map((line,i)=><div key={i} className={line.includes("FAIL")||line.includes("BLOCK")?"font-bold text-[#ff8b43]":line.includes("PASS")?"text-[#58d68d]":line.includes("TC-")||line.includes("P0")||line.includes("P1")||line.includes("P2")?"text-white":""}>{line||" "}</div>)}</div>
+        <div className="mt-2 min-w-0 max-w-full overflow-hidden text-white"><span className="text-[#28c840]">~/projects/vanilla-steel</span> <span className="text-white/45">% </span><span className="break-all">{stage.command.slice(2,2+typedChars)}</span><span className="animate-pulse text-white/80">▌</span></div>
+        <div className="mt-1 min-w-0 max-w-full break-words font-bold text-[#f18a32]">→ {stage.label}</div>
+        <div className="mt-3 min-w-0 max-w-full space-y-0.5 overflow-hidden text-white/65">{stage.lines.slice(0,visibleLines).map((line,i)=><div key={i} className={`min-w-0 max-w-full break-words ${line.includes("FAIL")||line.includes("BLOCK")?"font-bold text-[#ff8b43]":line.includes("PASS")?"text-[#58d68d]":line.includes("TC-")||line.includes("P0")||line.includes("P1")||line.includes("P2")?"text-white":""}`}>{line||" "}</div>)}</div>
         <div className="mt-3 h-1 overflow-hidden rounded-full bg-white/5"><div className="h-full bg-[#f18a32] transition-all duration-100" style={{width: progress + "%"}}/></div>
         {visibleLines>=stage.lines.length&&phase==="terminal"&&<div className="mt-3 border-t border-white/10 pt-3 font-bold text-white">{stage.result}</div>}
         {phase==="report" && <TerminalReport stage={stage}/>}
@@ -215,8 +215,8 @@ export const Route = createFileRoute("/")({
 function HomePage() {
   return <main className="overflow-hidden bg-white text-[#17213f]">
     <section className="bg-[#07101f] text-white">
-      <div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-16 sm:px-8 lg:grid-cols-[.9fr_1.1fr] lg:items-center lg:px-10 lg:py-24">
-        <div>
+      <div className="mx-auto grid w-full max-w-[1440px] min-w-0 gap-12 px-5 py-16 sm:px-8 lg:grid-cols-[minmax(0,.9fr)_minmax(0,1.1fr)] lg:items-start lg:px-10 lg:py-24">
+        <div className="min-w-0">
           <div className="font-mono text-[10px] font-bold uppercase tracking-[.22em] text-[#f18a32]">AUTONOMOUS QA · AGENTIC AI EVALUATION</div>
           <h1 className="mt-5 font-[Sora] text-[clamp(3.2rem,7vw,6.8rem)] font-extrabold leading-[.88] tracking-[-.07em]">Shyena is your<br/><span className="text-[#f18a32]">Autonomous</span><br/>QA Engineer.</h1>
           <p className="mt-7 max-w-2xl text-lg leading-8 text-white/60">It discovers what to test, executes real customer journeys, evaluates agent behaviour, reproduces failures and continuously expands regression coverage.</p>
@@ -228,7 +228,7 @@ function HomePage() {
             <span>Built in the Netherlands</span><span>Founder-led</span><span>Autonomous QA · Agentic evaluation</span>
           </div>
         </div>
-        <IllustrativeRun/>
+        <div className="min-w-0 w-full max-w-full self-start overflow-hidden"><IllustrativeRun/></div>
       </div>
     </section>
 
