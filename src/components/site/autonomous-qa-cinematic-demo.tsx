@@ -125,7 +125,7 @@ function roundedRect(ctx: CanvasRenderingContext2D, x: number, y: number, w: num
 
 function drawGlow(ctx: CanvasRenderingContext2D, x: number, y: number, r: number, color: string, alpha: number) {
   const g = ctx.createRadialGradient(x, y, 0, x, y, r);
-  g.addColorStop(0, color.replace(")", `, ${alpha})`).replace("rgb(", "rgba("));
+  g.addColorStop(0, rgba(color, alpha));
   g.addColorStop(1, "rgba(0,0,0,0)");
   ctx.fillStyle = g;
   ctx.fillRect(x - r, y - r, r * 2, r * 2);
@@ -264,24 +264,24 @@ function phaseCopy(phase: Phase) {
 }
 
 function nodeState(id: string, phase: Phase): "idle" | "active" | "passed" | "blocked" {
-  if (phase === "gate") return id === "approval" || id === "quote" ? "blocked" : "passed";
-  if (phase === "regression" || phase === "attack" || phase === "replay" || phase === "investigate") {
+  if (live.phase === "gate") return id === "approval" || id === "quote" ? "blocked" : "passed";
+  if (live.phase === "regression" || live.phase === "attack" || live.phase === "replay" || live.phase === "investigate") {
     return id === "approval" || id === "quote" ? "blocked" : "passed";
   }
-  if (phase === "blocked") return id === "approval" || id === "quote" ? "blocked" : "passed";
-  if (phase === "control") return id === "approval" ? "active" : id === "margin" ? "passed" : "idle";
-  if (phase === "execute") {
+  if (live.phase === "blocked") return id === "approval" || id === "quote" ? "blocked" : "passed";
+  if (live.phase === "control") return id === "approval" ? "active" : id === "margin" ? "passed" : "idle";
+  if (live.phase === "execute") {
     if (id === "inventory" || id === "pricing" || id === "margin") return "active";
     if (id === "agent" || id === "rfq") return "passed";
   }
-  if (phase === "understand") return id === "agent" ? "active" : id === "rfq" ? "passed" : "idle";
-  if (phase === "arrival") return id === "rfq" ? "active" : "idle";
+  if (live.phase === "understand") return id === "agent" ? "active" : id === "rfq" ? "passed" : "idle";
+  if (live.phase === "arrival") return id === "rfq" ? "active" : "idle";
   return "idle";
 }
 
 function MotionCanvas({ phase, elapsed, cinematic, paused }: { phase: Phase; elapsed: number; cinematic: boolean; paused: boolean }) {
   const ref = React.useRef<HTMLCanvasElement>(null);
-  const particlesRef = React.useRef<Particle[]>(createParticles());
+  const particlesRef = React.useRef<Particle[]>(createParticles());\n  const stateRef = React.useRef({ phase, elapsed, cinematic, paused });\n  stateRef.current = { phase, elapsed, cinematic, paused };
   const rafRef = React.useRef<number | null>(null);
   const lastRef = React.useRef(0);
 
@@ -318,7 +318,7 @@ function MotionCanvas({ phase, elapsed, cinematic, paused }: { phase: Phase; ela
       ctx.fillRect(0, 0, width, height);
 
       const t = elapsed / 1000;
-      const p = phaseProgress(elapsed, phase);
+      const p = phaseProgress(elapsed, live.phase);
       const slow = paused ? 0 : dt / 1000;
       const drift = t * 7;
 
@@ -329,12 +329,12 @@ function MotionCanvas({ phase, elapsed, cinematic, paused }: { phase: Phase; ela
       let cameraY = 0;
       if (live.cinematic) {
         const target =
-          phase === "blocked" || phase === "control" ? nodeById("approval").p :
-          phase === "investigate" ? nodeById("pricing").p :
-          phase === "replay" ? nodeById("approval").p :
-          phase === "attack" ? nodeById("approval").p :
-          phase === "gate" ? nodeById("quote").p :
-          nodeById(phase === "execute" ? "margin" : phase === "understand" ? "agent" : "rfq").p;
+          live.phase === "blocked" || live.phase === "control" ? nodeById("approval").p :
+          live.phase === "investigate" ? nodeById("pricing").p :
+          live.phase === "replay" ? nodeById("approval").p :
+          live.phase === "attack" ? nodeById("approval").p :
+          live.phase === "gate" ? nodeById("quote").p :
+          nodeById(live.phase === "execute" ? "margin" : live.phase === "understand" ? "agent" : "rfq").p;
         const ease = 0.35 + 0.18 * Math.sin(t * 0.8);
         cameraScale = 1.08 + ease * 0.18;
         cameraX = (0.5 - target.x) * width * (cameraScale - 1);
@@ -350,33 +350,33 @@ function MotionCanvas({ phase, elapsed, cinematic, paused }: { phase: Phase; ela
         const a = nodeById(aId).p;
         const b = nodeById(bId).p;
         const activeEdge =
-          (phase === "arrival" && aId === "rfq") ||
-          (live.phase === "understand" && aId === "rfq") ||
-          (live.phase === "execute" && (aId === "agent" || aId === "inventory" || aId === "pricing" || aId === "margin")) ||
-          (live.phase === "control" && aId === "margin") ||
-          (live.phase === "blocked" && (aId === "approval" || aId === "margin")) ||
-          (live.phase === "investigate" && (aId === "approval" || aId === "margin" || aId === "pricing" || aId === "agent")) ||
-          (live.phase === "replay" && (aId === "margin" || aId === "pricing" || aId === "approval")) ||
-          (live.phase === "attack" && aId === "approval");
+          (live.phase === "arrival" && aId === "rfq") ||
+          (live.live.phase === "understand" && aId === "rfq") ||
+          (live.live.phase === "execute" && (aId === "agent" || aId === "inventory" || aId === "pricing" || aId === "margin")) ||
+          (live.live.phase === "control" && aId === "margin") ||
+          (live.live.phase === "blocked" && (aId === "approval" || aId === "margin")) ||
+          (live.live.phase === "investigate" && (aId === "approval" || aId === "margin" || aId === "pricing" || aId === "agent")) ||
+          (live.live.phase === "replay" && (aId === "margin" || aId === "pricing" || aId === "approval")) ||
+          (live.live.phase === "attack" && aId === "approval");
 
-        const blockedEdge = live.phase === "blocked" && aId === "approval";
+        const blockedEdge = live.live.phase === "blocked" && aId === "approval";
         drawEdge(ctx, a, b, blockedEdge ? "blocked" : activeEdge ? "active" : nodeState(aId, live.phase) === "passed" && nodeState(bId, live.phase) === "passed" ? "passed" : "idle", width, height);
       }
 
       // Transaction path.
-      if (live.phase === "arrival" || live.phase === "understand") {
+      if (live.live.phase === "arrival" || live.live.phase === "understand") {
         const route = ["rfq", "agent"];
         drawPacket(ctx, routePoint(route, p), colors.cyan, 6);
-      } else if (live.phase === "execute") {
+      } else if (live.live.phase === "execute") {
         const routeA = ["agent", "inventory", "margin", "approval"];
         const routeB = ["agent", "pricing", "margin", "approval"];
         const a = routePoint(routeA, Math.min(1, p * 1.12));
         const b = routePoint(routeB, Math.max(0, p * 1.12 - 0.12));
         drawPacket(ctx, a, colors.cyan, 5);
         drawPacket(ctx, b, colors.cyan, 4);
-      } else if (live.phase === "control") {
+      } else if (live.live.phase === "control") {
         drawPacket(ctx, routePoint(["margin", "approval"], p), colors.amber, 6);
-      } else if (live.phase === "blocked") {
+      } else if (live.live.phase === "blocked") {
         drawPacket(ctx, routePoint(["approval", "quote"], Math.min(0.55, p * 0.55)), colors.red, 7);
         const q = nodeById("approval").p;
         const x = q.x * width, y = q.y * height;
@@ -386,19 +386,19 @@ function MotionCanvas({ phase, elapsed, cinematic, paused }: { phase: Phase; ela
         ctx.arc(x, y, 30 + 8 * Math.sin(t * 5), 0, Math.PI * 2);
         ctx.stroke();
         drawText(ctx, "CONTROL STOP", x, y - 42, 9, rgba(colors.red, 0.9), "700", "center");
-      } else if (live.phase === "investigate") {
+      } else if (live.live.phase === "investigate") {
         const route = ["approval", "margin", "pricing", "agent"];
         drawPacket(ctx, routePoint(route, p), colors.red, 5);
         for (let i = 0; i < 5; i++) {
           const q = routePoint(route, Math.max(0, p - i * 0.08));
           drawPacket(ctx, q, colors.amber, 2.5);
         }
-      } else if (live.phase === "replay") {
+      } else if (live.live.phase === "replay") {
         for (let i = 0; i < 3; i++) {
           const q = routePoint(["rfq", "agent", "pricing", "margin", "approval"], Math.max(0, p - i * 0.11));
           drawPacket(ctx, q, colors.green, 4);
         }
-      } else if (live.phase === "attack") {
+      } else if (live.live.phase === "attack") {
         const origin = nodeById("approval").p;
         const variants = [
           { end: { x: 0.62, y: 0.18 }, color: colors.red },
@@ -410,7 +410,7 @@ function MotionCanvas({ phase, elapsed, cinematic, paused }: { phase: Phase; ela
           const q = lerp(origin, v.end, Math.min(1, Math.max(0, p * 1.25 - i * 0.12)));
           drawPacket(ctx, q, v.color, i === 0 ? 5 : 3);
         });
-      } else if (live.phase === "regression") {
+      } else if (live.live.phase === "regression") {
         drawPacket(ctx, routePoint(["approval", "margin", "pricing", "agent", "rfq"], p), colors.green, 5);
         const a = nodeById("rfq").p;
         const b = nodeById("approval").p;
@@ -422,7 +422,7 @@ function MotionCanvas({ phase, elapsed, cinematic, paused }: { phase: Phase; ela
         ctx.lineTo(b.x * width, b.y * height);
         ctx.stroke();
         ctx.setLineDash([]);
-      } else if (live.phase === "gate") {
+      } else if (live.live.phase === "gate") {
         const q = nodeById("quote").p;
         drawPacket(ctx, q, colors.red, 8);
         const x = q.x * width, y = q.y * height;
@@ -437,12 +437,12 @@ function MotionCanvas({ phase, elapsed, cinematic, paused }: { phase: Phase; ela
 
       // Background system pulses. This borrows the useful "living board" idea
       // without copying the external visualizer's implementation.
-      if (!paused) {
+      if (!live.paused) {
         const ps = particlesRef.current;
         ps.forEach((particle) => {
-          particle.t = (particle.t + particle.speed * slow * (phase === "attack" ? 2.2 : 1)) % 1;
-          if (phase === "blocked" || phase === "gate") particle.hue = "red";
-          else if (phase === "replay" || phase === "regression") particle.hue = "green";
+          particle.t = (particle.t + particle.speed * slow * (live.live.phase === "attack" ? 2.2 : 1)) % 1;
+          if (live.phase === "blocked" || live.phase === "gate") particle.hue = "red";
+          else if (live.phase === "replay" || live.phase === "regression") particle.hue = "green";
           else particle.hue = "cyan";
           const q = routePoint(particle.route, particle.t);
           drawPacket(ctx, q, particle.hue === "red" ? colors.red : particle.hue === "green" ? colors.green : colors.cyan, particle.size);
@@ -450,21 +450,21 @@ function MotionCanvas({ phase, elapsed, cinematic, paused }: { phase: Phase; ela
       }
 
       // Root-cause halo and evidence convergence.
-      if (live.phase === "investigate" || live.phase === "replay" || live.phase === "regression") {
+      if (live.live.phase === "investigate" || live.live.phase === "replay" || live.live.phase === "regression") {
         const root = nodeById("pricing").p;
         const x = root.x * width, y = root.y * height;
-        const rings = phase === "investigate" ? 3 : 2;
+        const rings = live.phase === "investigate" ? 3 : 2;
         for (let i = 0; i < rings; i++) {
-          ctx.strokeStyle = rgba(live.phase === "investigate" ? colors.red : colors.green, 0.24 - i * 0.05);
+          ctx.strokeStyle = rgba(live.live.phase === "investigate" ? colors.red : colors.green, 0.24 - i * 0.05);
           ctx.lineWidth = 1.5;
           ctx.beginPath();
           ctx.arc(x, y, 22 + i * 16 + Math.sin(t * 3 + i) * 3, 0, Math.PI * 2);
           ctx.stroke();
         }
-        drawText(ctx, live.phase === "investigate" ? "ROOT CAUSE" : "REGRESSION ANCHOR", x, y - 54, 8, phase === "investigate" ? rgba(colors.red, 0.9) : rgba(colors.green, 0.9), "700", "center");
+        drawText(ctx, live.live.phase === "investigate" ? "ROOT CAUSE" : "REGRESSION ANCHOR", x, y - 54, 8, live.live.phase === "investigate" ? rgba(colors.red, 0.9) : rgba(colors.green, 0.9), "700", "center");
       }
 
-      nodes.forEach((node) => drawNode(ctx, node, nodeState(node.id, phase), width, height, 0.5 + 0.5 * Math.sin(t * 4)));
+      nodes.forEach((node) => drawNode(ctx, node, nodeState(node.id, live.phase), width, height, 0.5 + 0.5 * Math.sin(t * 4)));
 
       ctx.restore();
 
@@ -491,7 +491,7 @@ function EvidencePanel({ phase }: { phase: Phase }) {
     ["REPLAY", "3 / 3", "green"],
     ["COVERAGE", "46 → 61", "green"],
   ] as const;
-  const visible = phase === "arrival" ? 1 : phase === "understand" ? 2 : phase === "execute" ? 3 : phase === "control" ? 4 : phase === "blocked" ? 5 : phase === "investigate" ? 6 : 7;
+  const visible = live.phase === "arrival" ? 1 : live.phase === "understand" ? 2 : live.phase === "execute" ? 3 : live.phase === "control" ? 4 : live.phase === "blocked" ? 5 : live.phase === "investigate" ? 6 : 7;
   return (
     <div className="flex gap-1.5 overflow-x-auto pb-1">
       {evidence.map(([label, value, tone], i) => {
@@ -510,7 +510,7 @@ function EvidencePanel({ phase }: { phase: Phase }) {
 
 function DetailStrip({ phase }: { phase: Phase }) {
   const d = phaseCopy(phase);
-  const tone = phase === "blocked" || phase === "investigate" || phase === "attack" || phase === "gate" ? colors.red : phase === "regression" || phase === "replay" ? colors.green : phase === "control" ? colors.amber : colors.cyan;
+  const tone = live.phase === "blocked" || live.phase === "investigate" || live.phase === "attack" || live.phase === "gate" ? colors.red : live.phase === "regression" || live.phase === "replay" ? colors.green : live.phase === "control" ? colors.amber : colors.cyan;
   return (
     <div className="pointer-events-none absolute bottom-4 left-4 right-4 z-20 sm:left-6 sm:right-6">
       <div className="max-w-[760px] rounded-2xl border px-4 py-3 backdrop-blur-xl" style={{ borderColor: rgba(tone, 0.24), background: "rgba(3,8,14,.78)", boxShadow: `0 20px 80px ${rgba(tone, 0.09)}` }}>
@@ -523,7 +523,7 @@ function DetailStrip({ phase }: { phase: Phase }) {
 }
 
 function GatePanel({ phase }: { phase: Phase }) {
-  const blocked = phase === "gate";
+  const blocked = live.phase === "gate";
   return (
     <div className="rounded-2xl border p-3" style={{ borderColor: blocked ? rgba(colors.red, 0.3) : "rgba(255,255,255,.09)", background: blocked ? rgba(colors.red, 0.045) : "rgba(255,255,255,.018)" }}>
       <div className="flex items-center justify-between">
@@ -617,7 +617,7 @@ export function AutonomousQACinematicDemo() {
             <span>PR #284</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="shyena-livepulse h-2 w-2 rounded-full" style={{ background: phase === "gate" ? colors.red : colors.cyan }} />
+            <span className="shyena-livepulse h-2 w-2 rounded-full" style={{ background: live.phase === "gate" ? colors.red : colors.cyan }} />
             <button type="button" onClick={() => setRunning((v) => !v)} className="min-h-[42px] rounded-lg border border-white/12 px-3 font-mono text-[8px] font-bold text-white/65 transition hover:border-cyan-300/35 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300">{running ? "PAUSE" : "RESUME"}</button>
             <button type="button" onClick={restart} className="min-h-[42px] rounded-lg bg-white px-3 font-mono text-[8px] font-bold text-[#031019] transition hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300">RUN AGAIN</button>
           </div>
@@ -651,7 +651,7 @@ export function AutonomousQACinematicDemo() {
           <div className="absolute right-4 top-4 z-20 hidden w-[245px] rounded-xl border border-white/[.08] bg-[#030a12]/75 p-3 backdrop-blur-xl md:block">
             <div className="flex items-center justify-between">
               <span className="font-mono text-[7px] font-bold tracking-[.16em] text-white/35">LIVE INSPECTOR</span>
-              <span className="font-mono text-[7px]" style={{ color: phase === "gate" ? colors.red : colors.cyan }}>{phase.toUpperCase()}</span>
+              <span className="font-mono text-[7px]" style={{ color: live.phase === "gate" ? colors.red : colors.cyan }}>{phase.toUpperCase()}</span>
             </div>
             <div className="mt-2 font-mono text-[8px] leading-4 text-white/48">
               <div>TX <b className="text-white/80">RFQ-2026-184</b></div>
@@ -670,14 +670,14 @@ export function AutonomousQACinematicDemo() {
 
           <DetailStrip phase={phase} />
 
-          {phase === "blocked" && (
+          {live.phase === "blocked" && (
             <div className="absolute left-1/2 top-[62%] z-30 -translate-x-1/2 rounded-xl border border-red-400/30 bg-red-500/[.10] px-4 py-2.5 text-center shadow-[0_0_80px_rgba(255,83,100,.18)] backdrop-blur-xl">
               <div className="font-mono text-[8px] font-black tracking-[.2em] text-red-100">TRANSACTION HALTED</div>
               <div className="mt-1 font-mono text-[7px] text-red-100/55">approval_state=PENDING · quotation.create() denied</div>
             </div>
           )}
 
-          {phase === "investigate" && (
+          {live.phase === "investigate" && (
             <div className="absolute left-[44%] top-[22%] z-30 rounded-xl border border-red-400/20 bg-red-500/[.06] px-3 py-2 backdrop-blur-xl">
               <div className="font-mono text-[7px] font-bold tracking-[.16em] text-red-200/75">ROOT CAUSE</div>
               <div className="mt-1 font-mono text-[8px] text-white/70">pricing/margin-policy.ts</div>
@@ -685,7 +685,7 @@ export function AutonomousQACinematicDemo() {
             </div>
           )}
 
-          {phase === "replay" && (
+          {live.phase === "replay" && (
             <div className="absolute right-4 top-[22%] z-30 rounded-xl border border-emerald-400/20 bg-emerald-400/[.05] px-3 py-2 backdrop-blur-xl">
               <div className="font-mono text-[7px] font-bold tracking-[.16em] text-emerald-200/75">REPRODUCED</div>
               <div className="mt-1 text-sm font-bold text-white/85">3 / 3</div>
@@ -693,21 +693,21 @@ export function AutonomousQACinematicDemo() {
             </div>
           )}
 
-          {phase === "attack" && (
+          {live.phase === "attack" && (
             <div className="absolute left-1/2 top-[19%] z-30 -translate-x-1/2 rounded-xl border border-red-400/20 bg-red-500/[.045] px-3 py-2 text-center backdrop-blur-xl">
               <div className="font-mono text-[7px] font-bold tracking-[.16em] text-red-200/70">ADVERSARIAL BRANCHING</div>
               <div className="mt-1 font-mono text-[8px] text-white/55">12 scenarios · 1 reproduced</div>
             </div>
           )}
 
-          {phase === "regression" && (
+          {live.phase === "regression" && (
             <div className="absolute left-1/2 top-[19%] z-30 -translate-x-1/2 rounded-xl border border-emerald-400/20 bg-emerald-400/[.045] px-3 py-2 text-center backdrop-blur-xl">
               <div className="font-mono text-[7px] font-bold tracking-[.16em] text-emerald-200/70">REGRESSION PROMOTED</div>
               <div className="mt-1 font-mono text-[8px] text-white/55">TC-RFQ-021 · 46 → 61</div>
             </div>
           )}
 
-          {phase === "gate" && (
+          {live.phase === "gate" && (
             <div className="absolute left-1/2 top-[25%] z-30 -translate-x-1/2 text-center">
               <div className="font-mono text-[7px] font-bold tracking-[.24em] text-red-300/80">RELEASE GATE</div>
               <div className="mt-2 text-4xl font-black tracking-[-.04em] text-red-200 sm:text-6xl">BLOCKED</div>
@@ -752,7 +752,7 @@ export function AutonomousQACinematicDemo() {
         <div className="mt-2.5 flex flex-wrap items-center justify-between gap-2 rounded-xl border border-white/[.06] bg-white/[.012] px-3 py-2">
           <div className="flex items-center gap-3 font-mono text-[7px] text-white/25">
             <span>PHASE {String(phaseIndex + 1).padStart(2, "0")} / 10</span>
-            <span>{Math.round(phaseProgress(elapsed, phase) * 100)}% CURRENT PHASE</span>
+            <span>{Math.round(phaseProgress(elapsed, live.phase) * 100)}% CURRENT PHASE</span>
           </div>
           <div className="flex items-center gap-1.5">
             <button type="button" onClick={() => setCinematic((v) => !v)} className="min-h-[38px] rounded-lg border border-white/10 px-3 font-mono text-[7px] font-bold text-white/55 hover:border-cyan-300/25 hover:text-white/80">{cinematic ? "CINEMATIC ON" : "CINEMATIC OFF"}</button>
