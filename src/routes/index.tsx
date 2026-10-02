@@ -220,9 +220,10 @@ function HomePage() {
           <div className="font-mono text-[10px] font-bold uppercase tracking-[.22em] text-[#f18a32]">AUTONOMOUS QA · AI SYSTEMS</div>
           <h1 className="mt-5 max-w-4xl font-[Sora] text-[clamp(3rem,6.7vw,6.6rem)] font-extrabold leading-[.9] tracking-[-.07em]">Put every AI release through <span className="text-[#f18a32]">real-world testing.</span></h1>
           <p className="mt-7 max-w-2xl text-lg leading-8 text-white/65">AI systems are no longer just software that returns an answer. They reason, call tools, follow workflows and make decisions. Shyena is the autonomous QA engineer that discovers what matters, proves what happened and gives you the evidence behind every release decision.</p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link to="/demo" className="inline-flex h-12 items-center gap-2 rounded-lg bg-[#e87512] px-5 text-sm font-bold text-white">See autonomous QA in action <ArrowRight className="h-4 w-4"/></Link>
-            <Link to="/contact" className="inline-flex h-12 items-center gap-2 rounded-lg border border-white/15 px-5 text-sm font-bold text-white/85">Discuss your release <ArrowRight className="h-4 w-4"/></Link>
+          <div className="mt-8 flex w-full max-w-[760px] flex-nowrap items-center gap-3">
+            <Link to="/demo" className="inline-flex h-12 min-w-0 flex-[1.35] items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-[#e87512] px-4 text-[13px] font-bold text-white transition hover:bg-[#d9670a] sm:px-5 sm:text-sm">See autonomous QA in action <ArrowRight className="h-4 w-4 shrink-0"/></Link>
+            <Link to="/contact" className="inline-flex h-12 min-w-0 flex-[1] items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-white/15 px-4 text-[13px] font-bold text-white/85 transition hover:border-white/30 hover:text-white sm:px-5 sm:text-sm">Discuss your release <ArrowRight className="h-4 w-4 shrink-0"/></Link>
+            <Link to="/contact" className="inline-flex h-12 min-w-[150px] flex-[.72] items-center justify-center whitespace-nowrap rounded-lg bg-white px-4 text-[13px] font-bold text-[#17213f] transition hover:bg-white/90 sm:text-sm">Talk to Experts</Link>
           </div>
           <div className="mt-8 grid max-w-2xl gap-2 sm:grid-cols-3">
             {[["UNDERSTAND","What changed?"],["PROVE","Did it actually work?"],["DECIDE","Can we release?"]].map(([label,question])=><div key={label} className="rounded-xl border border-white/10 bg-white/[.035] p-3"><div className="font-mono text-[9px] font-bold tracking-[.16em] text-[#f18a32]">{label}</div><div className="mt-1 text-xs font-semibold text-white/70">{question}</div></div>)}
