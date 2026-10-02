@@ -7,7 +7,7 @@ const NAV = [
   ["Platform", "/platform"],
   ["Govern", "/govern"],
   ["Pricing", "/pricing"],
-  ["Assurance Network", "/experts"],
+  ["Assurance Expertise", "/experts"],
   ["Docs", "/docs"],
   ["Blog", "/blog"],
   ["About", "/about"],
