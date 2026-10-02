@@ -15,7 +15,7 @@ export function SiteFooter() {
         <div className="grid gap-12 lg:grid-cols-[1.5fr_2fr]">
           <div>
             <Link to="/" aria-label="Shyena home" className="inline-flex"><Logo size="footer" /></Link>
-            <p className="mt-5 max-w-sm text-sm leading-6 text-[#667085]">Autonomous QA that discovers what to test, proves what happened and preserves the evidence behind every release decision.</p>
+            <p className="mt-5 max-w-sm text-sm leading-6 text-[#667085]">AI assurance for systems that reason, act and change — understand, evaluate, attack and prove.</p>
             <div className="mt-6 flex items-center gap-2">
               <a href="https://www.linkedin.com/company/shyena-ai/" aria-label="Shyena on LinkedIn" className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[#e1e4e9] text-[#596273] transition hover:border-[#17213f] hover:text-[#17213f]"><Linkedin className="h-4 w-4" /></a>
               <a href="https://github.com/sbparimi/Shyena" aria-label="Shyena on GitHub" className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[#e1e4e9] text-[#596273] transition hover:border-[#17213f] hover:text-[#17213f]"><Github className="h-4 w-4" /></a>
