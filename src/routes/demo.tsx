@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import * as React from "react";
+import { CinematicDemoLayer } from "@/components/site/cinematic-demo-layer";
 import type { ReactNode } from "react";
 import { ArrowLeft, ArrowRight, Download, ExternalLink } from "lucide-react";
 
@@ -96,8 +97,8 @@ const ReportVisuals=()=> {
     :focus==="security"?[48,62,74,58,81,67,89,72,94,83,91,76,88,96]
     :[42,66,51,72,58,88,73,92,79,61,83,96,67,78,54,70,86,62,75,91];
 
-  return <div className="mt-8 overflow-hidden rounded-[24px] border border-[#16243b] bg-[#060c18] text-white shadow-2xl">
-    <div className="flex min-h-[760px]">
+  return <div className="mt-8 overflow-hidden rounded-[24px] border border-[#16243b] bg-[#060c18] text-white shadow-2xl relative">
+    <CinematicDemoLayer active={active} replaying={replaying}/><div className="relative z-10 flex min-h-[760px]">
       <aside className="hidden w-[176px] shrink-0 border-r border-white/10 bg-[#08101d] p-4 sm:block">
         <div className="flex items-center gap-2"><div className="grid h-8 w-8 place-items-center rounded-lg bg-orange-400 text-sm font-black text-[#08101d]">S</div><div><div className="text-sm font-black tracking-wide">SHYENA</div><div className="text-[7px] uppercase tracking-[.16em] text-white/35">AI assurance</div></div></div>
         <div className="mt-8 space-y-1 text-[10px] font-semibold">
