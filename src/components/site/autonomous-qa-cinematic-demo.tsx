@@ -49,14 +49,14 @@ function cameraFor(phase:number){
   return shots[phase]||shots[0];
 }
 
-function Graph({phase, pulse, cinematic}:{phase:number;pulse:number;cinematic:boolean}){
+function Graph({phase, pulse}:{phase:number;pulse:number}){
   const active = phase<2 ? ["rfq","agent","inventory","pricing"] : phase===2 ? ["rfq","agent","inventory","pricing","margin"] : phase<=4 ? ["agent","pricing","margin","quote"] : phase<=7 ? ["agent","pricing","margin","quote"] : ["agent","pricing","margin","quote","customer"];
   return <div className="relative h-[520px] overflow-hidden rounded-2xl border border-white/10 bg-[#060a10] shadow-[0_30px_100px_-50px_rgba(0,0,0,.95)] sm:h-[560px]">
     <div className="absolute inset-0 opacity-50" style={{backgroundImage:"linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px)",backgroundSize:"36px 36px"}}/>
     <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,rgba(241,138,50,.07),transparent_42%)]"/>
     <div className="absolute left-4 top-4 z-10 font-mono text-[8px] uppercase tracking-[.2em] text-white/30">SYSTEM UNDER TEST · RFQ TRANSACTION GRAPH</div>
     <div className="absolute right-4 top-4 z-10 rounded border border-white/10 bg-black/30 px-2 py-1 font-mono text-[7px] text-white/35">ILLUSTRATIVE RUN</div>
-    <div className="absolute inset-0 transition-transform duration-[1200ms] ease-[cubic-bezier(.2,.8,.2,1)]" style={{transform:cinematic?cameraFor(phase):"none",transformOrigin:"50% 50%"}}>    <svg className="absolute inset-0 h-full w-full" viewBox="0 0 1000 560" preserveAspectRatio="none">
+    <div className="absolute inset-0 transition-transform duration-[1200ms] ease-[cubic-bezier(.2,.8,.2,1)]" style={{transform:cameraFor(phase),transformOrigin:"50% 50%"}}>    <svg className="absolute inset-0 h-full w-full" viewBox="0 0 1000 560" preserveAspectRatio="none">
       <defs><linearGradient id="edge" x1="0" x2="1"><stop stopColor="#f18a32" stopOpacity=".08"/><stop offset=".5" stopColor="#f18a32" stopOpacity=".65"/><stop offset="1" stopColor="#f18a32" stopOpacity=".08"/></linearGradient></defs>
       {[["rfq","agent"],["agent","inventory"],["agent","pricing"],["inventory","margin"],["pricing","margin"],["margin","quote"],["quote","customer"]].map(([a,b])=>{
         const A=nodes.find(n=>n.id===a)!; const B=nodes.find(n=>n.id===b)!;
@@ -125,7 +125,7 @@ export function AutonomousQACinematicDemo(){
   <section className="sticky top-0 z-30 border-b border-white/10 bg-[#060a0f]/95 backdrop-blur"><div className="mx-auto flex max-w-[1380px] overflow-x-auto px-5 sm:px-8 lg:px-10">{phases.map((p,i)=><button key={p.id} onClick={()=>{setPhase(i);setRunning(false)}} className={`relative min-w-[118px] flex-1 px-3 py-4 text-left ${i===phase?"bg-white/[.045]":""}`}><div className={`font-mono text-[7px] font-bold tracking-[.16em] ${i===phase?(p.color==="red"?"text-red-300":"text-[#f18a32]"):"text-white/25"}`}>{p.label}</div><div className="mt-1 text-[9px] font-semibold text-white/55">{p.title}</div>{i===phase&&<div className={`absolute bottom-0 left-0 right-0 h-0.5 ${p.color==="red"?"bg-red-400":"bg-[#f18a32]"}`}/>}</button>)}</div></section>
   <section className="mx-auto max-w-[1380px] px-5 py-6 sm:px-8 lg:px-10 lg:py-8">
    <div className="mb-4 flex flex-wrap items-center justify-between gap-3"><div><div className="font-mono text-[8px] uppercase tracking-[.18em] text-white/25">CURRENT TRANSACTION</div><div className="mt-1 flex flex-wrap items-center gap-2 text-sm font-bold">RFQ-2026-184 <span className="text-white/20">·</span><span className="text-white/45">240 MT S355</span><span className="text-white/20">·</span><span className="text-white/45">Rotterdam</span></div></div><div className="flex gap-2"><button onClick={()=>{setReplay(v=>v+1);setPhase(4);setSelected(6)}} className="inline-flex h-9 items-center gap-2 rounded-lg border border-white/10 px-3 text-[10px] font-bold text-white/60 hover:bg-white/[.04]"><RotateCcw className="h-3.5 w-3.5"/> Replay failure {replay>0&&`(${replay})`}</button><Link to="/sample-report" className="inline-flex h-9 items-center gap-2 rounded-lg bg-white/[.06] px-3 text-[10px] font-bold text-white/65">Open report <ArrowRight className="h-3.5 w-3.5"/></Link></div></div>
-   <Graph phase={phase} pulse={pulse} cinematic={cinematic}/>
+   <Graph phase={phase} pulse={pulse}/>
    <div className="mt-5 grid gap-5 lg:grid-cols-[1.15fr_.85fr]"><TracePanel selected={selected} onSelect={setSelected}/><Inspector selected={selected} phase={phase}/></div>
    <div className="mt-5"><Findings/></div>
    <div className="mt-5 grid gap-5 lg:grid-cols-[.9fr_1.1fr]">
