@@ -327,7 +327,7 @@ function MotionCanvas({ phase, elapsed, cinematic, paused }: { phase: Phase; ela
       let cameraScale = 1;
       let cameraX = 0;
       let cameraY = 0;
-      if (cinematic) {
+      if (live.cinematic) {
         const target =
           phase === "blocked" || phase === "control" ? nodeById("approval").p :
           phase === "investigate" ? nodeById("pricing").p :
@@ -351,32 +351,32 @@ function MotionCanvas({ phase, elapsed, cinematic, paused }: { phase: Phase; ela
         const b = nodeById(bId).p;
         const activeEdge =
           (phase === "arrival" && aId === "rfq") ||
-          (phase === "understand" && aId === "rfq") ||
-          (phase === "execute" && (aId === "agent" || aId === "inventory" || aId === "pricing" || aId === "margin")) ||
-          (phase === "control" && aId === "margin") ||
-          (phase === "blocked" && (aId === "approval" || aId === "margin")) ||
-          (phase === "investigate" && (aId === "approval" || aId === "margin" || aId === "pricing" || aId === "agent")) ||
-          (phase === "replay" && (aId === "margin" || aId === "pricing" || aId === "approval")) ||
-          (phase === "attack" && aId === "approval");
+          (live.phase === "understand" && aId === "rfq") ||
+          (live.phase === "execute" && (aId === "agent" || aId === "inventory" || aId === "pricing" || aId === "margin")) ||
+          (live.phase === "control" && aId === "margin") ||
+          (live.phase === "blocked" && (aId === "approval" || aId === "margin")) ||
+          (live.phase === "investigate" && (aId === "approval" || aId === "margin" || aId === "pricing" || aId === "agent")) ||
+          (live.phase === "replay" && (aId === "margin" || aId === "pricing" || aId === "approval")) ||
+          (live.phase === "attack" && aId === "approval");
 
-        const blockedEdge = phase === "blocked" && aId === "approval";
-        drawEdge(ctx, a, b, blockedEdge ? "blocked" : activeEdge ? "active" : nodeState(aId, phase) === "passed" && nodeState(bId, phase) === "passed" ? "passed" : "idle", width, height);
+        const blockedEdge = live.phase === "blocked" && aId === "approval";
+        drawEdge(ctx, a, b, blockedEdge ? "blocked" : activeEdge ? "active" : nodeState(aId, live.phase) === "passed" && nodeState(bId, live.phase) === "passed" ? "passed" : "idle", width, height);
       }
 
       // Transaction path.
-      if (phase === "arrival" || phase === "understand") {
+      if (live.phase === "arrival" || live.phase === "understand") {
         const route = ["rfq", "agent"];
         drawPacket(ctx, routePoint(route, p), colors.cyan, 6);
-      } else if (phase === "execute") {
+      } else if (live.phase === "execute") {
         const routeA = ["agent", "inventory", "margin", "approval"];
         const routeB = ["agent", "pricing", "margin", "approval"];
         const a = routePoint(routeA, Math.min(1, p * 1.12));
         const b = routePoint(routeB, Math.max(0, p * 1.12 - 0.12));
         drawPacket(ctx, a, colors.cyan, 5);
         drawPacket(ctx, b, colors.cyan, 4);
-      } else if (phase === "control") {
+      } else if (live.phase === "control") {
         drawPacket(ctx, routePoint(["margin", "approval"], p), colors.amber, 6);
-      } else if (phase === "blocked") {
+      } else if (live.phase === "blocked") {
         drawPacket(ctx, routePoint(["approval", "quote"], Math.min(0.55, p * 0.55)), colors.red, 7);
         const q = nodeById("approval").p;
         const x = q.x * width, y = q.y * height;
@@ -386,19 +386,19 @@ function MotionCanvas({ phase, elapsed, cinematic, paused }: { phase: Phase; ela
         ctx.arc(x, y, 30 + 8 * Math.sin(t * 5), 0, Math.PI * 2);
         ctx.stroke();
         drawText(ctx, "CONTROL STOP", x, y - 42, 9, rgba(colors.red, 0.9), "700", "center");
-      } else if (phase === "investigate") {
+      } else if (live.phase === "investigate") {
         const route = ["approval", "margin", "pricing", "agent"];
         drawPacket(ctx, routePoint(route, p), colors.red, 5);
         for (let i = 0; i < 5; i++) {
           const q = routePoint(route, Math.max(0, p - i * 0.08));
           drawPacket(ctx, q, colors.amber, 2.5);
         }
-      } else if (phase === "replay") {
+      } else if (live.phase === "replay") {
         for (let i = 0; i < 3; i++) {
           const q = routePoint(["rfq", "agent", "pricing", "margin", "approval"], Math.max(0, p - i * 0.11));
           drawPacket(ctx, q, colors.green, 4);
         }
-      } else if (phase === "attack") {
+      } else if (live.phase === "attack") {
         const origin = nodeById("approval").p;
         const variants = [
           { end: { x: 0.62, y: 0.18 }, color: colors.red },
@@ -410,7 +410,7 @@ function MotionCanvas({ phase, elapsed, cinematic, paused }: { phase: Phase; ela
           const q = lerp(origin, v.end, Math.min(1, Math.max(0, p * 1.25 - i * 0.12)));
           drawPacket(ctx, q, v.color, i === 0 ? 5 : 3);
         });
-      } else if (phase === "regression") {
+      } else if (live.phase === "regression") {
         drawPacket(ctx, routePoint(["approval", "margin", "pricing", "agent", "rfq"], p), colors.green, 5);
         const a = nodeById("rfq").p;
         const b = nodeById("approval").p;
@@ -422,7 +422,7 @@ function MotionCanvas({ phase, elapsed, cinematic, paused }: { phase: Phase; ela
         ctx.lineTo(b.x * width, b.y * height);
         ctx.stroke();
         ctx.setLineDash([]);
-      } else if (phase === "gate") {
+      } else if (live.phase === "gate") {
         const q = nodeById("quote").p;
         drawPacket(ctx, q, colors.red, 8);
         const x = q.x * width, y = q.y * height;
@@ -450,18 +450,18 @@ function MotionCanvas({ phase, elapsed, cinematic, paused }: { phase: Phase; ela
       }
 
       // Root-cause halo and evidence convergence.
-      if (phase === "investigate" || phase === "replay" || phase === "regression") {
+      if (live.phase === "investigate" || live.phase === "replay" || live.phase === "regression") {
         const root = nodeById("pricing").p;
         const x = root.x * width, y = root.y * height;
         const rings = phase === "investigate" ? 3 : 2;
         for (let i = 0; i < rings; i++) {
-          ctx.strokeStyle = rgba(phase === "investigate" ? colors.red : colors.green, 0.24 - i * 0.05);
+          ctx.strokeStyle = rgba(live.phase === "investigate" ? colors.red : colors.green, 0.24 - i * 0.05);
           ctx.lineWidth = 1.5;
           ctx.beginPath();
           ctx.arc(x, y, 22 + i * 16 + Math.sin(t * 3 + i) * 3, 0, Math.PI * 2);
           ctx.stroke();
         }
-        drawText(ctx, phase === "investigate" ? "ROOT CAUSE" : "REGRESSION ANCHOR", x, y - 54, 8, phase === "investigate" ? rgba(colors.red, 0.9) : rgba(colors.green, 0.9), "700", "center");
+        drawText(ctx, live.phase === "investigate" ? "ROOT CAUSE" : "REGRESSION ANCHOR", x, y - 54, 8, phase === "investigate" ? rgba(colors.red, 0.9) : rgba(colors.green, 0.9), "700", "center");
       }
 
       nodes.forEach((node) => drawNode(ctx, node, nodeState(node.id, phase), width, height, 0.5 + 0.5 * Math.sin(t * 4)));
@@ -476,7 +476,7 @@ function MotionCanvas({ phase, elapsed, cinematic, paused }: { phase: Phase; ela
       observer.disconnect();
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
-  }, [elapsed, phase, cinematic, paused]);
+  }, []);
 
   return <canvas ref={ref} aria-label="Shyena autonomous QA transaction visualization" className="absolute inset-0 h-full w-full" />;
 }
