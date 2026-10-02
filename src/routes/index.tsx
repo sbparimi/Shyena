@@ -196,9 +196,9 @@ export const Route = createFileRoute("/")({
     links: [{ rel:"canonical", href:SITE+"/" }],
     meta: [
       { title:"Shyena Autonomous QA | Agentic AI Testing & Evaluation" },
-      { name:"description", content:"Shyena autonomously discovers journeys, generates and executes tests, evaluates AI-agent behaviour, diagnoses failures and expands regression coverage." },
+      { name:"description", content:"Put every AI release through real-world testing with autonomous QA that discovers journeys, evaluates agent behaviour, diagnoses failures and preserves release evidence." },
       { property:"og:title", content:"Shyena Autonomous QA | Agentic AI Testing & Evaluation" },
-      { property:"og:description", content:"Test AI agents with realistic journeys, evaluate behaviour, attack critical paths and produce traceable evidence before release." },
+      { property:"og:description", content:"Autonomous QA for AI systems: understand change, prove behaviour, attack critical paths and decide with evidence." },
       { property:"og:type", content:"website" }, { property:"og:url", content:SITE+"/" }, { property:"og:site_name", content:"Shyena" },
       { property:"og:image", content:SITE+"/shyena-logo-exact.webp" }, { name:"twitter:card", content:"summary_large_image" },
       { name:"twitter:title", content:"Shyena Autonomous QA | Agentic AI Testing & Evaluation" },
@@ -215,60 +215,144 @@ export const Route = createFileRoute("/")({
 function HomePage() {
   return <main className="overflow-hidden bg-white text-[#17213f]">
     <section className="bg-[#07101f] text-white">
-      <div className="mx-auto grid w-full max-w-[1440px] min-w-0 gap-12 px-5 py-16 sm:px-8 lg:grid-cols-[minmax(0,.9fr)_minmax(0,1.1fr)] lg:items-start lg:px-10 lg:py-24">
+      <div className="mx-auto grid w-full max-w-[1440px] min-w-0 gap-12 px-5 py-16 sm:px-8 lg:grid-cols-[minmax(0,.88fr)_minmax(0,1.12fr)] lg:items-center lg:px-10 lg:py-24">
         <div className="min-w-0">
-          <div className="font-mono text-[10px] font-bold uppercase tracking-[.22em] text-[#f18a32]">AUTONOMOUS QA · AGENTIC AI EVALUATION</div>
-          <h1 className="mt-5 font-[Sora] text-[clamp(3.2rem,7vw,6.8rem)] font-extrabold leading-[.88] tracking-[-.07em]">Shyena is your<br/><span className="text-[#f18a32]">Autonomous</span><br/>QA Engineer.</h1>
-          <p className="mt-7 max-w-2xl text-lg leading-8 text-white/60">It discovers what to test, executes real customer journeys, evaluates agent behaviour, reproduces failures and continuously expands regression coverage.</p>
+          <div className="font-mono text-[10px] font-bold uppercase tracking-[.22em] text-[#f18a32]">AUTONOMOUS QA · AI SYSTEMS</div>
+          <h1 className="mt-5 max-w-4xl font-[Sora] text-[clamp(3rem,6.7vw,6.6rem)] font-extrabold leading-[.9] tracking-[-.07em]">Put every AI release through <span className="text-[#f18a32]">real-world testing.</span></h1>
+          <p className="mt-7 max-w-2xl text-lg leading-8 text-white/65">AI systems are no longer just software that returns an answer. They reason, call tools, follow workflows and make decisions. Shyena is the autonomous QA engineer that discovers what matters, proves what happened and gives you the evidence behind every release decision.</p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link to="/contact" className="inline-flex h-12 items-center gap-2 rounded-lg bg-[#e87512] px-5 text-sm font-bold text-white">Book a 30-min call <ArrowRight className="h-4 w-4"/></Link>
-            <Link to="/demo" className="inline-flex h-12 items-center gap-2 rounded-lg border border-white/15 px-5 text-sm font-bold text-white/85">See autonomous QA in action <ArrowRight className="h-4 w-4"/></Link>
+            <Link to="/demo" className="inline-flex h-12 items-center gap-2 rounded-lg bg-[#e87512] px-5 text-sm font-bold text-white">See autonomous QA in action <ArrowRight className="h-4 w-4"/></Link>
+            <Link to="/contact" className="inline-flex h-12 items-center gap-2 rounded-lg border border-white/15 px-5 text-sm font-bold text-white/85">Discuss your release <ArrowRight className="h-4 w-4"/></Link>
           </div>
-          <div className="mt-8 flex flex-wrap gap-x-5 gap-y-2 text-xs font-semibold text-white/45">
-            <span>Built in the Netherlands</span><span>Founder-led</span><span>Autonomous QA · Agentic evaluation</span>
+          <div className="mt-8 grid max-w-2xl gap-2 sm:grid-cols-3">
+            {[["UNDERSTAND","What changed?"],["PROVE","Did it actually work?"],["DECIDE","Can we release?"]].map(([label,question])=><div key={label} className="rounded-xl border border-white/10 bg-white/[.035] p-3"><div className="font-mono text-[9px] font-bold tracking-[.16em] text-[#f18a32]">{label}</div><div className="mt-1 text-xs font-semibold text-white/70">{question}</div></div>)}
           </div>
         </div>
         <div className="min-w-0 w-full max-w-full self-start overflow-hidden"><IllustrativeRun/></div>
       </div>
     </section>
 
-    <section className="border-b border-[#e6e8ed] bg-[#fff8f2]"><div className="mx-auto max-w-[1280px] px-5 py-4 text-center font-mono text-[10px] font-bold uppercase tracking-[.12em] text-[#a55410]">AUTONOMOUS QA · TEST EVERY RELEASE · EVALUATE EVERY AGENT</div></section>
+    <section className="border-b border-[#e6e8ed] bg-[#fff8f2]">
+      <div className="mx-auto max-w-[1280px] px-5 py-4 text-center font-mono text-[10px] font-bold uppercase tracking-[.12em] text-[#a55410]">FROM CHANGE → IMPACT → TEST → EVALUATE → ATTACK → DIAGNOSE → RELEASE</div>
+    </section>
 
-    <section className="bg-white"><div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
-      <div className="max-w-3xl"><div className="text-sm font-bold text-[#e87512]">How Shyena works</div><h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em] sm:text-5xl">Assurance that runs where your AI does.</h2><p className="mt-5 text-lg leading-8 text-[#69707d]">From release testing to production learning to audit preparation, the same evidence chain connects what happened to what you decide.</p></div>
-      <div className="mt-10 grid gap-4 lg:grid-cols-3">
-        <OutcomeCard title="Before every release" body="Every change gets tested." items={["Journey generation","Four-layer evaluation","Security probes","Release gate"]} mock={<Mock><div className="flex items-center justify-between text-sm font-bold"><span>Release 2.8</span><span className="text-red-600">BLOCKED</span></div><div className="mt-3 text-xs text-[#69707d]">3 P1 findings · evidence attached</div></Mock>}/>
-        <OutcomeCard title="In production" body="Every conversation teaches the next test." items={["Conversation monitoring","Failure detection","Drift signals","New regression tests"]} mock={<Mock><div className="text-sm font-bold">Production failure → regression</div><div className="mt-3 flex items-center gap-2 text-xs text-[#69707d]"><span className="rounded bg-white px-2 py-1">Trace</span><ArrowRight className="h-3 w-3"/><span className="rounded bg-white px-2 py-1">Finding</span><ArrowRight className="h-3 w-3"/><span className="rounded bg-white px-2 py-1">Test</span></div></Mock>}/>
-        <OutcomeCard title="Every model change" body="Regression runs itself." items={["Model-version comparison","Behaviour drift detection","Journey replay","New regression cases"]} mock={<Mock><div className="text-sm font-bold">Model v4.2 → v4.3</div><div className="mt-3 text-xs text-[#69707d]">3 behavioural changes · 1 release blocker</div></Mock>}/>
+    <section className="bg-white">
+      <div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
+        <div className="max-w-3xl">
+          <div className="text-sm font-bold text-[#e87512]">The shift</div>
+          <h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em] sm:text-5xl">AI changed. QA has to change with it.</h2>
+          <p className="mt-5 text-lg leading-8 text-[#69707d]">Traditional automation starts with scripts. Modern AI systems need assurance that can discover behaviour, evaluate reasoning and tools, attack unsafe paths, diagnose failures and learn from what happens in production.</p>
+        </div>
+        <div className="mt-10 grid gap-4 md:grid-cols-3">
+          {[
+            ["Your regression suite is static.","New journeys, model versions and agent behaviours can change the risk surface without changing a test script."],
+            ["Answer quality is not enough.","An agent can produce a convincing answer while choosing the wrong tool, violating a business rule or failing the customer journey."],
+            ["Evidence is scattered.","CI logs, traces, screenshots, API results and business outcomes need to become one explainable release record."]
+          ].map(([title,body])=><article key={title} className="rounded-2xl border border-[#e1e4e9] bg-[#fafbfc] p-6"><h3 className="text-xl font-bold tracking-[-.02em]">{title}</h3><p className="mt-3 text-sm leading-6 text-[#69707d]">{body}</p></article>)}
+        </div>
       </div>
-      <p className="mt-8 text-center text-sm font-semibold text-[#596273]">No test scripts to maintain. No evidence to assemble by hand.</p>
-    </div></section>
+    </section>
 
-    <section className="border-y border-[#e6e8ed] bg-[#fafbfc]"><div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
-      <div className="max-w-3xl"><div className="text-sm font-bold text-[#e87512]">What Shyena checks</div><h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em] sm:text-5xl">Four layers. One release decision.</h2></div>
-      <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">{[
-        ["Deterministic","Did the APIs, states, routes and business rules behave correctly?"],
-        ["Semantic","Was the answer correct, relevant and on-brand?"],
-        ["Orchestration","Did the agent pick the right intent, tool and next step?"],
-        ["Security","Could someone manipulate it into doing something unsafe?"]
-      ].map(([title,body])=><div key={title} className="rounded-2xl border border-[#e1e4e9] bg-white p-6"><ShieldCheck className="h-5 w-5 text-[#e87512]"/><h3 className="mt-5 text-xl font-bold">{title}</h3><p className="mt-2 text-sm leading-6 text-[#69707d]">{body}</p></div>)}</div>
-      <p className="mt-8 text-sm leading-6 text-[#596273]">A convincing answer cannot hide a failed journey. Hard rule and security failures cannot be averaged away by a good semantic score.</p>
-    </div></section>
+    <section className="border-y border-[#e6e8ed] bg-[#fafbfc]">
+      <div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
+        <div className="max-w-3xl">
+          <div className="text-sm font-bold text-[#e87512]">The promise</div>
+          <h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em] sm:text-5xl">Shyena is the autonomous QA engineer for AI systems.</h2>
+          <p className="mt-5 text-lg leading-8 text-[#69707d]">Give it a change, a workflow or a system boundary. Shyena turns that context into executable assurance, investigates what fails and keeps the resulting evidence connected to the release.</p>
+        </div>
+        <div className="mt-10 grid gap-4 lg:grid-cols-3">
+          {[
+            ["UNDERSTAND","Know what changed and what matters.","Nexus maps architecture, dependencies, business-critical journeys and change impact before execution."],
+            ["PROVE","Know what actually happened.","Vera executes realistic browser, API and agent journeys and evaluates behaviour, outcomes and execution integrity."],
+            ["DECIDE","Know whether to release.","Chakra attacks critical paths and diagnoses failures; Govern turns the evidence into a release record and gate."]
+          ].map(([label,title,body])=><article key={label} className="rounded-2xl border border-[#dfe3e8] bg-white p-7 shadow-[0_20px_60px_-45px_rgba(23,35,63,.4)]">
+            <div className="font-mono text-xs font-bold tracking-[.18em] text-[#e87512]">{label}</div>
+            <h3 className="mt-3 text-2xl font-extrabold tracking-[-.03em]">{title}</h3>
+            <p className="mt-3 text-sm leading-6 text-[#69707d]">{body}</p>
+          </article>)}
+        </div>
+      </div>
+    </section>
 
-    <section className="bg-white"><div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
-      <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end"><div><div className="text-sm font-bold text-[#e87512]">Works with</div><h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em]">Fit the assurance layer to your stack.</h2></div><p className="max-w-xl text-sm leading-6 text-[#69707d]">Agent orchestration, browser automation, CI/CD, observability and model infrastructure can remain in place.</p></div>
-      <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">{[["Agent systems","Connect the assurance layer to the agent or orchestration interface."],["Browser journeys","Exercise customer-facing flows through browser automation."],["APIs & tools","Validate API calls, tool usage and business-rule outcomes."],["CI/CD & evidence","Run assurance in release workflows and preserve evidence." ]].map(([title,body])=><div key={title} className="rounded-2xl border border-[#dfe3e8] bg-[#fafbfc] p-5"><div className="text-sm font-bold">{title}</div><p className="mt-2 text-xs leading-5 text-[#69707d]">{body}</p></div>)}</div>
-      <p className="mt-4 text-xs text-[#8b929d]">Integration scope is agreed against your architecture; Shyena does not require replacing the systems already used to build or operate your AI agent.</p>
-    </div></section>
+    <section className="bg-white">
+      <div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
+        <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end">
+          <div><div className="text-sm font-bold text-[#e87512]">One assurance system</div><h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em] sm:text-5xl">Understand. Prove. Attack. Decide.</h2></div>
+          <p className="max-w-xl text-sm leading-6 text-[#69707d]">The products are separate engines in one evidence chain. Start with the part of the lifecycle where your team needs the most leverage.</p>
+        </div>
+        <div className="mt-9 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            ["NEXUS","Understand","Discover architecture, dependencies, journeys and change impact.","/nexus"],
+            ["VERA","Prove","Execute realistic journeys and evaluate agent behaviour, outcomes and integrity.","/vera"],
+            ["CHAKRA","Attack","Probe adversarial paths, reproduce failures and build permanent regression coverage.","/chakra"],
+            ["GOVERN","Decide","Preserve evidence and apply the release decision to the agreed policy.","/govern"]
+          ].map(([product,verb,body,to])=><Link key={product} to={to} className="group rounded-2xl border border-[#e1e4e9] bg-[#fafbfc] p-6 transition hover:-translate-y-0.5 hover:border-[#cfd5dd]">
+            <div className="flex items-center justify-between"><span className="font-mono text-xs font-bold tracking-[.15em] text-[#e87512]">{product}</span><ArrowRight className="h-4 w-4 text-[#8b929d] transition group-hover:translate-x-1 group-hover:text-[#e87512]"/></div>
+            <h3 className="mt-5 text-xl font-bold">{verb}</h3><p className="mt-2 text-sm leading-6 text-[#69707d]">{body}</p>
+          </Link>)}
+        </div>
+      </div>
+    </section>
 
-    <section className="bg-white"><div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24"><div className="max-w-3xl"><div className="text-sm font-bold text-[#e87512]">Outcomes</div><h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em] sm:text-5xl">The result is evidence you can use.</h2></div><div className="mt-9 grid gap-3 md:grid-cols-4">{["Catch journey failures that answer-quality scores miss.","Turn production failures into permanent tests.","Give auditors evidence, not screenshots.","Make release decisions you can defend."].map(x=><div key={x} className="rounded-2xl border border-[#e1e4e9] bg-[#fafbfc] p-6 text-sm font-semibold leading-6">{x}</div>)}</div></div></section>
+    <section className="border-y border-[#e6e8ed] bg-[#07101f] text-white">
+      <div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
+        <div className="grid gap-10 lg:grid-cols-[.8fr_1.2fr] lg:items-start">
+          <div>
+            <div className="font-mono text-xs font-bold uppercase tracking-[.18em] text-[#f18a32]">Proof, not promises</div>
+            <h2 className="mt-4 font-[Sora] text-4xl font-extrabold tracking-[-.045em] sm:text-5xl">See the evidence chain before you connect your system.</h2>
+            <p className="mt-5 max-w-xl text-base leading-7 text-white/55">The interactive run is a synthetic Vanilla Steel RFQ workflow. It shows the shape of autonomous QA without presenting fictional customer results as proof.</p>
+            <Link to="/demo" className="mt-7 inline-flex h-11 items-center gap-2 rounded-lg bg-[#e87512] px-5 text-sm font-bold text-white">Open the interactive run <ArrowRight className="h-4 w-4"/></Link>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {[
+              ["Change intelligence","Map changed files to affected workflow nodes and customer journeys."],
+              ["AI-era evaluation","Check goals, multi-turn behaviour, tool selection, arguments, grounding and trajectory integrity."],
+              ["Failure intelligence","Reproduce failures, correlate evidence, produce RCA and add permanent regression coverage."],
+              ["Release evidence","Keep traces, screenshots, API results and business outcomes attached to the release decision."]
+            ].map(([title,body])=><div key={title} className="rounded-2xl border border-white/10 bg-white/[.035] p-6"><h3 className="text-lg font-bold">{title}</h3><p className="mt-2 text-sm leading-6 text-white/50">{body}</p></div>)}
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <section className="border-y border-[#e6e8ed] bg-[#fafbfc]"><div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24"><div className="grid gap-8 lg:grid-cols-3"><div className="rounded-2xl border border-[#e1e4e9] bg-white p-7"><div className="text-sm font-bold text-[#e87512]">Proof</div><h3 className="mt-3 text-2xl font-extrabold">Design partner programme</h3><p className="mt-3 text-sm leading-6 text-[#69707d]">A small number of European organisations can work directly with the founder during an assurance pilot.</p><Link to="/design-partners" className="mt-5 inline-flex text-sm font-bold">Apply as a design partner <ArrowRight className="ml-1 h-4 w-4"/></Link></div><div className="rounded-2xl border border-[#e1e4e9] bg-white p-7"><div className="text-sm font-bold text-[#e87512]">Founder-led</div><h3 className="mt-3 text-2xl font-extrabold">Built close to the engineering problem.</h3><p className="mt-3 text-sm leading-6 text-[#69707d]">Parimi's background is in test leadership and conversational-AI quality engineering.</p><Link to="/about" className="mt-5 inline-flex text-sm font-bold">Meet the founder <ArrowRight className="ml-1 h-4 w-4"/></Link></div><div className="rounded-2xl border border-[#e1e4e9] bg-white p-7"><div className="text-sm font-bold text-[#e87512]">Knowledge</div><h3 className="mt-3 text-2xl font-extrabold">Engineering thinking, published.</h3><p className="mt-3 text-sm leading-6 text-[#69707d]">Read practical work on LLM evaluation, conversational testing and AI-agent assurance.</p><Link to="/blog" className="mt-5 inline-flex text-sm font-bold">Read the blog <ArrowRight className="ml-1 h-4 w-4"/></Link></div></div></div></section>
+    <section className="bg-white">
+      <div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
+        <div className="max-w-3xl"><div className="text-sm font-bold text-[#e87512]">Works with your stack</div><h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em] sm:text-5xl">Add assurance without replacing the systems you already run.</h2><p className="mt-5 text-lg leading-8 text-[#69707d]">Connect the assurance layer to the boundaries that matter: agent systems, browser journeys, APIs and tools, CI/CD and observability.</p></div>
+        <div className="mt-9 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {[["Agent systems","Connect to the agent or orchestration interface and evaluate decisions, tools and trajectories."],["Browser journeys","Exercise customer-facing workflows through real browser automation."],["APIs & tools","Validate calls, arguments, contracts and business-rule outcomes."],["CI/CD & evidence","Run assurance in release workflows and preserve the evidence chain."]].map(([title,body])=><div key={title} className="rounded-2xl border border-[#dfe3e8] bg-[#fafbfc] p-5"><div className="text-sm font-bold">{title}</div><p className="mt-2 text-xs leading-5 text-[#69707d]">{body}</p></div>)}
+        </div>
+        <p className="mt-4 text-xs text-[#8b929d]">Integration scope is agreed against your architecture. Shyena does not require replacing the systems already used to build or operate your AI system.</p>
+      </div>
+    </section>
 
-    <section className="bg-white"><div className="mx-auto max-w-[1000px] px-5 py-20 sm:px-8 lg:py-24"><div className="text-center"><div className="text-sm font-bold text-[#e87512]">Start small</div><h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em] sm:text-5xl">Autonomous QA Pilot.</h2><p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-[#69707d]">A focused engagement that connects one real system, discovers critical journeys, executes autonomous tests and shows where meaningful coverage can replace manual effort.</p><Link to="/pricing" className="mt-7 inline-flex h-11 items-center gap-2 rounded-lg border border-[#17213f] px-5 text-sm font-bold">See pricing <ArrowRight className="h-4 w-4"/></Link></div></div></section>
+    <section className="border-y border-[#e6e8ed] bg-[#fafbfc]">
+      <div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
+        <div className="max-w-3xl"><div className="text-sm font-bold text-[#e87512]">Start with one critical journey</div><h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em] sm:text-5xl">Bring one workflow. See what Shyena finds.</h2><p className="mt-5 text-lg leading-8 text-[#69707d]">A focused Autonomous QA Pilot connects one real system, discovers critical journeys, executes autonomous tests and shows where meaningful coverage can replace manual effort.</p></div>
+        <div className="mt-9 grid gap-4 md:grid-cols-3">
+          {[
+            ["1 · Understand","Map one business-critical workflow and its change surface."],
+            ["2 · Prove","Execute the journey across browser, API and agent boundaries with evidence."],
+            ["3 · Decide","Review findings, diagnosis, regression coverage and the resulting release record."]
+          ].map(([title,body])=><div key={title} className="rounded-2xl border border-[#e1e4e9] bg-white p-6"><h3 className="text-lg font-bold">{title}</h3><p className="mt-2 text-sm leading-6 text-[#69707d]">{body}</p></div>)}
+        </div>
+        <div className="mt-8 flex flex-wrap gap-3"><Link to="/pricing" className="inline-flex h-11 items-center gap-2 rounded-lg border border-[#17213f] px-5 text-sm font-bold">View engagement options <ArrowRight className="h-4 w-4"/></Link><Link to="/design-partners" className="inline-flex h-11 items-center gap-2 rounded-lg bg-[#17213f] px-5 text-sm font-bold text-white">Design partner programme <ArrowRight className="h-4 w-4"/></Link></div>
+      </div>
+    </section>
 
-    <section className="border-y border-[#e6e8ed] bg-[#fafbfc]"><div className="mx-auto max-w-[1000px] px-5 py-20 sm:px-8 lg:py-24"><div className="text-center"><div className="text-sm font-bold text-[#e87512]">FAQ</div><h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em]">Questions buyers ask.</h2></div><div className="mt-10 space-y-3">{faq.map(([q,a])=><details key={q} className="rounded-xl border border-[#e1e4e9] bg-white p-5"><summary className="cursor-pointer list-none font-bold">{q}</summary><p className="mt-3 max-w-3xl text-sm leading-6 text-[#69707d]">{a}</p></details>)}</div></div></section>
+    <section className="bg-white">
+      <div className="mx-auto max-w-[1000px] px-5 py-20 sm:px-8 lg:py-24">
+        <div className="text-center"><div className="text-sm font-bold text-[#e87512]">FAQ</div><h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em]">Questions buyers ask.</h2></div>
+        <div className="mt-10 space-y-3">{faq.map(([q,a])=><details key={q} className="rounded-xl border border-[#e1e4e9] bg-[#fafbfc] p-5"><summary className="cursor-pointer list-none font-bold">{q}</summary><p className="mt-3 max-w-3xl text-sm leading-6 text-[#69707d]">{a}</p></details>)}</div>
+      </div>
+    </section>
 
-    <section className="bg-[#17213f] text-white"><div className="mx-auto max-w-[1000px] px-5 py-16 text-center sm:px-8 lg:py-20"><h2 className="font-[Sora] text-3xl font-extrabold tracking-[-.04em] sm:text-4xl">Give every AI release an engineer whose only job is proving it's safe to ship.</h2><Link to="/contact" className="mt-8 inline-flex h-12 items-center gap-2 rounded-lg bg-[#e87512] px-6 text-sm font-bold">Book a 30-min call <ArrowRight className="h-4 w-4"/></Link></div></section>
+    <section className="bg-[#17213f] text-white">
+      <div className="mx-auto max-w-[1000px] px-5 py-16 text-center sm:px-8 lg:py-20">
+        <div className="font-mono text-[10px] font-bold uppercase tracking-[.2em] text-[#f18a32]">AUTONOMOUS QA</div>
+        <h2 className="mt-4 font-[Sora] text-3xl font-extrabold tracking-[-.04em] sm:text-5xl">Know what will break before your AI reaches customers.</h2>
+        <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/55">See the autonomous run, then bring one critical journey into a focused pilot.</p>
+        <div className="mt-8 flex flex-wrap justify-center gap-3"><Link to="/demo" className="inline-flex h-12 items-center gap-2 rounded-lg border border-white/15 px-6 text-sm font-bold text-white">See the run <ArrowRight className="h-4 w-4"/></Link><Link to="/contact" className="inline-flex h-12 items-center gap-2 rounded-lg bg-[#e87512] px-6 text-sm font-bold text-white">Discuss a pilot <ArrowRight className="h-4 w-4"/></Link></div>
+      </div>
+    </section>
   </main>;
 }
