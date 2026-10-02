@@ -1,236 +1,170 @@
 import * as React from "react";
 
-type Scene =
-  | "change"
-  | "impact"
-  | "playbook"
-  | "execution"
-  | "agent"
-  | "attack"
-  | "diagnose"
-  | "evidence"
-  | "regression"
-  | "gate";
+type Stage = "system"|"change"|"plan"|"run"|"agent"|"attack"|"rca"|"regression"|"decision";
 
-const SCENES: Scene[] = ["change","impact","playbook","execution","agent","attack","diagnose","evidence","regression","gate"];
+const stages: Stage[] = ["system","change","plan","run","agent","attack","rca","regression","decision"];
+
+const journey = [
+  ["RFQ Portal","Customer RFQ"],
+  ["Quotation Orchestrator","Routes transaction"],
+  ["Inventory API","310 MT available"],
+  ["Supplier Pricing","v2026-09-28T18:42"],
+  ["Margin Engine","7.8% margin"],
+  ["Approval Service","PENDING"],
+  ["Quotation API","create() blocked"],
+];
 
 const trajectory = [
-  "USER → RFQ-2026-184",
-  "AGENT → extract_rfq({grade:S355, qty:240, delivery:RTM})",
-  "TOOL → inventory.check → available=310 MT",
-  "AGENT → supplier_price.refresh → price_version=2026-09-28T18:42",
-  "TOOL → margin.calculate → margin=7.8%",
-  "AGENT → quotation.create → approval_state=PENDING",
-  "POLICY → BLOCK: approval_state must be APPROVED before quotation.create",
-  "REPLAY → reproduced 3/3",
+  ["USER","RFQ-2026-184 · 240 MT · S355 · Rotterdam"],
+  ["AGENT","extract_rfq({grade:S355, qty:240, delivery:RTM})"],
+  ["TOOL","inventory.check → available=310 MT"],
+  ["AGENT","supplier_price.refresh → price_version=2026-09-28T18:42"],
+  ["TOOL","margin.calculate → margin=7.8%"],
+  ["AGENT","quotation.create → approval_state=PENDING"],
+  ["POLICY","BLOCK → approval must be APPROVED"],
 ];
 
-const defects = [
-  ["F-001","P1","Approval bypass","BLOCK"],
-  ["F-002","P1","Stale commercial context","REVIEW"],
-  ["F-003","P1","Tool argument drift","BLOCK"],
-  ["F-004","P2","Policy citation gap","REVIEW"],
-  ["F-005","P2","Recovery UX","REVIEW"],
-  ["F-006","P2","Regression coverage gap","ACTION"],
+const tests = [
+  ["TC-RFQ-001","RFQ intake","P0"],
+  ["TC-RFQ-007","Inventory reservation","P0"],
+  ["TC-RFQ-014","Supplier price refresh","P1"],
+  ["TC-RFQ-021","Margin approval","P1"],
+  ["TC-RFQ-027","Quotation","P1"],
+  ["TC-RFQ-034","Customer response","P2"],
 ];
 
-const evidence = [
-  "PR DIFF","IMPACT GRAPH","TAML PLAYBOOK","EXECUTION MATRIX",
-  "PLAYWRIGHT TRACE","SCREENSHOTS","AGENT TRAJECTORY","TOOL TRACE",
-  "RAG EVIDENCE","POLICY VERSION","API EVIDENCE","SECURITY RESULT",
-  "REPRODUCTION","CI/CD RESULT","RELEASE DECISION","MACHINE BUNDLE",
+const attacks = [
+  ["Normal RFQ","BLOCKED"],
+  ["Supplier price manipulation","BLOCKED"],
+  ["Approval-state ambiguity","REPRODUCED"],
 ];
 
-const nodeSets = {
-  change: 31,
-  impact: 14,
-  playbook: 46,
-  execution: 43,
-  agent: 9,
-  attack: 12,
-  evidence: 31,
-  regression: 61,
+const evidence = ["PR diff","Impact graph","Test matrix","Agent trajectory","Tool trace","API evidence","Playwright trace","Screenshot","Security result","RCA","Regression","Release decision"];
+
+const copy: Record<Stage,{eyebrow:string;title:string;subtitle:string}> = {
+  system:{eyebrow:"SYSTEM UNDER TEST",title:"Vanilla Steel · RFQ → Quotation",subtitle:"Shyena tests the business transaction, not only the AI response."},
+  change:{eyebrow:"1 · UNDERSTAND THE CHANGE",title:"PR #284 changes the pricing path",subtitle:"31 changed files → impacted commercial journey"},
+  plan:{eyebrow:"2 · BUILD THE TEST PLAN",title:"Shyena generates the affected test universe",subtitle:"46 executable cases · 14 affected journeys · 8 critical paths"},
+  run:{eyebrow:"3 · EXECUTE THE TRANSACTION",title:"One customer RFQ moves through the system",subtitle:"Browser · API · agent · business rules · evidence"},
+  agent:{eyebrow:"4 · EVALUATE THE AGENT",title:"VERA inspects what the agent actually did",subtitle:"Goal · tools · arguments · policy · grounding · trajectory"},
+  attack:{eyebrow:"5 · ATTACK THE FAILURE PATH",title:"CHAKRA tries to bypass the control",subtitle:"12 adversarial scenarios · failure reproduced 3/3"},
+  rca:{eyebrow:"6 · DIAGNOSE THE CAUSE",title:"Shyena traces the failure back to the change",subtitle:"Failure → dependency → missing invariant → root cause"},
+  regression:{eyebrow:"7 · TURN FAILURE INTO COVERAGE",title:"The defect becomes a permanent regression",subtitle:"46 → 61 regression cases · 2 new hard gates"},
+  decision:{eyebrow:"8 · RELEASE DECISION",title:"BLOCK RELEASE",subtitle:"42 pass · 3 review · 1 fail · evidence attached"},
 };
 
-const SCENE_COPY: Record<Scene,{kicker:string;title:string;signal:string}> = {
-  change:{kicker:"CHANGE INTELLIGENCE",title:"PR #284",signal:"31 changed files"},
-  impact:{kicker:"IMPACT GRAPH",title:"14 affected journeys",signal:"8 critical paths"},
-  playbook:{kicker:"TEST UNIVERSE",title:"46 executable cases",signal:"P0 / P1 release paths"},
-  execution:{kicker:"AUTONOMOUS EXECUTION",title:"Browser · API · Agent",signal:"43 complete"},
-  agent:{kicker:"AGENT TRAJECTORY",title:"RFQ-2026-184",signal:"trc_8f21 · 14.8s"},
-  attack:{kicker:"CHAKRA ADVERSARIAL RUN",title:"12 attack variants",signal:"1 failed control"},
-  diagnose:{kicker:"AUTONOMOUS RCA",title:"F-001 reproduced",signal:"3 / 3 replay"},
-  evidence:{kicker:"EVIDENCE FABRICATION",title:"Evidence pack",signal:"31 artifacts · 18 traces · 27 screenshots"},
-  regression:{kicker:"REMEDIATION LOOP",title:"46 → 61 regression cases",signal:"2 new hard gates"},
-  gate:{kicker:"GOVERN RELEASE GATE",title:"BLOCKED",signal:"42 pass · 3 review · 1 fail"},
-};
-
-function NeuralGrid(){
-  return <div className="absolute inset-0 opacity-[.28]" style={{backgroundImage:"linear-gradient(rgba(93,116,150,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(93,116,150,.12) 1px,transparent 1px)",backgroundSize:"42px 42px"}}/>;
+function SystemMap({stage}:{stage:Stage}) {
+  return <div className="relative mx-auto w-full max-w-[1180px] overflow-hidden rounded-2xl border border-white/10 bg-[#07101b]/90 shadow-2xl">
+    <div className="absolute inset-0 opacity-30" style={{backgroundImage:"linear-gradient(rgba(85,120,155,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(85,120,155,.12) 1px,transparent 1px)",backgroundSize:"34px 34px"}}/>
+    <div className="relative grid gap-2 p-5 md:grid-cols-7 md:items-center md:p-8">
+      {journey.map(([name,desc],i)=><React.Fragment key={name}>
+        <div className={`relative rounded-xl border p-3 transition-all duration-500 ${i===5&&stage==="run"?"border-red-400/70 bg-red-500/10 shadow-[0_0_35px_rgba(239,68,68,.16)]":"border-white/10 bg-white/[.025]"}`}>
+          <div className="font-mono text-[9px] uppercase tracking-[.16em] text-cyan-300/60">{name}</div>
+          <div className="mt-1 text-[11px] font-semibold text-white/85">{desc}</div>
+          {i===5&&<div className="mt-2 font-mono text-[8px] text-red-300">approval_state=PENDING</div>}
+        </div>
+        {i<journey.length-1&&<div className="hidden text-center text-cyan-300/40 md:block">→</div>}
+      </React.Fragment>)}
+    </div>
+    {stage==="run"&&<div className="qa-transaction-packet"/>}
+  </div>;
 }
 
-function Packet({delay=0,tone="orange",reverse=false}:{delay?:number;tone?:string;reverse?:boolean}){
-  return <span
-    className={`qa-packet qa-packet-${reverse?"reverse":"forward"}`}
-    style={{animationDelay:`${delay}s`,background:tone==="cyan"?"#67e8f9":tone==="red"?"#f87171":"#fb923c",boxShadow:tone==="cyan"?"0 0 18px 5px rgba(34,211,238,.55)":tone==="red"?"0 0 22px 7px rgba(239,68,68,.6)":"0 0 20px 6px rgba(249,115,22,.65)"}}/>
+function ChangeView(){
+  return <div className="grid gap-4 md:grid-cols-[1.1fr_.9fr]">
+    <div className="rounded-2xl border border-white/10 bg-[#07101b] p-5">
+      <div className="mb-4 flex items-center justify-between"><span className="font-mono text-[9px] uppercase tracking-[.18em] text-violet-300">PULL REQUEST</span><span className="rounded bg-orange-400/10 px-2 py-1 font-mono text-[9px] text-orange-300">PR #284</span></div>
+      {["pricing/margin-policy.ts","quote-orchestrator.ts","supplier-price-client.ts","rfq-fixture.yaml"].map((x,i)=><div key={x} className="flex items-center gap-3 border-t border-white/5 py-3 font-mono text-[10px]"><span className="text-orange-300">M</span><span className="text-white/70">{x}</span><span className="ml-auto text-white/25">{[18,7,4,2][i]} lines</span></div>)}
+      <div className="mt-4 font-mono text-[10px] text-white/35">+ 27 additional changed files</div>
+    </div>
+    <div className="rounded-2xl border border-cyan-300/15 bg-cyan-300/[.025] p-5">
+      <div className="font-mono text-[9px] uppercase tracking-[.18em] text-cyan-300/60">IMPACT DETECTED</div>
+      <div className="mt-5 space-y-4 font-mono text-[10px]">
+        {["Supplier price","Margin calculation","Approval state","Quotation creation"].map((x,i)=><div key={x} className="flex items-center gap-3"><span className="h-2 w-2 rounded-full bg-cyan-300 shadow-[0_0_12px_rgba(34,211,238,.7)]"/><span>{x}</span>{i<3&&<span className="text-white/20">→</span>}</div>)}
+      </div>
+      <div className="mt-6 grid grid-cols-3 gap-2 text-center"><div><b className="text-xl">31</b><div className="text-[8px] text-white/35">FILES</div></div><div><b className="text-xl">14</b><div className="text-[8px] text-white/35">JOURNEYS</div></div><div><b className="text-xl text-orange-300">8</b><div className="text-[8px] text-white/35">CRITICAL</div></div></div>
+    </div>
+  </div>;
 }
 
-function NodeCloud({count,mode}:{count:number;mode:"ring"|"matrix"|"orbit"|"evidence"}) {
-  const visible = Math.min(count, mode==="ring"?46:mode==="matrix"?61:mode==="orbit"?18:31);
-  return <div className={`absolute inset-0 ${mode==="ring"?"qa-ring-cloud":mode==="matrix"?"qa-matrix-cloud":mode==="orbit"?"qa-orbit-cloud":"qa-evidence-cloud"}`}>
-    {Array.from({length:visible},(_,i)=><span
-      key={i}
-      className={`qa-mini-node ${i%9===0?"hot":""}`}
-      style={{
-        "--i":i,
-        "--n":visible,
-        animationDelay:`${(i%11)*-.17}s`,
-      } as React.CSSProperties}
-    />)}
-  </div>
+function PlanView(){
+  return <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">{tests.map(([id,name,p],i)=><div key={id} className="relative overflow-hidden rounded-xl border border-white/10 bg-[#07101b] p-4"><div className="flex items-center justify-between"><span className="font-mono text-[9px] text-cyan-300">{id}</span><span className="font-mono text-[8px] text-orange-300">{p}</span></div><div className="mt-3 text-sm font-semibold">{name}</div><div className="mt-3 h-1 rounded bg-white/5"><div className="h-full rounded bg-gradient-to-r from-violet-400 to-cyan-300" style={{width:`${45+i*10}%`}}/></div></div>)}</div>;
 }
 
-function TransactionGraph({scene}:{scene:Scene}){
-  const stageIndex=SCENES.indexOf(scene);
-  const nodes=[
-    [8,52,"#8b5cf6"],[18,32,"#22d3ee"],[28,66,"#22d3ee"],[39,34,"#22d3ee"],
-    [50,60,"#22d3ee"],[61,32,"#fb923c"],[72,62,"#fb923c"],[83,34,"#ef4444"],[93,52,"#ef4444"]
-  ] as const;
-  const mainPath="M8 52 C14 52 14 32 18 32 C22 32 23 66 28 66 C33 66 34 34 39 34 C44 34 45 60 50 60 C55 60 56 32 61 32 C66 32 67 62 72 62 C77 62 78 34 83 34 C88 34 89 52 93 52";
-  const returnPath="M93 52 C84 52 84 72 72 62 C64 54 63 22 50 60 C44 72 43 48 39 34 C34 22 33 72 28 66 C23 60 22 42 18 32 C14 24 13 52 8 52";
-  const stageGlow=stageIndex>=8?"#ef4444":stageIndex>=5?"#fb923c":"#22d3ee";
-  return <div className="absolute inset-0 flex items-center justify-center">
-    <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="absolute inset-0 h-full w-full">
-      <defs>
-        <filter id="qaGlow"><feGaussianBlur stdDeviation="1.3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-        <linearGradient id="qaFlow" x1="0" x2="1"><stop offset="0" stopColor="#8b5cf6" stopOpacity=".15"/><stop offset=".45" stopColor="#22d3ee" stopOpacity=".8"/><stop offset="1" stopColor={stageGlow} stopOpacity=".65"/></linearGradient>
-      </defs>
-      <path d={mainPath} fill="none" stroke="url(#qaFlow)" strokeWidth=".24" vectorEffect="non-scaling-stroke" opacity=".8"/>
-      <path d={returnPath} fill="none" stroke="#22d3ee" strokeOpacity=".14" strokeWidth=".16" vectorEffect="non-scaling-stroke"/>
-      <path d={mainPath} fill="none" stroke="#fff" strokeOpacity=".08" strokeWidth=".7" strokeDasharray=".5 3" vectorEffect="non-scaling-stroke"/>
-      {Array.from({length:4},(_,i)=><circle key={`f${i}`} r={i===0?".95":".55"} fill={i===0?"#fb923c":"#67e8f9"} filter="url(#qaGlow)">
-        <animateMotion dur={`${4.8+i*.7}s`} begin={`${-i*1.15}s`} repeatCount="indefinite" path={mainPath}/>
-      </circle>)}
-      {Array.from({length:2},(_,i)=><circle key={`r${i}`} r=".45" fill="#67e8f9" opacity=".7">
-        <animateMotion dur={`${5.4+i*.8}s`} begin={`${-i*1.7}s`} repeatCount="indefinite" path={returnPath}/>
-      </circle>)}
-      {nodes.map(([x,y,color],i)=><g key={i}>
-        <circle cx={x} cy={y} r={i===stageIndex?3.2:1.8} fill={i===stageIndex?stageGlow:"#07101c"} stroke={i===stageIndex?"#fff":color} strokeWidth={i===stageIndex?".45":".2"} vectorEffect="non-scaling-stroke" filter={i===stageIndex?"url(#qaGlow)":undefined}/>
-        {i===stageIndex&&<circle cx={x} cy={y} r="6" fill="none" stroke={stageGlow} strokeOpacity=".3" strokeWidth=".2" vectorEffect="non-scaling-stroke"><animate attributeName="r" values="3.5;8;3.5" dur="2.2s" repeatCount="indefinite"/></circle>}
-      </g>)}
-      <circle cx="8" cy="52" r="3.8" fill="none" stroke="#8b5cf6" strokeOpacity=".18" strokeWidth=".2"/>
-      <circle cx="93" cy="52" r="4.5" fill="none" stroke="#ef4444" strokeOpacity={stageIndex===9?".55":".12"} strokeWidth=".25"/>
-    </svg>
-  </div>
+function RunView(){
+  return <div className="grid gap-4 lg:grid-cols-[1.5fr_.8fr]">
+    <div className="rounded-2xl border border-white/10 bg-[#07101b] p-5">
+      <div className="mb-4 flex items-center justify-between"><span className="font-mono text-[9px] uppercase tracking-[.18em] text-cyan-300/60">LIVE TRANSACTION</span><span className="font-mono text-[9px] text-white/30">trc_8f21 · 14.8s</span></div>
+      {trajectory.map(([kind,value],i)=><div key={value} className="flex gap-4 border-t border-white/5 py-3"><span className={`w-14 shrink-0 font-mono text-[8px] ${kind==="POLICY"?"text-red-300":"text-cyan-300/60"}`}>{kind}</span><span className={`font-mono text-[10px] ${i===5?"text-orange-200":i===6?"text-red-300":"text-white/65"}`}>{value}</span></div>)}
+    </div>
+    <div className="rounded-2xl border border-white/10 bg-[#07101b] p-5">
+      <div className="font-mono text-[9px] uppercase tracking-[.18em] text-white/35">BUSINESS CONTEXT</div>
+      <div className="mt-5 space-y-3 text-[11px]"><div>Grade <b className="float-right">S355</b></div><div>Quantity <b className="float-right">240 MT</b></div><div>Delivery <b className="float-right">Rotterdam</b></div><div>Inventory <b className="float-right text-emerald-300">310 MT</b></div><div>Margin <b className="float-right">7.8%</b></div><div>Approval <b className="float-right text-red-300">PENDING</b></div></div>
+      <div className="mt-6 rounded-xl border border-red-400/20 bg-red-400/[.05] p-3 font-mono text-[9px] text-red-200">quotation.create() attempted while approval_state=PENDING</div>
+    </div>
+  </div>;
 }
 
-function SceneData({scene}:{scene:Scene}){
-  if(scene==="change") return <NodeCloud count={31} mode="matrix"/>;
-  if(scene==="impact") return <NodeCloud count={14} mode="ring"/>;
-  if(scene==="playbook") return <NodeCloud count={46} mode="ring"/>;
-  if(scene==="execution") return <NodeCloud count={43} mode="orbit"/>;
-  if(scene==="agent") return <div className="absolute inset-0 flex items-center justify-center"><div className="relative h-[58vh] w-[78vw] max-w-[1200px]">
-    {trajectory.map((_,i)=><div key={i} className={`absolute h-px bg-gradient-to-r from-cyan-300/10 via-cyan-300/60 to-orange-300/20 ${i===6?"bg-gradient-to-r from-red-400/20 via-red-400/80 to-transparent":""}`} style={{left:`${8+i*8}%`,top:`${42+(i%2)*18}%`,width:`${12+i%3*3}%`,transform:`rotate(${i%2?25:-25}deg)`}}/> )}
-    {trajectory.map((_,i)=><div key={i} className={`absolute -translate-x-1/2 -translate-y-1/2 rounded-full ${i===6?"h-12 w-12 bg-red-500/90 shadow-[0_0_55px_16px_rgba(239,68,68,.28)]":"h-7 w-7 bg-cyan-400/80 shadow-[0_0_30px_8px_rgba(34,211,238,.18)]"}`} style={{left:`${8+i*8}%`,top:`${42+(i%2)*18}%`}}/> )}
-    <Packet delay={0} tone="orange"/><Packet delay={-1.3} tone="cyan" reverse/>
-  </div></div>;
-  if(scene==="attack") return <div className="absolute inset-0 flex items-center justify-center"><NodeCloud count={12} mode="ring"/><div className="h-[32vh] w-[32vh] animate-pulse rounded-full border border-red-400/50 shadow-[0_0_120px_30px_rgba(239,68,68,.12)]"/><div className="absolute h-[16vh] w-[16vh] rounded-full border border-orange-300/30"/></div>;
-  if(scene==="diagnose") return <div className="absolute inset-0 flex items-center justify-center"><div className="relative h-[60vh] w-[78vw] max-w-[1100px]">
-    {defects.map((_,i)=><div key={i} className={`absolute rounded-full border ${i===0?"h-16 w-16 border-red-200 bg-red-400/90 shadow-[0_0_60px_18px_rgba(239,68,68,.28)]":"h-7 w-7 border-cyan-300/30 bg-[#08121f]"}`} style={{left:`${8+i*16}%`,top:`${25+(i%3)*22}%`}}/>)}
-    <div className="absolute left-[8%] top-[25%] h-px w-[78%] bg-gradient-to-l from-red-400/80 via-orange-300/40 to-cyan-300/20"/>
-    <div className="absolute left-[8%] top-[47%] h-px w-[78%] bg-gradient-to-l from-red-400/70 via-orange-300/30 to-cyan-300/20"/>
-    <div className="absolute left-[8%] top-[69%] h-px w-[78%] bg-gradient-to-l from-red-400/60 via-orange-300/25 to-cyan-300/20"/>
-    <Packet delay={0} tone="red" reverse/>
-  </div></div>;
-  if(scene==="evidence") return <NodeCloud count={31} mode="evidence"/>;
-  if(scene==="regression") return <NodeCloud count={61} mode="matrix"/>;
-  return <div className="absolute inset-0 flex items-center justify-center"><div className="relative h-[46vh] w-[46vh] rounded-full border border-red-300/30 shadow-[0_0_140px_35px_rgba(239,68,68,.08)]"><div className="absolute inset-[12%] rounded-full border border-orange-300/20"/><div className="absolute inset-[28%] rounded-full border border-cyan-300/20"/><div className="absolute inset-[43%] animate-pulse rounded-full bg-red-500/80 shadow-[0_0_70px_20px_rgba(239,68,68,.3)]"/>{Array.from({length:42},(_,i)=><span key={i} className="absolute left-1/2 top-1/2 h-1 w-1 rounded-full bg-orange-300" style={{transform:`rotate(${i*8.57}deg) translateY(-22vh)`,transformOrigin:"0 22vh",opacity:i<3?".9":".25"}}/>)}</div></div>;
+function AgentView(){
+  return <div className="grid gap-4 lg:grid-cols-[1.2fr_.8fr]">
+    <div className="rounded-2xl border border-white/10 bg-[#07101b] p-5">{trajectory.map(([k,v],i)=><div key={v} className="flex items-center gap-3 border-t border-white/5 py-3"><span className={`h-2 w-2 rounded-full ${i===5?"bg-red-400":"bg-cyan-300"} shadow-[0_0_12px_currentColor]`}/><span className="w-14 font-mono text-[8px] text-white/30">{k}</span><span className="font-mono text-[10px] text-white/70">{v}</span></div>)}</div>
+    <div className="rounded-2xl border border-white/10 bg-[#07101b] p-5"><div className="font-mono text-[9px] text-white/35">VERA EVALUATION</div>{[["Goal completion","REVIEW"],["Tool selection","FAIL"],["Tool arguments","PASS"],["Policy adherence","FAIL"],["RAG grounding","REVIEW"],["Trajectory integrity","PASS"]].map(([a,b])=><div key={a} className="flex justify-between border-t border-white/5 py-3 text-[10px]"><span>{a}</span><span className={b==="FAIL"?"text-red-300":b==="PASS"?"text-emerald-300":"text-amber-300"}>{b}</span></div>)}</div>
+  </div>;
+}
+
+function AttackView(){
+  return <div className="grid gap-3 md:grid-cols-3">{attacks.map(([a,b],i)=><div key={a} className={`rounded-2xl border p-5 ${i===2?"border-red-400/40 bg-red-400/[.06]":"border-white/10 bg-[#07101b]"}`}><div className="font-mono text-[9px] text-white/35">ATTACK 0{i+1}</div><div className="mt-6 text-sm font-semibold">{a}</div><div className={`mt-8 font-mono text-[10px] ${i===2?"text-red-300":"text-emerald-300"}`}>{b}</div></div>)}</div>;
+}
+
+function RCAView(){
+  return <div className="grid gap-4 lg:grid-cols-[1fr_.8fr]">
+    <div className="rounded-2xl border border-red-400/20 bg-[#07101b] p-6"><div className="font-mono text-[9px] uppercase tracking-[.18em] text-red-300/70">F-001 · P1 · BLOCKING</div><div className="mt-6 space-y-1 font-mono text-sm">{["quotation.create()","↑ approval guard","↑ approval cache","↑ supplier price refresh","↑ pricing/margin-policy.ts"].map((x,i)=><div key={x} className={i===0?"text-red-300":"text-white/55"}>{x}</div>)}</div></div>
+    <div className="rounded-2xl border border-orange-300/20 bg-orange-300/[.03] p-6"><div className="font-mono text-[9px] text-orange-300/60">MISSING INVARIANT</div><div className="mt-8 font-mono text-xs leading-7 text-white/75">current_quote.price_version<br/><span className="text-orange-300">MUST EQUAL</span><br/>approved.price_version</div><div className="mt-6 text-[10px] text-white/40">Replay: 3/3 reproduced</div></div>
+  </div>;
+}
+
+function RegressionView(){
+  return <div className="grid gap-4 md:grid-cols-3"><div className="rounded-2xl border border-white/10 bg-[#07101b] p-6"><div className="font-mono text-[9px] text-white/35">BEFORE</div><div className="mt-4 text-4xl font-black">46</div><div className="text-[9px] text-white/30">REGRESSION CASES</div></div><div className="rounded-2xl border border-cyan-300/20 bg-cyan-300/[.03] p-6"><div className="font-mono text-[9px] text-cyan-300/60">SHYENA ADDS</div><div className="mt-4 text-4xl font-black text-cyan-200">+15</div><div className="text-[9px] text-white/30">PERMANENT CASES</div></div><div className="rounded-2xl border border-emerald-300/20 bg-emerald-300/[.03] p-6"><div className="font-mono text-[9px] text-emerald-300/60">AFTER</div><div className="mt-4 text-4xl font-black text-emerald-200">61</div><div className="text-[9px] text-white/30">REGRESSION CASES</div></div></div>;
+}
+
+function DecisionView(){
+  return <div className="grid gap-4 lg:grid-cols-[1fr_.9fr]">
+    <div className="rounded-2xl border border-red-400/30 bg-red-400/[.04] p-6"><div className="font-mono text-[10px] tracking-[.2em] text-red-300">RELEASE DECISION</div><div className="mt-4 text-5xl font-black text-red-200">BLOCK</div><p className="mt-5 max-w-xl text-sm leading-6 text-white/65">Quotation creation can occur while authoritative margin approval remains pending.</p><div className="mt-6 grid grid-cols-2 gap-3 text-center sm:grid-cols-4">{[["42","PASS"],["3","REVIEW"],["1","FAIL"],["2","BLOCKING"]].map(([n,l])=><div key={l} className="rounded-lg border border-white/5 bg-black/20 p-3"><b className="text-xl">{n}</b><div className="mt-1 text-[8px] text-white/30">{l}</div></div>)}</div></div>
+    <div className="rounded-2xl border border-white/10 bg-[#07101b] p-6"><div className="font-mono text-[9px] text-white/35">EVIDENCE CHAIN</div><div className="mt-4 grid grid-cols-2 gap-2">{evidence.map(x=><div key={x} className="rounded border border-white/5 px-3 py-2 font-mono text-[8px] text-white/55">{x}</div>)}</div><div className="mt-5 text-[9px] text-white/30">31 artifacts · 18 traces · 27 screenshots</div></div>
+  </div>;
 }
 
 export function AutonomousQACinematicDemo(){
-  const [sceneIndex,setSceneIndex]=React.useState(0);
+  const [index,setIndex]=React.useState(0);
   const [playing,setPlaying]=React.useState(true);
   const [sound,setSound]=React.useState(false);
-  const audio=React.useRef<HTMLAudioElement|null>(null);
-
-  React.useEffect(()=>{
-    if(!playing)return;
-    const id=window.setInterval(()=>setSceneIndex(v=>(v+1)%SCENES.length),6500);
-    return()=>window.clearInterval(id);
-  },[playing]);
-
-  React.useEffect(()=>{
-    const el=audio.current;if(!el)return;
-    el.loop=true;el.volume=.14;
-    const unlock=()=>{el.play().then(()=>setSound(true)).catch(()=>{});};
-    unlock();
-    window.addEventListener("pointerdown",unlock,{once:true});
-    window.addEventListener("keydown",unlock,{once:true});
-    return()=>{el.pause();window.removeEventListener("pointerdown",unlock);window.removeEventListener("keydown",unlock);};
-  },[]);
-
-  const scene=SCENES[sceneIndex];
-  const info=SCENE_COPY[scene];
-
-  const toggleSound=()=>{
-    const el=audio.current;if(!el)return;
-    if(el.paused){el.play().then(()=>setSound(true)).catch(()=>{});}else{el.pause();setSound(false);}
-  };
-
-  return <main className="relative min-h-screen overflow-hidden bg-[#02050b] text-white">
+  const audio=React.useRef<HTMLAudioElement>(null);
+  const stage=stages[index];
+  React.useEffect(()=>{if(!playing)return;const t=window.setInterval(()=>setIndex(v=>Math.min(v+1,stages.length-1)),6500);return()=>clearInterval(t)},[playing]);
+  React.useEffect(()=>{const a=audio.current;if(!a)return;a.loop=true;a.volume=.12;const unlock=()=>a.play().then(()=>setSound(true)).catch(()=>{});window.addEventListener("pointerdown",unlock,{once:true});return()=>window.removeEventListener("pointerdown",unlock)},[]);
+  const info=copy[stage];
+  return <main className="min-h-screen overflow-hidden bg-[#02060c] text-white">
     <style>{`
-      @keyframes qa-forward{0%{left:5%;opacity:0}8%{opacity:1}50%{opacity:1}92%{opacity:1}100%{left:95%;opacity:0}}
-      @keyframes qa-reverse{0%{left:95%;opacity:0}8%{opacity:1}50%{opacity:1}92%{opacity:1}100%{left:5%;opacity:0}}
-      @keyframes qa-orbit{0%{transform:rotate(0deg) scale(.75)}50%{transform:rotate(180deg) scale(1.05)}100%{transform:rotate(360deg) scale(.75)}}
-      @keyframes qa-cloud{0%,100%{transform:scale(.92) rotate(0deg);opacity:.45}50%{transform:scale(1.04) rotate(180deg);opacity:.9}}
-      @keyframes qa-flicker{0%,100%{opacity:.2}50%{opacity:.8}}
-      .qa-packet{position:absolute;top:48%;z-index:40;height:7px;width:7px;border-radius:999px}
-      .qa-packet-forward{animation:qa-forward 4.8s linear infinite}
-      .qa-packet-reverse{animation:qa-reverse 4.2s linear infinite}
-      .qa-ring-cloud{position:absolute;inset:12%;border-radius:999px;border:1px solid rgba(34,211,238,.09);animation:qa-cloud 12s ease-in-out infinite}
-      .qa-matrix-cloud{position:absolute;inset:8%;display:grid;grid-template-columns:repeat(10,1fr);align-content:center;gap:12px;animation:qa-cloud 14s ease-in-out infinite}
-      .qa-orbit-cloud{position:absolute;inset:12%;border-radius:999px;animation:qa-orbit 18s linear infinite}
-      .qa-evidence-cloud{position:absolute;inset:16%;display:grid;grid-template-columns:repeat(8,1fr);align-content:center;gap:18px;animation:qa-cloud 10s ease-in-out infinite}
-      .qa-mini-node{display:block;height:5px;width:5px;border-radius:999px;background:rgba(103,232,249,.55);box-shadow:0 0 12px rgba(34,211,238,.25)}
-      .qa-mini-node.hot{background:rgba(251,146,60,.9);box-shadow:0 0 16px rgba(249,115,22,.55)}
+      @keyframes packet{0%{left:4%;opacity:0}10%{opacity:1}50%{opacity:1}90%{opacity:1}100%{left:96%;opacity:0}}
+      .qa-transaction-packet{position:absolute;top:50%;height:7px;width:7px;border-radius:50%;background:#fb923c;box-shadow:0 0 22px 7px rgba(249,115,22,.55);animation:packet 3.8s linear infinite}
     `}</style>
-
-    <NeuralGrid/>
-    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_48%,rgba(15,65,100,.16),transparent_42%)]"/>
-    <TransactionGraph scene={scene}/>
-    <SceneData scene={scene}/>
-
-    <div className="absolute left-5 top-5 z-50 flex items-center gap-3">
-      <div className="h-2.5 w-2.5 animate-pulse rounded-full bg-orange-400 shadow-[0_0_18px_6px_rgba(249,115,22,.4)]"/>
-      <div className="font-mono text-[9px] font-bold uppercase tracking-[.3em] text-white/60">SHYENA · AUTONOMOUS QA</div>
-    </div>
-
-    <div className="absolute right-5 top-5 z-50 text-right font-mono text-[8px] uppercase tracking-[.18em] text-white/30">
-      <div>RFQ-2026-184</div>
-      <div className="mt-1 text-orange-300/50">TRC_8F21 · 14.8S</div>
-    </div>
-
-    <div className="absolute left-1/2 top-10 z-50 -translate-x-1/2 text-center">
-      <div className="font-mono text-[8px] uppercase tracking-[.35em] text-cyan-200/40">{info.kicker}</div>
-      <div className={`mt-2 font-black tracking-[-.04em] ${scene==="gate"?"text-5xl text-red-300 sm:text-7xl":"text-3xl text-white/90 sm:text-5xl"}`}>{info.title}</div>
-      <div className="mt-2 font-mono text-[9px] uppercase tracking-[.22em] text-white/30">{info.signal}</div>
-    </div>
-
-    <div className="absolute bottom-7 left-1/2 z-50 w-[min(92vw,900px)] -translate-x-1/2">
-      <div className="h-px bg-white/10"><div className="h-px bg-gradient-to-r from-violet-500 via-cyan-300 to-orange-400 transition-all duration-700" style={{width:`${((sceneIndex+1)/SCENES.length)*100}%`}}/></div>
-      <div className="mt-3 flex justify-between">
-        {SCENES.map((x,i)=><button key={x} type="button" aria-label={x} onClick={()=>setSceneIndex(i)} className={`h-1.5 w-1.5 rounded-full transition-all ${i===sceneIndex?"scale-150 bg-orange-300 shadow-[0_0_10px_3px_rgba(249,115,22,.4)]":"bg-white/20"}`}/>)}
-      </div>
-    </div>
-
-    <div className="absolute bottom-5 left-5 z-50 flex gap-2">
-      <button type="button" onClick={()=>setPlaying(v=>!v)} className="rounded-full border border-white/10 bg-black/35 px-3 py-2 font-mono text-[8px] uppercase tracking-[.16em] text-white/55 backdrop-blur">{playing?"PAUSE":"PLAY"}</button>
-      <button type="button" onClick={()=>setSceneIndex(0)} className="rounded-full border border-white/10 bg-black/35 px-3 py-2 font-mono text-[8px] uppercase tracking-[.16em] text-white/55 backdrop-blur">REPLAY</button>
-    </div>
-
-    <div className="absolute bottom-5 right-5 z-50">
-      <audio ref={audio} src="/audio/shyena-demo-music.mp3" preload="auto"/>
-      <button type="button" onClick={toggleSound} className="rounded-full border border-white/10 bg-black/40 px-3 py-2 font-mono text-[8px] uppercase tracking-[.16em] text-white/55 backdrop-blur">{sound?"SOUND ON":"SOUND"}</button>
-    </div>
+    <div className="fixed inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(17,64,90,.18),transparent_42%)]"/>
+    <header className="relative z-10 flex items-center justify-between border-b border-white/10 px-5 py-4 md:px-8"><div className="font-mono text-[9px] tracking-[.25em] text-white/55">SHYENA / AUTONOMOUS QA</div><div className="font-mono text-[9px] text-white/25">ILLUSTRATIVE · SYNTHETIC SYSTEM</div></header>
+    <section className="relative z-10 mx-auto max-w-[1400px] px-4 pb-24 pt-8 md:px-8 md:pt-12">
+      <div className="mb-7 max-w-4xl"><div className="font-mono text-[10px] tracking-[.22em] text-cyan-300/65">{info.eyebrow}</div><h1 className={`mt-3 text-3xl font-black tracking-tight md:text-5xl ${stage==="decision"?"text-red-200":""}`}>{info.title}</h1><p className="mt-3 text-sm text-white/45 md:text-base">{info.subtitle}</p></div>
+      {stage==="system"&&<SystemMap stage={stage}/>}
+      {stage==="change"&&<ChangeView/>}
+      {stage==="plan"&&<PlanView/>}
+      {stage==="run"&&<RunView/>}
+      {stage==="agent"&&<AgentView/>}
+      {stage==="attack"&&<AttackView/>}
+      {stage==="rca"&&<RCAView/>}
+      {stage==="regression"&&<RegressionView/>}
+      {stage==="decision"&&<DecisionView/>}
+    </section>
+    <nav className="fixed bottom-0 left-0 right-0 z-20 border-t border-white/10 bg-[#02060c]/95 px-3 py-3 backdrop-blur-xl md:px-8">
+      <div className="mx-auto flex max-w-[1400px] items-center gap-2 overflow-x-auto">{stages.map((s,i)=><button key={s} onClick={()=>{setIndex(i);setPlaying(false)}} className={`shrink-0 rounded-lg px-3 py-2 font-mono text-[8px] uppercase tracking-[.12em] ${i===index?"bg-white/10 text-white":"text-white/30 hover:text-white/60"}`}>{String(i+1).padStart(2,"0")} {s}</button>)}<div className="ml-auto flex shrink-0 gap-2"><button onClick={()=>setPlaying(v=>!v)} className="rounded-lg border border-white/10 px-3 py-2 font-mono text-[8px] text-white/45">{playing?"PAUSE":"PLAY"}</button><button onClick={()=>setIndex(0)} className="rounded-lg border border-white/10 px-3 py-2 font-mono text-[8px] text-white/45">REPLAY</button><button onClick={()=>{const a=audio.current;if(!a)return;if(a.paused)a.play().then(()=>setSound(true));else{a.pause();setSound(false)}}} className="rounded-lg border border-white/10 px-3 py-2 font-mono text-[8px] text-white/45">{sound?"SOUND ON":"SOUND"}</button></div></div>
+    </nav>
+    <audio ref={audio} src="/audio/shyena-demo-music.mp3" preload="auto"/>
   </main>;
 }
