@@ -318,7 +318,7 @@ function MotionCanvas({ phase, elapsed, cinematic, paused }: { phase: Phase; ela
       ctx.fillRect(0, 0, width, height);
 
       const t = elapsed / 1000;
-      const p = phaseProgress(elapsed, live.phase);
+      const p = phaseProgress(live.elapsed, live.phase);
       const slow = paused ? 0 : dt / 1000;
       const drift = t * 7;
 
@@ -440,7 +440,7 @@ function MotionCanvas({ phase, elapsed, cinematic, paused }: { phase: Phase; ela
       if (!live.paused) {
         const ps = particlesRef.current;
         ps.forEach((particle) => {
-          particle.t = (particle.t + particle.speed * slow * (live.live.phase === "attack" ? 2.2 : 1)) % 1;
+          particle.t = (particle.t + particle.speed * slow * (live.phase === "attack" ? 2.2 : 1)) % 1;
           if (live.phase === "blocked" || live.phase === "gate") particle.hue = "red";
           else if (live.phase === "replay" || live.phase === "regression") particle.hue = "green";
           else particle.hue = "cyan";
@@ -461,7 +461,7 @@ function MotionCanvas({ phase, elapsed, cinematic, paused }: { phase: Phase; ela
           ctx.arc(x, y, 22 + i * 16 + Math.sin(t * 3 + i) * 3, 0, Math.PI * 2);
           ctx.stroke();
         }
-        drawText(ctx, live.phase === "investigate" ? "ROOT CAUSE" : "REGRESSION ANCHOR", x, y - 54, 8, live.live.phase === "investigate" ? rgba(colors.red, 0.9) : rgba(colors.green, 0.9), "700", "center");
+        drawText(ctx, live.phase === "investigate" ? "ROOT CAUSE" : "REGRESSION ANCHOR", x, y - 54, 8, live.phase === "investigate" ? rgba(colors.red, 0.9) : rgba(colors.green, 0.9), "700", "center");
       }
 
       nodes.forEach((node) => drawNode(ctx, node, nodeState(node.id, live.phase), width, height, 0.5 + 0.5 * Math.sin(t * 4)));
