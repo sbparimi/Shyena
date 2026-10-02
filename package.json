@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite dev",
     "build": "node scripts/generate-public-content.mjs && vite build",
-    "prebuild": "npm run lint",
+    "typecheck": "tsc --noEmit",
+    "prebuild": "npm run typecheck",
     "build:dev": "node scripts/generate-public-content.mjs && vite build --mode development",
     "preview": "vite preview",
     "lint": "eslint .",
