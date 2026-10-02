@@ -22,7 +22,7 @@ export const Route = createFileRoute("/experts")({
   head: () => ({
     links: [{ rel:"canonical", href:"https://www.shyena.eu/experts" }],
     meta: [
-      { title:"Shyena Assurance Network | AI Quality & Evaluation Specialists" },
+      { title:"Shyena Assurance Expertise | AI Quality & Evaluation Specialists" },
       { name:"description", content:"A capability-driven network for AI assurance work generated and orchestrated by Shyena Assurance Cloud." }
     ]
   }),
