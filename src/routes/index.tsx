@@ -11,7 +11,9 @@ const faq = [
   ["Which platforms do you support?", "Shyena is designed for conversational and agentic AI systems. Supported integrations should be confirmed for your stack during an engagement."],
   ["Do you need access to production?", "No for an initial assessment. The preferred boundary is a customer-controlled test or staging environment with scoped credentials and least-privilege access."],
   ["Where does our data go?", "Engagement architecture is designed around customer-controlled environments and customer-funded model/API accounts. See Security for the current boundary."],
-  ["Can we start small?", "Yes. Start with the AI Act Transparency & Risk Scan or an AI Assurance Pilot."]
+  ["Can we start small?", "Yes. Start with one AI system and one critical assurance journey. Shyena can automate the initial assessment and identify the specialist capabilities required for any remaining work."],
+  ["Does Shyena sell generic QA staffing?", "No. The specialist network is tied to Shyena-generated assurance work. The platform defines the required capability, assigns scoped work and keeps the resulting evidence in the same assurance record."],
+  ["Can I browse the specialist network?", "Yes. The network page describes the capability model and engagement flow. Named customer results, certifications and specialist performance claims are published only when verified."]
 ];
 
 function TerminalMetric({label,value,detail,accent="orange"}:{label:string;value:string;detail?:string;accent?:string}) {
@@ -217,9 +219,9 @@ function HomePage() {
     <section className="bg-[#07101f] text-white">
       <div className="mx-auto grid w-full max-w-[1440px] min-w-0 gap-12 px-5 py-16 sm:px-8 lg:grid-cols-[minmax(0,.88fr)_minmax(0,1.12fr)] lg:items-center lg:px-10 lg:py-24">
         <div className="min-w-0">
-          <div className="font-mono text-[10px] font-bold uppercase tracking-[.22em] text-[#f18a32]">AUTONOMOUS QA · AI SYSTEMS</div>
-          <h1 className="mt-5 max-w-4xl font-[Sora] text-[clamp(3rem,6.7vw,6.6rem)] font-extrabold leading-[.9] tracking-[-.07em]">Put every AI release through <span className="text-[#f18a32]">real-world testing.</span></h1>
-          <p className="mt-7 max-w-2xl text-lg leading-8 text-white/65">AI systems are no longer just software that returns an answer. They reason, call tools, follow workflows and make decisions. Shyena is the autonomous QA engineer that discovers what matters, proves what happened and gives you the evidence behind every release decision.</p>
+          <div className="font-mono text-[10px] font-bold uppercase tracking-[.22em] text-[#f18a32]">SHYENA ASSURANCE CLOUD · AI SYSTEMS</div>
+          <h1 className="mt-5 max-w-4xl font-[Sora] text-[clamp(3rem,6.7vw,6.6rem)] font-extrabold leading-[.9] tracking-[-.07em]">Assure every AI system with <span className="text-[#f18a32]">software, evidence and expertise.</span></h1>
+          <p className="mt-7 max-w-2xl text-lg leading-8 text-white/65">Shyena Assurance Cloud connects autonomous AI assurance with certified specialist capability. Discover risk, generate executable assurance, evaluate behaviour, attack critical paths and bring the right human expertise into the work only when automation needs it.</p>
           <div className="mt-8 grid w-full max-w-[620px] grid-cols-[1.2fr_1fr_1fr] gap-2">
             <Link to="/demo" className="inline-flex min-h-[42px] min-w-0 items-center justify-center gap-1.5 rounded-md bg-[#e87512] px-2.5 text-center text-[11px] font-bold leading-4 text-white transition hover:bg-[#d9670a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f6a15b] focus-visible:ring-offset-2 focus-visible:ring-offset-[#07101f] sm:text-xs">See autonomous QA in action <ArrowRight className="h-3.5 w-3.5 shrink-0" aria-hidden="true"/></Link>
             <Link to="/contact" className="inline-flex min-h-[42px] min-w-0 items-center justify-center gap-1.5 rounded-md border border-white/20 px-2.5 text-center text-[11px] font-bold leading-4 text-white transition hover:border-white/45 hover:bg-white/[.04] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f6a15b] focus-visible:ring-offset-2 focus-visible:ring-offset-[#07101f] sm:text-xs">Discuss your release <ArrowRight className="h-3.5 w-3.5 shrink-0" aria-hidden="true"/></Link>
@@ -303,7 +305,7 @@ function HomePage() {
     <section className="bg-white">
       <div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
         <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end">
-          <div><div className="text-sm font-bold text-[#e87512]">One assurance system</div><h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em] sm:text-5xl">Understand. Prove. Attack. Decide.</h2></div>
+          <div><div className="text-sm font-bold text-[#e87512]">One assurance system</div><h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em] sm:text-5xl">Platform, assurance network and evidence in one control plane.</h2></div>
           <p className="max-w-xl text-sm leading-6 text-[#69707d]">The products are separate engines in one evidence chain. Start with the part of the lifecycle where your team needs the most leverage.</p>
         </div>
         <div className="mt-9 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
@@ -316,6 +318,30 @@ function HomePage() {
             <div className="flex items-center justify-between"><span className="font-mono text-xs font-bold tracking-[.15em] text-[#e87512]">{product}</span><ArrowRight className="h-4 w-4 text-[#8b929d] transition group-hover:translate-x-1 group-hover:text-[#e87512]"/></div>
             <h3 className="mt-5 text-xl font-bold">{verb}</h3><p className="mt-2 text-sm leading-6 text-[#69707d]">{body}</p>
           </Link>)}
+        </div>
+      </div>
+    </section>
+
+    <section className="border-y border-[#e6e8ed] bg-[#fafbfc]">
+      <div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
+        <div className="grid gap-10 lg:grid-cols-[.82fr_1.18fr] lg:items-start">
+          <div>
+            <div className="font-mono text-xs font-bold uppercase tracking-[.18em] text-[#e87512]">The Assurance Cloud</div>
+            <h2 className="mt-4 font-[Sora] text-4xl font-extrabold tracking-[-.045em] sm:text-5xl">Software creates the assurance work. Shyena orchestrates it.</h2>
+            <p className="mt-5 max-w-xl text-base leading-7 text-[#69707d]">Shyena is not a marketplace of generic QA contractors. The platform first understands the AI system, identifies assurance gaps and creates executable work packages. Automation closes what it can; certified specialists close the remaining high-value gaps.</p>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <Link to="/experts" className="inline-flex h-11 items-center gap-2 rounded-lg bg-[#17213f] px-5 text-sm font-bold text-white">Explore assurance network <ArrowRight className="h-4 w-4"/></Link>
+              <Link to="/pricing" className="inline-flex h-11 items-center gap-2 rounded-lg border border-[#17213f] px-5 text-sm font-bold">See commercial model <ArrowRight className="h-4 w-4"/></Link>
+            </div>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {[
+              ["01 · DISCOVER","AI system → architecture → risk → required assurance"],
+              ["02 · AUTOMATE","Generate journeys, evaluations, attacks and evidence"],
+              ["03 · MATCH","Map unresolved assurance gaps to verified capabilities"],
+              ["04 · ASSURE","Human + machine execution produces one evidence record"]
+            ].map(([step,body])=><article key={step} className="rounded-2xl border border-[#dfe3e8] bg-white p-6 shadow-[0_20px_60px_-45px_rgba(23,35,63,.35)]"><div className="font-mono text-xs font-bold tracking-[.12em] text-[#e87512]">{step}</div><p className="mt-3 text-sm leading-6 text-[#596273]">{body}</p></article>)}
+          </div>
         </div>
       </div>
     </section>
