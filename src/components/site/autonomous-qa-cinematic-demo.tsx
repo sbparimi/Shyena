@@ -44,6 +44,11 @@ const phases=[
   {id:"gate",label:"RELEASE GATE",title:"Evidence becomes a decision",detail:"Critical controls fail → RELEASE BLOCKED.",color:"red"},
 ];
 
+function cameraFor(phase:number){
+  const shots=["translate3d(0,0,0) scale(1)","translate3d(-28px,8px,0) scale(1.06)","translate3d(-90px,-35px,0) scale(1.12)","translate3d(-165px,-10px,0) scale(1.2)","translate3d(-250px,-10px,0) scale(1.28)","translate3d(-110px,-35px,0) scale(1.18)","translate3d(-45px,12px,0) scale(1.1)","translate3d(-160px,-28px,0) scale(1.2)","translate3d(-250px,-4px,0) scale(1.28)","translate3d(-300px,-28px,0) scale(1.08)"];
+  return shots[phase]||shots[0];
+}
+
 function Graph({phase, pulse}:{phase:number;pulse:number}){
   const active = phase<2 ? ["rfq","agent","inventory","pricing"] : phase===2 ? ["rfq","agent","inventory","pricing","margin"] : phase<=4 ? ["agent","pricing","margin","quote"] : phase<=7 ? ["agent","pricing","margin","quote"] : ["agent","pricing","margin","quote","customer"];
   return <div className="relative h-[520px] overflow-hidden rounded-2xl border border-white/10 bg-[#060a10] shadow-[0_30px_100px_-50px_rgba(0,0,0,.95)] sm:h-[560px]">
@@ -51,7 +56,7 @@ function Graph({phase, pulse}:{phase:number;pulse:number}){
     <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,rgba(241,138,50,.07),transparent_42%)]"/>
     <div className="absolute left-4 top-4 z-10 font-mono text-[8px] uppercase tracking-[.2em] text-white/30">SYSTEM UNDER TEST · RFQ TRANSACTION GRAPH</div>
     <div className="absolute right-4 top-4 z-10 rounded border border-white/10 bg-black/30 px-2 py-1 font-mono text-[7px] text-white/35">ILLUSTRATIVE RUN</div>
-    <svg className="absolute inset-0 h-full w-full" viewBox="0 0 1000 560" preserveAspectRatio="none">
+    <div className="absolute inset-0 transition-transform duration-[1200ms] ease-[cubic-bezier(.2,.8,.2,1)]" style={{transform:cameraFor(phase),transformOrigin:"50% 50%"}}>    <svg className="absolute inset-0 h-full w-full" viewBox="0 0 1000 560" preserveAspectRatio="none">
       <defs><linearGradient id="edge" x1="0" x2="1"><stop stopColor="#f18a32" stopOpacity=".08"/><stop offset=".5" stopColor="#f18a32" stopOpacity=".65"/><stop offset="1" stopColor="#f18a32" stopOpacity=".08"/></linearGradient></defs>
       {[["rfq","agent"],["agent","inventory"],["agent","pricing"],["inventory","margin"],["pricing","margin"],["margin","quote"],["quote","customer"]].map(([a,b])=>{
         const A=nodes.find(n=>n.id===a)!; const B=nodes.find(n=>n.id===b)!;
@@ -60,6 +65,7 @@ function Graph({phase, pulse}:{phase:number;pulse:number}){
         return <g key={a+b}><path d={`M ${ax} ${ay} L ${bx} ${by}`} stroke={hot?"url(#edge)":"rgba(255,255,255,.07)"} strokeWidth={hot?2:1} fill="none" strokeDasharray={hot?"6 9":"0"}/>{hot&&<circle r="4" fill={phase>=3?"#ff4d5f":"#f18a32"}><animate attributeName="cx" values={`${ax};${bx}`}/><animate attributeName="cy" values={`${ay};${by}`}/><animate attributeName="opacity" values="0;1;0" dur="1.7s" repeatCount="indefinite"/></circle>}</g>
       })}
     </svg>
+    </div>
     {nodes.map(n=>{const hot=active.includes(n.id); const red=phase>=3&&["margin","quote"].includes(n.id); return <div key={n.id} className={`absolute z-10 -translate-x-1/2 -translate-y-1/2 transition-all duration-700 ${hot?"scale-105":"scale-100"}`} style={{left:n.x,top:n.y}}>
       <div className={`min-w-[128px] rounded-xl border px-3 py-3 backdrop-blur-md ${red?"border-red-400/45 bg-red-500/[.10] shadow-[0_0_45px_rgba(239,68,68,.16)]":hot?"border-[#f18a32]/45 bg-[#f18a32]/[.07] shadow-[0_0_45px_rgba(241,138,50,.12)]":"border-white/10 bg-[#0c121a]/90"}`}>
         <div className="flex items-center justify-between"><span className={`h-2 w-2 rounded-full ${red?"bg-red-400 animate-pulse":hot?"bg-[#f18a32] animate-pulse":"bg-white/20"}`}/><span className="font-mono text-[6px] text-white/25">NODE</span></div>
@@ -100,7 +106,7 @@ export function AutonomousQACinematicDemo(){
  const [selected,setSelected]=React.useState(0);
  const [pulse,setPulse]=React.useState(0);
  const [replay,setReplay]=React.useState(0);
- React.useEffect(()=>{if(!running)return; const t=window.setInterval(()=>{setPulse(v=>v+1);setPhase(v=>v>=5?0:v+1);},4200);return()=>window.clearInterval(t)},[running]);
+ React.useEffect(()=>{if(!running)return; const t=window.setInterval(()=>{setPulse(v=>v+1);setPhase(v=>v>=9?0:v+1);},2600);return()=>window.clearInterval(t)},[running]);
  const current=phases[phase];
  return <main className="min-h-screen bg-[#05080d] text-white">
   <section className="relative overflow-hidden border-b border-white/10 bg-[#060b12]"><div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_15%,rgba(241,138,50,.14),transparent_30%),radial-gradient(circle_at_20%_80%,rgba(52,211,153,.06),transparent_26%)]"/>
