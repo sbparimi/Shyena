@@ -5,13 +5,13 @@ import { ArrowRight, Check, ShieldCheck } from "lucide-react";
 const SITE = "https://www.shyena.eu";
 
 const faq = [
-  ["Is Shyena just another test automation tool?", "No. Shyena is an AI assurance platform. Nexus understands the system and change impact, Vera evaluates behaviour, Chakra attacks adversarial paths, and Govern connects evidence to release decisions."],
-  ["How is it different from LLM evaluation libraries?", "Shyena evaluates the system around the model: business journeys, routing, tools, APIs, agent trajectories, security controls and evidence. The suite connects those results to findings and release decisions."],
+  ["Is Shyena just another test automation tool?", "No. Shyena is your AI Assurance Engineer: it maps real journeys, judges behaviour, attacks unsafe paths and produces evidence for release decisions."],
+  ["How is it different from LLM evaluation libraries?", "LLM evaluation can score model outputs. Shyena evaluates the complete AI journey: business rules, routing, tools, APIs, agent behaviour and security, then connects findings to release evidence."],
   ["Does Shyena make us EU AI Act compliant?", "No. Shyena produces technical evidence that can support legal and compliance work. It is not legal advice or a certification body."],
-  ["Which platforms do you support?", "Shyena is designed for agentic and conversational AI systems, with integrations across agent orchestration, browser automation, APIs, CI/CD and observability. Contact us for your stack."],
-  ["Do you need access to production?", "No for the initial assessment. The preferred boundary is a customer-controlled test or staging environment using scoped API credentials and least-privilege access. Read-only logs are preferred where logs are needed. Production access is only used when explicitly agreed for the engagement."],
+  ["Which platforms do you support?", "Shyena is designed for conversational and agentic AI systems. Supported integrations should be confirmed for your stack during an engagement."],
+  ["Do you need access to production?", "No for an initial assessment. The preferred boundary is a customer-controlled test or staging environment with scoped credentials and least-privilege access."],
   ["Where does our data go?", "Engagement architecture is designed around customer-controlled environments and customer-funded model/API accounts. See Security for the current boundary."],
-  ["Can we start small?", "Yes. Start with one critical AI journey and build an assurance model around it."]
+  ["Can we start small?", "Yes. Start with the AI Act Transparency & Risk Scan or an AI Assurance Pilot."]
 ];
 
 function TerminalMetric({label,value,detail,accent="orange"}:{label:string;value:string;detail?:string;accent?:string}) {
@@ -237,7 +237,10 @@ function HomePage() {
       <div className="mx-auto max-w-[1280px] px-5 py-4 text-center font-mono text-[10px] font-bold uppercase tracking-[.12em] text-[#a55410]">FROM CHANGE → IMPACT → TEST → EVALUATE → ATTACK → DIAGNOSE → RELEASE</div>
     </section>
 
-    <section className="bg-white">
+    <section className="border-b border-[#e6e8ed] bg-[#fafbfc]"><div className="mx-auto max-w-[1280px] px-5 py-16 sm:px-8 lg:px-10 lg:py-20"><div className="max-w-3xl"><div className="text-sm font-bold text-[#e87512]">Assurance that runs where your AI does.</div><h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em]">One engineer. Three buyer moments.</h2></div><div className="mt-10 grid gap-4 lg:grid-cols-3">
+<article key={a} className="rounded-2xl border border-[#e1e4e9] bg-white p-7"><div className="text-xs font-bold uppercase tracking-[.12em] text-[#e87512]">Before every release</div><h3 className="mt-3 text-2xl font-extrabold">Every change gets tested.</h3><p className="mt-4 text-sm leading-6 text-[#69707d]">Journey generation · Four-layer evaluation · Security probes · Release gate</p></article>,<article key={a} className="rounded-2xl border border-[#e1e4e9] bg-white p-7"><div className="text-xs font-bold uppercase tracking-[.12em] text-[#e87512]">In production</div><h3 className="mt-3 text-2xl font-extrabold">Every conversation teaches the next test.</h3><p className="mt-4 text-sm leading-6 text-[#69707d]">Conversation monitoring · Failure detection · Drift alerts · New regression tests</p></article>,<article key={a} className="rounded-2xl border border-[#e1e4e9] bg-white p-7"><div className="text-xs font-bold uppercase tracking-[.12em] text-[#e87512]">At audit time</div><h3 className="mt-3 text-2xl font-extrabold">Every obligation has evidence.</h3><p className="mt-4 text-sm leading-6 text-[#69707d]">Requirement-to-evidence matrix · Evidence pack · Re-run history</p></article>
+</div></div></section>
+<section className="bg-white">
       <div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
         <div className="max-w-3xl">
           <div className="text-sm font-bold text-[#e87512]">The shift</div>
@@ -350,7 +353,7 @@ function HomePage() {
     <section className="bg-[#17213f] text-white">
       <div className="mx-auto max-w-[1000px] px-5 py-16 text-center sm:px-8 lg:py-20">
         <div className="font-mono text-[10px] font-bold uppercase tracking-[.2em] text-[#f18a32]">AUTONOMOUS QA</div>
-        <h2 className="mt-4 font-[Sora] text-3xl font-extrabold tracking-[-.04em] sm:text-5xl">Understand, evaluate, attack and prove your AI system.</h2>
+        <h2 className="mt-4 font-[Sora] text-3xl font-extrabold tracking-[-.04em] sm:text-5xl">Understand. Judge. Attack. Prove.</h2>
         <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/55">See the assurance chain, then bring one critical journey into a focused engagement.</p>
         <div className="mt-8 flex flex-wrap justify-center gap-3"><Link to="/demo" className="inline-flex h-12 items-center gap-2 rounded-lg border border-white/15 px-6 text-sm font-bold text-white">See the run <ArrowRight className="h-4 w-4"/></Link><Link to="/contact" className="inline-flex h-12 items-center gap-2 rounded-lg bg-[#e87512] px-6 text-sm font-bold text-white">Discuss a pilot <ArrowRight className="h-4 w-4"/></Link></div>
       </div>
