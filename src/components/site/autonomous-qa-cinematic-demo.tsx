@@ -65,7 +65,6 @@ function Graph({phase, pulse}:{phase:number;pulse:number}){
         return <g key={a+b}><path d={`M ${ax} ${ay} L ${bx} ${by}`} stroke={hot?"url(#edge)":"rgba(255,255,255,.07)"} strokeWidth={hot?2:1} fill="none" strokeDasharray={hot?"6 9":"0"}/>{hot&&<circle r="4" fill={phase>=3?"#ff4d5f":"#f18a32"}><animate attributeName="cx" values={`${ax};${bx}`}/><animate attributeName="cy" values={`${ay};${by}`}/><animate attributeName="opacity" values="0;1;0" dur="1.7s" repeatCount="indefinite"/></circle>}</g>
       })}
     </svg>
-    </div>
     {nodes.map(n=>{const hot=active.includes(n.id); const red=phase>=3&&["margin","quote"].includes(n.id); return <div key={n.id} className={`absolute z-10 -translate-x-1/2 -translate-y-1/2 transition-all duration-700 ${hot?"scale-105":"scale-100"}`} style={{left:n.x,top:n.y}}>
       <div className={`min-w-[128px] rounded-xl border px-3 py-3 backdrop-blur-md ${red?"border-red-400/45 bg-red-500/[.10] shadow-[0_0_45px_rgba(239,68,68,.16)]":hot?"border-[#f18a32]/45 bg-[#f18a32]/[.07] shadow-[0_0_45px_rgba(241,138,50,.12)]":"border-white/10 bg-[#0c121a]/90"}`}>
         <div className="flex items-center justify-between"><span className={`h-2 w-2 rounded-full ${red?"bg-red-400 animate-pulse":hot?"bg-[#f18a32] animate-pulse":"bg-white/20"}`}/><span className="font-mono text-[6px] text-white/25">NODE</span></div>
@@ -76,6 +75,7 @@ function Graph({phase, pulse}:{phase:number;pulse:number}){
     <div className="absolute bottom-4 left-4 right-4 z-10 flex flex-wrap gap-2 font-mono text-[7px] text-white/35">
       <span className="rounded border border-white/8 bg-black/25 px-2 py-1">CHANGE PR #284</span><span className="rounded border border-white/8 bg-black/25 px-2 py-1">JOURNEY RFQ-2026-184</span><span className="rounded border border-white/8 bg-black/25 px-2 py-1">TRACE trc_8f21</span>
       {phase>=3&&<span className="rounded border border-red-400/20 bg-red-500/10 px-2 py-1 text-red-300">P1 CONTROL VIOLATION</span>}{phase===8&&<span className="rounded border border-emerald-400/20 bg-emerald-500/10 px-2 py-1 text-emerald-300">46 → 61 REGRESSION CASES</span>}
+    </div>
     </div>
   </div>;
 }
