@@ -19,48 +19,6 @@ const MiniBars=({values,tone="purple"}:{values:number[];tone?:string})=><div cla
 
 const Sparkline=({values,tone="purple",pulse=false}:{values:number[];tone?:string;pulse?:boolean})=><div className="mt-3 flex h-10 items-end gap-[2px]">{values.map((v,i)=><span key={i} className={`w-full rounded-t transition-all duration-500 ${tone==="teal"?"bg-cyan-400/75":tone==="green"?"bg-emerald-400/75":"bg-violet-400/75"} ${pulse&&i===values.length-1?"animate-pulse":""}`} style={{height:`${Math.max(8,v)}%`}}/> )}</div>;
 
-const CinematicRunLayer=({active,replaying}:{active:string;replaying:boolean})=><div className="pointer-events-none absolute inset-0 overflow-hidden">
-  <div className="absolute inset-0 bg-[#030711]"/>
-  <div className="absolute inset-0 opacity-[.18]" style={{backgroundImage:"linear-gradient(rgba(80,120,180,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(80,120,180,.12) 1px,transparent 1px)",backgroundSize:"48px 48px"}}/>
-  <div className="absolute -left-20 top-1/3 h-72 w-72 animate-pulse rounded-full bg-violet-600/10 blur-[90px]"/>
-  <div className="absolute right-0 top-1/4 h-80 w-80 animate-pulse rounded-full bg-cyan-500/10 blur-[100px]"/>
-  <div className="absolute left-[10%] top-[50%] h-px w-[18%] rotate-[-28deg] bg-gradient-to-r from-violet-500/20 via-cyan-300/70 to-orange-400/30"/>
-  <div className="absolute left-[24%] top-[30%] h-px w-[22%] rotate-[25deg] bg-gradient-to-r from-violet-500/20 via-cyan-300/70 to-orange-400/30"/>
-  <div className="absolute left-[39%] top-[62%] h-px w-[19%] rotate-[-28deg] bg-gradient-to-r from-violet-500/20 via-cyan-300/70 to-orange-400/30"/>
-  <div className="absolute left-[54%] top-[32%] h-px w-[18%] rotate-[28deg] bg-gradient-to-r from-violet-500/20 via-cyan-300/70 to-orange-400/30"/>
-  <div className="absolute left-[68%] top-[60%] h-px w-[18%] rotate-[-28deg] bg-gradient-to-r from-violet-500/20 via-cyan-300/70 to-orange-400/30"/>
-  <div className="absolute left-[82%] top-[32%] h-px w-[12%] rotate-[62deg] bg-gradient-to-r from-violet-500/20 via-cyan-300/70 to-orange-400/30"/>
-  <div className="absolute left-[10%] top-[50%] h-2 w-2 animate-ping rounded-full bg-orange-300 shadow-[0_0_16px_5px_rgba(249,115,22,.6)]"/>
-  <div className="absolute left-[54%] top-[32%] h-1.5 w-1.5 animate-pulse rounded-full bg-cyan-300 shadow-[0_0_14px_4px_rgba(34,211,238,.55)]"/>
-  <div className="absolute right-8 top-8 h-24 w-24 animate-spin rounded-full border border-cyan-300/10 border-t-orange-300/30"/>
-  <div className="absolute left-[10%] top-[50%] h-5 w-5 -translate-x-1/2 -translate-y-1/2 rounded-full border border-orange-200 bg-orange-400 shadow-[0_0_28px_8px_rgba(249,115,22,.25)]"/>
-  <div className="absolute left-[24%] top-[30%] h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full border border-cyan-300/40 bg-[#0b1322]"/>
-  <div className="absolute left-[39%] top-[62%] h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full border border-cyan-300/40 bg-[#0b1322]"/>
-  <div className="absolute left-[54%] top-[32%] h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full border border-cyan-300/40 bg-[#0b1322]"/>
-  <div className="absolute left-[68%] top-[60%] h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full border border-cyan-300/40 bg-[#0b1322]"/>
-  <div className="absolute left-[82%] top-[32%] h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full border border-cyan-300/40 bg-[#0b1322]"/>
-  <div className="absolute left-[90%] top-[68%] h-5 w-5 -translate-x-1/2 -translate-y-1/2 rounded-full border border-red-200 bg-red-400 shadow-[0_0_28px_8px_rgba(239,68,68,.25)]"/>
-  <div className="absolute left-4 top-4 rounded-lg border border-cyan-300/10 bg-black/25 px-3 py-2 font-mono text-[7px] uppercase tracking-[.2em] text-cyan-200/45 backdrop-blur-sm">SHYENA · AUTONOMOUS QA NEURAL RUN · {active.toUpperCase()}</div>
-  <div className="absolute right-4 top-4 text-right font-mono text-[7px] uppercase tracking-[.16em] text-white/25"><div>TRANSACTION RFQ-2026-184</div><div className="mt-1 text-orange-300/45">TRACE trc_8f21 · 14.8s</div></div>
-  <div className="absolute bottom-4 left-4 rounded-lg border border-white/10 bg-black/35 px-3 py-2 backdrop-blur-md"><div className="font-mono text-[8px] font-bold tracking-[.14em] text-orange-300">{active.toUpperCase()} · {replaying?"REPLAY / RE-CORRELATING":"LIVE EVIDENCE STREAM"}</div><div className="mt-1 font-mono text-[7px] text-white/35">Change → impact → playbook → execution → evaluation → evidence → gate</div></div>
-</div>;
-
-const DemoSound=()=>{
-  const audioRef=React.useRef<HTMLAudioElement|null>(null);
-  const [enabled,setEnabled]=React.useState(false);
-  React.useEffect(()=>{
-    const audio=audioRef.current;if(!audio)return;
-    audio.volume=.16;audio.loop=true;
-    const tryPlay=()=>audio.play().then(()=>setEnabled(true)).catch(()=>{});
-    tryPlay();
-    const unlock=()=>tryPlay();
-    window.addEventListener("pointerdown",unlock,{once:true});window.addEventListener("keydown",unlock,{once:true});
-    return()=>{audio.pause();window.removeEventListener("pointerdown",unlock);window.removeEventListener("keydown",unlock);};
-  },[]);
-  const toggle=async()=>{const audio=audioRef.current;if(!audio)return;if(audio.paused){await audio.play().catch(()=>{});setEnabled(true)}else{audio.pause();setEnabled(false)}};
-  return <div className="pointer-events-auto fixed bottom-5 right-5 z-50"><audio ref={audioRef} src="/audio/shyena-demo-music.mp3" preload="auto"/><button type="button" onClick={toggle} className="rounded-full border border-white/15 bg-[#07101d]/90 px-3 py-2 font-mono text-[8px] font-bold uppercase tracking-[.15em] text-white/70 shadow-xl backdrop-blur-md hover:border-orange-400/40 hover:text-white">{enabled?"SOUND ON · TATAMUSIC":"ENABLE SOUND"}</button></div>
-};
-
 const ReportVisuals=()=> {
   const tabs=[
     ["overview","Overview"],
@@ -139,7 +97,7 @@ const ReportVisuals=()=> {
     :[42,66,51,72,58,88,73,92,79,61,83,96,67,78,54,70,86,62,75,91];
 
   return <div className="mt-8 overflow-hidden rounded-[24px] border border-[#16243b] bg-[#060c18] text-white shadow-2xl">
-    <DemoSound/><div className="relative flex min-h-[760px] overflow-hidden"><CinematicRunLayer active={active} replaying={replaying}/><div className="relative z-10 flex min-w-0 flex-1">
+    <div className="flex min-h-[760px]">
       <aside className="hidden w-[176px] shrink-0 border-r border-white/10 bg-[#08101d] p-4 sm:block">
         <div className="flex items-center gap-2"><div className="grid h-8 w-8 place-items-center rounded-lg bg-orange-400 text-sm font-black text-[#08101d]">S</div><div><div className="text-sm font-black tracking-wide">SHYENA</div><div className="text-[7px] uppercase tracking-[.16em] text-white/35">AI assurance</div></div></div>
         <div className="mt-8 space-y-1 text-[10px] font-semibold">
@@ -228,7 +186,7 @@ function SampleReport(){return <main className="bg-[#f5f7fa] text-[#17213f]">
 <div className="mt-9 font-mono text-[10px] font-bold uppercase tracking-[.2em] text-[#f18a32]">Interactive autonomous QA run · synthetic</div>
 <div className="mt-3 flex flex-col justify-between gap-7 lg:flex-row"><div className="max-w-4xl"><h1 className="font-[Sora] text-4xl font-extrabold tracking-[-.05em] sm:text-6xl">See an Autonomous QA Run</h1><p className="mt-5 max-w-3xl text-base leading-7 text-white/55 sm:text-lg">Watch one synthetic release move through change impact, autonomous execution, agent evaluation, security testing, diagnosis and release evidence. The report is the evidence record produced by the run.</p></div><div className="shrink-0"><div className="rounded-2xl border border-red-400/20 bg-red-500/10 p-5"><div className="text-[10px] font-bold uppercase tracking-[.16em] text-red-300">Release verdict</div><div className="mt-2 text-3xl font-black text-red-300">BLOCK</div><div className="mt-1 text-xs text-white/45">Synthetic demonstration</div></div></div></div>
 <div className="mt-8 flex flex-wrap gap-3"><a href="/api/sample-report-pdf" className="inline-flex h-11 items-center gap-2 rounded-lg bg-[#e87512] px-5 text-sm font-bold text-white"><Download className="h-4 w-4"/>Download evidence PDF</a><button type="button" onClick={()=>window.print()} className="inline-flex h-11 items-center gap-2 rounded-lg border border-white/15 px-5 text-sm font-bold text-white/75">Print / Save PDF</button></div>
-</div></div></section>
+</div></section>
 
 <section className="mx-auto max-w-[1180px] px-5 py-10 sm:px-8">
 <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-6">{[
