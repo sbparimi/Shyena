@@ -327,7 +327,7 @@ function HomePage() {
           <div>
             <div className="font-mono text-xs font-bold uppercase tracking-[.18em] text-[#e87512]">The Assurance Cloud</div>
             <h2 className="mt-4 font-[Sora] text-4xl font-extrabold tracking-[-.045em] sm:text-5xl">Software creates the assurance work. Shyena orchestrates it.</h2>
-            <p className="mt-5 max-w-xl text-base leading-7 text-[#69707d]">Shyena is not a marketplace of generic QA contractors. The platform first understands the AI system, identifies assurance gaps and creates executable work packages. Automation closes what it can; certified specialists close the remaining high-value gaps.</p>
+            <p className="mt-5 max-w-xl text-base leading-7 text-[#69707d]">Shyena is not a marketplace of generic QA contractors. The platform first understands the AI system, identifies assurance gaps and creates executable work packages. Automation closes what it can; specialists close the remaining high-value gaps.</p>
             <div className="mt-7 flex flex-wrap gap-3">
               <Link to="/experts" className="inline-flex h-11 items-center gap-2 rounded-lg bg-[#17213f] px-5 text-sm font-bold text-white">Hire assurance expertise <ArrowRight className="h-4 w-4"/></Link>
               <Link to="/pricing" className="inline-flex h-11 items-center gap-2 rounded-lg border border-[#17213f] px-5 text-sm font-bold">See commercial model <ArrowRight className="h-4 w-4"/></Link>
