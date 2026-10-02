@@ -122,6 +122,8 @@ function ExpertsPage(){
       </div>
     </section>
 
+    <Marketplace />
+
     <section className="border-y border-[#e6e8ed] bg-[#07101f] text-white">
       <div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
         <div className="grid gap-10 lg:grid-cols-[.78fr_1.22fr]">
