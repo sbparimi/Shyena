@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, Bug, CheckCircle2, ChevronRight, CircleAlert, FileCheck2, GitBranch, Play, RotateCcw, ShieldAlert, Terminal, XCircle, Zap } from "lucide-react";
+import { ArrowRight, Bug, CheckCircle2, ChevronRight, CircleAlert, FileCheck2, GitBranch, Play, RotateCcw, ShieldAlert, Terminal, Volume2, VolumeX, XCircle, Zap } from "lucide-react";
 
 type Node = { id:string; label:string; sub:string; x:string; y:string; tone?:string };
 const nodes:Node[]=[
@@ -106,14 +106,19 @@ export function AutonomousQACinematicDemo(){
  const [selected,setSelected]=React.useState(0);
  const [pulse,setPulse]=React.useState(0);
  const [replay,setReplay]=React.useState(0);
- React.useEffect(()=>{if(!running)return; const t=window.setInterval(()=>{setPulse(v=>v+1);setPhase(v=>v>=9?0:v+1);},2600);return()=>window.clearInterval(t)},[running]);
+ const [cinematic,setCinematic]=React.useState(true);
+ const [sound,setSound]=React.useState(false);
+ const audioRef=React.useRef<HTMLAudioElement|null>(null);
+ React.useEffect(()=>{if(!running)return; const t=window.setInterval(()=>{setPulse(v=>v+1);setPhase(v=>v>=9?0:v+1);},2600);return()=>window.clearInterval(t)},[running]); React.useEffect(()=>{const audio=audioRef.current;if(!audio)return;audio.volume=.22;if(sound){void audio.play().catch(()=>setSound(false));}else{audio.pause();}},[sound]);
+ React.useEffect(()=>{const onKey=(e:KeyboardEvent)=>{if(e.key.toLowerCase()==="c")setCinematic(v=>!v);if(e.code==="Space"){e.preventDefault();setRunning(v=>!v);}if(e.key.toLowerCase()==="r"){setPhase(0);setSelected(0);}};window.addEventListener("keydown",onKey);return()=>window.removeEventListener("keydown",onKey);},[]);
  const current=phases[phase];
  return <main className="min-h-screen bg-[#05080d] text-white">
+  <audio ref={audioRef} src="/audio/shyena-demo-music.mp3" loop preload="none" />
   <section className="relative overflow-hidden border-b border-white/10 bg-[#060b12]"><div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_15%,rgba(241,138,50,.14),transparent_30%),radial-gradient(circle_at_20%_80%,rgba(52,211,153,.06),transparent_26%)]"/>
-   <div className="relative mx-auto max-w-[1380px] px-5 pb-10 pt-16 sm:px-8 lg:px-10 lg:pb-14 lg:pt-20">
+   <div className={`relative mx-auto max-w-[1380px] ${cinematic?"":""}` px-5 pb-10 pt-16 sm:px-8 lg:px-10 lg:pb-14 lg:pt-20">
     <div className="flex flex-wrap items-center gap-3 font-mono text-[8px] font-bold uppercase tracking-[.22em] text-[#f18a32]"><span>SHYENA</span><span className="text-white/15">/</span><span>ASSURANCE CONTROL ROOM</span><span className="rounded border border-white/10 px-2 py-1 text-white/35">SYNTHETIC RUN</span></div>
     <div className="mt-6 grid gap-8 lg:grid-cols-[1.25fr_.75fr] lg:items-end"><div><h1 className="font-[Sora] text-[clamp(2.8rem,6vw,6.2rem)] font-extrabold leading-[.9] tracking-[-.065em]">Watch an AI transaction<br/><span className="text-[#f18a32]">become evidence.</span></h1><p className="mt-6 max-w-3xl text-lg leading-8 text-white/50">A living assurance run around a synthetic RFQ: change enters, the transaction executes, a control failure is reproduced, an adversarial path is tested and the release decision is produced.</p></div>
-     <div className="rounded-2xl border border-white/10 bg-black/20 p-4"><div className="flex items-center justify-between font-mono text-[7px] uppercase tracking-[.16em] text-white/30"><span>RUN STATUS</span><span className="text-emerald-300/80">{running?"LIVE":"PAUSED"}</span></div><div className="mt-4 grid grid-cols-3 gap-2"><div><div className="font-mono text-[7px] text-white/25">PHASE</div><div className="mt-1 text-lg font-extrabold">{String(phase+1).padStart(2,"0")}/06</div></div><div><div className="font-mono text-[7px] text-white/25">TRACE</div><div className="mt-1 text-lg font-extrabold">18</div></div><div><div className="font-mono text-[7px] text-white/25">EVIDENCE</div><div className="mt-1 text-lg font-extrabold">31</div></div></div><button onClick={()=>setRunning(v=>!v)} className="mt-4 flex h-9 w-full items-center justify-center gap-2 rounded-lg bg-[#f18a32] text-xs font-bold text-black">{running?<><Zap className="h-3.5 w-3.5"/> Pause run</>:<><Play className="h-3.5 w-3.5"/> Resume run</>}</button></div>
+     <div className="rounded-2xl border border-white/10 bg-black/20 p-4"><div className="flex items-center justify-between font-mono text-[7px] uppercase tracking-[.16em] text-white/30"><span>RUN STATUS</span><span className="text-emerald-300/80">{running?"LIVE":"PAUSED"}</span></div><div className="mt-4 grid grid-cols-3 gap-2"><div><div className="font-mono text-[7px] text-white/25">PHASE</div><div className="mt-1 text-lg font-extrabold">{String(phase+1).padStart(2,"0")}/06</div></div><div><div className="font-mono text-[7px] text-white/25">TRACE</div><div className="mt-1 text-lg font-extrabold">18</div></div><div><div className="font-mono text-[7px] text-white/25">EVIDENCE</div><div className="mt-1 text-lg font-extrabold">31</div></div></div><div className="mt-4 grid grid-cols-3 gap-2"><button onClick={()=>setRunning(v=>!v)} className="flex h-9 items-center justify-center gap-2 rounded-lg bg-[#f18a32] text-[10px] font-bold text-black">{running?<><Zap className="h-3.5 w-3.5"/> Pause</>:<><Play className="h-3.5 w-3.5"/> Resume</>}</button><button onClick={()=>setCinematic(v=>!v)} className="rounded-lg border border-white/10 bg-white/[.04] text-[10px] font-bold text-white/70">{cinematic?"Cinematic ON":"Cinematic OFF"}</button><button onClick={()=>setSound(v=>!v)} className="flex h-9 items-center justify-center gap-1 rounded-lg border border-white/10 bg-white/[.04] text-white/60">{sound?<Volume2 className="h-3.5 w-3.5"/>:<VolumeX className="h-3.5 w-3.5"/>}<span className="hidden sm:inline">Sound</span></button></div></div>
     </div>
    </div>
   </section>
