@@ -91,30 +91,36 @@ function NodeCloud({count,mode}:{count:number;mode:"ring"|"matrix"|"orbit"|"evid
 }
 
 function TransactionGraph({scene}:{scene:Scene}){
-  const active = scene==="change" ? 0 : scene==="impact" ? 1 : scene==="playbook" ? 2 : scene==="execution" ? 3 : scene==="agent" ? 4 : scene==="attack" ? 5 : scene==="diagnose" ? 6 : scene==="evidence" ? 7 : scene==="regression" ? 8 : 9;
-  const labels=["CHANGE","IMPACT","PLAYBOOK","EXECUTE","AGENT","ATTACK","RCA","EVIDENCE","REGRESS","GATE"];
+  const stageIndex=SCENES.indexOf(scene);
+  const nodes=[
+    [8,52,"#8b5cf6"],[18,32,"#22d3ee"],[28,66,"#22d3ee"],[39,34,"#22d3ee"],
+    [50,60,"#22d3ee"],[61,32,"#fb923c"],[72,62,"#fb923c"],[83,34,"#ef4444"],[93,52,"#ef4444"]
+  ] as const;
+  const mainPath="M8 52 C14 52 14 32 18 32 C22 32 23 66 28 66 C33 66 34 34 39 34 C44 34 45 60 50 60 C55 60 56 32 61 32 C66 32 67 62 72 62 C77 62 78 34 83 34 C88 34 89 52 93 52";
+  const returnPath="M93 52 C84 52 84 72 72 62 C64 54 63 22 50 60 C44 72 43 48 39 34 C34 22 33 72 28 66 C23 60 22 42 18 32 C14 24 13 52 8 52";
+  const stageGlow=stageIndex>=8?"#ef4444":stageIndex>=5?"#fb923c":"#22d3ee";
   return <div className="absolute inset-0 flex items-center justify-center">
-    <div className="relative h-[72vh] w-[94vw] max-w-[1500px]">
-      <div className="absolute left-[5%] top-[48%] h-px w-[90%] bg-gradient-to-r from-violet-500/10 via-cyan-300/45 to-red-400/20"/>
-      <div className="absolute left-[8%] top-[30%] h-[38%] w-[84%] rounded-[50%] border border-cyan-300/10"/>
-      <div className="absolute left-[15%] top-[19%] h-[62%] w-[70%] rounded-[50%] border border-violet-400/10"/>
-      {labels.map((label,i)=>{
-        const left=5+i*10;
-        const activeNode=i===active;
-        return <div key={label} className="absolute -translate-x-1/2 -translate-y-1/2" style={{left:`${left}%`,top:i%2===0?"48%":"31%"}}>
-          <div className={`relative flex items-center justify-center rounded-full border ${activeNode?"h-14 w-14 border-orange-200 bg-orange-400/90 shadow-[0_0_45px_12px_rgba(249,115,22,.22)]":"h-7 w-7 border-cyan-300/30 bg-[#07101c]"}`}>
-            <span className={activeNode?"h-2 w-2 rounded-full bg-white shadow-[0_0_12px_4px_rgba(255,255,255,.7)]":"h-1.5 w-1.5 rounded-full bg-cyan-300/60"}/>
-            {activeNode&&<span className="absolute -inset-4 animate-ping rounded-full border border-orange-300/15"/>}
-          </div>
-          <span className={`absolute left-1/2 top-full mt-3 -translate-x-1/2 whitespace-nowrap font-mono text-[8px] tracking-[.25em] ${activeNode?"text-orange-200":"text-white/20"}`}>{label}</span>
-        </div>
-      })}
-      <Packet delay={0} tone="orange"/>
-      <Packet delay={-1.8} tone="cyan" reverse/>
-      <Packet delay={-3.4} tone="orange"/>
-      {scene==="diagnose"&&<div className="absolute left-[54%] top-[31%] h-28 w-28 -translate-x-1/2 -translate-y-1/2 animate-ping rounded-full border border-red-400/30"/>}
-      {scene==="gate"&&<div className="absolute left-[95%] top-[48%] h-44 w-44 -translate-x-1/2 -translate-y-1/2 animate-pulse rounded-full border border-red-400/20 shadow-[0_0_90px_20px_rgba(239,68,68,.08)]"/>}
-    </div>
+    <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="absolute inset-0 h-full w-full">
+      <defs>
+        <filter id="qaGlow"><feGaussianBlur stdDeviation="1.3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <linearGradient id="qaFlow" x1="0" x2="1"><stop offset="0" stopColor="#8b5cf6" stopOpacity=".15"/><stop offset=".45" stopColor="#22d3ee" stopOpacity=".8"/><stop offset="1" stopColor={stageGlow} stopOpacity=".65"/></linearGradient>
+      </defs>
+      <path d={mainPath} fill="none" stroke="url(#qaFlow)" strokeWidth=".24" vectorEffect="non-scaling-stroke" opacity=".8"/>
+      <path d={returnPath} fill="none" stroke="#22d3ee" strokeOpacity=".14" strokeWidth=".16" vectorEffect="non-scaling-stroke"/>
+      <path d={mainPath} fill="none" stroke="#fff" strokeOpacity=".08" strokeWidth=".7" strokeDasharray=".5 3" vectorEffect="non-scaling-stroke"/>
+      {Array.from({length:4},(_,i)=><circle key={`f${i}`} r={i===0?".95":".55"} fill={i===0?"#fb923c":"#67e8f9"} filter="url(#qaGlow)">
+        <animateMotion dur={`${4.8+i*.7}s`} begin={`${-i*1.15}s`} repeatCount="indefinite" path={mainPath}/>
+      </circle>)}
+      {Array.from({length:2},(_,i)=><circle key={`r${i}`} r=".45" fill="#67e8f9" opacity=".7">
+        <animateMotion dur={`${5.4+i*.8}s`} begin={`${-i*1.7}s`} repeatCount="indefinite" path={returnPath}/>
+      </circle>)}
+      {nodes.map(([x,y,color],i)=><g key={i}>
+        <circle cx={x} cy={y} r={i===stageIndex?3.2:1.8} fill={i===stageIndex?stageGlow:"#07101c"} stroke={i===stageIndex?"#fff":color} strokeWidth={i===stageIndex?".45":".2"} vectorEffect="non-scaling-stroke" filter={i===stageIndex?"url(#qaGlow)":undefined}/>
+        {i===stageIndex&&<circle cx={x} cy={y} r="6" fill="none" stroke={stageGlow} strokeOpacity=".3" strokeWidth=".2" vectorEffect="non-scaling-stroke"><animate attributeName="r" values="3.5;8;3.5" dur="2.2s" repeatCount="indefinite"/></circle>}
+      </g>)}
+      <circle cx="8" cy="52" r="3.8" fill="none" stroke="#8b5cf6" strokeOpacity=".18" strokeWidth=".2"/>
+      <circle cx="93" cy="52" r="4.5" fill="none" stroke="#ef4444" strokeOpacity={stageIndex===9?".55":".12"} strokeWidth=".25"/>
+    </svg>
   </div>
 }
 
