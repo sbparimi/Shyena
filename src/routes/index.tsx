@@ -197,14 +197,14 @@ export const Route = createFileRoute("/")({
   head: () => ({
     links: [{ rel:"canonical", href:SITE+"/" }],
     meta: [
-      { title:"Shyena Autonomous QA | Agentic AI Testing & Evaluation" },
-      { name:"description", content:"Put every AI release through real-world testing with autonomous QA that discovers journeys, evaluates agent behaviour, diagnoses failures and preserves release evidence." },
+      { title:"Shyena Assurance Cloud | AI Quality, Evaluation & Assurance" },
+      { name:"description", content:"Shyena Assurance Cloud combines autonomous AI assurance with capability-driven specialist expertise to evaluate, secure and prove AI systems with evidence." },
       { property:"og:title", content:"Shyena Autonomous QA | Agentic AI Testing & Evaluation" },
-      { property:"og:description", content:"Autonomous QA for AI systems: understand change, prove behaviour, attack critical paths and decide with evidence." },
+      { property:"og:description", content:"AI assurance software, evidence and specialist capability for systems that reason, act and change." },
       { property:"og:type", content:"website" }, { property:"og:url", content:SITE+"/" }, { property:"og:site_name", content:"Shyena" },
       { property:"og:image", content:SITE+"/shyena-logo-exact.webp" }, { name:"twitter:card", content:"summary_large_image" },
       { name:"twitter:title", content:"Shyena Autonomous QA | Agentic AI Testing & Evaluation" },
-      { name:"twitter:description", content:"Autonomous QA, agentic evaluation, security testing and continuous regression for production AI systems." },
+      { name:"twitter:description", content:"AI evaluation, security testing, release assurance and specialist capability in one assurance control plane." },
       { name:"twitter:image", content:SITE+"/shyena-logo-exact.webp" }
     ],
     scripts:[
