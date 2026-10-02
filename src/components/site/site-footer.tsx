@@ -4,7 +4,7 @@ import { Logo } from "./logo";
 
 const COLUMNS = [
   { title: "Platform", links: [{ label: "Nexus", to: "/nexus" }, { label: "Vera", to: "/vera" }, { label: "Chakra", to: "/chakra" }, { label: "Govern", to: "/govern" }, { label: "Platform overview", to: "/platform" }] },
-  { title: "Resources", links: [{ label: "Interactive demo", to: "/demo" }, { label: "Blog", to: "/blog" }, { label: "Documentation", to: "/docs" }, { label: "Pricing", to: "/pricing" }] },
+  { title: "Resources", links: [{ label: "Sample report", to: "/sample-report" }, { label: "Blog", to: "/blog" }, { label: "Documentation", to: "/docs" }, { label: "Pricing", to: "/pricing" }] },
   { title: "Company", links: [{ label: "About", to: "/about" }, { label: "Design partners", to: "/design-partners" }, { label: "Security & trust", to: "/security" }, { label: "Contact", to: "/contact" }] },
 ] as const;
 
