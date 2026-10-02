@@ -142,8 +142,8 @@ const ReportVisuals=()=> {
     :focus==="security"?[48,62,74,58,81,67,89,72,94,83,91,76,88,96]
     :[42,66,51,72,58,88,73,92,79,61,83,96,67,78,54,70,86,62,75,91];
 
-  return <><DemoSound/><div className="mt-8 overflow-hidden rounded-[24px] border border-[#16243b] bg-[#060c18] text-white shadow-2xl">
-    <div className="relative flex min-h-[760px] overflow-hidden"><CinematicRunLayer active={active} replaying={replaying}/><div className="relative z-10 flex min-w-0 flex-1">
+  return <div className="mt-8 overflow-hidden rounded-[24px] border border-[#16243b] bg-[#060c18] text-white shadow-2xl">
+    <DemoSound/><div className="relative flex min-h-[760px] overflow-hidden"><CinematicRunLayer active={active} replaying={replaying}/><div className="relative z-10 flex min-w-0 flex-1">
       <aside className="hidden w-[176px] shrink-0 border-r border-white/10 bg-[#08101d] p-4 sm:block">
         <div className="flex items-center gap-2"><div className="grid h-8 w-8 place-items-center rounded-lg bg-orange-400 text-sm font-black text-[#08101d]">S</div><div><div className="text-sm font-black tracking-wide">SHYENA</div><div className="text-[7px] uppercase tracking-[.16em] text-white/35">AI assurance</div></div></div>
         <div className="mt-8 space-y-1 text-[10px] font-semibold">
@@ -381,4 +381,4 @@ function SampleReport(){return <main className="bg-[#f5f7fa] text-[#17213f]">
 <div className="mt-10 rounded-2xl bg-[#17213f] p-6 text-white sm:p-8"><div className="font-mono text-[10px] font-bold uppercase tracking-[.18em] text-[#f18a32]">Evidence chain</div><div className="mt-3 text-lg font-bold">Change → impact → playbook → execution → trajectory → evaluation → finding → remediation → regression → release verdict</div><p className="mt-3 max-w-3xl text-sm leading-6 text-white/55">Every material verdict in the report is intended to be traceable to executable evidence rather than a single LLM score.</p></div>
 
 <div className="mt-8 flex flex-wrap items-center justify-between gap-4"><p className="max-w-2xl text-xs leading-5 text-[#7a8390]">Synthetic demonstration only. Vanilla Steel is a fictional scenario. The run, repository changes, identifiers, results, traces, findings and metrics are illustrative and do not represent a real customer, production environment or executed run.</p><Link to="/contact" className="inline-flex h-11 items-center gap-2 rounded-lg bg-[#e87512] px-5 text-sm font-bold text-white">Apply this assurance model <ArrowRight className="h-4 w-4"/></Link></div>
-</div></section></main></>}
+</div></section></main>}
