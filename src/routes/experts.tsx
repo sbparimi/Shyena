@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
-import { ArrowRight, CheckCircle2, Search, SlidersHorizontal, ShieldCheck, Users, X } from "lucide-react";
+import { ArrowRight, CheckCircle2, Search, SlidersHorizontal, ShieldCheck, Users, Workflow, X } from "lucide-react";
 import { searchCandidates, submitHireRequest, type Candidate } from "@/lib/supabase";
 
 const capabilities = [
