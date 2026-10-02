@@ -4,9 +4,9 @@ const SITE="https://www.shyena.eu";
 
 const services=[
  {title:"Assurance Capacity",price:"Custom",cadence:"recurring",body:"A recurring pool of specialist assurance capability activated by Shyena-generated work packages. Scope follows the AI systems, risk domains and assurance volume you operate."},
- {title:"AI Act Transparency & Risk Scan",price:"[PARIMI TO CONFIRM: fixed price]",cadence:"1–2 weeks",body:"A focused assessment of one AI system: identify relevant transparency and risk considerations, technical evidence gaps and the assurance work needed next."},
+ {title:"AI Act Transparency & Risk Scan",price:"Custom pricing",cadence:"1–2 weeks",body:"A focused assessment of one AI system: identify relevant transparency and risk considerations, technical evidence gaps and the assurance work needed next."},
  {title:"AI Assurance Pilot",price:"€7,500",cadence:"30–60 days",body:"Assure one real AI system across representative journeys, deterministic controls, semantic evaluation, orchestration behaviour and security testing."},
- {title:"Governance Evidence Retainer",price:"[PARIMI TO CONFIRM: pricing]",cadence:"ongoing",body:"Maintain requirement-to-evidence mapping, re-run assurance across releases and preserve an auditable history of findings and evidence."}
+ {title:"Governance Evidence Retainer",price:"Custom pricing",cadence:"ongoing",body:"Maintain requirement-to-evidence mapping, re-run assurance across releases and preserve an auditable history of findings and evidence."}
 ];
 const platform=[
  {name:"Professional",body:"For a focused production AI assurance programme.",items:["Core platform capabilities","AI system and journey evaluation","Release evidence","CI/CD integration","Standard support"]},
