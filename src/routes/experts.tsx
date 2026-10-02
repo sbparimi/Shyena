@@ -107,7 +107,7 @@ function ExpertsPage(){
         <Workflow className="mx-auto h-8 w-8 text-[#e87512]"/>
         <h2 className="mt-4 font-[Sora] text-3xl font-extrabold tracking-[-.04em]">A network that gets smarter as assurance work compounds.</h2>
         <p className="mx-auto mt-4 max-w-2xl text-sm leading-6 text-[#69707d]">Validated specialist work can feed new evaluators, attack patterns, regression tests and domain knowledge back into the platform. This is the intended flywheel; production metrics will only be published when measured.</p>
-        <Link to="/contact" className="mt-7 inline-flex h-11 items-center gap-2 rounded-lg bg-[#e87512] px-5 text-sm font-bold text-white">Start an assurance requirement <ArrowRight className="h-4 w-4"/></Link>
+        <Link to="/contact" className="mt-7 inline-flex h-11 items-center gap-2 rounded-lg bg-[#e87512] px-5 text-sm font-bold text-white">Hire assurance expertise <ArrowRight className="h-4 w-4"/></Link>
       </div>
     </section>
   </main>;
