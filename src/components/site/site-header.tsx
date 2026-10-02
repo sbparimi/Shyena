@@ -4,7 +4,7 @@ import { ArrowRight, Menu, Search, X } from "lucide-react";
 import { Logo } from "./logo";
 
 const NAV = [
-  ["Autonomous QA", "/platform"],
+  ["Platform", "/platform"],
   ["Govern", "/govern"],
   ["Pricing", "/pricing"],
   ["Docs", "/docs"],
