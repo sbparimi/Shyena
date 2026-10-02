@@ -25,21 +25,23 @@ const CinematicRunLayer=({active,replaying}:{active:string;replaying:boolean})=>
   const nodes=[["PR #284","31 FILES",10,50],["IMPACT","14 JOURNEYS",24,30],["PLAYBOOK","46 CASES",39,62],["RFQ","240 MT S355",54,32],["AGENT","TC-RFQ-021",68,60],["POLICY","APPROVAL",82,32],["GATE","BLOCKED",90,68]] as const;
   const edges=[["10%","50%","18%","-28deg"],["24%","30%","22%","25deg"],["39%","62%","19%","-28deg"],["54%","32%","18%","28deg"],["68%","60%","18%","-28deg"],["82%","32%","12%","62deg"]] as const;
   return <div className="pointer-events-none absolute inset-0 overflow-hidden">
-    <style>{`@keyframes shyena-drift{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}@keyframes shyena-scan{0%{transform:translateX(-120%);opacity:0}15%,80%{opacity:.45}100%{transform:translateX(120%);opacity:0}}@keyframes shyena-pulse{0%,100%{opacity:.18;transform:scale(.86)}50%{opacity:.9;transform:scale(1.2)}}@keyframes shyena-packet-a{0%{left:10%;top:50%}16%{left:24%;top:30%}32%{left:39%;top:62%}48%{left:54%;top:32%}64%{left:68%;top:60%}80%{left:82%;top:32%}100%{left:90%;top:68%}}@keyframes shyena-packet-b{0%{left:90%;top:68%}16%{left:82%;top:32%}32%{left:68%;top:60%}48%{left:54%;top:32%}64%{left:39%;top:62%}80%{left:24%;top:30%}100%{left:10%;top:50%}}.shyena-drift{animation:shyena-drift 7s ease-in-out infinite}.shyena-scan{animation:shyena-scan 5s linear infinite}.shyena-glow{animation:shyena-pulse 2.4s ease-in-out infinite}.shyena-packet-a{animation:shyena-packet-a 5.2s linear infinite}.shyena-packet-b{animation:shyena-packet-b 3.7s linear infinite}`}</style>
     <div className="absolute inset-0 bg-[#030711]"/>
     <div className="absolute inset-0 opacity-[.18]" style={{backgroundImage:"linear-gradient(rgba(80,120,180,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(80,120,180,.12) 1px,transparent 1px)",backgroundSize:"48px 48px"}}/>
-    <div className="shyena-drift absolute -left-20 top-1/3 h-72 w-72 rounded-full bg-violet-600/10 blur-[90px]"/>
-    <div className="shyena-drift absolute right-0 top-1/4 h-80 w-80 rounded-full bg-cyan-500/10 blur-[100px]" style={{animationDelay:"-2s"}}/>
-    <div className="shyena-scan absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-cyan-300/10 to-transparent blur-xl"/>
+    <div className="absolute -left-20 top-1/3 h-72 w-72 animate-pulse rounded-full bg-violet-600/10 blur-[90px]"/>
+    <div className="absolute right-0 top-1/4 h-80 w-80 animate-pulse rounded-full bg-cyan-500/10 blur-[100px]"/>
+    <div className="absolute left-0 top-0 h-full w-1/3 -translate-x-full animate-[pulse_5s_linear_infinite] bg-gradient-to-r from-transparent via-cyan-300/10 to-transparent blur-xl"/>
     <div className="absolute inset-0">
-      {edges.map(([left,top,width,rotate],i)=><div key={i} className={`absolute h-px origin-left bg-gradient-to-r from-violet-500/10 via-cyan-300/60 to-orange-400/20 ${i===stageIndex||i===stageIndex-1?"shyena-glow":""}`} style={{left,top,width,transform:`rotate(${rotate})`}}/>)}
-      <div className="shyena-packet-a absolute z-20 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-orange-300 shadow-[0_0_14px_4px_rgba(249,115,22,.65)]"/>
-      <div className="shyena-packet-b absolute z-20 h-1 w-1 -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-300 shadow-[0_0_12px_3px_rgba(34,211,238,.6)]"/>
+      {edges.map(([left,top,width,rotate],i)=><div key={i} className={`absolute h-px origin-left bg-gradient-to-r from-violet-500/10 via-cyan-300/60 to-orange-400/20 ${i===stageIndex||i===stageIndex-1?"opacity-100":"opacity-40"}`} style={{left,top,width,transform:`rotate(${rotate})`}}/>)}
       {nodes.map(([label,sub,x,y],i)=><div key={label} className="absolute -translate-x-1/2 -translate-y-1/2" style={{left:`${x}%`,top:`${y}%`}}>
-        <div className={`shyena-glow rounded-full border ${i===stageIndex?"h-5 w-5 border-orange-200 bg-orange-400/90 shadow-[0_0_28px_8px_rgba(249,115,22,.25)]":"h-3 w-3 border-cyan-300/40 bg-[#0b1322]"}`}/>
+        <div className={`relative rounded-full border ${i===stageIndex?"h-5 w-5 border-orange-200 bg-orange-400 shadow-[0_0_28px_8px_rgba(249,115,22,.25)]":"h-3 w-3 border-cyan-300/40 bg-[#0b1322]"}`}>
+          <span className={`absolute -inset-2 rounded-full border ${i===stageIndex?"animate-ping border-orange-300/20":"border-cyan-300/5"}`}/>
+        </div>
         <div className={`absolute left-1/2 top-5 -translate-x-1/2 whitespace-nowrap font-mono text-[6px] uppercase tracking-[.14em] ${i===stageIndex?"text-orange-200":"text-white/20"}`}>{label}</div>
         <div className="absolute left-1/2 top-8 -translate-x-1/2 whitespace-nowrap font-mono text-[5px] text-white/15">{sub}</div>
       </div>)}
+      <div className="absolute left-[10%] top-[50%] h-1.5 w-1.5 animate-pulse rounded-full bg-orange-300 shadow-[0_0_14px_4px_rgba(249,115,22,.65)]"/>
+      <div className="absolute left-[54%] top-[32%] h-1 w-1 animate-ping rounded-full bg-cyan-300 shadow-[0_0_12px_3px_rgba(34,211,238,.6)]"/>
+      <div className="absolute right-[8%] top-[8%] h-24 w-24 animate-spin rounded-full border border-cyan-300/10 border-t-orange-300/30"/>
     </div>
     <div className="absolute left-4 top-4 rounded-lg border border-cyan-300/10 bg-black/25 px-3 py-2 font-mono text-[7px] uppercase tracking-[.2em] text-cyan-200/45 backdrop-blur-sm">SHYENA · AUTONOMOUS QA NEURAL RUN · {stages[stageIndex][0]}</div>
     <div className="absolute right-4 top-4 text-right font-mono text-[7px] uppercase tracking-[.16em] text-white/25"><div>TRANSACTION RFQ-2026-184</div><div className="mt-1 text-orange-300/45">TRACE trc_8f21 · 14.8s</div></div>
