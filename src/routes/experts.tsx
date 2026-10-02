@@ -38,7 +38,7 @@ function ExpertsPage(){
           <h1 className="mt-5 font-[Sora] text-[clamp(3rem,6vw,6rem)] font-extrabold leading-[.9] tracking-[-.065em]">Human expertise, activated by the assurance platform.</h1>
           <p className="mt-7 max-w-3xl text-lg leading-8 text-white/60">Shyena does not start with a generic CV database. It starts with the AI system, identifies the assurance work that remains and maps that work to the capabilities required to complete it.</p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link to="/contact" className="inline-flex h-11 items-center gap-2 rounded-lg bg-[#e87512] px-5 text-sm font-bold text-white">Define an assurance requirement <ArrowRight className="h-4 w-4"/></Link>
+            <Link to="/contact" className="inline-flex h-11 items-center gap-2 rounded-lg bg-[#e87512] px-5 text-sm font-bold text-white">Hire assurance expertise <ArrowRight className="h-4 w-4"/></Link>
             <Link to="/demo" className="inline-flex h-11 items-center gap-2 rounded-lg border border-white/15 px-5 text-sm font-bold text-white">See the assurance flow <ArrowRight className="h-4 w-4"/></Link>
           </div>
         </div>
