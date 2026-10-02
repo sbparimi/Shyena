@@ -35,13 +35,17 @@ const phases=[
   {id:"arrive",label:"ARRIVAL",title:"Change enters the system",detail:"PR #284 changes pricing + quotation workflow.",color:"neutral"},
   {id:"map",label:"UNDERSTAND",title:"Nexus maps the blast radius",detail:"31 files → 12 nodes → 14 journeys.",color:"orange"},
   {id:"execute",label:"EXECUTE",title:"Vera runs the RFQ journey",detail:"Browser + API + agent trajectory captured.",color:"orange"},
-  {id:"block",label:"CONTROL",title:"A business invariant stops the quote",detail:"approval_state=PENDING cannot cross the tool boundary.",color:"red"},
-  {id:"diagnose",label:"DIAGNOSE",title:"Chakra attacks and reproduces",detail:"3/3 replay · RCA linked to pricing/margin-policy.ts.",color:"red"},
-  {id:"prove",label:"PROVE",title:"Govern packages the decision",detail:"Evidence chain complete · RELEASE BLOCKED.",color:"red"},
+  {id:"control",label:"CONTROL",title:"A business invariant stops the quote",detail:"approval_state=PENDING cannot cross the tool boundary.",color:"red"},
+  {id:"blocked",label:"BLOCKED",title:"Release risk becomes visible",detail:"P1 control violation freezes the commercial path.",color:"red"},
+  {id:"diagnose",label:"DIAGNOSE",title:"Reverse-trace the failure",detail:"Supplier price → approval cache → quotation orchestrator.",color:"red"},
+  {id:"replay",label:"REPLAY",title:"Reproduce the exact path",detail:"Original trajectory reproduced 3/3.",color:"orange"},
+  {id:"attack",label:"ATTACK",title:"Probe the control boundary",detail:"Tool escalation fails; result joins release evidence.",color:"red"},
+  {id:"regression",label:"REGRESSION",title:"Make the failure permanent",detail:"46 → 61 cases; negative-path coverage added.",color:"orange"},
+  {id:"gate",label:"RELEASE GATE",title:"Evidence becomes a decision",detail:"Critical controls fail → RELEASE BLOCKED.",color:"red"},
 ];
 
 function Graph({phase, pulse}:{phase:number;pulse:number}){
-  const active = phase<2 ? ["rfq","agent","inventory","pricing"] : phase===2 ? ["rfq","agent","inventory","pricing","margin"] : phase>=3 ? ["agent","pricing","margin","quote"] : [];
+  const active = phase<2 ? ["rfq","agent","inventory","pricing"] : phase===2 ? ["rfq","agent","inventory","pricing","margin"] : phase<=4 ? ["agent","pricing","margin","quote"] : phase<=7 ? ["agent","pricing","margin","quote"] : ["agent","pricing","margin","quote","customer"];
   return <div className="relative h-[520px] overflow-hidden rounded-2xl border border-white/10 bg-[#060a10] shadow-[0_30px_100px_-50px_rgba(0,0,0,.95)] sm:h-[560px]">
     <div className="absolute inset-0 opacity-50" style={{backgroundImage:"linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px)",backgroundSize:"36px 36px"}}/>
     <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,rgba(241,138,50,.07),transparent_42%)]"/>
@@ -65,7 +69,7 @@ function Graph({phase, pulse}:{phase:number;pulse:number}){
     </div>})}
     <div className="absolute bottom-4 left-4 right-4 z-10 flex flex-wrap gap-2 font-mono text-[7px] text-white/35">
       <span className="rounded border border-white/8 bg-black/25 px-2 py-1">CHANGE PR #284</span><span className="rounded border border-white/8 bg-black/25 px-2 py-1">JOURNEY RFQ-2026-184</span><span className="rounded border border-white/8 bg-black/25 px-2 py-1">TRACE trc_8f21</span>
-      {phase>=3&&<span className="rounded border border-red-400/20 bg-red-500/10 px-2 py-1 text-red-300">P1 CONTROL VIOLATION</span>}
+      {phase>=3&&<span className="rounded border border-red-400/20 bg-red-500/10 px-2 py-1 text-red-300">P1 CONTROL VIOLATION</span>}{phase===8&&<span className="rounded border border-emerald-400/20 bg-emerald-500/10 px-2 py-1 text-emerald-300">46 → 61 REGRESSION CASES</span>}
     </div>
   </div>;
 }
@@ -82,7 +86,7 @@ function Inspector({selected,phase}:{selected:number;phase:number}){
  return <div className="rounded-2xl border border-white/10 bg-[#0b1119] p-5">
    <div className="flex items-center justify-between"><div className="font-mono text-[8px] font-bold uppercase tracking-[.18em] text-white/30">Live inspector</div><span className="font-mono text-[7px] text-white/25">EVENT {String(selected+1).padStart(2,"0")}</span></div>
    <div className="mt-5 rounded-xl border border-white/8 bg-black/20 p-4"><div className="font-mono text-[7px] uppercase tracking-[.12em] text-[#f18a32]">{item[0]}</div><pre className="mt-3 whitespace-pre-wrap font-mono text-[9px] leading-5 text-white/65">{item[1]}</pre></div>
-   <div className="mt-3 grid grid-cols-2 gap-2">{[["Latency",selected===5?"142ms":"38ms"],["Policy",phase>=3?"BLOCK":"PASS"],["Evidence",phase>=2?"LINKED":"CAPTURED"],["Replay",phase>=4?"3/3":"READY"]].map(([a,b])=><div key={a} className="rounded-lg border border-white/7 bg-white/[.015] p-3"><div className="font-mono text-[7px] text-white/25">{a}</div><div className={`mt-1 text-[10px] font-bold ${b==="BLOCK"?"text-red-300":"text-white/70"}`}>{b}</div></div>)}</div>
+   <div className="mt-3 grid grid-cols-2 gap-2">{[["Latency",selected===5?"142ms":"38ms"],["Policy",phase>=3?"BLOCK":"PASS"],["Evidence",phase>=2?"LINKED":"CAPTURED"],["Replay",phase>=6?"3/3":"READY"]].map(([a,b])=><div key={a} className="rounded-lg border border-white/7 bg-white/[.015] p-3"><div className="font-mono text-[7px] text-white/25">{a}</div><div className={`mt-1 text-[10px] font-bold ${b==="BLOCK"?"text-red-300":"text-white/70"}`}>{b}</div></div>)}</div>
  </div>;
 }
 
@@ -115,7 +119,7 @@ export function AutonomousQACinematicDemo(){
    <div className="mt-5"><Findings/></div>
    <div className="mt-5 grid gap-5 lg:grid-cols-[.9fr_1.1fr]">
     <div className="rounded-2xl border border-red-400/20 bg-red-500/[.045] p-5"><div className="flex items-center gap-2 font-mono text-[8px] font-bold uppercase tracking-[.18em] text-red-300"><ShieldAlert className="h-3.5 w-3.5"/> Adversarial control run</div><div className="mt-3 grid grid-cols-3 gap-2">{[["PROMPT INJECTION","PASS"],["TOOL ESCALATION","FAIL"],["DATA BOUNDARY","PASS"]].map(([a,b])=><div key={a} className="rounded-lg border border-white/7 bg-black/10 p-3"><div className="font-mono text-[6px] text-white/25">{a}</div><div className={`mt-2 text-xs font-extrabold ${b==="FAIL"?"text-red-300":"text-emerald-300"}`}>{b}</div></div>)}</div><p className="mt-4 text-[10px] leading-5 text-white/35">12 adversarial cases · 9 blocked · 2 review · 1 failed. The failed control is carried into the release evidence.</p></div>
-    <div className="rounded-2xl border border-white/10 bg-[#0b1119] p-5"><div className="flex items-center gap-2 font-mono text-[8px] font-bold uppercase tracking-[.18em] text-white/30"><FileCheck2 className="h-3.5 w-3.5"/> Evidence chain</div><div className="mt-4 flex flex-wrap items-center gap-1.5">{["CHANGE","IMPACT","PLAYBOOK","EXECUTION","TRAJECTORY","EVALUATION","FINDING","REPLAY","REMEDIATION","REGRESSION","VERDICT"].map((x,i)=><React.Fragment key={x}><span className={`rounded border px-2 py-1 font-mono text-[6px] ${i<=phase+4?"border-[#f18a32]/25 bg-[#f18a32]/[.06] text-[#f18a32]":"border-white/7 text-white/20"}`}>{x}</span>{i<10&&<ChevronRight className="h-3 w-3 text-white/10"/>}</React.Fragment>)}</div><div className="mt-5 rounded-lg border border-red-400/15 bg-red-500/[.06] p-3"><div className="font-mono text-[7px] text-red-300/70">RELEASE GATE</div><div className="mt-1 text-lg font-extrabold text-red-300">BLOCKED</div><div className="mt-1 text-[9px] text-white/35">F-001 + tool escalation failure require remediation and regression before release.</div></div></div>
+    <div className="rounded-2xl border border-white/10 bg-[#0b1119] p-5"><div className="flex items-center gap-2 font-mono text-[8px] font-bold uppercase tracking-[.18em] text-white/30"><FileCheck2 className="h-3.5 w-3.5"/> Evidence chain</div><div className="mt-4 flex flex-wrap items-center gap-1.5">{["CHANGE","IMPACT","PLAYBOOK","EXECUTION","TRAJECTORY","EVALUATION","FINDING","REPLAY","REMEDIATION","REGRESSION","VERDICT"].map((x,i)=><React.Fragment key={x}><span className={`rounded border px-2 py-1 font-mono text-[6px] ${i<=phase+1?"border-[#f18a32]/25 bg-[#f18a32]/[.06] text-[#f18a32]":"border-white/7 text-white/20"}`}>{x}</span>{i<10&&<ChevronRight className="h-3 w-3 text-white/10"/>}</React.Fragment>)}</div><div className="mt-5 rounded-lg border border-red-400/15 bg-red-500/[.06] p-3"><div className="font-mono text-[7px] text-red-300/70">RELEASE GATE</div><div className="mt-1 text-lg font-extrabold text-red-300">BLOCKED</div><div className="mt-1 text-[9px] text-white/35">F-001 + tool escalation failure require remediation and regression before release.</div></div></div>
    </div>
    <div className="mt-5 rounded-2xl border border-white/10 bg-[#0b1119] p-5"><div className="grid gap-5 lg:grid-cols-[1fr_auto] lg:items-center"><div><div className="font-mono text-[8px] font-bold uppercase tracking-[.18em] text-[#f18a32]">AUTOMATIC ACTION</div><h2 className="mt-2 font-[Sora] text-xl font-bold">The failure does not end at the red badge.</h2><p className="mt-2 max-w-3xl text-sm leading-6 text-white/40">Shyena links the failure to its root cause, reproduces it, creates permanent negative-path coverage and carries the evidence into the release gate.</p></div><div className="flex flex-wrap gap-2 font-mono text-[7px]"><span className="rounded border border-white/8 px-2 py-2">RCA LINKED</span><span className="rounded border border-white/8 px-2 py-2">REGRESSION ADDED</span><span className="rounded border border-red-400/20 bg-red-500/10 px-2 py-2 text-red-300">RELEASE BLOCKED</span></div></div></div>
   </section>
