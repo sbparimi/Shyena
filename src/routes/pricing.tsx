@@ -3,9 +3,9 @@ import { ArrowRight, Check } from "lucide-react";
 const SITE="https://www.shyena.eu";
 
 const services=[
- {title:"Autonomous QA Pilot",price:"Custom pricing",cadence:"2–4 weeks",body:"Connect one AI or application system, discover critical journeys, generate and execute an autonomous test suite, evaluate behaviour and deliver a release-quality findings report."},
- {title:"Agentic Evaluation Programme",price:"€7,500",cadence:"30–60 days · one AI system",body:"Continuous evaluation of multi-turn journeys, deterministic rules, semantic quality, orchestration, tool calls, model drift and adversarial behaviour."},
- {title:"Continuous Autonomous QA",price:"Custom pricing",cadence:"ongoing",body:"Always-on release testing, failure reproduction, regression expansion, production-to-test learning and evidence-backed release decisions."}
+ {title:"AI Act Transparency & Risk Scan",price:"[PARIMI TO CONFIRM: fixed price]",cadence:"1–2 weeks",body:"A focused assessment of one AI system: identify relevant transparency and risk considerations, technical evidence gaps and the assurance work needed next."},
+ {title:"AI Assurance Pilot",price:"€7,500",cadence:"30–60 days",body:"Assure one real AI system across representative journeys, deterministic controls, semantic evaluation, orchestration behaviour and security testing."},
+ {title:"Governance Evidence Retainer",price:"[PARIMI TO CONFIRM: pricing]",cadence:"ongoing",body:"Maintain requirement-to-evidence mapping, re-run assurance across releases and preserve an auditable history of findings and evidence."}
 ];
 const platform=[
  {name:"Professional",body:"For a focused production AI assurance programme.",items:["Core platform capabilities","AI system and journey evaluation","Release evidence","CI/CD integration","Standard support"]},
@@ -13,7 +13,7 @@ const platform=[
  {name:"Strategic",body:"For broader AI estates and tailored assurance operations.",items:["Enterprise assurance scope","Custom evaluators and policies","Private deployment options","Advanced integrations","Dedicated engagement"]},
 ];
 const faq=[
- ["Can we start without buying the platform?","Yes. Start with an Autonomous QA Pilot or the €7,500 Agentic Evaluation Programme."],
+ ["Can we start without buying the platform?","Yes. Start with an AI Assurance Pilot or the €7,500 AI Assurance Pilot."],
  ["What does the pilot cover?","One AI system, representative assurance journeys, four-layer evaluation, security checks and an evidence-backed release assessment."],
  ["Are platform plans priced per user?","No per-seat pricing is described here. Commercial scope is based on systems, assurance capacity and engagement requirements."],
  ["Are cloud and model costs included?","Customer cloud, model and API usage is scoped separately where applicable."],
@@ -21,20 +21,20 @@ const faq=[
 ];
 
 export const Route=createFileRoute("/pricing")({head:()=>({links:[{rel:"canonical",href:SITE+"/pricing"}],meta:[
- {title:"Pricing | Shyena Autonomous QA"},
+ {title:"Pricing | Shyena AI Assurance"},
  {name:"description",content:"Start with an AI assurance service and scale to continuous platform assurance for production AI agents."},
- {property:"og:title",content:"Pricing | Shyena Autonomous QA"},
+ {property:"og:title",content:"Pricing | Shyena AI Assurance"},
  {property:"og:description",content:"AI Act scan, assurance pilot, governance retainer and platform options."},
  {property:"og:url",content:SITE+"/pricing"},
  {name:"twitter:card",content:"summary_large_image"},
- {name:"twitter:title",content:"Pricing | Shyena Autonomous QA"},
+ {name:"twitter:title",content:"Pricing | Shyena AI Assurance"},
  {name:"twitter:description",content:"Start small with an AI assurance service, then scale to the platform."}
 ]}),component:PricingPage});
 
 function PricingPage(){return <main className="bg-white text-[#17213f]">
 <section className="bg-[#07101f] text-white"><div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 lg:px-10 lg:py-28"><div className="max-w-5xl"><div className="font-mono text-[10px] font-bold uppercase tracking-[.22em] text-[#f18a32]">Pricing</div><h1 className="mt-5 font-[Sora] text-[clamp(3rem,6vw,6rem)] font-extrabold leading-[.9] tracking-[-.065em]">Start with one AI system.</h1><p className="mt-7 max-w-3xl text-lg leading-8 text-white/60">Start with one real system. Scale to autonomous regression, agentic evaluation and continuous release testing as coverage grows.</p></div></div></section>
 
-<section className="bg-[#fafbfc] border-b border-[#e6e8ed]"><div className="mx-auto max-w-[1280px] px-5 py-16 sm:px-8 lg:px-10 lg:py-20"><div className="max-w-3xl"><div className="text-sm font-bold text-[#e87512]">Autonomous QA first</div><h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em]">Three ways to adopt autonomous testing.</h2><p className="mt-4 text-base leading-7 text-[#69707d]">Founder-led engagements produce concrete evidence before you decide whether a platform subscription is appropriate.</p></div><div className="mt-10 grid gap-4 lg:grid-cols-3">{services.map(s=><article key={s.title} className="flex flex-col rounded-2xl border border-[#e0e3e8] bg-white p-7 sm:p-8"><h3 className="text-xl font-extrabold">{s.title}</h3><div className="mt-5 text-3xl font-extrabold tracking-[-.04em]">{s.price}</div><div className="mt-1 text-sm text-[#69707d]">{s.cadence}</div><p className="mt-5 flex-1 text-sm leading-6 text-[#69707d]">{s.body}</p><Link to="/contact" className="mt-7 inline-flex h-11 items-center justify-center gap-2 rounded-lg bg-[#e87512] px-5 text-sm font-bold text-white">Discuss scope <ArrowRight className="h-4 w-4"/></Link></article>)}</div></div></section>
+<section className="bg-[#fafbfc] border-b border-[#e6e8ed]"><div className="mx-auto max-w-[1280px] px-5 py-16 sm:px-8 lg:px-10 lg:py-20"><div className="max-w-3xl"><div className="text-sm font-bold text-[#e87512]">AI Assurance first</div><h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em]">Three ways to start an AI assurance programme.</h2><p className="mt-4 text-base leading-7 text-[#69707d]">Start with one AI system, produce concrete evidence, then scale to continuous assurance.</p></div><div className="mt-10 grid gap-4 lg:grid-cols-3">{services.map(s=><article key={s.title} className="flex flex-col rounded-2xl border border-[#e0e3e8] bg-white p-7 sm:p-8"><h3 className="text-xl font-extrabold">{s.title}</h3><div className="mt-5 text-3xl font-extrabold tracking-[-.04em]">{s.price}</div><div className="mt-1 text-sm text-[#69707d]">{s.cadence}</div><p className="mt-5 flex-1 text-sm leading-6 text-[#69707d]">{s.body}</p><Link to="/contact" className="mt-7 inline-flex h-11 items-center justify-center gap-2 rounded-lg bg-[#e87512] px-5 text-sm font-bold text-white">Discuss scope <ArrowRight className="h-4 w-4"/></Link></article>)}</div></div></section>
 
 <section className="bg-white"><div className="mx-auto max-w-[1280px] px-5 py-16 sm:px-8 lg:px-10 lg:py-20"><div className="max-w-3xl"><div className="text-sm font-bold text-[#e87512]">Scale to the platform</div><h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em]">Continuous assurance for production AI.</h2><p className="mt-4 text-base leading-7 text-[#69707d]">Nexus understands the system. Vera evaluates real behaviour. Chakra challenges security. Govern preserves the evidence.</p></div><div className="mt-10 grid gap-4 lg:grid-cols-3">{platform.map(p=><article key={p.name} className="rounded-2xl border border-[#e0e3e8] bg-[#fafbfc] p-7"><h3 className="text-xl font-extrabold">{p.name}</h3><p className="mt-3 text-sm leading-6 text-[#69707d]">{p.body}</p><div className="mt-5 text-2xl font-extrabold">Custom pricing</div><ul className="mt-5 space-y-3 border-t border-[#e6e8ed] pt-5">{p.items.map(x=><li key={x} className="flex gap-2 text-sm text-[#596273]"><Check className="mt-0.5 h-4 w-4 shrink-0 text-[#e87512]"/>{x}</li>)}</ul><Link to="/contact" className="mt-7 inline-flex h-11 items-center gap-2 rounded-lg border border-[#17213f] px-5 text-sm font-bold">Discuss scope <ArrowRight className="h-4 w-4"/></Link></article>)}</div></div></section>
 
