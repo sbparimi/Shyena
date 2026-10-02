@@ -5,13 +5,13 @@ import { ArrowRight, Check, ShieldCheck } from "lucide-react";
 const SITE = "https://www.shyena.eu";
 
 const faq = [
-  ["Is Shyena just another test automation tool?", "No. Shyena is autonomous QA: it discovers coverage, generates journeys, executes them, evaluates agent behaviour, diagnoses failures and feeds new cases back into regression. Governance evidence is a downstream output."],
-  ["How is it different from LLM evaluation libraries?", "Those libraries primarily score model outputs. Shyena evaluates complete business journeys, including routing, APIs, tools, execution integrity and security, then links findings to release decisions."],
+  ["Is Shyena just another test automation tool?", "No. Shyena is an AI assurance platform. Nexus understands the system and change impact, Vera evaluates behaviour, Chakra attacks adversarial paths, and Govern connects evidence to release decisions."],
+  ["How is it different from LLM evaluation libraries?", "Shyena evaluates the system around the model: business journeys, routing, tools, APIs, agent trajectories, security controls and evidence. The suite connects those results to findings and release decisions."],
   ["Does Shyena make us EU AI Act compliant?", "No. Shyena produces technical evidence that can support legal and compliance work. It is not legal advice or a certification body."],
   ["Which platforms do you support?", "Shyena is designed for agentic and conversational AI systems, with integrations across agent orchestration, browser automation, APIs, CI/CD and observability. Contact us for your stack."],
   ["Do you need access to production?", "No for the initial assessment. The preferred boundary is a customer-controlled test or staging environment using scoped API credentials and least-privilege access. Read-only logs are preferred where logs are needed. Production access is only used when explicitly agreed for the engagement."],
   ["Where does our data go?", "Engagement architecture is designed around customer-controlled environments and customer-funded model/API accounts. See Security for the current boundary."],
-  ["Can we start small?", "Yes. Start with an Autonomous QA Pilot or the €7,500 Agentic Evaluation Programme."]
+  ["Can we start small?", "Yes. Start with one critical AI journey and build an assurance model around it."]
 ];
 
 function TerminalMetric({label,value,detail,accent="orange"}:{label:string;value:string;detail?:string;accent?:string}) {
@@ -135,7 +135,7 @@ function IllustrativeRun() {
     },
     {
       command: "$ shyena report --rfq RFQ-2026-184 --release", product:"GOVERN", short:"RELEASE", label: "GOVERN · RELEASE ASSURANCE", kind:"report",
-      lines:["SHYENA AUTONOMOUS QA · VANILLA STEEL","RFQ-2026-184 · PR #284","","RFQ journeys executed ................ 46","Passed ................................ 42","Failed ................................ 1","Review ................................ 3","P0 .................................... 0","P1 .................................... 1","P2 .................................... 2","","Evidence: git diff · traces · screenshots","          API logs · Playwright · Claude","Playbook: vanilla-steel-rfq.taml","","RELEASE VERDICT  ✕ BLOCK"],
+      lines:["SHYENA AI ASSURANCE · VANILLA STEEL","RFQ-2026-184 · PR #284","","RFQ journeys executed ................ 46","Passed ................................ 42","Failed ................................ 1","Review ................................ 3","P0 .................................... 0","P1 .................................... 1","P2 .................................... 2","","Evidence: git diff · traces · screenshots","          API logs · Playwright · Claude","Playbook: vanilla-steel-rfq.taml","","RELEASE VERDICT  ✕ BLOCK"],
       result:"Report generated · quotation evidence pack attached · RELEASE BLOCKED",
       reportTitle:"Release assurance decision", takeaway:"46 journeys resolve to 42 PASS, 3 REVIEW and 1 FAIL. The P1 approval defect blocks release; the report also carries the RCA, CAPA and verification path.",
       metrics:[{label:"Journeys",value:"46",detail:"executed"},{label:"PASS",value:"42",detail:"91.3%",accent:"green"},{label:"P1",value:"1",detail:"blocking finding",accent:"red"},{label:"Verdict",value:"BLOCK",detail:"release gate",accent:"red"}]
@@ -350,8 +350,8 @@ function HomePage() {
     <section className="bg-[#17213f] text-white">
       <div className="mx-auto max-w-[1000px] px-5 py-16 text-center sm:px-8 lg:py-20">
         <div className="font-mono text-[10px] font-bold uppercase tracking-[.2em] text-[#f18a32]">AUTONOMOUS QA</div>
-        <h2 className="mt-4 font-[Sora] text-3xl font-extrabold tracking-[-.04em] sm:text-5xl">Know what will break before your AI reaches customers.</h2>
-        <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/55">See the autonomous run, then bring one critical journey into a focused pilot.</p>
+        <h2 className="mt-4 font-[Sora] text-3xl font-extrabold tracking-[-.04em] sm:text-5xl">Understand, evaluate, attack and prove your AI system.</h2>
+        <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/55">See the assurance chain, then bring one critical journey into a focused engagement.</p>
         <div className="mt-8 flex flex-wrap justify-center gap-3"><Link to="/demo" className="inline-flex h-12 items-center gap-2 rounded-lg border border-white/15 px-6 text-sm font-bold text-white">See the run <ArrowRight className="h-4 w-4"/></Link><Link to="/contact" className="inline-flex h-12 items-center gap-2 rounded-lg bg-[#e87512] px-6 text-sm font-bold text-white">Discuss a pilot <ArrowRight className="h-4 w-4"/></Link></div>
       </div>
     </section>
