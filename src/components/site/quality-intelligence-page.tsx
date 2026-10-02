@@ -23,7 +23,7 @@ export function QualityIntelligencePage() {
  return <main className="bg-white text-[#17213f]">
   <section className="bg-[#07101f] text-white">
    <div className="mx-auto grid max-w-[1400px] gap-12 px-5 py-16 sm:px-8 lg:grid-cols-[1.05fr_.95fr] lg:items-center lg:px-10 lg:py-24">
-    <div><div className="font-mono text-[10px] font-bold uppercase tracking-[.22em] text-[#f18a32]">AUTONOMOUS QA ENGINEER</div>
+    <div><div className="font-mono text-[10px] font-bold uppercase tracking-[.22em] text-[#f18a32]">AI ASSURANCE PLATFORM</div>
      <h1 className="mt-5 font-[Sora] text-[clamp(3.2rem,7vw,7rem)] font-extrabold leading-[.86] tracking-[-.075em]">Your QA team<br/><span className="text-[#f18a32]">should not have</span><br/>to write every test.</h1>
      <p className="mt-8 max-w-2xl text-lg leading-8 text-white/60 sm:text-xl">Shyena is an autonomous QA and agentic AI evaluation platform that discovers what matters, generates tests, executes journeys, diagnoses failures and continuously expands coverage.</p>
      <div className="mt-8 flex flex-wrap gap-3"><Link to="/contact" className="inline-flex h-12 items-center gap-2 rounded-lg bg-[#e87512] px-5 text-sm font-bold text-white">See it on your system <ArrowRight className="h-4 w-4"/></Link><Link to="/sample-report" className="inline-flex h-12 items-center gap-2 rounded-lg border border-white/15 px-5 text-sm font-bold text-white/85">See a sample run <ArrowRight className="h-4 w-4"/></Link></div>
