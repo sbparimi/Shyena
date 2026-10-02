@@ -1,0 +1,32 @@
+name: Shyena Production Smoke Test
+
+on:
+  deployment_status:
+
+jobs:
+  smoke:
+    if: github.event.deployment_status.state == 'success' && github.event.deployment_status.environment == 'Production'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check production routes
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          check_page() {
+            local url="$1"
+            local marker="$2"
+            echo "Checking $url"
+
+            body="$(curl --fail --silent --show-error --location --max-time 30 "$url")"
+
+            if ! grep -Fq "$marker" <<<"$body"; then
+              echo "Expected page marker not found: $marker"
+              exit 1
+            fi
+          }
+
+          check_page "https://www.shyena.eu/" "Shyena"
+          check_page "https://www.shyena.eu/experts" "Human expertise, activated by the assurance platform."
+
+          echo "Production smoke test passed."
