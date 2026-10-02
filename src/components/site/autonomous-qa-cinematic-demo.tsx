@@ -1,224 +1,344 @@
 import * as React from "react";
 
-type Status = "idle" | "running" | "passed" | "blocked" | "review";
-type Phase = "ready" | "impact" | "plan" | "transaction" | "failure" | "investigate" | "attack" | "regression" | "decision";
+type Phase =
+  | "arrival"
+  | "agent"
+  | "tools"
+  | "approval"
+  | "blocked"
+  | "investigate"
+  | "replay"
+  | "attack"
+  | "regression"
+  | "gate";
 
 const nodes = [
-  ["rfq","RFQ Portal","Customer transaction"],
-  ["agent","Quotation Agent","Agentic orchestration"],
-  ["inventory","Inventory API","310 MT available"],
-  ["pricing","Supplier Pricing","Price v2026-09-28T18:42"],
-  ["margin","Margin Engine","7.8% margin"],
-  ["approval","Approval Service","PENDING"],
-  ["quote","Quotation API","Creation guarded"],
+  { id: "rfq", label: "RFQ PORTAL", sub: "customer request", x: 7 },
+  { id: "agent", label: "QUOTATION AGENT", sub: "agentic orchestration", x: 25 },
+  { id: "inventory", label: "INVENTORY", sub: "310 MT available", x: 45 },
+  { id: "pricing", label: "SUPPLIER PRICING", sub: "v2026-09-28T18:42", x: 45 },
+  { id: "margin", label: "MARGIN ENGINE", sub: "7.8% calculated", x: 64 },
+  { id: "approval", label: "APPROVAL", sub: "PENDING", x: 82 },
+  { id: "quote", label: "QUOTATION API", sub: "creation guarded", x: 94 },
 ] as const;
 
-const events = [
-  ["09:41:02","CHANGE","PR #284 · 31 files changed"],
-  ["09:41:04","IMPACT","14 journeys · 8 critical paths"],
-  ["09:41:06","PLAN","46 affected regression cases generated"],
-  ["09:41:09","REQUEST","RFQ-2026-184 · 240 MT S355 · Rotterdam"],
-  ["09:41:11","AGENT","extract_rfq({grade:S355, qty:240, delivery:RTM})"],
-  ["09:41:13","TOOL","inventory.check → available=310 MT"],
-  ["09:41:15","TOOL","supplier_price.refresh → 2026-09-28T18:42"],
-  ["09:41:17","TOOL","margin.calculate → margin=7.8%"],
-  ["09:41:19","POLICY","quotation.create blocked · approval_state=PENDING"],
-  ["09:41:22","RCA","F-001 · approval cache / pricing path"],
-  ["09:41:25","REPLAY","3/3 reproductions confirmed"],
-  ["09:41:28","SECURITY","12 adversarial scenarios · 1 reproduced"],
-  ["09:41:31","REGRESSION","15 permanent cases added"],
-  ["09:41:34","GATE","RELEASE BLOCKED"],
-] as const;
+const phaseLabels: Record<Phase, string> = {
+  arrival: "RFQ ENTERED",
+  agent: "AGENT DECISION",
+  tools: "TOOL CALLS",
+  approval: "CONTROL CHECK",
+  blocked: "POLICY INTERCEPT",
+  investigate: "TRACE + RCA",
+  replay: "REPLAY 3/3",
+  attack: "ATTACK VARIANTS",
+  regression: "REGRESSION CREATED",
+  gate: "RELEASE GATE",
+};
 
-const trajectory = [
-  ["USER","RFQ-2026-184: 240 MT S355, Rotterdam"],
-  ["AGENT","extract_rfq({grade:S355, qty:240, delivery:RTM})"],
-  ["TOOL","inventory.check → available=310 MT"],
-  ["AGENT","supplier_price.refresh → price_version=2026-09-28T18:42"],
-  ["TOOL","margin.calculate → margin=7.8%"],
-  ["AGENT","quotation.create → approval_state=PENDING"],
-  ["POLICY","BLOCK: approval_state must be APPROVED"],
-] as const;
-
-const evidence = ["PR diff","Impact graph","TAML playbook","Execution matrix","Agent trajectory","Tool-call trace","API evidence","Playwright trace","Screenshots","Security results","RCA record","Regression case","Release decision"];
-
-function Badge({children, tone="neutral"}:{children:React.ReactNode;tone?:string}) {
-  return <span className={`rounded-md border px-2 py-1 font-mono text-[8px] uppercase tracking-[.12em] ${tone==="red"?"border-red-400/30 bg-red-400/10 text-red-200":tone==="green"?"border-emerald-400/30 bg-emerald-400/10 text-emerald-200":tone==="cyan"?"border-cyan-300/20 bg-cyan-300/10 text-cyan-200":"border-white/10 bg-white/[.04] text-white/45"}`}>{children}</span>;
+function phaseFor(tick: number): Phase {
+  if (tick < 8) return "arrival";
+  if (tick < 18) return "agent";
+  if (tick < 30) return "tools";
+  if (tick < 39) return "approval";
+  if (tick < 50) return "blocked";
+  if (tick < 64) return "investigate";
+  if (tick < 75) return "replay";
+  if (tick < 88) return "attack";
+  if (tick < 101) return "regression";
+  return "gate";
 }
 
-function Node({id,name,desc,status,active,onClick}:{id:string;name:string;desc:string;status:Status;active:boolean;onClick:()=>void}) {
-  const tone = status==="blocked" ? "border-red-400/60 bg-red-400/[.08]" : active ? "border-cyan-300/50 bg-cyan-300/[.06]" : "border-white/10 bg-white/[.025]";
-  return <button onClick={onClick} className={`relative w-full rounded-xl border p-3 text-left transition-all duration-300 ${tone} ${active?"shadow-[0_0_28px_rgba(34,211,238,.10)]":""}`}>
-    {active && <span className="absolute -inset-px animate-pulse rounded-xl border border-cyan-300/20"/>}
-    <div className="relative flex items-start gap-2">
-      <span className={`mt-1 h-2 w-2 shrink-0 rounded-full ${status==="blocked"?"bg-red-400":status==="passed"?"bg-emerald-400":status==="running"?"bg-cyan-300":"bg-white/20"}`}/>
-      <span><span className="block text-[11px] font-semibold text-white/85">{name}</span><span className="mt-1 block font-mono text-[8px] text-white/30">{desc}</span></span>
-    </div>
-  </button>;
+function nodeState(id: string, phase: Phase) {
+  if (phase === "gate") return id === "quote" || id === "approval" ? "blocked" : "passed";
+  if (phase === "regression" || phase === "attack" || phase === "replay" || phase === "investigate" || phase === "blocked") {
+    if (id === "approval" || id === "quote") return "blocked";
+    if (id === "rfq" || id === "agent" || id === "inventory" || id === "pricing" || id === "margin") return "passed";
+  }
+  if (phase === "approval") return id === "approval" ? "active" : id === "margin" ? "passed" : "idle";
+  if (phase === "tools") {
+    if (id === "inventory" || id === "pricing" || id === "margin") return "active";
+    if (id === "agent") return "passed";
+  }
+  if (phase === "agent") return id === "agent" ? "active" : id === "rfq" ? "passed" : "idle";
+  if (phase === "arrival") return id === "rfq" ? "active" : "idle";
+  return "idle";
 }
 
-function Topology({activeNode,onNode}:{activeNode:string;onNode:(id:string)=>void}) {
-  const positions = [[7,50],[25,50],[42,18],[42,50],[60,50],[77,50],[93,50]];
-  return <div className="relative min-h-[430px] overflow-hidden rounded-2xl border border-white/10 bg-[#07101b]">
-    <div className="absolute inset-0 opacity-30" style={{backgroundImage:"linear-gradient(rgba(80,120,150,.10) 1px,transparent 1px),linear-gradient(90deg,rgba(80,120,150,.10) 1px,transparent 1px)",backgroundSize:"32px 32px"}}/>
-    <svg className="absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-      {positions.slice(0,-1).map((p,i)=><line key={i} x1={p[0]} y1={p[1]} x2={positions[i+1][0]} y2={positions[i+1][1]} stroke="rgba(120,160,190,.22)" strokeWidth=".35" strokeDasharray="1.5 1.5"/>)}
-      <line x1="25" y1="50" x2="42" y2="18" stroke="rgba(120,160,190,.18)" strokeWidth=".35" strokeDasharray="1.5 1.5"/>
-      <line x1="42" y1="18" x2="60" y2="50" stroke="rgba(120,160,190,.18)" strokeWidth=".35" strokeDasharray="1.5 1.5"/>
-    </svg>
-    <div className="absolute left-4 top-4 flex items-center gap-2"><Badge tone="cyan">LIVE SYSTEM</Badge><span className="font-mono text-[8px] text-white/25">Vanilla Steel · illustrative</span></div>
-    {nodes.map(([id,name,desc],i)=><button key={id} onClick={()=>onNode(id)} className="absolute -translate-x-1/2 -translate-y-1/2" style={{left:`${positions[i][0]}%`,top:`${positions[i][1]}%`}}>
-      <div className={`w-[105px] rounded-xl border p-2 text-left backdrop-blur-sm transition ${activeNode===id?"border-cyan-300/60 bg-cyan-300/10":"border-white/10 bg-[#091522]/95"} `}>
-        <div className="font-mono text-[8px] font-semibold text-white/80">{name}</div>
-        <div className="mt-1 text-[7px] text-white/30">{desc}</div>
+function NodeCard({ node, state }: { node: (typeof nodes)[number]; state: string }) {
+  const tone =
+    state === "blocked"
+      ? "border-red-400/70 bg-red-500/[.09] shadow-[0_0_35px_rgba(248,113,113,.16)]"
+      : state === "active"
+        ? "border-cyan-300/70 bg-cyan-300/[.08] shadow-[0_0_35px_rgba(103,232,249,.15)]"
+        : state === "passed"
+          ? "border-emerald-300/30 bg-emerald-300/[.035]"
+          : "border-white/10 bg-[#08111d]/90";
+
+  const dot =
+    state === "blocked" ? "bg-red-400" :
+    state === "active" ? "bg-cyan-300 animate-pulse" :
+    state === "passed" ? "bg-emerald-400" : "bg-white/20";
+
+  return (
+    <div className={`absolute top-1/2 z-10 w-[132px] -translate-x-1/2 -translate-y-1/2 rounded-xl border px-3 py-2.5 backdrop-blur-sm transition-all duration-500 sm:w-[154px] ${tone}`} style={{ left: `${node.x}%` }}>
+      <div className="flex items-center gap-2">
+        <span className={`h-2 w-2 shrink-0 rounded-full ${dot}`} />
+        <span className="font-mono text-[8px] font-bold tracking-[.08em] text-white/85 sm:text-[9px]">{node.label}</span>
       </div>
-    </button>)}
-    <div className="absolute bottom-4 left-4 right-4 flex flex-wrap items-center gap-2">
-      <Badge>RFQ-2026-184</Badge><Badge>PR #284</Badge><Badge>240 MT</Badge><Badge>S355</Badge><Badge>Rotterdam</Badge>
+      <div className="mt-1 pl-4 font-mono text-[7px] text-white/35 sm:text-[8px]">{node.sub}</div>
+      {state === "blocked" && <div className="mt-1.5 pl-4 font-mono text-[7px] font-bold uppercase tracking-[.1em] text-red-300">BLOCKED</div>}
     </div>
-    <div className="shyena-packet" style={{animationPlayState:"running"}}/>
-  </div>;
+  );
 }
 
-function Inspector({node,phase}:{node:string;phase:Phase}) {
-  const data:Record<string,{title:string;role:string;request:string;response:string;state:string}> = {
-    rfq:{title:"RFQ Portal",role:"Customer transaction entry",request:"POST /rfq\nRFQ-2026-184 · 240 MT · S355",response:"delivery=Rotterdam",state:"passed"},
-    agent:{title:"Quotation Agent",role:"Agentic orchestration",request:"extract_rfq(...)\nsupplier_price.refresh(...)",response:"quotation.create(...)\napproval_state=PENDING",state:"blocked"},
-    inventory:{title:"Inventory API",role:"Deterministic availability",request:"inventory.check(S355, 240 MT)",response:"available=310 MT",state:"passed"},
-    pricing:{title:"Supplier Pricing",role:"Commercial context",request:"supplier_price.refresh()",response:"price_version=2026-09-28T18:42",state:"passed"},
-    margin:{title:"Margin Engine",role:"Deterministic calculation",request:"margin.calculate()",response:"margin=7.8%",state:"passed"},
-    approval:{title:"Approval Service",role:"Authoritative control",request:"approval_state",response:"PENDING",state:"blocked"},
-    quote:{title:"Quotation API",role:"Commercial output",request:"quotation.create()",response:"BLOCKED BY POLICY",state:"blocked"},
+function Packet({ phase }: { phase: Phase }) {
+  const blocked = phase === "blocked" || phase === "investigate" || phase === "replay" || phase === "attack" || phase === "regression" || phase === "gate";
+  return (
+    <>
+      <div className={`shyena-transaction-packet ${blocked ? "is-blocked" : ""}`} />
+      {(phase === "replay" || phase === "attack") && (
+        <>
+          <div className="shyena-replay replay-one" />
+          <div className="shyena-replay replay-two" />
+          <div className="shyena-replay replay-three" />
+        </>
+      )}
+    </>
+  );
+}
+
+function EvidenceRail({ phase }: { phase: Phase }) {
+  const items = [
+    ["DIFF", "31 files"],
+    ["IMPACT", "14 journeys"],
+    ["PLAYBOOK", "46 cases"],
+    ["TRACE", "trc_8f21"],
+    ["RCA", "F-001"],
+    ["REPLAY", "3/3"],
+    ["REGRESSION", "46 → 61"],
+  ];
+  const active =
+    phase === "arrival" ? 0 :
+    phase === "agent" || phase === "tools" ? 1 :
+    phase === "approval" ? 2 :
+    phase === "blocked" ? 3 :
+    phase === "investigate" ? 4 :
+    phase === "replay" ? 5 :
+    6;
+
+  return (
+    <div className="flex min-w-0 gap-2 overflow-x-auto pb-1">
+      {items.map(([label, value], i) => (
+        <div key={label} className={`min-w-[105px] rounded-lg border px-2.5 py-2 transition-all duration-500 ${i <= active ? "border-cyan-300/25 bg-cyan-300/[.045]" : "border-white/7 bg-white/[.02]"}`}>
+          <div className="font-mono text-[7px] font-bold tracking-[.15em] text-white/30">{label}</div>
+          <div className={`mt-1 font-mono text-[9px] font-bold ${i <= active ? "text-white/75" : "text-white/25"}`}>{value}</div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function TransactionDetail({ phase }: { phase: Phase }) {
+  const detail: Record<Phase, { title: string; body: string; tone: string }> = {
+    arrival: { title: "Customer → RFQ Portal", body: "RFQ-2026-184 · 240 MT S355 · Rotterdam", tone: "cyan" },
+    agent: { title: "Quotation Agent", body: "extract_rfq({grade:S355, qty:240, delivery:RTM})", tone: "cyan" },
+    tools: { title: "Agent → tools", body: "inventory.check → 310 MT · supplier_price.refresh → v2026-09-28T18:42 · margin.calculate → 7.8%", tone: "cyan" },
+    approval: { title: "Agent → approval", body: "quotation.create() · approval_state=PENDING", tone: "amber" },
+    blocked: { title: "Shyena intercept", body: "BLOCK: approval_state must be APPROVED before quotation.create()", tone: "red" },
+    investigate: { title: "Trace → RCA", body: "F-001 · pricing/margin-policy.ts → approval cache → quotation orchestrator", tone: "red" },
+    replay: { title: "Replay", body: "Same trajectory reproduced 3/3 · deterministic failure confirmed", tone: "green" },
+    attack: { title: "Attack variants", body: "12 adversarial scenarios · tool escalation reproduced", tone: "red" },
+    regression: { title: "Permanent coverage", body: "TC-RFQ-021 promoted into regression · coverage 46 → 61", tone: "green" },
+    gate: { title: "Release gate", body: "P1 approval bypass remains unresolved · RELEASE BLOCKED", tone: "red" },
   };
-  const d=data[node]||data.agent;
-  return <div className="rounded-2xl border border-white/10 bg-[#07101b]">
-    <div className="flex items-center justify-between border-b border-white/5 p-4"><div><div className="font-mono text-[8px] uppercase tracking-[.18em] text-white/30">TRANSACTION INSPECTOR</div><div className="mt-1 text-sm font-semibold">{d.title}</div></div><Badge tone={d.state==="blocked"?"red":d.state==="passed"?"green":"cyan"}>{d.state}</Badge></div>
-    <div className="space-y-4 p-4">
-      <div><div className="font-mono text-[8px] text-white/25">ROLE</div><div className="mt-1 text-[10px] text-white/60">{d.role}</div></div>
-      <div><div className="font-mono text-[8px] text-white/25">REQUEST</div><pre className="mt-1 whitespace-pre-wrap rounded-lg border border-white/5 bg-black/20 p-3 font-mono text-[9px] leading-5 text-cyan-100/65">{d.request}</pre></div>
-      <div><div className="font-mono text-[8px] text-white/25">RESPONSE</div><pre className={`mt-1 whitespace-pre-wrap rounded-lg border p-3 font-mono text-[9px] leading-5 ${d.state==="blocked"?"border-red-400/20 bg-red-400/[.04] text-red-100/75":"border-white/5 bg-black/20 text-emerald-100/65"}`}>{d.response}</pre></div>
-      {d.state==="blocked" && <div className="rounded-lg border border-orange-300/20 bg-orange-300/[.04] p-3 font-mono text-[8px] leading-5 text-orange-100/70">Invariant: current_quote.price_version MUST EQUAL approved.price_version</div>}
-      <div className="font-mono text-[8px] text-white/20">{phase==="decision"?"Evidence attached to release gate":"Evidence captured automatically"}</div>
+  const d = detail[phase];
+  const tone = d.tone === "red" ? "border-red-400/25 bg-red-400/[.055] text-red-100" : d.tone === "green" ? "border-emerald-400/25 bg-emerald-400/[.055] text-emerald-100" : d.tone === "amber" ? "border-amber-300/25 bg-amber-300/[.05] text-amber-100" : "border-cyan-300/20 bg-cyan-300/[.045] text-cyan-50";
+  return (
+    <div className={`rounded-xl border p-3 transition-all duration-500 ${tone}`}>
+      <div className="font-mono text-[7px] font-bold uppercase tracking-[.17em] opacity-55">{phaseLabels[phase]}</div>
+      <div className="mt-1 text-[11px] font-semibold">{d.title}</div>
+      <div className="mt-1.5 font-mono text-[8px] leading-4 opacity-65">{d.body}</div>
     </div>
-  </div>;
+  );
 }
 
-function TracePanel() {
-  return <div className="rounded-2xl border border-white/10 bg-[#07101b]">
-    <div className="flex items-center justify-between border-b border-white/5 px-4 py-3"><span className="font-mono text-[8px] uppercase tracking-[.18em] text-white/30">AGENT TRACE · trc_8f21</span><Badge tone="red">BLOCKED</Badge></div>
-    <div className="max-h-[360px] overflow-auto p-2">{trajectory.map(([k,v],i)=><div key={v} className="flex gap-3 rounded-lg px-2 py-2.5 hover:bg-white/[.025]"><span className={`w-12 shrink-0 font-mono text-[7px] ${k==="POLICY"?"text-red-300":"text-cyan-300/50"}`}>{k}</span><span className={`font-mono text-[8px] leading-4 ${k==="POLICY"?"text-red-200":"text-white/55"}`}>{v}</span></div>)}</div>
-  </div>;
-}
-
-function EvidencePanel() {
-  return <div className="rounded-2xl border border-white/10 bg-[#07101b] p-4"><div className="flex items-center justify-between"><span className="font-mono text-[8px] uppercase tracking-[.18em] text-white/30">EVIDENCE</span><span className="font-mono text-[8px] text-white/25">100% linked</span></div><div className="mt-3 grid grid-cols-2 gap-1.5">{evidence.map(x=><div key={x} className="rounded border border-white/5 px-2 py-2 font-mono text-[7px] text-white/45">{x}</div>)}</div><div className="mt-3 font-mono text-[7px] text-white/25">31 artifacts · 18 traces · 27 screenshots</div></div>;
-}
-
-function AppStatus({phase}:{phase:Phase}) {
-  const status = phase==="decision"?"BLOCKED":phase==="ready"?"READY":"RUNNING";
-  return <div className="flex items-center gap-2"><span className={`h-2 w-2 rounded-full ${status==="BLOCKED"?"bg-red-400":"bg-cyan-300"}`}/><span className="font-mono text-[8px] tracking-[.15em] text-white/55">{status}</span></div>;
+function Gate({ phase }: { phase: Phase }) {
+  const closed = phase === "gate";
+  return (
+    <div className={`rounded-xl border p-3 transition-all duration-700 ${closed ? "border-red-400/35 bg-red-500/[.07]" : "border-white/8 bg-white/[.02]"}`}>
+      <div className="flex items-center justify-between">
+        <span className="font-mono text-[7px] font-bold tracking-[.16em] text-white/35">RELEASE GATE</span>
+        <span className={`rounded px-2 py-1 font-mono text-[8px] font-bold tracking-[.12em] ${closed ? "bg-red-500/85 text-white" : "bg-white/8 text-white/30"}`}>{closed ? "BLOCK" : "OPEN"}</span>
+      </div>
+      <div className="mt-2 grid grid-cols-4 gap-1.5 font-mono text-center">
+        <div><div className="text-sm font-bold text-emerald-300">42</div><div className="text-[6px] text-white/25">PASS</div></div>
+        <div><div className="text-sm font-bold text-amber-300">3</div><div className="text-[6px] text-white/25">REVIEW</div></div>
+        <div><div className="text-sm font-bold text-red-300">1</div><div className="text-[6px] text-white/25">FAIL</div></div>
+        <div><div className="text-sm font-bold text-white/70">61</div><div className="text-[6px] text-white/25">CASES</div></div>
+      </div>
+    </div>
+  );
 }
 
 export function AutonomousQACinematicDemo() {
-  const [phase,setPhase]=React.useState<Phase>("ready");
-  const [activeNode,setActiveNode]=React.useState("rfq");
-  const [running,setRunning]=React.useState(false);
-  const [events,setEvents]=React.useState<typeof events>([]);
-  const [selectedTab,setSelectedTab]=React.useState<"transaction"|"trace"|"evidence"|"release">("transaction");
-  const timer=React.useRef<number | null>(null);
+  const [tick, setTick] = React.useState(0);
+  const phase = phaseFor(tick);
+  const [paused, setPaused] = React.useState(false);
 
-  const run = React.useCallback(() => {
-    if (timer.current) window.clearInterval(timer.current);
-    setPhase("impact"); setRunning(true); setEvents([]);
-    let i=0;
-    timer.current=window.setInterval(()=>{
-      const e=eventsData[i];
-      if(!e){ if(timer.current) window.clearInterval(timer.current); setPhase("decision"); setRunning(false); return; }
-      setEvents(prev=>[...prev,e]);
-      if(i<2) setPhase("impact");
-      else if(i===2) setPhase("plan");
-      else if(i>=3&&i<=7) { setPhase("transaction"); setActiveNode(["rfq","agent","inventory","pricing","margin"][Math.min(i-3,4)]); }
-      else if(i===8){setPhase("failure");setActiveNode("approval");setSelectedTab("transaction");}
-      else if(i===9){setPhase("investigate");setSelectedTab("trace");}
-      else if(i===10||i===11){setPhase("attack");setSelectedTab("trace");}
-      else if(i===12){setPhase("regression");setSelectedTab("evidence");}
-      else if(i===13){setPhase("decision");setActiveNode("quote");setSelectedTab("release");}
-      i++;
-    },1100);
-  },[]);
-  const eventsData=eventsList;
-  React.useEffect(()=>{const t=window.setTimeout(run,700);return()=>{window.clearTimeout(t);if(timer.current)window.clearInterval(timer.current)}},[run]);
+  React.useEffect(() => {
+    if (paused) return;
+    const timer = window.setInterval(() => setTick((v) => (v + 1) % 116), 120);
+    return () => window.clearInterval(timer);
+  }, [paused]);
 
-  return <main className="min-h-screen overflow-hidden bg-[#02060c] text-white">
-    <style>{`
-      @keyframes packetFlow{0%{left:7%;opacity:0}8%{opacity:1}50%{opacity:1}92%{opacity:1}100%{left:92%;opacity:0}}
-      @keyframes pulseNode{0%,100%{opacity:.35}50%{opacity:1}}
-      .shyena-packet{position:absolute;left:7%;top:50%;width:7px;height:7px;border-radius:999px;background:#67e8f9;box-shadow:0 0 20px 6px rgba(34,211,238,.45);animation:packetFlow 3.4s linear infinite;pointer-events:none}
-    `}</style>
-    <header className="border-b border-white/10 bg-[#02060c]/90 px-4 py-3 backdrop-blur-xl md:px-7">
-      <div className="mx-auto flex max-w-[1600px] items-center justify-between gap-4">
-        <div className="flex items-center gap-3"><span className="font-mono text-[10px] font-bold tracking-[.25em] text-white/80">SHYENA</span><span className="text-white/15">/</span><span className="font-mono text-[9px] tracking-[.18em] text-cyan-300/60">ASSURANCE RUN</span></div>
-        <div className="hidden items-center gap-3 md:flex"><span className="font-mono text-[8px] text-white/35">VANILLA STEEL · RFQ-2026-184</span><span className="font-mono text-[8px] text-white/25">PR #284</span><AppStatus phase={phase}/></div>
-        <button onClick={run} className="rounded-lg border border-white/10 px-3 py-2 font-mono text-[8px] text-white/55 hover:border-cyan-300/30 hover:text-white">{running?"RUNNING":"RUN AGAIN"}</button>
-      </div>
-    </header>
+  const restart = () => setTick(0);
 
-    <div className="mx-auto max-w-[1600px] px-4 py-4 md:px-7">
-      <div className="mb-3 flex flex-wrap items-center gap-2 md:hidden"><Badge>VANILLA STEEL · RFQ-2026-184</Badge><Badge>PR #284</Badge><AppStatus phase={phase}/></div>
-      <div className="grid gap-3 lg:grid-cols-[220px_minmax(0,1fr)_320px]">
-        <aside className="space-y-3">
-          <div className="rounded-2xl border border-white/10 bg-[#07101b] p-4"><div className="font-mono text-[8px] uppercase tracking-[.18em] text-white/30">SYSTEM UNDER TEST</div><div className="mt-1 text-sm font-semibold">RFQ → Quotation</div><div className="mt-1 text-[9px] text-white/30">Commercial transaction</div><div className="mt-4 space-y-2">{nodes.map(([id,n,d])=><Node key={id} id={id} name={n} desc={d} active={activeNode===id} status={id==="quote"&&phase==="decision"?"blocked":id==="approval"&&phase==="failure"?"blocked":activeNode===id?"running":phase==="decision"?"passed":"idle"} onClick={()=>setActiveNode(id)}/>)}</div></div>
-          <div className="rounded-2xl border border-white/10 bg-[#07101b] p-4"><div className="font-mono text-[8px] text-white/30">WHY THIS TRANSACTION?</div><p className="mt-2 text-[10px] leading-5 text-white/50">PR #284 changes the pricing path. Shyena follows the affected business journey instead of relying on a static regression list.</p></div>
-        </aside>
+  return (
+    <main className="min-h-screen overflow-hidden bg-[#03070d] text-white">
+      <style>{`
+        @keyframes shyenaPacket {
+          0% { left: 4%; opacity: 0; transform: scale(.7); }
+          7% { opacity: 1; }
+          21% { left: 25%; }
+          43% { left: 45%; }
+          65% { left: 64%; }
+          86% { left: 82%; }
+          96% { left: 82%; opacity: 1; }
+          100% { left: 82%; opacity: 0; transform: scale(1.35); }
+        }
+        @keyframes shyenaReplay {
+          0% { left: 82%; top: 50%; opacity: 0; }
+          10% { opacity: 1; }
+          72% { left: 25%; top: 50%; opacity: 1; }
+          100% { left: 7%; top: 50%; opacity: 0; }
+        }
+        @keyframes shyenaBranch {
+          0% { left: 82%; top: 50%; opacity: 0; }
+          15% { opacity: 1; }
+          55% { left: 64%; top: 22%; opacity: 1; }
+          100% { left: 48%; top: 10%; opacity: 0; }
+        }
+        @keyframes shyenaGlow {
+          0%,100% { opacity: .25; }
+          50% { opacity: .75; }
+        }
+        .shyena-transaction-packet {
+          position:absolute; z-index:20; top:50%; left:4%; width:10px; height:10px; border-radius:999px;
+          background:#67e8f9; box-shadow:0 0 18px 7px rgba(103,232,249,.38); pointer-events:none;
+          animation:shyenaPacket 5.8s cubic-bezier(.2,.7,.2,1) infinite;
+        }
+        .shyena-transaction-packet.is-blocked { background:#fb7185; box-shadow:0 0 22px 9px rgba(248,113,113,.42); }
+        .shyena-replay,.shyena-replay::after { position:absolute; z-index:21; width:7px; height:7px; border-radius:999px; pointer-events:none; }
+        .shyena-replay { background:#86efac; box-shadow:0 0 15px 5px rgba(134,239,172,.3); animation:shyenaReplay 2.2s linear infinite; }
+        .shyena-replay.replay-two { animation-delay:.35s; }
+        .shyena-replay.replay-three { animation-delay:.7s; }
+        .shyena-replay.replay-one,.shyena-replay.replay-two,.shyena-replay.replay-three { top:50%; left:82%; }
+        .shyena-replay::after { content:""; inset:-3px; border:1px solid rgba(134,239,172,.28); }
+        .shyena-branch { position:absolute; z-index:21; width:6px; height:6px; border-radius:999px; background:#fda4af; box-shadow:0 0 14px 4px rgba(253,164,175,.3); animation:shyenaBranch 1.8s linear infinite; }
+      `}</style>
 
-        <section className="min-w-0 space-y-3">
-          <Topology activeNode={activeNode} onNode={setActiveNode}/>
-          <div className="grid gap-3 sm:grid-cols-4">
-            {[["IMPACT","14 journeys"],["PLAYBOOK","46 cases"],["EXECUTED","43 complete"],["SECURITY","12 scenarios"]].map(([a,b])=><div key={a} className="rounded-xl border border-white/10 bg-[#07101b] p-3"><div className="font-mono text-[7px] text-white/25">{a}</div><div className="mt-1 text-[11px] font-semibold text-white/75">{b}</div></div>)}
+      <header className="border-b border-white/8 bg-[#03070d]/90 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-[1440px] items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+          <div className="flex items-center gap-3">
+            <span className="font-mono text-[11px] font-black tracking-[.28em] text-white">SHYENA</span>
+            <span className="hidden text-white/15 sm:inline">/</span>
+            <span className="hidden font-mono text-[8px] tracking-[.18em] text-cyan-300/55 sm:inline">AUTONOMOUS QA</span>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-[#07101b]">
-            <div className="flex items-center justify-between border-b border-white/5 px-4 py-3"><span className="font-mono text-[8px] uppercase tracking-[.18em] text-white/30">LIVE EVENT STREAM</span><span className="font-mono text-[7px] text-white/20">{events.length}/{eventsList.length}</span></div>
-            <div className="h-[250px] overflow-auto p-2">{(events.length?events:eventsList.slice(0,3)).map(([time,type,msg],i)=><div key={time+type} className="flex gap-3 border-b border-white/[.035] px-2 py-2"><span className="font-mono text-[7px] text-white/20">{time}</span><span className={`w-16 font-mono text-[7px] ${type==="POLICY"||type==="GATE"?"text-red-300":type==="TOOL"||type==="AGENT"?"text-cyan-300/60":"text-white/35"}`}>{type}</span><span className="font-mono text-[8px] text-white/55">{msg}</span></div>)}</div>
+          <div className="hidden items-center gap-4 font-mono text-[8px] text-white/30 md:flex">
+            <span>VANILLA STEEL · ILLUSTRATIVE</span>
+            <span>RFQ-2026-184</span>
+            <span>PR #284</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className={`h-2 w-2 rounded-full ${phase === "gate" ? "bg-red-400" : "bg-cyan-300 animate-pulse"}`} />
+            <span className="hidden font-mono text-[8px] tracking-[.12em] text-white/45 sm:inline">{phase === "gate" ? "BLOCKED" : "LIVE"}</span>
+            <button type="button" onClick={() => setPaused((v) => !v)} className="min-h-[44px] rounded-lg border border-white/15 px-3 font-mono text-[8px] font-bold text-white/70 transition hover:border-cyan-300/35 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:ring-offset-2 focus-visible:ring-offset-[#03070d]">{paused ? "RESUME" : "PAUSE"}</button>
+            <button type="button" onClick={restart} className="min-h-[44px] rounded-lg bg-white px-3 font-mono text-[8px] font-bold text-[#07101f] transition hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:ring-offset-2 focus-visible:ring-offset-[#03070d]">REPLAY</button>
+          </div>
+        </div>
+      </header>
+
+      <div className="mx-auto max-w-[1440px] px-4 pb-6 pt-4 sm:px-6 lg:px-8">
+        <div className="mb-3 flex items-center justify-between gap-3">
+          <div className="min-w-0">
+            <div className="truncate font-mono text-[9px] font-bold uppercase tracking-[.18em] text-[#f18a32]">LIVE ASSURANCE TRANSACTION</div>
+            <div className="mt-1 truncate text-sm font-semibold text-white/80">Customer RFQ → quotation decision</div>
+          </div>
+          <div className="hidden rounded-lg border border-white/8 bg-white/[.02] px-3 py-2 font-mono text-[7px] text-white/30 sm:block">SYNTHETIC / NOT A CUSTOMER RUN</div>
+        </div>
+
+        <section className="relative overflow-hidden rounded-[22px] border border-white/10 bg-[#06101b] shadow-[0_40px_120px_-60px_rgba(0,0,0,.95)]">
+          <div className="absolute inset-0 opacity-30" style={{ backgroundImage: "radial-gradient(circle at 50% 50%, rgba(34,211,238,.09), transparent 38%), linear-gradient(rgba(100,140,170,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(100,140,170,.06) 1px, transparent 1px)", backgroundSize: "auto, 32px 32px, 32px 32px" }} />
+          <div className="relative min-h-[500px] sm:min-h-[570px]">
+            <div className="absolute left-[7%] right-[6%] top-1/2 h-px bg-gradient-to-r from-cyan-300/10 via-cyan-300/25 to-red-400/15" />
+            <div className="absolute left-[25%] top-1/2 h-32 w-px -translate-y-1/2 bg-gradient-to-b from-transparent via-cyan-300/20 to-transparent" />
+            <div className="absolute left-[45%] top-[28%] h-24 w-px bg-cyan-300/10" />
+            <div className="absolute left-[64%] top-1/2 h-24 w-px -translate-y-1/2 bg-gradient-to-b from-transparent via-cyan-300/15 to-transparent" />
+            <div className="absolute left-[82%] top-1/2 h-28 w-px -translate-y-1/2 bg-gradient-to-b from-transparent via-red-400/25 to-transparent" />
+
+            <div className="absolute left-4 top-4 flex items-center gap-2">
+              <span className="rounded-md border border-cyan-300/20 bg-cyan-300/[.05] px-2 py-1 font-mono text-[7px] font-bold tracking-[.14em] text-cyan-200/70">TRANSACTION GRAPH</span>
+              <span className="font-mono text-[7px] text-white/25">{phaseLabels[phase]}</span>
+            </div>
+
+            {nodes.map((node) => <NodeCard key={node.id} node={node} state={nodeState(node.id, phase)} />)}
+            <Packet phase={phase} />
+
+            {(phase === "investigate" || phase === "replay" || phase === "attack" || phase === "regression" || phase === "gate") && (
+              <div className="absolute left-[50%] top-[14%] -translate-x-1/2 rounded-xl border border-orange-300/20 bg-orange-300/[.045] px-4 py-2 text-center backdrop-blur">
+                <div className="font-mono text-[7px] font-bold tracking-[.15em] text-orange-200/70">SHYENA</div>
+                <div className="mt-1 text-[10px] font-semibold text-white/75">{phase === "investigate" ? "following the evidence backward" : phase === "replay" ? "replaying the exact trajectory" : phase === "attack" ? "branching adversarial variants" : phase === "regression" ? "promoting failure to permanent coverage" : "evidence attached to release gate"}</div>
+              </div>
+            )}
+
+            {phase === "blocked" && (
+              <div className="absolute left-[82%] top-[64%] -translate-x-1/2 rounded-lg border border-red-400/30 bg-red-500/[.09] px-3 py-2 shadow-[0_0_40px_rgba(248,113,113,.14)]">
+                <div className="font-mono text-[8px] font-black tracking-[.16em] text-red-200">X  BLOCKED</div>
+                <div className="mt-1 font-mono text-[7px] text-red-100/55">approval_state=PENDING</div>
+              </div>
+            )}
+
+            {phase === "attack" && (
+              <div className="absolute left-[70%] top-[68%] rounded-lg border border-red-300/20 bg-red-400/[.05] px-3 py-2 font-mono text-[7px] text-red-100/60">
+                12 adversarial paths · 1 reproduced
+              </div>
+            )}
+
+            <div className="absolute bottom-5 left-4 right-4">
+              <TransactionDetail phase={phase} />
+            </div>
           </div>
         </section>
 
-        <aside className="space-y-3">
-          <div className="flex gap-1 rounded-xl border border-white/10 bg-[#07101b] p-1">
-            {(["transaction","trace","evidence","release"] as const).map(t=><button key={t} onClick={()=>setSelectedTab(t)} className={`flex-1 rounded-lg px-2 py-2 font-mono text-[7px] uppercase ${selectedTab===t?"bg-white/10 text-white":"text-white/30"}`}>{t}</button>)}
+        <div className="mt-3">
+          <EvidenceRail phase={phase} />
+        </div>
+
+        <div className="mt-3 grid gap-3 lg:grid-cols-[minmax(0,1fr)_310px]">
+          <div className="rounded-xl border border-white/8 bg-white/[.02] p-3">
+            <div className="flex items-center justify-between">
+              <span className="font-mono text-[7px] font-bold tracking-[.16em] text-white/30">EXECUTION SIGNAL</span>
+              <span className="font-mono text-[7px] text-white/20">PR #284 · 31 changed files</span>
+            </div>
+            <div className="mt-2 flex flex-wrap gap-x-5 gap-y-2 font-mono text-[8px] text-white/45">
+              <span>RFQ <b className="text-white/70">240 MT</b></span>
+              <span>GRADE <b className="text-white/70">S355</b></span>
+              <span>STOCK <b className="text-emerald-300">310 MT</b></span>
+              <span>MARGIN <b className="text-white/70">7.8%</b></span>
+              <span>TRACE <b className="text-cyan-300">trc_8f21</b></span>
+              <span>FINDING <b className="text-red-300">F-001</b></span>
+            </div>
           </div>
-          {selectedTab==="transaction"&&<Inspector node={activeNode} phase={phase}/>}
-          {selectedTab==="trace"&&<TracePanel/>}
-          {selectedTab==="evidence"&&<EvidencePanel/>}
-          {selectedTab==="release"&&<ReleasePanel/>}
-          {phase==="failure"&&<div className="rounded-xl border border-red-400/20 bg-red-400/[.04] p-4"><div className="font-mono text-[8px] text-red-300">F-001 · BLOCKING</div><div className="mt-2 text-[11px] font-semibold">Approval bypass</div><div className="mt-2 font-mono text-[8px] leading-4 text-white/45">quotation.create() reached the tool boundary while approval_state=PENDING.</div></div>}
-        </aside>
+          <Gate phase={phase} />
+        </div>
       </div>
-    </div>
-    <footer className="border-t border-white/10 px-4 py-3 md:px-7"><div className="mx-auto flex max-w-[1600px] items-center justify-between"><span className="font-mono text-[7px] text-white/20">SYNTHETIC DEMONSTRATION · NOT A CUSTOMER RUN</span><span className="font-mono text-[7px] text-white/20">Change → impact → execution → finding → RCA → regression → release</span></div></footer>
-  </main>;
-}
 
-const eventsList = [
-  ["09:41:02","CHANGE","PR #284 · 31 files changed"],
-  ["09:41:04","IMPACT","14 journeys · 8 critical paths"],
-  ["09:41:06","PLAN","46 affected regression cases generated"],
-  ["09:41:09","REQUEST","RFQ-2026-184 · 240 MT S355 · Rotterdam"],
-  ["09:41:11","AGENT","extract_rfq({grade:S355, qty:240, delivery:RTM})"],
-  ["09:41:13","TOOL","inventory.check → available=310 MT"],
-  ["09:41:15","TOOL","supplier_price.refresh → price_version=2026-09-28T18:42"],
-  ["09:41:17","TOOL","margin.calculate → margin=7.8%"],
-  ["09:41:19","POLICY","quotation.create blocked · approval_state=PENDING"],
-  ["09:41:22","RCA","F-001 · approval cache / pricing path"],
-  ["09:41:25","REPLAY","3/3 reproductions confirmed"],
-  ["09:41:28","SECURITY","12 adversarial scenarios · 1 reproduced"],
-  ["09:41:31","REGRESSION","15 permanent cases added · 46 → 61"],
-  ["09:41:34","GATE","RELEASE BLOCKED"],
-] as const;
-
-function ReleasePanel() {
-  return <div className="space-y-3">
-    <div className="rounded-2xl border border-red-400/30 bg-red-400/[.05] p-5"><div className="font-mono text-[8px] tracking-[.18em] text-red-300">RELEASE DECISION</div><div className="mt-2 text-4xl font-black text-red-200">BLOCK</div><p className="mt-3 text-[10px] leading-5 text-white/55">Quotation creation can occur while authoritative margin approval remains pending.</p></div>
-    <div className="grid grid-cols-2 gap-2">{[["42","PASS"],["3","REVIEW"],["1","FAIL"],["2","BLOCKING"]].map(([n,l])=><div key={l} className="rounded-xl border border-white/10 bg-[#07101b] p-3 text-center"><div className="text-lg font-bold">{n}</div><div className="font-mono text-[7px] text-white/25">{l}</div></div>)}</div>
-    <EvidencePanel/>
-  </div>;
+      <footer className="border-t border-white/8 px-4 py-3 sm:px-6 lg:px-8">
+        <div className="mx-auto flex max-w-[1440px] flex-col gap-1 font-mono text-[7px] text-white/20 sm:flex-row sm:items-center sm:justify-between">
+          <span>SHYENA · AUTONOMOUS QA</span>
+          <span>Illustrative Vanilla Steel RFQ · all run data is synthetic</span>
+        </div>
+      </footer>
+    </main>
+  );
 }
