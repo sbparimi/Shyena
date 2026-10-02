@@ -237,10 +237,32 @@ function HomePage() {
       <div className="mx-auto max-w-[1280px] px-5 py-4 text-center font-mono text-[10px] font-bold uppercase tracking-[.12em] text-[#a55410]">FROM CHANGE → IMPACT → TEST → EVALUATE → ATTACK → DIAGNOSE → RELEASE</div>
     </section>
 
-    <section className="border-b border-[#e6e8ed] bg-[#fafbfc]"><div className="mx-auto max-w-[1280px] px-5 py-16 sm:px-8 lg:px-10 lg:py-20"><div className="max-w-3xl"><div className="text-sm font-bold text-[#e87512]">Assurance that runs where your AI does.</div><h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em]">One engineer. Three buyer moments.</h2></div><div className="mt-10 grid gap-4 lg:grid-cols-3">
-<article key={a} className="rounded-2xl border border-[#e1e4e9] bg-white p-7"><div className="text-xs font-bold uppercase tracking-[.12em] text-[#e87512]">Before every release</div><h3 className="mt-3 text-2xl font-extrabold">Every change gets tested.</h3><p className="mt-4 text-sm leading-6 text-[#69707d]">Journey generation · Four-layer evaluation · Security probes · Release gate</p></article>,<article key={a} className="rounded-2xl border border-[#e1e4e9] bg-white p-7"><div className="text-xs font-bold uppercase tracking-[.12em] text-[#e87512]">In production</div><h3 className="mt-3 text-2xl font-extrabold">Every conversation teaches the next test.</h3><p className="mt-4 text-sm leading-6 text-[#69707d]">Conversation monitoring · Failure detection · Drift alerts · New regression tests</p></article>,<article key={a} className="rounded-2xl border border-[#e1e4e9] bg-white p-7"><div className="text-xs font-bold uppercase tracking-[.12em] text-[#e87512]">At audit time</div><h3 className="mt-3 text-2xl font-extrabold">Every obligation has evidence.</h3><p className="mt-4 text-sm leading-6 text-[#69707d]">Requirement-to-evidence matrix · Evidence pack · Re-run history</p></article>
-</div></div></section>
-<section className="bg-white">
+    <section className="border-b border-[#e6e8ed] bg-[#fafbfc]">
+      <div className="mx-auto max-w-[1280px] px-5 py-16 sm:px-8 lg:px-10 lg:py-20">
+        <div className="max-w-3xl">
+          <div className="text-sm font-bold text-[#e87512]">Assurance that runs where your AI does.</div>
+          <h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em]">One engineer. Three buyer moments.</h2>
+        </div>
+        <div className="mt-10 grid gap-4 lg:grid-cols-3">
+          <article className="rounded-2xl border border-[#e1e4e9] bg-white p-7">
+            <div className="text-xs font-bold uppercase tracking-[.12em] text-[#e87512]">Before every release</div>
+            <h3 className="mt-3 text-2xl font-extrabold">Every change gets tested.</h3>
+            <p className="mt-4 text-sm leading-6 text-[#69707d]">Journey generation · Four-layer evaluation · Security probes · Release gate</p>
+          </article>
+          <article className="rounded-2xl border border-[#e1e4e9] bg-white p-7">
+            <div className="text-xs font-bold uppercase tracking-[.12em] text-[#e87512]">In production</div>
+            <h3 className="mt-3 text-2xl font-extrabold">Every conversation teaches the next test.</h3>
+            <p className="mt-4 text-sm leading-6 text-[#69707d]">Conversation monitoring · Failure detection · Drift alerts · New regression tests</p>
+          </article>
+          <article className="rounded-2xl border border-[#e1e4e9] bg-white p-7">
+            <div className="text-xs font-bold uppercase tracking-[.12em] text-[#e87512]">At audit time</div>
+            <h3 className="mt-3 text-2xl font-extrabold">Every obligation has evidence.</h3>
+            <p className="mt-4 text-sm leading-6 text-[#69707d]">Requirement-to-evidence matrix · Evidence pack · Re-run history</p>
+          </article>
+        </div>
+      </div>
+    </section>
+    <section className="bg-white">
       <div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
         <div className="max-w-3xl">
           <div className="text-sm font-bold text-[#e87512]">The shift</div>
