@@ -281,7 +281,9 @@ function nodeState(id: string, phase: Phase): "idle" | "active" | "passed" | "bl
 
 function MotionCanvas({ phase, elapsed, cinematic, paused }: { phase: Phase; elapsed: number; cinematic: boolean; paused: boolean }) {
   const ref = React.useRef<HTMLCanvasElement>(null);
-  const particlesRef = React.useRef<Particle[]>(createParticles());\n  const stateRef = React.useRef({ phase, elapsed, cinematic, paused });\n  stateRef.current = { phase, elapsed, cinematic, paused };\n  const stateRef = React.useRef({ phase, elapsed, cinematic, paused });\n  stateRef.current = { phase, elapsed, cinematic, paused };
+  const particlesRef = React.useRef<Particle[]>(createParticles());
+  const stateRef = React.useRef({ phase, elapsed, cinematic, paused });
+  stateRef.current = { phase, elapsed, cinematic, paused };
   const rafRef = React.useRef<number | null>(null);
   const lastRef = React.useRef(0);
 
@@ -310,14 +312,15 @@ function MotionCanvas({ phase, elapsed, cinematic, paused }: { phase: Phase; ela
     resize();
 
     const render = (ts: number) => {
-      const live = stateRef.current;\n      const dt = Math.min(50, lastRef.current ? ts - lastRef.current : 16);
+      const live = stateRef.current;
+      const dt = Math.min(50, lastRef.current ? ts - lastRef.current : 16);
       lastRef.current = ts;
 
       ctx.clearRect(0, 0, width, height);
       ctx.fillStyle = colors.bg;
       ctx.fillRect(0, 0, width, height);
 
-      const t = elapsed / 1000;
+      const t = live.elapsed / 1000;
       const p = phaseProgress(live.elapsed, live.phase);
       const slow = paused ? 0 : dt / 1000;
       const drift = t * 7;
