@@ -1,145 +1,264 @@
 ---
-title: "The Problem With Green Checkmarks on Broken Conversations"
-description: "Why semantic scores can look healthy while an agent journey has actually failed, and how an execution-integrity gate prevents false passes."
+title: "Cognigy Agent Testing: Why Green Checkmarks Can Hide Broken Journeys"
+description: "How semantic scores can look healthy while a Cognigy Agent journey has failed, and why execution integrity must gate the final verdict."
 slug: "the-problem-with-green-checkmarks-on-broken-conversations"
 content_type: "technical-article"
-category: "Quality Assurance"
+category: "Cognigy Assurance"
 diagram: "false-pass"
-thesis: "A green semantic score is not evidence that an agent completed its journey; execution integrity and critical contracts must constrain what a quality score is allowed to mean."
-primary_keyword: "AI agent evaluation"
+thesis: "A Cognigy Agent should not pass because its final answer sounds correct when the Flow, Tool execution, state transition or required handover failed underneath."
+primary_keyword: "Cognigy AI Agent evaluation"
 search_intent: "informational"
 author: "Shyena Engineering"
 published: true
 ---
 
-A semantic evaluator can correctly conclude that an agent's answer is relevant while the customer journey is still broken. The false pass appears when that quality measurement is promoted to the release verdict.
+# Cognigy Agent Testing: Why Green Checkmarks Can Hide Broken Journeys
 
-Consider an address-change journey. The agent explains the process correctly, but the required address-change tool never executes. The address remains unchanged. A response-quality judge can still return a strong score because it is judging the answer, not the side effect.
+The most dangerous AI test result is not an obvious failure.
 
-## The false pass has a specific shape
+It is a green result that looks convincing while the Agent did not actually complete the customer's task.
 
-```text
-Customer goal       = change address
-Semantic quality    = 0.92
-Conversation quality = PASS
-Required tool call   = missing
-Business state       = unchanged
-Execution integrity  = complete
+Consider a Cognigy Agent handling an order cancellation.
 
-Release verdict      = FAIL
+The final message says:
+
+> "Your order has been cancelled."
+
+A semantic evaluator gives the response a high score.
+
+But the execution evidence shows:
+
+```
+Customer identity: verified
+Order lookup: PASS
+Eligibility check: PASS
+Cancellation Tool: TIMEOUT
+Order state: still ACTIVE
+Final response: "Your order has been cancelled."
 ```
 
-Nothing is wrong with the 0.92. It simply answers a narrower question.
+A response-quality test can be green.
 
-The engineering error is using it as evidence for a broader claim: "the agent worked."
+The business journey is broken.
 
-## Separate the questions
+## Why this happens
 
-An assurance system should keep different properties visible.
+LLM-based evaluation is good at questions such as:
 
-| Layer | Question |
-|---|---|
-| Goal completion | Did the intended business outcome happen? |
-| Orchestration | Did the correct intent, route or handoff occur? |
-| Deterministic correctness | Are exact facts and side effects correct? |
-| Semantic quality | Was the generated interaction useful and grounded? |
-| Security | Did the agent respect trust and authorization boundaries? |
-| Execution integrity | Is the run complete and observable enough to support a verdict? |
+- Is the answer relevant?
+- Is it clear?
+- Does it address the user's request?
+- Does it appear grounded in the supplied context?
 
-These layers can legitimately disagree.
+It is not automatically authoritative for:
 
-For example, semantic quality can PASS while goal completion FAILS. That is useful information, not evaluator inconsistency.
+- whether a Tool actually executed;
+- whether a database state changed;
+- whether the correct customer was targeted;
+- whether an authorization check occurred;
+- whether a required Flow path executed;
+- whether a handover completed.
 
-## Why averaging creates false confidence
+Those facts belong to stronger evidence sources.
 
-Suppose a release produces these measurements:
+## The four-layer Cognigy verdict
 
-```text
-Semantic quality             96%   PASS
-Goal completion               82%  FAIL
-Deterministic contracts       98%  PASS
-Orchestration                 95%  PASS
-Security                       1 blocker
-Evidence completeness        100%  PASS
+A useful model is:
+
+```
+1. Deterministic facts
+2. Semantic quality
+3. Execution integrity
+4. Security constraints
+          |
+          v
+      Final verdict
 ```
 
-An average could still look impressive. But the average is not the release policy.
+### Deterministic facts
 
-A critical authorization violation, incorrect state change or incomplete execution must retain the ability to block release.
+Check exact conditions such as:
 
-A simple gated policy is easier to reason about:
+- expected Tool;
+- Tool arguments;
+- API result;
+- authorization state;
+- business record state;
+- required Flow or handover event.
 
-```text
-if execution_integrity_invalid:
-    FAIL
-elif critical_security_violation:
-    FAIL
-elif critical_deterministic_failure:
-    FAIL
-elif goal_not_completed:
-    FAIL
-else:
-    evaluate semantic quality against threshold
+### Semantic quality
+
+Evaluate properties that genuinely require interpretation:
+
+- relevance;
+- completeness;
+- clarity;
+- grounding;
+- appropriate uncertainty;
+- conversational quality.
+
+### Execution integrity
+
+Ask whether the run itself is valid.
+
+Did it finish? Did required actions execute? Did the evaluator receive complete evidence? Did the environment fail before the journey reached its terminal state?
+
+### Security constraints
+
+Check trust boundaries separately, especially for customer data and state-changing Tools.
+
+A critical security failure should not disappear into an average score.
+
+## A semantic PASS can coexist with a functional FAIL
+
+Imagine:
+
+```
+Answer quality        0.94
+Goal completion       FAIL
+Tool contract         FAIL
+Execution integrity   FAIL
+Security              PASS
 ```
 
-The exact gate is business-specific. The principle is not: **critical contracts are gates, not weighted suggestions.**
+There is no contradiction.
 
-## Execution integrity is an assurance property
+The 0.94 score answers one question: how good was the generated answer?
 
-Execution integrity is often treated as an observability concern. For release assurance, it is more than that.
+The release decision answers another: did the Agent successfully and safely complete the business journey?
 
-If the test ends after a timeout, loses the trace, misses tool events, or cannot establish whether a required step executed, the result may be impossible to interpret.
+A good assurance system does not force different dimensions into one number before applying hard gates.
 
-That does not necessarily mean the agent failed. It can mean the test result is **INCONCLUSIVE**.
+## Cognigy Tools make this particularly important
 
-This distinction prevents another kind of false confidence: treating missing evidence as evidence of success.
+Tools can create side effects.
 
-## The evidence chain
+A Tool may retrieve a record, update a customer attribute, initiate a refund, create a case, or invoke another enterprise capability.
 
-A useful report should let an engineer move backwards from verdict to proof.
+For state-changing actions, the test should connect:
 
-```text
-VERDICT: FAIL
-    |
-    +--> failed contract: goal completion
-    |
-    +--> observed state: address unchanged
-    |
-    +--> execution evidence: change_address not called
-    |
-    +--> orchestration evidence: wrong route selected
-    |
-    +--> semantic evidence: response was clear
+```
+User goal
+  |
+Agent decision
+  |
+Tool selected
+  |
+Tool arguments
+  |
+Tool result
+  |
+Authoritative state
+  |
+Final response
 ```
 
-The report is stronger because every claim has a corresponding observation.
+If any critical link breaks, the final answer cannot repair the evidence.
 
-## Score and verdict are different objects
+## The false-pass pattern
 
-A score is a measurement. A verdict is a decision.
+A common failure looks like this:
 
-The measurement can be continuous, such as 0.0–1.0. The verdict is usually categorical: PASS, FAIL, INCONCLUSIVE, NOT RUN or QUARANTINED.
+```
+Tool call
+   |
+   X  failure / timeout
+   |
+Agent assumes success
+   |
+LLM produces confident confirmation
+   |
+LLM judge sees helpful answer
+   |
+PASS
+```
 
-Keeping those concepts separate makes release governance much clearer.
+The correct flow is:
 
-It also allows teams to ask better questions:
+```
+Tool call
+   |
+   X failure / timeout
+   |
+Execution-integrity gate
+   |
+FAIL / INCONCLUSIVE
+```
 
-- Did the agent fail, or did the test fail to observe it?
-- Which contract caused the failure?
-- Was the failure release-blocking?
-- Which runtime event proves the claim?
-- Did the change improve execution or only wording?
+The evaluator should not allow a broken run to masquerade as a successful one.
 
-## What this changes for QA
+## Playbooks and Simulator do not remove this problem
 
-QA teams should stop treating the evaluation score as the final artifact. The important artifact is the evidence-backed decision.
+Cognigy provides native mechanisms for simulating and testing Agent behaviour. Those capabilities are valuable.
 
-That means retaining the test intent, execution trace, deterministic assertions, semantic evaluation, security observations and gate policy version alongside the result.
+Independent assurance adds a different control:
 
-A high score can then remain useful without becoming dangerous.
+> The organisation should be able to prove what happened during the execution and why the release verdict follows from that evidence.
+
+This is particularly important when the test result becomes part of a release process involving QA, engineering, product and security stakeholders.
+
+## What the report should show
+
+Instead of:
+
+```
+Test: Cancel order
+Score: 92%
+Status: PASS
+```
+
+show:
+
+```
+Journey: Cancel order
+Goal: cancellation completed
+
+Deterministic
+  identity_verified: PASS
+  order_eligible: PASS
+  cancellation_tool: FAIL
+  order_state: FAIL
+
+Semantic
+  response_relevance: 4/4
+
+Execution integrity
+  terminal state reached: NO
+
+Final verdict
+  FAIL
+```
+
+The second report explains the failure.
+
+## A hard-gate policy
+
+A practical policy can be:
+
+```
+IF critical deterministic condition fails
+    -> FAIL
+
+IF required execution evidence is missing
+    -> INCONCLUSIVE
+
+IF critical security boundary fails
+    -> FAIL
+
+OTHERWISE
+    -> evaluate semantic criteria
+```
+
+The exact policy belongs to the organisation. The important design principle is that semantic quality cannot override a release-blocking fact.
 
 ## Conclusion
 
-The cure for false green is not a bigger judge model. It is a layered assurance model in which execution integrity and hard contracts constrain what semantic evaluation can prove.
+Green checkmarks are useful only when the test semantics are sound.
 
-**Green means the measured criterion passed. It does not automatically mean the agent worked.**
+For Cognigy Agents, that means separating what the Agent **said** from what the system **did**.
+
+A fluent answer can be a useful observation.
+
+It is not proof of a successful business transaction.
+
+**Never let a good sentence turn a broken execution green.**
