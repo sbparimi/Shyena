@@ -1,106 +1,214 @@
 ---
-title: "Nexus System Intelligence for Cognigy: Build the Assurance Graph Before You Generate Tests"
-description: "A deep engineering model for understanding Cognigy Flows, AI Agents, Jobs, Tools, endpoints, handovers and business journeys before generating targeted assurance."
+title: "Nexus for Cognigy: Turning Agents, Flows, Jobs and Tools into Test Intelligence"
+description: "How Nexus models Cognigy Agent structure and customer journeys to identify decision points, dependencies, change impact and goal-driven test specifications."
 slug: "nexus-system-intelligence-for-cognigy"
 content_type: "technical-article"
 category: "Cognigy Assurance"
 diagram: "systems"
-thesis: "The highest-value Cognigy testing starts before execution: build a system-aware model that connects business journeys to Flows, Agents, Jobs, Tools, dependencies, state changes and release controls."
-primary_keyword: "Cognigy system testing"
+thesis: "Before generating tests, understand the Cognigy system that can execute them. Nexus turns Agent structure, Flows, Jobs, Tools and journeys into test intelligence."
+primary_keyword: "Cognigy test generation"
 search_intent: "informational"
 author: "Shyena Engineering"
 published: true
 ---
 
-# Nexus System Intelligence for Cognigy: Build the Assurance Graph Before You Generate Tests
+# Nexus for Cognigy: Turning Agents, Flows, Jobs and Tools into Test Intelligence
 
-The difficult part of testing an enterprise AI Agent is not producing another conversation. It is knowing what the conversation can cause.
+Generating a customer prompt is easy.
 
-Cognigy implementations can combine Flows, Intents, States, Slot Fillers, AI Agents, Jobs, Tools, Endpoints, knowledge capabilities, external services and handovers. Cognigy also exposes APIs for inspecting AI Agent Jobs and their associated Tools. That makes the system observable, but observation alone does not create a useful assurance model.
+Generating a test that is actually connected to a Cognigy Agent's business logic is much harder.
 
-The public Shyena name for this capability is Nexus System Intelligence.
+A useful test-generation system needs to understand the system under test before it proposes scenarios.
 
-## Start with the customer journey
+That is the role of Nexus.
 
-A conventional workflow begins with a requirement, a test case, a script and an execution. For agentic systems, a stronger workflow begins with the business goal, maps the customer journey, identifies the system path and risk, defines test intent, executes it and preserves the evidence.
+## Start from Cognigy structure
 
-Consider a customer who wants to change the delivery address for an eligible order. The assurance model needs to discover the entry Endpoint, Flow or Agent path, routing decision, AI Agent Job, permitted Tool, authoritative API, authorization conditions, failure paths, handover behaviour and terminal business state.
+A Cognigy Agent exposes more useful testing information than the final conversation suggests.
 
-The journey is the anchor. Cognigy components are part of the path.
+Depending on the Agent, the assurance model can include:
 
-## Model the execution graph
+- Agent configuration;
+- Flows;
+- Jobs;
+- Tools;
+- intents;
+- handovers;
+- knowledge dependencies;
+- external capabilities;
+- critical business journeys.
 
-A useful model follows the journey from Customer to Endpoint, Flow, Intent or AI Agent, Job, Tool, External API, authoritative business state and customer outcome.
+Nexus uses this structure as the starting point for test intelligence.
 
-Also model knowledge retrieval, retries, fallbacks, human or AI handovers, timeout branches, security controls and external dependencies.
+## Why generic prompt generation is weak
 
-The graph should answer four engineering questions: Which journeys depend on this component? What changes when the component changes? Which important paths have evidence-backed coverage? Which new tests are justified by the changed risk?
+Ask a language model:
 
-## Separate descriptive and consequential nodes
+> "Generate tests for a parcel delivery chatbot."
 
-A response node is not equivalent to a Tool that mutates customer state. A payment Tool is not equivalent to a harmless explanation.
+You will receive plausible scenarios.
 
-Observational behaviour can usually emphasise semantic quality. Decisional behaviour needs deterministic and trajectory evidence. Consequential behaviour needs exact arguments and authoritative state. Privileged behaviour needs deterministic and adversarial controls.
+But the model does not automatically know:
 
-## Jobs and Tools are first-class dependencies
+- which intents actually exist;
+- which Tools can change state;
+- which Flows contain critical decisions;
+- where handovers occur;
+- which business journeys are supported;
+- which dependencies are affected by a change.
 
-Cognigy's API exposes AI Agent Jobs and their associated Tools. That makes the capability surface concrete enough to reason about.
+A generated list can therefore be imaginative without being useful.
 
-For example, a refund Job might permit order retrieval, eligibility validation and refund creation while forbidding unrelated privileged operations.
+## Build an assurance graph
 
-The assurance question is not only whether the refund Tool ran. It is whether the Tool was permitted, whether its arguments were correct, whether the caller was authorized, and whether the authoritative state changed as expected.
+Nexus approaches the problem as a graph:
 
-## Change impact is broader than source-code impact
+```
+Agent
+ |
+ +-- Flow
+ |    +-- decision
+ |    +-- intent
+ |    +-- branch
+ |
+ +-- Job
+ |    +-- Tool
+ |    +-- Tool
+ |
+ +-- Knowledge
+ |
+ +-- Handover
+ |
+ +-- External dependency
+```
 
-AI risk can change through Flow logic, Agent instructions, model version, Job configuration, Tool definitions, knowledge sources, retrieval configuration, Endpoints, handovers, external APIs or authorization policy.
+Business journeys then traverse this graph.
 
-A source diff can therefore understate assurance impact. A useful chain is changed component, affected journey, affected Tool, affected invariant, required regression and release gate.
+The graph becomes the basis for coverage.
 
-## Coverage should be measured against risk
+## From decision points to test intent
 
-Test count is a weak proxy for assurance. Better dimensions include critical journey coverage, execution-path coverage, deterministic contract coverage, Tool and authorization coverage, recovery-path coverage, security-boundary coverage and evidence completeness.
+Suppose a Flow contains:
 
-If the numbers are not measured from the actual system, they should not be published as facts.
+```
+eligibility?
+  |
+  +-- yes -> cancellation Tool
+  |
+  +-- no  -> explain policy
+```
 
-## Generate test intent after understanding
+A useful test generator should create at least two meaningful intent paths.
 
-For an address-change journey, risk-driven intent can include the happy path, an ineligible order, wrong-customer access, wrong Tool selection, wrong Tool arguments, API timeout, partial failure, handover and prompt-manipulation attempts.
+It should also consider boundary conditions:
 
-Each scenario exists because the graph exposes a risk. That is the difference between generated volume and generated assurance.
+- missing order;
+- expired eligibility;
+- ambiguous identity;
+- Tool failure;
+- unexpected user request.
 
-## Keep the model connected to evidence
+The objective is not to generate more tests.
 
-A static architecture diagram has limited value. The useful lifecycle is system model, test intent, execution, finding, root cause, regression and updated assurance model.
+It is to generate tests around the decisions that can change the outcome.
 
-A production failure should create a new invariant, negative-path test, security control, affected-journey link or release-gate condition where appropriate. The failure becomes organisational memory.
+## Change impact
 
-## What Nexus System Intelligence is and is not
+One of the strongest reasons to understand system structure is regression selection.
 
-Nexus System Intelligence is an assurance-oriented system model, dependency and journey graph, change-impact intelligence, risk-driven test-intent layer and provenance layer connecting tests to the system they protect.
+If a Tool changes:
 
-It is not a replacement for Cognigy's native environment. It is not a claim that every implementation can be completely understood automatically. It is not generic architecture documentation, and it is not a reason to remove carefully authored edge cases.
+```
+Tool change
+   |
+   +--> Jobs using Tool
+           |
+           +--> Flows / journeys
+                   |
+                   +--> affected test specifications
+```
 
-## The assurance graph
+Instead of rerunning an undifferentiated suite, engineering can identify the journeys that actually depend on the changed component.
 
-The release relationship should be traceable from business requirement to customer journey, Cognigy component, dependency, test intent, execution trace, finding, regression and release decision.
+## Goal-driven test specifications
 
-This gives engineering teams a defensible answer to the incident question: why did we believe this journey was safe to release?
+A Nexus specification is intentionally more expressive than a prompt.
 
-## Why this matters for Cognigy teams
+A useful specification contains:
 
-Cognigy teams can use native platform testing where it is strongest and add an independent assurance view where the scope crosses business systems, authoritative state, security boundaries or release governance.
+- goal;
+- persona;
+- starting context;
+- playbook or interaction strategy;
+- expected invariants;
+- forbidden behaviours;
+- required evidence.
 
-The result is not more tests for their own sake. It is targeted assurance based on the paths that matter.
+For example:
+
+```yaml
+goal: resolve an address-change request
+persona: verified parcel customer
+playbook:
+  - ask naturally
+  - provide parcel information when requested
+assertions:
+  - correct customer context
+  - verification before update
+  - permitted Tool selected
+  - authoritative state changed
+  - response matches outcome
+```
+
+The Agent remains free to conduct the conversation. The specification defines what the test must prove.
+
+## Nexus is not a black-box transcript generator
+
+The important distinction is provenance.
+
+A generated test should be traceable to the part of the Cognigy Agent that caused it to be proposed.
+
+For example:
+
+```
+Test case
+  |
+  +--> business goal
+  +--> affected Flow
+  +--> decision point
+  +--> Job
+  +--> Tool
+  +--> expected invariant
+```
+
+That makes generated tests easier to review and maintain.
+
+## What Nexus does not claim
+
+Nexus should not pretend to replace manual test design.
+
+Experienced QA engineers still understand business risk, unusual customer behaviour and organisational policy.
+
+The useful role of system-aware generation is to increase coverage of the implementation surface while keeping human judgement over the quality contract.
+
+## The independent boundary
+
+Nexus is designed around Cognigy as the live source of system structure.
+
+That creates a clear product boundary:
+
+**Cognigy builds and runs the Agent.**
+
+**Nexus understands the Agent and turns its structure into test intelligence.**
+
+**Vera executes and evaluates the resulting journeys.**
+
+The independence comes from separating the test-generation and evaluation layer from the Agent being tested.
 
 ## Conclusion
 
-Cognigy gives teams a sophisticated environment for building and operating AI Agents. As the capability surface grows, assurance has to follow the system rather than only the conversation.
+The quality of generated tests depends heavily on what the generator understands.
 
-Understand the system. Map the journeys. Identify the consequences. Then generate the assurance.
+For Cognigy, that means understanding Agents, Flows, Jobs, Tools, intents, handovers and business journeys rather than generating generic chatbot prompts.
 
-## Primary research
-
-- Cognigy AI Agent Evaluation: https://www.cognigy.com/platform/ai-agent-evaluation
-- Cognigy AI Agent Jobs and Tools API: https://docs.cognigy.com/api-reference/aiagents/get-ai-agent-jobs-and-their-tools
-- Cognigy Playbooks API: https://docs.cognigy.com/api-reference/playbooks-v20/create-a-new-playbook
-- Cognigy Endpoint reference: https://docs.cognigy.com/ai/agents/deploy/endpoint-reference/overview
+**First understand the Agent. Then decide what deserves to be tested.**
