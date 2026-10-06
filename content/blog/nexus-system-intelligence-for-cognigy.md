@@ -1,144 +1,114 @@
 ---
-title: "Nexus for Cognigy: Turning Flows, Agents and Tools into an Assurance Graph"
-description: "How Shyena Nexus builds an assurance-oriented system model around Cognigy so teams can identify critical journeys, dependencies, change impact and test intent before execution."
+title: "Nexus System Intelligence for Cognigy: Build the Assurance Graph Before You Generate Tests"
+description: "A deep engineering model for understanding Cognigy Flows, AI Agents, Jobs, Tools, endpoints, handovers and business journeys before generating targeted assurance."
 slug: "nexus-system-intelligence-for-cognigy"
 content_type: "technical-article"
 category: "Cognigy Assurance"
 diagram: "systems"
-thesis: "Before generating tests, understand the system that can execute them. Nexus turns Cognigy implementation structure and business journeys into an assurance graph that exposes dependencies, impact and coverage targets."
+thesis: "The highest-value Cognigy testing starts before execution: build a system-aware model that connects business journeys to Flows, Agents, Jobs, Tools, dependencies, state changes and release controls."
 primary_keyword: "Cognigy system testing"
 search_intent: "informational"
 author: "Shyena Engineering"
 published: true
 ---
 
-# Nexus for Cognigy: Turning Flows, Agents and Tools into an Assurance Graph
+# Nexus System Intelligence for Cognigy: Build the Assurance Graph Before You Generate Tests
 
-The first mistake in AI testing is often starting too late.
+The difficult part of testing an enterprise AI Agent is not producing another conversation. It is knowing what the conversation can cause.
 
-Teams open the test editor and ask: what should we test?
+Cognigy implementations can combine Flows, Intents, States, Slot Fillers, AI Agents, Jobs, Tools, Endpoints, knowledge capabilities, external services and handovers. Cognigy also exposes APIs for inspecting AI Agent Jobs and their associated Tools. That makes the system observable, but observation alone does not create a useful assurance model.
 
-For complex Cognigy implementations, the better question is: what system are we actually testing?
+The public Shyena name for this capability is **Nexus System Intelligence**.
 
-Cognigy Flows contain Nodes, Intents, States and Slot Fillers. AI Agents can introduce Jobs and Tools. Endpoints connect the system to channels. Handover logic can move work to other Agents or humans. External services create additional dependencies.
+> Before generating tests, build a model of the system that can execute them.
 
-A test suite built without understanding those relationships can have excellent execution and poor coverage.
+## 1. Start with the customer journey
 
-That is the problem Nexus is designed to solve.
+A conventional workflow is `Requirement → test case → script → execution`. For agentic systems, a stronger workflow is `Business goal → journey → system path → risk → test intent → execution → evidence`.
 
-## The assurance graph
+Consider: “A customer wants to change the delivery address for an eligible order.” The assurance model needs to discover the entry Endpoint, Flow or Agent path, routing decision, AI Agent Job, permitted Tool, authoritative API, authorization conditions, failure paths, handover behaviour and terminal business state.
 
-Nexus represents the system as a graph:
+The journey is the anchor. Cognigy components are part of the path.
 
-Business journey → entrypoint → Cognigy Flow → Intent or Agent → Job → Tool → external service → business state.
+## 2. Model the execution graph
 
-The graph exists to answer four engineering questions:
+`Customer → Endpoint → Flow → Intent / AI Agent → Job → Tool → External API → Authoritative business state → Customer outcome`
 
-1. Which customer journeys depend on this component?
-2. Which components are affected by a change?
-3. Which paths are currently covered?
-4. Which new tests should be generated?
+Also model knowledge retrieval, retries, fallbacks, handovers, timeout branches, security controls and external dependencies.
 
-## From implementation to test intent
+The graph answers four questions:
 
-Suppose a team changes a Cognigy Job that can invoke three Tools.
+1. Which journeys depend on this component?
+2. What changes when this component changes?
+3. Which important paths have evidence-backed coverage?
+4. Which new tests are justified by the changed risk?
 
-The naive response is to run the entire regression suite.
+## 3. Separate descriptive and consequential nodes
 
-Nexus asks which journeys depend on the Job and each Tool, which of those journeys are critical, which have deterministic business contracts and which have security-sensitive side effects.
+A response node is not equivalent to a Tool that mutates customer state. A payment Tool is not equivalent to a harmless explanation.
 
-A change can then become a risk map instead of a vague regression request.
+| Class | Example | Assurance emphasis |
+|---|---|---|
+| Observational | answer / explanation | semantic quality |
+| Decisional | route / Intent / Job choice | deterministic + trajectory evidence |
+| Consequential | Tool / API / workflow | exact arguments + authoritative state |
+| Privileged | payment / identity / sensitive data | deterministic + adversarial controls |
 
-## Business journeys are the anchor
+## 4. Jobs and Tools are first-class dependencies
 
-Technical components are not the final unit of assurance. Customers experience journeys.
+Cognigy's API exposes AI Agent Jobs and their associated Tools. That makes the capability surface concrete enough to reason about.
 
-Examples include changing an address, cancelling an order, checking an invoice, reporting a damaged delivery or escalating to a human.
+For example, a refund Job might permit `get_order`, `validate_refund`, and `create_refund`, while forbidding unrelated privileged operations.
 
-Each journey can map to Flow, Intent, Agent, Job, Tool, API, state transition, security boundary and expected outcome.
+The assurance question is not only whether the refund Tool ran. It is whether the Tool was permitted, whether its arguments were correct, whether the caller was authorized, and whether the authoritative state changed as expected.
 
-That creates a traceable relationship:
+## 5. Change impact is broader than source-code impact
 
-Business requirement → customer journey → Cognigy path → system dependencies → test intent.
+AI risk can change through Flow logic, Agent instructions, model version, Job configuration, Tool definitions, knowledge sources, retrieval configuration, Endpoints, handovers, external APIs or authorization policy.
 
-The result is stronger than a collection of isolated conversation tests.
+A source diff can therefore understate assurance impact.
 
-## Why dependency mapping matters
+`Changed component → affected journey → affected Tool → affected invariant → required regression → release gate`
 
-Consider a Tool used by five journeys. A small change to that Tool may have a much larger assurance impact than a change to a component used by one journey.
+## 6. Coverage should be measured against risk
 
-Without a dependency graph, that relationship is easy to miss.
+Test count is a weak proxy for assurance. Better dimensions include critical journey coverage, execution-path coverage, deterministic contract coverage, Tool and authorization coverage, recovery-path coverage, security-boundary coverage and evidence completeness.
 
-With the graph, one changed Tool can immediately expose the affected journeys, required regression, relevant security controls and release impact.
+If the numbers are not measured from the actual system, they should not be published as facts.
 
-## Coverage should mean more than test count
+## 7. Generate test intent after understanding
 
-A team might say: we have 400 tests.
+For an address-change journey, risk-driven intent can include the happy path, an ineligible order, wrong-customer access, wrong Tool selection, wrong Tool arguments, API timeout, partial failure, handover, and prompt-manipulation attempts.
 
-That does not establish meaningful coverage.
+Each scenario exists because the graph exposes a risk. That is the difference between generated volume and generated assurance.
 
-A stronger question is: how many critical business journeys have traceable coverage across their important system paths?
+## 8. Keep the model connected to evidence
 
-Useful coverage dimensions include journey coverage, path coverage, deterministic contract coverage, security coverage and evidence coverage.
+A static architecture diagram has limited value. The useful lifecycle is `System model → test intent → execution → finding → root cause → regression → updated assurance model`.
 
-The numbers should come from the actual system. If they do not, they should not be presented as facts.
+A production failure should create a new invariant, negative-path test, security control, affected-journey link or release-gate condition where appropriate.
 
-## Change impact for AI systems
+## 9. What Nexus System Intelligence is — and is not
 
-Traditional impact analysis often starts with source-code dependencies. AI systems need a wider model.
+**It is:** an assurance-oriented system model, dependency and journey graph, change-impact intelligence, risk-driven test-intent layer, and provenance layer connecting tests to the system they protect.
 
-A change can occur in Flow logic, Intent configuration, model, prompt, Job, Tool, knowledge source, retrieval configuration, endpoint, handover, external API or security policy.
+**It is not:** a replacement for Cognigy's native environment, a claim that every implementation can be completely understood automatically, a generic architecture documentation tool, or a reason to remove carefully authored edge cases.
 
-The affected journey may remain invisible if impact analysis only looks at source files.
+## 10. The assurance graph
 
-Nexus therefore treats the AI system as a combination of implementation structure and behavioural dependency.
+`Business requirement → customer journey → Cognigy component → dependency → test intent → execution trace → finding → regression → release decision`
 
-## Generate tests after understanding
-
-Only after the graph exists should test generation begin.
-
-For a refund journey, the assurance model might identify the critical path as identify customer → retrieve order → validate → refund → confirm.
-
-Risk-driven tests can then include the happy path, ineligible order, wrong customer, missing order, refund API timeout, Tool argument mutation, duplicate refund attempt, prompt injection, human handover and recovery after partial failure.
-
-Every test has a reason to exist.
-
-## A living assurance model
-
-Nexus should not become another static diagram.
-
-Its value comes from keeping the model connected to execution:
-
-System model → test intent → execution → finding → regression → updated assurance model.
-
-A failure should teach the assurance system something.
-
-If a missing negative path is discovered, the journey gains that coverage. If a Tool boundary is vulnerable, affected journeys inherit the control. If a new handover branch appears, the model exposes the new path.
-
-This is how coverage becomes an engineering asset rather than a spreadsheet.
-
-## Why this matters for Cognigy teams
-
-Cognigy provides APIs and platform structures that expose Flows and AI Agent Jobs. The independent assurance challenge is to connect those structures to business outcomes.
-
-A Cognigy team should be able to move from: something changed in the Agent, to: this change affects these critical journeys, these Tools, these authorization boundaries and these release controls.
-
-That is actionable intelligence.
-
-## Nexus is not another test runner
-
-A test runner answers: did the test execute?
-
-Nexus answers: why does this test exist, what system path does it protect, what changed and what else is affected?
-
-That is the difference between execution and assurance intelligence.
+This gives engineering teams a defensible answer to: why did we believe this journey was safe to release?
 
 ## Conclusion
 
-The difficult part of AI testing is not generating more tests. It is knowing which tests matter.
+Cognigy gives teams a sophisticated environment for building and operating AI Agents. As the capability surface grows, assurance has to follow the system rather than only the conversation.
 
-For Cognigy systems, that means understanding Flows, Agents, Jobs, Tools, endpoints, handovers, external dependencies and business journeys as one connected model.
+**Understand the system. Map the journeys. Identify the consequences. Then generate the assurance.**
 
-Nexus turns that model into assurance intelligence.
+### Primary research
 
-Understand first. Generate second. Execute third. Then use the evidence to improve the model itself.
+- Cognigy AI Agent Evaluation: https://www.cognigy.com/platform/ai-agent-evaluation
+- Cognigy AI Agent Jobs and Tools API: https://docs.cognigy.com/api-reference/aiagents/get-ai-agent-jobs-and-their-tools
+- Cognigy Playbooks API: https://docs.cognigy.com/api-reference/playbooks-v20/create-a-new-playbook
+- Cognigy Endpoint reference: https://docs.cognigy.com/ai/agents/deploy/endpoint-reference/overview
