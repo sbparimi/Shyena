@@ -150,6 +150,33 @@ A test should define:
 
 A successful handover with lost context can still be a failed journey.
 
+## MCP creates another tool boundary
+
+Cognigy's current platform direction also includes Model Context Protocol (MCP), which can expose tools to external AI applications through a standardized interface. When MCP is in scope, the assurance surface expands beyond the Agent conversation.
+
+Test at least four layers:
+
+1. **Discovery** — are only the intended tools exposed?
+2. **Schema** — are tool names, descriptions and parameters correct?
+3. **Invocation** — can the Agent or external client call the capability only under the intended authorization conditions?
+4. **Side effect** — does the downstream operation produce the expected state without crossing a customer or privilege boundary?
+
+MCP therefore belongs in the same evidence graph as native Cognigy Tools. The interface is different; the assurance questions are similar.
+
+## Agent loop control matters
+
+Agentic execution can contain repeated reasoning and Tool-action cycles. A test should therefore include termination behaviour as an invariant where the journey can loop.
+
+Useful evidence includes:
+
+- number of repeated action cycles;
+- retry behaviour after Tool errors;
+- termination condition;
+- maximum-loop configuration where applicable;
+- final terminal state.
+
+A conversation that eventually stops is not necessarily healthy if it consumed an unexpected number of cycles or repeated a state-changing Tool.
+
 ## Endpoint and environment matter
 
 The same Agent can behave differently across environments because of:
