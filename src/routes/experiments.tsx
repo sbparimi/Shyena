@@ -1,3 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { QualityIntelligencePage } from "../components/site/quality-intelligence-page";
-export const Route = createFileRoute("/experiments")({ head: () => ({ meta: [{ title: "AI Evaluation Experiments | Shyena" }, { name: "description", content: "Compare models, prompts, retrieval and agent versions and prove what changed." }, { name: "robots", content: "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" }, { property: "og:title", content: "AI Evaluation Experiments | Shyena" }, { property: "og:description", content: "Compare models, prompts, retrieval and agent versions and prove what changed." }, { property: "og:type", content: "website" }, { property: "og:url", content: "https://www.shyena.eu/experiments" }, { property: "og:image", content: "https://www.shyena.eu/shyena-logo-exact.webp" }, { property: "og:image:alt", content: "Shyena AI assurance platform" }, { name: "twitter:card", content: "summary_large_image" }, { name: "twitter:image", content: "https://www.shyena.eu/shyena-logo-exact.webp" }], links: [{ rel: "canonical", href: "https://www.shyena.eu/experiments" }] }), component: () => <QualityIntelligencePage module="experiments" /> });
+import { createFileRoute, redirect } from "@tanstack/react-router";
+
+export const Route = createFileRoute("/experiments")({
+  beforeLoad: () => {
+    throw redirect({ to: "/vera", statusCode: 301 });
+  },
+  component: () => null,
+});

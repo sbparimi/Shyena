@@ -1,16 +1,3 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { AutonomousQACinematicDemo } from "@/components/site/autonomous-qa-cinematic-demo";
-
-export const Route = createFileRoute("/demo")({
-  head:()=>({
-    meta:[
-      {title:"AI Assurance Platform | Shyena"},
-      {name:"description",content:"Interactive Shyena AI assurance demonstration: understand, evaluate, attack and prove an AI system."},
-      {property:"og:title",content:"AI Assurance Platform | Shyena"},
-      {property:"og:description",content:"Interactive Shyena AI assurance demonstration: understand, evaluate, attack and prove an AI system."},
-      {property:"og:url",content:"https://www.shyena.eu/demo"},
-    ],
-    links:[{rel:"canonical",href:"https://www.shyena.eu/demo"}],
-  }),
-  component:()=> <AutonomousQACinematicDemo/>,
-});
+import { createFileRoute, Link } from "@tanstack/react-router";
+export const Route=createFileRoute("/demo")({head:()=>({meta:[{title:"How it works | Shyena"},{name:"description",content:"How Nexus and Vera provide independent Cognigy AI Agent testing and evaluation."}]}),component:Demo});
+function Demo(){return <div className="bg-white text-[#17213f]"><section className="bg-[#07101f] text-white"><div className="mx-auto max-w-[1100px] px-5 py-20 sm:px-8 lg:py-28"><p className="font-mono text-xs font-bold uppercase tracking-[.2em] text-[#f18a32]">How it works</p><h1 className="mt-5 font-[Sora] text-5xl font-extrabold tracking-[-.055em] sm:text-6xl">From Cognigy project to evidence.</h1><p className="mt-6 max-w-2xl text-lg leading-8 text-white/65">Nexus maps the project and drafts tests. Vera runs real conversations, checks deterministic behaviour and evaluates the evidence.</p></div></section><section><div className="mx-auto max-w-[1000px] px-5 py-16 sm:px-8 lg:py-24"><div className="grid gap-4 md:grid-cols-2"><div className="rounded-2xl border p-7"><span className="font-mono text-xs text-[#f18a32]">01</span><h2 className="mt-4 text-2xl font-extrabold">Nexus</h2><p className="mt-3 text-sm leading-7 text-[#667085]">Read the project, map journeys and decision points, then draft goal-driven test cases.</p></div><div className="rounded-2xl border p-7"><span className="font-mono text-xs text-[#f18a32]">02</span><h2 className="mt-4 text-2xl font-extrabold">Vera</h2><p className="mt-3 text-sm leading-7 text-[#667085]">Execute persona-driven conversations, verify tool calls and state, evaluate semantics and preserve the audit trail.</p></div></div><Link to="/sample-report" className="mt-8 inline-flex h-11 items-center rounded-lg bg-[#17213f] px-5 text-sm font-bold text-white">See a sample report</Link></div></section></div>}
