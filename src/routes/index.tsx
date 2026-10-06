@@ -8,7 +8,7 @@ const faq = [
   ["Is Shyena just another test automation tool?", "No. Shyena is your AI Assurance Engineer: it maps real journeys, judges behaviour, attacks unsafe paths and produces evidence for release decisions."],
   ["How is it different from LLM evaluation libraries?", "LLM evaluation can score model outputs. Shyena evaluates the complete AI journey: business rules, routing, tools, APIs, agent behaviour and security, then connects findings to release evidence."],
   ["Does Shyena make us EU AI Act compliant?", "No. Shyena produces technical evidence that can support legal and compliance work. It is not legal advice or a certification body."],
-  ["Which platforms do you support?", "Shyena is designed for conversational and agentic AI systems. Supported integrations should be confirmed for your stack during an engagement."],
+  ["Which platforms do you support?", "Cognigy is a first-class assurance target. Shyena can assess Cognigy Flows, AI Agents, Jobs, Tools, endpoints, handovers and surrounding enterprise systems; exact integration scope is confirmed against the customer environment."],
   ["Do you need access to production?", "No for an initial assessment. The preferred boundary is a customer-controlled test or staging environment with scoped credentials and least-privilege access."],
   ["Where does our data go?", "Engagement architecture is designed around customer-controlled environments and customer-funded model/API accounts. See Security for the current boundary."],
   ["Can we start small?", "Yes. Start with one AI system and one critical assurance journey. Shyena can automate the initial assessment and identify the specialist capabilities required for any remaining work."],
