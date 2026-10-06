@@ -121,7 +121,20 @@ export function AutonomousQACinematicDemo(){
     </div>
    </div>
   </section>
-  <section className="sticky top-0 z-30 border-b border-white/10 bg-[#060a0f]/95 backdrop-blur"><div className="mx-auto flex max-w-[1380px] overflow-x-auto px-5 sm:px-8 lg:px-10">{phases.map((p,i)=><button key={p.id} onClick={()=>{setPhase(i);setRunning(false)}} className={`relative min-w-[118px] flex-1 px-3 py-4 text-left ${i===phase?"bg-white/[.045]":""}`}><div className={`font-mono text-[7px] font-bold tracking-[.16em] ${i===phase?(p.color==="red"?"text-red-300":"text-[#f18a32]"):"text-white/25"}`}>{p.label}</div><div className="mt-1 text-[9px] font-semibold text-white/55">{p.title}</div>{i===phase&&<div className={`absolute bottom-0 left-0 right-0 h-0.5 ${p.color==="red"?"bg-red-400":"bg-[#f18a32]"}`}/>}</button>)}</div></section>
+  <section className="sticky top-0 z-30 border-b border-white/10 bg-[#060a0f]/95 backdrop-blur">
+    <div className="mx-auto flex max-w-[1380px] overflow-x-auto px-5 sm:px-8 lg:px-10">
+      {phases.map((p,i) => {
+        const active = i === phase;
+        const tone = p.color === "red" ? "text-red-300" : "text-[#f18a32]";
+        const bar = p.color === "red" ? "bg-red-400" : "bg-[#f18a32]";
+        return <button key={p.id} onClick={() => { setPhase(i); setRunning(false); }} className={`relative min-w-[118px] flex-1 px-3 py-4 text-left ${active ? "bg-white/[.045]" : ""}`}>
+          <div className={`font-mono text-[7px] font-bold tracking-[.16em] ${active ? tone : "text-white/25"}`}>{p.label}</div>
+          <div className="mt-1 text-[9px] font-semibold text-white/55">{p.title}</div>
+          {active && <div className={`absolute bottom-0 left-0 right-0 h-0.5 ${bar}`} />}
+        </button>;
+      })}
+    </div>
+  </section>
   <section className="mx-auto max-w-[1380px] px-5 py-6 sm:px-8 lg:px-10 lg:py-8">
    <div className="mb-4 flex flex-wrap items-center justify-between gap-3"><div><div className="font-mono text-[8px] uppercase tracking-[.18em] text-white/25">CURRENT TRANSACTION</div><div className="mt-1 flex flex-wrap items-center gap-2 text-sm font-bold">RFQ-2026-184 <span className="text-white/20">·</span><span className="text-white/45">240 MT S355</span><span className="text-white/20">·</span><span className="text-white/45">Rotterdam</span></div></div><div className="flex gap-2"><button onClick={()=>{setReplay(v=>v+1);setPhase(4);setSelected(6)}} className="inline-flex h-9 items-center gap-2 rounded-lg border border-white/10 px-3 text-[10px] font-bold text-white/60 hover:bg-white/[.04]"><RotateCcw className="h-3.5 w-3.5"/> Replay failure {replay>0&&`(${replay})`}</button><Link to="/sample-report" className="inline-flex h-9 items-center gap-2 rounded-lg bg-white/[.06] px-3 text-[10px] font-bold text-white/65">Open report <ArrowRight className="h-3.5 w-3.5"/></Link></div></div>
    <Graph phase={phase} pulse={pulse}/>
