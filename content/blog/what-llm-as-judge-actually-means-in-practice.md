@@ -1,168 +1,231 @@
 ---
-title: "What LLM-as-Judge Actually Means in Practice"
-description: "LLM-as-judge is a semantic evaluation layer, not a universal truth oracle. Here is how to use rubrics, context and evidence without creating false confidence."
+title: "LLM-as-Judge for Cognigy Agents: What It Should and Should Not Decide"
+description: "A practical model for using LLM-as-judge with Cognigy conversations while keeping deterministic Tool, Flow, state and security facts outside the judge's authority."
 slug: "what-llm-as-judge-actually-means-in-practice"
 content_type: "technical-article"
-category: "Evaluation Model"
+category: "Cognigy Assurance"
 diagram: "judge"
-thesis: "LLM-as-judge is useful for semantic properties that require interpretation, but its authority should stop where deterministic, security or execution evidence can establish the truth more reliably."
-primary_keyword: "LLM as judge"
+thesis: "LLM-as-judge is valuable for semantic properties of Cognigy conversations, but exact Tool calls, state changes, authorization and execution integrity should be proven by deterministic evidence."
+primary_keyword: "LLM as judge Cognigy"
 search_intent: "informational"
 author: "Shyena Engineering"
 published: true
 ---
 
-LLM-as-judge means using a language model to evaluate properties that do not have a reliable deterministic oracle. It does not mean asking one model to decide whether the entire agent worked.
+# LLM-as-Judge for Cognigy Agents: What It Should and Should Not Decide
 
-That distinction matters because language quality is contextual. Relevance, grounding, completeness and conversational appropriateness can require interpretation. Exact identifiers, amounts, permissions, tool calls and state changes usually have stronger sources of truth.
+LLM-as-judge is one of the most useful techniques for evaluating conversational AI. It is also one of the easiest ways to create false confidence.
 
-## What the judge is actually doing
+For a Cognigy Agent, the correct question is not:
 
-A judge receives an observable interaction, a rubric and enough context to apply that rubric.
+> "Can an LLM judge this conversation?"
 
-```text
-USER GOAL + CONTEXT
-        |
-        v
-     RUBRIC
-        |
-        v
-   AGENT RESPONSE
-        |
-        v
-   LLM-AS-JUDGE
-        |
-        +--> score
-        +--> rationale
-        +--> evidence references
+It is:
+
+> **"Which properties of this Cognigy execution genuinely require semantic judgement, and which properties have a stronger deterministic source of truth?"**
+
+That distinction should shape the entire evaluation architecture.
+
+## What the judge is good at
+
+A judge can evaluate questions such as:
+
+- Was the Agent's answer relevant?
+- Did it address the customer's actual request?
+- Was the explanation complete?
+- Was the answer grounded in the supplied knowledge?
+- Did the Agent communicate uncertainty appropriately?
+- Was the conversation understandable and contextually appropriate?
+
+These are semantic properties.
+
+## What the judge should not own
+
+Avoid using an LLM as the authority for:
+
+- whether a Tool was invoked;
+- the exact Tool name;
+- Tool arguments;
+- whether authorization succeeded;
+- whether a Flow event occurred;
+- whether a database state changed;
+- whether a required handover happened;
+- whether execution timed out;
+- whether another customer's data was accessed.
+
+Those facts can be established more directly.
+
+The principle is:
+
+> **Use the strongest available oracle for each assertion.**
+
+## A Cognigy evaluation envelope
+
+A semantic evaluation can be represented as:
+
 ```
-
-The rubric is part of the test design.
-
-"Is this a good answer?" is too vague to be a reliable release criterion.
-
-A better criterion is explicit:
-
-```yaml
-criterion: answer grounding
-score: 0-4
-context:
-  - user request
-  - retrieved sources
-  - agent response
-rule:
-  score 4 only when every material claim is supported
-failure:
-  unsupported claim or source mismatch
-```
-
-Now the judge has a bounded question to answer.
-
-## Judge what requires judgment
-
-A useful separation looks like this:
-
-| Question | Better evaluation method |
-|---|---|
-| Is the order ID exactly correct? | Deterministic assertion |
-| Did the required tool execute? | Runtime trace |
-| Was authorization granted? | Security/control evidence |
-| Did the backend state change? | Source-of-truth assertion |
-| Is the explanation relevant? | LLM judge |
-| Is the answer grounded in retrieved material? | LLM judge + source evidence |
-| Is the tone appropriate for the context? | LLM judge |
-
-Delegating everything to the judge weakens the test because the evaluator is being asked to recreate facts that another system can establish directly.
-
-## Context changes the evaluation
-
-The same response can be correct in one context and wrong in another.
-
-A judge may need:
-
-- the user goal;
-- relevant previous turns;
-- applicable policy;
-- retrieved sources;
-- expected constraints;
-- the actual agent response.
-
-Too little context can make the judgement arbitrary. Too much irrelevant context can make it noisy.
-
-The engineering objective is to provide enough evidence to make the criterion decidable.
-
-## Calibration is part of the test design
-
-A judge should be treated like any other evaluation component.
-
-Build a reference set containing clear passes, clear failures and borderline examples. Compare judge decisions with expert decisions, inspect disagreement patterns, and revise the rubric when the disagreement reveals an ambiguous criterion.
-
-Useful controls include:
-
-- representative reference cases;
-- explicit scoring anchors;
-- separate review of false positives and false negatives;
-- versioned rubrics;
-- recorded judge model/version;
-- stable evaluation context.
-
-Do not compare scores across major rubric changes as though they were identical measurements.
-
-## Reliability is not the same as authority
-
-A judge can be highly consistent and still be wrong about a fact outside its authority.
-
-This is a crucial distinction.
-
-```text
-                 RELEASE DECISION
-                        |
-             +----------+----------+
-             |                     |
-       HARD CONTRACTS        SEMANTIC QUALITY
-             |                     |
-   deterministic/security       LLM judge
-   execution evidence
-```
-
-The judge contributes evidence. It does not become the source of truth for the entire system.
-
-## A high semantic score can still fail
-
-Suppose the judge returns 4/4 for answer quality. The agent may still have:
-
-- selected the wrong intent;
-- skipped a required tool;
-- changed the wrong record;
-- violated an authorization boundary;
-- failed to complete the business goal.
-
-That is not a contradiction. The judge measured the answer.
-
-The release decision must consider the rest of the evidence chain.
-
-## Make the judge auditable
-
-Every important semantic evaluation should retain enough information to explain the result:
-
-```text
-TEST CASE
-   |
-   +--> rubric version
-   +--> model/version
-   +--> evaluation context
-   +--> response under evaluation
-   +--> score + rationale
-   +--> supporting evidence
+Customer goal
+   +
+Conversation
+   +
+Relevant knowledge/context
+   +
+Evaluation rubric
    |
    v
-SEMANTIC RESULT
+LLM judge
+   |
+   +--> score
+   +--> reasoning
+   +--> evidence references
 ```
 
-This matters when teams compare releases, investigate disagreement, or change the rubric.
+The context must be controlled.
+
+For a knowledge-grounding criterion, the judge may need the customer question, retrieved content and Agent answer. Giving it unrelated conversation history can make the judgement less precise.
+
+## A better rubric
+
+"Was the Agent helpful?" is too broad.
+
+A stronger Cognigy criterion might be:
+
+```
+criterion: cancellation explanation
+
+PASS when:
+- the response states whether cancellation succeeded;
+- the response does not claim success when the Tool result failed;
+- the response reflects the authoritative order state;
+- required next steps are explained when cancellation is unavailable.
+```
+
+The deterministic parts can be checked separately. The judge can focus on whether the explanation is accurate, clear and complete.
+
+## Rubric versioning matters
+
+If the rubric changes, the meaning of a score can change.
+
+Therefore preserve:
+
+- rubric version;
+- judge model/version;
+- evaluation context;
+- conversation/run ID;
+- score;
+- reasoning;
+- evidence supplied to the judge.
+
+This allows an engineering team to understand why two releases received different semantic results.
+
+## Judge calibration
+
+A judge should be tested like any other component.
+
+Create representative Cognigy examples:
+
+- obvious pass;
+- obvious failure;
+- borderline case;
+- adversarial case;
+- incomplete Tool result;
+- conflicting knowledge;
+- successful handover;
+- failed handover.
+
+Compare judge decisions against an agreed reference set.
+
+The purpose is not to prove that the judge is infallible. It is to discover where the rubric is ambiguous or the evaluator is unreliable.
+
+## The authority hierarchy
+
+A practical hierarchy is:
+
+```
+Authoritative state / execution evidence
+          >
+Deterministic assertion
+          >
+Semantic judgement
+```
+
+This does not mean semantic evaluation is unimportant. It means it should not override a fact that another system can prove exactly.
+
+For example, if Cognigy invokes a refund Tool with order ID 123 but the authoritative system shows that order 456 was changed, the judge should not rescue the result because the response was polite.
+
+## Execution integrity comes before semantic confidence
+
+Suppose the conversation is excellent but the final Tool result was never received.
+
+The judge may still score the final response highly if it is given only the text.
+
+That is an evaluation design failure.
+
+The execution-integrity layer should first establish:
+
+```
+Was the run complete?
+Was required evidence captured?
+Did required actions execute?
+Did the terminal state occur?
+```
+
+Only then should semantic evidence be interpreted as release evidence.
+
+## Cognigy Simulator and independent evaluation
+
+Native Cognigy simulation and evaluation capabilities can generate useful observations at scale.
+
+An independent evaluation layer can consume the resulting conversation and execution evidence while applying its own release-oriented contracts.
+
+The distinction is important:
+
+**Simulation** asks whether the Agent behaves acceptably under a scenario.
+
+**Independent assurance** asks whether the evidence is sufficient to defend the release decision.
+
+They can coexist.
+
+## DeepEval and other evaluator frameworks
+
+Frameworks such as DeepEval can be useful for implementing semantic metrics, test orchestration and evaluator logic. The framework is not the assurance model by itself.
+
+For Cognigy, the useful pattern is:
+
+```
+Cognigy execution
+   |
+raw conversation + execution evidence
+   |
+DeepEval / semantic evaluator
+   |
+semantic result
+   |
+deterministic + execution gates
+   |
+final verdict
+```
+
+The semantic framework should remain one component in the evidence chain.
+
+## Security should not become a semantic score
+
+A prompt-injection attempt that causes unauthorized Tool behaviour is not merely "a low-quality answer."
+
+It is a control failure.
+
+Likewise, exposing another customer's information should be treated as a security or privacy failure according to the organisation's policy, not diluted because the response was otherwise helpful.
 
 ## Conclusion
 
-LLM-as-judge is strongest when it is precise about what it knows how to judge. Use it for semantic dimensions that genuinely require interpretation, then combine its result with deterministic contracts, orchestration evidence, security checks and execution-integrity controls.
+LLM-as-judge is strongest when its authority is narrow and explicit.
 
-**A judge can evaluate an answer. Assurance must evaluate the system.**
+For Cognigy Agents:
+
+- let deterministic evidence prove exact facts;
+- let execution evidence prove what actually happened;
+- let authoritative systems prove state;
+- let security checks prove boundary conditions;
+- let the LLM judge interpret the semantic properties that genuinely require interpretation.
+
+**A judge can evaluate meaning. It should not invent facts.**
