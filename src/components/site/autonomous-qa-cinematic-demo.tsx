@@ -55,7 +55,7 @@ function Graph({phase, pulse}:{phase:number;pulse:number}){
     <div className="absolute inset-0 opacity-50" style={{backgroundImage:"linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px)",backgroundSize:"36px 36px"}}/>
     <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,rgba(241,138,50,.07),transparent_42%)]"/>
     <div className="absolute left-4 top-4 z-10 font-mono text-[8px] uppercase tracking-[.2em] text-white/30">SYSTEM UNDER TEST · RFQ TRANSACTION GRAPH</div>
-    <div className="absolute right-4 top-4 z-10 rounded border border-white/10 bg-black/30 px-2 py-1 font-mono text-[7px] text-white/35">ILLUSTRATIVE RUN</div>
+    <div className="absolute right-4 top-4 z-10 rounded border border-white/10 bg-black/30 px-2 py-1 font-mono text-[7px] text-white/35">ILLUSTRATIVE RUN · CINEMATIC ON</div>
     <div className="absolute inset-0 transition-transform duration-[1200ms] ease-[cubic-bezier(.2,.8,.2,1)]" style={{transform:cameraFor(phase),transformOrigin:"50% 50%"}}>    <svg className="absolute inset-0 h-full w-full" viewBox="0 0 1000 560" preserveAspectRatio="none">
       <defs><linearGradient id="edge" x1="0" x2="1"><stop stopColor="#f18a32" stopOpacity=".08"/><stop offset=".5" stopColor="#f18a32" stopOpacity=".65"/><stop offset="1" stopColor="#f18a32" stopOpacity=".08"/></linearGradient></defs>
       {[["rfq","agent"],["agent","inventory"],["agent","pricing"],["inventory","margin"],["pricing","margin"],["margin","quote"],["quote","customer"]].map(([a,b])=>{
