@@ -2,6 +2,7 @@ import { createFileRoute, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/cis")({
   beforeLoad: () => {
-    throw redirect({ to: "/nexus" });
+    throw redirect({ to: "/vera", statusCode: 301 });
   },
+  component: () => null,
 });
