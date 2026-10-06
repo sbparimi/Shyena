@@ -1,175 +1,166 @@
 ---
-title: "Vera for Cognigy: Evidence-First Evaluation Beyond a Single Agent Score"
-description: "How Shyena Vera evaluates Cognigy journeys using deterministic assertions, semantic judgment and execution integrity without allowing one score to hide a critical failure."
+title: "Vera Assurance Engine for Cognigy: Evidence-First Evaluation Beyond a Single Score"
+description: "A deep engineering model for evaluating Cognigy journeys with deterministic facts, semantic judgment, execution integrity, security gates and traceable release evidence."
 slug: "vera-evidence-first-evaluation-for-cognigy"
 content_type: "technical-article"
 category: "Cognigy Assurance"
 diagram: "judge"
-thesis: "A Cognigy evaluation result is useful only when the team can explain what was judged, what was observed, which deterministic facts held, and why the final verdict follows."
+thesis: "A Cognigy evaluation becomes assurance only when every important judgment can be traced to the journey, observed execution, deterministic facts, evaluator configuration and release policy."
 primary_keyword: "Cognigy AI Agent evaluation"
 search_intent: "informational"
 author: "Shyena Engineering"
 published: true
 ---
 
-# Vera for Cognigy: Evidence-First Evaluation Beyond a Single Agent Score
+# Vera Assurance Engine for Cognigy: Evidence-First Evaluation Beyond a Single Score
 
-AI Agent evaluation is often reduced to a score. That is attractive because a score is easy to put on a dashboard. It is also dangerous.
+An AI Agent evaluation is easy to summarize: `Score: 0.91`. The difficult part is answering what was evaluated, which facts were deterministic, what the Agent actually executed, which Tool was called, what state changed, whether the customer goal completed, which security controls were tested and why the result should pass or block a release.
 
-A Cognigy journey can produce a fluent response while taking the wrong route, invoking the wrong Tool, failing to update backend state or violating a security constraint.
+The public Shyena name for this capability is the **Vera Assurance Engine**.
 
-Cognigy Simulator is designed to run controlled scenarios, vary executions and score results against configurable criteria. Cognigy also describes evaluation dimensions such as task success, guardrail adherence, integration and Tool performance, experience quality and multilingual consistency.
+> A score is diagnostic. Evidence is what makes a release decision defensible.
 
-The important next step is evidence.
+## 1. Cognigy already has evaluation capabilities
 
-What exactly caused the score? What facts were deterministic? What did the Agent actually execute? Which failure should block release?
+Cognigy describes AI Agent Evaluation around realistic scenarios, configurable success criteria, repeated simulations and production-readiness. Cognigy also provides Playbooks with steps and assertions for deterministic QA.
 
-That is the problem Vera is designed to make explicit.
+An independent evaluation layer should not pretend those capabilities do not exist. The question is where the evidence boundary sits.
 
-## Three evaluation layers
+`journey → deterministic contract → trace → semantic judgment → security observation → finding → release decision`
 
-A useful Cognigy assurance model separates three layers.
+## 2. Three questions need three evaluators
 
-1. Deterministic: exact facts and business contracts.
-2. Semantic: properties requiring language or contextual judgment.
-3. Execution integrity: whether the Agent took an acceptable path to the outcome.
+Consider an order cancellation. The Agent says the order was cancelled. That sentence can be evaluated semantically, but there are separate questions:
 
-Security is then treated as a release-critical control layer rather than an average quality dimension.
+- Is the authoritative order state actually `CANCELLED`?
+- Did the Agent authenticate the customer and retrieve the correct order?
+- Did it invoke the permitted capability?
+- Could a user manipulate the Agent into cancelling another customer's order?
 
-This prevents a semantic score from becoming a universal truth signal.
+The model therefore separates deterministic evidence, semantic evidence, execution-integrity evidence and security evidence.
 
-## Deterministic evaluation
+## 3. Deterministic facts should stay deterministic
 
-Use deterministic checks whenever the system has an authoritative answer.
+Use authoritative systems wherever the answer is exact:
 
-Examples include expected Intent, required Slot, customer identity, authorization result, Tool name, Tool arguments, API status, order state, payment state, required handover and terminal state.
+`assert intent == address_change`
+`assert tool.name == update_address`
+`assert tool.arguments.customer_id == authenticated_customer_id`
+`assert api.status == 200`
+`assert order.state == CANCELLED`
+`assert handover.target == billing`
 
-Suppose the expected order state is CANCELLED but the authoritative system reports ACTIVE while the Agent says the order was cancelled.
+An LLM judge can explain evidence. It should not override authoritative evidence.
 
-The evaluation is not ambiguous. It is a deterministic failure.
+## 4. Semantic evaluation has a different job
 
-An LLM judge should not reinterpret it.
+Semantic judgment is appropriate for clarity, completeness, uncertainty handling, grounding, tone and contextual relevance.
 
-## Semantic evaluation
+The evidence envelope should preserve the criterion, rubric, input, relevant context, evaluator configuration, score, reason and threshold. Without provenance, a score is difficult to reproduce.
 
-Some questions genuinely require interpretation: was the response clear, was the explanation complete, did the Agent communicate uncertainty appropriately, was the answer grounded in context and did the response follow the intended tone?
+## 5. Execution integrity prevents false green results
 
-This is where an LLM judge can help.
+Imagine `Customer → Flow → Agent → Job → Tool → API`. The Agent produces an excellent answer, but the run times out before the API result arrives.
 
-But the evaluation should preserve the input, context, criterion, rubric, evaluator model, score, reason and threshold.
+Semantic quality can be PASS while execution integrity is FAIL. If execution integrity is release-critical, the final verdict must be BLOCK.
 
-A score without provenance is difficult to reproduce and difficult to defend.
+A broken execution must not become green because the final text sounds convincing.
 
-## Execution integrity
+## 6. Tool selection is part of correctness
 
-The third layer asks whether the system reached the outcome through an acceptable execution path.
+Cognigy exposes AI Agent Jobs and their associated Tools through its API. Tool selection can therefore be treated as an observable assurance signal.
 
-For a Cognigy journey, that can mean Endpoint → Flow → Intent → AI Agent → Job → Tool → API → state.
+Expected: `retrieve_order → validate_refund → create_refund`.
+Observed: `retrieve_order → create_refund`.
 
-The exact path varies by implementation. The test should define required and forbidden transitions where they matter.
+The final answer may be polished. The journey still fails if validation is a release-critical invariant.
 
-For example, a refund journey may require authentication, order retrieval, eligibility validation and refund creation, while forbidding refund creation without authentication or eligibility validation.
+## 7. Tool arguments can be more important than the response
 
-The final response cannot establish those conditions.
+A dangerous failure can look like:
 
-## Why scores can create false confidence
+`Tool: update_address`
+`Expected customer_id: CUST-4821`
+`Observed customer_id: CUST-7319`
 
-Consider two runs.
+Tool arguments should be evaluated as structured evidence: identity, authorization context, resource identifier, amount, currency, destination, policy version and correlation identifier where relevant.
 
-Run A: semantic quality 96 percent, goal completion PASS, Tool selection PASS, authorization PASS, backend state PASS, security PASS.
+## 8. Production conversation analysis and release assurance are different loops
 
-Run B: semantic quality 97 percent, goal completion PASS, Tool selection PASS, authorization FAIL, backend state PASS, security FAIL.
+Cognigy introduced Conversation Analyzer for LLM-based analysis of production conversations, including sentiment, containment, AI behaviour and experience quality.
 
-If a dashboard averages these values, Run B can still look healthy.
+That creates valuable feedback, but production analytics and pre-release assurance answer different questions.
 
-That is unacceptable for a critical journey.
+**Production analysis:** What is happening across real conversations?
 
-The release gate needs severity-aware semantics. A critical security failure can override a high average score.
+**Release assurance:** Is this version safe enough to release under the defined policy?
 
-## The evidence object
+The stronger lifecycle is `Production observation → new risk → assurance requirement → targeted journey → evaluation → regression → release gate`.
 
-Each important evaluation should be treated as an evidence object containing the journey, run, criterion, evaluation method, expected condition, observed condition, result, severity and references to the underlying trace or system observation.
+## 9. Security should not be averaged into quality
 
-The important property is provenance.
+Suppose semantic quality is 97%, goal completion passes, Tool selection passes, but authorization fails.
 
-An engineer should be able to move from RELEASE BLOCKED → FINDING → EVALUATION → TRACE → RAW OBSERVATION.
+A composite average could still look impressive. That is the wrong release semantics.
 
-## Preserve the journey
+Critical authorization, deterministic or execution-integrity failures should be treated as hard gates when the customer's release policy defines them that way.
 
-A single-turn prompt test answers a narrow question. An Agent journey answers a broader one.
+A useful policy vocabulary is PASS, REVIEW, BLOCK and INCONCLUSIVE. The exact thresholds and blockers belong to the customer.
 
-A customer may identify themselves, provide an order, ask for a refund, trigger an eligibility check, invoke a Tool and then receive a result.
+## 10. Evaluation provenance
 
-A semantic evaluator looking only at the final response can miss a failure at the authorization or Tool stage.
+Every important result should be traceable.
 
-Vera therefore keeps evaluation attached to the journey and its execution evidence.
+| Field | Purpose |
+|---|---|
+| Journey ID | identifies the business scenario |
+| Agent version | identifies the system under test |
+| Environment | establishes execution context |
+| Run ID | connects to raw execution |
+| Criterion | defines what was judged |
+| Expected | defines the contract |
+| Observed | captures what happened |
+| Evaluator | identifies how judgment was made |
+| Result | PASS / REVIEW / FAIL |
+| Severity | determines release impact |
+| Evidence | links to trace, API result or state observation |
 
-## Evaluate the gap between Tool execution and the response
+## 11. Cognigy Simulator and independent evaluation
 
-One of the most important patterns is comparing what the Agent said with what the Tool actually did.
+Cognigy Simulator is valuable for scenario-based simulation and evaluation at scale. An independent assurance layer can sit around that execution without replacing it:
 
-Agent: Your refund has been completed.
+`Scenario → Cognigy execution → raw conversation + events → deterministic assertions → semantic criteria → execution-integrity checks → security controls → finding → regression → release decision`
 
-Tool: refund.status = PENDING.
+The important boundary is authority: the system under test should not be the only source that decides whether it passed.
 
-Evaluation: semantic response quality REVIEW; deterministic business state FAIL; execution integrity FAIL; release verdict BLOCK.
+## 12. MCP creates another evaluation surface
 
-This is the kind of failure response-only evaluation can miss.
+Cognigy's current MCP Server documentation describes an experimental endpoint for exposing selected AI Agent Tools to external AI applications. The documentation describes structured tool discovery and invocation, Tool parameters and a default Tool-call timeout.
 
-## Cognigy Simulator and independent evaluation
+Where MCP is in scope, evaluation should include exposed tools, discovery, parameters, authorization assumptions, unexpected arguments, timeout behaviour, retry behaviour, sensitive data and downstream side effects.
 
-Cognigy Simulator is valuable because it provides controlled simulation and evaluation at the platform level. Cognigy also provides scheduling and mocking capabilities for testing.
+Because the endpoint is currently documented as experimental and not recommended for production use, the environment and version should be captured in the assurance record.
 
-An independent evaluation layer does not need to compete with that execution engine.
+## 13. Findings should become permanent controls
 
-It can consume journey and execution evidence and ask which business requirement the run covered, which deterministic contracts were asserted, which semantic criteria were applied, which trace events support the result, whether the execution path remained valid, whether security controls passed and whether the result should be PASS, REVIEW or BLOCK.
+Suppose a journey discovers `Agent selected refund Tool before authorization`.
 
-This separation prevents the evaluator from becoming both the system under test and the sole authority that declares itself correct.
+The useful chain is `Finding → root cause → negative-path scenario → deterministic assertion → security regression → release gate`.
 
-## The evaluation hierarchy
-
-A practical hierarchy is:
-
-Authoritative system state → deterministic assertion → execution integrity → semantic judgment → human review where required.
-
-Not every test needs every layer. The test designer should know which layer owns each claim.
-
-## Findings should become regression
-
-An evaluation should not disappear after the run.
-
-If a journey discovers that an Agent selected a refund Tool before validating authorization, that finding should become a permanent negative-path regression control.
-
-Finding → root cause → negative path → regression test → future release gate.
-
-This turns evaluation into organisational memory.
-
-## Vera release semantics
-
-A release can pass when semantic quality, deterministic correctness, execution integrity, security and evidence completeness all meet the defined policy.
-
-A release can block when one critical invariant fails even if the semantic score is excellent.
-
-The principle is simple: a critical invariant must not be averaged away.
-
-## Why this matters for enterprise Cognigy programmes
-
-Cognigy supports enterprise agent architectures where language behaviour, deterministic logic and tool-based actions coexist, with multiple endpoints, handover patterns and external tool connectivity.
-
-That makes evaluation multidimensional.
-
-The mature question is no longer: what is the Agent score?
-
-It is: which claims about this journey are supported by which evidence?
-
-That is the difference between evaluation and assurance.
+That turns evaluation into organisational memory.
 
 ## Conclusion
 
-Vera is designed around a simple principle: every important judgment should have evidence behind it.
+The Vera Assurance Engine model is not “give every conversation a score.” It is:
 
-Use deterministic assertions for facts. Use semantic evaluation for interpretation. Use execution-integrity checks for paths and state. Use security controls for trust boundaries. Then connect the result to release policy.
+**Judge the meaning. Verify the facts. Inspect the path. Test the boundary. Preserve the evidence.**
 
-For Cognigy teams, the separation is clear: Cognigy builds and executes the Agent; Vera evaluates the evidence; Govern turns evidence into the release decision.
+For Cognigy teams, the stronger release question is not “What score did the Agent get?” but “Which claims about this Agent are actually proven?”
 
-The result is not merely a better score. It is a decision the engineering team can defend.
+### Primary research
+
+- Cognigy AI Agent Evaluation: https://www.cognigy.com/platform/ai-agent-evaluation
+- Cognigy Conversation Analyzer: https://www.cognigy.com/product-updates/conversation-analyzer-automated-quality-evaluation-for-enterprise-ai-agents
+- Cognigy AI Agent Jobs and Tools API: https://docs.cognigy.com/api-reference/aiagents/get-ai-agent-jobs-and-their-tools
+- Cognigy MCP Server: https://docs.cognigy.com/ai/agents/deploy/endpoint-reference/mcp-server
+- Cognigy Playbooks API: https://docs.cognigy.com/api-reference/playbooks-v20/create-a-new-playbook
