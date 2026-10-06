@@ -175,6 +175,12 @@ The objective is traceability.
 
 A reviewer should be able to move from "BLOCK" to the exact condition that caused the block.
 
+## MCP and external tool surfaces
+
+When a Cognigy Agent uses MCP-based capabilities, the testing boundary should include the external tool contract as well as the conversational outcome. Test discovery, tool schema, parameter handling, authorization, timeouts, error recovery and downstream side effects.
+
+The important question is not whether MCP is technically reachable. It is whether the Agent can use the exposed capability only in the situations the business process permits, and whether the resulting side effect is independently verifiable.
+
 ## The independent question
 
 Cognigy can execute the Agent.
