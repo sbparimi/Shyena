@@ -23,7 +23,7 @@ export const Route = createFileRoute("/blog/")({
   component: BlogIndexPage,
 });
 
-const CATEGORY_FILTERS = ["All", "AI Agent Assurance", "Testing Strategy", "Quality Assurance", "Evaluation Model", "Security"] as const;
+const CATEGORY_FILTERS = ["All", "AI Agent Assurance", "Cognigy Assurance", "Testing Strategy", "Quality Assurance", "Evaluation Model", "Security"] as const;
 
 type Category = (typeof CATEGORY_FILTERS)[number];
 
@@ -64,7 +64,7 @@ function BlogIndexPage() {
 
           <div className="mt-10 grid max-w-5xl border-y border-[#cfc8ba] sm:grid-cols-3">
             {[
-              ["06", "engineering articles"],
+              ["10", "engineering articles"],
               ["05", "assurance disciplines"],
               ["01", "evidence-first approach"],
             ].map(([value, label], index) => (
