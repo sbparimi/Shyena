@@ -199,8 +199,8 @@ export const Route = createFileRoute("/")({
     meta: [
       { title:"Shyena Assurance Cloud | AI Quality, Evaluation & Assurance" },
       { name:"description", content:"Shyena Assurance Cloud combines autonomous AI assurance with capability-driven specialist expertise to evaluate, secure and prove AI systems with evidence." },
-      { property:"og:title", content:"Shyena Autonomous QA | Agentic AI Testing & Evaluation" },
-      { property:"og:description", content:"AI assurance software, evidence and specialist capability for systems that reason, act and change." },
+      { property:"og:title", content:"Shyena AI Assurance Platform | Evaluation, Security & Governance" },
+      { property:"og:description", content:"AI assurance software, evidence and specialist capability for systems that reason, act and change, including Cognigy agent assurance." },
       { property:"og:type", content:"website" }, { property:"og:url", content:SITE+"/" }, { property:"og:site_name", content:"Shyena" },
       { property:"og:image", content:SITE+"/shyena-logo-exact.webp" }, { name:"twitter:card", content:"summary_large_image" },
       { name:"twitter:title", content:"Shyena Autonomous QA | Agentic AI Testing & Evaluation" },
@@ -221,7 +221,7 @@ function HomePage() {
         <div className="min-w-0">
           <div className="font-mono text-[10px] font-bold uppercase tracking-[.22em] text-[#f18a32]">SHYENA ASSURANCE CLOUD · AI SYSTEMS</div>
           <h1 className="mt-5 max-w-4xl font-[Sora] text-[clamp(3rem,6.7vw,6.6rem)] font-extrabold leading-[.9] tracking-[-.07em]">Assure every AI system with <span className="text-[#f18a32]">software, evidence and expertise.</span></h1>
-          <p className="mt-7 max-w-2xl text-lg leading-8 text-white/65">Shyena Assurance Cloud connects autonomous AI assurance with certified specialist capability. Discover risk, generate executable assurance, evaluate behaviour, attack critical paths and bring the right human expertise into the work only when automation needs it.</p>
+          <p className="mt-7 max-w-2xl text-lg leading-8 text-white/65">Shyena Assurance Cloud connects autonomous AI assurance with specialist capability. Discover risk, generate executable assurance, evaluate behaviour, attack critical paths and bring the right human expertise into the work only when automation needs it.</p>
           <div className="mt-8 flex w-full max-w-[620px] flex-wrap gap-2">
             <Link to="/contact" className="inline-flex min-h-[42px] items-center justify-center gap-1.5 rounded-md bg-[#e87512] px-5 text-center text-xs font-bold leading-4 text-white transition hover:bg-[#d9670a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f6a15b] focus-visible:ring-offset-2 focus-visible:ring-offset-[#07101f]">Book a 30-min call <ArrowRight className="h-3.5 w-3.5 shrink-0" aria-hidden="true"/></Link>
             
