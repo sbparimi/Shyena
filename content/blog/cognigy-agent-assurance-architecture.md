@@ -1,175 +1,228 @@
 ---
-title: "Cognigy Agent Assurance Architecture: Testing Flows, Jobs, Tools, Handover and MCP as One System"
-description: "A technical architecture for assuring Cognigy AI Agents across Flows, Jobs, Tools, knowledge, endpoints, handovers, external APIs and MCP rather than treating the conversation as the whole system."
+title: "Cognigy Agent Assurance Architecture: Testing Flows, Jobs, Tools, Knowledge and Handover"
+description: "A technical architecture for independently testing Cognigy AI Agents across Agent configuration, Flows, Jobs, Tools, Knowledge, endpoints, handovers and external side effects."
 slug: "cognigy-agent-assurance-architecture"
 content_type: "technical-article"
 category: "Cognigy Assurance"
 diagram: "systems"
-thesis: "As Cognigy Agents gain more autonomous tools and orchestration paths, assurance must follow the execution graph from endpoint to Flow, Job, Tool, external service, state change and handover."
-primary_keyword: "Cognigy AI Agent testing"
+thesis: "A Cognigy Agent is an execution graph, not just a conversation. Independent assurance should follow that graph from endpoint to Agent, Flow, Job, Tool, knowledge, state change and handover."
+primary_keyword: "Cognigy AI Agent architecture testing"
 search_intent: "informational"
 author: "Shyena Engineering"
 published: true
 ---
 
-# Cognigy Agent Assurance Architecture: Testing Flows, Jobs, Tools, Handover and MCP as One System
+# Cognigy Agent Assurance Architecture: Testing Flows, Jobs, Tools, Knowledge and Handover
 
-The difficult part of testing an enterprise AI Agent is no longer generating a conversation. It is understanding the system that conversation can activate.
+A Cognigy Agent can be understood as a conversational interface over a larger execution graph.
 
-Cognigy architecture now spans conversational Flows, AI Agents, Jobs, Tools, knowledge, endpoints, handovers, external integrations and MCP. Cognigy documents Flows as structures built from Nodes, Intents, States and Slot Fillers, while current AI Agent capabilities add Jobs and Tools for more autonomous behaviour.
+The graph may include:
 
-That creates a useful engineering model:
+- Agent configuration;
+- persona and instructions;
+- Jobs;
+- Flows;
+- Tools;
+- Knowledge;
+- endpoints;
+- external APIs;
+- handovers;
+- business state.
 
-Customer → Endpoint → Flow → AI Agent → Job → Tool → External service → Business state.
+Testing only the conversation hides too much of this graph.
 
-Assurance should follow that graph.
+## Model the execution surface
 
-## Start with the execution graph
+A useful assurance architecture is:
 
-The first failure in many AI testing programmes is starting with prompts. Prompts are useful inputs. They are not the architecture.
+```
+                 Cognigy Endpoint
+                       |
+                       v
+                    Agent
+                       |
+          +------------+------------+
+          |            |            |
+        Jobs         Flows       Knowledge
+          |            |
+        Tools       deterministic
+          |            |
+          +-----+------+ 
+                |
+        external systems
+                |
+          business state
+```
 
-For each critical journey, build a graph containing the entry endpoint, Flow, route or intent, AI Agent, Job, Tool, knowledge dependency, external API, state mutation, human or AI handover and terminal outcome.
+The exact implementation differs between projects, but the assurance principle remains the same: test the surfaces that can affect the customer outcome.
 
-This gives the assurance team a map of possible side effects.
+## Agent configuration is part of the test
 
-## Separate conversational nodes from consequential nodes
+Persona, instructions and behavioural constraints influence what the Agent decides to do.
 
-Not every node has the same risk.
+A regression may therefore happen without a Flow changing.
 
-A response that explains a policy is not equivalent to a Tool that changes a customer account.
+For example, a prompt change can cause the Agent to:
 
-A practical classification is:
+- select a different Job;
+- use a different Tool;
+- ask fewer verification questions;
+- respond confidently to unsupported requests.
 
-Observational → response or explanation.
+The test universe should therefore not be derived only from deterministic Flow paths.
 
-Decisional → routing, intent or Job selection.
+## Jobs define capabilities
 
-Consequential → Tool, API, workflow or state mutation.
+A Job gives the Agent a task-oriented capability.
 
-Privileged → payment, identity, access or sensitive data.
+Testing should ask:
 
-The more consequential the node, the more deterministic the evidence should become.
+- Was the right Job selected?
+- Were the Job's expected capabilities available?
+- Did the Agent use them appropriately?
+- Did the Agent exit the Job correctly?
+- Did it hand over when the Job could not complete the task?
 
-## Build assertions around state
+This turns Job behaviour into observable regression evidence.
 
-Suppose the journey is: change my delivery address.
+## Flows provide deterministic structure
 
-A strong test checks that the customer was authenticated, the correct customer was selected, the correct route was chosen, the new address was collected, the correct Tool was selected, the correct identifier was passed, the backend accepted the change, the authoritative address state changed and the agent communicated the actual result.
+Flows can contain explicit business logic, routing and state transitions.
 
-The final response is important. It is not sufficient.
+They are especially useful as sources of deterministic assertions.
 
-## Treat Jobs and Tools as a contract
+For example:
 
-Cognigy exposes AI Agent Jobs and their associated Tools through its API. This makes the capability surface observable and testable.
+```
+Expected Flow behaviour
+request
+ -> identity verification
+ -> order retrieval
+ -> eligibility decision
+ -> permitted Tool
+ -> confirmation
+```
 
-A useful assurance contract can define:
+A test can compare the observed execution against those invariants without requiring the LLM to judge exact control flow.
 
-Job: Refund customer.
+## Tools create side effects
 
-Allowed Tools: get_order, validate_refund, create_refund.
+Tool calls should be treated as first-class test evidence.
 
-Forbidden Tools: delete_customer, update_payment_method.
+For each critical Tool, consider:
 
-Preconditions: authenticated customer, eligible order.
+- selection;
+- arguments;
+- authorization;
+- result;
+- error handling;
+- retry behaviour;
+- resulting state.
 
-Postcondition: refund state is accepted or pending according to the business contract.
+The Tool name alone is not enough.
 
-The test can then compare the observed trajectory against the permitted capability model.
+A correct Tool called with the wrong customer ID can be a severe failure.
 
-Tool selection itself becomes testable.
+## Knowledge is part of the reasoning environment
 
-## Test wrong tools, not only missing tools
+Knowledge can influence the Agent's answer and decisions.
 
-A conventional regression test asks whether the required Tool ran.
+Assurance should therefore capture enough context to answer:
 
-An assurance test also asks whether the wrong Tool could run.
+- what information was available;
+- which information was used;
+- whether the answer was grounded;
+- whether conflicting or missing information was handled safely.
 
-Expected: retrieve_order → update_address.
+Knowledge changes should be treated as potentially meaningful changes to Agent behaviour.
 
-Unsafe: retrieve_order → update_payment_method.
+## Handover must preserve the contract
 
-Both may return valid API responses. Only one is permitted.
+Handover can be part of normal Agent orchestration.
 
-This is especially important when Agents select Tools dynamically.
+A test should define:
 
-## MCP changes the capability surface
+- when handover is required;
+- what context must be transferred;
+- what the receiving Agent or human process should know;
+- what customer data must not cross the boundary;
+- what the final outcome should be.
 
-Cognigy documentation describes MCP support for connecting Agents with external tools and an MCP Server Endpoint for exposing configured Tools to external AI applications.
+A successful handover with lost context can still be a failed journey.
 
-That creates a new boundary:
+## Endpoint and environment matter
 
-Cognigy Agent → MCP discovery → external Tool → external system.
+The same Agent can behave differently across environments because of:
 
-Assurance should therefore test tool discovery, authorization, argument validation, unexpected Tool selection, privilege boundaries, timeout behaviour, retry behaviour, sensitive data handling and observable side effects.
+- model configuration;
+- credentials;
+- external APIs;
+- knowledge versions;
+- endpoint configuration;
+- data;
+- downstream availability.
 
-Cognigy currently describes its MCP Server Endpoint as experimental and intended for development or staging. That makes version and environment awareness part of the assurance record.
+The assurance record should therefore identify the environment and endpoint used for every release-critical run.
 
-## Handover is a state transition
+## Build the evidence graph
 
-Handover should be tested as a transition, not as a final status.
+The output should not be a flat list of test cases.
 
-For an AI-to-human handover, verify the trigger reason, destination, transferred context, customer identity, sensitive data handling and the receiving agent’s ability to continue the journey.
+It should connect:
 
-For AI-to-AI handover, verify that the receiving Flow or Agent starts in the intended state and receives the information required to continue.
+```
+Change
+ |
+Affected Cognigy component
+ |
+Affected journey
+ |
+Test specification
+ |
+Execution
+ |
+Evidence
+ |
+Finding
+ |
+Release verdict
+```
 
-A handover can pass as a transcript event while still failing operationally.
+This makes regression impact explainable.
 
-## Use two test modes
+## Security boundaries
 
-A robust programme needs deterministic probes and adaptive journeys.
+Cognigy Agents that can access enterprise data or Tools should be tested at their trust boundaries.
 
-Deterministic probes are appropriate for exact intents, required slots, Tool arguments, API responses, authorization and business invariants.
+Examples:
 
-Adaptive journeys are appropriate for natural language variation, ambiguity, recovery, multi-turn context and goal completion.
+```
+Customer A -> Customer B data
+Unauthenticated -> privileged Tool
+Retrieved content -> instruction injection
+Agent -> unrestricted side effect
+```
 
-Deterministic testing provides precision. Adaptive testing provides realism. The two should reinforce each other.
+Security scenarios should be tied to the same journey and evidence model as functional scenarios.
 
-## Keep semantic judgment downstream of facts
+## Architecture principle
 
-Semantic evaluation is appropriate for questions such as whether an explanation is clear, whether a response is helpful or whether the agent communicates uncertainty appropriately.
+A practical independent assurance system therefore has five layers:
 
-It is not the right authority for facts that an authoritative system can establish directly.
+1. **Discovery** — understand the Cognigy Agent structure.
+2. **Specification** — define goals, personas and invariants.
+3. **Execution** — exercise the live Agent.
+4. **Evaluation** — combine deterministic and semantic evidence.
+5. **Decision** — apply integrity and release gates.
 
-If refund.status equals PENDING, an LLM judge should not turn that into COMPLETED because the response sounds confident.
-
-The evidence hierarchy should be authoritative state, deterministic assertion, execution integrity, semantic judgment, then human review where required.
-
-## Build an assurance graph
-
-A useful release artefact connects:
-
-Requirement → journey → Cognigy component → execution trace → assertion → semantic evaluation → security observation → finding → regression → release verdict.
-
-This graph answers the question that matters during an incident: why did we believe this journey was safe to release?
-
-A dashboard can show that a run failed. An assurance graph can explain why.
-
-## What goes into CI/CD
-
-A practical pipeline is:
-
-Change detected → affected journeys → Cognigy Flow/Agent/Tool impact → targeted simulation → deterministic assertions → semantic evaluation → execution-integrity checks → security probes → findings → regression update → release gate.
-
-The key is targeting.
-
-A knowledge change may require retrieval and answer-quality regression. A Tool change may require broad journey and security regression. An authorization change may require deterministic and adversarial gates.
-
-## The Shyena model
-
-Nexus builds the system-aware view.
-
-Vera evaluates realistic journeys and preserves the evidence behind judgments.
-
-Chakra challenges security boundaries.
-
-Govern connects the evidence to release decisions.
-
-The product names describe Shyena capabilities; the underlying Cognigy platform remains the system being assured.
+The architecture follows the system instead of pretending the conversation is the entire system.
 
 ## Conclusion
 
-Cognigy gives engineering teams a sophisticated environment for building AI Agents. That sophistication changes the assurance problem.
+Cognigy makes it possible to combine deterministic and agentic behaviour in one customer experience.
 
-The system under test is no longer simply a conversation. It is a graph of endpoints, Flows, Agents, Jobs, Tools, knowledge, APIs, handovers and state transitions.
+That is powerful, but it creates a larger test surface.
 
-The strongest assurance strategy follows that graph: map the capability surface, exercise realistic journeys, assert deterministic facts, evaluate semantics where interpretation is required, attack trust boundaries, verify side effects, preserve evidence and make the release decision.
+A serious assurance architecture follows the path from the customer's goal through the Agent, Job, Flow, Tool, Knowledge and handover to the resulting business state.
+
+**Test the execution graph, not just the final sentence.**
