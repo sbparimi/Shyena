@@ -105,10 +105,14 @@ export function AutonomousQACinematicDemo(){
  const [phase,setPhase]=React.useState(0);
  const [selected,setSelected]=React.useState(0);
  const [pulse,setPulse]=React.useState(0);
- const [replay,setReplay]=React.useState(0);\n  const [sound,setSound]=React.useState(false);\n  const audioRef=React.useRef<HTMLAudioElement|null>(null);
+ const [replay,setReplay]=React.useState(0);
+  const [sound,setSound]=React.useState(false);
+  const audioRef=React.useRef<HTMLAudioElement|null>(null);
  React.useEffect(()=>{if(!running)return; const t=window.setInterval(()=>{setPulse(v=>v+1);setPhase(v=>v>=9?0:v+1);},2600);return()=>window.clearInterval(t)},[running]);
+ React.useEffect(()=>{const audio=audioRef.current;if(!audio)return;audio.volume=0.22;if(sound){void audio.play().catch(()=>setSound(false));}else audio.pause();},[sound]);
  const current=phases[phase];
- return <main className="min-h-screen bg-[#05080d] text-white">\n  <audio ref={audioRef} src="/audio/shyena-demo-music.mp3" loop preload="none" />
+ return <main className="min-h-screen bg-[#05080d] text-white">
+  <audio ref={audioRef} src="/audio/shyena-demo-music.mp3" loop preload="none" />
   <section className="relative overflow-hidden border-b border-white/10 bg-[#060b12]"><div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_15%,rgba(241,138,50,.14),transparent_30%),radial-gradient(circle_at_20%_80%,rgba(52,211,153,.06),transparent_26%)]"/>
    <div className="relative mx-auto max-w-[1380px] px-5 pb-10 pt-16 sm:px-8 lg:px-10 lg:pb-14 lg:pt-20">
     <div className="flex flex-wrap items-center gap-3 font-mono text-[8px] font-bold uppercase tracking-[.22em] text-[#f18a32]"><span>SHYENA</span><span className="text-white/15">/</span><span>ASSURANCE CONTROL ROOM</span><span className="rounded border border-white/10 px-2 py-1 text-white/35">SYNTHETIC RUN</span></div>
