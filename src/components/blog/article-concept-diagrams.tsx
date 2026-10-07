@@ -139,7 +139,7 @@ function NodeBox({ node }: { node: Node }) {
     <g className="node-shell">
       <rect x={node.x - 78} y={node.y - 34} width="156" height="68" rx="15" fill={fill} stroke={stroke} strokeOpacity=".62" strokeWidth="1.2" />
       <rect x={node.x - 73} y={node.y - 29} width="146" height="58" rx="12" fill="none" stroke="#fff" strokeOpacity=".035" />
-      <circle cx={node.x - 58} cy={node.y - 19} r="3" fill={stroke} opacity=".9" filter="url(#__NODE_GLOW__)" />
+      <circle cx={node.x - 58} cy={node.y - 19} r="3" fill={stroke} opacity=".9" />
       <text x={node.x} y={node.y - 2} textAnchor="middle" fill="#F5F7FB" fontFamily="Inter,ui-sans-serif,system-ui" fontSize="13" fontWeight="700" letterSpacing=".3">{node.label}</text>
       {node.sub && <text x={node.x} y={node.y + 18} textAnchor="middle" fill="#8992A7" fontFamily="JetBrains Mono,ui-monospace,monospace" fontSize="9.5">{node.sub}</text>}
     </g>
@@ -159,7 +159,7 @@ function EdgeLines({ nodes, edges, arrowId, dangerArrowId }: { nodes: Node[]; ed
         const y2 = horizontal ? b.y : b.y + (b.y > a.y ? -34 : 34);
         return (
           <g key={i}>
-            <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={edge.danger ? palette.danger : "#778197"} strokeOpacity=".22" strokeWidth="7" filter={`url(#${dangerArrowId})`} />
+            <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={edge.danger ? palette.danger : "#778197"} strokeOpacity=".22" strokeWidth="7" />
             <line className="beam" x1={x1} y1={y1} x2={x2} y2={y2} stroke={edge.danger ? palette.danger : "#B4A8FF"} strokeOpacity={edge.danger ? ".72" : ".5"} strokeWidth={edge.danger ? "1.8" : "1.25"} strokeDasharray={edge.dashed ? "5 7" : undefined} markerEnd={`url(#${edge.danger ? dangerArrowId : arrowId})`} />
           </g>
         );
