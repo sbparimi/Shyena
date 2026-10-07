@@ -1,4 +1,5 @@
 import { Markdown, type MarkdownComponents } from "@tanstack/markdown/react";
+import type { ReactNode } from "react";
 import { generatedContent } from "@/content/generated-content";
 
 const blogSources = import.meta.glob("../../content/blog/*.md", {
@@ -31,12 +32,6 @@ const components = {
   },
 } satisfies MarkdownComponents;
 
-/**
- * Published markdown can contain internal ChatGPT citation tokens from the
- * research workflow. Those tokens are not valid website markup and the
- * markdown renderer exposes them as raw text. Remove them before rendering;
- * public source links remain the authoritative citations for readers.
- */
 function sanitizePublishedMarkdown(source: string) {
   return source
     .replace(/cite[^]*/g, "")
@@ -49,8 +44,15 @@ function sourceFor(sourcePath: string) {
   return blogSources[normalized] ?? docSources[normalized];
 }
 
-export function GeneratedMarkdown({ sourcePath }: { sourcePath: string }) {
+export function GeneratedMarkdown({
+  sourcePath,
+  visuals = {},
+}: {
+  sourcePath: string;
+  visuals?: Record<string, ReactNode>;
+}) {
   const source = sourceFor(sourcePath);
+
   if (!source) {
     return (
       <div className="rounded-xl border border-destructive/30 bg-destructive/5 p-6 text-sm text-muted-foreground">
@@ -59,9 +61,29 @@ export function GeneratedMarkdown({ sourcePath }: { sourcePath: string }) {
     );
   }
 
+  const cleanSource = sanitizePublishedMarkdown(source);
+  const parts = cleanSource.split(/<!--\s*SHYENA_VISUAL:([a-z0-9-]+)\s*-->/gi);
+
   return (
     <div className="generated-content">
-      <Markdown components={components}>{sanitizePublishedMarkdown(source)}</Markdown>
+      {parts.map((part, index) => {
+        if (index % 2 === 1) {
+          const visual = visuals[part.trim().toLowerCase()];
+          return visual ? (
+            <div key={"visual-" + index} className="my-12 sm:my-16">
+              {visual}
+            </div>
+          ) : null;
+        }
+
+        if (!part.trim()) return null;
+
+        return (
+          <Markdown key={"markdown-" + index} components={components}>
+            {part}
+          </Markdown>
+        );
+      })}
     </div>
   );
 }

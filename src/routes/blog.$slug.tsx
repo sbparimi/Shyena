@@ -90,7 +90,18 @@ function ArticlePage() {
     </section>
 
     <article className="mx-auto w-full max-w-3xl px-5 pb-24 pt-12 sm:px-8">
-      <GeneratedMarkdown sourcePath={article.sourcePath} />
+      <GeneratedMarkdown
+        sourcePath={article.sourcePath}
+        visuals={slug === "how-to-test-a-cognigy-agent" ? {
+          "assurance-path": <ArticleConceptDiagram concept="cognigy" />,
+          "quadrants": <ArticleConceptDiagram concept="contracts" />,
+          "flow-to-tests": <ArticleConceptDiagram concept="trajectory" />,
+          "risk-universe": <ArticleConceptDiagram concept="systems" />,
+          "rag": <ArticleConceptDiagram concept="judge" />,
+          "false-green": <ArticleConceptDiagram concept="false-pass" />,
+          "evidence": <ArticleConceptDiagram concept="evidence" />,
+        } : {}}
+      />
 
       <section className="mt-16 rounded-2xl border border-[#e2e5eb] bg-white p-6 sm:p-8" aria-labelledby="related-resources-heading">
         <div className="text-xs font-semibold uppercase tracking-[.16em] text-[#e87512]">Continue the assurance journey</div>
