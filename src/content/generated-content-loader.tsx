@@ -1,4 +1,5 @@
 import { Markdown, type MarkdownComponents } from "@tanstack/markdown/react";
+import type { ReactNode } from "react";
 import { generatedContent } from "@/content/generated-content";
 
 const blogSources = import.meta.glob("../../content/blog/*.md", {
@@ -49,7 +50,7 @@ function sourceFor(sourcePath: string) {
   return blogSources[normalized] ?? docSources[normalized];
 }
 
-export function GeneratedMarkdown({ sourcePath }: { sourcePath: string }) {
+export function GeneratedMarkdown({ sourcePath, visuals = {} }: { sourcePath: string; visuals?: Record<string, ReactNode> }) {
   const source = sourceFor(sourcePath);
   if (!source) {
     return (
