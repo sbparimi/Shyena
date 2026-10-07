@@ -19,11 +19,24 @@ type Node = {
   sub?: string;
   tone?: "gold" | "purple" | "muted" | "danger" | "success";
 };
+
 type Edge = { from: number; to: number; danger?: boolean; dashed?: boolean };
 
-const palette = { gold: "#d99a00", purple: "#7c3aed", muted: "#64748b", danger: "#dc2626", success: "#15803d" };
+const palette = {
+  gold: "#E7B85C",
+  purple: "#9B8AFB",
+  muted: "#6F7890",
+  danger: "#FF667A",
+  success: "#52D6A1",
+};
 
-type DiagramRender = (ids: { titleId: string; gridId: string; arrowId: string; dangerArrowId: string }) => ReactNode;
+type DiagramRender = (ids: {
+  titleId: string;
+  gridId: string;
+  arrowId: string;
+  dangerArrowId: string;
+  glowId: string;
+}) => ReactNode;
 
 function Frame({ title, eyebrow, render }: { title: string; eyebrow: string; render: DiagramRender }) {
   const rawId = useId();
@@ -33,38 +46,130 @@ function Frame({ title, eyebrow, render }: { title: string; eyebrow: string; ren
     gridId: `concept-grid-${safeId}`,
     arrowId: `concept-arrow-${safeId}`,
     dangerArrowId: `concept-arrow-danger-${safeId}`,
+    glowId: `concept-glow-${safeId}`,
   };
 
   return (
-    <figure className="shyena-concept-figure" aria-label={title}>
-      <div className="shyena-concept-header"><span>{eyebrow}</span><strong>{title}</strong></div>
-      <svg viewBox="0 0 1200 430" role="img" aria-labelledby={ids.titleId} className="shyena-concept-svg">
+    <figure
+      className="shyena-concept-figure group relative overflow-hidden rounded-[28px] border border-white/[0.09] bg-[#07090f] shadow-[0_30px_100px_rgba(0,0,0,.38)]"
+      aria-label={title}
+    >
+      <style>{`
+        .shyena-concept-figure .beam { stroke-dasharray: 12 34; animation: shyenaBeam 2.4s linear infinite; }
+        .shyena-concept-figure .node-shell { animation: shyenaFloat 4.8s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+        .shyena-concept-figure .node-shell:nth-child(3n) { animation-delay: -.9s; }
+        .shyena-concept-figure .node-shell:nth-child(4n) { animation-delay: -1.7s; }
+        .shyena-concept-figure .spark { animation: shyenaSpark 2.8s ease-in-out infinite; }
+        .shyena-concept-figure .spark:nth-child(2n) { animation-delay: -1.2s; }
+        .shyena-concept-figure .scan { animation: shyenaScan 5.5s ease-in-out infinite; }
+        @keyframes shyenaBeam { to { stroke-dashoffset: -92; } }
+        @keyframes shyenaFloat { 0%,100% { opacity:.86; transform:translateY(0); } 50% { opacity:1; transform:translateY(-3px); } }
+        @keyframes shyenaSpark { 0%,100% { opacity:.15; transform:scale(.65); } 50% { opacity:1; transform:scale(1.2); } }
+        @keyframes shyenaScan { 0% { transform:translateY(-160px); opacity:0; } 18%,70% { opacity:.55; } 100% { transform:translateY(520px); opacity:0; } }
+        @media (prefers-reduced-motion: reduce) {
+          .shyena-concept-figure .beam,.shyena-concept-figure .node-shell,.shyena-concept-figure .spark,.shyena-concept-figure .scan { animation:none; }
+        }
+      `}</style>
+      <div className="relative flex items-center justify-between border-b border-white/[0.07] px-5 py-4 sm:px-7">
+        <div>
+          <div className="font-mono text-[9px] font-semibold uppercase tracking-[.26em] text-[#E7B85C]/80">{eyebrow}</div>
+          <div className="mt-1 text-sm font-semibold tracking-[-.01em] text-white/90">{title}</div>
+        </div>
+        <div className="flex items-center gap-2 font-mono text-[8px] uppercase tracking-[.18em] text-white/35">
+          <span className="h-1.5 w-1.5 rounded-full bg-[#52D6A1] shadow-[0_0_12px_rgba(82,214,161,.8)]" />
+          LIVE ASSURANCE MODEL
+        </div>
+      </div>
+      <svg viewBox="0 0 1200 430" role="img" aria-labelledby={ids.titleId} className="shyena-concept-svg block h-auto w-full">
         <title id={ids.titleId}>{title}</title>
         <defs>
-          <pattern id={ids.gridId} width="48" height="48" patternUnits="userSpaceOnUse"><path d="M 48 0 L 0 0 0 48" fill="none" stroke="#e2e8f0" strokeWidth="1" /></pattern>
-          <marker id={ids.arrowId} markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#94a3b8" /></marker>
-          <marker id={ids.dangerArrowId} markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill={palette.danger} /></marker>
+          <linearGradient id={`bg-${safeId}`} x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#080B13" />
+            <stop offset="55%" stopColor="#0A0D18" />
+            <stop offset="100%" stopColor="#05070C" />
+          </linearGradient>
+          <radialGradient id={`halo-${safeId}`} cx="50%" cy="45%" r="60%">
+            <stop offset="0%" stopColor="#9B8AFB" stopOpacity=".10" />
+            <stop offset="52%" stopColor="#E7B85C" stopOpacity=".035" />
+            <stop offset="100%" stopColor="#000" stopOpacity="0" />
+          </radialGradient>
+          <pattern id={ids.gridId} width="42" height="42" patternUnits="userSpaceOnUse">
+            <path d="M42 0H0V42" fill="none" stroke="#fff" strokeOpacity=".035" strokeWidth="1" />
+          </pattern>
+          <filter id={ids.glowId} x="-80%" y="-80%" width="260%" height="260%">
+            <feGaussianBlur stdDeviation="5" result="blur" />
+            <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+          </filter>
+          <marker id={ids.arrowId} markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+            <path d="M0,0 L7,3.5 L0,7 Z" fill="#8790A5" />
+          </marker>
+          <marker id={ids.dangerArrowId} markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+            <path d="M0,0 L7,3.5 L0,7 Z" fill={palette.danger} />
+          </marker>
         </defs>
-        <rect width="1200" height="430" fill="#fffdf8" />
-        <rect width="1200" height="430" fill={`url(#${ids.gridId})`} opacity=".62" />
+        <rect width="1200" height="430" fill={`url(#bg-${safeId})`} />
+        <rect width="1200" height="430" fill={`url(#halo-${safeId})`} />
+        <rect width="1200" height="430" fill={`url(#${ids.gridId})`} />
+        <rect className="scan" x="0" y="0" width="1200" height="2" fill="#E7B85C" opacity=".18" filter={`url(#${ids.glowId})`} />
+        <g opacity=".75">
+          {[{x:92,y:74},{x:185,y:360},{x:310,y:72},{x:486,y:338},{x:735,y:68},{x:910,y:355},{x:1110,y:92},{x:1080,y:340}].map((p,i) => (
+            <circle key={i} className="spark" cx={p.x} cy={p.y} r="1.7" fill={i % 3 === 0 ? palette.gold : palette.purple} />
+          ))}
+        </g>
         {render(ids)}
       </svg>
+      <figcaption className="border-t border-white/[0.07] px-5 py-4 sm:px-7">
+        <div className="flex items-center justify-between gap-4">
+          <span className="font-mono text-[9px] uppercase tracking-[.2em] text-white/30">ECAAP / EVIDENCE GRAPH</span>
+          <span className="font-mono text-[9px] uppercase tracking-[.16em] text-white/45">Move through the system → preserve proof</span>
+        </div>
+      </figcaption>
     </figure>
   );
 }
 
 function NodeBox({ node }: { node: Node }) {
   const stroke = palette[node.tone || "muted"];
-  const fill = node.tone === "gold" ? "#fff8df" : node.tone === "danger" ? "#fff5f5" : node.tone === "success" ? "#f0fdf4" : "#ffffff";
-  return <g><rect x={node.x - 78} y={node.y - 34} width="156" height="68" rx="12" fill={fill} stroke={stroke} strokeWidth="1.8" /><text x={node.x} y={node.y - 2} textAnchor="middle" fill="#0f172a" fontFamily="Inter,ui-sans-serif,system-ui" fontSize="14" fontWeight="700">{node.label}</text>{node.sub && <text x={node.x} y={node.y + 18} textAnchor="middle" fill="#64748b" fontFamily="Inter,ui-sans-serif,system-ui" fontSize="10.5">{node.sub}</text>}</g>;
+  const fill =
+    node.tone === "gold" ? "#17140D" :
+    node.tone === "danger" ? "#180D12" :
+    node.tone === "success" ? "#0C1815" :
+    "#0C1019";
+  return (
+    <g className="node-shell">
+      <rect x={node.x - 78} y={node.y - 34} width="156" height="68" rx="15" fill={fill} stroke={stroke} strokeOpacity=".62" strokeWidth="1.2" />
+      <rect x={node.x - 73} y={node.y - 29} width="146" height="58" rx="12" fill="none" stroke="#fff" strokeOpacity=".035" />
+      <circle cx={node.x - 58} cy={node.y - 19} r="3" fill={stroke} opacity=".9" filter="url(#__NODE_GLOW__)" />
+      <text x={node.x} y={node.y - 2} textAnchor="middle" fill="#F5F7FB" fontFamily="Inter,ui-sans-serif,system-ui" fontSize="13" fontWeight="700" letterSpacing=".3">{node.label}</text>
+      {node.sub && <text x={node.x} y={node.y + 18} textAnchor="middle" fill="#8992A7" fontFamily="JetBrains Mono,ui-monospace,monospace" fontSize="9.5">{node.sub}</text>}
+    </g>
+  );
 }
 
 function EdgeLines({ nodes, edges, arrowId, dangerArrowId }: { nodes: Node[]; edges: Edge[]; arrowId: string; dangerArrowId: string }) {
-  return <g fill="none" strokeLinecap="round">{edges.map((edge, i) => { const a = nodes[edge.from], b = nodes[edge.to]; if (!a || !b) return null; const horizontal = Math.abs(b.x - a.x) >= Math.abs(b.y - a.y); const x1 = horizontal ? a.x + (b.x > a.x ? 78 : -78) : a.x; const y1 = horizontal ? a.y : a.y + (b.y > a.y ? 34 : -34); const x2 = horizontal ? b.x + (b.x > a.x ? -78 : 78) : b.x; const y2 = horizontal ? b.y : b.y + (b.y > a.y ? -34 : 34); return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke={edge.danger ? palette.danger : "#94a3b8"} strokeWidth={edge.danger ? 2.4 : 1.6} strokeDasharray={edge.dashed ? "6 6" : undefined} markerEnd={`url(#${edge.danger ? dangerArrowId : arrowId})`} />; })}</g>;
+  return (
+    <g fill="none" strokeLinecap="round">
+      {edges.map((edge, i) => {
+        const a = nodes[edge.from], b = nodes[edge.to];
+        if (!a || !b) return null;
+        const horizontal = Math.abs(b.x - a.x) >= Math.abs(b.y - a.y);
+        const x1 = horizontal ? a.x + (b.x > a.x ? 78 : -78) : a.x;
+        const y1 = horizontal ? a.y : a.y + (b.y > a.y ? 34 : -34);
+        const x2 = horizontal ? b.x + (b.x > a.x ? -78 : 78) : b.x;
+        const y2 = horizontal ? b.y : b.y + (b.y > a.y ? -34 : 34);
+        return (
+          <g key={i}>
+            <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={edge.danger ? palette.danger : "#778197"} strokeOpacity=".22" strokeWidth="7" filter={`url(#${dangerArrowId})`} />
+            <line className="beam" x1={x1} y1={y1} x2={x2} y2={y2} stroke={edge.danger ? palette.danger : "#B4A8FF"} strokeOpacity={edge.danger ? ".72" : ".5"} strokeWidth={edge.danger ? "1.8" : "1.25"} strokeDasharray={edge.dashed ? "5 7" : undefined} markerEnd={`url(#${edge.danger ? dangerArrowId : arrowId})`} />
+          </g>
+        );
+      })}
+    </g>
+  );
 }
 
 function Diagram({ title, eyebrow, nodes, edges, caption }: { title: string; eyebrow: string; nodes: Node[]; edges: Edge[]; caption: string }) {
-  return <Frame title={title} eyebrow={eyebrow} render={({ arrowId, dangerArrowId }) => <><EdgeLines nodes={nodes} edges={edges} arrowId={arrowId} dangerArrowId={dangerArrowId} />{nodes.map((n) => <NodeBox key={`${n.x}-${n.y}-${n.label}`} node={n}/>)}<text x="600" y="405" textAnchor="middle" fill="#475569" fontFamily="JetBrains Mono,ui-monospace,monospace" fontSize="12" fontWeight="600">{caption}</text></>} />;
+  return <Frame title={title} eyebrow={eyebrow} render={({ arrowId, dangerArrowId }) => <><EdgeLines nodes={nodes} edges={edges} arrowId={arrowId} dangerArrowId={dangerArrowId} />{nodes.map((n) => <NodeBox key={`${n.x}-${n.y}-${n.label}`} node={n}/>)}<text x="600" y="405" textAnchor="middle" fill="#8790A5" fontFamily="JetBrains Mono,ui-monospace,monospace" fontSize="10" fontWeight="600" letterSpacing="1.5">{caption}</text></>} />;
 }
 
 function SystemsDiagram() { const nodes: Node[] = [{x:600,y:76,label:"AI AGENT",sub:"system under assurance",tone:"gold"},{x:160,y:210,label:"GOAL",sub:"user outcome",tone:"purple"},{x:410,y:210,label:"ORCHESTRATION",sub:"route · intent · handoff",tone:"purple"},{x:665,y:210,label:"TOOLS",sub:"actions · side effects",tone:"purple"},{x:1040,y:210,label:"SECURITY",sub:"boundaries · abuse",tone:"danger"},{x:300,y:350,label:"DETERMINISTIC",sub:"contracts · facts"},{x:600,y:350,label:"GENERATED ANSWERS",sub:"quality · grounding",tone:"gold"},{x:900,y:350,label:"EVIDENCE",sub:"trace · outcome · proof",tone:"gold"}]; return <Diagram title="AI agent testing as a systems problem" eyebrow="SYSTEM VIEW" nodes={nodes} edges={[{from:0,to:1},{from:0,to:2},{from:0,to:3},{from:0,to:4},{from:1,to:5},{from:2,to:5},{from:2,to:6},{from:3,to:6},{from:4,to:7},{from:5,to:7},{from:6,to:7}]} caption="MULTIPLE SIGNALS → ONE EVIDENCE CHAIN → RELEASE VERDICT"/>; }
