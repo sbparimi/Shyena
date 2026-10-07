@@ -63,6 +63,8 @@ For Cognigy, the real assurance question is:
 
 That question produces a very different test architecture.
 
+<!-- SHYENA_VISUAL:assurance-path -->
+
 ### The system under test
 
 A useful mental model is:
@@ -319,6 +321,8 @@ Business outcome
 
 This is where endpoint-only testing becomes insufficient.
 
+<!-- SHYENA_VISUAL:flow-to-tests -->
+
 ---
 
 ## 8. Intent Testing
@@ -482,6 +486,8 @@ Then multiply those structural tests with:
 - adversarial conditions.
 
 The result is a **risk-shaped test universe**, not a random pile of conversations.
+
+<!-- SHYENA_VISUAL:risk-universe -->
 
 ---
 
@@ -715,6 +721,8 @@ Expected:
 
 This is where semantic evaluation and security testing intersect.
 
+<!-- SHYENA_VISUAL:rag -->
+
 ---
 
 ## 17. The False-Green Problem
@@ -747,6 +755,8 @@ This is a central ECAAP rule:
 > **A quality score cannot rescue a broken execution.**
 
 The final verdict is governed by the highest-risk evidence, not merely by an average score.
+
+<!-- SHYENA_VISUAL:false-green -->
 
 ---
 
@@ -958,6 +968,8 @@ Unauthorized capability or data exposure.
 Timeout, dependency failure or unsafe recovery.
 
 This is much more useful than a generic "agent score."
+
+<!-- SHYENA_VISUAL:evidence -->
 
 ---
 
