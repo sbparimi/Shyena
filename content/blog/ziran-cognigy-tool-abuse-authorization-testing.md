@@ -12,7 +12,9 @@ author: "Shyena Engineering"
 published: true
 ---
 
-# Testing Tool Abuse and Authorization in Cognigy AI Agents
+## Abstract
+
+Tool use transforms an AI Agent from a language interface into a delegated execution authority. This article models security testing of Cognigy Tools as a capability-integrity problem spanning intent, authorization, parameter construction, invocation and downstream state. It argues that authorization cannot safely be inferred from the model's interpretation of user intent and proposes a complete-mediation test oracle in which downstream authorization and side-effect evidence are first-class observations. The framework covers unauthorized invocation, parameter manipulation, sequence bypass, contextual privilege confusion and failure-path exploitation. The proposed evaluation is falsifiable through controlled paired experiments comparing response-only and execution-aware security oracles.\n\n**Keywords:** tool security, capability integrity, authorization, Cognigy, agentic AI, excessive agency, side effects, complete mediation.\n\n# Testing Tool Abuse and Authorization in Cognigy AI Agents
 
 A conversational Agent can say exactly the right thing while doing the wrong thing underneath.
 
@@ -223,3 +225,41 @@ It can become an execution authority.
 Security testing must therefore validate the boundary between **what the user asks**, **what the Agent decides**, **what the Tool receives**, and **what the downstream system actually changes**.
 
 **A secure conversational response is not enough. The Tool boundary must hold.**
+\n\n## Research framing
+
+### Research questions
+
+**RQ1.** How frequently can an Agent produce a semantically plausible response while violating a Tool authorization invariant?
+
+**RQ2.** Which Tool-level properties—capability selection, parameter integrity, authorization state or downstream state—provide the strongest security evidence?
+
+**RQ3.** Does complete-mediation testing reduce false PASS classifications compared with relying on Agent-generated refusals?
+
+### Formal capability model
+
+Let $C$ denote a capability, $x$ its arguments, $u$ the caller identity and $s$ the authorization state. A Tool invocation is permitted only when $Policy(u,C,x,s)=allow$. The Agent may propose $(C,x)$, but the proposition is not itself an authorization decision. Security testing therefore evaluates whether every executed invocation satisfies the downstream policy predicate and whether the resulting state transition is permitted.
+
+### Attack model
+
+The adversary may manipulate natural-language intent, conversation state, identifiers, parameters or sequencing. The adversary does not receive direct infrastructure privileges. The test environment must instrument the Agent-to-Tool boundary and, where possible, the downstream state transition. This makes the methodology suitable for gray-box security evaluation rather than assuming access to model internals.
+
+### Metrics and statistical design
+
+Primary metrics should include unauthorized Tool invocation rate, unauthorized parameter rate, side-effect violation rate, authorization-bypass rate and false-pass rate. Each attack condition should be repeated across seeds or independent runs where applicable. Confidence intervals should be reported rather than presenting a single observed percentage. High-impact actions should receive separate analysis because a low-frequency failure in an irreversible capability is not equivalent to a low-impact read operation.
+
+### Hypothesis
+
+**H1:** Execution-aware evaluation has a lower false-pass rate than response-only evaluation for Tool authorization tests. **H0:** There is no difference. The hypothesis can be tested with paired attack journeys and McNemar's test for paired binary classifications, with effect size and confidence interval reported.
+
+### Limitations
+
+Tool security depends on downstream controls. The methodology cannot certify an external system whose authorization semantics are not observable. It also does not assume that every Tool should require human approval; autonomy must be evaluated against business risk and capability scope.
+
+### References
+
+1. OWASP GenAI Security Project, “LLM06:2025 Excessive Agency,” 2025.
+2. IEEE, “Tool and Agent Selection for Large Language Model Agents in Production: A Survey,” Proc. IEEE CAI, 2026.
+3. F. Alpay and T. Alpay, “AgentSecBench,” arXiv:2605.26269, 2026.
+4. Y. Ling et al., “Toward Secure LLM Agents,” arXiv:2606.10749, 2026.
+5. Cognigy, “Flows,” Cognigy.AI Documentation.
+6. Cognigy, “MCP Server,” Cognigy.AI Documentation.\n
