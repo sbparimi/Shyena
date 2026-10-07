@@ -6,34 +6,61 @@ export const Route = createFileRoute("/pricing")({
       { title: "Pricing | Shyena" },
       {
         name: "description",
-        content: "Pricing for independent Cognigy AI Agent testing and evaluation.",
+        content: "Cognigy AI Agent testing and evaluation engagements, from dedicated-engineer pilots to enterprise assurance.",
       },
     ],
   }),
   component: Pricing,
 });
 
-const scope = [
+const plans = [
   {
-    title: "Project understanding",
-    eyebrow: "01 / Scope",
-    body: "Review the Cognigy project structure, agent behaviour, key journeys, decision points and the environments that matter to the assurance scope.",
-    deliverable: "A scoped test model covering the agent surface and priority business journeys.",
-    duration: "Typical duration: defined by project complexity and journey scope.",
+    name: "Pilot",
+    kicker: "Dedicated engineer",
+    description:
+      "A focused engagement to establish the assurance baseline for your Cognigy AI Agent.",
+    price: "Scoped",
+    priceNote: "per pilot",
+    features: [
+      "Dedicated Shyena engineer onboarded to the project",
+      "Cognigy architecture and journey discovery",
+      "Priority business journeys converted into tests",
+      "Initial execution, evaluation and findings",
+    ],
+    cta: "Start a pilot",
+    featured: true,
   },
   {
-    title: "Test generation",
-    eyebrow: "02 / Deliver",
-    body: "Turn the agreed Cognigy journeys into goal-driven tests with personas, playbooks, assertions and boundary cases.",
-    deliverable: "An executable test set mapped to the agreed journeys and evaluation requirements.",
-    duration: "Typical duration: defined by journey count and test depth.",
+    name: "Continuous",
+    kicker: "Ongoing assurance",
+    description:
+      "Continuous testing as your Cognigy agents, flows, knowledge and business journeys evolve.",
+    price: "Scoped",
+    priceNote: "per engagement",
+    features: [
+      "Recurring test generation and execution",
+      "Regression coverage for agreed journeys",
+      "Deterministic and semantic evaluation",
+      "Release evidence and trend reporting",
+    ],
+    cta: "Discuss continuous testing",
+    featured: false,
   },
   {
-    title: "Execution & evaluation",
-    eyebrow: "03 / Evidence",
-    body: "Run the conversations against the agent and evaluate deterministic behaviour, semantic quality, tool use and execution integrity.",
-    deliverable: "Evidence-backed results with inspectable verdicts and evaluation findings.",
-    duration: "Typical duration: defined by execution volume and evaluation scope.",
+    name: "Enterprise",
+    kicker: "Scaled assurance",
+    description:
+      "A broader assurance programme for multiple agents, environments, teams and business journeys.",
+    price: "Custom",
+    priceNote: "per programme",
+    features: [
+      "Multi-agent and multi-environment coverage",
+      "Expanded business-journey test universe",
+      "Enterprise reporting and governance",
+      "Dedicated delivery model defined around your organisation",
+    ],
+    cta: "Discuss enterprise",
+    featured: false,
   },
 ];
 
@@ -41,64 +68,132 @@ function Pricing() {
   return (
     <div className="bg-white text-[#17213f]">
       <section className="scroll-mt-[68px] bg-[#07101f] text-white">
-        <div className="mx-auto max-w-[1000px] px-5 pb-20 pt-24 text-center sm:px-8 sm:pt-28 lg:pb-28 lg:pt-32">
+        <div className="mx-auto max-w-[1080px] px-5 pb-16 pt-20 sm:px-8 sm:pt-24 lg:pb-20 lg:pt-28">
           <p className="font-mono text-xs font-bold uppercase tracking-[.2em] text-[#f18a32]">
             Pricing
           </p>
-          <h1 className="mx-auto mt-5 max-w-4xl font-[Sora] text-4xl font-extrabold leading-[1.02] tracking-[-.045em] sm:text-5xl lg:text-6xl">
-            Price the testing scope, not a generic platform tier.
+          <h1 className="mt-4 max-w-4xl font-[Sora] text-4xl font-extrabold leading-[1.02] tracking-[-.045em] sm:text-5xl lg:text-6xl">
+            Price the assurance engagement, not a generic AI platform tier.
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-white/65">
-            Pricing depends on the Cognigy agent, journeys, environments and evaluation scope.
-            The site does not publish unsupported fixed tiers.
+          <p className="mt-5 max-w-3xl text-lg leading-8 text-white/65">
+            Start with a focused pilot and a dedicated engineer. Expand into continuous or
+            enterprise assurance when the testing scope requires it.
           </p>
-          <Link
-            to="/contact"
-            className="mt-8 inline-flex h-12 items-center rounded-lg bg-[#f18a32] px-5 text-sm font-bold text-[#07101f]"
-          >
-            Book a 30-min call
-          </Link>
         </div>
       </section>
 
-      <section aria-labelledby="pricing-scope">
-        <div className="mx-auto max-w-[1200px] px-5 py-16 sm:px-8 lg:py-24">
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="font-mono text-xs font-bold uppercase tracking-[.18em] text-[#f18a32]">
-              Testing scope
-            </p>
-            <h2 id="pricing-scope" className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">
-              The work is scoped around the agent, not a generic tier.
-            </h2>
-            <p className="mt-4 text-base leading-7 text-[#667085]">
-              Each engagement defines what is analysed, generated, executed and evidenced before
-              the work begins.
-            </p>
-          </div>
-
-          <div className="mt-10 grid min-w-0 grid-cols-1 gap-4 md:grid-cols-3">
-            {scope.map((item) => (
+      <section aria-labelledby="plans" className="bg-[#07101f] pb-20 text-white lg:pb-28">
+        <div className="mx-auto max-w-[1200px] px-5 sm:px-8">
+          <div className="grid min-w-0 grid-cols-1 gap-4 md:grid-cols-3">
+            {plans.map((plan) => (
               <article
-                key={item.title}
-                className="min-w-0 rounded-xl border border-[#e2e5ea] bg-white p-6 shadow-[0_8px_30px_-28px_rgba(23,33,63,.45)]"
+                key={plan.name}
+                className={
+                  "min-w-0 rounded-xl border p-6 sm:p-7 " +
+                  (plan.featured
+                    ? "border-[#f18a32] bg-white text-[#17213f]"
+                    : "border-white/15 bg-[#101a19] text-white")
+                }
               >
-                <p className="font-mono text-[10px] font-bold uppercase tracking-[.18em] text-[#f18a32]">
-                  {item.eyebrow}
-                </p>
-                <h3 className="mt-3 min-w-0 break-words text-xl font-extrabold leading-tight tracking-tight [hyphens:auto] sm:text-2xl">
-                  {item.title}
-                </h3>
-                <p className="mt-4 text-sm leading-6 text-[#596273]">{item.body}</p>
-                <div className="mt-5 border-t border-[#eef0f3] pt-5">
-                  <p className="text-xs font-bold uppercase tracking-[.12em] text-[#17213f]">
-                    Delivered
+                <div className="flex min-h-7 items-center justify-between gap-3">
+                  <p
+                    className={
+                      "font-mono text-[10px] font-bold uppercase tracking-[.18em] " +
+                      (plan.featured ? "text-[#e87512]" : "text-[#f18a32]")
+                    }
+                  >
+                    {plan.kicker}
                   </p>
-                  <p className="mt-2 text-sm leading-6 text-[#596273]">{item.deliverable}</p>
+                  {plan.featured && (
+                    <span className="rounded-full bg-[#f18a32]/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[.1em] text-[#a64e05]">
+                      Recommended
+                    </span>
+                  )}
                 </div>
-                <p className="mt-5 text-xs leading-5 text-[#667085]">{item.duration}</p>
+
+                <h2 className="mt-3 min-w-0 break-words text-2xl font-extrabold leading-tight tracking-tight sm:text-3xl">
+                  {plan.name}
+                </h2>
+
+                <p
+                  className={
+                    "mt-4 min-h-[96px] text-sm leading-6 " +
+                    (plan.featured ? "text-[#596273]" : "text-white/60")
+                  }
+                >
+                  {plan.description}
+                </p>
+
+                <div
+                  className={
+                    "mt-5 border-t pt-5 " +
+                    (plan.featured ? "border-[#e8eaee]" : "border-white/10")
+                  }
+                >
+                  <div className="flex items-end gap-2">
+                    <span className="break-words text-3xl font-extrabold tracking-tight sm:text-4xl">
+                      {plan.price}
+                    </span>
+                    <span
+                      className={
+                        "mb-1 text-xs " +
+                        (plan.featured ? "text-[#7a8290]" : "text-white/50")
+                      }
+                    >
+                      {plan.priceNote}
+                    </span>
+                  </div>
+                </div>
+
+                <ul
+                  className={
+                    "mt-6 min-h-[176px] space-y-3 text-sm leading-5 " +
+                    (plan.featured ? "text-[#596273]" : "text-white/65")
+                  }
+                >
+                  {plan.features.map((feature) => (
+                    <li key={feature} className="flex gap-2.5">
+                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#f18a32]" />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <Link
+                  to="/contact"
+                  className={
+                    "mt-6 flex h-12 items-center justify-center rounded-lg px-4 text-sm font-bold transition-colors " +
+                    (plan.featured
+                      ? "bg-[#07101f] text-white hover:bg-[#17233f]"
+                      : "bg-white text-[#07101f] hover:bg-white/90")
+                  }
+                >
+                  {plan.cta}
+                </Link>
               </article>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="bg-white">
+        <div className="mx-auto max-w-[1000px] px-5 py-16 text-center sm:px-8 lg:py-20">
+          <p className="font-mono text-xs font-bold uppercase tracking-[.18em] text-[#f18a32]">
+            Pilot first
+          </p>
+          <h2 className="mx-auto mt-3 max-w-3xl text-3xl font-extrabold tracking-tight sm:text-4xl">
+            Put a dedicated engineer against the agent before scaling the programme.
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-[#667085]">
+            The pilot establishes the working model, priority journeys, test coverage and
+            evaluation approach. Scope and commercial terms are agreed before onboarding.
+          </p>
+          <Link
+            to="/contact"
+            className="mt-7 inline-flex h-12 items-center rounded-lg bg-[#e87512] px-5 text-sm font-bold text-white"
+          >
+            Book a pilot discussion
+          </Link>
         </div>
       </section>
     </div>
