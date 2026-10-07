@@ -73,23 +73,36 @@ function ArticlePage() {
 
   return <>
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
-    <section className="relative overflow-hidden bg-[#f7f8fb] text-[#17213f]">
-      <div className="mx-auto w-full max-w-5xl px-5 pb-10 pt-12 sm:px-8 sm:pt-20">
-        <div className="mb-10 flex items-center justify-center">
-          <img src="/shyena-mark.svg?v=20260917" alt="Shyena" className="h-14 w-11 object-contain" />
-          <span className="ml-3 font-[Sora] text-2xl font-extrabold tracking-[-.04em] text-[#0B1B3A]">Shyena</span>
+    <section className="relative overflow-hidden border-b border-[#e7e9ee] bg-[#f8f9fb] text-[#17213f]">
+      <div className="mx-auto w-full max-w-6xl px-5 pb-14 pt-12 sm:px-8 sm:pb-20 sm:pt-16">
+        <div className="max-w-4xl">
+          <div className="flex flex-wrap items-center gap-3 text-[11px] font-semibold uppercase tracking-[.18em] text-[#e87512]">
+            <span>{article.category || "Engineering"}</span>
+            <span className="h-1 w-1 rounded-full bg-[#c4c9d3]" />
+            <span>Technical guide</span>
+            <span className="h-1 w-1 rounded-full bg-[#c4c9d3]" />
+            <span>~15 min read</span>
+          </div>
+          <h1 className="mt-5 max-w-4xl text-4xl font-semibold leading-[1.04] tracking-[-.05em] text-[#0b1733] sm:text-6xl">{article.title}</h1>
+          <p className="mt-6 max-w-3xl text-lg leading-8 text-[#566176] sm:text-xl">{article.description}</p>
+          <div className="mt-7 flex items-center gap-3 text-sm text-[#697386]">
+            <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#0b1733] text-[10px] font-bold text-white">S</span>
+            <span>{article.author || "Shyena Engineering"}</span>
+            <span className="text-[#c5cad3]">·</span>
+            <span>AI Agent Assurance</span>
+          </div>
         </div>
-        <div className="text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-[#f0d6c2] bg-white px-3.5 py-1.5 text-xs font-semibold text-[#e87512]">{article.category || "Engineering"}</span>
-          <h1 className="mt-6 text-3xl font-bold leading-[1.1] tracking-[-.035em] sm:text-5xl">{article.title}</h1>
-        </div>
-        {article.diagram && <div className="mt-10"><ArticleConceptDiagram concept={article.diagram as ArticleConcept} /></div>}
-        {article.thesis && <p className="mx-auto mt-10 max-w-3xl text-center text-base font-medium leading-relaxed text-[#4f5b70] sm:text-lg">{article.thesis}</p>}
-        <div className="mt-5 text-center text-sm text-[#7b8494]">{article.author || "Shyena Engineering"}</div>
+        {article.diagram && <div className="mt-12"><ArticleConceptDiagram concept={article.diagram as ArticleConcept} /></div>}
+        {article.thesis && (
+          <div className="mt-8 grid gap-5 border-y border-[#dfe3ea] py-7 sm:grid-cols-[140px_1fr] sm:items-start">
+            <div className="font-mono text-[10px] font-semibold uppercase tracking-[.2em] text-[#8a92a2]">The thesis</div>
+            <p className="max-w-4xl text-base font-medium leading-7 text-[#26334d] sm:text-lg">{article.thesis}</p>
+          </div>
+        )}
       </div>
     </section>
 
-    <article className="mx-auto w-full max-w-3xl px-5 pb-24 pt-12 sm:px-8">
+    <article className="mx-auto w-full max-w-6xl px-5 pb-24 pt-10 sm:px-8 sm:pt-14">\n      <div className="grid gap-12 lg:grid-cols-[180px_minmax(0,760px)_1fr] lg:items-start">\n        <aside className="hidden lg:block lg:sticky lg:top-28">\n          <div className="font-mono text-[9px] font-semibold uppercase tracking-[.2em] text-[#9aa2b0]">In this guide</div>\n          <nav className="mt-4 space-y-3 text-[12px] leading-5 text-[#6a7384]">\n            <a href="#the-ecaap-assurance-model" className="block hover:text-[#e87512]">ECAAP assurance model</a>\n            <a href="#1--prove-the-contract" className="block hover:text-[#e87512]">Contracts</a>\n            <a href="#2--prove-the-behaviour" className="block hover:text-[#e87512]">Behaviour</a>\n            <a href="#3--evaluate-the-answer" className="block hover:text-[#e87512]">Answer quality</a>\n            <a href="#4--prevent-false-greens" className="block hover:text-[#e87512]">False greens</a>\n            <a href="#5--test-the-trust-boundary" className="block hover:text-[#e87512]">Security</a>\n            <a href="#6--close-the-production-loop" className="block hover:text-[#e87512]">Production</a>\n            <a href="#7--build-the-evidence-model" className="block hover:text-[#e87512]">Evidence</a>\n          </nav>\n        </aside>\n        <div className="min-w-0">
       <GeneratedMarkdown
         sourcePath={article.sourcePath}
         visuals={slug === "how-to-test-a-cognigy-agent" ? {
@@ -103,7 +116,7 @@ function ArticlePage() {
         } : {}}
       />
 
-      <section className="mt-16 rounded-2xl border border-[#e2e5eb] bg-white p-6 sm:p-8" aria-labelledby="related-resources-heading">
+        <section className="mt-16 rounded-2xl border border-[#e2e5eb] bg-white p-6 sm:p-8" aria-labelledby="related-resources-heading">
         <div className="text-xs font-semibold uppercase tracking-[.16em] text-[#e87512]">Continue the assurance journey</div>
         <h2 id="related-resources-heading" className="mt-2 text-xl font-bold text-[#17213f]">Explore the system behind the article.</h2>
         <div className="mt-5 grid gap-3 sm:grid-cols-2">
@@ -114,13 +127,13 @@ function ArticlePage() {
         </div>
       </section>
 
-      <div className="mt-8 overflow-hidden rounded-2xl border border-[#f0d6c2] bg-[#fff8f2] px-6 py-10 text-center sm:px-10">
+        <div className="mt-8 overflow-hidden rounded-2xl border border-[#f0d6c2] bg-[#fff8f2] px-6 py-10 text-center sm:px-10">
         <img src="/shyena-mark.svg?v=20260917" alt="" aria-hidden="true" className="mx-auto h-12 w-10 object-contain" />
         <h2 className="mt-4 text-xl font-bold text-[#17213f] sm:text-2xl">Make the release decision defensible.</h2>
         <p className="mx-auto mt-3 max-w-lg text-[#69707d]">Shyena connects live agent behaviour to evidence, evaluation and release governance.</p>
         <Button asChild size="lg" className="mt-6"><Link to="/contact">See Shyena in action <ArrowRight className="h-4 w-4" /></Link></Button>
       </div>
-      <div className="mt-10 flex flex-wrap items-center justify-between gap-4"><Button asChild variant="ghost" className="px-0 text-muted-foreground hover:text-foreground"><Link to="/blog"><ArrowLeft className="mr-2 h-4 w-4" />Back to Insights</Link></Button><Link to="/docs" className="inline-flex items-center gap-1 text-sm font-semibold text-[#e87512]">Documentation <ExternalLink className="h-3.5 w-3.5" /></Link></div>
+        <div className="mt-10 flex flex-wrap items-center justify-between gap-4"><Button asChild variant="ghost" className="px-0 text-muted-foreground hover:text-foreground"><Link to="/blog"><ArrowLeft className="mr-2 h-4 w-4" />Back to Insights</Link></Button><Link to="/docs" className="inline-flex items-center gap-1 text-sm font-semibold text-[#e87512]">Documentation <ExternalLink className="h-3.5 w-3.5" /></Link></div>
     </article>
   </>;
 }
