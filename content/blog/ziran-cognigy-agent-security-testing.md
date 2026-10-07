@@ -12,7 +12,9 @@ author: "Shyena Engineering"
 published: true
 ---
 
-# Security Testing Cognigy AI Agents: Why Functional Passes Are Not Security Passes
+## Abstract
+
+Agentic security cannot be inferred from conversational correctness. This article formulates security testing of Cognigy-built AI Agents as a system-level verification problem over untrusted input, delegated authority, tool execution, protected data and external side effects. We define a security journey as a tuple of preconditions, adversarial stimuli, protected assets, security invariants, observable execution evidence and a release disposition. The central proposition is that an Agent security verdict should be derived from the strongest available evidence at the point where authority is exercised, rather than from the natural-language response alone. The framework distinguishes semantic observations from deterministic execution facts and provides a basis for repeatable adversarial regression testing. It is presented as a research methodology rather than as a claim of measured vulnerability rates; empirical validation requires controlled experiments across representative Agent configurations and model versions.\n\n**Keywords:** agentic AI security, Cognigy, adversarial testing, prompt injection, tool security, security invariants, execution evidence, AI assurance, red teaming.\n\n# Security Testing Cognigy AI Agents: Why Functional Passes Are Not Security Passes
 
 A Cognigy Agent can correctly route an intent, retrieve an order and complete a customer journey while still having a serious security weakness.
 
@@ -197,3 +199,37 @@ Ziran provides the security-testing lens for those adversarial journeys.
 The objective is not to produce a longer list of jailbreaks.
 
 **The objective is to produce evidence that critical Agent security boundaries hold.**
+\n\n## Research framing
+
+### Research questions
+
+**RQ1.** Which security boundaries emerge when a Cognigy Agent converts untrusted language into Flow, Job, Tool, retrieval or handover actions?
+
+**RQ2.** Which observable signals are sufficient to distinguish a conversationally safe response from a security-safe execution?
+
+**RQ3.** How can adversarial security journeys be converted into deterministic regression assets without reducing the problem to a static jailbreak corpus?
+
+### Threat model
+
+The adversary controls some or all user-originated content and may attempt direct or indirect instruction manipulation, identity confusion, data-access escalation, Tool coercion or multi-turn state manipulation. The defender controls the Agent configuration, authorization policy, test environment and evidence collection. The model itself is treated as a probabilistic component rather than a trusted policy enforcement mechanism. This follows the broader security literature's distinction between model behaviour and system-level controls. OWASP explicitly treats excessive agency as a consequence of excessive functionality, permissions or autonomy, while recent agent-security research emphasizes delegated authority, information flow and persistent state as system-level attack surfaces. 
+
+### Evaluation methodology
+
+A publishable experimental study based on this framework should use paired benign and adversarial journeys, multiple Agent configurations, repeated trials per condition, fixed test data, version-pinned models and an independent execution trace. Primary measures should include attack success rate (ASR), unauthorized-action rate (UAR), protected-data disclosure rate (PDDR), false-pass rate (FPR), evidence completeness (EC) and security regression recall (SRR). Results should report confidence intervals and stratify by attack family rather than aggregating heterogeneous failures into one score.
+
+### Novelty and falsifiability
+
+The falsifiable claim is not that Ziran prevents attacks. The testable claim is that an evidence-correlated security oracle can reduce false security conclusions relative to response-only evaluation. A controlled study can compare (A) final-response judgement, (B) response plus LLM-as-judge, and (C) response plus deterministic execution evidence. The primary endpoint is the rate at which each oracle incorrectly classifies a security violation as PASS.
+
+### Limitations
+
+The framework does not establish a universal security guarantee, cannot infer vulnerabilities from Agent text alone, and does not replace application penetration testing, identity controls, infrastructure security or governance processes. Results are deployment-specific because Tool permissions, Flow logic, downstream authorization and model behaviour materially affect the attack surface.
+
+### References
+
+1. Y. Ling et al., “Toward Secure LLM Agents: Threat Surfaces, Attacks, Defenses, and Evaluation,” arXiv:2606.10749, 2026.
+2. F. Alpay and T. Alpay, “AgentSecBench: Measuring Prompt Injection, Privacy Leakage, and Tool-Use Integrity in LLM Agents,” arXiv:2605.26269, 2026.
+3. OWASP GenAI Security Project, “Top 10 for LLM and GenAI Applications,” 2026.
+4. NIST, “Artificial Intelligence Risk Management Framework: Generative Artificial Intelligence Profile,” NIST AI 600-1, 2024.
+5. Cognigy, “Flows,” Cognigy.AI Documentation.
+6. IEEE, “Defeating Prompt Injections by Design,” Proc. IEEE SaTML, 2026.\n
