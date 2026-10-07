@@ -1,18 +1,18 @@
 ---
-title: "How to Test a Cognigy Agent: The Complete ECAAP Assurance Guide"
+title: "How to Test a Cognigy Agent: The Complete Shyena Assurance Guide"
 description: "A deep engineering guide to testing Cognigy Agents across intent, Flows, Jobs, Tools, Knowledge, orchestration, state, security, business outcomes and continuous production assurance."
 slug: "how-to-test-a-cognigy-agent"
 content_type: "technical-article"
 category: "Cognigy Assurance"
 diagram: "cognigy"
-thesis: "A Cognigy Agent is not tested when its final answer sounds correct. ECAAP validates the complete execution path—from intent and orchestration through tools, knowledge, security and business outcome—and turns the evidence into a release decision."
+thesis: "A Cognigy Agent is not tested when its final answer sounds correct. Shyena validates the complete execution path—from intent and orchestration through tools, knowledge, security and business outcome—and turns the evidence into a release decision."
 primary_keyword: "how to test a Cognigy Agent"
 search_intent: "informational"
 author: "Shyena Engineering"
 published: true
 ---
 
-# How to Test a Cognigy Agent: The Complete ECAAP Assurance Guide
+# How to Test a Cognigy Agent: The Complete Shyena Assurance Guide
 
 A Cognigy Agent is not a chatbot with a better language model.
 
@@ -41,7 +41,7 @@ A serious Cognigy testing strategy therefore has to test more than the conversat
 
 It has to test the **system that produced the conversation**.
 
-This is the purpose of the **Enterprise Conversational AI Assurance Platform (ECAAP)** model.
+This is the purpose of the **Shyena Assurance Platform**.
 
 ---
 
@@ -113,13 +113,13 @@ A stronger definition is:
 
 > **A Cognigy Agent is tested when the important business journeys have sufficient evidence across deterministic correctness, behavioural correctness, semantic quality, security, execution integrity and business outcome.**
 
-ECAAP separates those dimensions so that one strong score cannot hide a critical failure.
+Shyena separates those dimensions so that one strong score cannot hide a critical failure.
 
 ---
 
-## 3. ECAAP: Four Assurance Quadrants
+## 3. Shyena: Four Assurance Quadrants
 
-ECAAP organizes the assurance problem into four connected quadrants.
+Shyena organizes the assurance problem into four connected quadrants.
 
 ### Q1 — Contract validation
 
@@ -209,7 +209,7 @@ A deterministic test can verify:
 
 No LLM judge is necessary.
 
-This is an important ECAAP principle:
+This is an important Shyena principle:
 
 > **Use deterministic assertions whenever the truth can be computed deterministically.**
 
@@ -750,7 +750,7 @@ Execution integrity    FAIL
 
 The release must fail.
 
-This is a central ECAAP rule:
+This is a central Shyena rule:
 
 > **A quality score cannot rescue a broken execution.**
 
@@ -1414,7 +1414,7 @@ It requires:
 - confidence-aware evidence;
 - and continuous production feedback.
 
-That is the role of ECAAP.
+That is the role of Shyena.
 
 **The objective is not to generate more conversations.**
 
