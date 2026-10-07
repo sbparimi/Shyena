@@ -12,7 +12,9 @@ author: "Shyena Engineering"
 published: true
 ---
 
-# Prompt Injection Testing for Cognigy AI Agents: From Jailbreaks to Security Properties
+## Abstract
+
+Prompt injection in an Agent is best understood as an instruction-integrity problem rather than a collection of memorable jailbreak strings. This article develops a Cognigy-oriented testing model in which trusted instructions, untrusted observations and delegated capabilities are explicitly separated. It defines prompt-injection tests around invariants that must survive adversarial perturbation, including authorization preservation, Tool non-invocation and protected-data non-disclosure. The proposed methodology supports direct, indirect and multi-turn injection and separates semantic assessment from deterministic execution evidence. The article does not claim a measured defense rate; instead it specifies an experimentally falsifiable protocol for evaluating whether a security oracle detects violations that response-only grading misses.\n\n**Keywords:** prompt injection, indirect prompt injection, Cognigy, instruction integrity, agentic AI, security invariants, adversarial testing, multi-turn attacks.\n\n# Prompt Injection Testing for Cognigy AI Agents: From Jailbreaks to Security Properties
 
 Prompt injection is often demonstrated with a dramatic sentence:
 
@@ -203,3 +205,40 @@ For production Cognigy Agents, it is an instruction-boundary and execution-contr
 Ziran turns adversarial prompts into repeatable security journeys with explicit invariants and evidence.
 
 **The goal is not to prove that an Agent can resist one jailbreak. The goal is to prove that critical security properties remain intact when untrusted input attempts to change the Agent's behaviour.**
+\n\n## Research framing
+
+### Research questions
+
+**RQ1.** Which prompt-injection transformations preserve an attack objective while changing lexical form, conversation history or injection location?
+
+**RQ2.** Which security invariants remain stable across direct, indirect and multi-turn attacks?
+
+**RQ3.** How much does execution-aware evaluation reduce false PASS classifications compared with response-only evaluation?
+
+### Attack taxonomy
+
+The experimental corpus should stratify attacks by source (direct user input versus retrieved or tool-derived content), temporal structure (single-turn versus multi-turn), target (instruction priority, data disclosure, Tool invocation or state transition) and transformation (paraphrase, role manipulation, contextual embedding, structured content and sequential pressure). This taxonomy is consistent with contemporary research describing prompt injection as extending beyond simple overrides into indirect and tool-assisted manipulation.
+
+### Formal security property
+
+Let $I_t$ be trusted instructions, $U_t$ untrusted observations, $C_t$ the conversation state and $A_t$ the set of executable capabilities. A security invariant $P$ is satisfied if, for every allowed adversarial transformation $T$ in the test corpus, the resulting execution $E(T(I,U,C))$ remains within the policy-defined capability and disclosure boundary. The test oracle therefore evaluates the execution trace, not merely the generated response.
+
+### Experimental protocol
+
+For each benign journey, construct adversarial counterparts that preserve the legitimate task while varying only the injection factor. Run each condition repeatedly with a fixed Agent version and model configuration. Record Tool calls, arguments, authorization state, retrieved content provenance, downstream state and final response. Report ASR, invariant-violation rate, false-pass rate, and variance across repeated trials. The protocol should include negative controls to measure whether the evaluator incorrectly flags benign content.
+
+### Comparison baseline
+
+Compare at least three evaluators: lexical refusal heuristics, response-only semantic judgement, and evidence-correlated security evaluation. A stronger study should include a defence condition such as policy enforcement or control-flow isolation and measure both security and task utility, because security mechanisms can alter legitimate task completion.
+
+### Limitations
+
+Prompt-injection resistance is not a scalar model property. It depends on the surrounding application, data provenance, capability permissions and downstream controls. A benchmark result on one Agent configuration should therefore not be generalized to all Cognigy deployments.
+
+### References
+
+1. IEEE, “Defeating Prompt Injections by Design,” Proc. IEEE SaTML, 2026.
+2. IEEE, “A Systematic Review of Prompt Injection Attacks on Large Language Models,” IEEE Access, vol. 14, 2026.
+3. F. Alpay and T. Alpay, “AgentSecBench,” arXiv:2605.26269, 2026.
+4. OWASP GenAI Security Project, “LLM01: Prompt Injection” and “LLM06: Excessive Agency,” 2025–2026.
+5. NIST, “Artificial Intelligence Risk Management Framework: Generative Artificial Intelligence Profile,” NIST AI 600-1, 2024.\n
