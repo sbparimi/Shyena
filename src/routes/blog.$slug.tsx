@@ -102,38 +102,60 @@ function ArticlePage() {
       </div>
     </section>
 
-    <article className="mx-auto w-full max-w-6xl px-5 pb-24 pt-10 sm:px-8 sm:pt-14">\n      <div className="grid gap-12 lg:grid-cols-[180px_minmax(0,760px)_1fr] lg:items-start">\n        <aside className="hidden lg:block lg:sticky lg:top-28">\n          <div className="font-mono text-[9px] font-semibold uppercase tracking-[.2em] text-[#9aa2b0]">In this guide</div>\n          <nav className="mt-4 space-y-3 text-[12px] leading-5 text-[#6a7384]">\n            <a href="#the-ecaap-assurance-model" className="block hover:text-[#e87512]">ECAAP assurance model</a>\n            <a href="#1--prove-the-contract" className="block hover:text-[#e87512]">Contracts</a>\n            <a href="#2--prove-the-behaviour" className="block hover:text-[#e87512]">Behaviour</a>\n            <a href="#3--evaluate-the-answer" className="block hover:text-[#e87512]">Answer quality</a>\n            <a href="#4--prevent-false-greens" className="block hover:text-[#e87512]">False greens</a>\n            <a href="#5--test-the-trust-boundary" className="block hover:text-[#e87512]">Security</a>\n            <a href="#6--close-the-production-loop" className="block hover:text-[#e87512]">Production</a>\n            <a href="#7--build-the-evidence-model" className="block hover:text-[#e87512]">Evidence</a>\n          </nav>\n        </aside>\n        <div className="min-w-0">
-      <GeneratedMarkdown
-        sourcePath={article.sourcePath}
-        visuals={slug === "how-to-test-a-cognigy-agent" ? {
-          "assurance-path": <ArticleConceptDiagram concept="cognigy" />,
-          "quadrants": <ArticleConceptDiagram concept="contracts" />,
-          "flow-to-tests": <ArticleConceptDiagram concept="trajectory" />,
-          "risk-universe": <ArticleConceptDiagram concept="systems" />,
-          "rag": <ArticleConceptDiagram concept="judge" />,
-          "false-green": <ArticleConceptDiagram concept="false-pass" />,
-          "evidence": <ArticleConceptDiagram concept="evidence" />,
-        } : {}}
-      />
+    <article className="mx-auto w-full max-w-6xl px-5 pb-24 pt-10 sm:px-8 sm:pt-14">
+      <div className="grid gap-12 lg:grid-cols-[180px_minmax(0,760px)_1fr] lg:items-start">
+        <aside className="hidden lg:sticky lg:top-28 lg:block">
+          <div className="font-mono text-[9px] font-semibold uppercase tracking-[.2em] text-[#9aa2b0]">In this guide</div>
+          <nav className="mt-4 space-y-3 text-[12px] leading-5 text-[#6a7384]">
+            <a href="#the-ecaap-assurance-model" className="block hover:text-[#e87512]">ECAAP assurance model</a>
+            <a href="#1--prove-the-contract" className="block hover:text-[#e87512]">Contracts</a>
+            <a href="#2--prove-the-behaviour" className="block hover:text-[#e87512]">Behaviour</a>
+            <a href="#3--evaluate-the-answer" className="block hover:text-[#e87512]">Answer quality</a>
+            <a href="#4--prevent-false-greens" className="block hover:text-[#e87512]">False greens</a>
+            <a href="#5--test-the-trust-boundary" className="block hover:text-[#e87512]">Security</a>
+            <a href="#6--close-the-production-loop" className="block hover:text-[#e87512]">Production</a>
+            <a href="#7--build-the-evidence-model" className="block hover:text-[#e87512]">Evidence</a>
+          </nav>
+        </aside>
 
-        <section className="mt-16 rounded-2xl border border-[#e2e5eb] bg-white p-6 sm:p-8" aria-labelledby="related-resources-heading">
-        <div className="text-xs font-semibold uppercase tracking-[.16em] text-[#e87512]">Continue the assurance journey</div>
-        <h2 id="related-resources-heading" className="mt-2 text-xl font-bold text-[#17213f]">Explore the system behind the article.</h2>
-        <div className="mt-5 grid gap-3 sm:grid-cols-2">
-          <Link to="/vera" className="group rounded-xl border border-[#e1e4e9] p-4 transition hover:-translate-y-0.5 hover:border-[#e87512]"><div className="font-semibold text-[#17213f]">Vera · Test &amp; Evaluate <ArrowRight className="ml-1 inline h-4 w-4 transition-transform group-hover:translate-x-1" /></div><p className="mt-1 text-sm leading-5 text-[#69707d]">Run realistic agent journeys and evaluate behaviour.</p></Link>
-          <Link to="/nexus" className="group rounded-xl border border-[#e1e4e9] p-4 transition hover:-translate-y-0.5 hover:border-[#e87512]"><div className="font-semibold text-[#17213f]">Nexus · Understand <ArrowRight className="ml-1 inline h-4 w-4 transition-transform group-hover:translate-x-1" /></div><p className="mt-1 text-sm leading-5 text-[#69707d]">Map system logic and turn it into test intelligence.</p></Link>
-          <Link to="/chakra" className="group rounded-xl border border-[#e1e4e9] p-4 transition hover:-translate-y-0.5 hover:border-[#e87512]"><div className="font-semibold text-[#17213f]">Chakra · Secure <ArrowRight className="ml-1 inline h-4 w-4 transition-transform group-hover:translate-x-1" /></div><p className="mt-1 text-sm leading-5 text-[#69707d]">Test trust boundaries and adversarial paths.</p></Link>
-          <Link to="/docs/evaluation-model" className="group rounded-xl border border-[#e1e4e9] p-4 transition hover:-translate-y-0.5 hover:border-[#e87512]"><div className="font-semibold text-[#17213f]">Evaluation model <ArrowRight className="ml-1 inline h-4 w-4 transition-transform group-hover:translate-x-1" /></div><p className="mt-1 text-sm leading-5 text-[#69707d]">See how deterministic, semantic and integrity evidence combine.</p></Link>
+        <div className="min-w-0">
+          <GeneratedMarkdown
+            sourcePath={article.sourcePath}
+            visuals={slug === "how-to-test-a-cognigy-agent" ? {
+              "assurance-path": <ArticleConceptDiagram concept="cognigy" />,
+              "quadrants": <ArticleConceptDiagram concept="contracts" />,
+              "flow-to-tests": <ArticleConceptDiagram concept="trajectory" />,
+              "risk-universe": <ArticleConceptDiagram concept="systems" />,
+              "rag": <ArticleConceptDiagram concept="judge" />,
+              "false-green": <ArticleConceptDiagram concept="false-pass" />,
+              "evidence": <ArticleConceptDiagram concept="evidence" />,
+            } : {}}
+          />
+
+          <section className="mt-16 rounded-2xl border border-[#e2e5eb] bg-white p-6 sm:p-8" aria-labelledby="related-resources-heading">
+            <div className="text-xs font-semibold uppercase tracking-[.16em] text-[#e87512]">Continue the assurance journey</div>
+            <h2 id="related-resources-heading" className="mt-2 text-xl font-bold text-[#17213f]">Explore the system behind the article.</h2>
+            <div className="mt-5 grid gap-3 sm:grid-cols-2">
+              <Link to="/vera" className="group rounded-xl border border-[#e1e4e9] p-4 transition hover:-translate-y-0.5 hover:border-[#e87512]"><div className="font-semibold text-[#17213f]">Vera · Test &amp; Evaluate <ArrowRight className="ml-1 inline h-4 w-4 transition-transform group-hover:translate-x-1" /></div><p className="mt-1 text-sm leading-5 text-[#69707d]">Run realistic agent journeys and evaluate behaviour.</p></Link>
+              <Link to="/nexus" className="group rounded-xl border border-[#e1e4e9] p-4 transition hover:-translate-y-0.5 hover:border-[#e87512]"><div className="font-semibold text-[#17213f]">Nexus · Understand <ArrowRight className="ml-1 inline h-4 w-4 transition-transform group-hover:translate-x-1" /></div><p className="mt-1 text-sm leading-5 text-[#69707d]">Map system logic and turn it into test intelligence.</p></Link>
+              <Link to="/chakra" className="group rounded-xl border border-[#e1e4e9] p-4 transition hover:-translate-y-0.5 hover:border-[#e87512]"><div className="font-semibold text-[#17213f]">Chakra · Secure <ArrowRight className="ml-1 inline h-4 w-4 transition-transform group-hover:translate-x-1" /></div><p className="mt-1 text-sm leading-5 text-[#69707d]">Test trust boundaries and adversarial paths.</p></Link>
+              <Link to="/docs/evaluation-model" className="group rounded-xl border border-[#e1e4e9] p-4 transition hover:-translate-y-0.5 hover:border-[#e87512]"><div className="font-semibold text-[#17213f]">Evaluation model <ArrowRight className="ml-1 inline h-4 w-4 transition-transform group-hover:translate-x-1" /></div><p className="mt-1 text-sm leading-5 text-[#69707d]">See how deterministic, semantic and integrity evidence combine.</p></Link>
+            </div>
+          </section>
+
+          <div className="mt-8 overflow-hidden rounded-2xl border border-[#f0d6c2] bg-[#fff8f2] px-6 py-10 text-center sm:px-10">
+            <img src="/shyena-mark.svg?v=20260917" alt="" aria-hidden="true" className="mx-auto h-12 w-10 object-contain" />
+            <h2 className="mt-4 text-xl font-bold text-[#17213f] sm:text-2xl">Make the release decision defensible.</h2>
+            <p className="mx-auto mt-3 max-w-lg text-[#69707d]">Shyena connects live agent behaviour to evidence, evaluation and release governance.</p>
+            <Button asChild size="lg" className="mt-6"><Link to="/contact">See Shyena in action <ArrowRight className="h-4 w-4" /></Link></Button>
+          </div>
+
+          <div className="mt-10 flex flex-wrap items-center justify-between gap-4">
+            <Button asChild variant="ghost" className="px-0 text-muted-foreground hover:text-foreground"><Link to="/blog"><ArrowLeft className="mr-2 h-4 w-4" />Back to Insights</Link></Button>
+            <Link to="/docs" className="inline-flex items-center gap-1 text-sm font-semibold text-[#e87512]">Documentation <ExternalLink className="h-3.5 w-3.5" /></Link>
+          </div>
         </div>
-      </section>
-
-        <div className="mt-8 overflow-hidden rounded-2xl border border-[#f0d6c2] bg-[#fff8f2] px-6 py-10 text-center sm:px-10">
-        <img src="/shyena-mark.svg?v=20260917" alt="" aria-hidden="true" className="mx-auto h-12 w-10 object-contain" />
-        <h2 className="mt-4 text-xl font-bold text-[#17213f] sm:text-2xl">Make the release decision defensible.</h2>
-        <p className="mx-auto mt-3 max-w-lg text-[#69707d]">Shyena connects live agent behaviour to evidence, evaluation and release governance.</p>
-        <Button asChild size="lg" className="mt-6"><Link to="/contact">See Shyena in action <ArrowRight className="h-4 w-4" /></Link></Button>
       </div>
-        <div className="mt-10 flex flex-wrap items-center justify-between gap-4"><Button asChild variant="ghost" className="px-0 text-muted-foreground hover:text-foreground"><Link to="/blog"><ArrowLeft className="mr-2 h-4 w-4" />Back to Insights</Link></Button><Link to="/docs" className="inline-flex items-center gap-1 text-sm font-semibold text-[#e87512]">Documentation <ExternalLink className="h-3.5 w-3.5" /></Link></div>
     </article>
   </>;
 }
