@@ -12,7 +12,9 @@ author: "Shyena Engineering"
 published: true
 ---
 
-# Data Exfiltration Testing for Cognigy AI Agents: Protecting Customer and Tenant Boundaries
+## Abstract
+
+Data exfiltration in AI Agents is a confidentiality problem expressed through a probabilistic control layer. This article develops a Cognigy-oriented methodology for testing customer, account and tenant boundaries across conversation, retrieval, Tools and downstream data systems. The central construct is authorization-conditioned information flow: a caller may obtain only information permitted by identity, tenant and policy context, independent of linguistic persuasion. The proposed methodology uses synthetic multi-tenant data, paired legitimate and adversarial journeys, provenance-aware retrieval observations and downstream access logs. It distinguishes disclosure in the final response from unauthorized retrieval that may occur before response generation. The methodology is intended to support empirical validation without claiming universal confidentiality guarantees.\n\n**Keywords:** data exfiltration, tenant isolation, confidentiality, Cognigy, retrieval security, authorization, information flow, agentic AI.\n\n# Data Exfiltration Testing for Cognigy AI Agents: Protecting Customer and Tenant Boundaries
 
 One of the highest-impact Agent security failures is not a jailbreak.
 
@@ -179,3 +181,36 @@ AI Agent security cannot be separated from data security.
 For Cognigy Agents, test the complete path from identity and conversation through retrieval, Tools and downstream systems.
 
 **The critical invariant is simple: a user's ability to talk to an Agent must never become permission to access data they are not authorized to see.**
+\n\n## Research framing
+
+### Research questions
+
+**RQ1.** Can an Agent disclose or retrieve data outside the caller's authorized information-flow boundary while producing a semantically plausible response?
+
+**RQ2.** Which evidence layer—response, retrieval provenance, Tool invocation or downstream access log—most reliably identifies confidentiality violations?
+
+**RQ3.** How do multi-turn identity and context manipulations affect cross-tenant isolation?
+
+### Information-flow model
+
+Let $u$ represent caller identity and tenant, $D_u$ the authorized data set, and $O$ the observable output. A confidentiality property requires that $O$ and all externally observable side effects remain within the permitted projection $P(D_u)$. Retrieval of unauthorized data is itself security-relevant even when the final response does not disclose it, because intermediate access may violate policy or create secondary leakage channels.
+
+### Experimental design
+
+Construct at least two synthetic tenants with disjoint identifiers, records and knowledge namespaces. For each legitimate journey, create adversarial variants that change only identity claims, resource identifiers, conversational context or retrieval conditions. Instrument retrieval source identifiers, Tool calls, authorization decisions and downstream reads. Evaluate disclosure rate, unauthorized retrieval rate, cross-tenant access rate, unnecessary-disclosure rate and false-pass rate.
+
+### Threats to validity
+
+Synthetic data improves safety but may underrepresent production complexity. Retrieval systems can also introduce ranking and caching effects that make repeated trials non-independent. Experiments should therefore report environment configuration, corpus version, cache policy, model version and authorization implementation. A security result should not be generalized across deployments without reproducing the boundary conditions.
+
+### Practical security oracle
+
+A confidentiality PASS requires both an allowed authorization context and absence of unauthorized retrieval or disclosure. A response-only evaluator can therefore produce a false PASS when the Agent internally retrieves a protected record and subsequently refuses to display it. The proposed oracle explicitly separates access from disclosure.
+
+### References
+
+1. NIST, “Artificial Intelligence Risk Management Framework: Generative Artificial Intelligence Profile,” NIST AI 600-1, 2024.
+2. F. Alpay and T. Alpay, “AgentSecBench: Measuring Prompt Injection, Privacy Leakage, and Tool-Use Integrity in LLM Agents,” arXiv:2605.26269, 2026.
+3. Y. Ling et al., “Toward Secure LLM Agents,” arXiv:2606.10749, 2026.
+4. OWASP GenAI Security Project, “LLM06:2025 Excessive Agency” and “Sensitive Information Disclosure,” 2025.
+5. Cognigy, “Flows,” Cognigy.AI Documentation.\n
