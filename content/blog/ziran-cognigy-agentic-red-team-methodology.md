@@ -12,7 +12,9 @@ author: "Shyena Engineering"
 published: true
 ---
 
-# A Red-Team Methodology for Cognigy AI Agents: Building Repeatable Agentic Security Tests
+## Abstract
+
+This article proposes a research-grade methodology for red-teaming Cognigy-built AI Agents as stateful socio-technical systems rather than as isolated language models. The methodology integrates capability mapping, security-property definition, adversarial journey generation, controlled execution, evidence correlation, verdict construction and regression. It addresses a central evaluation problem: conventional red-team outputs often demonstrate an attack but do not establish whether the observed behaviour crossed a business security boundary or whether the finding remains reproducible after remediation. The proposed lifecycle therefore makes the security property and evidence oracle explicit before attack generation. The article defines measurable outcomes and an experimental protocol suitable for empirical study, while deliberately avoiding unsupported claims of effectiveness without data.\n\n**Keywords:** AI red teaming, agentic AI, Cognigy, security testing, threat modeling, adversarial journeys, security regression, evaluation methodology, assurance.\n\n# A Red-Team Methodology for Cognigy AI Agents: Building Repeatable Agentic Security Tests
 
 Agent red teaming is often reduced to a list of adversarial prompts.
 
@@ -227,3 +229,41 @@ It is to establish repeatable evidence that the Agent's security boundaries with
 **Map the capability. Define the invariant. Attack the boundary. Observe the execution. Prove the result. Re-test the fix.**
 
 That is how Agent security becomes engineering rather than theatre.
+\n\n## Research framing
+
+### Research questions
+
+**RQ1.** Can a capability-centric threat model provide broader and more reproducible coverage than a prompt-centric red-team corpus?
+
+**RQ2.** Does defining the security invariant before attack generation improve oracle consistency and regression reuse?
+
+**RQ3.** Which evidence hierarchy best supports reproducible security verdicts across Agent versions?
+
+### Methodological contribution
+
+The proposed unit of testing is the **adversarial security journey**, represented as $J=(P,A,I,E,O,V)$, where $P$ is the precondition set, $A$ the attack sequence, $I$ the security invariant, $E$ the execution evidence set, $O$ the oracle and $V$ the resulting disposition. This representation separates the attack stimulus from the security property and allows one invariant to be tested against many adversarial transformations.
+
+### Coverage model
+
+Security coverage should be reported across capabilities, attack families, trust boundaries and execution stages. A simple coverage tensor can be represented as $Coverage(c,a,b,s)$ where $c$ is capability, $a$ attack family, $b$ trust boundary and $s$ execution stage. This is preferable to reporting only the number of prompts executed because 10,000 prompts against one capability do not demonstrate coverage of an Agent's authorization or data boundaries.
+
+### Experimental protocol
+
+A rigorous study should compare a prompt-centric baseline with the proposed journey-centric method. Both suites should be executed against the same Agent versions and environments. Report attack coverage, unique invariant violations, reproducibility rate, false-positive rate, false-negative rate where ground truth is available, time-to-triage and regression retention after remediation. Human security reviewers should adjudicate ambiguous cases under a blinded protocol when feasible.
+
+### Reproducibility requirements
+
+Each reported finding should preserve Agent version, model version, test environment, capability inventory, attack family, journey identifier, test data version, execution trace, Tool calls, downstream state and evaluator version. Without these artifacts, an Agent security result is difficult to reproduce and should be treated as an observation rather than a verified finding.
+
+### Limitations
+
+No red-team methodology can establish absolute security for an open-ended probabilistic system. Coverage is bounded by the capability inventory, attack generator, observability and environment. The methodology also does not replace traditional application, infrastructure, identity or penetration testing.
+
+### References
+
+1. Y. Ling et al., “Toward Secure LLM Agents: Threat Surfaces, Attacks, Defenses, and Evaluation,” arXiv:2606.10749, 2026.
+2. M. J. Hossain, M. A. Hossain, and N. Ansari, “On Understanding, Identifying, and Mitigating Vulnerabilities in Agentic Large Language Models,” arXiv:2608.10530, 2026.
+3. IEEE, “A Survey of Fuzzing Techniques for Large Language Model Agents,” Proc. IEEE BDAI, 2026.
+4. IEEE, “LLM-Based Intelligent Agents for Cybersecurity: A Tutorial and Survey of Automated Vulnerability Discovery,” IEEE Access, vol. 14, pp. 100884–100917, 2026.
+5. NIST, “Artificial Intelligence Risk Management Framework: Generative Artificial Intelligence Profile,” NIST AI 600-1, 2024.
+6. OWASP GenAI Security Project, “Top 10 for LLM and GenAI Applications,” 2026.\n
