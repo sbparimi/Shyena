@@ -120,7 +120,7 @@ function Frame({ title, eyebrow, render }: { title: string; eyebrow: string; ren
       </svg>
       <figcaption className="border-t border-white/[0.07] px-5 py-4 sm:px-7">
         <div className="flex items-center justify-between gap-4">
-          <span className="font-mono text-[9px] uppercase tracking-[.2em] text-white/30">ECAAP / EVIDENCE GRAPH</span>
+          <span className="font-mono text-[9px] uppercase tracking-[.2em] text-white/30">SHYENA / EVIDENCE GRAPH</span>
           <span className="font-mono text-[9px] uppercase tracking-[.16em] text-white/45">Move through the system → preserve proof</span>
         </div>
       </figcaption>
