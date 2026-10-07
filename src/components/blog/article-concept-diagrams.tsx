@@ -20,7 +20,7 @@ type Node = {
   tone?: "gold" | "purple" | "muted" | "danger" | "success";
 };
 
-type Edge = { from: number; to: number; danger?: boolean; dashed?: boolean };
+type Edge = { from: number; to: number; danger?: boolean; dashed?: boolean; flow?: boolean };
 
 const palette = {
   gold: "#E7B85C",
@@ -55,19 +55,10 @@ function Frame({ title, eyebrow, render }: { title: string; eyebrow: string; ren
       aria-label={title}
     >
       <style>{`
-        .shyena-concept-figure .beam { stroke-dasharray: 12 34; animation: shyenaBeam 2.4s linear infinite; }
-        .shyena-concept-figure .node-shell { animation: shyenaFloat 4.8s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
-        .shyena-concept-figure .node-shell:nth-child(3n) { animation-delay: -.9s; }
-        .shyena-concept-figure .node-shell:nth-child(4n) { animation-delay: -1.7s; }
-        .shyena-concept-figure .spark { animation: shyenaSpark 2.8s ease-in-out infinite; }
-        .shyena-concept-figure .spark:nth-child(2n) { animation-delay: -1.2s; }
-        .shyena-concept-figure .scan { animation: shyenaScan 5.5s ease-in-out infinite; }
-        @keyframes shyenaBeam { to { stroke-dashoffset: -92; } }
-        @keyframes shyenaFloat { 0%,100% { opacity:.86; transform:translateY(0); } 50% { opacity:1; transform:translateY(-3px); } }
-        @keyframes shyenaSpark { 0%,100% { opacity:.15; transform:scale(.65); } 50% { opacity:1; transform:scale(1.2); } }
-        @keyframes shyenaScan { 0% { transform:translateY(-160px); opacity:0; } 18%,70% { opacity:.55; } 100% { transform:translateY(520px); opacity:0; } }
+        .shyena-concept-figure .flow { stroke-dasharray: 7 18; animation: shyenaFlow 3.8s linear infinite; }
+        @keyframes shyenaFlow { to { stroke-dashoffset: -50; } }
         @media (prefers-reduced-motion: reduce) {
-          .shyena-concept-figure .beam,.shyena-concept-figure .node-shell,.shyena-concept-figure .spark,.shyena-concept-figure .scan { animation:none; }
+          .shyena-concept-figure .flow { animation: none; }
         }
       `}</style>
       <div className="relative flex items-center justify-between border-b border-white/[0.07] px-5 py-4 sm:px-7">
@@ -75,9 +66,8 @@ function Frame({ title, eyebrow, render }: { title: string; eyebrow: string; ren
           <div className="font-mono text-[9px] font-semibold uppercase tracking-[.26em] text-[#E7B85C]/80">{eyebrow}</div>
           <div className="mt-1 text-sm font-semibold tracking-[-.01em] text-white/90">{title}</div>
         </div>
-        <div className="flex items-center gap-2 font-mono text-[8px] uppercase tracking-[.18em] text-white/35">
-          <span className="h-1.5 w-1.5 rounded-full bg-[#52D6A1] shadow-[0_0_12px_rgba(82,214,161,.8)]" />
-          LIVE ASSURANCE MODEL
+        <div className="font-mono text-[8px] uppercase tracking-[.18em] text-white/35">
+          SYSTEM MAP · READ LEFT → RIGHT
         </div>
       </div>
       <svg viewBox="0 0 1200 430" role="img" aria-labelledby={ids.titleId} className="shyena-concept-svg block h-auto w-full">
@@ -110,18 +100,12 @@ function Frame({ title, eyebrow, render }: { title: string; eyebrow: string; ren
         <rect width="1200" height="430" fill={`url(#bg-${safeId})`} />
         <rect width="1200" height="430" fill={`url(#halo-${safeId})`} />
         <rect width="1200" height="430" fill={`url(#${ids.gridId})`} />
-        <rect className="scan" x="0" y="0" width="1200" height="2" fill="#E7B85C" opacity=".18" filter={`url(#${ids.glowId})`} />
-        <g opacity=".75">
-          {[{x:92,y:74},{x:185,y:360},{x:310,y:72},{x:486,y:338},{x:735,y:68},{x:910,y:355},{x:1110,y:92},{x:1080,y:340}].map((p,i) => (
-            <circle key={i} className="spark" cx={p.x} cy={p.y} r="1.7" fill={i % 3 === 0 ? palette.gold : palette.purple} />
-          ))}
-        </g>
         {render(ids)}
       </svg>
       <figcaption className="border-t border-white/[0.07] px-5 py-4 sm:px-7">
         <div className="flex items-center justify-between gap-4">
-          <span className="font-mono text-[9px] uppercase tracking-[.2em] text-white/30">SHYENA / EVIDENCE GRAPH</span>
-          <span className="font-mono text-[9px] uppercase tracking-[.16em] text-white/45">Move through the system → preserve proof</span>
+          <span className="font-mono text-[9px] uppercase tracking-[.2em] text-white/30">SHYENA / CONCEPT MAP</span>
+          <span className="font-mono text-[9px] uppercase tracking-[.16em] text-white/45">Arrows show dependency · gold = decision · red = risk</span>
         </div>
       </figcaption>
     </figure>
@@ -136,7 +120,7 @@ function NodeBox({ node }: { node: Node }) {
     node.tone === "success" ? "#0C1815" :
     "#0C1019";
   return (
-    <g className="node-shell">
+    <g>
       <rect x={node.x - 78} y={node.y - 34} width="156" height="68" rx="15" fill={fill} stroke={stroke} strokeOpacity=".62" strokeWidth="1.2" />
       <rect x={node.x - 73} y={node.y - 29} width="146" height="58" rx="12" fill="none" stroke="#fff" strokeOpacity=".035" />
       <circle cx={node.x - 58} cy={node.y - 19} r="3" fill={stroke} opacity=".9" />
@@ -160,7 +144,7 @@ function EdgeLines({ nodes, edges, arrowId, dangerArrowId }: { nodes: Node[]; ed
         return (
           <g key={i}>
             <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={edge.danger ? palette.danger : "#778197"} strokeOpacity=".22" strokeWidth="7" />
-            <line className="beam" x1={x1} y1={y1} x2={x2} y2={y2} stroke={edge.danger ? palette.danger : "#B4A8FF"} strokeOpacity={edge.danger ? ".72" : ".5"} strokeWidth={edge.danger ? "1.8" : "1.25"} strokeDasharray={edge.dashed ? "5 7" : undefined} markerEnd={`url(#${edge.danger ? dangerArrowId : arrowId})`} />
+            <line className={edge.flow ? "flow" : undefined} x1={x1} y1={y1} x2={x2} y2={y2} stroke={edge.danger ? palette.danger : "#B4A8FF"} strokeOpacity={edge.danger ? ".72" : ".5"} strokeWidth={edge.danger ? "1.8" : "1.25"} strokeDasharray={edge.dashed ? "5 7" : undefined} markerEnd={`url(#${edge.danger ? dangerArrowId : arrowId})`} />
           </g>
         );
       })}
