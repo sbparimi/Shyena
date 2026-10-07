@@ -9,7 +9,6 @@ import {
   ShieldCheck,
   Target,
   Workflow,
-  XCircle,
 } from "lucide-react";
 
 export const Route = createFileRoute("/vera")({
@@ -190,7 +189,7 @@ function Vera() {
               return (
                 <article
                   key={item.number}
-                  className="group rounded-2xl border border-[#e1e4e8] bg-white p-7 transition hover:-translate-y-1 hover:shadow-[0_18px_50px_rgba(23,33,63,0.08)]"
+                  className="group rounded-2xl border border-[#e1e4e8] bg-white p-7 text-[#17213f] transition hover:-translate-y-1 hover:shadow-[0_18px_50px_rgba(23,33,63,0.08)]"
                 >
                   <div className="flex items-start justify-between">
                     <span className="font-mono text-xs font-bold text-[#a0a7b2]">
@@ -198,7 +197,7 @@ function Vera() {
                     </span>
                     <Icon className="h-5 w-5 text-[#f18a32]" />
                   </div>
-                  <h3 className="mt-8 text-2xl font-extrabold tracking-[-0.03em]">
+                  <h3 className="mt-8 text-2xl font-extrabold tracking-[-0.03em] text-[#17213f]">
                     {item.title}
                   </h3>
                   <p className="mt-3 font-semibold leading-6 text-[#303a52]">
@@ -229,19 +228,19 @@ function Vera() {
             {audiences.map((audience) => (
               <article
                 key={audience.title}
-                className="rounded-2xl border border-white/10 bg-white/[0.04] p-7"
+                className="rounded-2xl border border-white/10 bg-white p-7 text-[#17213f] shadow-[0_18px_50px_rgba(0,0,0,0.12)]"
               >
-                <p className="font-mono text-xs font-bold uppercase tracking-[0.14em] text-white/40">
+                <p className="font-mono text-xs font-bold uppercase tracking-[0.14em] text-[#667085]">
                   {audience.title}
                 </p>
-                <h3 className="mt-6 text-2xl font-extrabold leading-tight tracking-[-0.03em]">
+                <h3 className="mt-6 text-2xl font-extrabold leading-tight tracking-[-0.03em] text-[#17213f]">
                   {audience.outcome}
                 </h3>
                 <ul className="mt-7 space-y-4">
                   {audience.points.map((point) => (
                     <li
                       key={point}
-                      className="flex gap-3 text-sm leading-6 text-white/65"
+                      className="flex gap-3 text-sm leading-6 text-[#596273]"
                     >
                       <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#f18a32]" />
                       <span>{point}</span>
