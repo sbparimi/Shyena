@@ -973,7 +973,7 @@ This is much more useful than a generic "agent score."
 
 ---
 
-## 23. The ECAAP Quality Signals
+## 23. The Shyena Quality Signals
 
 A mature assurance report should expose separate signals.
 
@@ -1253,7 +1253,7 @@ Question:
 
 > Does the Agent survive large behavioural variation?
 
-### Level 4 — ECAAP assurance
+### Level 4 — Shyena assurance
 
 Contract + behaviour + semantic + security + business outcome.
 
