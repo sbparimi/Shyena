@@ -23,7 +23,7 @@ export const Route = createFileRoute("/blog/")({
   component: BlogIndexPage,
 });
 
-const CATEGORY_FILTERS = ["All", "AI Agent Assurance", "Cognigy Assurance", "Testing Strategy", "Quality Assurance", "Evaluation Model", "Security"] as const;
+const CATEGORY_FILTERS = ["All", "AI Agent Assurance", "Cognigy Assurance", "Agentic AI Security", "Testing Strategy", "Quality Assurance", "Evaluation Model", "Security"] as const;
 
 type Category = (typeof CATEGORY_FILTERS)[number];
 
