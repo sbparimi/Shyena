@@ -25,7 +25,7 @@ const pilotSteps = [
   "Cognigy agent and journey discovery",
   "Priority business journeys converted into executable tests",
   "Automated execution and deterministic + semantic evaluation",
-  "Failure analysis, remediation backlog and assurance report",
+  "Failure analysis and prioritized remediation backlog",
   "Release-ready assurance report",
 ];
 
