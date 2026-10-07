@@ -60,11 +60,7 @@ export function GeneratedMarkdown({ sourcePath, visuals = {} }: { sourcePath: st
     );
   }
 
-  return (
-    <div className="generated-content">
-      <Markdown components={components}>{sanitizePublishedMarkdown(source)}</Markdown>
-    </div>
-  );
+  const cleanSource = sanitizePublishedMarkdown(source);\n  const parts = cleanSource.split(/<!--\\s*SHYENA_VISUAL:([a-z0-9-]+)\\s*-->/gi);\n\n  return (\n    <div className="generated-content">\n      {parts.map((part, index) => {\n        if (index % 2 === 1) {\n          const visual = visuals[part.trim().toLowerCase()];\n          return visual ? <div key={"visual-" + index} className="my-12 sm:my-16">{visual}</div> : null;\n        }\n        if (!part.trim()) return null;\n        return <Markdown key={"markdown-" + index} components={components}>{part}</Markdown>;\n      })}\n    </div>\n  );
 }
 
 export function getGeneratedArticle(slug: string) {
