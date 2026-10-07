@@ -12,7 +12,7 @@ author: "Shyena Engineering"
 published: true
 ---
 
-# How to Test a Cognigy Agent: The Complete Shyena Assurance Guide
+# How to Test a Cognigy Agent
 
 A Cognigy Agent is not a chatbot with a better language model.
 
@@ -45,7 +45,7 @@ This is the purpose of the **Shyena Assurance Platform**.
 
 ---
 
-## 1. The Testing Question Has Changed
+## The real testing problem
 
 Traditional software testing starts with:
 
@@ -97,7 +97,7 @@ That means a test suite that checks only the final response has a large blind sp
 
 ---
 
-## 2. What Does "Tested" Actually Mean?
+### What Does "Tested" Actually Mean?
 
 A Cognigy Agent should not be considered tested simply because:
 
@@ -117,7 +117,9 @@ Shyena separates those dimensions so that one strong score cannot hide a critica
 
 ---
 
-## 3. Shyena: Four Assurance Quadrants
+## The ECAAP assurance model
+
+Four questions define the assurance model: **Did it execute correctly? Did it behave correctly? Is the answer actually good? Can we prove the decision?**
 
 Shyena organizes the assurance problem into four connected quadrants.
 
@@ -180,7 +182,7 @@ The four quadrants form a lifecycle:
 
 ---
 
-## 4. Q1: Contract Validation
+## 1 — Prove the contract
 
 The first question should often be:
 
@@ -215,7 +217,7 @@ This is an important Shyena principle:
 
 ---
 
-## 5. Tool Testing Is More Than "Was the Tool Called?"
+### Tool Testing Is More Than "Was the Tool Called?"
 
 Suppose the user says:
 
@@ -264,7 +266,7 @@ A Tool can technically succeed while the business journey still fails.
 
 ---
 
-## 6. MCP Creates Another Assurance Boundary
+### MCP Creates Another Assurance Boundary
 
 If the Cognigy solution uses MCP or other tool-mediated capabilities, the test surface expands.
 
@@ -293,7 +295,7 @@ It is a **capability boundary**.
 
 ---
 
-## 7. Q2: Behaviour Validation
+## 2 — Prove the behaviour
 
 Q2 asks:
 
@@ -325,7 +327,7 @@ This is where endpoint-only testing becomes insufficient.
 
 ---
 
-## 8. Intent Testing
+### Intent Testing
 
 Intent testing should not consist of a handful of manually written examples.
 
@@ -380,7 +382,7 @@ Intent accuracy is not the same as conversational quality.
 
 ---
 
-## 9. Flow Testing
+### Flow Testing
 
 A Cognigy Flow should be treated as a behavioural graph.
 
@@ -453,7 +455,7 @@ The Flow becomes a source of **test universe generation**.
 
 ---
 
-## 10. From Flow to Test Universe
+### From Flow to Test Universe
 
 This is a critical distinction.
 
@@ -491,7 +493,7 @@ The result is a **risk-shaped test universe**, not a random pile of conversation
 
 ---
 
-## 11. State and Context Testing
+### State and Context Testing
 
 Conversation state is one of the most important failure surfaces.
 
@@ -536,7 +538,7 @@ Verify that:
 
 ---
 
-## 12. Interruption Testing
+### Interruption Testing
 
 Real customers do not execute Playbooks perfectly.
 
@@ -570,7 +572,7 @@ A robust conversational system must remain coherent under these transitions.
 
 ---
 
-## 13. Handover Testing
+### Handover Testing
 
 A handover is a business operation.
 
@@ -604,7 +606,7 @@ The fact that a handover occurred is not sufficient evidence that it occurred co
 
 ---
 
-## 14. Q3: Generated Answer Quality
+## 3 — Evaluate the answer
 
 Once deterministic behaviour has been validated, semantic evaluation becomes valuable.
 
@@ -635,7 +637,7 @@ This separation prevents an LLM judge from becoming the authority on facts that 
 
 ---
 
-## 15. RAG Testing: Retrieval and Generation Are Different Failures
+### RAG Testing: Retrieval and Generation Are Different Failures
 
 Consider:
 
@@ -677,7 +679,7 @@ A single final answer score cannot reliably tell you which layer failed.
 
 ---
 
-## 16. Hallucination Testing
+### Hallucination Testing
 
 Test at least four knowledge conditions.
 
@@ -725,7 +727,7 @@ This is where semantic evaluation and security testing intersect.
 
 ---
 
-## 17. The False-Green Problem
+## 4 — Prevent false greens
 
 Consider:
 
@@ -760,7 +762,7 @@ The final verdict is governed by the highest-risk evidence, not merely by an ave
 
 ---
 
-## 18. Execution Integrity
+### Execution Integrity
 
 Execution integrity asks:
 
@@ -796,7 +798,7 @@ and
 
 ---
 
-## 19. Business Outcome Testing
+### Business Outcome Testing
 
 The final response is not necessarily the final oracle.
 
@@ -827,7 +829,7 @@ Only then is the business outcome proven.
 
 ---
 
-## 20. Security Testing
+## 5 — Test the trust boundary
 
 Security should not be an isolated final phase.
 
@@ -877,7 +879,7 @@ It is:
 
 ---
 
-## 21. Q4: Continuous Production Assurance
+## 6 — Close the production loop
 
 A release test suite represents what the engineering team already knows.
 
@@ -907,7 +909,7 @@ It should become new test intelligence.
 
 ---
 
-## 22. Trace-Based Diagnosis
+### Trace-Based Diagnosis
 
 A useful trace connects:
 
@@ -973,7 +975,7 @@ This is much more useful than a generic "agent score."
 
 ---
 
-## 23. The Shyena Quality Signals
+## 7 — Build the evidence model
 
 A mature assurance report should expose separate signals.
 
@@ -1033,7 +1035,7 @@ A critical security failure should not be averaged away.
 
 ---
 
-## 24. DII: Deterministic Integrity
+### DII: Deterministic Integrity
 
 A useful engineering signal is a **Deterministic Integrity Index**.
 
@@ -1057,7 +1059,7 @@ This makes failures diagnosable.
 
 ---
 
-## 25. Orchestrator Score
+### Orchestrator Score
 
 Agentic systems introduce another question:
 
@@ -1106,7 +1108,7 @@ This is a different signal from semantic answer quality.
 
 ---
 
-## 26. Confidence Must Reflect Evidence
+### Confidence Must Reflect Evidence
 
 A score without evidence volume is weak.
 
@@ -1145,7 +1147,7 @@ It is:
 
 ---
 
-## 27. Risk-Based Test Generation
+### Risk-Based Test Generation
 
 Not every Flow requires the same depth.
 
@@ -1180,7 +1182,7 @@ It is the one that covers the most important failure modes.
 
 ---
 
-## 28. Change-Aware Regression
+### Change-Aware Regression
 
 The test suite should respond to what changed.
 
@@ -1227,7 +1229,7 @@ This produces a more efficient release pipeline than executing every test after 
 
 ---
 
-## 29. The Cognigy Testing Maturity Model
+## 8 — Define testing maturity
 
 ### Level 1 — Manual exploration
 
@@ -1273,7 +1275,7 @@ Enterprise Cognigy systems should target Level 4 and Level 5.
 
 ---
 
-## 30. A Complete Cognigy Test Matrix
+### A Complete Cognigy Test Matrix
 
 | Layer | What is tested | Primary evidence |
 |---|---|---|
@@ -1298,7 +1300,7 @@ Enterprise Cognigy systems should target Level 4 and Level 5.
 
 ---
 
-## 31. What a Defensible Release Decision Looks Like
+## 9 — Make the release decision defensible
 
 A production release should produce an evidence chain:
 
@@ -1346,7 +1348,7 @@ should lead to the exact execution boundary where the defect occurred.
 
 ---
 
-## 32. The Most Important Principle
+## The principle that matters
 
 The central mistake in conversational AI testing is treating the answer as the system.
 
