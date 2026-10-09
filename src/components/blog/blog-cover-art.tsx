@@ -91,7 +91,7 @@ export function FalsePassCover() {
   );
 }
 
-/** "How to Test a Cognigy Agent" — a clean four-step methodology. */
+/** "How to Test an AI Agent" — a clean four-step methodology. */
 export function MethodologyCover() {
   const steps = [140, 320, 500, 660];
   return (
@@ -112,7 +112,7 @@ export function MethodologyCover() {
   );
 }
 
-/** "Cognigy Agent Security Testing: Red-Teaming with Ziran" — graph, one flagged path. */
+/** "AI Agent Security Testing: Red-Teaming with Ziran" — graph, one flagged path. */
 export function SecurityGraphCover() {
   const nodes = [
     { x: 160, y: 140 },
