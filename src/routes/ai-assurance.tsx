@@ -8,23 +8,26 @@ export const Route = createFileRoute("/ai-assurance")({
     links: [{ rel: "canonical", href: SITE + "/ai-assurance" }],
     meta: [
       { title: "AI Test Engineering & Assurance | Shyena" },
-      { name: "description", content: "Vendor-neutral testing and evaluation for AI chatbots, LLM applications, document AI, OCR, classification pipelines and agentic workflows. Validate quality, integrations, security and release readiness with traceable evidence." },
-      { name: "keywords", content: "AI test engineering, LLM evaluation, AI chatbot testing, generative AI testing, agentic workflow testing, OCR testing, document AI validation, hallucination detection, AI drift monitoring, AI release assurance" },
+      { name: "description", content: "Vendor-neutral AI quality engineering and assurance across predictive models, machine learning, generative AI, LLM applications, RAG, document AI, OCR, classification, forecasting, recommendation, computer vision and agentic workflows. Validate quality, robustness, integrations, security and release readiness with traceable evidence." },
+      { name: "keywords", content: "AI quality engineering, machine learning testing, model evaluation, generative AI testing, LLM evaluation, RAG evaluation, data and feature validation, computer vision testing, OCR testing, document AI validation, model robustness, bias and drift monitoring, agentic workflow testing, AI security testing, AI release assurance" },
       { name: "robots", content: "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" },
       { property: "og:title", content: "AI Test Engineering & Assurance | Shyena" },
-      { property: "og:description", content: "Test AI outputs and the workflows around them. Turn repeatable evaluation into release evidence for production AI." },
+      { property: "og:description", content: "Test AI models, data pipelines, generated outputs and end-to-end workflows. Turn repeatable evaluation into release evidence across production AI." },
       { property: "og:url", content: SITE + "/ai-assurance" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "AI Test Engineering & Assurance | Shyena" },
-      { name: "twitter:description", content: "Practical, vendor-neutral assurance for generative AI, document AI and agentic workflows." }
+      { name: "twitter:description", content: "Vendor-neutral AI quality engineering for predictive, generative and agentic systems across the AI lifecycle." }
     ]
   }),
   component: Page
 });
 
 const work = [
-  ["LLM and chatbot quality", "Create scenario suites for factual accuracy, groundedness, completeness, instruction following, consistency, refusal behaviour and useful uncertainty."],
+  ["Generative AI and LLM evaluation", "Evaluate factuality, groundedness, completeness, instruction following, consistency, refusal behaviour, retrieval quality and useful uncertainty across prompts, models and datasets."],
   ["Document AI and OCR", "Measure field-level extraction accuracy, classification precision and recall, confidence handling, malformed documents, scans, tables and low-quality inputs."],
+  ["Predictive and traditional ML", "Validate labelled datasets, feature pipelines, model metrics, class imbalance, threshold behaviour, robustness, fairness considerations and model-version regressions."],
+  ["Computer vision and multimodal AI", "Test image and video classification, detection, segmentation, multimodal inputs, edge cases and performance across representative conditions."],
+  ["Data and feature pipelines", "Check schema contracts, data quality, lineage, transformations, leakage risks, distribution changes and the impact of data refreshes on model outcomes."],
   ["Agent and workflow execution", "Assert the intended tools and APIs were called with valid arguments, the right identity and permissions were used, and authoritative business state changed correctly."],
   ["Evaluation engineering", "Build reusable Python evaluators, deterministic assertions, semantic rubrics and calibrated LLM-as-judge checks. Keep hard business rules out of subjective scoring."],
   ["Regression and drift", "Run fixed baseline datasets on every material change and on a schedule. Compare results by model, prompt, retrieval configuration, dataset and release."],
@@ -38,7 +41,7 @@ function Page() {
         <div className="max-w-5xl">
           <div className="font-mono text-[10px] font-bold uppercase tracking-[.2em] text-[#f18a32]">AI QUALITY ENGINEERING · SHYENA</div>
           <h1 className="mt-5 font-[Sora] text-[clamp(3rem,6vw,6rem)] font-extrabold leading-[.92] tracking-[-.065em]">Test the AI.<br/><span className="text-[#f18a32]">Prove the outcome.</span></h1>
-          <p className="mt-7 max-w-3xl text-lg leading-8 text-white/60">Shyena helps teams validate AI chatbots, generative AI applications, document-processing pipelines and multi-step agent workflows. Test output quality, deterministic business rules, integrations, security and real system state—not just whether a response sounds convincing.</p>
+          <p className="mt-7 max-w-3xl text-lg leading-8 text-white/60">Shyena helps teams assure AI across its lifecycle—from data and feature pipelines to predictive models, generative AI applications, RAG, document processing, computer vision and multi-step agent workflows. Validate accuracy, robustness, business rules, integrations, security and real-world outcomes with evidence, not assumptions.</p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link to="/contact" className="inline-flex h-11 items-center gap-2 rounded-lg bg-[#e87512] px-5 text-sm font-bold">Discuss an AI assurance assessment <ArrowRight className="h-4 w-4"/></Link>
             <a href="#approach" className="inline-flex h-11 items-center gap-2 rounded-lg border border-white/15 px-5 text-sm font-bold text-white/80">See the practical approach <ArrowRight className="h-4 w-4"/></a>
@@ -68,7 +71,7 @@ function Page() {
 
     <section className="border-y border-[#e6e8ed] bg-[#fafbfc]">
       <div className="mx-auto max-w-[1240px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
-        <div className="max-w-3xl"><div className="text-sm font-bold text-[#e87512]">WHAT WE VALIDATE</div><h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em]">One quality model. Different AI workloads.</h2><p className="mt-5 text-base leading-7 text-[#69707d]">Choose the tests that fit the system. A chatbot, an extraction pipeline and an autonomous workflow need different metrics, but each needs repeatable scenarios, clear thresholds and evidence that supports a release decision.</p></div>
+        <div className="max-w-3xl"><div className="text-sm font-bold text-[#e87512]">WHAT WE VALIDATE</div><h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em]">One quality model. Different AI workloads.</h2><p className="mt-5 text-base leading-7 text-[#69707d]">Choose the tests that fit the system. A predictive model, a generative application, a vision pipeline and an autonomous workflow need different metrics, but each needs representative data, repeatable evaluations, clear thresholds and evidence that supports a release decision.</p></div>
         <div className="mt-9 grid gap-4 md:grid-cols-2 lg:grid-cols-3">{work.map(([title, body]) => <article key={title} className="rounded-2xl border border-[#e1e4e9] bg-white p-6"><h3 className="text-base font-bold">{title}</h3><p className="mt-3 text-sm leading-6 text-[#69707d]">{body}</p></article>)}</div>
       </div>
     </section>
