@@ -6,7 +6,7 @@ const LATEST_ARTICLES = [
   { title: "AI Agent Testing Is a Systems Problem, Not Just an LLM Evaluation Problem", category: "AI Agent Assurance", readTime: "6 min", to: "/blog/generated/ai-agent-testing-is-a-systems-problem", icon: Sparkles },
   { title: "Why Conversational AI Needs a Different Testing Model", category: "Testing Strategy", readTime: "6 min", to: "/blog/why-conversational-ai-needs-a-different-testing-model", icon: Sparkles },
   { title: "The Problem With Green Checkmarks on Broken Conversations", category: "Quality Assurance", readTime: "5 min", to: "/blog/the-problem-with-green-checkmarks-on-broken-conversations", icon: BookOpen },
-  { title: "How to Test a Cognigy Agent: A Practical Guide", category: "Testing Strategy", readTime: "7 min", to: "/blog/how-to-test-a-cognigy-agent", icon: BookOpen },
+  { title: "AI Test Design for Business Workflows", category: "Testing Strategy", readTime: "7 min", to: "/blog/ai-test-design-for-business-workflows", icon: BookOpen },
 ] as const;
 
 export function LatestArticles() {
