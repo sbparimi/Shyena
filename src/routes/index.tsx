@@ -8,7 +8,7 @@ const faq = [
   ["Is Shyena just another test automation tool?", "No. Shyena is your AI Assurance Engineer: it maps real journeys, judges behaviour, attacks unsafe paths and produces evidence for release decisions."],
   ["How is it different from LLM evaluation libraries?", "LLM evaluation can score model outputs. Shyena evaluates the complete AI journey: business rules, routing, tools, APIs, agent behaviour and security, then connects findings to release evidence."],
   ["Does Shyena make us EU AI Act compliant?", "No. Shyena produces technical evidence that can support legal and compliance work. It is not legal advice or a certification body."],
-  ["Which AI systems do you support?", "Shyena is designed for vendor-neutral assurance across AI chatbots, LLM applications, RAG systems, OCR and document AI pipelines, classification models, APIs and agentic workflows. Specific connectors and execution access are confirmed for each environment."],
+  ["Which AI systems do you support?", "Shyena provides vendor-neutral assurance across predictive and machine-learning models, generative AI applications, LLMs, RAG systems, document AI, OCR, classification, APIs and agentic workflows. Specific connectors and execution access are confirmed for each environment."],
   ["Do you need access to production?", "No for an initial assessment. The preferred boundary is a customer-controlled test or staging environment with scoped credentials and least-privilege access."],
   ["Where does our data go?", "Engagement architecture is designed around customer-controlled environments and customer-funded model/API accounts. See Security for the current boundary."],
   ["Can we start small?", "Yes. Start with one AI system and one critical assurance journey. Shyena can automate the initial assessment and identify the specialist capabilities required for any remaining work."],
@@ -203,7 +203,7 @@ export const Route = createFileRoute("/")({
       { property:"og:description", content:"AI assurance software and evidence for generative AI, document AI and agentic workflows that reason, act and change." },
       { property:"og:type", content:"website" }, { property:"og:url", content:SITE+"/" }, { property:"og:site_name", content:"Shyena" },
       { property:"og:image", content:SITE+"/shyena-logo-exact.webp" }, { name:"twitter:card", content:"summary_large_image" },
-      { name:"twitter:title", content:"Shyena Autonomous QA | Agentic AI Testing & Evaluation" },
+      { name:"twitter:title", content:"Shyena AI Quality Engineering | Testing, Evaluation & Assurance" },
       { name:"twitter:description", content:"AI evaluation, security testing, release assurance and specialist capability in one assurance control plane." },
       { name:"twitter:image", content:SITE+"/shyena-logo-exact.webp" }
     ],
@@ -252,8 +252,8 @@ function HomePage() {
           </article>
           <article className="rounded-2xl border border-[#e1e4e9] bg-white p-7">
             <div className="text-xs font-bold uppercase tracking-[.12em] text-[#e87512]">In production</div>
-            <h3 className="mt-3 text-2xl font-extrabold">Every conversation teaches the next test.</h3>
-            <p className="mt-4 text-sm leading-6 text-[#69707d]">Conversation monitoring · Failure detection · Drift alerts · New regression tests</p>
+            <h3 className="mt-3 text-2xl font-extrabold">Every production signal informs the next test.</h3>
+            <p className="mt-4 text-sm leading-6 text-[#69707d]">Production monitoring · Failure detection · Drift alerts · New regression tests</p>
           </article>
           <article className="rounded-2xl border border-[#e1e4e9] bg-white p-7">
             <div className="text-xs font-bold uppercase tracking-[.12em] text-[#e87512]">At audit time</div>
