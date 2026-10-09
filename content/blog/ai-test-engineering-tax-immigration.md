@@ -4,6 +4,7 @@ description: "A practical quality engineering playbook for validating document e
 slug: "ai-test-engineering-tax-immigration"
 content_type: "technical-article"
 category: "Quality Assurance"
+diagram: "systems"
 thesis: "Production AI quality requires labelled ground truth, deterministic business rules, semantic evaluation, integration checks and auditable release evidence."
 primary_keyword: "AI test engineering tax immigration"
 search_intent: "informational"
