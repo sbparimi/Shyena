@@ -3,7 +3,7 @@ import { ArrowRight, Check } from "lucide-react";
 const SITE="https://www.shyena.eu";
 
 const services=[
- {title:"AI Act Transparency & Risk Scan",price:"Fixed fee — [PARIMI TO CONFIRM]",cadence:"1–2 weeks",body:"Scope one AI system against relevant transparency and risk considerations. Deliver a findings summary, evidence-gap map and a prioritized assurance worklist."},
+ {title:"AI Act Transparency & Risk Scan",price:"Custom quote",cadence:"1–2 weeks",body:"Scope one AI system against relevant transparency and risk considerations. Deliver a findings summary, evidence-gap map and a prioritized assurance worklist."},
  {title:"AI Assurance Pilot",price:"€7,500",cadence:"30–60 days",body:"Scope one real AI system and representative customer journeys. Deliver deterministic controls, semantic evaluation, orchestration checks, security testing and an evidence-backed release assessment."},
  {title:"Governance Evidence Retainer",price:"Custom pricing",cadence:"Ongoing",body:"Maintain requirement-to-evidence mapping across releases. Deliver refreshed assurance evidence, tracked findings, regression results and an auditable history of changes."},
 ];
