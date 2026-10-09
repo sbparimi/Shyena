@@ -3,7 +3,7 @@ import { ArrowRight, CheckCircle2, Network, ShieldCheck } from "lucide-react";
 
 const SITE = "https://www.shyena.eu";
 
-export const Route = createFileRoute("/cognigy-testing")({
+export const Route = createFileRoute("/ai-assurance")({
   head: () => ({
     links: [{ rel: "canonical", href: SITE + "/ai-assurance" }],
     meta: [

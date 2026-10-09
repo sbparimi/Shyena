@@ -3,7 +3,7 @@ import { useEffect } from "react";
 const SKILL_RULES: Array<[string, string[]]> = [
   ["AI agent testing", ["ai agent", "agent testing", "agentic"]],
   ["AI evaluation", ["evaluation", "evaluat", "llm-as-judge", "semantic"]],
-  ["Conversational AI", ["conversational", "cognigy", "chatbot"]],
+  ["Conversational AI", ["conversational", "ai-agent", "chatbot"]],
   ["AI security testing", ["security", "ziran", "prompt injection", "red team"]],
   ["Autonomous testing", ["autonomous", "self-healing", "autonomous qa"]],
   ["Web testing", ["web testing", "browser", "playwright", "selenium"]],

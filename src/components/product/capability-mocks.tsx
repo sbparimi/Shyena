@@ -39,7 +39,7 @@ export function ConversationMock() {
         <span className="h-2.5 w-2.5 rounded-full bg-warning/70" />
         <span className="h-2.5 w-2.5 rounded-full bg-accent/70" />
         <span className="ml-2 text-[11px] font-medium text-muted-foreground">
-          Live session · Cognigy Webchat
+          Live session · AI chatbot
         </span>
       </div>
       <div className="space-y-3 p-4">
