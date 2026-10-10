@@ -102,7 +102,7 @@ function HomePage() {
   const selected = commands.find((item) => item.id === activeCommand) ?? commands[0]!;
 
   return (
-    <main className="min-h-screen overflow-hidden bg-[#080b10] text-white">
+    <div className="min-h-full overflow-hidden bg-[#080b10] text-white">
       <section className="relative border-b border-white/10">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_70%_10%,rgba(249,115,22,0.13),transparent_42%)]" />
         <div className="relative mx-auto grid max-w-[1320px] gap-12 px-5 pb-20 pt-16 sm:px-8 lg:grid-cols-[1fr_0.92fr] lg:items-center lg:px-10 lg:pb-28 lg:pt-24">
@@ -261,12 +261,6 @@ function HomePage() {
         </div>
       </section>
 
-      <footer className="border-t border-white/10 px-5 py-6 sm:px-8 lg:px-10">
-        <div className="mx-auto flex max-w-[1320px] flex-col gap-2 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
-          <span>SHYENA · AI QUALITY ENGINEERING</span>
-          <div className="flex flex-wrap gap-x-5 gap-y-2"><Link to="/platform" className="hover:text-white">Platform</Link><Link to="/security" className="hover:text-white">Security</Link><Link to="/docs" className="hover:text-white">Docs</Link><Link to="/contact" className="hover:text-white">Contact</Link></div>
-        </div>
-      </footer>
-    </main>
+    </div>
   );
 }
