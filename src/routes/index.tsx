@@ -57,7 +57,7 @@ export const Route = createFileRoute("/")({
       { property: "og:url", content: "https://www.shyena.eu/" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [\n      { rel: "canonical", href: "https://www.shyena.eu/" },\n      { rel: "preconnect", href: "https://fonts.googleapis.com" },\n      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },\n      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" },\n    ],
+    links: [{ rel: "canonical", href: "https://www.shyena.eu/" }],
   }),
   component: HomePage,
 });
