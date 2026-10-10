@@ -270,7 +270,7 @@ This loop should run when source content, graph schema, chunking, embeddings, pr
 
 ## Start with a reproducible run
 
-The commands below use the repository's existing content-validation workflow. They validate Shyena's public content artifacts; they do **not** execute the illustrative RAG factory configuration above.
+For the concise implementation guide, see [GraphRAG evaluation in the Shyena documentation](/docs/graphrag-evaluation). The commands below use the repository's existing content-validation workflow. They validate Shyena's public content artifacts; they do **not** execute the illustrative RAG factory configuration above.
 
 ```bash
 # Install dependencies
