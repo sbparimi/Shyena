@@ -9,16 +9,16 @@ export const Route = createFileRoute("/docs/graphrag-evaluation")({
       {
         name: "description",
         content:
-          "A developer guide to comparing vector RAG, GraphRAG and hybrid retrieval with versioned benchmarks, traceable evidence and release gates.",
+          "An engineering guide to source authority, retrieval diagnosis, claim grounding, reproducible evidence and RAG release controls.",
       },
     ],
     links: [{ rel: "canonical", href: "https://www.shyena.eu/docs/graphrag-evaluation" }],
   }),
   component: () => (
     <KnowledgeDocPage
-      section="GraphRAG Evaluation"
-      title="Evaluate retrieval architectures with evidence."
-      description="A practical guide to versioned RAG benchmarks, controlled comparisons, claim-level grounding, failure diagnosis and release gates."
+      section="RAG Reliability"
+      title="Trace RAG failures from source to claim."
+      description="Trace source ingestion, retrieval, context resolution and answer claims with original diagrams and evidence-based release gates."
       source={source}
       next={{ to: "/docs/evaluation-model", label: "Evaluation Model" }}
     />
