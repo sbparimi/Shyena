@@ -4,7 +4,7 @@ description: "Turn a RAG hallucination benchmark into a repeatable engineering w
 slug: "agentic-sdlc-graphrag-evaluation"
 content_type: "technical-article"
 category: "AI Engineering"
-diagram: "rag-evaluation-factory"
+diagram: "evidence"
 thesis: "RAG architecture decisions should be made from controlled, repeatable evidence across answer correctness, grounding, retrieval, conflict resolution, abstention, security, latency and cost—not from architecture labels or one aggregate score."
 primary_keyword: "GraphRAG evaluation"
 search_intent: "informational"
@@ -305,7 +305,7 @@ The report should make it clear what was measured, what remains uncertain and wh
 
 ## The Shyena model
 
-Shyena's assurance model connects system understanding, execution, semantic and deterministic evaluation, security testing and release evidence. In this workflow:
+Shyena's assurance model connects system understanding, execution, semantic and deterministic evaluation, security testing and release evidence. See the [evaluation model](/docs/evaluation-model) for the wider assurance contract and [AI agent testing systems guide](/blog/ai-agent-testing-is-a-systems-problem) for the distinction between response quality and system outcome. In this workflow:
 
 - **Nexus** maps the change and its risk surface.
 - **Vera** evaluates behaviour against the benchmark.
