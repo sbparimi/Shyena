@@ -12,6 +12,7 @@ import { type ReactNode, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import appCss from "../styles.css?url";
 import siteThemeCss from "../site-theme.css?url";
+import warpThemeCss from "../warp-theme.css?url";
 import enterpriseTypographyCss from "../enterprise-typography.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import {
@@ -335,6 +336,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     links: [
       { rel: "stylesheet", href: appCss },
       { rel: "stylesheet", href: siteThemeCss },
+      { rel: "stylesheet", href: warpThemeCss },
       { rel: "stylesheet", href: enterpriseTypographyCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
