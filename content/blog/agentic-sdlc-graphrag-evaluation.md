@@ -1,321 +1,195 @@
 ---
-title: "GraphRAG vs. Vector RAG: Build an Agentic SDLC Evaluation Factory"
-description: "Turn a RAG hallucination benchmark into a repeatable engineering workflow: generate tests, compare retrieval architectures, trace failures, and gate releases on evidence."
+title: "When Retrieval Looks Right but Answers Are Wrong: A RAG Reliability Blueprint"
+description: "An original engineering blueprint for tracing RAG failures from source ingestion to generated claims, with architecture diagrams, reproducible evaluation and release controls."
 slug: "agentic-sdlc-graphrag-evaluation"
 content_type: "technical-article"
 category: "Evaluation Model"
 diagram: "evidence"
-thesis: "RAG architecture decisions should be made from controlled, repeatable evidence across answer correctness, grounding, retrieval, conflict resolution, abstention, security, latency and cost—not from architecture labels or one aggregate score."
-primary_keyword: "GraphRAG evaluation"
+thesis: "RAG reliability is an end-to-end systems property: source authority, claim grounding, abstention, security and operational cost must be measured independently and tied to reproducible evidence."
+primary_keyword: "RAG reliability engineering"
 search_intent: "informational"
 author: "Shyena Engineering"
 published: true
 ---
 
-# GraphRAG vs. Vector RAG: Build an Agentic SDLC Evaluation Factory
+# When Retrieval Looks Right but Answers Are Wrong
 
-A retrieval-augmented generation system can return a convincing answer and still choose the wrong version of a fact.
+A retrieval-augmented generation (RAG) system can fetch a relevant document, quote a real sentence and still answer incorrectly. The failure may come from stale source material, version confusion, missing relationships, misleading context, or a model that adds a plausible claim the evidence never made.
 
-A vector search may retrieve a highly similar paragraph from an older SDK guide. A knowledge graph may identify the correct relationship but pass too much context to a model that cannot reliably follow the precedence rules. A hybrid pipeline may retrieve the right evidence and still generate a claim that the evidence does not support.
+RAG quality is an engineering problem across the whole request path—not a contest between vector search and knowledge graphs.
 
-The engineering problem is not to declare one retrieval architecture the winner. It is to establish **which configuration works for which query classes, under which constraints, with evidence that can be reproduced after every change**.
+This is an original reliability workflow for assistants answering questions over changing technical documentation. The running scenario is a fictional **Northstar Metrics SDK** assistant that explains API versions, configuration options and platform compatibility. It is illustrative, not a real product or customer deployment.
 
-This guide shows how to apply an agentic software development lifecycle (SDLC) to RAG evaluation: define the contract, build a benchmark, execute controlled comparisons, diagnose failures, propose targeted fixes, and keep release decisions tied to evidence.
+## Architecture: follow the evidence
 
-> **The operating principle:** benchmark the whole system, preserve the evidence, and make the gate enforceable.
+![Original Shyena RAG reliability architecture showing source ingestion, version-aware indexing, parallel retrieval, context resolution, answer generation, claim verification, evidence storage and release gates.](/rag-evaluation-architecture.svg)
 
-## What the benchmark tells us—and what it does not
+Each stage has a distinct responsibility and should emit inspectable evidence. The generator should not be blamed for an indexing error, and successful retrieval is not proof that the final answer is grounded.
 
-The [MachineLearningMastery benchmark](https://machinelearningmastery.com/evaluating-graph-rag-vs-standard-rag-a-hallucination-benchmark-on-fact-dense-queries/) compares standard vector RAG with a three-tier GraphRAG approach using a synthetic dataset of 50 basketball-player profiles. The graph stores designated facts, while vector documents contain multiple numbers and deliberately conflicting context.
+## Define what a correct answer means
 
-The article reports 96% accuracy for standard vector RAG and 92% for the GraphRAG implementation. Its scoring checks whether the expected number appears in the generated answer.
+Assume the assistant is asked: “Which setting controls batch flushing in SDK v4, and does the browser transport support it?”
 
-That is a useful initial experiment, but it is not enough to establish a general ranking of architectures:
+Trusted documentation includes a v4 parameter reference, a compatibility table and a v3 migration note. The older page uses similar terminology but describes different behaviour. An evaluator that merely searches for the expected parameter name could pass an answer that also contains an obsolete default or an unsupported compatibility claim.
 
-- The dataset is small and synthetic.
-- The metric can pass an answer that includes the correct number alongside a contradictory or unsupported claim.
-- A number appearing in the answer does not prove the correct entity, time period, unit, or source was used.
-- The result reflects the combination of retrieval, prompt instructions and model capacity—not retrieval architecture alone.
-
-The result is best treated as a hypothesis to investigate. A production decision needs a broader benchmark, controlled variables, claim-level evidence and explicit release policy.
-
-## The system under test
-
-Use a deliberately different example: a fictional developer documentation assistant for **Northstar Metrics SDK**. The assistant answers questions about API parameters, SDK versions, browser compatibility and deprecated methods.
-
-The version 4 reference says that `flushIntervalMs` controls batch flushing. An older version 3 guide contains a similarly named option with different behaviour. A migration page links the option to the browser transport, while a stale snippet recommends a deprecated method.
-
-A query such as:
-
-> Which setting controls batch flushing in SDK v4, and is it supported by the browser transport?
-
-requires more than finding text that resembles the question. The answer must resolve the version, retrieve the authoritative definition, follow the compatibility relationship and avoid importing obsolete behaviour.
-
-This is a synthetic example for illustrating the evaluation method, not a claim about a real SDK.
-
-## From a question to an assurance contract
-
-Start with what must be true, not with a transcript the model must reproduce.
+Write the expected outcome before execution:
 
 ```yaml
-benchmark:
-  id: northstar-sdk-rag-v1
-  domain: developer-documentation
-  question: "Which setting controls batch flushing in SDK v4?"
-  expected:
+case:
+  id: sdk-v4-batch-flush
+  source_set: northstar-docs-2026-10
+  required_facts:
     sdk_version: "v4"
     parameter: "flushIntervalMs"
-    evidence_required: true
-  forbidden:
-    - "Treat v3 behaviour as the v4 contract"
-    - "Claim browser compatibility without supporting evidence"
-  verdict:
-    unsupported_claim: fail
-    wrong_version: fail
-    missing_evidence: fail
+  required_evidence:
+    - "v4 parameter reference"
+  fail_if:
+    - wrong_version
+    - unsupported_claim
+    - missing_required_source
+    - material_contradiction
 ```
 
-The benchmark contract separates exact facts from judgement-based criteria. Exact version, parameter name and deprecation status should be checked deterministically against ground truth. Whether the explanation is clear and whether each natural-language claim is supported can use semantic evaluation, calibrated against reviewed examples.
+The names and facts are fictional. The engineering principle is to define failure conditions before observing the model output.
 
-## Define the factory as code
+## Build a risk-shaped benchmark
 
-A factory definition should make the test inputs, configurations, evidence requirements and release policy reviewable alongside the system under test.
+Avoid filling a test set with paraphrases of one source page. Include cases that represent different ways the system can mislead a user.
 
-The following is an **illustrative configuration**, not a claim that a matching Shyena CLI or runtime command is already available:
+| Test family | Failure being probed | Expected oracle |
+| --- | --- | --- |
+| Direct lookup | A required fact is missed or altered | Trusted value and source |
+| Version conflict | An obsolete value wins | Version precedence rule |
+| Cross-document relationship | A compatibility edge is missed | Verified relationship |
+| Ambiguous request | The system guesses despite ambiguity | Clarification or abstention |
+| Missing evidence | The answer invents a plausible detail | Expected abstention |
+| Contradictory context | Conflicting documents are blended | Authority and conflict policy |
+| Untrusted content | Retrieved instructions try to override policy | Security invariant |
+| Regression case | A previous fix breaks another query class | Accepted baseline and trace |
+
+Every case needs a source snapshot or source identifier, an expected outcome and a reviewable reason for inclusion. Generated test cases should not become authoritative ground truth without review. Keep synthetic cases labelled and separate from production-derived cases.
+
+## Keep the scorecard multidimensional
+
+A single aggregate score hides the information needed to diagnose failures. Report these dimensions independently:
+
+- **Answer correctness:** are facts correct, including entity, unit and version?
+- **Evidence coverage:** were authoritative sources retrieved?
+- **Claim grounding:** can each material factual claim be supported?
+- **Conflict handling:** was the documented source-precedence rule applied?
+- **Abstention quality:** did the system stop or ask when evidence was insufficient?
+- **Security behaviour:** did untrusted documents remain data rather than instructions?
+- **Latency and cost:** what did the grounded answer cost and how long did it take?
+- **Evidence integrity:** can the exact run, configuration, sources and verdict be reconstructed?
+
+Use deterministic checks for exact facts and invariants. Use semantic evaluation for judgement-based criteria, and pass the rubric and supporting evidence to the evaluator—not just the generated answer.
+
+### Why substring checks fail
+
+Consider: “The v4 parameter is `flushIntervalMs`, which behaves exactly like the v3 option and is supported by every transport.” A substring assertion can find the expected parameter and pass the test, even though the answer contains a version error and an unsupported compatibility claim.
+
+Evaluate the full response, including contradictions. Track false passes explicitly; they are often more useful than a single average score.
+
+## Route each failure to the responsible layer
+
+![Original Shyena failure-routing diagram mapping observed RAG failures to ingestion, retrieval, context resolution, claim verification and security controls.](/rag-failure-routing.svg)
+
+Find the earliest stage where observed evidence diverges from the contract.
+
+| Observed evidence | First investigation | Avoid as the first reaction |
+| --- | --- | --- |
+| Correct source is absent from the index | Ingestion, parsing, metadata and freshness | Increasing model size |
+| Source is indexed but not retrieved | Query formulation, filters, embeddings and reranking | Rewriting the answer prompt |
+| Current and obsolete sources are both retrieved | Version metadata and authority policy | Removing all historical documents |
+| Correct context is present but answer contradicts it | Context layout, generation and claim verification | Assuming retrieval is at fault |
+| Answer is plausible but not traceable | Run capture, source IDs and evaluator logging | Treating a score as evidence |
+| Hostile document instructions affect behaviour | Trust boundaries, content isolation and tool policy | Treating it as relevance tuning |
+
+A diagnosis is a hypothesis, not a verdict. Confirm it with a targeted experiment, then rerun the failing cases and regression suite.
+
+## Compare retrieval configurations fairly
+
+Vector retrieval, graph traversal and hybrid retrieval have different operating characteristics. Compare them against the same contract rather than ranking them by name.
+
+1. Pin the question set, source snapshot, model, prompt, decoding settings and evaluator.
+2. Change one retrieval dimension while holding the rest of the pipeline constant.
+3. Preserve retrieved chunks, source metadata, graph paths, final context and generated claims.
+4. Repeat stochastic runs where appropriate and report uncertainty when the sample supports it.
+5. Test model changes separately; do not mix retrieval and model changes into one result.
+6. Report by query class so gains on relationship questions do not hide regressions elsewhere.
+
+Graph retrieval may help when a query depends on verified relationships; vector retrieval may be sufficient for direct semantic lookup; hybrid designs may balance the two. The workload and evidence should decide.
+
+## Preserve a reproducible run manifest
+
+A result is not reproducible if the report omits the sources, prompt or retrieval settings that produced it.
 
 ```yaml
-factory:
-  name: northstar-rag-assurance
-  objective: compare-retrieval-configurations
-  benchmark: northstar-sdk-rag-v1
-
-matrix:
-  retrieval:
-    - vector
-    - graph
-    - hybrid
-  controls:
-    keep_model_constant: true
-    keep_questions_constant: true
-    preserve_raw_outputs: true
-    record_latency_and_cost: true
-
-evaluation:
-  deterministic:
-    - entity_and_version_match
-    - required_fact_match
-    - source_id_present
-  semantic:
-    - claim_level_grounding
-    - answer_completeness
-    - contradiction_detection
-  security:
-    - prompt_injection_resistance
-    - untrusted_document_handling
-
-release:
-  block_on:
-    - critical_unsupported_claim
-    - wrong_version
-    - missing_required_evidence
-    - security_failure
-  require_human_approval: true
+run_manifest:
+  benchmark_id: northstar-docs-rag-v1
+  source_snapshot: northstar-docs-2026-10
+  retrieval_config: hybrid-v3
+  generator_model: pinned-model-id
+  prompt_revision: answer-policy-12
+  evaluator_revision: grounding-rubric-4
+  artifacts:
+    - retrieved-source-ids
+    - final-context
+    - raw-answer
+    - extracted-claims
+    - deterministic-results
+    - semantic-rationale
+    - latency-and-cost
+  verdict: "computed-from-versioned-policy"
 ```
 
-The definition should be versioned. A benchmark result without its dataset version, prompt, model, retrieval settings and evaluator version is not a reproducible engineering result.
+Values are illustrative. An implementation should use immutable identifiers. Do not expose secrets or sensitive source text in broadly accessible reports; use access-controlled evidence references where needed.
 
-## The agentic SDLC workflow
+## Turn the scorecard into a release policy
 
-### 01 — Plan: map the risk
-
-**Nexus** maps the changed components and dependencies: source documents, chunking, embedding model, vector index, graph construction, retrieval policy, prompt, answer model and evaluator.
-
-The output is a change-impact map and a risk-based test plan. If a source schema changes, the factory should include ingestion and entity-linking tests. If the prompt changes, it should rerun conflict-resolution and unsupported-answer cases.
-
-### 02 — Build: create a balanced benchmark
-
-The benchmark agent generates questions from verified facts and relationships, then adds controlled challenge cases:
-
-- atomic fact lookup;
-- entity disambiguation;
-- version and time conflicts;
-- multi-hop relationships;
-- missing or ambiguous facts;
-- stale and contradictory documents;
-- irrelevant but semantically similar passages;
-- prompt injection embedded in retrieved content.
-
-Every generated case needs a known expected outcome. Human review is required before generated ground truth becomes authoritative.
-
-### 03 — Test: run a controlled matrix
-
-**Vera** coordinates execution and evaluates the observed behaviour. Run the same benchmark against vector RAG, GraphRAG and hybrid retrieval.
-
-First hold the model, question set, generation settings and evaluation rules constant. This isolates retrieval-related differences as far as the system permits. Then run a separate model matrix to investigate whether model capacity changes the result.
-
-Capture raw output and trace evidence for every case:
-
-```text
-TEST CASE
-  ├── benchmark and expected facts
-  ├── retrieved passages and source IDs
-  ├── graph entities and traversed relationships
-  ├── prompt and model configuration
-  ├── generated answer and claims
-  ├── deterministic assertions
-  ├── semantic evaluation
-  └── latency, token use and cost
-```
-
-Do not compare one configuration's best run with another configuration's average. Use paired questions, repeated trials where generation is stochastic, and confidence intervals where the sample supports them.
-
-### 04 — Evaluate: measure separate failure dimensions
-
-A single accuracy number is too lossy for release governance.
-
-| Signal | Question answered |
-| --- | --- |
-| Answer correctness | Does the answer match the trusted fact? |
-| Claim-level grounding | Is each factual claim supported by retrieved evidence? |
-| Retrieval recall | Was the evidence needed to answer found? |
-| Evidence precision | Was the context relevant rather than merely similar? |
-| Conflict resolution | Did the system use the correct source, entity and version? |
-| Multi-hop success | Were required relationships followed correctly? |
-| Abstention quality | Did the system decline when evidence was missing or ambiguous? |
-| Security robustness | Did untrusted retrieved content alter policy or tool behaviour? |
-| Latency and cost | What did a successful, grounded answer cost and how long did it take? |
-
-Keep these metrics visible separately. If an answer contains the expected parameter but also states an obsolete default, a substring assertion may pass while the answer is still wrong. Claim-level checks and contradiction detection should expose that failure.
-
-### 05 — Secure: test the retrieval boundary
-
-**Chakra** challenges the system with hostile or misleading documents, instructions that conflict with system policy, cross-version confusion and attempts to make the assistant reveal restricted content.
-
-The security evaluator should verify the actual control outcome, not merely score the final wording. A critical disclosure or policy bypass is a release blocker even when average answer quality is high.
-
-### 06 — Govern: make the decision from evidence
-
-**Govern** assembles the results into a reviewable release decision. Each failure should link to the exact test case, retrieved evidence, model and prompt version, trace, assertion and evaluation rationale.
-
-The gate should not silently change thresholds or remove failing cases to make a run pass. Any policy change should be reviewed, versioned and visible in the evidence record.
-
-## Diagnose the failure before changing the architecture
-
-A failed answer is a symptom, not a root cause.
-
-| Observed failure | Likely investigation |
-| --- | --- |
-| Correct document exists but is not retrieved | Query formulation, chunking, embeddings, filters and reranking |
-| Correct evidence is retrieved but the answer uses the wrong version | Context ordering, source precedence and model instruction following |
-| Graph path is incomplete | Entity resolution, relationship coverage and graph construction |
-| Evidence is correct but claims exceed it | Prompt design, generation behaviour and claim-level verification |
-| Unknown question receives a confident answer | Abstention policy and missing-evidence detection |
-| Accuracy improves but cost or latency spikes | Retrieval fan-out, graph traversal, context size and model choice |
-
-The diagnosis agent should propose a narrow change and explain which failures it is expected to fix. The factory then reruns the failed cases and the full regression suite. A fix is accepted only when the target failure improves without introducing a critical regression elsewhere.
-
-## Use a release gate, not a leaderboard
-
-Example policy values must be chosen for the product's risk profile; they are not universal industry standards.
+Thresholds must reflect the product's risk profile and be versioned like code. These are illustrative policy values, not universal standards or measured Shyena results.
 
 ```yaml
 release_policy:
-  minimum_correctness: 0.95
-  minimum_claim_grounding: 0.98
   critical_unsupported_claims: 0
   wrong_version_answers: 0
-  security_blockers: 0
-  evidence_completeness: 1.00
-  human_approval_required: true
+  security_invariant_failures: 0
+  required_evidence_complete: true
+  minimum_correctness: 0.95
+  minimum_claim_grounding: 0.98
+  human_review:
+    required_for_policy_changes: true
+    required_for_new_ground_truth: true
 ```
 
-Under this illustrative policy, a configuration that scores well on average still fails if it returns one critical unsupported claim or uses the wrong SDK version. Thresholds should be validated against a representative benchmark, and small samples should not be treated as statistically conclusive.
+Hard blockers must not be averaged away by strong results elsewhere. A run with one critical version error can fail even if its overall score is high. Store the decision rationale with the evidence and require review for policy changes or newly promoted ground truth.
 
-The architecture decision is then a constrained trade-off:
+## Shyena's role in the assurance loop
 
-```text
-ELIGIBLE CONFIGURATIONS
-  = quality thresholds met
-  + security gates passed
-  + evidence complete
-
-SELECT AMONG ELIGIBLE
-  = quality × latency × cost × operational fit
-```
-
-A graph-based configuration may justify its additional complexity on relationship-heavy questions. Vector retrieval may be sufficient for straightforward prose lookup. Hybrid retrieval may provide the best balance for a mixed workload. The benchmark—not the architecture label—should decide.
-
-## The quality loop
-
-```text
-CHANGE
-  ↓
-IMPACT MAP
-  ↓
-BENCHMARK + TEST MATRIX
-  ↓
-EXECUTE + TRACE
-  ↓
-SCORE + CLASSIFY FAILURES
-  ↓
-PROPOSE FIX
-  ↓
-REGRESSION RUN
-  ↓
-EVIDENCE + RELEASE DECISION
-  ↺
-```
-
-This loop should run when source content, graph schema, chunking, embeddings, prompts, models, retrieval logic or evaluation rules change. Production failures that are confirmed and understood can become new regression cases, with review before they enter the authoritative benchmark.
-
-## Start with a reproducible run
-
-For the concise implementation guide, see [GraphRAG evaluation in the Shyena documentation](/docs/graphrag-evaluation). The commands below use the repository's existing content-validation workflow. They validate Shyena's public content artifacts; they do **not** execute the illustrative RAG factory configuration above.
-
-```bash
-# Install dependencies
-pnpm install
-
-# Validate the public content contract
-pnpm run content:validate
-
-# Generate the content index used by the site
-pnpm run content:generate
-
-# Run the production build
-pnpm run build
-```
-
-For the RAG evaluation implementation itself, connect the benchmark runner to the team's chosen test harness and retrieval services. Keep the command interface explicit about which capabilities are implemented; do not present an example command as a working Shyena CLI until that interface exists.
-
-## What a useful report should show
-
-A developer should be able to move from a failed case to the evidence without guessing:
-
-- benchmark version and configuration matrix;
-- correctness and claim-grounding by query category;
-- retrieval evidence and graph paths;
-- contradictions, unsupported claims and abstentions;
-- latency and cost distributions;
-- security failures and release-blocking conditions;
-- regression comparison against the accepted baseline;
-- recommended next action with supporting trace links.
-
-The report should make it clear what was measured, what remains uncertain and why the verdict was reached. Synthetic sample data must be labelled as such; no sample metric should be presented as a live customer result.
-
-## The Shyena model
-
-Shyena's assurance model connects system understanding, execution, semantic and deterministic evaluation, security testing and release evidence. See the [evaluation model](/docs/evaluation-model) for the wider assurance contract and [AI agent testing systems guide](/blog/ai-agent-testing-is-a-systems-problem) for the distinction between response quality and system outcome. In this workflow:
-
-- **Nexus** maps the change and its risk surface.
-- **Vera** evaluates behaviour against the benchmark.
-- **Chakra** challenges trust and security boundaries.
+- **Nexus** maps the system and change surface so coverage includes affected dependencies.
+- **Vera** evaluates observed behaviour against deterministic contracts and semantic rubrics.
+- **Chakra** tests trust boundaries and adversarial retrieved content.
 - **Govern** assembles evidence and applies release policy.
 
-These responsibilities describe the intended workflow. The article does not claim that this specific RAG benchmark is already running as a live service.
+These are workflow responsibilities. This article does not claim that the fictional Northstar benchmark has been executed by a live Shyena service.
 
-The outcome is not simply a ranking of vector RAG and GraphRAG. It is an evidence-backed answer to a more useful engineering question:
+## Repository commands are not benchmark commands
 
-> Which retrieval and model configuration can meet this product's correctness, grounding, security, latency and cost requirements—and can we prove that it still does after the next change?
+The following commands validate and build Shyena's website content; they do not execute the illustrative RAG benchmark:
 
-**Benchmark the behaviour. Trace the failure. Gate the release on evidence.**
+```bash
+npm install
+npm run content:validate
+npm run content:generate
+npm run build
+```
+
+Connect a real benchmark to the test harness and retrieval services selected by the engineering team. Do not present an unimplemented command as an available Shyena CLI.
+
+## Source context and limits
+
+A [published Graph-RAG versus standard RAG experiment](https://machinelearningmastery.com/evaluating-graph-rag-vs-standard-rag-a-hallucination-benchmark-on-fact-dense-queries/) reports results from a small synthetic basketball-player dataset. Its expected-number substring criterion cannot establish complete claim correctness, grounding or general superiority of one retrieval design. Treat it as a narrow observation—not a production architecture decision.
+
+This article is an independent engineering synthesis. It does not reuse that experiment's example, structure or narrative; the source is cited only for the methodological limitation above.
+
+**The release question is not whether retrieval found something relevant. It is whether the system answered correctly, showed its evidence, respected trust boundaries and can prove the result after the next change.**
