@@ -1,8 +1,9 @@
 type LogoProps = {
   size?: "header" | "footer";
+  theme?: "light" | "dark";
 };
 
-export function Logo({ size = "header" }: LogoProps) {
+export function Logo({ size = "header", theme = "light" }: LogoProps) {
   const mark = size === "footer" ? "h-10 w-9" : "h-8 w-7 sm:h-9 sm:w-8";
   const word = size === "footer" ? "text-[29px]" : "text-[25px] sm:text-[28px]";
 
@@ -18,7 +19,7 @@ export function Logo({ size = "header" }: LogoProps) {
         aria-hidden="true"
         className={`${mark} shrink-0 object-contain`}
       />
-      <span className={`font-[Sora] ${word} font-extrabold tracking-[-0.055em] text-[#0B1B3A]`}>Shyena</span>
+      <span className={`font-[Sora] ${word} font-extrabold tracking-[-0.055em] ${theme === "dark" ? "text-white" : "text-[#0B1B3A]"}`}>Shyena</span>
     </span>
   );
 }
