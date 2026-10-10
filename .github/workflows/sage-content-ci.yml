@@ -7,15 +7,27 @@ on:
     branches: [main]
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   validate-and-build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
       - name: Install dependencies
         run: npm install
+      - name: Format homepage files
+        run: |
+          npx prettier --write src/routes/index.tsx src/components/site/site-header.tsx src/components/site/site-footer.tsx
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if ! git diff --quiet; then
+            git add src/routes/index.tsx src/components/site/site-header.tsx src/components/site/site-footer.tsx
+            git commit -m "Format Warp-inspired homepage"
+            git push origin "HEAD:${GITHUB_HEAD_REF:-$GITHUB_REF_NAME}"
+          fi
       - name: Validate content contract
         run: npm run content:validate
       - name: Generate content registry
