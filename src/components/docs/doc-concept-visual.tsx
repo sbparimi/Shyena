@@ -37,15 +37,9 @@ function RagEvaluationVisual() {
   return <><figure className="overflow-hidden rounded-[2rem] border border-[#ddd4c5] bg-[#fbf8ef] shadow-[0_24px_70px_-35px_rgba(20,35,56,.28)]"><img src="/rag-evaluation-architecture.svg" alt="RAG reliability architecture: source registry, version-aware indexing, vector and graph retrieval, context resolution, answer generation, claim verification, evidence store and release gate." className="block h-auto w-full" width={1200} height={570} decoding="async" fetchPriority="high" /><figcaption className="border-t border-[#e4ddd0] bg-white/70 px-5 py-3 font-mono text-[9px] uppercase tracking-[0.14em] text-[#71848e] sm:px-7">Source authority → retrieval → claim verification → release evidence</figcaption></figure><Thesis concept={concept} /></>;
 }
 
-function RagEvaluationVisual() {
-  const concept = CONCEPTS["RAG Reliability"];
-  return <><figure className="overflow-hidden rounded-[2rem] border border-[#ddd4c5] bg-[#fbf8ef] shadow-[0_24px_70px_-35px_rgba(20,35,56,.28)]"><img src="/rag-evaluation-architecture.svg" alt="RAG reliability architecture: source registry, version-aware indexing, vector and graph retrieval, context resolution, answer generation, claim verification, evidence store and release gate." className="block h-auto w-full" width={1200} height={570} decoding="async" fetchPriority="high" /><figcaption className="border-t border-[#e4ddd0] bg-white/70 px-5 py-3 font-mono text-[9px] uppercase tracking-[0.14em] text-[#71848e] sm:px-7">Source authority → retrieval → claim verification → release evidence</figcaption></figure><Thesis concept={concept} /></>;
-}
-
 export function DocConceptVisual({ section }: { section: string }) {
   const concept = CONCEPTS[section] ?? FALLBACK;
   if (section === "The Evaluation Model") return <EvaluationModelVisual />;
-  if (section === "RAG Reliability") return <RagEvaluationVisual />;
   if (section === "RAG Reliability") return <RagEvaluationVisual />;
   const isInternal = section === "SAGE Content Engineering";
   const isTokenomics = section === "AI Assurance Tokenomics";
