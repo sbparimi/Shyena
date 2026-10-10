@@ -292,16 +292,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Shyena AI Assurance Platform | Evaluation, Security & Governance" },
+      { title: "Shyena | Agentic SDLC from Plan to Production" },
       {
         name: "description",
         content:
-          "Shyena provides AI quality engineering across models, data pipelines, generative AI applications and agentic systems, with evaluation, security testing and evidence-backed release decisions.",
+          "Shyena connects planning, coding agents, test engineering, security and release governance into one evidence-led Agentic SDLC workflow.",
       },
       {
         name: "keywords",
         content:
-          "AI quality engineering, machine learning testing, model evaluation, data pipeline validation, generative AI testing, LLM evaluation, RAG evaluation, AI governance, EU AI Act, ISO 42001, AI system testing",
+          "Agentic SDLC, autonomous software engineering, coding agents, test engineering, autonomous testing, AI security, release governance, engineering evidence, continuous verification",
       },
       {
         name: "robots",
@@ -309,12 +309,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       {
         property: "og:title",
-        content: "Shyena: AI Assurance Platform | Evaluation, security & governance evidence",
+        content: "Shyena: The Agentic SDLC from Plan to Production",
       },
       {
         property: "og:description",
         content:
-          "Test AI models, data pipelines and AI-powered workflows; evaluate behaviour, challenge critical paths and produce traceable evidence before release.",
+          "Connect coding agents, test engineering, security checks and release governance into one traceable Agentic SDLC workflow.",
       },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "Shyena" },
@@ -323,12 +323,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary_large_image" },
       {
         name: "twitter:title",
-        content: "Shyena AI Quality Engineering | Model Evaluation, Security & Assurance",
+        content: "Shyena | Agentic SDLC from Plan to Production",
       },
       {
         name: "twitter:description",
         content:
-          "AI quality engineering, model and data evaluation, security testing and governance evidence across production AI.",
+          "Plan, code, test, secure, release and learn in one governed Agentic SDLC—with evidence and release controls.",
       },
       { name: "twitter:image", content: "https://www.shyena.eu/shyena-logo-exact.webp" },
     ],
