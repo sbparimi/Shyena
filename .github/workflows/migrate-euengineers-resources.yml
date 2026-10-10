@@ -42,6 +42,11 @@ jobs:
           git add src/data/euengineers-resources.ts
           git diff --cached --quiet && echo 'No migration changes detected.' && exit 0
           git commit -m 'Import EU Engineers resources into Shyena docs [skip euengineers migration]'
+          # Build tooling may leave tracked or untracked generated artifacts in the worktree.
+          # The migration commit is already created; keep those artifacts out of the rebase.
+          if [[ -n "$(git status --porcelain)" ]]; then
+            git stash push --include-untracked -m "temporary build artifacts before resource migration rebase"
+          fi
           git fetch origin main
           git rebase origin/main
           git push origin HEAD:main
