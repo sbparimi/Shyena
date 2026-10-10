@@ -1,4 +1,12 @@
-import { AbsoluteFill, Audio, staticFile, useCurrentFrame, interpolate, spring, useVideoConfig } from "remotion";
+import {
+  AbsoluteFill,
+  Audio,
+  staticFile,
+  useCurrentFrame,
+  interpolate,
+  spring,
+  useVideoConfig,
+} from "remotion";
 import { BRAND } from "../theme";
 import { FrameClip } from "../components/FrameClip";
 import { Dashboard } from "../components/Dashboard";
@@ -39,7 +47,6 @@ export const SceneOffice: React.FC = () => {
         <Dashboard />
       </ScreenOverlay>
 
-
       <AbsoluteFill
         style={{
           background:
@@ -48,7 +55,13 @@ export const SceneOffice: React.FC = () => {
       />
 
       <AbsoluteFill style={{ justifyContent: "flex-end", padding: "0 9% 9%" }}>
-        <div style={{ opacity: copyIn, transform: `translateY(${(1 - copyIn) * 30}px)`, maxWidth: "62%" }}>
+        <div
+          style={{
+            opacity: copyIn,
+            transform: `translateY(${(1 - copyIn) * 30}px)`,
+            maxWidth: "62%",
+          }}
+        >
           <div
             style={{
               fontFamily: "Inter, sans-serif",

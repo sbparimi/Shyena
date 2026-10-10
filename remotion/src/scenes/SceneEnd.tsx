@@ -1,4 +1,12 @@
-import { AbsoluteFill, Audio, staticFile, useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
+import {
+  AbsoluteFill,
+  Audio,
+  staticFile,
+  useCurrentFrame,
+  useVideoConfig,
+  spring,
+  interpolate,
+} from "remotion";
 import { BRAND } from "../theme";
 import { LogoLockup } from "../components/LogoLockup";
 

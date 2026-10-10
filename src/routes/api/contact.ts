@@ -6,10 +6,35 @@ const MAX_COMPANY_LENGTH = 160;
 const MAX_MESSAGE_LENGTH = 5000;
 
 const FREE_EMAIL_DOMAINS = new Set([
-  "gmail.com", "googlemail.com", "outlook.com", "hotmail.com", "hotmail.co.uk", "live.com", "live.co.uk", "msn.com",
-  "yahoo.com", "yahoo.co.uk", "ymail.com", "rocketmail.com", "icloud.com", "me.com", "mac.com", "aol.com",
-  "proton.me", "protonmail.com", "pm.me", "gmx.com", "gmx.net", "mail.com", "yandex.com", "yandex.ru", "zoho.com",
-  "mail.ru", "qq.com", "163.com", "126.com",
+  "gmail.com",
+  "googlemail.com",
+  "outlook.com",
+  "hotmail.com",
+  "hotmail.co.uk",
+  "live.com",
+  "live.co.uk",
+  "msn.com",
+  "yahoo.com",
+  "yahoo.co.uk",
+  "ymail.com",
+  "rocketmail.com",
+  "icloud.com",
+  "me.com",
+  "mac.com",
+  "aol.com",
+  "proton.me",
+  "protonmail.com",
+  "pm.me",
+  "gmx.com",
+  "gmx.net",
+  "mail.com",
+  "yandex.com",
+  "yandex.ru",
+  "zoho.com",
+  "mail.ru",
+  "qq.com",
+  "163.com",
+  "126.com",
 ]);
 
 function cleanText(value: unknown, maxLength: number): string {
@@ -17,7 +42,12 @@ function cleanText(value: unknown, maxLength: number): string {
 }
 
 function escapeHtml(value: string): string {
-  return value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#039;");
+  return value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
 }
 
 function isWorkEmail(email: string): boolean {
@@ -32,7 +62,11 @@ export const Route = createFileRoute("/api/contact")({
     handlers: {
       POST: async ({ request }) => {
         let body: unknown;
-        try { body = await request.json(); } catch { return Response.json({ error: "Invalid request body" }, { status: 400 }); }
+        try {
+          body = await request.json();
+        } catch {
+          return Response.json({ error: "Invalid request body" }, { status: 400 });
+        }
 
         const input = body as Record<string, unknown>;
         const inquiryReason = cleanText(input.inquiryReason, 80);
@@ -48,12 +82,19 @@ export const Route = createFileRoute("/api/contact")({
         const name = [firstName, lastName].filter(Boolean).join(" ");
 
         const honeypot = cleanText(input.website, 200);
-        if (honeypot) return Response.json({ error: "Unable to submit this request." }, { status: 400 });
+        if (honeypot)
+          return Response.json({ error: "Unable to submit this request." }, { status: 400 });
         if (!inquiryReason || !firstName || !lastName || !email || !company || !message) {
           return Response.json({ error: "Please complete the required fields." }, { status: 400 });
         }
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || !isWorkEmail(email)) {
-          return Response.json({ error: "Please use your company work email. Personal email providers such as Gmail, Outlook and Yahoo are not accepted." }, { status: 400 });
+          return Response.json(
+            {
+              error:
+                "Please use your company work email. Personal email providers such as Gmail, Outlook and Yahoo are not accepted.",
+            },
+            { status: 400 },
+          );
         }
 
         const resendApiKey = process.env["RESEND_API_KEY"];
@@ -68,7 +109,9 @@ export const Route = createFileRoute("/api/contact")({
           method: "POST",
           headers: { Authorization: `Bearer ${resendApiKey}`, "Content-Type": "application/json" },
           body: JSON.stringify({
-            from: "Shyena <contact@shyena.eu>", to: ["sp@shyena.eu"], reply_to: email,
+            from: "Shyena <contact@shyena.eu>",
+            to: ["sp@shyena.eu"],
+            reply_to: email,
             subject: `New Shyena enquiry from ${name}`,
             html: `<div style="font-family:Arial,sans-serif;line-height:1.6;color:#17132f"><h2>New Shyena Website Enquiry</h2><p><strong>Inquiry reason:</strong> ${safe(inquiryReason)}</p><p><strong>Name:</strong> ${safe(name)}</p><p><strong>Work email:</strong> ${safe(email)}</p><p><strong>Phone:</strong> ${safe(phone)}</p><p><strong>Company:</strong> ${safe(company)}</p><p><strong>Job title:</strong> ${safe(jobTitle)}</p><p><strong>Company size:</strong> ${safe(companySize)}</p><p><strong>Country:</strong> ${safe(country)}</p><hr /><p><strong>Message</strong></p><p>${safeMessage}</p></div>`,
           }),

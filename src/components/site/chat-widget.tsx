@@ -33,9 +33,7 @@ const SUGGESTIONS = [
 ];
 
 function textOf(parts: { type: string; text?: string }[]) {
-  return parts
-    .map((part) => (part.type === "text" && part.text ? part.text : ""))
-    .join("");
+  return parts.map((part) => (part.type === "text" && part.text ? part.text : "")).join("");
 }
 
 export function ChatWidget() {
@@ -208,7 +206,11 @@ export function ChatWidget() {
                 maxLength={1000}
               />
               <PromptInputFooter className="justify-end">
-                <PromptInputSubmit status={status} disabled={busy && status !== "streaming"} onStop={stop} />
+                <PromptInputSubmit
+                  status={status}
+                  disabled={busy && status !== "streaming"}
+                  onStop={stop}
+                />
               </PromptInputFooter>
             </PromptInput>
             <p className="mt-2 text-center text-[11px] leading-relaxed text-muted-foreground">

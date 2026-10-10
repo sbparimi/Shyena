@@ -26,7 +26,10 @@ const errors = [];
 const seenSlugs = new Set();
 const seenTitles = new Set();
 
-for (const [type, dir] of [["blog", BLOG], ["docs", DOCS]]) {
+for (const [type, dir] of [
+  ["blog", BLOG],
+  ["docs", DOCS],
+]) {
   for (const name of files(dir, ".md")) {
     const file = join(dir, name);
     const meta = frontmatter(readFileSync(file, "utf8"), file);
@@ -37,11 +40,13 @@ for (const [type, dir] of [["blog", BLOG], ["docs", DOCS]]) {
     if (meta.title && seenTitles.has(meta.title)) errors.push(`${file}: duplicate title`);
     if (meta.slug) seenSlugs.add(meta.slug);
     if (meta.title) seenTitles.add(meta.title);
-    if (type === "blog" && !meta.primary_keyword) errors.push(`${file}: blog article missing primary_keyword`);
+    if (type === "blog" && !meta.primary_keyword)
+      errors.push(`${file}: blog article missing primary_keyword`);
 
     const source = readFileSync(file, "utf8");
     if (/javascript:/i.test(source)) errors.push(`${file}: executable URL detected`);
-    if (/DECISION:\s*REJECT/i.test(source)) errors.push(`${file}: rejected content cannot be published`);
+    if (/DECISION:\s*REJECT/i.test(source))
+      errors.push(`${file}: rejected content cannot be published`);
   }
 }
 

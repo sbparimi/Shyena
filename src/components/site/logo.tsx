@@ -19,11 +19,17 @@ export function Logo({ size = "header", theme = "light" }: LogoProps) {
         aria-hidden="true"
         className={`${mark} shrink-0 object-contain`}
       />
-      <span className={`font-[Sora] ${word} font-extrabold tracking-[-0.055em] ${theme === "dark" ? "text-white" : "text-[#0B1B3A]"}`}>Shyena</span>
+      <span
+        className={`font-[Sora] ${word} font-extrabold tracking-[-0.055em] ${theme === "dark" ? "text-white" : "text-[#0B1B3A]"}`}
+      >
+        Shyena
+      </span>
     </span>
   );
 }
 
 export function BrandMark({ className = "h-10 w-9" }: { className?: string }) {
-  return <img src="/shyena-mark.svg?v=20260917" alt="Shyena" className={`${className} object-contain`} />;
+  return (
+    <img src="/shyena-mark.svg?v=20260917" alt="Shyena" className={`${className} object-contain`} />
+  );
 }

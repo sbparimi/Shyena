@@ -1,10 +1,26 @@
 import { motion } from "framer-motion";
 
 const groups = [
-  { title: "BUILD", items: ["NEXUS · UNDERSTAND", "VERA · EVALUATE", "CHAKRA · DEFEND"], position: "left-5 top-[66px] sm:left-7" },
-  { title: "TEST", items: ["JOURNEYS", "EVALUATION", "EXPERIMENTS"], position: "right-5 top-[92px] sm:right-7" },
-  { title: "MONITOR", items: ["TRACES", "EVIDENCE", "FINDINGS", "METRICS"], position: "left-5 bottom-[38px] sm:left-7" },
-  { title: "GOVERN", items: ["PROVE", "TRACEABILITY", "RELEASE POLICY", "EVIDENCE PACK"], position: "right-5 bottom-[38px] sm:right-7" },
+  {
+    title: "BUILD",
+    items: ["NEXUS · UNDERSTAND", "VERA · EVALUATE", "CHAKRA · DEFEND"],
+    position: "left-5 top-[66px] sm:left-7",
+  },
+  {
+    title: "TEST",
+    items: ["JOURNEYS", "EVALUATION", "EXPERIMENTS"],
+    position: "right-5 top-[92px] sm:right-7",
+  },
+  {
+    title: "MONITOR",
+    items: ["TRACES", "EVIDENCE", "FINDINGS", "METRICS"],
+    position: "left-5 bottom-[38px] sm:left-7",
+  },
+  {
+    title: "GOVERN",
+    items: ["PROVE", "TRACEABILITY", "RELEASE POLICY", "EVIDENCE PACK"],
+    position: "right-5 bottom-[38px] sm:right-7",
+  },
 ] as const;
 
 export function ShyenaAssuranceArchitecture() {
@@ -55,9 +71,15 @@ export function ShyenaAssuranceArchitecture() {
           </motion.div>
 
           <div className="absolute left-1/2 top-[47%] z-20 flex h-[34%] w-[25%] min-w-[170px] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full border border-white/[.08] bg-[#050912]/90 shadow-[inset_0_0_45px_rgba(104,119,255,.06)]">
-            <div className="text-[10px] font-semibold uppercase tracking-[.22em] text-[#e87512]">Assurance</div>
-            <div className="mt-3 rounded-full border border-[#6877ff]/35 bg-[#0c1322] px-6 py-2 font-mono text-sm text-white/85">Evidence</div>
-            <div className="mt-2 rounded-full border border-white/10 bg-[#0c1322] px-6 py-2 font-mono text-sm text-white/60">Verdict</div>
+            <div className="text-[10px] font-semibold uppercase tracking-[.22em] text-[#e87512]">
+              Assurance
+            </div>
+            <div className="mt-3 rounded-full border border-[#6877ff]/35 bg-[#0c1322] px-6 py-2 font-mono text-sm text-white/85">
+              Evidence
+            </div>
+            <div className="mt-2 rounded-full border border-white/10 bg-[#0c1322] px-6 py-2 font-mono text-sm text-white/60">
+              Verdict
+            </div>
           </div>
 
           {groups.map((group) => (
@@ -66,7 +88,9 @@ export function ShyenaAssuranceArchitecture() {
               className={`absolute z-30 w-[29%] min-w-[184px] rounded-[20px] border border-[#6877ff]/25 bg-[#101827]/95 p-3.5 shadow-[0_20px_50px_-30px_rgba(0,0,0,.8)] backdrop-blur-md sm:w-[27%] sm:p-4 ${group.position}`}
             >
               <div className="mb-3 flex items-center justify-between">
-                <span className="font-mono text-[12px] font-semibold tracking-[.16em] text-white/80 sm:text-[13px]">{group.title}</span>
+                <span className="font-mono text-[12px] font-semibold tracking-[.16em] text-white/80 sm:text-[13px]">
+                  {group.title}
+                </span>
                 <span className="h-1.5 w-1.5 rounded-full bg-[#e87512] shadow-[0_0_10px_rgba(232,117,18,.65)]" />
               </div>
               <div className="space-y-1.5">
@@ -84,7 +108,9 @@ export function ShyenaAssuranceArchitecture() {
           ))}
 
           <div className="absolute bottom-[3%] left-1/2 z-40 w-[27%] min-w-[190px] -translate-x-1/2 rounded-[18px] border border-[#e87512]/30 bg-[#101827]/95 px-4 py-3 text-center shadow-[0_20px_50px_-30px_rgba(0,0,0,.8)] backdrop-blur-md">
-            <div className="font-mono text-[11px] font-semibold tracking-[.16em] text-white/75">GOVERN</div>
+            <div className="font-mono text-[11px] font-semibold tracking-[.16em] text-white/75">
+              GOVERN
+            </div>
             <div className="mt-2 rounded-lg border border-white/[.07] bg-[#080e1a] px-3 py-2 font-mono text-[8px] tracking-[.04em] text-white/50">
               RELEASE POLICY
             </div>

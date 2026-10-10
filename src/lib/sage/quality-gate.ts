@@ -9,7 +9,8 @@ export function evaluateQualityGate(input: {
   const critical = input.reviews.flatMap((review) => review.criticalFindings);
 
   if (critical.length > 0) reasons.push(`${critical.length} critical review finding(s)`);
-  if (input.reviews.some((review) => !review.passed)) reasons.push("independent review did not pass");
+  if (input.reviews.some((review) => !review.passed))
+    reasons.push("independent review did not pass");
   if (!input.factCheck?.passed) reasons.push("fact check did not pass");
   if (!input.seo?.passed) reasons.push("SEO contract did not pass");
 

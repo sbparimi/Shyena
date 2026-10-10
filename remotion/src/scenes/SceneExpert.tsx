@@ -1,6 +1,6 @@
 import {
   AbsoluteFill,
-    useCurrentFrame,
+  useCurrentFrame,
   interpolate,
   spring,
   useVideoConfig,
@@ -17,10 +17,26 @@ import { LogoLockup } from "../components/LogoLockup";
 // Timed to match audio/expert.m4a (~24.2s at 30fps) so each caption is on
 // screen for exactly the span in which the voiceover speaks it.
 const CAPTIONS: { from: number; to: number; text: string }[] = [
-  { from: 98, to: 250, text: "Shyena has real conversations with your AI agent — the same way your customers do." },
-  { from: 250, to: 412, text: "Every test is built around a goal and a persona, never a scripted click path." },
-  { from: 412, to: 553, text: "An LLM judge scores each turn; deterministic assertions check the hard facts." },
-  { from: 553, to: 727, text: "If the run breaks down, the execution-integrity gate caps it at FAIL." },
+  {
+    from: 98,
+    to: 250,
+    text: "Shyena has real conversations with your AI agent — the same way your customers do.",
+  },
+  {
+    from: 250,
+    to: 412,
+    text: "Every test is built around a goal and a persona, never a scripted click path.",
+  },
+  {
+    from: 412,
+    to: 553,
+    text: "An LLM judge scores each turn; deterministic assertions check the hard facts.",
+  },
+  {
+    from: 553,
+    to: 727,
+    text: "If the run breaks down, the execution-integrity gate caps it at FAIL.",
+  },
 ];
 
 export const SceneExpert: React.FC = () => {
