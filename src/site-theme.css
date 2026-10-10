@@ -380,3 +380,37 @@ footer a:hover { color: var(--shyena-ink) !important; }
 @media(prefers-reduced-motion:reduce) {
   *,*::before,*::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; scroll-behavior:auto !important; }
 }
+
+
+/* Normalize nested page shells and dark-blue legacy panels without flattening terminal previews. */
+.site-theme main[class*="bg-white"],
+.site-theme main[class*="bg-slate-50"],
+.site-theme main[class*="bg-gray-50"] {
+  background: var(--shyena-canvas) !important;
+  color: var(--shyena-ink) !important;
+}
+.site-theme [class*="bg-white"]:not(section):not(a):not(button):not(input),
+.site-theme [class*="bg-slate-50"]:not(section):not(a):not(button):not(input),
+.site-theme [class*="bg-slate-100"]:not(section):not(a):not(button):not(input),
+.site-theme [class*="bg-gray-50"]:not(section):not(a):not(button):not(input),
+.site-theme [class*="bg-gray-100"]:not(section):not(a):not(button):not(input),
+.site-theme [class*="bg-[#07101f]"]:not(section),
+.site-theme [class*="bg-[#17213f]"]:not(section),
+.site-theme [class*="bg-[#0c1729]"]:not(section),
+.site-theme [class*="bg-navy"]:not(section) {
+  background-color: var(--shyena-surface) !important;
+  border-color: var(--shyena-border) !important;
+  color: var(--shyena-ink);
+  box-shadow: none !important;
+}
+.site-theme [class*="bg-white/"]:not(section) {
+  background-color: rgba(255,255,255,.045) !important;
+}
+.site-theme button[class*="bg-[#e87512]"],
+.site-theme a[class*="bg-[#e87512]"],
+.site-theme button[class*="bg-[#f4d64f]"],
+.site-theme a[class*="bg-[#f4d64f]"] {
+  background: var(--shyena-cta) !important;
+  border-color: var(--shyena-cta) !important;
+  color: var(--shyena-cta-ink) !important;
+}
