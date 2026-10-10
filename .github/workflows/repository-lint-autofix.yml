@@ -46,12 +46,9 @@ jobs:
           node-version: 24
 
       - name: Install dependencies
-        run: npm install
+        run: npm install --no-audit --no-fund
 
-      - name: Apply repository-wide formatting
-        run: npx prettier --write . --ignore-unknown
-
-      - name: Apply safe ESLint fixes
+      - name: Apply safe ESLint and Prettier fixes
         run: npx eslint . --fix
 
       - name: Commit automated fixes to this branch
@@ -65,7 +62,7 @@ jobs:
             git commit -m "chore: apply repository-wide lint fixes"
             git push origin "HEAD:${BRANCH_NAME}"
           else
-            echo "No automatic formatting or ESLint fixes were needed."
+            echo "No automatic ESLint/Prettier fixes were needed."
           fi
 
       - name: Verify lint
