@@ -48,12 +48,36 @@ const products = [
 ];
 
 const lifecycle = [
-  ["01", "Plan & design", "Translate product intent into architecture context, constraints, acceptance criteria and risk."],
-  ["02", "Code & integrate", "Bring coding agents, repository changes, contracts and engineering tools into one traceable workflow."],
-  ["03", "Test & evaluate", "Select impacted checks, execute browser and API journeys, and verify intended outcomes."],
-  ["04", "Secure", "Challenge dependencies, permissions, policies, agent tools and trust boundaries before release."],
-  ["05", "Release", "Assemble evidence, apply policy gates and keep required human approvals explicit."],
-  ["06", "Operate & learn", "Feed incidents, telemetry and regressions back into the next engineering cycle."],
+  [
+    "01",
+    "Plan & design",
+    "Translate product intent into architecture context, constraints, acceptance criteria and risk.",
+  ],
+  [
+    "02",
+    "Code & integrate",
+    "Bring coding agents, repository changes, contracts and engineering tools into one traceable workflow.",
+  ],
+  [
+    "03",
+    "Test & evaluate",
+    "Select impacted checks, execute browser and API journeys, and verify intended outcomes.",
+  ],
+  [
+    "04",
+    "Secure",
+    "Challenge dependencies, permissions, policies, agent tools and trust boundaries before release.",
+  ],
+  [
+    "05",
+    "Release",
+    "Assemble evidence, apply policy gates and keep required human approvals explicit.",
+  ],
+  [
+    "06",
+    "Operate & learn",
+    "Feed incidents, telemetry and regressions back into the next engineering cycle.",
+  ],
 ];
 
 const surfaces = [
@@ -277,7 +301,9 @@ export function QualityIntelligencePage() {
         <div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
           <div className="grid gap-10 lg:grid-cols-[.75fr_1.25fr] lg:items-center">
             <div>
-              <div className="text-sm font-bold text-[#f18a32]">Agent assurance within the SDLC</div>
+              <div className="text-sm font-bold text-[#f18a32]">
+                Agent assurance within the SDLC
+              </div>
               <h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em] sm:text-5xl">
                 Verify the agent's work and behaviour.
               </h2>
