@@ -4,7 +4,7 @@ import { ArrowRight, Menu, Search, X } from "lucide-react";
 import { Logo } from "./logo";
 
 const NAV = [
-  ["Platform", "/platform"],
+  ["Agentic SDLC", "/platform"],
   ["Govern", "/govern"],
   ["Pricing", "/pricing"],
   ["Hire Us", "/experts"],
@@ -59,7 +59,7 @@ export function SiteHeader() {
     >
       <div className="mx-auto flex h-[68px] w-full max-w-[1480px] items-center px-5 sm:px-7 lg:px-8 xl:px-10">
         <Link to="/" aria-label="Shyena home" onClick={closeAll} className="shrink-0">
-          <Logo size="header" theme="light" />
+          <Logo size="header" theme="dark" />
         </Link>
         <nav
           aria-label="Primary navigation"

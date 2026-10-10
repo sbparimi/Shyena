@@ -48,12 +48,36 @@ const products = [
 ];
 
 const lifecycle = [
-  ["01", "Discover", "Read the system context, journeys, requirements and existing tests."],
-  ["02", "Plan", "Identify change impact, coverage gaps and the tests that matter."],
-  ["03", "Execute", "Run browser, API and agentic journeys against the target environment."],
-  ["04", "Evaluate", "Combine deterministic assertions, semantic judgement and execution signals."],
-  ["05", "Diagnose", "Reproduce failures, group related defects and expose likely causes."],
-  ["06", "Learn", "Convert new failures and production signals into durable regression coverage."],
+  [
+    "01",
+    "Plan & design",
+    "Translate product intent into architecture context, constraints, acceptance criteria and risk.",
+  ],
+  [
+    "02",
+    "Code & integrate",
+    "Bring coding agents, repository changes, contracts and engineering tools into one traceable workflow.",
+  ],
+  [
+    "03",
+    "Test & evaluate",
+    "Select impacted checks, execute browser and API journeys, and verify intended outcomes.",
+  ],
+  [
+    "04",
+    "Secure",
+    "Challenge dependencies, permissions, policies, agent tools and trust boundaries before release.",
+  ],
+  [
+    "05",
+    "Release",
+    "Assemble evidence, apply policy gates and keep required human approvals explicit.",
+  ],
+  [
+    "06",
+    "Operate & learn",
+    "Feed incidents, telemetry and regressions back into the next engineering cycle.",
+  ],
 ];
 
 const surfaces = [
@@ -76,19 +100,20 @@ export function QualityIntelligencePage() {
         <div className="mx-auto grid max-w-[1400px] gap-12 px-5 py-16 sm:px-8 lg:grid-cols-[1.05fr_.95fr] lg:items-center lg:px-10 lg:py-24">
           <div>
             <div className="font-mono text-[10px] font-bold uppercase tracking-[.22em] text-[#f18a32]">
-              AI ASSURANCE PLATFORM
+              THE AGENTIC SDLC · PLAN TO PRODUCTION
             </div>
             <h1 className="mt-5 font-[Sora] text-[clamp(3.2rem,7vw,7rem)] font-extrabold leading-[.86] tracking-[-.075em]">
-              Your QA team
+              One engineering
               <br />
-              <span className="text-[#f18a32]">should not have</span>
+              <span className="text-[#f18a32]">lifecycle.</span>
               <br />
-              to write every test.
+              Governed by evidence.
             </h1>
             <p className="mt-8 max-w-2xl text-lg leading-8 text-white/60 sm:text-xl">
-              Shyena is an AI quality engineering and assurance platform that helps teams validate
-              data, evaluate models and AI-powered products, test security, diagnose failures and
-              build evidence-backed release confidence across the AI lifecycle.
+              Shyena connects coding agents, test engineering, security checks and release controls
+              into one governed workflow—from planning and implementation through production
+              feedback. Move beyond isolated agents and bots without losing traceability, policy
+              boundaries or accountability for the release decision.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
@@ -118,22 +143,22 @@ export function QualityIntelligencePage() {
           <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#0c1729] shadow-[0_30px_90px_-45px_rgba(0,0,0,.9)]">
             <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
               <span className="font-mono text-[10px] font-bold uppercase tracking-[.18em] text-white/45">
-                Autonomous run
+                Illustrative workflow
               </span>
               <span className="flex items-center gap-2 text-[9px] font-bold text-[#f18a32]">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#f18a32]" />
-                RUNNING
+                SAMPLE OUTPUT
               </span>
             </div>
             <div className="space-y-3 p-5 font-mono text-[11px] leading-5 sm:p-7">
-              <div className="text-white/35">$ shyena qa --release 284</div>
+              <div className="text-white/35">$ shyena sdlc inspect --change &lt;id&gt;</div>
               {[
-                ["10:02", "discover", "23 journeys identified"],
-                ["10:03", "plan", "41 tests selected from change impact"],
-                ["10:05", "execute", "41/41 journeys executed"],
-                ["10:06", "evaluate", "3 behavioural regressions found"],
-                ["10:07", "diagnose", "2 failures reproduced"],
-                ["10:08", "learn", "2 regression cases proposed"],
+                ["--:--", "plan", "Intent and acceptance criteria resolved"],
+                ["--:--", "build", "Coding-agent change linked to repository diff"],
+                ["--:--", "test", "Impacted journeys selected and verified"],
+                ["--:--", "secure", "Policy and trust-boundary checks evaluated"],
+                ["--:--", "release", "Evidence assembled; release policy applied"],
+                ["--:--", "learn", "Production signals feed the next cycle"],
               ].map(([t, p, b], i) => (
                 <div key={p} className="grid grid-cols-[42px_64px_1fr] gap-2">
                   <span className="text-white/25">{t}</span>
@@ -148,21 +173,21 @@ export function QualityIntelligencePage() {
 
       <section className="border-b border-[#e6e8ed] bg-[#fff8f2]">
         <div className="mx-auto max-w-[1280px] px-5 py-4 text-center font-mono text-[10px] font-bold uppercase tracking-[.12em] text-[#a55410]">
-          AUTONOMOUS TESTING · AGENTIC EVALUATION · CONTINUOUS REGRESSION
+          PLAN · CODE · TEST · SECURE · RELEASE · OPERATE
         </div>
       </section>
 
       <section>
         <div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
           <div className="max-w-4xl">
-            <div className="text-sm font-bold text-[#e87512]">The autonomous QA loop</div>
+            <div className="text-sm font-bold text-[#e87512]">The autonomous engineering loop</div>
             <h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.05em] sm:text-6xl">
-              Discover. Plan. Execute. Diagnose. Learn.
+              Plan. Build. Verify. Ship. Learn.
             </h2>
             <p className="mt-6 max-w-3xl text-lg leading-8 text-[#69707d]">
-              The system does the repetitive quality work around your engineering workflow. Humans
-              define intent and policy; autonomous agents handle the continuous exploration,
-              execution and evidence collection.
+              Connect the work that coding agents do to the checks that prove it is safe to ship.
+              Teams define outcomes, constraints and release policy; agents and existing tools can
+              carry out bounded work while evidence and approval requirements remain explicit.
             </p>
           </div>
           <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -185,12 +210,12 @@ export function QualityIntelligencePage() {
           <div className="max-w-4xl">
             <div className="text-sm font-bold text-[#e87512]">The Shyena product suite</div>
             <h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.05em] sm:text-5xl">
-              Four products. One end-to-end AI assurance system.
+              One Agentic SDLC. Four connected capabilities.
             </h2>
             <p className="mt-5 text-lg leading-8 text-[#69707d]">
-              Each product supports a distinct stage of AI assurance—from system discovery and
-              evaluation to security testing and governance evidence—across predictive, generative
-              and agentic AI.
+              Nexus, Vera, Chakra and Govern connect system understanding, verification, security
+              and release evidence. They are the assurance foundation around the wider engineering
+              lifecycle—not four disconnected testing utilities.
             </p>
           </div>
           <div className="mt-10 grid gap-4 md:grid-cols-2">
@@ -229,10 +254,10 @@ export function QualityIntelligencePage() {
           <div className="grid gap-10 lg:grid-cols-[.8fr_1.2fr]">
             <div>
               <div className="text-sm font-bold text-[#e87512]">
-                What autonomous QA actually does
+                What autonomous engineering needs
               </div>
               <h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em] sm:text-5xl">
-                More than test generation.
+                More than coding agents.
               </h2>
             </div>
             <div className="grid gap-3 sm:grid-cols-2">
@@ -276,9 +301,11 @@ export function QualityIntelligencePage() {
         <div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
           <div className="grid gap-10 lg:grid-cols-[.75fr_1.25fr] lg:items-center">
             <div>
-              <div className="text-sm font-bold text-[#f18a32]">Agentic AI evaluation</div>
+              <div className="text-sm font-bold text-[#f18a32]">
+                Agent assurance within the SDLC
+              </div>
               <h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em] sm:text-5xl">
-                Test the agent, not just the answer.
+                Verify the agent's work and behaviour.
               </h2>
             </div>
             <div className="grid gap-3 sm:grid-cols-2">
@@ -309,17 +336,18 @@ export function QualityIntelligencePage() {
         <div className="mx-auto max-w-[1000px] px-5 py-20 text-center sm:px-8 lg:py-24">
           <div className="text-sm font-bold text-[#e87512]">Start with one system</div>
           <h2 className="mt-4 font-[Sora] text-4xl font-extrabold tracking-[-.05em] sm:text-6xl">
-            Give Shyena one real release.
+            Connect one engineering workflow.
           </h2>
           <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-[#69707d]">
-            Connect a test environment, one critical journey and your existing automation. Shyena
-            shows where autonomous QA can remove manual effort and increase meaningful coverage.
+            Start with one repository, one delivery workflow or one AI system. Map the lifecycle,
+            identify where autonomous work needs verification, and connect the evidence required for
+            a defensible release decision.
           </p>
           <Link
             to="/contact"
             className="mt-8 inline-flex h-12 items-center gap-2 rounded-lg bg-[#e87512] px-6 text-sm font-bold text-white"
           >
-            Start an autonomous QA pilot <ArrowRight className="h-4 w-4" />
+            Map your Agentic SDLC <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </section>

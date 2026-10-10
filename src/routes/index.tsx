@@ -141,18 +141,42 @@ const workflowStages = [
 ] as const;
 
 const coverage = [
-  ["01", "Plan", "Translate change and requirements into risk-based coverage."],
-  ["02", "Build", "Check contracts, integrations and component behaviour."],
-  ["03", "Test", "Run browser, API, regression and AI-specific journeys."],
-  ["04", "Evaluate", "Separate exact assertions from semantic judgement."],
-  ["05", "Secure", "Probe permissions, policies and failure boundaries."],
-  ["06", "Release", "Review evidence, risk and explicit approval."],
+  [
+    "01",
+    "Plan & design",
+    "Translate product intent, requirements and architecture into goals, constraints and measurable acceptance criteria.",
+  ],
+  [
+    "02",
+    "Code & integrate",
+    "Coordinate coding agents and existing engineering tools around repository changes, contracts and integration boundaries.",
+  ],
+  [
+    "03",
+    "Test & evaluate",
+    "Generate and execute browser, API, regression and AI-specific checks against intended outcomes.",
+  ],
+  [
+    "04",
+    "Secure",
+    "Challenge permissions, dependencies, prompt and tool boundaries, policies and failure paths.",
+  ],
+  [
+    "05",
+    "Release",
+    "Assemble traceable evidence, assess risk and apply explicit release gates and approvals.",
+  ],
+  [
+    "06",
+    "Operate & learn",
+    "Feed production signals, incidents and regressions back into the next engineering cycle.",
+  ],
 ];
 
 const faqs = [
   [
-    "Is Shyena only for chatbots?",
-    "No. Shyena is designed around AI-system assurance across workflows, agents, APIs, tools, retrieval, policies and user-facing behaviour—not only chat transcripts.",
+    "Is Shyena only for agent testing?",
+    "No. The broader mission is the Agentic SDLC: connect planning, coding agents, test engineering, security checks, release evidence and operational feedback into one governed engineering workflow. Nexus, Vera, Chakra and Govern provide the assurance capabilities within that lifecycle.",
   ],
   [
     "Does the factory replace existing test tools?",
@@ -171,16 +195,17 @@ const faqs = [
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Shyena — Open AI Assurance Factory" },
+      { title: "Shyena — The Agentic SDLC, from Plan to Production" },
       {
         name: "description",
         content:
-          "An observable AI assurance factory for system mapping, behaviour testing, security evaluation and evidence-led release governance.",
+          "Shyena connects the Agentic SDLC from planning and coding agents to testing, security, release evidence and operational feedback in one governed engineering workflow.",
       },
-      { property: "og:title", content: "Shyena — Open AI Assurance Factory" },
+      { property: "og:title", content: "Shyena — The Agentic SDLC, from Plan to Production" },
       {
         property: "og:description",
-        content: "Define the workflow. Evaluate the outcomes. Keep the evidence.",
+        content:
+          "Connect coding agents, test engineering, security and release governance in one evidence-led Agentic SDLC.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://www.shyena.eu/" },
@@ -214,21 +239,22 @@ function HomePage() {
         <div className="relative mx-auto max-w-[1440px] px-5 pb-8 pt-14 sm:px-8 sm:pt-20 lg:px-12 lg:pt-24">
           <div className="flex flex-wrap items-center gap-2 font-mono text-[10px] uppercase tracking-[.18em] text-[#625a75] sm:text-[11px]">
             <span className="inline-flex items-center gap-2 text-[#5145ff]">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#5145ff]" /> AI ASSURANCE FACTORY
+              <span className="h-1.5 w-1.5 rounded-full bg-[#5145ff]" /> AGENTIC SDLC CONTROL PLANE
             </span>
             <span className="text-[#b7b0c7]">/</span>
-            <span>Open workflow · evidence-led</span>
+            <span>Plan · build · test · secure · release · learn</span>
           </div>
           <div className="mt-8 grid gap-8 lg:grid-cols-[1.15fr_.65fr] lg:items-end">
             <h1 className="max-w-5xl text-[clamp(3.1rem,7.3vw,7.6rem)] font-medium leading-[.93] tracking-[-.075em]">
-              Open assurance
+              The Agentic SDLC
               <br />
-              for <span className="text-[#5145ff]">AI systems.</span>
+              <span className="text-[#5145ff]">from plan to production.</span>
             </h1>
             <div className="max-w-xl pb-2 lg:justify-self-end">
               <p className="text-base leading-7 text-[#575064] sm:text-lg sm:leading-8">
-                Define how your system is tested. Use the tools and models that fit. Measure
-                outcomes, learn from failures and keep release decisions grounded in evidence.
+                Move beyond isolated coding agents and test bots. Connect planning, implementation,
+                testing, security, release and operational feedback in one governed engineering
+                workflow—with evidence behind every critical decision.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <Link
@@ -251,7 +277,7 @@ function HomePage() {
           <div className="mt-14 border-y border-[#dcd6e8] py-3">
             <div className="flex flex-wrap items-center justify-between gap-3 font-mono text-[9px] uppercase tracking-[.15em] text-[#6e667e] sm:text-[10px]">
               <span className="inline-flex items-center gap-2">
-                <Workflow className="h-3.5 w-3.5 text-[#5145ff]" /> FIG. 01 / ASSURANCE FACTORY
+                <Workflow className="h-3.5 w-3.5 text-[#5145ff]" /> FIG. 01 / AGENTIC SDLC
               </span>
               <span>INTERACTIVE SCHEMATIC · SYNTHETIC SAMPLE DATA</span>
             </div>
@@ -727,20 +753,21 @@ function HomePage() {
         </div>
       </section>
 
-      <section className="border-b border-[#e8e4f0] bg-white">
+      <section id="sdlc" className="border-b border-[#e8e4f0] bg-white">
         <div className="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-12 lg:py-24">
           <div className="grid gap-8 lg:grid-cols-[.8fr_1.2fr] lg:items-end">
             <div>
               <div className="font-mono text-[10px] uppercase tracking-[.18em] text-[#5145ff]">
-                02 / SDLC coverage
+                02 / Agentic SDLC coverage
               </div>
               <h2 className="mt-5 max-w-2xl text-3xl font-medium leading-tight tracking-[-.055em] sm:text-5xl">
-                Beyond a green CI check. Assurance across the lifecycle.
+                Autonomous engineering across the entire lifecycle.
               </h2>
             </div>
             <p className="max-w-lg text-sm leading-7 text-[#61586f]">
-              A release can fail for reasons a unit test cannot see. Connect the change, the real
-              behaviour, the security boundaries and the evidence needed to decide.
+              Coding agents are only one part of the shift. Shyena brings the workflow around them
+              into view—from intent and implementation to verification, security, release and
+              operational learning.
             </p>
           </div>
           <div className="mt-10 grid gap-x-8 md:grid-cols-2 xl:grid-cols-3">
@@ -1154,7 +1181,7 @@ function HomePage() {
               <Zap className="h-3.5 w-3.5" /> Start with one critical journey
             </div>
             <h2 className="mt-5 max-w-4xl text-3xl font-medium leading-tight tracking-[-.055em] sm:text-5xl">
-              Make your next AI release easier to trust.
+              Make autonomous engineering accountable—from the first plan to production.
             </h2>
             <p className="mt-4 max-w-2xl text-sm leading-7 text-[#d0c9dd]">
               Map the risk. Test the behaviour. Challenge the boundaries. Decide with evidence.
