@@ -40,7 +40,7 @@ export function SiteFooter() {
         <div className="grid gap-12 lg:grid-cols-[1.5fr_2fr]">
           <div>
             <Link to="/" aria-label="Shyena home" className="inline-flex">
-              <Logo size="footer" />
+              <Logo size="footer" theme="dark" />
             </Link>
             <p className="mt-5 max-w-sm text-sm leading-6 text-[#667085]">
               The governed Agentic SDLC—from planning and coding agents through testing, security,
