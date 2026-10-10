@@ -18,7 +18,6 @@ export function SiteHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const isHome = location.pathname === "/";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -47,7 +46,7 @@ export function SiteHeader() {
           {NAV.map(([label, to]) => <Link key={to} to={to} onClick={closeAll} className={`inline-flex h-10 items-center rounded-lg px-3.5 text-[13px] font-semibold transition ${active(to) ? "bg-[#efedff] text-[#5145ff]" : "text-[#4f5765] hover:bg-[#f7f5ff] hover:text-[#5145ff]"}`}>{label}</Link>)}
         </nav>
         <div className="ml-auto hidden items-center gap-2 lg:flex">
-          <button type="button" onClick={() => setSearchOpen(true)} aria-label="Search Shyena" className={`inline-flex h-10 items-center gap-2 rounded-lg border border-transparent px-2.5 transition ${"text-[#5d6573] hover:border-[#e3e0ee] hover:bg-[#f7f5ff] hover:text-[#5145ff]"}`}><Search className="h-[17px] w-[17px]" /><span className="hidden xl:inline text-[12px]">Search</span><kbd className={`hidden rounded border px-1.5 py-0.5 font-mono text-[9px] xl:inline ${isHome ? "border-white/15 bg-white/5 text-slate-400" : "border-[#dfe3e8] bg-white text-[#8b929d]"}`}>⌘K</kbd></button>
+          <button type="button" onClick={() => setSearchOpen(true)} aria-label="Search Shyena" className="inline-flex h-10 items-center gap-2 rounded-lg border border-transparent px-2.5 text-[#5d6573] transition hover:border-[#e3e0ee] hover:bg-[#f7f5ff] hover:text-[#5145ff]"><Search className="h-[17px] w-[17px]" /><span className="hidden xl:inline text-[12px]">Search</span><kbd className={`hidden rounded border px-1.5 py-0.5 font-mono text-[9px] xl:inline border-[#dfe3e8] bg-white text-[#8b929d]`}>⌘K</kbd></button>
           <Link to="/contact" onClick={closeAll} className="group inline-flex h-10 items-center justify-center gap-2 rounded-md bg-[#f4d64f] px-4 text-[13px] font-semibold text-[#211a32] transition hover:-translate-y-px hover:bg-[#ffe978]">Book a demo <ArrowRight className="h-3.5 w-3.5" /></Link>
         </div>
         <button type="button" onClick={() => setMobileOpen(v => !v)} aria-label={mobileOpen ? "Close menu" : "Open menu"} aria-expanded={mobileOpen} className={`ml-auto inline-flex h-10 w-10 items-center justify-center rounded-lg border lg:hidden ${"border-[#dfe3e8] bg-white text-[#17213f]"}`}>{mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}</button>
