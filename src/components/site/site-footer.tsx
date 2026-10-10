@@ -22,15 +22,15 @@ export function SiteFooter() {
             </div>
           </div>
           <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-            {COLUMNS.map((column) => <div key={column.title}><h3 className="text-xs font-bold uppercase tracking-[0.14em] text-[#17213f]">{column.title}</h3><ul className="mt-5 space-y-3">{column.links.map((link) => <li key={`${column.title}-${link.label}`}><Link to={link.to} className="text-sm text-[#667085] transition-colors hover:text-[#e87512]">{link.label}</Link></li>)}</ul></div>)}
+            {COLUMNS.map((column) => <div key={column.title}><h3 className="text-xs font-bold uppercase tracking-[0.14em] text-[#17213f]">{column.title}</h3><ul className="mt-5 space-y-3">{column.links.map((link) => <li key={`${column.title}-${link.label}`}><Link to={link.to} className="text-sm text-[#667085] transition-colors hover:text-[#5145ff]">{link.label}</Link></li>)}</ul></div>)}
           </div>
         </div>
         <div className="mt-8 border-t border-[#e5e7eb] pt-5 text-xs leading-5 text-[#7a8290]">
   <div>Shyena · Netherlands</div>
 </div>
 <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-[#7a8290]">
-  <Link to="/privacy" className="hover:text-[#e87512]">Privacy Policy</Link>
-  <Link to="/cookies" className="hover:text-[#e87512]">Cookie notice</Link><Link to="/terms" className="hover:text-[#e87512]">Terms</Link>
+  <Link to="/privacy" className="hover:text-[#5145ff]">Privacy Policy</Link>
+  <Link to="/cookies" className="hover:text-[#5145ff]">Cookie notice</Link><Link to="/terms" className="hover:text-[#5145ff]">Terms</Link>
 </div>
 <div className="mt-6 flex flex-col gap-4 border-t border-[#e5e7eb] pt-6 text-xs text-[#7a8290] sm:flex-row sm:items-center sm:justify-between">
           <div>© {new Date().getFullYear()} Shyena. All rights reserved.</div>
