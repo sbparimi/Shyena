@@ -1,9 +1,23 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import {
-  Activity, ArrowDownRight, ArrowRight, ArrowUpRight, Check, ChevronDown,
-  CircleDot, GitBranch, GitPullRequest, Layers3, LockKeyhole, Radar,
-  ShieldCheck, Sparkles, Terminal, Workflow, Zap,
+  Activity,
+  ArrowDownRight,
+  ArrowRight,
+  ArrowUpRight,
+  Check,
+  ChevronDown,
+  CircleDot,
+  GitBranch,
+  GitPullRequest,
+  Layers3,
+  LockKeyhole,
+  Radar,
+  ShieldCheck,
+  Sparkles,
+  Terminal,
+  Workflow,
+  Zap,
 } from "lucide-react";
 
 const configTabs = [
