@@ -11,7 +11,9 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "content:generate": "node scripts/generate-public-content.mjs",
-    "content:validate": "node scripts/validate-public-content.mjs"
+    "content:validate": "node scripts/validate-public-content.mjs",
+    "factory:audit": "node scripts/factory/repository-audit.mjs",
+    "factory:test": "node --test tests/factory/*.test.mjs"
   },
   "dependencies": {
     "@ai-sdk/openai": "^4.0.47",
