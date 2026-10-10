@@ -2,9 +2,9 @@ import { Link } from "@tanstack/react-router";
 import { ArrowRight, Check, Play, ShieldCheck } from "lucide-react";
 
 const products = [
-  { name:"Nexus", title:"Discover & plan", body:"Build a system-aware map of agents, journeys, dependencies, tools and risk. Nexus turns product context into an executable assurance plan.", to:"/nexus", items:["Journey discovery","Dependency mapping","Impact analysis","Autonomous test planning"] },
-  { name:"Vera", title:"Evaluate & verify", body:"Execute realistic multi-turn journeys and judge whether the agent actually achieved the user's goal — not just whether a response looked plausible.", to:"/vera", items:["Agentic journey execution","Deterministic checks","Semantic evaluation","Trajectory & tool validation"] },
-  { name:"Chakra", title:"Attack & break", body:"Continuously probe AI agents for unsafe behaviour, prompt injection, permission failures and adversarial paths before they reach users.", to:"/chakra", items:["Adversarial scenario generation","Prompt-injection testing","Tool abuse checks","Security regression"] },
+  { name:"Nexus", title:"Discover & plan", body:"Build a system-aware map of AI models, data pipelines, applications, dependencies, workflows and risk. Nexus turns product context into an executable assurance plan.", to:"/nexus", items:["Journey discovery","Dependency mapping","Impact analysis","Autonomous test planning"] },
+  { name:"Vera", title:"Evaluate & verify", body:"Evaluate model outputs, predictions, generated content and end-to-end workflows against expected outcomes—not just whether a response looked plausible.", to:"/vera", items:["Model and output evaluation","Deterministic checks","Semantic evaluation","Workflow and outcome validation"] },
+  { name:"Chakra", title:"Attack & break", body:"Probe AI systems for adversarial inputs, model weaknesses, data exposure, unsafe actions and trust-boundary failures before they reach users.", to:"/chakra", items:["Adversarial scenario generation","Model and input robustness","Data exposure checks","AI security regression"] },
   { name:"Govern", title:"Prove & release", body:"Turn every test run into traceable engineering evidence. Governance is the downstream evidence layer — not the reason to start testing.", to:"/govern", items:["Release verdicts","Evidence chain","Requirement traceability","Re-run history"] }
 ];
 
@@ -17,7 +17,7 @@ const lifecycle = [
   ["06","Learn","Convert new failures and production signals into durable regression coverage."]
 ];
 
-const surfaces = ["Web","APIs","Conversational AI","AI agents","Tool calls","RAG","Mobile","CI/CD","Production traces"];
+const surfaces = ["Predictive ML","Generative AI","Data pipelines","Computer vision","RAG","Document AI","APIs","AI agents","CI/CD","Production monitoring"];
 
 export function QualityIntelligencePage() {
  return <main className="bg-white text-[#17213f]">
@@ -25,7 +25,7 @@ export function QualityIntelligencePage() {
    <div className="mx-auto grid max-w-[1400px] gap-12 px-5 py-16 sm:px-8 lg:grid-cols-[1.05fr_.95fr] lg:items-center lg:px-10 lg:py-24">
     <div><div className="font-mono text-[10px] font-bold uppercase tracking-[.22em] text-[#f18a32]">AI ASSURANCE PLATFORM</div>
      <h1 className="mt-5 font-[Sora] text-[clamp(3.2rem,7vw,7rem)] font-extrabold leading-[.86] tracking-[-.075em]">Your QA team<br/><span className="text-[#f18a32]">should not have</span><br/>to write every test.</h1>
-     <p className="mt-8 max-w-2xl text-lg leading-8 text-white/60 sm:text-xl">Shyena is an autonomous QA and agentic AI evaluation platform that discovers what matters, generates tests, executes journeys, diagnoses failures and continuously expands coverage.</p>
+     <p className="mt-8 max-w-2xl text-lg leading-8 text-white/60 sm:text-xl">Shyena is an AI quality engineering and assurance platform that helps teams validate data, evaluate models and AI-powered products, test security, diagnose failures and build evidence-backed release confidence across the AI lifecycle.</p>
      <div className="mt-8 flex flex-wrap gap-3"><Link to="/contact" className="inline-flex h-12 items-center gap-2 rounded-lg bg-[#e87512] px-5 text-sm font-bold text-white">See it on your system <ArrowRight className="h-4 w-4"/></Link><Link to="/sample-report" className="inline-flex h-12 items-center gap-2 rounded-lg border border-white/15 px-5 text-sm font-bold text-white/85">See a sample run <ArrowRight className="h-4 w-4"/></Link></div>
      <div className="mt-8 flex flex-wrap gap-2">{surfaces.map(x=><span key={x} className="rounded-full border border-white/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[.12em] text-white/45">{x}</span>)}</div>
     </div>
