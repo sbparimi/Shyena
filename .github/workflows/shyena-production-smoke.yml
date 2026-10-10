@@ -16,17 +16,23 @@ jobs:
           check_page() {
             local url="$1"
             local marker="$2"
+            local body_file
+            body_file="$(mktemp)"
             echo "Checking $url"
 
-            body="$(curl --fail --silent --show-error --location --max-time 30 "$url")"
+            curl --fail --silent --show-error --location --max-time 30 "$url" --output "$body_file"
 
-            if ! grep -Fq "$marker" <<<"$body"; then
+            if ! grep -Fq "$marker" "$body_file"; then
               echo "Expected page marker not found: $marker"
+              echo "Page title and matching headings:"
+              grep -Eio '<title>[^<]+</title>|<h[1-3][^>]*>[^<]+' "$body_file" | head -20 || true
+              rm -f "$body_file"
               exit 1
             fi
+            rm -f "$body_file"
           }
 
           check_page "https://www.shyena.eu/" "Shyena"
-          check_page "https://www.shyena.eu/experts" "Human expertise, activated by the assurance platform."
+          check_page "https://www.shyena.eu/experts" "ASSURANCE EXPERTISE DIRECTORY"
 
           echo "Production smoke test passed."
