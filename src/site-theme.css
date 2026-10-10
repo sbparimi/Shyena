@@ -414,3 +414,21 @@ footer a:hover { color: var(--shyena-ink) !important; }
   border-color: var(--shyena-cta) !important;
   color: var(--shyena-cta-ink) !important;
 }
+
+
+/* Additional legacy ink colors normalized for contrast on the shared dark canvas. */
+.site-theme [class*="text-[#0f172a]"],
+.site-theme [class*="text-[#0f1730]"],
+.site-theme [class*="text-[#17233f]"],
+.site-theme [class*="text-[#2d263d]"],
+.site-theme [class*="text-[#211a32]"],
+.site-theme [class*="text-[#0B1B3A]"] {
+  color: var(--shyena-ink) !important;
+}
+.site-theme [class*="text-white/"] { color: rgba(245,245,245,.72) !important; }
+.site-theme [class*="border-white/"] { border-color: rgba(255,255,255,.12) !important; }
+.site-theme [class*="bg-[#080711]"],
+.site-theme [class*="bg-[#090713]"],
+.site-theme [class*="bg-[#0b0920]"] {
+  background: var(--shyena-terminal) !important;
+}
