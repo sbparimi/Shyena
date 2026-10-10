@@ -1,0 +1,29 @@
+version: 1
+article: agentic-sdlc-graphrag-evaluation
+claims:
+  - id: CLM-001
+    claim: "The source article reports 96% accuracy for standard vector RAG and 92% for its three-tier GraphRAG implementation."
+    status: verified
+    basis: "MachineLearningMastery article; result section and 50-query benchmark implementation."
+    source: "https://machinelearningmastery.com/evaluating-graph-rag-vs-standard-rag-a-hallucination-benchmark-on-fact-dense-queries/"
+  - id: CLM-002
+    claim: "The source benchmark uses 50 synthetic basketball-player profiles and checks whether the expected numeric string appears in the generated output."
+    status: verified
+    basis: "Dataset generation and evaluation loop in the source article."
+    source: "https://machinelearningmastery.com/evaluating-graph-rag-vs-standard-rag-a-hallucination-benchmark-on-fact-dense-queries/"
+  - id: CLM-003
+    claim: "The reported result does not establish a universal ranking between vector RAG and GraphRAG."
+    status: inference
+    basis: "Inference from the small synthetic dataset, architecture/model coupling, and limited numeric-substring metric."
+    source: "https://machinelearningmastery.com/evaluating-graph-rag-vs-standard-rag-a-hallucination-benchmark-on-fact-dense-queries/"
+  - id: CLM-004
+    claim: "A robust evaluation workflow should separate deterministic checks, semantic evaluation, security gates, and evidence completeness."
+    status: opinion
+    basis: "Shyena engineering position and proposed design."
+    source_required: false
+  - id: CLM-005
+    claim: "Northstar Metrics SDK is a fictional example used to explain version conflicts in developer documentation."
+    status: synthetic
+    basis: "Explicitly identified as a synthetic example in the article."
+    source_required: false
+unverified_material_claims: 0
