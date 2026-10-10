@@ -336,8 +336,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     links: [
       { rel: "stylesheet", href: appCss },
       { rel: "stylesheet", href: siteThemeCss },
-      { rel: "stylesheet", href: warpThemeCss },
       { rel: "stylesheet", href: enterpriseTypographyCss },
+      { rel: "stylesheet", href: warpThemeCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
