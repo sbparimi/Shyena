@@ -10,7 +10,7 @@ const COLUMNS = [
       { label: "Vera", to: "/vera" },
       { label: "Chakra", to: "/chakra" },
       { label: "Govern", to: "/govern" },
-      { label: "Platform overview", to: "/platform" },
+      { label: "Agentic SDLC overview", to: "/platform" },
     ],
   },
   {
@@ -43,8 +43,8 @@ export function SiteFooter() {
               <Logo size="footer" />
             </Link>
             <p className="mt-5 max-w-sm text-sm leading-6 text-[#667085]">
-              AI assurance for systems that reason, act and change — understand, evaluate, attack
-              and prove.
+              The governed Agentic SDLC—from planning and coding agents through testing, security,
+              release evidence and operational learning.
             </p>
             <div className="mt-6 flex items-center gap-2">
               <a
