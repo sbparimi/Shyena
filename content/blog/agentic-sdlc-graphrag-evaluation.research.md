@@ -1,24 +1,21 @@
-# Research brief: GraphRAG evaluation through Agentic SDLC
+# Research brief: RAG reliability engineering
 
-## Thesis
-RAG architecture decisions should be based on controlled, reproducible evaluation across correctness, grounding, retrieval, conflict resolution, abstention, security, latency and cost. A small benchmark is a hypothesis generator, not a universal architecture ranking.
+## Article position
+Original Shyena engineering synthesis focused on end-to-end failure localization, source authority, claim-level verification, reproducible run manifests and release policy. It does not reuse the source article's narrative or example.
 
-## Primary source
+## Narrow external evidence
 - URL: https://machinelearningmastery.com/evaluating-graph-rag-vs-standard-rag-a-hallucination-benchmark-on-fact-dense-queries/
-- Article title: Evaluating Graph-RAG vs. Standard RAG: A Hallucination Benchmark on Fact-Dense Queries
-- Publication date shown on source: October 8, 2026
-- Relevant method: synthetic dataset of 50 basketball-player profiles; designated facts stored in a simple graph/quad store; conflicting contextual text stored in ChromaDB; vector RAG compared with a three-tier GraphRAG prompt.
-- Reported results: 96% standard vector RAG accuracy and 92% three-tier GraphRAG accuracy.
-- Metric limitation: scoring checks whether the expected numeric string appears anywhere in the model output. This does not establish claim-level correctness or grounding.
-- Use in article: report the results with caveats; do not generalise them to all GraphRAG systems.
+- Use: methodological context only.
+- Source describes a small synthetic basketball-player benchmark comparing tested vector and GraphRAG configurations.
+- It reports 96% versus 92% accuracy for those configurations.
+- The evaluation criterion checks whether an expected numeric string appears in generated output; this does not test all claims for correctness, grounding or contradictions.
+- Editorial decision: do not reuse its dataset, example, experiment structure or article section sequence. Cite it only to explain the limits of substring-based evaluation.
 
-## Editorial decisions
-- Use a fictional developer-documentation assistant for a fictional SDK as the running example.
-- Mark the SDK and its facts as synthetic.
-- Separate deterministic assertions from semantic judgement.
-- Label YAML factory and release policy as illustrative rather than implemented product features.
-- Use actual package scripts only for repository content validation and build commands.
-- Do not claim benchmark execution, customer outcomes, deployed capabilities or measured Shyena metrics.
+## Synthetic example
+Northstar Metrics SDK and its example facts are fictional.
 
-## Research limitations
-The source experiment is small and synthetic. No independent replication is claimed. Thresholds in the article are examples of policy configuration, not industry standards.
+## Claim policy
+- No Shyena execution metrics or customer outcomes are claimed.
+- Thresholds are illustrative policy examples, not industry standards.
+- YAML is design guidance, not a declaration of an implemented runtime or CLI.
+- Website commands are confirmed in package.json.
