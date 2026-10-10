@@ -141,12 +141,36 @@ const workflowStages = [
 ] as const;
 
 const coverage = [
-  ["01", "Plan & design", "Translate product intent, requirements and architecture into goals, constraints and measurable acceptance criteria."],
-  ["02", "Code & integrate", "Coordinate coding agents and existing engineering tools around repository changes, contracts and integration boundaries."],
-  ["03", "Test & evaluate", "Generate and execute browser, API, regression and AI-specific checks against intended outcomes."],
-  ["04", "Secure", "Challenge permissions, dependencies, prompt and tool boundaries, policies and failure paths."],
-  ["05", "Release", "Assemble traceable evidence, assess risk and apply explicit release gates and approvals."],
-  ["06", "Operate & learn", "Feed production signals, incidents and regressions back into the next engineering cycle."],
+  [
+    "01",
+    "Plan & design",
+    "Translate product intent, requirements and architecture into goals, constraints and measurable acceptance criteria.",
+  ],
+  [
+    "02",
+    "Code & integrate",
+    "Coordinate coding agents and existing engineering tools around repository changes, contracts and integration boundaries.",
+  ],
+  [
+    "03",
+    "Test & evaluate",
+    "Generate and execute browser, API, regression and AI-specific checks against intended outcomes.",
+  ],
+  [
+    "04",
+    "Secure",
+    "Challenge permissions, dependencies, prompt and tool boundaries, policies and failure paths.",
+  ],
+  [
+    "05",
+    "Release",
+    "Assemble traceable evidence, assess risk and apply explicit release gates and approvals.",
+  ],
+  [
+    "06",
+    "Operate & learn",
+    "Feed production signals, incidents and regressions back into the next engineering cycle.",
+  ],
 ];
 
 const faqs = [
@@ -180,7 +204,8 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "Shyena — The Agentic SDLC, from Plan to Production" },
       {
         property: "og:description",
-        content: "Connect coding agents, test engineering, security and release governance in one evidence-led Agentic SDLC.",
+        content:
+          "Connect coding agents, test engineering, security and release governance in one evidence-led Agentic SDLC.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://www.shyena.eu/" },
@@ -740,7 +765,9 @@ function HomePage() {
               </h2>
             </div>
             <p className="max-w-lg text-sm leading-7 text-[#61586f]">
-              Coding agents are only one part of the shift. Shyena brings the workflow around them into view—from intent and implementation to verification, security, release and operational learning.
+              Coding agents are only one part of the shift. Shyena brings the workflow around them
+              into view—from intent and implementation to verification, security, release and
+              operational learning.
             </p>
           </div>
           <div className="mt-10 grid gap-x-8 md:grid-cols-2 xl:grid-cols-3">
