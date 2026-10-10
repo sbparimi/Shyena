@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   ArrowRight,
   CheckCircle2,
@@ -314,7 +314,7 @@ function Marketplace() {
     [loading, setLoading] = useState(true),
     [error, setError] = useState(""),
     [hireCandidate, setHireCandidate] = useState<Candidate | null>(null);
-  const load = async () => {
+  const load = useCallback(async () => {
     setLoading(true);
     setError("");
     try {
@@ -328,17 +328,10 @@ function Marketplace() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [filters]);
   useEffect(() => {
-    load();
-  }, [
-    filters.search,
-    filters.location,
-    filters.skill,
-    filters.domain,
-    filters.availableBy,
-    filters.remote,
-  ]);
+    void load();
+  }, [load]);
   const skillOptions = useMemo(
     () => Array.from(new Set(candidates.flatMap((c) => c.core_skills))).sort(),
     [candidates],
