@@ -9,7 +9,8 @@ const output = path.resolve("public/shyena-soundtrack.wav");
 
 // Original procedural ambient soundtrack: restrained pad, soft pulse,
 // piano-like plucks and a gentle harmonic lift. No external music asset.
-const buffer = Buffer.alloc(samples * channels * 2);
+const dataSize = samples * channels * 2;
+const buffer = Buffer.alloc(44 + dataSize);
 const TAU = Math.PI * 2;
 const clamp = (value) => Math.max(-1, Math.min(1, value));
 const smoothstep = (x) => x * x * (3 - 2 * x);
@@ -63,7 +64,6 @@ function sample(t, channel) {
   return clamp((pad(t) + pulse(t) + pluck(t) + lift(t) + motion) * 0.72 * envelope(t, 1.5, 3.5));
 }
 
-const dataSize = samples * channels * 2;
 buffer.write("RIFF", 0);
 buffer.writeUInt32LE(36 + dataSize, 4);
 buffer.write("WAVE", 8);
