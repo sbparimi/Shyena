@@ -1,0 +1,76 @@
+name: Repository Lint Remediation
+
+on:
+  pull_request:
+    branches:
+      - main
+    types: [opened, synchronize, reopened]
+    paths:
+      - ".github/workflows/repository-lint-autofix.yml"
+      - "**/*.ts"
+      - "**/*.tsx"
+      - "**/*.js"
+      - "**/*.jsx"
+      - "**/*.json"
+      - "**/*.md"
+      - "**/*.yml"
+      - "**/*.yaml"
+      - "package.json"
+      - "package-lock.json"
+
+permissions:
+  contents: write
+  pull-requests: read
+
+concurrency:
+  group: repository-lint-remediation-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
+jobs:
+  remediate-and-verify:
+    if: github.event.pull_request.head.repo.full_name == github.repository && startsWith(github.head_ref, 'fix/repository-wide-lint')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out pull request branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Apply repository-wide formatting
+        run: npx prettier --write . --ignore-unknown
+
+      - name: Apply safe ESLint fixes
+        run: npx eslint . --fix
+
+      - name: Commit automated fixes to this pull request
+        env:
+          BRANCH_NAME: ${{ github.event.pull_request.head.ref }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: apply repository-wide lint fixes"
+            git push origin "HEAD:${BRANCH_NAME}"
+          else
+            echo "No automatic formatting or ESLint fixes were needed."
+          fi
+
+      - name: Verify lint
+        run: npm run lint
+
+      - name: Validate public content
+        run: npm run content:validate
+
+      - name: Verify production build
+        run: npm run build
