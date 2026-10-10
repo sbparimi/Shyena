@@ -5,32 +5,32 @@ import { ArrowDownRight, ArrowRight, Check, ChevronRight, Circle, Play, ShieldCh
 const commands = [
   {
     id: "audit",
-    label: "Audit",
-    command: "npm run factory:audit",
+    label: "Content",
+    command: "npm run content:validate",
     output: [
-      { tone: "muted", text: "$ npm run factory:audit" },
-      { tone: "normal", text: "Repository readiness audit" },
-      { tone: "normal", text: "✓ package manifest found" },
-      { tone: "normal", text: "✓ build / lint / content checks discovered" },
-      { tone: "warn", text: "! dedicated product test runner: not configured" },
+      { tone: "muted", text: "$ npm run content:validate" },
+      { tone: "normal", text: "Public content validation" },
+      { tone: "normal", text: "✓ required metadata fields checked" },
+      { tone: "normal", text: "✓ duplicate slugs and titles checked" },
+      { tone: "warn", text: "! product test runner: not yet configured" },
       { tone: "warn", text: "! product environments: not yet connected" },
-      { tone: "accent", text: "Report written to stdout as JSON" },
+      { tone: "accent", text: "Validation result: process exit code" },
     ],
-    description: "Know what is testable before you automate it.",
+    description: "Catch invalid or unsafe public content before build.",
   },
   {
     id: "test",
-    label: "Test",
-    command: "npm run factory:test",
+    label: "Generate",
+    command: "npm run content:generate",
     output: [
-      { tone: "muted", text: "$ npm run factory:test" },
-      { tone: "normal", text: "Node.js test runner · factory audit suite" },
-      { tone: "normal", text: "✓ missing manifest is blocked" },
-      { tone: "normal", text: "✓ missing test infrastructure is reported" },
-      { tone: "normal", text: "✓ configured baseline is recognized" },
-      { tone: "accent", text: "Test result: see the actual CI run for status" },
+      { tone: "muted", text: "$ npm run content:generate" },
+      { tone: "normal", text: "Generate public content metadata" },
+      { tone: "normal", text: "✓ read published blog and docs files" },
+      { tone: "normal", text: "✓ validate required frontmatter" },
+      { tone: "normal", text: "✓ write generated-content.ts" },
+      { tone: "accent", text: "Output: src/content/generated-content.ts" },
     ],
-    description: "Test the factory's own checks, not only the product.",
+    description: "Generate the metadata consumed by the site.",
   },
   {
     id: "lint",
@@ -160,7 +160,7 @@ function HomePage() {
               </div>
             </div>
             <div className="flex items-center justify-between gap-3 border-t border-white/10 bg-white/[.025] px-4 py-3 font-mono text-[10px] text-slate-500">
-              <span>Commands available in the current repository</span>
+              <span>Current repository commands</span>
               <Link to="/contact" className="inline-flex items-center gap-1 text-orange-200 hover:text-orange-100">Talk to us <ChevronRight className="h-3 w-3" /></Link>
             </div>
           </div>
