@@ -3,7 +3,7 @@ import { useState } from "react";
 import {
   Activity, ArrowDownRight, ArrowRight, ArrowUpRight, Check, ChevronDown,
   CircleDot, GitBranch, GitPullRequest, Layers3, LockKeyhole, Radar,
-  ShieldCheck, Sparkles, Workflow, Zap,
+  ShieldCheck, Sparkles, Terminal, Workflow, Zap,
 } from "lucide-react";
 
 const configTabs = [
