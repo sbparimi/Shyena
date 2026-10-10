@@ -789,12 +789,12 @@ function HomePage() {
                     className={`group min-w-[245px] max-w-[300px] flex-1 snap-start rounded-xl border p-5 text-left transition duration-200 sm:min-w-[270px] ${selected ? "border-[#5145ff] bg-[#17151b]" : "border-[#dcd6e8] bg-white hover:border-[#5145ff]" }`}
                   >
                     <div className="flex items-center justify-between gap-3">
-                      <span className="font-mono text-[10px] text-[#8d849a]">{n} / 06</span>
+                      <span className="font-mono text-[10px] text-[#85858c]">{n} / 06</span>
                       <ArrowDownRight className={`h-4 w-4 transition group-hover:translate-x-0.5 group-hover:translate-y-0.5 ${selected ? "text-[#c7a8ff]" : "text-[#b2aabd]"}`} />
                     </div>
                     <h3 className="mt-8 text-xl font-medium tracking-[-.03em]">{title}</h3>
-                    <p className="mt-3 text-sm leading-6 text-[#6b6279]">{body}</p>
-                    <div className="mt-6 flex items-center gap-2 border-t border-[#dcd6e8] pt-3 font-mono text-[9px] uppercase tracking-[.12em] text-[#8d849a]">
+                    <p className="mt-3 text-sm leading-6 text-[#b4b4b8]">{body}</p>
+                    <div className="mt-6 flex items-center gap-2 border-t border-[#dcd6e8] pt-3 font-mono text-[9px] uppercase tracking-[.12em] text-[#85858c]">
                       <span className={`h-1.5 w-1.5 rounded-full ${selected ? "bg-[#c7a8ff]" : "bg-[#686872]"}`} />
                       {selected ? "Selected stage" : "Inspect stage"}
                     </div>
