@@ -1,0 +1,49 @@
+name: Self-testing factory — baseline gates
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: "17 5 * * 1-5"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: shyena-factory-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  baseline:
+    name: Repository audit, content, lint and build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install --no-package-lock
+
+      - name: Audit repository readiness
+        run: node scripts/factory/repository-audit.mjs
+
+      - name: Test factory audit
+        run: node --test tests/factory/*.test.mjs
+
+      - name: Validate public content
+        run: npm run content:validate
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build
+        run: npm run build
