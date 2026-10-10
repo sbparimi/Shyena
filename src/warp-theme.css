@@ -139,8 +139,8 @@ body > div > header, header.sticky, body header {
   border-color: var(--warp-border) !important;
   box-shadow: none !important;
 }
-body header :where(a,button) { color: var(--warp-muted) !important; }
-body header :where(a:hover,button:hover) { color: var(--warp-text) !important; }
+body header a, body header button { color: var(--warp-muted) !important; }
+body header a:hover, body header button:hover { color: var(--warp-text) !important; }
 body header a[class*="bg-[#f4d64f]"], body header a[class*="bg-[#f4d64f]"]:hover {
   background: var(--warp-cta) !important;
   color: var(--warp-cta-ink) !important;
@@ -156,9 +156,9 @@ body footer {
   color: var(--warp-text) !important;
   border-color: var(--warp-border) !important;
 }
-body footer :where(h2,h3,h4) { color: var(--warp-text) !important; }
+body footer h2, body footer h3, body footer h4 { color: var(--warp-text) !important; }
 body footer :where(p,a,span,div) { border-color: var(--warp-border); }
-body footer :where(a,p,div.text-xs) { color: var(--warp-muted); }
+body footer a, body footer p, body footer div.text-xs { color: var(--warp-muted) !important; }
 body footer a:hover { color: var(--warp-text) !important; }
 
 /* Homepage: product-led hero, precise grid, and a credible engineering console. */
