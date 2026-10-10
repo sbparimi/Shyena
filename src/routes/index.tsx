@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { ArrowDownRight, ArrowRight, Check, ChevronRight, Circle, Copy, GitBranch, Play, ShieldCheck, Terminal, Workflow } from "lucide-react";
+import { ArrowDownRight, ArrowRight, Check, ChevronRight, Circle, Play, ShieldCheck, Terminal, Workflow } from "lucide-react";
 
 const commands = [
   {
@@ -99,7 +99,7 @@ export const Route = createFileRoute("/")({
 
 function HomePage() {
   const [activeCommand, setActiveCommand] = useState("audit");
-  const selected = commands.find((item) => item.id === activeCommand) ?? commands[0];
+  const selected = commands.find((item) => item.id === activeCommand) ?? commands[0]!;
 
   return (
     <main className="min-h-screen overflow-hidden bg-[#080b10] text-white">
