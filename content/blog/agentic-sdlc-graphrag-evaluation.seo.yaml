@@ -1,18 +1,16 @@
 version: 1
 article: agentic-sdlc-graphrag-evaluation
-primary_keyword: GraphRAG evaluation
+primary_keyword: RAG reliability engineering
 search_intent: informational
 secondary_topics:
-  - vector RAG evaluation
-  - agentic SDLC
-  - RAG hallucination benchmark
-  - GraphRAG vs vector RAG
+  - retrieval augmented generation testing
+  - RAG evaluation architecture
   - claim-level grounding
-  - retrieval recall
-  - AI evaluation factory
+  - retrieval failure diagnosis
   - RAG regression testing
-  - AI release gates
-  - agentic AI assurance
+  - vector and graph retrieval
+  - AI assurance release gates
+  - source authority resolution
 seo_contract:
   unique_title: true
   meta_description: true
@@ -27,4 +25,4 @@ seo_contract:
   no_keyword_stuffing: true
   no_duplicate_content: true
   product_claims_reviewed: true
-score_note: "Editorial SEO contract; score is intentionally not assigned before publication validation."
+score_note: "Editorial SEO contract; no numeric score assigned before publication validation."
