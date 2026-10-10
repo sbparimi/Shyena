@@ -159,3 +159,22 @@
     font-size: clamp(1.9rem, 8vw, 2.75rem) !important;
   }
 }
+
+/* Keep published Markdown code samples inside the article column on narrow screens. */
+.generated-content {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.generated-content pre {
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  white-space: pre;
+}
+
+.generated-content pre code {
+  overflow-wrap: normal;
+  word-break: normal;
+}
