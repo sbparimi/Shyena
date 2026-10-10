@@ -156,7 +156,7 @@ const ORGANIZATION_SCHEMA = {
         url: "https://www.shyena.eu/shyena-logo-lockup.svg?v=20260917",
       },
       description:
-        "Shyena provides AI quality engineering and assurance across machine-learning models, data pipelines, generative AI applications and agentic systems.",
+        "Shyena connects the Agentic SDLC from planning and coding agents through testing, security, release evidence and operational feedback in one governed engineering workflow.",
     },
     {
       "@type": "WebSite",
@@ -174,7 +174,7 @@ const ORGANIZATION_SCHEMA = {
       operatingSystem: "Web",
       url: "https://www.shyena.eu/",
       description:
-        "An AI quality engineering and assurance platform for evaluating AI models, data pipelines, generative AI applications and agentic systems, testing security and producing evidence-backed release decisions.",
+        "A governed Agentic SDLC platform connecting planning, coding agents, test engineering, security checks, release evidence and operational feedback.",
       keywords:
         "AI quality engineering, machine learning testing, model evaluation, data quality, generative AI testing, LLM evaluation, RAG evaluation, computer vision, document AI, AI governance, EU AI Act, ISO 42001, AI security testing, autonomous testing, release assurance",
       publisher: { "@id": "https://www.shyena.eu/#organization" },
