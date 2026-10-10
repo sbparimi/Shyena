@@ -32,6 +32,9 @@ jobs:
       - name: Build and validate
         run: npm run build
 
+      - name: Restore build-generated registry
+        run: git restore --worktree -- src/content/generated-content.ts
+
       - name: Commit migration
         run: |
           git config user.name 'github-actions[bot]'
