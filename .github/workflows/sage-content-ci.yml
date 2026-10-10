@@ -14,6 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
       - name: Install dependencies
         run: npm install
       - name: Format homepage files
@@ -24,7 +26,7 @@ jobs:
           if ! git diff --quiet; then
             git add src/routes/index.tsx src/components/site/site-header.tsx src/components/site/site-footer.tsx
             git commit -m "Format Warp-inspired homepage"
-            git push origin "HEAD:${GITHUB_REF_NAME}"
+            git push origin "HEAD:${GITHUB_HEAD_REF:-$GITHUB_REF_NAME}"
           fi
       - name: Validate content contract
         run: npm run content:validate
