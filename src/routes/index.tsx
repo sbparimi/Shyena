@@ -219,6 +219,7 @@ export const Route = createFileRoute("/")({
 function HomePage() {
   const [activeConfig, setActiveConfig] = useState<(typeof configTabs)[number]["id"]>("factory");
   const [activeStage, setActiveStage] = useState<(typeof workflowStages)[number]["id"]>("vera");
+  const [activeCoverage, setActiveCoverage] = useState(0);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const config = configTabs.find((tab) => tab.id === activeConfig) ?? configTabs[0]!;
   const stage = workflowStages.find((item) => item.id === activeStage) ?? workflowStages[1]!;
@@ -770,20 +771,81 @@ function HomePage() {
               operational learning.
             </p>
           </div>
-          <div className="mt-10 grid gap-x-8 md:grid-cols-2 xl:grid-cols-3">
-            {coverage.map(([n, title, body]) => (
-              <article
-                key={n}
-                className="group border-t border-[#dcd6e8] py-6 transition hover:border-[#5145ff]"
-              >
-                <div className="flex items-center justify-between">
-                  <span className="font-mono text-[10px] text-[#8d849a]">{n} / 06</span>
-                  <ArrowDownRight className="h-4 w-4 text-[#b2aabd] transition group-hover:translate-x-0.5 group-hover:translate-y-0.5 group-hover:text-[#5145ff]" />
+          <div className="mt-10">
+            <div className="mb-3 flex flex-wrap items-center justify-between gap-3 font-mono text-[9px] uppercase tracking-[.14em] text-[#8d849a]">
+              <span>Lifecycle explorer / 06 stages</span>
+              <span>SELECT A STAGE TO INSPECT</span>
+            </div>
+            <div className="rail flex snap-x snap-mandatory gap-3 overflow-x-auto pb-4">
+              {coverage.map(([n, title, body], i) => {
+                const selected = activeCoverage === i;
+                return (
+                  <button
+                    key={n}
+                    type="button"
+                    aria-pressed={selected}
+                    onClick={() => setActiveCoverage(i)}
+                    className={\`group min-w-[245px] max-w-[300px] flex-1 snap-start rounded-xl border p-5 text-left transition duration-200 sm:min-w-[270px] \${selected ? "border-[#5145ff] bg-[#17151b]" : "border-[#dcd6e8] bg-white hover:border-[#5145ff]" }\`}
+                  >
+                    <div className="flex items-center justify-between gap-3">
+                      <span className="font-mono text-[10px] text-[#8d849a]">{n} / 06</span>
+                      <ArrowDownRight className={\`h-4 w-4 transition group-hover:translate-x-0.5 group-hover:translate-y-0.5 \${selected ? "text-[#c7a8ff]" : "text-[#b2aabd]"}\`} />
+                    </div>
+                    <h3 className="mt-8 text-xl font-medium tracking-[-.03em]">{title}</h3>
+                    <p className="mt-3 text-sm leading-6 text-[#6b6279]">{body}</p>
+                    <div className="mt-6 flex items-center gap-2 border-t border-[#dcd6e8] pt-3 font-mono text-[9px] uppercase tracking-[.12em] text-[#8d849a]">
+                      <span className={\`h-1.5 w-1.5 rounded-full \${selected ? "bg-[#c7a8ff]" : "bg-[#686872]"}\`} />
+                      {selected ? "Selected stage" : "Inspect stage"}
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+            <div className="mt-2 grid overflow-hidden rounded-xl border border-[#dcd6e8] lg:grid-cols-[.9fr_1.1fr]">
+              <div className="p-5 sm:p-7">
+                <div className="font-mono text-[9px] uppercase tracking-[.16em] text-[#c7a8ff]">
+                  Stage {selectedCoverage[0]} / 06 · Assurance brief
                 </div>
-                <h3 className="mt-6 text-xl font-medium tracking-[-.03em]">{title}</h3>
-                <p className="mt-3 max-w-sm text-sm leading-6 text-[#6b6279]">{body}</p>
-              </article>
-            ))}
+                <h3 className="mt-4 text-2xl font-medium tracking-[-.04em] sm:text-3xl">
+                  {selectedCoverage[1]}
+                </h3>
+                <p className="mt-3 max-w-xl text-sm leading-7 text-[#b4b4b8]">
+                  {selectedCoverage[2]}
+                </p>
+                <div className="mt-6 flex items-center gap-2 text-xs text-[#b4b4b8]">
+                  <LockKeyhole className="h-4 w-4 text-[#c7a8ff]" />
+                  Evidence and policy requirements remain explicit at every stage.
+                </div>
+              </div>
+              <div className="border-t border-[#dcd6e8] bg-[#080809] p-4 sm:p-6 lg:border-l lg:border-t-0">
+                <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#2a2a2d] pb-3">
+                  <div className="flex items-center gap-2">
+                    <Terminal className="h-4 w-4 text-[#c7a8ff]" />
+                    <span className="font-mono text-xs text-[#f5f5f5]">assurance-run</span>
+                  </div>
+                  <span className="font-mono text-[9px] uppercase tracking-[.12em] text-[#85858c]">
+                    Illustrative console · not executable
+                  </span>
+                </div>
+                <div className="mt-4 space-y-3 font-mono text-[11px] leading-6 sm:text-xs">
+                  <p className="break-words text-[#b8f28b]">
+                    <span className="text-[#85858c]">$</span> shyena assure --stage {selectedCoverage[1]!.toLowerCase().replace(/[^a-z0-9]+/g, "-")}
+                  </p>
+                  <p className="text-[#b4b4b8]">
+                    <span className="text-[#c7a8ff]">scope</span> {selectedCoverage[2]}
+                  </p>
+                  <p className="text-[#b4b4b8]">
+                    <span className="text-[#c7a8ff]">evidence</span> required · traceable · reviewable
+                  </p>
+                  <p className="text-[#b4b4b8]">
+                    <span className="text-[#c7a8ff]">next</span> {coverage[activeCoverage + 1]?.[1] ?? "Feed learning into the next cycle"}
+                  </p>
+                </div>
+                <div className="mt-5 border-t border-[#2a2a2d] pt-3 font-mono text-[9px] text-[#85858c]">
+                  UI CONCEPT ONLY · NO LIVE RUN OR CUSTOMER DATA
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
