@@ -21,7 +21,6 @@ export function Ul({ items }: { items: ReactNode[] }) {
   return (
     <ul className="mt-6 space-y-3">
       {items.map((item, i) => (
-        // eslint-disable-next-line react/no-array-index-key
         <li key={i} className="flex gap-3">
           <span
             aria-hidden="true"
