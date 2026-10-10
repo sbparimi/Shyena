@@ -171,13 +171,13 @@ const faqs = [
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Shyena — Open AI Assurance Factory" },
+      { title: "Shyena — AI Assurance Factory" },
       {
         name: "description",
         content:
           "An observable AI assurance factory for system mapping, behaviour testing, security evaluation and evidence-led release governance.",
       },
-      { property: "og:title", content: "Shyena — Open AI Assurance Factory" },
+      { property: "og:title", content: "Shyena — AI Assurance Factory" },
       {
         property: "og:description",
         content: "Define the workflow. Evaluate the outcomes. Keep the evidence.",
@@ -217,11 +217,11 @@ function HomePage() {
               <span className="h-1.5 w-1.5 rounded-full bg-[#5145ff]" /> AI ASSURANCE FACTORY
             </span>
             <span className="text-[#b7b0c7]">/</span>
-            <span>Open workflow · evidence-led</span>
+            <span>Configurable workflow · evidence-led</span>
           </div>
           <div className="mt-8 grid gap-8 lg:grid-cols-[1.15fr_.65fr] lg:items-end">
             <h1 className="max-w-5xl text-[clamp(3.1rem,7.3vw,7.6rem)] font-medium leading-[.93] tracking-[-.075em]">
-              Open assurance
+              Assurance
               <br />
               for <span className="text-[#5145ff]">AI systems.</span>
             </h1>
@@ -889,7 +889,7 @@ function HomePage() {
         <div className="mx-auto grid max-w-[1440px] gap-10 px-5 py-20 sm:px-8 lg:grid-cols-[.75fr_1.25fr] lg:px-12 lg:py-24">
           <div>
             <div className="font-mono text-[10px] uppercase tracking-[.18em] text-[#5145ff]">
-              04 / Open at every layer
+              04 / Fits your stack
             </div>
             <h2 className="mt-5 max-w-xl text-3xl font-medium leading-tight tracking-[-.055em] sm:text-5xl">
               Your stack. Your models. Your controls.
