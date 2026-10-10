@@ -67,14 +67,14 @@ const lifecycle = [
   ["05", "Repair", "Diagnose failures and propose a patch with a regression test."],
   ["06", "Verify", "Re-run independent checks and publish evidence for human review."],
   ["07", "Improve", "Benchmark failures and propose changes to the factory itself."],
-];
+] as const;
 
 const products = [
   { name: "Nexus", role: "Understand the system", detail: "Map requirements, components, dependencies and change impact.", to: "/nexus", command: "shyena nexus map --repo ." },
   { name: "Vera", role: "Evaluate behaviour", detail: "Verify expected outcomes, model responses and end-to-end journeys.", to: "/vera", command: "shyena vera evaluate --suite regression" },
   { name: "Chakra", role: "Test security", detail: "Exercise adversarial cases, trust boundaries and unsafe behaviour.", to: "/chakra", command: "shyena chakra scan --target staging" },
   { name: "Govern", role: "Prove release readiness", detail: "Collect traceable results and present a release decision with evidence.", to: "/govern", command: "shyena govern report --run latest" },
-];
+] as const;
 
 function TerminalLine({ tone, text }: { tone: string; text: string }) {
   const toneClass = tone === "warn" ? "text-amber-300" : tone === "accent" ? "text-orange-300" : tone === "muted" ? "text-slate-500" : "text-slate-200";
