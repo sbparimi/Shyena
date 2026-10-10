@@ -223,6 +223,7 @@ function HomePage() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const config = configTabs.find((tab) => tab.id === activeConfig) ?? configTabs[0]!;
   const stage = workflowStages.find((item) => item.id === activeStage) ?? workflowStages[1]!;
+  const selectedCoverage = coverage[activeCoverage] ?? coverage[0]!;
 
   return (
     <div className="shyena-factory-home overflow-hidden bg-[#fbfaff] text-[#1a1527]">
