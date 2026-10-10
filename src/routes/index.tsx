@@ -786,16 +786,20 @@ function HomePage() {
                     type="button"
                     aria-pressed={selected}
                     onClick={() => setActiveCoverage(i)}
-                    className={`group min-w-[245px] max-w-[300px] flex-1 snap-start rounded-xl border p-5 text-left transition duration-200 sm:min-w-[270px] ${selected ? "border-[#5145ff] bg-[#17151b]" : "border-[#dcd6e8] bg-white hover:border-[#5145ff]" }`}
+                    className={`group min-w-[245px] max-w-[300px] flex-1 snap-start rounded-xl border p-5 text-left transition duration-200 sm:min-w-[270px] ${selected ? "border-[#5145ff] bg-[#17151b]" : "border-[#dcd6e8] bg-white hover:border-[#5145ff]"}`}
                   >
                     <div className="flex items-center justify-between gap-3">
                       <span className="font-mono text-[10px] text-[#85858c]">{n} / 06</span>
-                      <ArrowDownRight className={`h-4 w-4 transition group-hover:translate-x-0.5 group-hover:translate-y-0.5 ${selected ? "text-[#c7a8ff]" : "text-[#b2aabd]"}`} />
+                      <ArrowDownRight
+                        className={`h-4 w-4 transition group-hover:translate-x-0.5 group-hover:translate-y-0.5 ${selected ? "text-[#c7a8ff]" : "text-[#b2aabd]"}`}
+                      />
                     </div>
                     <h3 className="mt-8 text-xl font-medium tracking-[-.03em]">{title}</h3>
                     <p className="mt-3 text-sm leading-6 text-[#b4b4b8]">{body}</p>
                     <div className="mt-6 flex items-center gap-2 border-t border-[#dcd6e8] pt-3 font-mono text-[9px] uppercase tracking-[.12em] text-[#85858c]">
-                      <span className={`h-1.5 w-1.5 rounded-full ${selected ? "bg-[#c7a8ff]" : "bg-[#686872]"}`} />
+                      <span
+                        className={`h-1.5 w-1.5 rounded-full ${selected ? "bg-[#c7a8ff]" : "bg-[#686872]"}`}
+                      />
                       {selected ? "Selected stage" : "Inspect stage"}
                     </div>
                   </button>
@@ -830,16 +834,25 @@ function HomePage() {
                 </div>
                 <div className="mt-4 space-y-3 font-mono text-[11px] leading-6 sm:text-xs">
                   <p className="break-words text-[#b8f28b]">
-                    <span className="text-[#85858c]">$</span> shyena assure --stage {selectedCoverage[1]!.toLowerCase().replace(/[^a-z0-9]+/g, "-")}
+                    <span className="text-[#85858c]">$</span>
+                    <span className="ml-2">
+                      shyena assure --stage{" "}
+                      {selectedCoverage[1]!.toLowerCase().replace(/[^a-z0-9]+/g, "-")}
+                    </span>
                   </p>
                   <p className="text-[#b4b4b8]">
-                    <span className="text-[#c7a8ff]">scope</span> {selectedCoverage[2]}
+                    <span className="text-[#c7a8ff]">scope</span>
+                    <span className="ml-2">{selectedCoverage[2]}</span>
                   </p>
                   <p className="text-[#b4b4b8]">
-                    <span className="text-[#c7a8ff]">evidence</span> required · traceable · reviewable
+                    <span className="text-[#c7a8ff]">evidence</span>
+                    <span className="ml-2">required · traceable · reviewable</span>
                   </p>
                   <p className="text-[#b4b4b8]">
-                    <span className="text-[#c7a8ff]">next</span> {coverage[activeCoverage + 1]?.[1] ?? "Feed learning into the next cycle"}
+                    <span className="text-[#c7a8ff]">next</span>
+                    <span className="ml-2">
+                      {coverage[activeCoverage + 1]?.[1] ?? "Feed learning into the next cycle"}
+                    </span>
                   </p>
                 </div>
                 <div className="mt-5 border-t border-[#2a2a2d] pt-3 font-mono text-[9px] text-[#85858c]">

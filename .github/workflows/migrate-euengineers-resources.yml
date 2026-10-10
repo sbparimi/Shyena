@@ -29,6 +29,9 @@ jobs:
       - name: Scrape EU Engineers resources
         run: node scripts/migrate-euengineers-resources.mjs
 
+      - name: Format generated resource snapshot
+        run: npx prettier --write src/data/euengineers-resources.ts
+
       - name: Build and validate
         run: npm run build
 
