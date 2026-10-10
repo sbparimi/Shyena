@@ -31,7 +31,6 @@ export function VideoExperience() {
   const musicRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    let observer: MutationObserver | undefined;
     let mounted = true;
     const attach = () => {
       const found = document.querySelector(VIDEO_SELECTOR);
@@ -52,9 +51,9 @@ export function VideoExperience() {
       setControlsHost(host);
     };
     attach();
-    observer = new MutationObserver(attach);
+    const observer = new MutationObserver(attach);
     observer.observe(document.body, { childList: true, subtree: true });
-    return () => { mounted = false; observer?.disconnect(); };
+    return () => { mounted = false; observer.disconnect(); };
   }, []);
 
   useEffect(() => {
