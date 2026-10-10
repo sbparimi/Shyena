@@ -4,23 +4,25 @@ on:
   pull_request:
     paths:
       - "content/**"
+      - "src/content/docs/**"
+      - "src/components/docs/doc-concept-visual.tsx"
+      - "public/rag-*.svg"
       - "src/lib/sage/**"
       - "scripts/validate-sage-content.mjs"
       - "package.json"
-      - "pnpm-lock.yaml"
+      - ".github/workflows/sage-content-validation.yml"
 
 jobs:
   content-contract:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-          cache: pnpm
-      - run: pnpm install --frozen-lockfile
-      - run: node scripts/validate-sage-content.mjs
-      - run: pnpm build
+      - name: Install dependencies
+        run: npm install
+      - name: Validate public content
+        run: npm run content:validate
+      - name: Build production site
+        run: npm run build
