@@ -25,6 +25,7 @@ const CATEGORIES = [
   ["getting-started", "Getting Started", "Agent → Journey → Evaluation → Evidence → Release", BookOpen, "/docs/getting-started"],
   ["writing-test-specs", "Writing Test Specs", "Goal → Persona → Playbook → Invariants → Evidence", FileText, "/docs/writing-test-specs"],
   ["evaluation-model", "Evaluation Model", "Deterministic → Semantic → Trajectory → Security → Verdict", Scale, "/docs/evaluation-model"],
+  ["graphrag-evaluation", "RAG Reliability", "Sources → Retrieval → Claims → Evidence → Verdict", Workflow, "/docs/graphrag-evaluation"],
   ["environments", "Environments & Configuration", "Agent → Environment → Secrets → Runtime → Evaluator", Sliders, "/docs/environments"],
   ["integrations", "Integrations", "Agent → Shyena → CI/CD → Observability → Release", Plug, "/docs/integrations"],
   ["api-reference", "API Reference", "Client → API → Run → Evidence → Verdict", Code, "/docs/api-reference"],
@@ -66,7 +67,7 @@ function DocsOverview() {
             </div>
           </div>
           <div className="mt-10 grid max-w-4xl grid-cols-2 border-y border-[#cfc8ba] sm:grid-cols-4">
-            {[["10", "core guides"], ["01", "evaluation model"], ["05", "latest insights"], ["∞", "engineering paths"]].map(([value, label]) => <div key={label} className="border-r border-[#cfc8ba] px-4 py-4 last:border-r-0 sm:px-5"><div className="font-mono text-xl font-bold text-[#0e172b]">{value}</div><div className="mt-1 font-mono text-[9px] uppercase tracking-[0.13em] text-slate-500">{label}</div></div>)}
+            {[[String(CATEGORIES.length).padStart(2, "0"), "core guides"], ["01", "evaluation model"], ["05", "latest insights"], ["∞", "engineering paths"]].map(([value, label]) => <div key={label} className="border-r border-[#cfc8ba] px-4 py-4 last:border-r-0 sm:px-5"><div className="font-mono text-xl font-bold text-[#0e172b]">{value}</div><div className="mt-1 font-mono text-[9px] uppercase tracking-[0.13em] text-slate-500">{label}</div></div>)}
           </div>
         </div>
       </section>

@@ -1,0 +1,21 @@
+version: 1
+article: agentic-sdlc-graphrag-evaluation
+claims:
+  - id: CLM-001
+    claim: "The cited public experiment reports results on a small synthetic dataset and compares tested vector and graph retrieval configurations."
+    status: verified
+    source: "https://machinelearningmastery.com/evaluating-graph-rag-vs-standard-rag-a-hallucination-benchmark-on-fact-dense-queries/"
+  - id: CLM-002
+    claim: "The cited experiment's expected-number substring criterion cannot establish complete claim correctness or grounding."
+    status: inference
+    basis: "The criterion checks presence of an expected numeric string, not whether all claims are supported or consistent."
+    source: "https://machinelearningmastery.com/evaluating-graph-rag-vs-standard-rag-a-hallucination-benchmark-on-fact-dense-queries/"
+  - id: CLM-003
+    claim: "Northstar Metrics SDK and its example facts are fictional."
+    status: synthetic
+    basis: "Explicitly labelled as a fictional illustration."
+  - id: CLM-004
+    claim: "Reliable RAG evaluation should preserve source IDs, context, model and prompt revisions, claim checks and reproducible verdicts."
+    status: recommendation
+    basis: "Proposed engineering design; not a claim of deployed Shyena functionality."
+unverified_material_claims: 0
