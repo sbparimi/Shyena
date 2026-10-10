@@ -25,7 +25,7 @@ const CATEGORIES = [
   ["getting-started", "Getting Started", "Agent → Journey → Evaluation → Evidence → Release", BookOpen, "/docs/getting-started"],
   ["writing-test-specs", "Writing Test Specs", "Goal → Persona → Playbook → Invariants → Evidence", FileText, "/docs/writing-test-specs"],
   ["evaluation-model", "Evaluation Model", "Deterministic → Semantic → Trajectory → Security → Verdict", Scale, "/docs/evaluation-model"],
-  ["graphrag-evaluation", "GraphRAG Evaluation", "Vector → Graph → Hybrid → Evidence → Verdict", Workflow, "/docs/graphrag-evaluation"],
+  ["graphrag-evaluation", "RAG Reliability", "Sources → Retrieval → Claims → Evidence → Verdict", Workflow, "/docs/graphrag-evaluation"],
   ["environments", "Environments & Configuration", "Agent → Environment → Secrets → Runtime → Evaluator", Sliders, "/docs/environments"],
   ["integrations", "Integrations", "Agent → Shyena → CI/CD → Observability → Release", Plug, "/docs/integrations"],
   ["api-reference", "API Reference", "Client → API → Run → Evidence → Verdict", Code, "/docs/api-reference"],
