@@ -4,9 +4,9 @@ import { ArrowRight, CheckCircle2, Search, SlidersHorizontal, ShieldCheck, Users
 import { searchCandidates, submitHireRequest, type Candidate } from "@/lib/supabase";
 
 const capabilities = [
-  ["AI Evaluation Engineering","LLM evaluation, semantic quality, task completion, RAG grounding, agent trajectories and regression evaluation."],
-  ["Agentic QA","Browser journeys, tool selection, orchestration, multi-turn behaviour, recovery paths and business workflow validation."],
-  ["AI Security","Prompt injection, excessive agency, data leakage, unsafe tool use and adversarial assurance."],
+  ["AI Evaluation Engineering","Model evaluation, classification and prediction metrics, LLM and RAG quality, generated-output assessment, robustness and regression evaluation."],
+  ["Agentic QA","Model and pipeline testing, AI application behaviour, integrations, agent orchestration, recovery paths and business outcome validation."],
+  ["AI Security","Adversarial robustness, prompt injection, model abuse, data leakage, unsafe tool use and AI system security assurance."],
   ["AI Observability","Tracing, evidence correlation, failure attribution, latency and production feedback loops."],
   ["Domain Assurance","Payments, healthcare, CRM, ERP, customer service and other domain-specific business journeys."],
   ["Accessibility & Human Experience","WCAG, assistive technology, voice journeys and accessibility validation across AI-enabled experiences."]
