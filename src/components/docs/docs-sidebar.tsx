@@ -8,6 +8,7 @@ const DOCS_SECTIONS = [
   { to: "/docs/getting-started", label: "Getting Started" },
   { to: "/docs/writing-test-specs", label: "Writing Test Specs" },
   { to: "/docs/evaluation-model", label: "Evaluation Model" },
+  { to: "/docs/graphrag-evaluation", label: "GraphRAG Evaluation" },
   { to: "/docs/environments", label: "Environments & Configuration" },
   { to: "/docs/integrations", label: "Integrations" },
   { to: "/docs/api-reference", label: "API Reference" },
