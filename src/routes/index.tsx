@@ -2,8 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import {
   Activity, ArrowRight, ArrowUpRight, Check, ChevronRight, CircleDot,
-  GitBranch, GitPullRequest, Layers3, LockKeyhole, Play, Radar,
-  ShieldCheck, Sparkles, Terminal, Workflow, Zap,
+  GitPullRequest, Layers3, LockKeyhole, Play, Radar,
+  ShieldCheck, Sparkles, Workflow, Zap,
 } from "lucide-react";
 
 const stages = [
