@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import {
-  Activity, ArrowDownRight, ArrowRight, ArrowUpRight, Check, ChevronRight,
+  Activity, ArrowRight, ArrowUpRight, Check,
   CircleCheck, CircleDot, GitPullRequest, Layers3, LockKeyhole, Play,
   Radar, ShieldCheck, Sparkles, Workflow, Zap,
 } from "lucide-react";
