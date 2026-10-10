@@ -19,7 +19,8 @@ function validate(file) {
   if (!/^title:\s*.+$/m.test(text)) failures.push(`${file}: missing title`);
   if (!/^description:\s*.+$/m.test(text)) failures.push(`${file}: missing description`);
   if (!/^slug:\s*.+$/m.test(text)) failures.push(`${file}: missing slug`);
-  if (/lorem ipsum|TODO: publish|fabricated citation/i.test(text)) failures.push(`${file}: blocked placeholder content`);
+  if (/lorem ipsum|TODO: publish|fabricated citation/i.test(text))
+    failures.push(`${file}: blocked placeholder content`);
 }
 
 walk(root);

@@ -12,7 +12,13 @@ export type KnowledgeDocPageProps = {
   next?: { to: string; label: string };
 };
 
-export function KnowledgeDocPage({ section, title, description, source, next }: KnowledgeDocPageProps) {
+export function KnowledgeDocPage({
+  section,
+  title,
+  description,
+  source,
+  next,
+}: KnowledgeDocPageProps) {
   return (
     <div className="min-h-screen bg-[#eef7fb] pb-10 text-[#202a33]">
       <section className="relative overflow-hidden rounded-3xl border border-[#d6e7ee] bg-[#eaf5fa] shadow-[0_20px_60px_-35px_rgba(24,55,70,.28)] sm:rounded-[2rem]">
@@ -22,13 +28,23 @@ export function KnowledgeDocPage({ section, title, description, source, next }: 
 
         <div className="relative grid gap-8 px-6 py-10 sm:px-10 sm:py-14 lg:grid-cols-[minmax(0,1fr)_minmax(420px,0.9fr)] lg:items-center lg:px-12 lg:py-16">
           <div className="max-w-3xl">
-            <p className="font-mono text-xs uppercase tracking-[0.22em] text-[#e87516]">Docs / {section}</p>
-            <h1 className="mt-5 text-4xl font-bold leading-[1.03] tracking-tight text-[#202a33] sm:text-5xl lg:text-6xl">{title}</h1>
+            <p className="font-mono text-xs uppercase tracking-[0.22em] text-[#e87516]">
+              Docs / {section}
+            </p>
+            <h1 className="mt-5 text-4xl font-bold leading-[1.03] tracking-tight text-[#202a33] sm:text-5xl lg:text-6xl">
+              {title}
+            </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[#52616b]">{description}</p>
             <div className="mt-7 flex flex-wrap gap-2 font-mono text-[9px] uppercase tracking-[0.16em] text-[#647782]">
-              <span className="rounded-full border border-[#cbdfe8] bg-white/70 px-3 py-1.5">concept first</span>
-              <span className="rounded-full border border-[#cbdfe8] bg-white/70 px-3 py-1.5">evidence driven</span>
-              <span className="rounded-full border border-[#cbdfe8] bg-white/70 px-3 py-1.5">engineer readable</span>
+              <span className="rounded-full border border-[#cbdfe8] bg-white/70 px-3 py-1.5">
+                concept first
+              </span>
+              <span className="rounded-full border border-[#cbdfe8] bg-white/70 px-3 py-1.5">
+                evidence driven
+              </span>
+              <span className="rounded-full border border-[#cbdfe8] bg-white/70 px-3 py-1.5">
+                engineer readable
+              </span>
             </div>
           </div>
 
@@ -38,9 +54,13 @@ export function KnowledgeDocPage({ section, title, description, source, next }: 
 
       <article className="mt-8 rounded-3xl border border-[#d7e5eb] bg-white px-6 py-8 shadow-[0_18px_55px_-38px_rgba(24,55,70,.32)] sm:px-10 sm:py-10 lg:px-12">
         <div className="mb-10 rounded-2xl border border-[#d8e9f0] bg-[#f3f9fc] px-5 py-5 sm:px-6">
-          <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#e87516]">How to read this guide</p>
+          <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#e87516]">
+            How to read this guide
+          </p>
           <p className="mt-2 max-w-4xl text-sm leading-6 text-[#52616b]">
-            Start with the visual assembly above. Each piece maps to a concept in this guide; the sections below provide the engineering detail, rules, examples and evidence needed to implement it correctly.
+            Start with the visual assembly above. Each piece maps to a concept in this guide; the
+            sections below provide the engineering detail, rules, examples and evidence needed to
+            implement it correctly.
           </p>
         </div>
 
@@ -49,10 +69,26 @@ export function KnowledgeDocPage({ section, title, description, source, next }: 
         </div>
 
         <div className="mt-14 flex flex-col gap-3 border-t border-[#d7e5eb] pt-8 sm:flex-row sm:items-center sm:justify-between">
-          <Button asChild variant="ghost" className="px-0 text-[#647782] hover:text-[#202a33]"><Link to="/docs"><ArrowLeft className="mr-2 h-4 w-4" />Back to Docs</Link></Button>
-          {next && <Button asChild><Link to={next.to}>{next.label}<ArrowRight className="ml-2 h-4 w-4" /></Link></Button>}
+          <Button asChild variant="ghost" className="px-0 text-[#647782] hover:text-[#202a33]">
+            <Link to="/docs">
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Back to Docs
+            </Link>
+          </Button>
+          {next && (
+            <Button asChild>
+              <Link to={next.to}>
+                {next.label}
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+          )}
         </div>
-        <div className="mt-8 text-xs text-[#71848e]"><BookOpen className="mr-1 inline h-3.5 w-3.5" aria-hidden="true" />Primary sources are listed inside each page. <ExternalLink className="inline h-3.5 w-3.5" aria-hidden="true" /></div>
+        <div className="mt-8 text-xs text-[#71848e]">
+          <BookOpen className="mr-1 inline h-3.5 w-3.5" aria-hidden="true" />
+          Primary sources are listed inside each page.{" "}
+          <ExternalLink className="inline h-3.5 w-3.5" aria-hidden="true" />
+        </div>
       </article>
     </div>
   );

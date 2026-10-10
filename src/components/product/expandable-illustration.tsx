@@ -36,7 +36,9 @@ export function ExpandableIllustration({
       <DialogContent className="max-h-[92vh] w-[95vw] max-w-5xl overflow-y-auto border-navy-border bg-navy p-0 sm:rounded-2xl">
         <div className="p-6 sm:p-8">
           <DialogTitle className="text-xl font-semibold text-navy-foreground">{title}</DialogTitle>
-          <DialogDescription className="mt-1 text-sm text-navy-muted">{description}</DialogDescription>
+          <DialogDescription className="mt-1 text-sm text-navy-muted">
+            {description}
+          </DialogDescription>
           <div className="mt-6 w-full overflow-hidden rounded-xl border border-navy-border">
             {children}
           </div>

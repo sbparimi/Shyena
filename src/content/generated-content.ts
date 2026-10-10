@@ -21,11 +21,13 @@ export const generatedContent = {
       type: "blog",
       sourcePath: "content/blog/ai-agent-testing-is-a-systems-problem.md",
       title: "AI Agent Testing: Why Response Quality Is Not Enough for Production Assurance",
-      description: "An AI agent can produce a good answer and still fail the customer's journey. Learn how to test outcomes, orchestration, tools, deterministic contracts, security, and evidence as one assurance system.",
+      description:
+        "An AI agent can produce a good answer and still fail the customer's journey. Learn how to test outcomes, orchestration, tools, deterministic contracts, security, and evidence as one assurance system.",
       slug: "ai-agent-testing-is-a-systems-problem",
       category: "AI Agent Assurance",
       diagram: "systems",
-      thesis: "A good AI response is not proof that an agent worked. Production assurance must connect business outcome, agent execution, orchestration, deterministic contracts, generated-answer quality, security, and execution evidence into one release decision.",
+      thesis:
+        "A good AI response is not proof that an agent worked. Production assurance must connect business outcome, agent execution, orchestration, deterministic contracts, generated-answer quality, security, and execution evidence into one release decision.",
       primary_keyword: "AI agent testing",
       search_intent: "informational",
       author: "Shyena Engineering",
@@ -35,11 +37,13 @@ export const generatedContent = {
       type: "blog",
       sourcePath: "content/blog/why-conversational-ai-needs-a-different-testing-model.md",
       title: "Why Conversational AI Needs a Different Testing Model",
-      description: "Why agent tests should validate goals and acceptable trajectories instead of replaying one fixed conversation transcript.",
+      description:
+        "Why agent tests should validate goals and acceptable trajectories instead of replaying one fixed conversation transcript.",
       slug: "why-conversational-ai-needs-a-different-testing-model",
       category: "Testing Strategy",
       diagram: "trajectory",
-      thesis: "Conversational testing should evaluate whether an agent achieves a defined goal within explicit behavioural boundaries, not whether it reproduces one preferred transcript.",
+      thesis:
+        "Conversational testing should evaluate whether an agent achieves a defined goal within explicit behavioural boundaries, not whether it reproduces one preferred transcript.",
       primary_keyword: "conversational AI testing",
       search_intent: "informational",
       author: "Shyena Engineering",
@@ -49,11 +53,13 @@ export const generatedContent = {
       type: "blog",
       sourcePath: "content/blog/the-problem-with-green-checkmarks-on-broken-conversations.md",
       title: "The Problem With Green Checkmarks on Broken Conversations",
-      description: "Why semantic scores can look healthy while an agent journey has actually failed, and how an execution-integrity gate prevents false passes.",
+      description:
+        "Why semantic scores can look healthy while an agent journey has actually failed, and how an execution-integrity gate prevents false passes.",
       slug: "the-problem-with-green-checkmarks-on-broken-conversations",
       category: "Quality Assurance",
       diagram: "false-pass",
-      thesis: "A green semantic score is not evidence that an agent completed its journey; execution integrity and critical contracts must constrain what a quality score is allowed to mean.",
+      thesis:
+        "A green semantic score is not evidence that an agent completed its journey; execution integrity and critical contracts must constrain what a quality score is allowed to mean.",
       primary_keyword: "AI agent evaluation",
       search_intent: "informational",
       author: "Shyena Engineering",
@@ -63,23 +69,26 @@ export const generatedContent = {
       type: "blog",
       sourcePath: "content/blog/what-llm-as-judge-actually-means-in-practice.md",
       title: "What LLM-as-Judge Actually Means in Practice",
-      description: "LLM-as-judge is a semantic evaluation layer, not a universal truth oracle. Here is how to use rubrics, context and evidence without creating false confidence.",
+      description:
+        "LLM-as-judge is a semantic evaluation layer, not a universal truth oracle. Here is how to use rubrics, context and evidence without creating false confidence.",
       slug: "what-llm-as-judge-actually-means-in-practice",
       category: "Evaluation Model",
       diagram: "judge",
-      thesis: "LLM-as-judge is useful for semantic properties that require interpretation, but its authority should stop where deterministic, security or execution evidence can establish the truth more reliably.",
+      thesis:
+        "LLM-as-judge is useful for semantic properties that require interpretation, but its authority should stop where deterministic, security or execution evidence can establish the truth more reliably.",
       primary_keyword: "LLM as judge",
       search_intent: "informational",
       author: "Shyena Engineering",
       published: "true",
-    }
+    },
   ],
   docs: [
     {
       type: "docs",
       sourcePath: "content/docs/ai-assurance-tokenomics.md",
       title: "AI Assurance Tokenomics",
-      description: "Connecting tokens, agent behaviour, assurance effort, value and business impact.",
+      description:
+        "Connecting tokens, agent behaviour, assurance effort, value and business impact.",
       slug: "ai-assurance-tokenomics",
       category: "AI Assurance Economics",
       primary_keyword: "AI assurance tokenomics",
@@ -91,7 +100,8 @@ export const generatedContent = {
       type: "docs",
       sourcePath: "content/docs/sage-content-engineering.md",
       title: "SAGE Content Engineering",
-      description: "How Shyena researches, verifies, drafts, reviews, and publishes technical content through an evidence-aware content engineering pipeline.",
+      description:
+        "How Shyena researches, verifies, drafts, reviews, and publishes technical content through an evidence-aware content engineering pipeline.",
       slug: "sage-content-engineering",
       category: "Content Engineering",
       primary_keyword: "AI content engineering",

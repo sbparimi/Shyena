@@ -13,7 +13,12 @@ type ExpertVisual = {
 function specialtyFor(skills: string[]) {
   const text = skills.join(" ").toLowerCase();
   if (/(security|red team|owasp|prompt injection|adversarial)/.test(text)) return "CHAKRA";
-  if (/(eval|deepeval|promptfoo|testing|qa|playwright|automation|rag|performance|accessibility)/.test(text)) return "VERA";
+  if (
+    /(eval|deepeval|promptfoo|testing|qa|playwright|automation|rag|performance|accessibility)/.test(
+      text,
+    )
+  )
+    return "VERA";
   return "NEXUS";
 }
 
@@ -63,7 +68,9 @@ function CorporateIdentity({ id, name, role }: { id: string; name: string; role:
           </div>
           <div className="mt-5 flex items-center gap-2">
             <span className="h-2 w-2 rounded-full" style={{ background: accent }} />
-            <span className="text-[10px] font-medium uppercase tracking-[0.14em] text-white/45">Shyena expert network</span>
+            <span className="text-[10px] font-medium uppercase tracking-[0.14em] text-white/45">
+              Shyena expert network
+            </span>
           </div>
         </div>
       </div>
@@ -75,7 +82,14 @@ function CorporateIdentity({ id, name, role }: { id: string; name: string; role:
   );
 }
 
-export function ExpertActionVisual({ id, name, role, skills, gender, compact = false }: ExpertVisual) {
+export function ExpertActionVisual({
+  id,
+  name,
+  role,
+  skills,
+  gender,
+  compact = false,
+}: ExpertVisual) {
   const pointerX = useMotionValue(0);
   const pointerY = useMotionValue(0);
   const rotateY = useSpring(pointerX, { stiffness: 120, damping: 24, mass: 0.7 });
@@ -105,7 +119,10 @@ export function ExpertActionVisual({ id, name, role, skills, gender, compact = f
     >
       <CorporateIdentity id={id} name={name} role={role} />
 
-      <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-[#17213f] to-transparent" aria-hidden="true" />
+      <div
+        className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-[#17213f] to-transparent"
+        aria-hidden="true"
+      />
       <div className="absolute left-4 bottom-4 z-10 rounded-full border border-white/15 bg-white/[0.06] px-2.5 py-1 text-[8px] font-bold tracking-[0.16em] text-white/50">
         {product}
       </div>

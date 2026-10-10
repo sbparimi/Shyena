@@ -54,7 +54,9 @@ function ArticlePage() {
             <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
               {article.description}
             </p>
-            <p className="mt-5 text-sm text-muted-foreground">{article.author || "Shyena Engineering"}</p>
+            <p className="mt-5 text-sm text-muted-foreground">
+              {article.author || "Shyena Engineering"}
+            </p>
           </div>
         </div>
       </section>
@@ -63,7 +65,9 @@ function ArticlePage() {
         <GeneratedMarkdown sourcePath={article.sourcePath} />
 
         <div className="mt-16 rounded-2xl border border-navy-border bg-navy px-6 py-10 text-center sm:px-10">
-          <h2 className="text-xl font-bold text-navy-foreground sm:text-2xl">Make the release decision defensible.</h2>
+          <h2 className="text-xl font-bold text-navy-foreground sm:text-2xl">
+            Make the release decision defensible.
+          </h2>
           <p className="mx-auto mt-3 max-w-lg text-navy-muted">
             Shyena connects live agent behaviour to evidence, evaluation and release governance.
           </p>
@@ -75,7 +79,11 @@ function ArticlePage() {
         </div>
 
         <div className="mt-10">
-          <Button asChild variant="ghost" className="px-0 text-muted-foreground hover:text-foreground">
+          <Button
+            asChild
+            variant="ghost"
+            className="px-0 text-muted-foreground hover:text-foreground"
+          >
             <Link to="/blog">
               <ArrowLeft className="mr-2 h-4 w-4" />
               Back to Insights

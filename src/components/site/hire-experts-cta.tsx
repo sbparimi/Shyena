@@ -20,14 +20,20 @@ const SKILL_RULES: Array<[string, string[]]> = [
   ["LLM testing", ["llm", "bedrock", "claude", "ollama", "model"]],
   ["CRM / ERP testing", ["crm", "erp", "oracle r12"]],
   ["Performance testing", ["performance", "jmeter", "load testing"]],
-  ["Test strategy & release governance", ["test strategy", "release governance", "quality engineering", "release management"]],
+  [
+    "Test strategy & release governance",
+    ["test strategy", "release governance", "quality engineering", "release management"],
+  ],
 ];
 
-const CTA_PATTERN = /^(book(?: a)?(?: demo| walkthrough)?|request(?: a)? demo|start(?: a)? pilot|discuss|talk|contact|get started|see how(?: it works)?|scope|explore|learn|schedule|try|demo|pilot|assessment|assurance review|consult)\b/i;
+const CTA_PATTERN =
+  /^(book(?: a)?(?: demo| walkthrough)?|request(?: a)? demo|start(?: a)? pilot|discuss|talk|contact|get started|see how(?: it works)?|scope|explore|learn|schedule|try|demo|pilot|assessment|assurance review|consult)\b/i;
 
 function getPageSkills(): string[] {
   const text = document.querySelector("main")?.innerText?.toLowerCase() ?? "";
-  return SKILL_RULES.filter(([, terms]) => terms.some((term) => text.includes(term))).map(([skill]) => skill);
+  return SKILL_RULES.filter(([, terms]) => terms.some((term) => text.includes(term))).map(
+    ([skill]) => skill,
+  );
 }
 
 function buildHireHref(skills: string[]) {
@@ -39,7 +45,8 @@ function buildHireHref(skills: string[]) {
 
 function isVisible(element: HTMLElement): boolean {
   const style = window.getComputedStyle(element);
-  if (style.display === "none" || style.visibility === "hidden" || Number(style.opacity) === 0) return false;
+  if (style.display === "none" || style.visibility === "hidden" || Number(style.opacity) === 0)
+    return false;
   const rect = element.getBoundingClientRect();
   return rect.width > 0 && rect.height > 0;
 }
@@ -49,7 +56,11 @@ function isKeyCta(element: HTMLElement): boolean {
   return Boolean(text) && CTA_PATTERN.test(text) && !text.toLowerCase().includes("hire expert");
 }
 
-function getCtaGroup(element: HTMLElement, main: HTMLElement, candidates: HTMLElement[]): HTMLElement {
+function getCtaGroup(
+  element: HTMLElement,
+  main: HTMLElement,
+  candidates: HTMLElement[],
+): HTMLElement {
   let current = element.parentElement;
   let best = element.parentElement ?? main;
 
@@ -71,8 +82,11 @@ function createHireExpertsLink(href: string, skills: string[]): HTMLAnchorElemen
   link.href = href;
   link.dataset.hireExpertsSource = window.location.pathname;
   link.dataset.shyenaHireExpertLink = "true";
-  link.className = "inline-flex h-11 items-center justify-center gap-2 rounded-lg border border-[#17213f] bg-white px-4 text-xs font-semibold text-[#17213f] transition hover:border-[#ff5a0a] hover:text-[#ff5a0a]";
-  link.title = skills.length ? `Talk to experts for: ${skills.join(", ")}` : "Talk to Shyena experts";
+  link.className =
+    "inline-flex h-11 items-center justify-center gap-2 rounded-lg border border-[#17213f] bg-white px-4 text-xs font-semibold text-[#17213f] transition hover:border-[#ff5a0a] hover:text-[#ff5a0a]";
+  link.title = skills.length
+    ? `Talk to experts for: ${skills.join(", ")}`
+    : "Talk to Shyena experts";
   link.textContent = "Talk to Experts";
   return link;
 }
@@ -106,7 +120,8 @@ function addExpertCtas() {
     if (
       members.some((element) => element.dataset.shyenaHireExpertAttached === "true") ||
       group?.querySelector("[data-shyena-hire-expert-link='true']")
-    ) return;
+    )
+      return;
 
     const lastCta = members[members.length - 1];
     const wrapper = document.createElement("span");
@@ -131,7 +146,10 @@ export function HireExpertsCtaInjector() {
 
     run();
     const observer = new MutationObserver(run);
-    observer.observe(document.querySelector("main") ?? document.body, { childList: true, subtree: true });
+    observer.observe(document.querySelector("main") ?? document.body, {
+      childList: true,
+      subtree: true,
+    });
 
     return () => {
       cancelAnimationFrame(frame);

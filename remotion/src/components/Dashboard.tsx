@@ -34,14 +34,22 @@ const Spark: React.FC<{ frame: number; seed: number; color: string }> = ({
   }).join(" ");
   return (
     <svg viewBox="0 0 100 100" preserveAspectRatio="none" style={{ width: "100%", height: "100%" }}>
-      <polyline points={pts} fill="none" stroke={color} strokeWidth={2.2} vectorEffect="non-scaling-stroke" />
+      <polyline
+        points={pts}
+        fill="none"
+        stroke={color}
+        strokeWidth={2.2}
+        vectorEffect="non-scaling-stroke"
+      />
     </svg>
   );
 };
 
 export const Dashboard: React.FC = () => {
   const frame = useCurrentFrame();
-  const runs = Math.floor(interpolate(frame, [0, 300], [1284, 1461], { extrapolateRight: "clamp" }));
+  const runs = Math.floor(
+    interpolate(frame, [0, 300], [1284, 1461], { extrapolateRight: "clamp" }),
+  );
 
   return (
     <div
@@ -68,7 +76,11 @@ export const Dashboard: React.FC = () => {
       <div style={{ display: "flex", gap: "2%" }}>
         {[
           { k: "Pass rate", v: `${(88 + Math.sin(frame / 22) * 1.6).toFixed(1)}%`, c: BRAND.green },
-          { k: "Judge score", v: `${(8.4 + Math.sin(frame / 17) * 0.2).toFixed(2)}`, c: BRAND.lavender },
+          {
+            k: "Judge score",
+            v: `${(8.4 + Math.sin(frame / 17) * 0.2).toFixed(2)}`,
+            c: BRAND.lavender,
+          },
           { k: "Metrics", v: "31", c: "#38BDF8" },
           { k: "Hard gate fails", v: `${3 + (Math.floor(frame / 90) % 3)}`, c: BRAND.red },
         ].map((m) => (
@@ -147,7 +159,14 @@ export const Dashboard: React.FC = () => {
             });
             return (
               <div key={r.label} style={{ opacity: appear }}>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: 16 }}>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    fontSize: 16,
+                  }}
+                >
                   <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
                     <span
                       style={{

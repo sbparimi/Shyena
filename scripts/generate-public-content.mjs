@@ -31,7 +31,8 @@ function publicationFiles(dir, files = []) {
       entry.name !== "README.md" &&
       !entry.name.endsWith(".research.md") &&
       !entry.name.endsWith(".review.md")
-    ) files.push(full);
+    )
+      files.push(full);
   }
   return files;
 }
@@ -43,7 +44,9 @@ const articles = publicationFiles(join(contentRoot, "blog")).map((file) => {
     throw new Error(`Invalid content frontmatter: ${relative(ROOT, file)}`);
   }
   if (!meta.diagram || !meta.thesis) {
-    throw new Error(`Blog article requires diagram and thesis frontmatter: ${relative(ROOT, file)}`);
+    throw new Error(
+      `Blog article requires diagram and thesis frontmatter: ${relative(ROOT, file)}`,
+    );
   }
   return { type: "blog", sourcePath: relative(ROOT, file).replaceAll("\\", "/"), ...meta };
 });

@@ -2,12 +2,23 @@ const SUPABASE_URL = "https://gzthuldvqufrvxeybvyo.supabase.co";
 const SUPABASE_KEY = "sb_publishable_ueUr_kwat_KK1jQoixQ4ug_QC8ZXqzh";
 
 export type Candidate = {
-  id: string; full_name: string; headline: string; bio: string | null; location: string;
-  timezone: string | null; available_from: string | null;
+  id: string;
+  full_name: string;
+  headline: string;
+  bio: string | null;
+  location: string;
+  timezone: string | null;
+  available_from: string | null;
   availability_status: "available" | "soon" | "unavailable";
-  core_skills: string[]; specialties: string[]; domains: string[]; certifications: string[];
-  years_experience: number | null; remote_modes: string[]; resume_path: string | null;
-  avatar_url: string | null; total_count: number;
+  core_skills: string[];
+  specialties: string[];
+  domains: string[];
+  certifications: string[];
+  years_experience: number | null;
+  remote_modes: string[];
+  resume_path: string | null;
+  avatar_url: string | null;
+  total_count: number;
 };
 
 async function supabaseFetch(path: string, init: RequestInit = {}) {
@@ -21,10 +32,18 @@ async function supabaseFetch(path: string, init: RequestInit = {}) {
 }
 
 async function directCandidateSearch(filters: {
-  search?: string; location?: string; skill?: string; domain?: string;
-  availableBy?: string; remote?: string; page?: number; pageSize?: number;
+  search?: string;
+  location?: string;
+  skill?: string;
+  domain?: string;
+  availableBy?: string;
+  remote?: string;
+  page?: number;
+  pageSize?: number;
 }) {
-  const response = await supabaseFetch("/rest/v1/assurance_candidates?select=*&profile_status=eq.published&order=full_name.asc");
+  const response = await supabaseFetch(
+    "/rest/v1/assurance_candidates?select=*&profile_status=eq.published&order=full_name.asc",
+  );
   const rows = (await response.json()) as Candidate[];
   const term = (filters.search ?? "").trim().toLowerCase();
   const location = (filters.location ?? "").trim().toLowerCase();
@@ -36,15 +55,29 @@ async function directCandidateSearch(filters: {
   const filtered = rows.filter((candidate) => {
     if (candidate.full_name.trim().toLowerCase() === "suresh parimi") return false;
     const searchable = [
-      candidate.full_name, candidate.headline, candidate.bio ?? "",
-      candidate.location, ...candidate.core_skills, ...candidate.specialties, ...candidate.domains
-    ].join(" ").toLowerCase();
+      candidate.full_name,
+      candidate.headline,
+      candidate.bio ?? "",
+      candidate.location,
+      ...candidate.core_skills,
+      ...candidate.specialties,
+      ...candidate.domains,
+    ]
+      .join(" ")
+      .toLowerCase();
     if (term && !searchable.includes(term)) return false;
     if (location && !candidate.location.toLowerCase().includes(location)) return false;
-    if (skill && ![...candidate.core_skills, ...candidate.specialties].some((x) => x.toLowerCase().includes(skill))) return false;
+    if (
+      skill &&
+      ![...candidate.core_skills, ...candidate.specialties].some((x) =>
+        x.toLowerCase().includes(skill),
+      )
+    )
+      return false;
     if (domain && !candidate.domains.some((x) => x.toLowerCase().includes(domain))) return false;
     if (remote && !candidate.remote_modes.some((x) => x.toLowerCase() === remote)) return false;
-    if (availableBy && candidate.available_from && candidate.available_from > availableBy) return false;
+    if (availableBy && candidate.available_from && candidate.available_from > availableBy)
+      return false;
     return true;
   });
 
@@ -58,8 +91,14 @@ async function directCandidateSearch(filters: {
 }
 
 export async function searchCandidates(filters: {
-  search?: string; location?: string; skill?: string; domain?: string;
-  availableBy?: string; remote?: string; page?: number; pageSize?: number;
+  search?: string;
+  location?: string;
+  skill?: string;
+  domain?: string;
+  availableBy?: string;
+  remote?: string;
+  page?: number;
+  pageSize?: number;
 }) {
   try {
     const response = await supabaseFetch("/rest/v1/rpc/search_assurance_candidates", {
@@ -77,7 +116,9 @@ export async function searchCandidates(filters: {
     });
     const rows = (await response.json()) as Candidate[];
     if (rows.length > 0) {
-      return rows.filter((candidate) => candidate.full_name.trim().toLowerCase() !== "suresh parimi");
+      return rows.filter(
+        (candidate) => candidate.full_name.trim().toLowerCase() !== "suresh parimi",
+      );
     }
   } catch {
     // Fall through to the direct published-profile query.
@@ -86,8 +127,11 @@ export async function searchCandidates(filters: {
 }
 
 export async function submitHireRequest(payload: {
-  candidate_id: string; hiring_manager_name: string; company_name: string;
-  work_email: string; message?: string;
+  candidate_id: string;
+  hiring_manager_name: string;
+  company_name: string;
+  work_email: string;
+  message?: string;
 }) {
   await supabaseFetch("/rest/v1/assurance_hire_requests", {
     method: "POST",

@@ -36,7 +36,14 @@ export function DivergentPathsCover() {
   ];
   return (
     <CoverFrame>
-      <circle cx="140" cy="200" r="14" fill="var(--color-navy)" stroke="var(--color-primary)" strokeWidth="2.5" />
+      <circle
+        cx="140"
+        cy="200"
+        r="14"
+        fill="var(--color-navy)"
+        stroke="var(--color-primary)"
+        strokeWidth="2.5"
+      />
       {ends.map((e) => (
         <g key={e.y}>
           <path
@@ -46,13 +53,36 @@ export function DivergentPathsCover() {
             strokeWidth="2.5"
             opacity="0.75"
           />
-          <circle cx="640" cy={e.y} r="10" fill="var(--color-navy)" stroke={e.color} strokeWidth="2.5" />
+          <circle
+            cx="640"
+            cy={e.y}
+            r="10"
+            fill="var(--color-navy)"
+            stroke={e.color}
+            strokeWidth="2.5"
+          />
         </g>
       ))}
-      <text x="140" y="242" textAnchor="middle" fill="var(--color-navy-muted)" fontFamily="ui-sans-serif, system-ui" fontSize="13" fontWeight="600">
+      <text
+        x="140"
+        y="242"
+        textAnchor="middle"
+        fill="var(--color-navy-muted)"
+        fontFamily="ui-sans-serif, system-ui"
+        fontSize="13"
+        fontWeight="600"
+      >
         one goal
       </text>
-      <text x="640" y="356" textAnchor="middle" fill="var(--color-navy-muted)" fontFamily="ui-sans-serif, system-ui" fontSize="13" fontWeight="600">
+      <text
+        x="640"
+        y="356"
+        textAnchor="middle"
+        fill="var(--color-navy-muted)"
+        fontFamily="ui-sans-serif, system-ui"
+        fontSize="13"
+        fontWeight="600"
+      >
         many valid paths
       </text>
     </CoverFrame>
@@ -80,11 +110,41 @@ export function FalsePassCover() {
           opacity={0.55 + i * 0.12}
         />
       ))}
-      <line x1="560" y1="200" x2="600" y2="200" stroke="var(--color-navy-border)" strokeWidth="2" strokeDasharray="4 5" />
+      <line
+        x1="560"
+        y1="200"
+        x2="600"
+        y2="200"
+        stroke="var(--color-navy-border)"
+        strokeWidth="2"
+        strokeDasharray="4 5"
+      />
       <circle cx="660" cy="200" r="46" fill="var(--color-destructive)" opacity="0.14" />
-      <circle cx="660" cy="200" r="46" fill="none" stroke="var(--color-destructive)" strokeWidth="2.5" />
-      <path d="M638,200 l16,16 l28,-32" fill="none" stroke="var(--color-destructive)" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" />
-      <text x="660" y="270" textAnchor="middle" fill="var(--color-destructive)" fontFamily="ui-sans-serif, system-ui" fontSize="13" fontWeight="700">
+      <circle
+        cx="660"
+        cy="200"
+        r="46"
+        fill="none"
+        stroke="var(--color-destructive)"
+        strokeWidth="2.5"
+      />
+      <path
+        d="M638,200 l16,16 l28,-32"
+        fill="none"
+        stroke="var(--color-destructive)"
+        strokeWidth="6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <text
+        x="660"
+        y="270"
+        textAnchor="middle"
+        fill="var(--color-destructive)"
+        fontFamily="ui-sans-serif, system-ui"
+        fontSize="13"
+        fontWeight="700"
+      >
         false PASS
       </text>
     </CoverFrame>
@@ -96,16 +156,48 @@ export function MethodologyCover() {
   const steps = [140, 320, 500, 660];
   return (
     <CoverFrame>
-      <line x1="140" y1="200" x2="660" y2="200" stroke="var(--color-navy-border)" strokeWidth="2" strokeDasharray="5 6" />
+      <line
+        x1="140"
+        y1="200"
+        x2="660"
+        y2="200"
+        stroke="var(--color-navy-border)"
+        strokeWidth="2"
+        strokeDasharray="5 6"
+      />
       {steps.map((x, i) => (
         <g key={x}>
-          <circle cx={x} cy="200" r="26" fill="var(--color-navy)" stroke={i === steps.length - 1 ? "var(--color-accent)" : "var(--color-primary)"} strokeWidth="3" />
-          <text x={x} y="207" textAnchor="middle" fill={i === steps.length - 1 ? "var(--color-accent)" : "var(--color-primary)"} fontFamily="ui-sans-serif, system-ui" fontSize="18" fontWeight="700">
+          <circle
+            cx={x}
+            cy="200"
+            r="26"
+            fill="var(--color-navy)"
+            stroke={i === steps.length - 1 ? "var(--color-accent)" : "var(--color-primary)"}
+            strokeWidth="3"
+          />
+          <text
+            x={x}
+            y="207"
+            textAnchor="middle"
+            fill={i === steps.length - 1 ? "var(--color-accent)" : "var(--color-primary)"}
+            fontFamily="ui-sans-serif, system-ui"
+            fontSize="18"
+            fontWeight="700"
+          >
             {i + 1}
           </text>
         </g>
       ))}
-      <text x="400" y="280" textAnchor="middle" fill="var(--color-navy-muted)" fontFamily="ui-sans-serif, system-ui" fontSize="13" fontWeight="600" letterSpacing="1">
+      <text
+        x="400"
+        y="280"
+        textAnchor="middle"
+        fill="var(--color-navy-muted)"
+        fontFamily="ui-sans-serif, system-ui"
+        fontSize="13"
+        fontWeight="600"
+        letterSpacing="1"
+      >
         GOAL → PERSONA → PLAYBOOK → GATE
       </text>
     </CoverFrame>
@@ -156,8 +248,24 @@ export function SecurityGraphCover() {
           strokeWidth="2.5"
         />
       ))}
-      <rect x="560" y="150" width="150" height="24" rx="12" fill="var(--color-destructive)" opacity="0.16" />
-      <text x="635" y="166" textAnchor="middle" fill="var(--color-destructive)" fontFamily="ui-sans-serif, system-ui" fontSize="11" fontWeight="700">
+      <rect
+        x="560"
+        y="150"
+        width="150"
+        height="24"
+        rx="12"
+        fill="var(--color-destructive)"
+        opacity="0.16"
+      />
+      <text
+        x="635"
+        y="166"
+        textAnchor="middle"
+        fill="var(--color-destructive)"
+        fontFamily="ui-sans-serif, system-ui"
+        fontSize="11"
+        fontWeight="700"
+      >
         flagged path
       </text>
     </CoverFrame>
@@ -168,7 +276,14 @@ export function SecurityGraphCover() {
 export function JudgeGaugeCover() {
   return (
     <CoverFrame>
-      <circle cx="400" cy="220" r="110" fill="none" stroke="var(--color-navy-border)" strokeWidth="14" />
+      <circle
+        cx="400"
+        cy="220"
+        r="110"
+        fill="none"
+        stroke="var(--color-navy-border)"
+        strokeWidth="14"
+      />
       <circle
         cx="400"
         cy="220"
@@ -180,10 +295,26 @@ export function JudgeGaugeCover() {
         strokeDasharray={`${2 * Math.PI * 110 * 0.72} ${2 * Math.PI * 110}`}
         transform="rotate(-90 400 220)"
       />
-      <text x="400" y="212" textAnchor="middle" fill="var(--color-navy-foreground)" fontFamily="ui-sans-serif, system-ui" fontSize="34" fontWeight="700">
+      <text
+        x="400"
+        y="212"
+        textAnchor="middle"
+        fill="var(--color-navy-foreground)"
+        fontFamily="ui-sans-serif, system-ui"
+        fontSize="34"
+        fontWeight="700"
+      >
         0.91
       </text>
-      <text x="400" y="240" textAnchor="middle" fill="var(--color-navy-muted)" fontFamily="ui-sans-serif, system-ui" fontSize="12" fontWeight="600">
+      <text
+        x="400"
+        y="240"
+        textAnchor="middle"
+        fill="var(--color-navy-muted)"
+        fontFamily="ui-sans-serif, system-ui"
+        fontSize="12"
+        fontWeight="600"
+      >
         grounding score
       </text>
     </CoverFrame>

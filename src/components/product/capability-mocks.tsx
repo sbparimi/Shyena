@@ -14,8 +14,8 @@ export function PersonaMock() {
         </div>
       </div>
       <p className="relative mt-5 text-xs leading-relaxed text-muted-foreground">
-        Goal: cancel auto-renewal before the next billing date without being upsold or
-        transferred more than once.
+        Goal: cancel auto-renewal before the next billing date without being upsold or transferred
+        more than once.
       </p>
       <div className="relative mt-5 flex flex-wrap gap-2">
         {["Goal", "Playbook", "Traits"].map((tag) => (
@@ -84,10 +84,7 @@ export function JudgeMock() {
             <span>{bar.pass ? "PASS" : `${bar.value / 100}`}</span>
           </div>
           <div className="mt-1.5 h-2 w-full overflow-hidden rounded-full bg-secondary">
-            <div
-              className="h-full rounded-full bg-accent"
-              style={{ width: `${bar.value}%` }}
-            />
+            <div className="h-full rounded-full bg-accent" style={{ width: `${bar.value}%` }} />
           </div>
         </div>
       ))}

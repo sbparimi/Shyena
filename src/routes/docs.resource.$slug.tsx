@@ -8,7 +8,14 @@ const markdownComponents = {
   a(props) {
     const href = props.href || "";
     const external = /^https?:\/\//i.test(href);
-    return <a {...props} href={href} rel={external ? "nofollow noopener noreferrer" : props.rel} target={external ? "_blank" : props.target} />;
+    return (
+      <a
+        {...props}
+        href={href}
+        rel={external ? "nofollow noopener noreferrer" : props.rel}
+        target={external ? "_blank" : props.target}
+      />
+    );
   },
   img(props) {
     return <img {...props} loading="lazy" decoding="async" />;
@@ -21,10 +28,21 @@ export const Route = createFileRoute("/docs/resource/$slug")({
     return {
       meta: [
         { title: article ? `${article.title} | Shyena Docs` : "Resource | Shyena Docs" },
-        { name: "description", content: article?.description || "Engineering resource from the Shyena documentation library." },
+        {
+          name: "description",
+          content:
+            article?.description || "Engineering resource from the Shyena documentation library.",
+        },
         { property: "og:type", content: "article" },
-        { property: "og:title", content: article ? `${article.title} | Shyena Docs` : "Resource | Shyena Docs" },
-        { property: "og:description", content: article?.description || "Engineering resource from the Shyena documentation library." },
+        {
+          property: "og:title",
+          content: article ? `${article.title} | Shyena Docs` : "Resource | Shyena Docs",
+        },
+        {
+          property: "og:description",
+          content:
+            article?.description || "Engineering resource from the Shyena documentation library.",
+        },
       ],
       links: [{ rel: "canonical", href: `https://www.shyena.eu/docs/resource/${params.slug}` }],
     };
@@ -40,7 +58,12 @@ function ResourceArticle() {
     return (
       <div className="mx-auto max-w-3xl px-6 py-24 text-center">
         <h1 className="text-3xl font-bold text-[#0e172b]">Resource not found</h1>
-        <Button asChild className="mt-8"><Link to="/docs"><ArrowLeft className="mr-2 h-4 w-4" />Back to Documentation</Link></Button>
+        <Button asChild className="mt-8">
+          <Link to="/docs">
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back to Documentation
+          </Link>
+        </Button>
       </div>
     );
   }
@@ -49,12 +72,29 @@ function ResourceArticle() {
     <div className="bg-white text-slate-950">
       <section className="border-b border-slate-300 bg-[#eaf5fa]">
         <div className="mx-auto max-w-5xl px-5 py-14 sm:px-8 sm:py-20">
-          <Link to="/docs" className="inline-flex items-center gap-2 text-sm font-semibold text-slate-600 hover:text-slate-950"><ArrowLeft className="h-4 w-4" /> Documentation</Link>
+          <Link
+            to="/docs"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-slate-600 hover:text-slate-950"
+          >
+            <ArrowLeft className="h-4 w-4" /> Documentation
+          </Link>
           <div className="mt-10 max-w-4xl">
-            <p className="font-mono text-xs uppercase tracking-[0.2em] text-[#a87900]">Engineering resource</p>
-            <h1 className="mt-4 text-4xl font-bold leading-tight tracking-tight text-[#0e172b] sm:text-6xl">{article.title}</h1>
-            {article.description && <p className="mt-6 max-w-3xl text-lg leading-relaxed text-slate-600">{article.description}</p>}
-            {article.published && <p className="mt-5 font-mono text-xs uppercase tracking-[0.12em] text-slate-500">{article.published}</p>}
+            <p className="font-mono text-xs uppercase tracking-[0.2em] text-[#a87900]">
+              Engineering resource
+            </p>
+            <h1 className="mt-4 text-4xl font-bold leading-tight tracking-tight text-[#0e172b] sm:text-6xl">
+              {article.title}
+            </h1>
+            {article.description && (
+              <p className="mt-6 max-w-3xl text-lg leading-relaxed text-slate-600">
+                {article.description}
+              </p>
+            )}
+            {article.published && (
+              <p className="mt-5 font-mono text-xs uppercase tracking-[0.12em] text-slate-500">
+                {article.published}
+              </p>
+            )}
           </div>
         </div>
       </section>
@@ -65,10 +105,21 @@ function ResourceArticle() {
         </div>
 
         <div className="mt-16 border-y-2 border-slate-950 bg-[#f5f8fc] px-6 py-8 sm:px-8">
-          <p className="text-sm leading-7 text-slate-600">Originally published in the EU Engineers engineering library. This copy is maintained as part of the Shyena documentation knowledge base.</p>
+          <p className="text-sm leading-7 text-slate-600">
+            Originally published in the EU Engineers engineering library. This copy is maintained as
+            part of the Shyena documentation knowledge base.
+          </p>
           <div className="mt-6 flex flex-wrap gap-3">
-            <Button asChild className="bg-slate-950 text-white hover:bg-slate-800"><Link to="/docs/evaluation-model">Explore the Shyena evaluation model <ArrowRight className="h-4 w-4" /></Link></Button>
-            <Button asChild variant="outline"><a href={article.sourceUrl} target="_blank" rel="noopener noreferrer">View original article</a></Button>
+            <Button asChild className="bg-slate-950 text-white hover:bg-slate-800">
+              <Link to="/docs/evaluation-model">
+                Explore the Shyena evaluation model <ArrowRight className="h-4 w-4" />
+              </Link>
+            </Button>
+            <Button asChild variant="outline">
+              <a href={article.sourceUrl} target="_blank" rel="noopener noreferrer">
+                View original article
+              </a>
+            </Button>
           </div>
         </div>
       </article>
