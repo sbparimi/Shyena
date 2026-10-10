@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import { load } from "cheerio";
+import prettier from "prettier";
 
 const SOURCE = "https://euengineers.eu/resources";
 const HOST = "euengineers.eu";
@@ -106,7 +107,11 @@ unique.sort((a, b) => a.title.localeCompare(b.title));
 if (!unique.length)
   throw new Error("Article discovery succeeded, but no article content could be extracted.");
 
-const output = `// Generated from ${SOURCE}. Do not edit manually.\nexport const EUENGINEERS_RESOURCES = ${JSON.stringify(unique, null, 2)} as const;\n`;
+const rawOutput = `// Generated from ${SOURCE}. Do not edit manually.\nexport const EUENGINEERS_RESOURCES = ${JSON.stringify(unique, null, 2)} as const;\n`;
+const output = await prettier.format(rawOutput, {
+  ...(await prettier.resolveConfig("src/data/euengineers-resources.ts")),
+  parser: "typescript",
+});
 fs.mkdirSync("src/data", { recursive: true });
 fs.writeFileSync("src/data/euengineers-resources.ts", output);
 
