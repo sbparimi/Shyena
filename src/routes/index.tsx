@@ -238,12 +238,11 @@ function HomePage() {
             maskImage: "linear-gradient(to bottom,black,transparent 92%)",
           }}
         />
-        <div
-          className="relative mx-auto max-w-[1132px] px-5 pb-8 pt-14 sm:px-8 sm:pt-20 lg:px-12 lg:pt-24"
-        >
+        <div className="relative mx-auto max-w-[1132px] px-5 pb-8 pt-14 sm:px-8 sm:pt-20 lg:px-12 lg:pt-24">
           <div className="flex flex-wrap items-center gap-2 font-mono text-[10px] uppercase tracking-[.1em] text-[var(--warp-subtle)] sm:text-[11px]">
             <span className="inline-flex items-center gap-2 text-[var(--warp-blue)]">
-              <span className="h-1.5 w-1.5 rounded-full bg-[var(--warp-blue)]" /> AGENTIC SDLC CONTROL PLANE
+              <span className="h-1.5 w-1.5 rounded-full bg-[var(--warp-blue)]" />
+              AGENTIC SDLC CONTROL PLANE
             </span>
             <span className="text-[#b7b0c7]">/</span>
             <span>Plan · build · test · secure · release · learn</span>
@@ -698,8 +697,8 @@ function HomePage() {
                 <span className="font-mono text-xs text-[#302940]">assurance-config</span>
               </div>
               <span className="font-mono text-[9px] text-[var(--warp-subtle)]">
-                  CONCEPTUAL CONFIGURATION
-                </span>
+                CONCEPTUAL CONFIGURATION
+              </span>
             </div>
             <div className="flex flex-wrap gap-1 border-b border-[#e5e5e5] bg-[var(--warp-surface-soft)] px-3 py-2">
               {configTabs.map((tab) => (
