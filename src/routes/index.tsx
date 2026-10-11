@@ -697,7 +697,9 @@ function HomePage() {
                 <GitBranch className="h-4 w-4 text-[#2b2bff]" />
                 <span className="font-mono text-xs text-[#302940]">assurance-config</span>
               </div>
-              <span className="font-mono text-[9px] text-[var(--warp-subtle)]">CONCEPTUAL CONFIGURATION</span>
+              <span className="font-mono text-[9px] text-[var(--warp-subtle)]">
+                  CONCEPTUAL CONFIGURATION
+                </span>
             </div>
             <div className="flex flex-wrap gap-1 border-b border-[#e5e5e5] bg-[var(--warp-surface-soft)] px-3 py-2">
               {configTabs.map((tab) => (
@@ -793,7 +795,9 @@ function HomePage() {
                     className={`group min-w-[245px] max-w-[300px] flex-1 snap-start rounded-xl border p-5 text-left transition duration-200 sm:min-w-[270px] ${selected ? "border-[#2b2bff] bg-[#171717]" : "border-[var(--warp-border)] bg-white hover:border-[#2b2bff]"}`}
                   >
                     <div className="flex items-center justify-between gap-3">
-                      <span className="font-mono text-[10px] text-[var(--warp-subtle)]">{n} / 06</span>
+                      <span className="font-mono text-[10px] text-[var(--warp-subtle)]">
+                        {n} / 06
+                      </span>
                       <ArrowDownRight
                         className={`h-4 w-4 transition group-hover:translate-x-0.5 group-hover:translate-y-0.5 ${selected ? "text-[var(--warp-blue)]" : "text-[var(--warp-subtle)]"}`}
                       />
@@ -1243,7 +1247,9 @@ function HomePage() {
                   />
                 </button>
                 {openFaq === i && (
-                  <p className="max-w-3xl pb-5 pr-8 text-sm leading-6 text-[var(--warp-muted)]">{answer}</p>
+                  <p className="max-w-3xl pb-5 pr-8 text-sm leading-6 text-[var(--warp-muted)]">
+                    {answer}
+                  </p>
                 )}
               </div>
             ))}
