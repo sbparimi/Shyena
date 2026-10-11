@@ -319,7 +319,7 @@ function Marketplace() {
     setError("");
     try {
       const timeout = new Promise<never>((_, reject) => {
-        setTimeout(() => reject(new Error("Candidate directory request timed out.")), 8000);
+        setTimeout(() => reject(new Error("Candidate directory request timed out.")), 4000);
       });
       const rows = await Promise.race([
         searchCandidates({ ...filters, page: 1, pageSize: 24 }),
