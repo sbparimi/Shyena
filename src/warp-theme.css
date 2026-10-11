@@ -581,6 +581,66 @@ body > div > header input {
   color: var(--warp-text) !important;
   border-color: var(--warp-border) !important;
 }
+#page-content.site-theme :where(a.inline-flex, button.inline-flex) {
+  min-height: 40px;
+  border-radius: 8px !important;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  box-shadow: none !important;
+  transition: color 160ms ease, background-color 160ms ease, border-color 160ms ease;
+}
+#page-content.site-theme .shyena-action-primary,
+#page-content.site-theme [data-shyena-button="primary"] {
+  background: #f5f5f5 !important;
+  color: #101011 !important;
+  border: 1px solid #f5f5f5 !important;
+  box-shadow: none !important;
+}
+#page-content.site-theme .shyena-action-primary:hover,
+#page-content.site-theme [data-shyena-button="primary"]:hover {
+  background: #dcdce0 !important;
+  color: #101011 !important;
+  border-color: #dcdce0 !important;
+}
+#page-content.site-theme .shyena-action-secondary,
+#page-content.site-theme .shyena-action-dark,
+#page-content.site-theme [data-shyena-button="secondary"],
+#page-content.site-theme [data-shyena-button="ghost"],
+#page-content.site-theme [data-shyena-button="link"] {
+  background: rgba(255, 255, 255, 0.035) !important;
+  color: var(--warp-text) !important;
+  border: 1px solid var(--warp-border-strong) !important;
+  box-shadow: none !important;
+}
+#page-content.site-theme .shyena-action-secondary:hover,
+#page-content.site-theme .shyena-action-dark:hover,
+#page-content.site-theme [data-shyena-button="secondary"]:hover,
+#page-content.site-theme [data-shyena-button="ghost"]:hover,
+#page-content.site-theme [data-shyena-button="link"]:hover {
+  background: rgba(255, 255, 255, 0.075) !important;
+  color: var(--warp-text) !important;
+  border-color: #5a5a63 !important;
+}
+#page-content.site-theme [data-shyena-button="destructive"] {
+  background: #dc2626 !important;
+  color: #fff !important;
+  border-color: #dc2626 !important;
+}
+#page-content.site-theme input,
+#page-content.site-theme textarea,
+#page-content.site-theme select,
+#page-content.site-theme .reference-page-theme input,
+#page-content.site-theme .reference-page-theme textarea,
+#page-content.site-theme .reference-page-theme select {
+  background: #101011 !important;
+  color: var(--warp-text) !important;
+  border-color: var(--warp-border-strong) !important;
+}
+#page-content.site-theme input::placeholder,
+#page-content.site-theme textarea::placeholder,
+#page-content.site-theme select:invalid {
+  color: var(--warp-subtle) !important;
+}
 body > div > footer {
   background: var(--warp-bg) !important;
   color: var(--warp-text) !important;
