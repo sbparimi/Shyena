@@ -48,8 +48,6 @@
   color: var(--warp-ink);
   font-size: 1.02rem;
 }
-  display: none !important;
-}
 
 /* Media player and its control overlays remain dark by design. */
 .shyena-video-shell {
