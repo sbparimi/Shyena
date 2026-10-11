@@ -798,7 +798,7 @@ function HomePage() {
                     <p className="mt-3 text-sm leading-6 text-[var(--warp-muted)]">{body}</p>
                     <div className="mt-6 flex items-center gap-2 border-t border-[var(--warp-border)] pt-3 font-mono text-[9px] uppercase tracking-[.12em] text-[var(--warp-subtle)]">
                       <span
-                        className={`h-1.5 w-1.5 rounded-full ${selected ? "bg-[#c7a8ff]" : "bg-[var(--warp-subtle)]"}`}
+                        className={`h-1.5 w-1.5 rounded-full ${selected ? "bg-[var(--warp-blue)]" : "bg-[var(--warp-subtle)]"}`}
                       />
                       {selected ? "Selected stage" : "Inspect stage"}
                     </div>
