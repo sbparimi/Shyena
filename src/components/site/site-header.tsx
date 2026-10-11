@@ -54,8 +54,10 @@ export function SiteHeader() {
     location.pathname === to || (to !== "/" && location.pathname.startsWith(to + "/"));
 
   return (
-    <header data-shyena-chrome="header" className={`sticky top-0 z-50 border-b transition-colors duration-200 ${scrolled ? "is-scrolled" : ""}`}>
-
+    <header
+      data-shyena-chrome="header"
+      className={`sticky top-0 z-50 border-b transition-colors duration-200 ${scrolled ? "is-scrolled" : ""}`}
+    >
       <div className="mx-auto flex h-[68px] w-full max-w-[1132px] items-center px-6">
         <Link to="/" aria-label="Shyena home" onClick={closeAll} className="shrink-0">
           <Logo size="header" theme="dark" />
@@ -84,9 +86,7 @@ export function SiteHeader() {
           >
             <Search className="h-[17px] w-[17px]" />
             <span className="hidden xl:inline text-[12px]">Search</span>
-            <kbd
-              className="hidden rounded-sm border px-1.5 py-0.5 font-mono text-[9px] xl:inline shyena-search-shortcut"
-            >
+            <kbd className="hidden rounded-sm border px-1.5 py-0.5 font-mono text-[9px] xl:inline shyena-search-shortcut">
               ⌘K
             </kbd>
           </button>
@@ -109,9 +109,7 @@ export function SiteHeader() {
         </button>
       </div>
       {mobileOpen && (
-        <div
-          className="border-t px-5 pb-6 pt-3 lg:hidden shyena-mobile-panel"
-        >
+        <div className="border-t px-5 pb-6 pt-3 lg:hidden shyena-mobile-panel">
           <nav aria-label="Mobile navigation" className="grid gap-1">
             {NAV.map(([label, to]) => (
               <Link
