@@ -3,7 +3,7 @@ type LogoProps = {
   theme?: "light" | "dark";
 };
 
-export function Logo({ size = "header", theme = "light" }: LogoProps) {
+export function Logo({ size = "header" }: LogoProps) {
   const mark = size === "footer" ? "h-10 w-9" : "h-8 w-7 sm:h-9 sm:w-8";
   const word = size === "footer" ? "text-[29px]" : "text-[25px] sm:text-[28px]";
 
