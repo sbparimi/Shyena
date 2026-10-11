@@ -22,7 +22,7 @@ if (root.includes("enterpriseTypographyCss")) {
 if (/^\s*(?:html|body)\s*[,{]/m.test(siteTheme)) {
   failures.push("site-theme.css must not declare global html/body theme rules.");
 }
-if (/\.site-theme\s*:where\(\s*h1/i.test(siteTheme)) {
+if (siteTheme.includes("h1")) {
   failures.push("site-theme.css must not define global heading typography.");
 }
 if (typographyTheme.trim() !== "/* Typography is owned by the canonical warp-theme.css design system. */") {
