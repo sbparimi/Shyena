@@ -238,7 +238,9 @@ function HomePage() {
             maskImage: "linear-gradient(to bottom,black,transparent 92%)",
           }}
         />
-        <div className="relative mx-auto max-w-[1132px] px-5 pb-8 pt-14 sm:px-8 sm:pt-20 lg:px-12 lg:pt-24">
+        <div
+          className="relative mx-auto max-w-[1132px] px-5 pb-8 pt-14 sm:px-8 sm:pt-20 lg:px-12 lg:pt-24"
+        >
           <div className="flex flex-wrap items-center gap-2 font-mono text-[10px] uppercase tracking-[.1em] text-[var(--warp-subtle)] sm:text-[11px]">
             <span className="inline-flex items-center gap-2 text-[var(--warp-blue)]">
               <span className="h-1.5 w-1.5 rounded-full bg-[var(--warp-blue)]" /> AGENTIC SDLC CONTROL PLANE
@@ -609,7 +611,9 @@ function HomePage() {
                           <p className="mt-1 text-[11px] font-semibold text-[var(--warp-ink)]">
                             {event.text}
                           </p>
-                          <p className="mt-0.5 text-[10px] text-[var(--warp-subtle)]">{event.sub}</p>
+                          <p className="mt-0.5 text-[10px] text-[var(--warp-subtle)]">
+                            {event.sub}
+                          </p>
                         </div>
                       </div>
                     ))}
@@ -1146,7 +1150,10 @@ function HomePage() {
                     "Policy boundaries checked",
                     "Human approval recorded",
                   ].map((item) => (
-                    <div key={item} className="flex items-center gap-2 text-xs text-[var(--warp-ink)]">
+                    <div
+                      key={item}
+                      className="flex items-center gap-2 text-xs text-[var(--warp-ink)]"
+                    >
                       <LockKeyhole className="h-3.5 w-3.5 text-[#2b2bff]" />
                       {item}
                     </div>
@@ -1192,7 +1199,10 @@ function HomePage() {
                 text: "Bring test results, policy findings and approval into one decision.",
               },
             ].map(({ icon: Icon, title, text }) => (
-              <article key={title} className="rounded-lg border border-[var(--warp-border)] bg-[var(--warp-canvas)] p-5">
+              <article
+                key={title}
+                className="rounded-lg border border-[var(--warp-border)] bg-[var(--warp-canvas)] p-5"
+              >
                 <Icon className="h-4 w-4 text-[#2b2bff]" />
                 <h3 className="mt-5 text-base font-semibold">{title}</h3>
                 <p className="mt-2 text-sm leading-6 text-[var(--warp-muted)]">{text}</p>
