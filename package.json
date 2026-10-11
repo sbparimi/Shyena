@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite dev",
-    "build": "node scripts/generate-public-content.mjs && vite build",
-    "build:dev": "node scripts/generate-public-content.mjs && vite build --mode development",
+    "build": "node scripts/validate-theme-contract.mjs && node scripts/generate-public-content.mjs && vite build",
+    "build:dev": "node scripts/validate-theme-contract.mjs && node scripts/generate-public-content.mjs && vite build --mode development",
     "preview": "vite preview",
     "lint": "eslint . && node scripts/validate-theme-contract.mjs",
     "format": "prettier --write .",
