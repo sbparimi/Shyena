@@ -19,10 +19,10 @@ if (siteThemePosition >= 0 && canonicalThemePosition <= siteThemePosition) {
 if (root.includes("enterpriseTypographyCss")) {
   failures.push("Remove the competing enterprise typography stylesheet from the root cascade.");
 }
-if (/^\\s*(?:html|body)\\s*[,\\{]/m.test(siteTheme)) {
+if (/^\s*(?:html|body)\s*[,{]/m.test(siteTheme)) {
   failures.push("site-theme.css must not declare global html/body theme rules.");
 }
-if (/\\.site-theme\\s*:where\\(\\s*h1/i.test(siteTheme)) {
+if (/\.site-theme\s*:where\(\s*h1/i.test(siteTheme)) {
   failures.push("site-theme.css must not define global heading typography.");
 }
 if (typographyTheme.trim() !== "/* Typography is owned by the canonical warp-theme.css design system. */") {
@@ -42,12 +42,11 @@ for (const token of [
   if (!canonicalTheme.includes(token)) failures.push(`Canonical theme is missing token ${token}`);
 }
 
-for (const hook of [
-  'data-shyena-chrome="header"',
-  'data-shyena-chrome="footer"',
-]) {
-  if (!root.includes(hook) && !read("../src/components/site/site-header.tsx").includes(hook) &&
-      !read("../src/components/site/site-footer.tsx").includes(hook)) {
+const header = read("../src/components/site/site-header.tsx");
+const footer = read("../src/components/site/site-footer.tsx");
+
+for (const hook of ['data-shyena-chrome="header"', 'data-shyena-chrome="footer"']) {
+  if (!root.includes(hook) && !header.includes(hook) && !footer.includes(hook)) {
     failures.push(`Expected semantic theme hook ${hook} was not found.`);
   }
 }
@@ -57,5 +56,7 @@ if (failures.length) {
   for (const failure of failures) console.error(`- ${failure}`);
   process.exitCode = 1;
 } else {
-  console.log("Theme contract passed: one canonical theme, stable chrome hooks, and ordered CSS cascade.");
+  console.log(
+    "Theme contract passed: one canonical theme, stable chrome hooks, and ordered CSS cascade.",
+  );
 }
