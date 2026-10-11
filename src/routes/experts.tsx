@@ -318,7 +318,13 @@ function Marketplace() {
     setLoading(true);
     setError("");
     try {
-      const rows = await searchCandidates({ ...filters, page: 1, pageSize: 24 });
+      const timeout = new Promise<never>((_, reject) => {
+        setTimeout(() => reject(new Error("Candidate directory request timed out.")), 8000);
+      });
+      const rows = await Promise.race([
+        searchCandidates({ ...filters, page: 1, pageSize: 24 }),
+        timeout,
+      ]);
       setCandidates(rows);
       setTotal(rows[0]?.total_count ?? 0);
     } catch {
@@ -348,9 +354,9 @@ function Marketplace() {
             <div className="font-mono text-[10px] font-bold uppercase tracking-[.18em] text-[#e87512]">
               ASSURANCE EXPERTISE DIRECTORY
             </div>
-            <h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em] sm:text-5xl">
+            <h1 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em] sm:text-5xl">
               Find the capability your AI system needs.
-            </h2>
+            </h1>
             <p className="mt-4 text-base leading-7 text-[#69707d]">
               Search published specialist profiles by capability, location, domain, work model and
               availability. Candidate resumes are stored as private PDF assets in Supabase Storage.
