@@ -54,16 +54,15 @@ export function SiteHeader() {
     location.pathname === to || (to !== "/" && location.pathname.startsWith(to + "/"));
 
   return (
-    <header
-      className={`sticky top-0 z-50 border-b backdrop-blur-xl transition-shadow duration-300 ${`bg-white/95 ${scrolled ? "border-[#dfe3ea] shadow-[0_8px_30px_-22px_rgba(23,35,63,.16)]" : "border-[#e8eaf0]"}`}`}
-    >
-      <div className="mx-auto flex h-[68px] w-full max-w-[1480px] items-center px-5 sm:px-7 lg:px-8 xl:px-10">
+    <header data-shyena-chrome="header" className={`sticky top-0 z-50 border-b transition-colors duration-200 ${scrolled ? "is-scrolled" : ""}`}>
+
+      <div className="mx-auto flex h-[68px] w-full max-w-[1132px] items-center px-6">
         <Link to="/" aria-label="Shyena home" onClick={closeAll} className="shrink-0">
           <Logo size="header" theme="dark" />
         </Link>
         <nav
           aria-label="Primary navigation"
-          className="hidden flex-1 items-center justify-center gap-1 lg:flex"
+          className="hidden flex-1 items-center justify-center gap-1 lg:flex shyena-nav"
         >
           {NAV.map(([label, to]) => (
             <Link
@@ -94,7 +93,7 @@ export function SiteHeader() {
           <Link
             to="/demo"
             onClick={closeAll}
-            className="group inline-flex h-10 items-center justify-center gap-2 rounded-md bg-[#f4d64f] px-4 text-[13px] font-semibold text-[#211a32] transition hover:-translate-y-px hover:bg-[#ffe978]"
+            className="group inline-flex h-10 items-center justify-center gap-2 rounded-sm border px-4 text-[12px] font-medium transition shyena-demo-cta"
           >
             Book a demo <ArrowRight className="h-3.5 w-3.5" />
           </Link>
@@ -104,14 +103,14 @@ export function SiteHeader() {
           onClick={() => setMobileOpen((v) => !v)}
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
           aria-expanded={mobileOpen}
-          className={`ml-auto inline-flex h-10 w-10 items-center justify-center rounded-lg border lg:hidden ${"border-[#dfe3e8] bg-white text-[#17213f]"}`}
+          className="ml-auto inline-flex h-10 w-10 items-center justify-center rounded-sm border lg:hidden shyena-mobile-menu"
         >
           {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </div>
       {mobileOpen && (
         <div
-          className={`border-t px-5 pb-6 pt-3 shadow-[0_20px_50px_-35px_rgba(23,35,63,.45)] lg:hidden border-[#e8eaf0] bg-white`}
+          className="border-t px-5 pb-6 pt-3 lg:hidden shyena-mobile-panel"
         >
           <nav aria-label="Mobile navigation" className="grid gap-1">
             {NAV.map(([label, to]) => (
@@ -119,7 +118,7 @@ export function SiteHeader() {
                 key={to}
                 to={to}
                 onClick={closeAll}
-                className={`flex min-h-12 items-center justify-between rounded-xl border px-4 text-[14px] font-bold ${active(to) ? "border-[#d9d3ff] bg-[#f7f5ff] text-[#5145ff]" : "border-[#e5e7eb] text-[#4f5765]"}`}
+                className={`flex min-h-12 items-center justify-between rounded-sm border px-4 text-[12px] font-medium ${active(to) ? "is-active" : ""}`}
               >
                 {label}
                 <ArrowRight className="h-4 w-4" />
@@ -128,7 +127,7 @@ export function SiteHeader() {
             <Link
               to="/demo"
               onClick={closeAll}
-              className="mt-2 flex min-h-12 items-center justify-center rounded-md bg-[#f4d64f] px-4 text-[14px] font-bold text-[#211a32]"
+              className="mt-2 flex min-h-12 items-center justify-center rounded-sm border px-4 text-[12px] font-medium shyena-demo-cta"
             >
               Book a demo <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
