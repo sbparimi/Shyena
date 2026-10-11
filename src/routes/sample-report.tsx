@@ -35,8 +35,8 @@ function SampleReportPage() {
             From execution evidence to a release decision.
           </h1>
           <p className="mt-6 max-w-3xl text-lg leading-8 text-[#555]">
-            This illustrative report shows the structure of an assurance record. It contains no
-            live customer run, production result, customer name or measured performance claim.
+            This illustrative report shows the structure of an assurance record. It contains no live
+            customer run, production result, customer name or measured performance claim.
           </p>
           <div className="mt-8 inline-flex items-center gap-2 border border-[#b9b9b9] bg-white px-3 py-2 text-sm font-medium">
             <CheckCircle2 className="h-4 w-4" /> Demonstration data — not a real execution
@@ -57,15 +57,35 @@ function SampleReportPage() {
             <table className="w-full min-w-[620px] border-collapse text-left text-sm">
               <thead className="bg-[#f6f6f6]">
                 <tr>
-                  <th scope="col" className="border-b border-[#e5e5e5] p-4 font-semibold">Evidence layer</th>
-                  <th scope="col" className="border-b border-[#e5e5e5] p-4 font-semibold">Status</th>
-                  <th scope="col" className="border-b border-[#e5e5e5] p-4 font-semibold">Expected evidence</th>
+                  <th
+                    scope="col"
+                    className="border-b border-[#e5e5e5] p-4 font-semibold"
+                  >
+                    Evidence layer
+                  </th>
+                  <th
+                    scope="col"
+                    className="border-b border-[#e5e5e5] p-4 font-semibold"
+                  >
+                    Status
+                  </th>
+                  <th
+                    scope="col"
+                    className="border-b border-[#e5e5e5] p-4 font-semibold"
+                  >
+                    Expected evidence
+                  </th>
                 </tr>
               </thead>
               <tbody>
                 {evidence.map(([layer, status, detail]) => (
                   <tr key={layer}>
-                    <th scope="row" className="border-b border-[#e5e5e5] p-4 font-medium">{layer}</th>
+                    <th
+                      scope="row"
+                      className="border-b border-[#e5e5e5] p-4 font-medium"
+                    >
+                      {layer}
+                    </th>
                     <td className="border-b border-[#e5e5e5] p-4 text-[#555]">{status}</td>
                     <td className="border-b border-[#e5e5e5] p-4 text-[#555]">{detail}</td>
                   </tr>
@@ -74,9 +94,16 @@ function SampleReportPage() {
             </table>
           </div>
         </section>
-        <section className="mt-12 border border-[#e5e5e5] p-6 sm:p-8" aria-labelledby="verdict-heading">
-          <div className="font-mono text-xs uppercase tracking-[.12em] text-[#555]">Release disposition</div>
-          <h2 id="verdict-heading" className="mt-3 text-2xl font-semibold">No verdict generated</h2>
+        <section
+          className="mt-12 border border-[#e5e5e5] p-6 sm:p-8"
+          aria-labelledby="verdict-heading"
+        >
+          <div className="font-mono text-xs uppercase tracking-[.12em] text-[#555]">
+            Release disposition
+          </div>
+          <h2 id="verdict-heading" className="mt-3 text-2xl font-semibold">
+            No verdict generated
+          </h2>
           <p className="mt-3 max-w-3xl leading-7 text-[#555]">
             Because this is sample content and no test run was executed, this page does not claim
             PASS, FAIL or approval. A production verdict must be derived from recorded evidence and
@@ -84,13 +111,22 @@ function SampleReportPage() {
           </p>
         </section>
         <div className="mt-10 flex flex-wrap gap-3">
-          <Link to="/docs/reporting" className="inline-flex min-h-11 items-center gap-2 border border-[#171717] bg-[#eff57a] px-4 text-sm font-medium text-[#171717]">
+          <Link
+            to="/docs/reporting"
+            className="inline-flex min-h-11 items-center gap-2 border border-[#171717] bg-[#eff57a] px-4 text-sm font-medium text-[#171717]"
+          >
             Read reporting documentation <ArrowRight className="h-4 w-4" />
           </Link>
-          <Link to="/contact" className="inline-flex min-h-11 items-center gap-2 border border-[#b9b9b9] px-4 text-sm font-medium text-[#171717]">
+          <Link
+            to="/contact"
+            className="inline-flex min-h-11 items-center gap-2 border border-[#b9b9b9] px-4 text-sm font-medium text-[#171717]"
+          >
             Discuss an assurance walkthrough
           </Link>
-          <Link to="/" className="inline-flex min-h-11 items-center gap-2 px-3 text-sm font-medium text-[#555]">
+          <Link
+            to="/"
+            className="inline-flex min-h-11 items-center gap-2 px-3 text-sm font-medium text-[#555]"
+          >
             <ArrowLeft className="h-4 w-4" /> Back to Shyena
           </Link>
         </div>
