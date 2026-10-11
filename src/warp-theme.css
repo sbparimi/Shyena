@@ -326,6 +326,11 @@ body {
 #page-content.site-theme :where(section, article, aside, [role="tabpanel"]) {
   border-color: var(--warp-border);
 }
+#page-content.site-theme [class*="bg-white"]:not(a):not(button):not(input):not(textarea):not(select),
+#page-content.site-theme [class*="bg-slate-50"]:not(a):not(button):not(input):not(textarea):not(select),
+#page-content.site-theme [class*="bg-slate-100"]:not(a):not(button):not(input):not(textarea):not(select),
+#page-content.site-theme [class*="bg-gray-50"]:not(a):not(button):not(input):not(textarea):not(select),
+#page-content.site-theme [class*="bg-gray-100"]:not(a):not(button):not(input):not(textarea):not(select),
 #page-content.site-theme section[class*="bg-white"],
 #page-content.site-theme section[class*="bg-slate-50"],
 #page-content.site-theme section[class*="bg-slate-100"],
@@ -588,7 +593,7 @@ body > div > footer h3 {
 body > div > footer p,
 body > div > footer a,
 body > div > footer div {
-  color: var(--warp-muted);
+  color: var(--warp-muted) !important;
 }
 body > div > footer a:hover {
   color: var(--warp-accent) !important;
