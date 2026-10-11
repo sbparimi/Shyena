@@ -69,7 +69,7 @@ export function SiteHeader() {
               key={to}
               to={to}
               onClick={closeAll}
-              className={`inline-flex h-10 items-center rounded-lg px-3.5 text-[13px] font-semibold transition ${active(to) ? "bg-[#efedff] text-[#5145ff]" : "text-[#4f5765] hover:bg-[#f7f5ff] hover:text-[#5145ff]"}`}
+              className={`inline-flex h-10 items-center rounded-sm px-3.5 text-[11px] font-medium uppercase tracking-[.025em] transition ${active(to) ? "is-active" : ""}`}
             >
               {label}
             </Link>
@@ -80,12 +80,12 @@ export function SiteHeader() {
             type="button"
             onClick={() => setSearchOpen(true)}
             aria-label="Search Shyena"
-            className="inline-flex h-10 items-center gap-2 rounded-lg border border-transparent px-2.5 text-[#5d6573] transition hover:border-[#e3e0ee] hover:bg-[#f7f5ff] hover:text-[#5145ff]"
+            className="inline-flex h-10 items-center gap-2 rounded-sm border border-transparent px-2.5 transition shyena-search-control"
           >
             <Search className="h-[17px] w-[17px]" />
             <span className="hidden xl:inline text-[12px]">Search</span>
             <kbd
-              className={`hidden rounded border px-1.5 py-0.5 font-mono text-[9px] xl:inline border-[#dfe3e8] bg-white text-[#8b929d]`}
+              className="hidden rounded-sm border px-1.5 py-0.5 font-mono text-[9px] xl:inline shyena-search-shortcut"
             >
               ⌘K
             </kbd>
