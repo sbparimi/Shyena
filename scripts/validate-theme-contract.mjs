@@ -25,7 +25,10 @@ if (/^\s*(?:html|body)\s*[,{]/m.test(siteTheme)) {
 if (siteTheme.includes("h1")) {
   failures.push("site-theme.css must not define global heading typography.");
 }
-if (typographyTheme.trim() !== "/* Typography is owned by the canonical warp-theme.css design system. */") {
+if (
+  typographyTheme.trim() !==
+  "/* Typography is owned by the canonical warp-theme.css design system. */"
+) {
   failures.push("enterprise-typography.css must remain a compatibility stub, not a second theme.");
 }
 
