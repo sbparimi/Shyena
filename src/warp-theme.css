@@ -382,6 +382,11 @@ body {
 #page-content.site-theme [class*="text-white"]:not(pre):not(code) {
   color: var(--warp-ink) !important;
 }
+#page-content.site-theme pre [class*="text-white"],
+#page-content.site-theme [class*="bg-[#080809]"] [class*="text-white"],
+#page-content.site-theme [class*="bg-[#1a1522]"] [class*="text-white"] {
+  color: #ffffff !important;
+}
 #page-content.site-theme [class*="bg-white/"] {
   background: rgba(26, 21, 34, 0.035) !important;
 }
@@ -455,6 +460,9 @@ body > div > header input {
   background: transparent !important;
   color: var(--warp-ink) !important;
   border-color: var(--warp-border) !important;
+}
+body > div > footer > div.mx-auto {
+  max-width: 1132px !important;
 }
 body > div > footer {
   background: var(--warp-canvas) !important;
