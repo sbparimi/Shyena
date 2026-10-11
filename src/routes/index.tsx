@@ -97,7 +97,7 @@ const workflowStages = [
     label: "Understand",
     title: "Know what changed before you test.",
     body: "Map components, dependencies and business-critical journeys to focus assurance where change creates risk.",
-    color: "#5145ff",
+    color: "#2b2bff",
     icon: Layers3,
     detail: "Change surface mapped",
     status: "MAPPED",
@@ -226,8 +226,8 @@ function HomePage() {
   const selectedCoverage = coverage[activeCoverage] ?? coverage[0]!;
 
   return (
-    <div className="shyena-factory-home overflow-hidden bg-[#fbfaff] text-[#1a1527]">
-      <section className="relative border-b border-[#e8e4f0] bg-[linear-gradient(180deg,#f7f5ff_0%,#fcfbff_82%)]">
+    <div className="shyena-factory-home overflow-hidden bg-[var(--warp-canvas)] text-[var(--warp-ink)]">
+      <section className="relative border-b border-[var(--warp-border)] bg-[linear-gradient(180deg,#f7f5ff_0%,#fcfbff_82%)]">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 opacity-60"
@@ -238,22 +238,23 @@ function HomePage() {
             maskImage: "linear-gradient(to bottom,black,transparent 92%)",
           }}
         />
-        <div className="relative mx-auto max-w-[1440px] px-5 pb-8 pt-14 sm:px-8 sm:pt-20 lg:px-12 lg:pt-24">
-          <div className="flex flex-wrap items-center gap-2 font-mono text-[10px] uppercase tracking-[.18em] text-[#625a75] sm:text-[11px]">
-            <span className="inline-flex items-center gap-2 text-[#5145ff]">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#5145ff]" /> AGENTIC SDLC CONTROL PLANE
+        <div className="relative mx-auto max-w-[1132px] px-5 pb-8 pt-14 sm:px-8 sm:pt-20 lg:px-12 lg:pt-24">
+          <div className="flex flex-wrap items-center gap-2 font-mono text-[10px] uppercase tracking-[.1em] text-[var(--warp-subtle)] sm:text-[11px]">
+            <span className="inline-flex items-center gap-2 text-[var(--warp-blue)]">
+              <span className="h-1.5 w-1.5 rounded-full bg-[var(--warp-blue)]" />
+              AGENTIC SDLC CONTROL PLANE
             </span>
             <span className="text-[#b7b0c7]">/</span>
             <span>Plan · build · test · secure · release · learn</span>
           </div>
           <div className="mt-8 grid gap-8 lg:grid-cols-[1.15fr_.65fr] lg:items-end">
-            <h1 className="max-w-5xl text-[clamp(3.1rem,7.3vw,7.6rem)] font-medium leading-[.93] tracking-[-.075em]">
+            <h1 className="max-w-5xl text-[clamp(3.1rem,7.3vw,7.6rem)] font-medium leading-[1.02] tracking-[-.06em]">
               The Agentic SDLC
               <br />
-              <span className="text-[#5145ff]">from plan to production.</span>
+              <span className="text-[#2b2bff]">from plan to production.</span>
             </h1>
             <div className="max-w-xl pb-2 lg:justify-self-end">
-              <p className="text-base leading-7 text-[#575064] sm:text-lg sm:leading-8">
+              <p className="text-base leading-7 text-[var(--warp-muted)] sm:text-lg sm:leading-8">
                 Move beyond isolated coding agents and test bots. Connect planning, implementation,
                 testing, security, release and operational feedback in one governed engineering
                 workflow—with evidence behind every critical decision.
@@ -261,53 +262,53 @@ function HomePage() {
               <div className="mt-6 flex flex-wrap gap-3">
                 <Link
                   to="/platform"
-                  className="group inline-flex h-12 items-center gap-2 rounded-md bg-[#5145ff] px-5 text-sm font-semibold text-white shadow-[0_8px_22px_-14px_rgba(81,69,255,.8)] transition hover:-translate-y-0.5 hover:bg-[#3f32e8]"
+                  className="group inline-flex h-12 items-center gap-2 rounded-md bg-[#2b2bff] px-5 text-sm font-semibold text-white shadow-[0_8px_22px_-14px_rgba(81,69,255,.8)] transition hover:-translate-y-0.5 hover:bg-[#3f32e8]"
                 >
                   Explore the platform{" "}
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                 </Link>
                 <Link
                   to="/demo"
-                  className="inline-flex h-12 items-center gap-2 rounded-md border border-[#d7d1e5] bg-white/80 px-5 text-sm font-semibold text-[#2d263d] transition hover:border-[#a9a0c3] hover:bg-white"
+                  className="inline-flex h-12 items-center gap-2 rounded-md border border-[#d7d1e5] bg-white/80 px-5 text-sm font-semibold text-[var(--warp-ink)] transition hover:border-[#a9a0c3] hover:bg-white"
                 >
-                  <Activity className="h-4 w-4 text-[#5145ff]" /> See an example run
+                  <Activity className="h-4 w-4 text-[#2b2bff]" /> See an example run
                 </Link>
               </div>
             </div>
           </div>
 
-          <div className="mt-14 border-y border-[#dcd6e8] py-3">
-            <div className="flex flex-wrap items-center justify-between gap-3 font-mono text-[9px] uppercase tracking-[.15em] text-[#6e667e] sm:text-[10px]">
+          <div className="mt-14 border-y border-[var(--warp-border)] py-3">
+            <div className="flex flex-wrap items-center justify-between gap-3 font-mono text-[9px] uppercase tracking-[.15em] text-[var(--warp-subtle)] sm:text-[10px]">
               <span className="inline-flex items-center gap-2">
-                <Workflow className="h-3.5 w-3.5 text-[#5145ff]" /> FIG. 01 / AGENTIC SDLC
+                <Workflow className="h-3.5 w-3.5 text-[#2b2bff]" /> FIG. 01 / AGENTIC SDLC
               </span>
               <span>INTERACTIVE SCHEMATIC · SYNTHETIC SAMPLE DATA</span>
             </div>
           </div>
 
-          <div className="relative mt-5 overflow-hidden rounded-xl border border-[#d8d2e5] bg-white/90 shadow-[0_30px_90px_-60px_rgba(54,38,99,.38)]">
-            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#e7e2ef] px-4 py-3 sm:px-5">
+          <div className="relative mt-5 overflow-hidden rounded-sm border border-[var(--warp-border)] bg-white/90 shadow-[0_30px_90px_-60px_rgba(54,38,99,.38)]">
+            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--warp-border)] px-4 py-3 sm:px-5">
               <div className="flex items-center gap-2.5">
-                <div className="flex h-8 w-8 items-center justify-center rounded-md bg-[#efedff] text-[#5145ff]">
+                <div className="flex h-8 w-8 items-center justify-center rounded-md bg-[var(--warp-surface-soft)] text-[#2b2bff]">
                   <Workflow className="h-4 w-4" />
                 </div>
                 <div>
                   <div className="text-xs font-semibold">Change → system → evidence</div>
-                  <div className="mt-0.5 font-mono text-[9px] text-[#82798f]">
+                  <div className="mt-0.5 font-mono text-[9px] text-[var(--warp-subtle)]">
                     SCENARIO / 014 · REFERENCE FLOW
                   </div>
                 </div>
               </div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-[#d9d3ff] bg-[#f6f4ff] px-2.5 py-1.5 font-mono text-[9px] uppercase tracking-[.12em] text-[#5145ff]">
+              <div className="inline-flex items-center gap-2 rounded-full border border-[var(--warp-border)] bg-[var(--warp-surface-soft)] px-2.5 py-1.5 font-mono text-[9px] uppercase tracking-[.12em] text-[#2b2bff]">
                 <span className="relative flex h-1.5 w-1.5">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#5145ff] opacity-50" />
-                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#5145ff]" />
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#2b2bff] opacity-50" />
+                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#2b2bff]" />
                 </span>{" "}
                 Observer view
               </div>
             </div>
             <div className="grid lg:grid-cols-[1.28fr_.72fr]">
-              <div className="relative min-h-[350px] overflow-hidden border-b border-[#e7e2ef] bg-[#fcfbff] sm:min-h-[430px] lg:border-b-0 lg:border-r">
+              <div className="relative min-h-[350px] overflow-hidden border-b border-[#e5e5e5] bg-[var(--warp-canvas)] sm:min-h-[430px] lg:border-b-0 lg:border-r">
                 <div
                   aria-hidden="true"
                   className="absolute inset-0 opacity-70"
@@ -333,8 +334,8 @@ function HomePage() {
                 >
                   <defs>
                     <linearGradient id="shyenaFlow" x1="0" x2="1">
-                      <stop stopColor="#5145ff" stopOpacity=".2" />
-                      <stop offset=".55" stopColor="#5145ff" stopOpacity=".8" />
+                      <stop stopColor="#2b2bff" stopOpacity=".2" />
+                      <stop offset=".55" stopColor="#2b2bff" stopOpacity=".8" />
                       <stop offset="1" stopColor="#2e9c76" stopOpacity=".8" />
                     </linearGradient>
                     <filter id="shyenaSoftGlow">
@@ -365,7 +366,7 @@ function HomePage() {
                       {i % 2 === 0 && (
                         <circle
                           r="4"
-                          fill={i === 6 ? "#2e9c76" : "#5145ff"}
+                          fill={i === 6 ? "#2e9c76" : "#2b2bff"}
                           filter="url(#shyenaSoftGlow)"
                         >
                           <animate
@@ -407,7 +408,7 @@ function HomePage() {
                       h: 80,
                       title: "NEXUS",
                       sub: "System map",
-                      tone: "#5145ff",
+                      tone: "#2b2bff",
                     },
                     {
                       x: 345,
@@ -452,14 +453,14 @@ function HomePage() {
                         height={node.h}
                         rx="8"
                         fill="#fff"
-                        stroke={activeStage === node.title.toLowerCase() ? "#5145ff" : "#d8d2e5"}
+                        stroke={activeStage === node.title.toLowerCase() ? "#2b2bff" : "#e5e5e5"}
                         strokeWidth={activeStage === node.title.toLowerCase() ? 2 : 1.2}
                       />
                       <circle cx="14" cy="15" r="3" fill={node.tone} />
                       <text
                         x="14"
                         y="38"
-                        fill="#1a1527"
+                        fill="#171717"
                         fontSize="12"
                         fontFamily="ui-monospace,monospace"
                         fontWeight="700"
@@ -509,7 +510,7 @@ function HomePage() {
                         type="button"
                         aria-pressed={chosen}
                         onClick={() => setActiveStage(item.id)}
-                        className={`inline-flex min-h-9 items-center gap-2 rounded-md border px-3 text-[10px] font-semibold transition ${chosen ? "border-[#5145ff] bg-[#5145ff] text-white shadow-sm" : "border-[#d9d3e6] bg-white/95 text-[#514a61] hover:border-[#5145ff] hover:text-[#5145ff]"}`}
+                        className={`inline-flex min-h-9 items-center gap-2 rounded-md border px-3 text-[10px] font-semibold transition ${chosen ? "border-[#2b2bff] bg-[#2b2bff] text-white shadow-sm" : "border-[var(--warp-border)] bg-white/95 text-[var(--warp-ink)] hover:border-[#2b2bff] hover:text-[#2b2bff]"}`}
                       >
                         <Icon className="h-3 w-3" />
                         {item.name}
@@ -519,31 +520,31 @@ function HomePage() {
                 </div>
               </div>
               <div className="flex min-w-0 flex-col bg-white">
-                <div className="border-b border-[#e7e2ef] px-4 py-4 sm:px-5">
+                <div className="border-b border-[#e5e5e5] px-4 py-4 sm:px-5">
                   <div className="flex items-center justify-between gap-2">
                     <span className="font-mono text-[9px] uppercase tracking-[.16em] text-[#7e758e]">
                       Selected capability / {stage.n}
                     </span>
-                    <span className="rounded border border-[#d9d3ff] bg-[#f7f5ff] px-2 py-1 font-mono text-[9px] text-[#5145ff]">
+                    <span className="rounded border border-[var(--warp-border)] bg-[var(--warp-surface-soft)] px-2 py-1 font-mono text-[9px] text-[#2b2bff]">
                       {stage.status}
                     </span>
                   </div>
                   <div className="mt-4 flex items-start gap-3">
                     <div
-                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-[#e3def1] bg-[#f6f4ff]"
+                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-[#e3def1] bg-[var(--warp-surface-soft)]"
                       style={{ color: stage.color }}
                     >
                       <stage.icon className="h-4 w-4" />
                     </div>
                     <div>
                       <h2 className="text-lg font-semibold tracking-tight">{stage.name}</h2>
-                      <p className="mt-1 text-xs text-[#746b83]">
+                      <p className="mt-1 text-xs text-[var(--warp-muted)]">
                         {stage.label} · {stage.title}
                       </p>
                     </div>
                   </div>
-                  <p className="mt-4 text-xs leading-6 text-[#61586f]">{stage.body}</p>
-                  <div className="mt-4 flex items-start gap-2 rounded-md border border-[#e8e3f0] bg-[#fbfaff] p-3 text-[11px] leading-5 text-[#3f374f]">
+                  <p className="mt-4 text-xs leading-6 text-[var(--warp-muted)]">{stage.body}</p>
+                  <div className="mt-4 flex items-start gap-2 rounded-md border border-[var(--warp-border)] bg-[var(--warp-canvas)] p-3 text-[11px] leading-5 text-[var(--warp-ink)]">
                     <CircleDot
                       className="mt-0.5 h-3.5 w-3.5 shrink-0"
                       style={{ color: stage.color }}
@@ -587,9 +588,9 @@ function HomePage() {
                     ].map((event) => (
                       <div
                         key={event.name}
-                        className="grid grid-cols-[42px_1fr] gap-3 border-t border-[#eeeaf4] py-3"
+                        className="grid grid-cols-[42px_1fr] gap-3 border-t border-[var(--warp-border)] py-3"
                       >
-                        <span className="pt-0.5 font-mono text-[9px] text-[#938ba0]">
+                        <span className="pt-0.5 font-mono text-[9px] text-[var(--warp-subtle)]">
                           {event.time}
                         </span>
                         <div>
@@ -599,32 +600,34 @@ function HomePage() {
                               style={{
                                 background:
                                   workflowStages.find((s) => s.name.toUpperCase() === event.name)
-                                    ?.color ?? "#5145ff",
+                                    ?.color ?? "#2b2bff",
                               }}
                             />
-                            <span className="font-mono text-[9px] tracking-[.1em] text-[#81788e]">
+                            <span className="font-mono text-[9px] tracking-[.1em] text-[var(--warp-subtle)]">
                               {event.name}
                             </span>
                           </div>
-                          <p className="mt-1 text-[11px] font-semibold text-[#2a2338]">
+                          <p className="mt-1 text-[11px] font-semibold text-[var(--warp-ink)]">
                             {event.text}
                           </p>
-                          <p className="mt-0.5 text-[10px] text-[#81788e]">{event.sub}</p>
+                          <p className="mt-0.5 text-[10px] text-[var(--warp-subtle)]">
+                            {event.sub}
+                          </p>
                         </div>
                       </div>
                     ))}
                   </div>
                 </div>
-                <div className="border-t border-[#e7e2ef] bg-[#f8f6ff] px-4 py-3 sm:px-5">
-                  <div className="flex items-center gap-2 text-[10px] text-[#514a61]">
-                    <LockKeyhole className="h-3.5 w-3.5 text-[#5145ff]" /> No verdict without
+                <div className="border-t border-[#e5e5e5] bg-[var(--warp-surface-soft)] px-4 py-3 sm:px-5">
+                  <div className="flex items-center gap-2 text-[10px] text-[var(--warp-ink)]">
+                    <LockKeyhole className="h-3.5 w-3.5 text-[#2b2bff]" /> No verdict without
                     verified evidence.
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div className="mt-3 flex flex-wrap items-center justify-between gap-3 font-mono text-[9px] text-[#8c8399]">
+          <div className="mt-3 flex flex-wrap items-center justify-between gap-3 font-mono text-[9px] text-[var(--warp-subtle)]">
             <span>FIG. 03 / INTERACTIVE WORKFLOW MODEL</span>
             <span>Sample UI only · no live execution implied</span>
           </div>
@@ -634,74 +637,76 @@ function HomePage() {
       <section className="border-b border-[#e8e4f0] bg-white">
         <div className="mx-auto max-w-[1440px] px-5 py-7 sm:px-8 lg:px-12">
           <div className="flex flex-wrap items-center justify-between gap-4">
-            <span className="font-mono text-[9px] uppercase tracking-[.17em] text-[#82798f]">
+            <span className="font-mono text-[9px] uppercase tracking-[.17em] text-[var(--warp-subtle)]">
               Designed around principles that travel with your stack
             </span>
-            <div className="flex flex-wrap gap-x-7 gap-y-3 text-xs font-semibold text-[#3f374f]">
+            <div className="flex flex-wrap gap-x-7 gap-y-3 text-xs font-semibold text-[var(--warp-ink)]">
               <span className="inline-flex items-center gap-2">
-                <Check className="h-3.5 w-3.5 text-[#5145ff]" /> Tool flexibility
+                <Check className="h-3.5 w-3.5 text-[#2b2bff]" /> Tool flexibility
               </span>
               <span className="inline-flex items-center gap-2">
-                <Check className="h-3.5 w-3.5 text-[#5145ff]" /> Traceable evidence
+                <Check className="h-3.5 w-3.5 text-[#2b2bff]" /> Traceable evidence
               </span>
               <span className="inline-flex items-center gap-2">
-                <Check className="h-3.5 w-3.5 text-[#5145ff]" /> Explicit guardrails
+                <Check className="h-3.5 w-3.5 text-[#2b2bff]" /> Explicit guardrails
               </span>
               <span className="inline-flex items-center gap-2">
-                <Check className="h-3.5 w-3.5 text-[#5145ff]" /> Human-governed release
+                <Check className="h-3.5 w-3.5 text-[#2b2bff]" /> Human-governed release
               </span>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="border-b border-[#e8e4f0] bg-[#fbfaff]">
+      <section className="border-b border-[#e8e4f0] bg-[var(--warp-canvas)]">
         <div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[.78fr_1.22fr] lg:px-12 lg:py-28">
           <div>
-            <div className="font-mono text-[10px] uppercase tracking-[.18em] text-[#5145ff]">
+            <div className="font-mono text-[10px] uppercase tracking-[.18em] text-[#2b2bff]">
               01 / Configuration
             </div>
             <h2 className="mt-5 max-w-xl text-3xl font-medium leading-tight tracking-[-.055em] sm:text-5xl">
               Your assurance workflow, defined in code.
             </h2>
-            <p className="mt-5 max-w-lg text-sm leading-7 text-[#61586f]">
+            <p className="mt-5 max-w-lg text-sm leading-7 text-[var(--warp-muted)]">
               Make the workflow legible. Specify the stages, evaluation criteria and release
               controls so the process can be reviewed and repeated.
             </p>
-            <div className="mt-7 space-y-3 text-sm text-[#3f374f]">
+            <div className="mt-7 space-y-3 text-sm text-[var(--warp-ink)]">
               {[
                 "Keep policy controls explicit",
                 "Compare runs against a stable baseline",
                 "Preserve evidence behind every verdict",
               ].map((item) => (
                 <div key={item} className="flex items-start gap-2.5">
-                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-[#5145ff]" />
+                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-[#2b2bff]" />
                   {item}
                 </div>
               ))}
             </div>
             <Link
               to="/platform"
-              className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-[#5145ff] hover:text-[#3025d7]"
+              className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-[#2b2bff] hover:text-[#3025d7]"
             >
               Explore the platform <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
-          <div className="overflow-hidden rounded-xl border border-[#d9d3e6] bg-white shadow-[0_24px_60px_-45px_rgba(55,42,89,.35)]">
-            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#e7e2ef] px-4 py-3 sm:px-5">
+          <div className="overflow-hidden rounded-xl border border-[var(--warp-border)] bg-white shadow-[0_24px_60px_-45px_rgba(55,42,89,.35)]">
+            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#e5e5e5] px-4 py-3 sm:px-5">
               <div className="flex items-center gap-2">
-                <GitBranch className="h-4 w-4 text-[#5145ff]" />
+                <GitBranch className="h-4 w-4 text-[#2b2bff]" />
                 <span className="font-mono text-xs text-[#302940]">assurance-config</span>
               </div>
-              <span className="font-mono text-[9px] text-[#8c8399]">CONCEPTUAL CONFIGURATION</span>
+              <span className="font-mono text-[9px] text-[var(--warp-subtle)]">
+                CONCEPTUAL CONFIGURATION
+              </span>
             </div>
-            <div className="flex flex-wrap gap-1 border-b border-[#e7e2ef] bg-[#faf9fd] px-3 py-2">
+            <div className="flex flex-wrap gap-1 border-b border-[#e5e5e5] bg-[var(--warp-surface-soft)] px-3 py-2">
               {configTabs.map((tab) => (
                 <button
                   key={tab.id}
                   type="button"
                   onClick={() => setActiveConfig(tab.id)}
-                  className={`rounded-md px-3 py-2 text-[10px] font-semibold transition ${activeConfig === tab.id ? "bg-[#5145ff] text-white" : "text-[#655c75] hover:bg-[#efedff] hover:text-[#5145ff]"}`}
+                  className={`rounded-md px-3 py-2 text-[10px] font-semibold transition ${activeConfig === tab.id ? "bg-[#2b2bff] text-white" : "text-[var(--warp-muted)] hover:bg-[var(--warp-surface-soft)] hover:text-[#2b2bff]"}`}
                 >
                   {tab.label}
                 </button>
@@ -709,8 +714,8 @@ function HomePage() {
             </div>
             <div className="grid min-h-[300px] md:grid-cols-[minmax(0,1fr)_220px]">
               <div className="overflow-x-auto p-4 sm:p-5">
-                <div className="mb-4 flex items-center gap-2 font-mono text-[10px] text-[#82798f]">
-                  <span className="h-2 w-2 rounded-full bg-[#5145ff]" />
+                <div className="mb-4 flex items-center gap-2 font-mono text-[10px] text-[var(--warp-subtle)]">
+                  <span className="h-2 w-2 rounded-full bg-[#2b2bff]" />
                   {config.file}
                 </div>
                 <pre className="font-mono text-[11px] leading-6 sm:text-xs">
@@ -719,12 +724,12 @@ function HomePage() {
                       key={i}
                       className={
                         kind === "key"
-                          ? "text-[#5145ff]"
+                          ? "text-[#2b2bff]"
                           : kind === "comment"
                             ? "text-[#948ba3]"
                             : kind === "value"
                               ? "text-[#2e765d]"
-                              : "text-[#8c8399]"
+                              : "text-[var(--warp-subtle)]"
                       }
                     >
                       {line || " "}
@@ -732,8 +737,8 @@ function HomePage() {
                   ))}
                 </pre>
               </div>
-              <aside className="border-t border-[#e7e2ef] bg-[#faf9fd] p-4 md:border-l md:border-t-0">
-                <div className="font-mono text-[9px] uppercase tracking-[.14em] text-[#82798f]">
+              <aside className="border-t border-[#e5e5e5] bg-[var(--warp-surface-soft)] p-4 md:border-l md:border-t-0">
+                <div className="font-mono text-[9px] uppercase tracking-[.14em] text-[var(--warp-subtle)]">
                   Configuration intent
                 </div>
                 <p className="mt-3 text-sm font-semibold text-[#302940]">{config.label}</p>
@@ -746,7 +751,7 @@ function HomePage() {
                         ? "Compare repeatable runs and retain failures instead of hiding regressions."
                         : "Keep critical failures, missing evidence and approval requirements explicit."}
                 </p>
-                <div className="mt-5 border-t border-[#e5dfed] pt-4 font-mono text-[9px] text-[#82798f]">
+                <div className="mt-5 border-t border-[var(--warp-border)] pt-4 font-mono text-[9px] text-[var(--warp-subtle)]">
                   EXAMPLE ONLY · NOT A RUNTIME CONTRACT
                 </div>
               </aside>
@@ -759,14 +764,14 @@ function HomePage() {
         <div className="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-12 lg:py-24">
           <div className="grid gap-8 lg:grid-cols-[.8fr_1.2fr] lg:items-end">
             <div>
-              <div className="font-mono text-[10px] uppercase tracking-[.18em] text-[#5145ff]">
+              <div className="font-mono text-[10px] uppercase tracking-[.18em] text-[#2b2bff]">
                 02 / Agentic SDLC coverage
               </div>
               <h2 className="mt-5 max-w-2xl text-3xl font-medium leading-tight tracking-[-.055em] sm:text-5xl">
                 Autonomous engineering across the entire lifecycle.
               </h2>
             </div>
-            <p className="max-w-lg text-sm leading-7 text-[#61586f]">
+            <p className="max-w-lg text-sm leading-7 text-[var(--warp-muted)]">
               Coding agents are only one part of the shift. Shyena brings the workflow around them
               into view—from intent and implementation to verification, security, release and
               operational learning.
@@ -786,19 +791,21 @@ function HomePage() {
                     type="button"
                     aria-pressed={selected}
                     onClick={() => setActiveCoverage(i)}
-                    className={`group min-w-[245px] max-w-[300px] flex-1 snap-start rounded-xl border p-5 text-left transition duration-200 sm:min-w-[270px] ${selected ? "border-[#5145ff] bg-[#17151b]" : "border-[#dcd6e8] bg-white hover:border-[#5145ff]"}`}
+                    className={`group min-w-[245px] max-w-[300px] flex-1 snap-start rounded-xl border p-5 text-left transition duration-200 sm:min-w-[270px] ${selected ? "border-[#2b2bff] bg-[#171717]" : "border-[var(--warp-border)] bg-white hover:border-[#2b2bff]"}`}
                   >
                     <div className="flex items-center justify-between gap-3">
-                      <span className="font-mono text-[10px] text-[#85858c]">{n} / 06</span>
+                      <span className="font-mono text-[10px] text-[var(--warp-subtle)]">
+                        {n} / 06
+                      </span>
                       <ArrowDownRight
-                        className={`h-4 w-4 transition group-hover:translate-x-0.5 group-hover:translate-y-0.5 ${selected ? "text-[#c7a8ff]" : "text-[#b2aabd]"}`}
+                        className={`h-4 w-4 transition group-hover:translate-x-0.5 group-hover:translate-y-0.5 ${selected ? "text-[var(--warp-blue)]" : "text-[var(--warp-subtle)]"}`}
                       />
                     </div>
                     <h3 className="mt-8 text-xl font-medium tracking-[-.03em]">{title}</h3>
-                    <p className="mt-3 text-sm leading-6 text-[#b4b4b8]">{body}</p>
-                    <div className="mt-6 flex items-center gap-2 border-t border-[#dcd6e8] pt-3 font-mono text-[9px] uppercase tracking-[.12em] text-[#85858c]">
+                    <p className="mt-3 text-sm leading-6 text-[var(--warp-muted)]">{body}</p>
+                    <div className="mt-6 flex items-center gap-2 border-t border-[var(--warp-border)] pt-3 font-mono text-[9px] uppercase tracking-[.12em] text-[var(--warp-subtle)]">
                       <span
-                        className={`h-1.5 w-1.5 rounded-full ${selected ? "bg-[#c7a8ff]" : "bg-[#686872]"}`}
+                        className={`h-1.5 w-1.5 rounded-full ${selected ? "bg-[var(--warp-blue)]" : "bg-[var(--warp-subtle)]"}`}
                       />
                       {selected ? "Selected stage" : "Inspect stage"}
                     </div>
@@ -806,56 +813,56 @@ function HomePage() {
                 );
               })}
             </div>
-            <div className="mt-2 grid overflow-hidden rounded-xl border border-[#dcd6e8] lg:grid-cols-[.9fr_1.1fr]">
+            <div className="mt-2 grid overflow-hidden rounded-xl border border-[var(--warp-border)] lg:grid-cols-[.9fr_1.1fr]">
               <div className="p-5 sm:p-7">
-                <div className="font-mono text-[9px] uppercase tracking-[.16em] text-[#c7a8ff]">
+                <div className="font-mono text-[9px] uppercase tracking-[.16em] text-[var(--warp-blue)]">
                   Stage {selectedCoverage[0]} / 06 · Assurance brief
                 </div>
                 <h3 className="mt-4 text-2xl font-medium tracking-[-.04em] sm:text-3xl">
                   {selectedCoverage[1]}
                 </h3>
-                <p className="mt-3 max-w-xl text-sm leading-7 text-[#b4b4b8]">
+                <p className="mt-3 max-w-xl text-sm leading-7 text-[var(--warp-muted)]">
                   {selectedCoverage[2]}
                 </p>
-                <div className="mt-6 flex items-center gap-2 text-xs text-[#b4b4b8]">
-                  <LockKeyhole className="h-4 w-4 text-[#c7a8ff]" />
+                <div className="mt-6 flex items-center gap-2 text-xs text-[var(--warp-muted)]">
+                  <LockKeyhole className="h-4 w-4 text-[var(--warp-blue)]" />
                   Evidence and policy requirements remain explicit at every stage.
                 </div>
               </div>
-              <div className="border-t border-[#dcd6e8] bg-[#080809] p-4 sm:p-6 lg:border-l lg:border-t-0">
-                <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#2a2a2d] pb-3">
+              <div className="border-t border-[var(--warp-border)] bg-[var(--warp-terminal)] p-4 sm:p-6 lg:border-l lg:border-t-0">
+                <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#303030] pb-3">
                   <div className="flex items-center gap-2">
-                    <Terminal className="h-4 w-4 text-[#c7a8ff]" />
+                    <Terminal className="h-4 w-4 text-[var(--warp-blue)]" />
                     <span className="font-mono text-xs text-[#f5f5f5]">assurance-run</span>
                   </div>
-                  <span className="font-mono text-[9px] uppercase tracking-[.12em] text-[#85858c]">
+                  <span className="font-mono text-[9px] uppercase tracking-[.12em] text-[var(--warp-subtle)]">
                     Illustrative console · not executable
                   </span>
                 </div>
                 <div className="mt-4 space-y-3 font-mono text-[11px] leading-6 sm:text-xs">
-                  <p className="break-words text-[#b8f28b]">
-                    <span className="text-[#85858c]">$</span>
+                  <p className="break-words text-[var(--warp-blue)]">
+                    <span className="text-[var(--warp-subtle)]">$</span>
                     <span className="ml-2">
                       shyena assure --stage{" "}
                       {selectedCoverage[1]!.toLowerCase().replace(/[^a-z0-9]+/g, "-")}
                     </span>
                   </p>
-                  <p className="text-[#b4b4b8]">
-                    <span className="text-[#c7a8ff]">scope</span>
+                  <p className="text-[var(--warp-muted)]">
+                    <span className="text-[var(--warp-blue)]">scope</span>
                     <span className="ml-2">{selectedCoverage[2]}</span>
                   </p>
-                  <p className="text-[#b4b4b8]">
-                    <span className="text-[#c7a8ff]">evidence</span>
+                  <p className="text-[var(--warp-muted)]">
+                    <span className="text-[var(--warp-blue)]">evidence</span>
                     <span className="ml-2">required · traceable · reviewable</span>
                   </p>
-                  <p className="text-[#b4b4b8]">
-                    <span className="text-[#c7a8ff]">next</span>
+                  <p className="text-[var(--warp-muted)]">
+                    <span className="text-[var(--warp-blue)]">next</span>
                     <span className="ml-2">
                       {coverage[activeCoverage + 1]?.[1] ?? "Feed learning into the next cycle"}
                     </span>
                   </p>
                 </div>
-                <div className="mt-5 border-t border-[#2a2a2d] pt-3 font-mono text-[9px] text-[#85858c]">
+                <div className="mt-5 border-t border-[#303030] pt-3 font-mono text-[9px] text-[var(--warp-subtle)]">
                   UI CONCEPT ONLY · NO LIVE RUN OR CUSTOMER DATA
                 </div>
               </div>
@@ -864,32 +871,32 @@ function HomePage() {
         </div>
       </section>
 
-      <section className="border-b border-[#e8e4f0] bg-[#f7f5ff]">
+      <section className="border-b border-[#e8e4f0] bg-[var(--warp-surface-soft)]">
         <div className="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-12 lg:py-24">
           <div className="grid gap-8 lg:grid-cols-[.8fr_1.2fr] lg:items-end">
             <div>
-              <div className="font-mono text-[10px] uppercase tracking-[.18em] text-[#5145ff]">
+              <div className="font-mono text-[10px] uppercase tracking-[.18em] text-[#2b2bff]">
                 03 / Quality loop
               </div>
               <h2 className="mt-5 max-w-2xl text-3xl font-medium leading-tight tracking-[-.055em] sm:text-5xl">
                 Measurement belongs inside the workflow.
               </h2>
             </div>
-            <p className="max-w-lg text-sm leading-7 text-[#61586f]">
+            <p className="max-w-lg text-sm leading-7 text-[var(--warp-muted)]">
               Execution integrity, deterministic assertions and semantic evaluation answer different
               questions. Keep the signals separate, then bring them together with policy and risk.
             </p>
           </div>
           <div className="mt-10 grid gap-4 lg:grid-cols-3">
-            <article className="rounded-lg border border-[#ded8ed] bg-white p-5">
+            <article className="rounded-lg border border-[var(--warp-border)] bg-white p-5">
               <div className="flex items-center justify-between">
-                <span className="font-mono text-[9px] uppercase tracking-[.14em] text-[#746b83]">
+                <span className="font-mono text-[9px] uppercase tracking-[.14em] text-[var(--warp-muted)]">
                   Signal / 01
                 </span>
-                <Activity className="h-4 w-4 text-[#5145ff]" />
+                <Activity className="h-4 w-4 text-[#2b2bff]" />
               </div>
               <h3 className="mt-5 text-lg font-semibold">Execution integrity</h3>
-              <p className="mt-2 text-xs leading-5 text-[#6b6279]">
+              <p className="mt-2 text-xs leading-5 text-[var(--warp-muted)]">
                 Was the journey actually completed, with the required trace and tool results?
               </p>
               <svg
@@ -902,26 +909,26 @@ function HomePage() {
                 <path
                   d="M0 66 L32 60 L64 64 L96 40 L128 45 L160 28 L192 35 L224 22 L256 26 L288 14 L320 18"
                   fill="none"
-                  stroke="#5145ff"
+                  stroke="#2b2bff"
                   strokeWidth="2.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
-                <circle cx="288" cy="14" r="4" fill="#5145ff" />
+                <circle cx="288" cy="14" r="4" fill="#2b2bff" />
               </svg>
-              <div className="mt-3 border-t border-[#eeeaf4] pt-3 font-mono text-[9px] text-[#8a8198]">
+              <div className="mt-3 border-t border-[var(--warp-border)] pt-3 font-mono text-[9px] text-[var(--warp-subtle)]">
                 ILLUSTRATIVE TREND · NOT MEASURED
               </div>
             </article>
-            <article className="rounded-lg border border-[#ded8ed] bg-white p-5">
+            <article className="rounded-lg border border-[var(--warp-border)] bg-white p-5">
               <div className="flex items-center justify-between">
-                <span className="font-mono text-[9px] uppercase tracking-[.14em] text-[#746b83]">
+                <span className="font-mono text-[9px] uppercase tracking-[.14em] text-[var(--warp-muted)]">
                   Signal / 02
                 </span>
                 <Check className="h-4 w-4 text-[#2580ee]" />
               </div>
               <h3 className="mt-5 text-lg font-semibold">Deterministic rules</h3>
-              <p className="mt-2 text-xs leading-5 text-[#6b6279]">
+              <p className="mt-2 text-xs leading-5 text-[var(--warp-muted)]">
                 Did exact facts, required steps and hard constraints hold?
               </p>
               <div className="mt-5 space-y-3">
@@ -932,9 +939,9 @@ function HomePage() {
                 ].map(([a, b], i) => (
                   <div
                     key={a}
-                    className="flex items-center justify-between gap-2 border-b border-[#eeeaf4] pb-2 text-[10px]"
+                    className="flex items-center justify-between gap-2 border-b border-[var(--warp-border)] pb-2 text-[10px]"
                   >
-                    <span className="text-[#3f374f]">{a}</span>
+                    <span className="text-[var(--warp-ink)]">{a}</span>
                     <span className="inline-flex items-center gap-1.5 text-[#2580ee]">
                       <Check className="h-3 w-3" />
                       {b}
@@ -942,22 +949,22 @@ function HomePage() {
                   </div>
                 ))}
               </div>
-              <div className="mt-3 border-t border-[#eeeaf4] pt-3 font-mono text-[9px] text-[#8a8198]">
+              <div className="mt-3 border-t border-[var(--warp-border)] pt-3 font-mono text-[9px] text-[var(--warp-subtle)]">
                 SCHEMATIC CHECKLIST
               </div>
             </article>
-            <article className="rounded-lg border border-[#ded8ed] bg-white p-5">
+            <article className="rounded-lg border border-[var(--warp-border)] bg-white p-5">
               <div className="flex items-center justify-between">
-                <span className="font-mono text-[9px] uppercase tracking-[.14em] text-[#746b83]">
+                <span className="font-mono text-[9px] uppercase tracking-[.14em] text-[var(--warp-muted)]">
                   Signal / 03
                 </span>
                 <Radar className="h-4 w-4 text-[#21845e]" />
               </div>
               <h3 className="mt-5 text-lg font-semibold">Semantic quality</h3>
-              <p className="mt-2 text-xs leading-5 text-[#6b6279]">
+              <p className="mt-2 text-xs leading-5 text-[var(--warp-muted)]">
                 Did the result meet the user’s intent when exact string matching is too brittle?
               </p>
-              <div className="mt-5 flex h-[92px] items-end gap-2 border-b border-[#e9e4f1] px-2">
+              <div className="mt-5 flex h-[92px] items-end gap-2 border-b border-[var(--warp-border)] px-2">
                 {[38, 54, 43, 69, 61, 78, 58, 86, 73, 91, 68, 82, 96, 77, 88, 72, 94, 83].map(
                   (h, i) => (
                     <span
@@ -968,19 +975,19 @@ function HomePage() {
                   ),
                 )}
               </div>
-              <div className="mt-3 border-t border-[#eeeaf4] pt-3 font-mono text-[9px] text-[#8a8198]">
+              <div className="mt-3 border-t border-[var(--warp-border)] pt-3 font-mono text-[9px] text-[var(--warp-subtle)]">
                 SYNTHETIC VISUAL · NO SCORES SHOWN
               </div>
             </article>
           </div>
-          <div className="mt-5 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-[#ded8ed] bg-white/75 px-4 py-3 text-xs text-[#514a61]">
+          <div className="mt-5 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-[var(--warp-border)] bg-white/75 px-4 py-3 text-xs text-[var(--warp-ink)]">
             <span className="inline-flex items-center gap-2">
-              <Sparkles className="h-4 w-4 text-[#5145ff]" /> Learn from failures. Never weaken a
+              <Sparkles className="h-4 w-4 text-[#2b2bff]" /> Learn from failures. Never weaken a
               gate just to pass.
             </span>
             <Link
               to="/govern"
-              className="inline-flex items-center gap-1.5 font-semibold text-[#5145ff]"
+              className="inline-flex items-center gap-1.5 font-semibold text-[#2b2bff]"
             >
               Explore governance <ArrowRight className="h-3.5 w-3.5" />
             </Link>
@@ -991,25 +998,25 @@ function HomePage() {
       <section className="border-b border-[#e8e4f0] bg-white">
         <div className="mx-auto grid max-w-[1440px] gap-10 px-5 py-20 sm:px-8 lg:grid-cols-[.75fr_1.25fr] lg:px-12 lg:py-24">
           <div>
-            <div className="font-mono text-[10px] uppercase tracking-[.18em] text-[#5145ff]">
+            <div className="font-mono text-[10px] uppercase tracking-[.18em] text-[#2b2bff]">
               04 / Open at every layer
             </div>
             <h2 className="mt-5 max-w-xl text-3xl font-medium leading-tight tracking-[-.055em] sm:text-5xl">
               Your stack. Your models. Your controls.
             </h2>
-            <p className="mt-5 max-w-lg text-sm leading-7 text-[#61586f]">
+            <p className="mt-5 max-w-lg text-sm leading-7 text-[var(--warp-muted)]">
               Assurance should be portable across the system being tested. Keep the workflow focused
               on contracts, outcomes and evidence rather than tying the decision to one model or
               interface.
             </p>
             <Link
               to="/platform"
-              className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-[#5145ff]"
+              className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-[#2b2bff]"
             >
               Explore the approach <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
-          <div className="overflow-hidden rounded-lg border border-[#dcd6e8] bg-[#fbfaff]">
+          <div className="overflow-hidden rounded-lg border border-[var(--warp-border)] bg-[var(--warp-canvas)]">
             {[
               {
                 n: "LAYER 04",
@@ -1040,14 +1047,14 @@ function HomePage() {
                 key={item.n}
                 className="grid gap-3 border-b border-[#e6e0ef] p-4 last:border-0 sm:grid-cols-[90px_1fr_130px] sm:items-center sm:p-5"
               >
-                <span className="font-mono text-[9px] tracking-[.12em] text-[#8a8198]">
+                <span className="font-mono text-[9px] tracking-[.12em] text-[var(--warp-subtle)]">
                   {item.n}
                 </span>
                 <div>
                   <h3 className="text-sm font-semibold">{item.title}</h3>
                   <p className="mt-1 text-xs leading-5 text-[#716780]">{item.text}</p>
                 </div>
-                <span className="inline-flex w-fit rounded border border-[#dcd6e8] bg-white px-2 py-1 font-mono text-[9px] text-[#5145ff]">
+                <span className="inline-flex w-fit rounded border border-[var(--warp-border)] bg-white px-2 py-1 font-mono text-[9px] text-[#2b2bff]">
                   {item.tag}
                 </span>
               </div>
@@ -1056,30 +1063,30 @@ function HomePage() {
         </div>
       </section>
 
-      <section className="border-b border-[#e8e4f0] bg-[#fbfaff]">
+      <section className="border-b border-[#e8e4f0] bg-[var(--warp-canvas)]">
         <div className="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-12 lg:py-24">
           <div className="grid gap-8 lg:grid-cols-[.8fr_1.2fr] lg:items-end">
             <div>
-              <div className="font-mono text-[10px] uppercase tracking-[.18em] text-[#5145ff]">
+              <div className="font-mono text-[10px] uppercase tracking-[.18em] text-[#2b2bff]">
                 05 / Governance
               </div>
               <h2 className="mt-5 max-w-2xl text-3xl font-medium leading-tight tracking-[-.055em] sm:text-5xl">
                 Coordinate the work. Keep control of the outcome.
               </h2>
             </div>
-            <p className="max-w-lg text-sm leading-7 text-[#61586f]">
+            <p className="max-w-lg text-sm leading-7 text-[var(--warp-muted)]">
               An assurance control plane should show what is running, which evidence is missing and
               where human review is required. This is an illustrative roster, not a live agent
               connection.
             </p>
           </div>
-          <div className="mt-10 overflow-hidden rounded-lg border border-[#dcd6e8] bg-white">
-            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#e8e3f0] px-4 py-3 sm:px-5">
+          <div className="mt-10 overflow-hidden rounded-lg border border-[var(--warp-border)] bg-white">
+            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--warp-border)] px-4 py-3 sm:px-5">
               <div className="flex items-center gap-2">
-                <Workflow className="h-4 w-4 text-[#5145ff]" />
+                <Workflow className="h-4 w-4 text-[#2b2bff]" />
                 <span className="text-xs font-semibold">Factory control plane</span>
               </div>
-              <span className="font-mono text-[9px] uppercase tracking-[.14em] text-[#8a8198]">
+              <span className="font-mono text-[9px] uppercase tracking-[.14em] text-[var(--warp-subtle)]">
                 Illustrative roster · no live agents
               </span>
             </div>
@@ -1090,7 +1097,7 @@ function HomePage() {
                     name: "Nexus",
                     task: "Map changed components",
                     state: "Complete",
-                    tone: "#5145ff",
+                    tone: "#2b2bff",
                   },
                   {
                     name: "Vera",
@@ -1128,14 +1135,14 @@ function HomePage() {
                   </div>
                 ))}
               </div>
-              <div className="border-t border-[#e8e3f0] bg-[#faf9fd] p-5 lg:border-l lg:border-t-0">
-                <div className="font-mono text-[9px] uppercase tracking-[.14em] text-[#82798f]">
+              <div className="border-t border-[var(--warp-border)] bg-[var(--warp-surface-soft)] p-5 lg:border-l lg:border-t-0">
+                <div className="font-mono text-[9px] uppercase tracking-[.14em] text-[var(--warp-subtle)]">
                   Release guardrail
                 </div>
                 <h3 className="mt-4 text-xl font-medium tracking-[-.03em]">
                   Evidence first. Approval explicit.
                 </h3>
-                <p className="mt-3 text-sm leading-6 text-[#655c75]">
+                <p className="mt-3 text-sm leading-6 text-[var(--warp-muted)]">
                   A missing trace, critical policy failure or required approval should remain
                   visible. Do not average away a hard constraint.
                 </p>
@@ -1146,8 +1153,11 @@ function HomePage() {
                     "Policy boundaries checked",
                     "Human approval recorded",
                   ].map((item) => (
-                    <div key={item} className="flex items-center gap-2 text-xs text-[#514a61]">
-                      <LockKeyhole className="h-3.5 w-3.5 text-[#5145ff]" />
+                    <div
+                      key={item}
+                      className="flex items-center gap-2 text-xs text-[var(--warp-ink)]"
+                    >
+                      <LockKeyhole className="h-3.5 w-3.5 text-[#2b2bff]" />
                       {item}
                     </div>
                   ))}
@@ -1162,14 +1172,14 @@ function HomePage() {
         <div className="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-12 lg:py-24">
           <div className="grid gap-8 lg:grid-cols-[.8fr_1.2fr] lg:items-end">
             <div>
-              <div className="font-mono text-[10px] uppercase tracking-[.18em] text-[#5145ff]">
+              <div className="font-mono text-[10px] uppercase tracking-[.18em] text-[#2b2bff]">
                 06 / Use Shyena where you work
               </div>
               <h2 className="mt-5 max-w-2xl text-3xl font-medium leading-tight tracking-[-.055em] sm:text-5xl">
                 From a single critical journey to the release workflow.
               </h2>
             </div>
-            <p className="max-w-lg text-sm leading-7 text-[#61586f]">
+            <p className="max-w-lg text-sm leading-7 text-[var(--warp-muted)]">
               Start with the highest-risk path, connect the checks you need, and expand coverage as
               the system and its risks evolve.
             </p>
@@ -1192,33 +1202,36 @@ function HomePage() {
                 text: "Bring test results, policy findings and approval into one decision.",
               },
             ].map(({ icon: Icon, title, text }) => (
-              <article key={title} className="rounded-lg border border-[#ded8ed] bg-[#fbfaff] p-5">
-                <Icon className="h-4 w-4 text-[#5145ff]" />
+              <article
+                key={title}
+                className="rounded-lg border border-[var(--warp-border)] bg-[var(--warp-canvas)] p-5"
+              >
+                <Icon className="h-4 w-4 text-[#2b2bff]" />
                 <h3 className="mt-5 text-base font-semibold">{title}</h3>
-                <p className="mt-2 text-sm leading-6 text-[#6b6279]">{text}</p>
+                <p className="mt-2 text-sm leading-6 text-[var(--warp-muted)]">{text}</p>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="border-b border-[#e8e4f0] bg-[#f7f5ff]">
+      <section className="border-b border-[#e8e4f0] bg-[var(--warp-surface-soft)]">
         <div className="mx-auto grid max-w-[1440px] gap-10 px-5 py-20 sm:px-8 lg:grid-cols-[.72fr_1.28fr] lg:px-12 lg:py-24">
           <div>
-            <div className="font-mono text-[10px] uppercase tracking-[.18em] text-[#5145ff]">
+            <div className="font-mono text-[10px] uppercase tracking-[.18em] text-[#2b2bff]">
               FAQ / The basics
             </div>
             <h2 className="mt-5 text-3xl font-medium leading-tight tracking-[-.055em] sm:text-5xl">
               Questions, answered.
             </h2>
-            <p className="mt-5 max-w-md text-sm leading-7 text-[#61586f]">
+            <p className="mt-5 max-w-md text-sm leading-7 text-[var(--warp-muted)]">
               The factory should make the process clearer—not hide what is implemented and what
               remains an example.
             </p>
           </div>
-          <div className="border-t border-[#dcd6e8]">
+          <div className="border-t border-[var(--warp-border)]">
             {faqs.map(([question, answer], i) => (
-              <div key={question} className="border-b border-[#dcd6e8]">
+              <div key={question} className="border-b border-[var(--warp-border)]">
                 <button
                   type="button"
                   aria-expanded={openFaq === i}
@@ -1229,11 +1242,13 @@ function HomePage() {
                     {question}
                   </span>
                   <ChevronDown
-                    className={`h-4 w-4 shrink-0 text-[#5145ff] transition-transform ${openFaq === i ? "rotate-180" : ""}`}
+                    className={`h-4 w-4 shrink-0 text-[#2b2bff] transition-transform ${openFaq === i ? "rotate-180" : ""}`}
                   />
                 </button>
                 {openFaq === i && (
-                  <p className="max-w-3xl pb-5 pr-8 text-sm leading-6 text-[#655c75]">{answer}</p>
+                  <p className="max-w-3xl pb-5 pr-8 text-sm leading-6 text-[var(--warp-muted)]">
+                    {answer}
+                  </p>
                 )}
               </div>
             ))}
@@ -1241,38 +1256,38 @@ function HomePage() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-[#211a32] text-white">
+      <section className="relative overflow-hidden bg-[var(--warp-surface-soft)] text-[var(--warp-ink)]">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 opacity-20"
           style={{
             backgroundImage:
-              "linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px)",
+              "linear-gradient(rgba(23,23,23,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(23,23,23,.055) 1px,transparent 1px)",
             backgroundSize: "42px 42px",
           }}
         />
         <div className="relative mx-auto flex max-w-[1440px] flex-col gap-8 px-5 py-16 sm:px-8 lg:flex-row lg:items-end lg:justify-between lg:px-12 lg:py-24">
           <div>
-            <div className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[.18em] text-[#c3bcff]">
+            <div className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[.18em] text-[var(--warp-blue)]">
               <Zap className="h-3.5 w-3.5" /> Start with one critical journey
             </div>
             <h2 className="mt-5 max-w-4xl text-3xl font-medium leading-tight tracking-[-.055em] sm:text-5xl">
               Make autonomous engineering accountable—from the first plan to production.
             </h2>
-            <p className="mt-4 max-w-2xl text-sm leading-7 text-[#d0c9dd]">
+            <p className="mt-4 max-w-2xl text-sm leading-7 text-[var(--warp-muted)]">
               Map the risk. Test the behaviour. Challenge the boundaries. Decide with evidence.
             </p>
           </div>
           <div className="flex shrink-0 flex-wrap gap-3">
             <Link
               to="/demo"
-              className="inline-flex h-12 items-center gap-2 rounded-md bg-[#f4d64f] px-5 text-sm font-semibold text-[#211a32] transition hover:bg-[#ffe978]"
+              className="inline-flex h-12 items-center gap-2 rounded-md bg-[var(--warp-lime)] px-5 text-sm font-semibold text-[var(--warp-ink)] transition hover:bg-[#e4e96b]"
             >
               Book a demo <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
               to="/contact"
-              className="inline-flex h-12 items-center gap-2 rounded-md border border-white/25 px-5 text-sm font-semibold text-white transition hover:bg-white/10"
+              className="inline-flex h-12 items-center gap-2 rounded-md border border-[var(--warp-border-strong)] px-5 text-sm font-medium text-[var(--warp-ink)] transition hover:bg-white"
             >
               Contact Shyena <ArrowUpRight className="h-4 w-4" />
             </Link>

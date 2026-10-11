@@ -35,8 +35,8 @@ const COLUMNS = [
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-[#e5e7eb] bg-white text-[#17213f]">
-      <div className="mx-auto w-full max-w-[1480px] px-5 py-14 sm:px-8 lg:px-10 lg:py-16">
+    <footer data-shyena-chrome="footer" className="border-t">
+      <div className="mx-auto w-full max-w-[1132px] px-6 py-14 lg:py-16">
         <div className="grid gap-12 lg:grid-cols-[1.5fr_2fr]">
           <div>
             <Link to="/" aria-label="Shyena home" className="inline-flex">
@@ -66,7 +66,7 @@ export function SiteFooter() {
           <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
             {COLUMNS.map((column) => (
               <div key={column.title}>
-                <h3 className="text-xs font-bold uppercase tracking-[0.14em] text-[#17213f]">
+                <h3 className="text-xs font-medium uppercase tracking-[0.08em] shyena-footer-heading">
                   {column.title}
                 </h3>
                 <ul className="mt-5 space-y-3">
