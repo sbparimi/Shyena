@@ -386,7 +386,7 @@ body > div > footer[data-shyena-chrome="footer"] a:hover {
   mask-image: linear-gradient(to bottom, black 0%, transparent 95%) !important;
 }
 
-#page-content.site-theme .shyena-factory-home > section > div.mx-auto[class*="max-w-[1440px]"] {
+#page-content.site-theme .shyena-factory-home > section > div.mx-auto[class*="max-w-[1132px]"] {
   max-width: 1132px !important;
 }
 
@@ -516,7 +516,7 @@ body > div > footer[data-shyena-chrome="footer"] a:hover {
     font-size: clamp(1.6rem, 7.3vw, 2.25rem) !important;
   }
 
-  #page-content.site-theme .shyena-factory-home > section > div.mx-auto[class*="max-w-[1440px]"] {
+  #page-content.site-theme .shyena-factory-home > section > div.mx-auto[class*="max-w-[1132px]"] {
     max-width: calc(100% - 48px) !important;
     padding-left: 0 !important;
     padding-right: 0 !important;
