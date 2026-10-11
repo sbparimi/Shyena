@@ -97,7 +97,7 @@ const workflowStages = [
     label: "Understand",
     title: "Know what changed before you test.",
     body: "Map components, dependencies and business-critical journeys to focus assurance where change creates risk.",
-    color: "#5145ff",
+    color: "#2b2bff",
     icon: Layers3,
     detail: "Change surface mapped",
     status: "MAPPED",
@@ -226,8 +226,8 @@ function HomePage() {
   const selectedCoverage = coverage[activeCoverage] ?? coverage[0]!;
 
   return (
-    <div className="shyena-factory-home overflow-hidden bg-[#fbfaff] text-[#1a1527]">
-      <section className="relative border-b border-[#e8e4f0] bg-[linear-gradient(180deg,#f7f5ff_0%,#fcfbff_82%)]">
+    <div className="shyena-factory-home overflow-hidden bg-[var(--warp-canvas)] text-[var(--warp-ink)]">
+      <section className="relative border-b border-[var(--warp-border)] bg-[linear-gradient(180deg,#f7f5ff_0%,#fcfbff_82%)]">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 opacity-60"
@@ -238,19 +238,19 @@ function HomePage() {
             maskImage: "linear-gradient(to bottom,black,transparent 92%)",
           }}
         />
-        <div className="relative mx-auto max-w-[1440px] px-5 pb-8 pt-14 sm:px-8 sm:pt-20 lg:px-12 lg:pt-24">
-          <div className="flex flex-wrap items-center gap-2 font-mono text-[10px] uppercase tracking-[.18em] text-[#625a75] sm:text-[11px]">
-            <span className="inline-flex items-center gap-2 text-[#5145ff]">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#5145ff]" /> AGENTIC SDLC CONTROL PLANE
+        <div className="relative mx-auto max-w-[1132px] px-5 pb-8 pt-14 sm:px-8 sm:pt-20 lg:px-12 lg:pt-24">
+          <div className="flex flex-wrap items-center gap-2 font-mono text-[10px] uppercase tracking-[.1em] text-[#625a75] sm:text-[11px]">
+            <span className="inline-flex items-center gap-2 text-[var(--warp-blue)]">
+              <span className="h-1.5 w-1.5 rounded-full bg-[var(--warp-blue)]" /> AGENTIC SDLC CONTROL PLANE
             </span>
             <span className="text-[#b7b0c7]">/</span>
             <span>Plan · build · test · secure · release · learn</span>
           </div>
           <div className="mt-8 grid gap-8 lg:grid-cols-[1.15fr_.65fr] lg:items-end">
-            <h1 className="max-w-5xl text-[clamp(3.1rem,7.3vw,7.6rem)] font-medium leading-[.93] tracking-[-.075em]">
+            <h1 className="max-w-5xl text-[clamp(3.1rem,7.3vw,7.6rem)] font-medium leading-[1.02] tracking-[-.06em]">
               The Agentic SDLC
               <br />
-              <span className="text-[#5145ff]">from plan to production.</span>
+              <span className="text-[#2b2bff]">from plan to production.</span>
             </h1>
             <div className="max-w-xl pb-2 lg:justify-self-end">
               <p className="text-base leading-7 text-[#575064] sm:text-lg sm:leading-8">
@@ -261,7 +261,7 @@ function HomePage() {
               <div className="mt-6 flex flex-wrap gap-3">
                 <Link
                   to="/platform"
-                  className="group inline-flex h-12 items-center gap-2 rounded-md bg-[#5145ff] px-5 text-sm font-semibold text-white shadow-[0_8px_22px_-14px_rgba(81,69,255,.8)] transition hover:-translate-y-0.5 hover:bg-[#3f32e8]"
+                  className="group inline-flex h-12 items-center gap-2 rounded-md bg-[#2b2bff] px-5 text-sm font-semibold text-white shadow-[0_8px_22px_-14px_rgba(81,69,255,.8)] transition hover:-translate-y-0.5 hover:bg-[#3f32e8]"
                 >
                   Explore the platform{" "}
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
@@ -270,25 +270,25 @@ function HomePage() {
                   to="/demo"
                   className="inline-flex h-12 items-center gap-2 rounded-md border border-[#d7d1e5] bg-white/80 px-5 text-sm font-semibold text-[#2d263d] transition hover:border-[#a9a0c3] hover:bg-white"
                 >
-                  <Activity className="h-4 w-4 text-[#5145ff]" /> See an example run
+                  <Activity className="h-4 w-4 text-[#2b2bff]" /> See an example run
                 </Link>
               </div>
             </div>
           </div>
 
-          <div className="mt-14 border-y border-[#dcd6e8] py-3">
+          <div className="mt-14 border-y border-[var(--warp-border)] py-3">
             <div className="flex flex-wrap items-center justify-between gap-3 font-mono text-[9px] uppercase tracking-[.15em] text-[#6e667e] sm:text-[10px]">
               <span className="inline-flex items-center gap-2">
-                <Workflow className="h-3.5 w-3.5 text-[#5145ff]" /> FIG. 01 / AGENTIC SDLC
+                <Workflow className="h-3.5 w-3.5 text-[#2b2bff]" /> FIG. 01 / AGENTIC SDLC
               </span>
               <span>INTERACTIVE SCHEMATIC · SYNTHETIC SAMPLE DATA</span>
             </div>
           </div>
 
-          <div className="relative mt-5 overflow-hidden rounded-xl border border-[#d8d2e5] bg-white/90 shadow-[0_30px_90px_-60px_rgba(54,38,99,.38)]">
-            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#e7e2ef] px-4 py-3 sm:px-5">
+          <div className="relative mt-5 overflow-hidden rounded-sm border border-[var(--warp-border)] bg-white/90 shadow-[0_30px_90px_-60px_rgba(54,38,99,.38)]">
+            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--warp-border)] px-4 py-3 sm:px-5">
               <div className="flex items-center gap-2.5">
-                <div className="flex h-8 w-8 items-center justify-center rounded-md bg-[#efedff] text-[#5145ff]">
+                <div className="flex h-8 w-8 items-center justify-center rounded-md bg-[var(--warp-surface-soft)] text-[#2b2bff]">
                   <Workflow className="h-4 w-4" />
                 </div>
                 <div>
@@ -298,16 +298,16 @@ function HomePage() {
                   </div>
                 </div>
               </div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-[#d9d3ff] bg-[#f6f4ff] px-2.5 py-1.5 font-mono text-[9px] uppercase tracking-[.12em] text-[#5145ff]">
+              <div className="inline-flex items-center gap-2 rounded-full border border-[#d9d3ff] bg-[var(--warp-surface-soft)] px-2.5 py-1.5 font-mono text-[9px] uppercase tracking-[.12em] text-[#2b2bff]">
                 <span className="relative flex h-1.5 w-1.5">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#5145ff] opacity-50" />
-                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#5145ff]" />
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#2b2bff] opacity-50" />
+                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#2b2bff]" />
                 </span>{" "}
                 Observer view
               </div>
             </div>
             <div className="grid lg:grid-cols-[1.28fr_.72fr]">
-              <div className="relative min-h-[350px] overflow-hidden border-b border-[#e7e2ef] bg-[#fcfbff] sm:min-h-[430px] lg:border-b-0 lg:border-r">
+              <div className="relative min-h-[350px] overflow-hidden border-b border-[#e5e5e5] bg-[var(--warp-canvas)] sm:min-h-[430px] lg:border-b-0 lg:border-r">
                 <div
                   aria-hidden="true"
                   className="absolute inset-0 opacity-70"
@@ -333,8 +333,8 @@ function HomePage() {
                 >
                   <defs>
                     <linearGradient id="shyenaFlow" x1="0" x2="1">
-                      <stop stopColor="#5145ff" stopOpacity=".2" />
-                      <stop offset=".55" stopColor="#5145ff" stopOpacity=".8" />
+                      <stop stopColor="#2b2bff" stopOpacity=".2" />
+                      <stop offset=".55" stopColor="#2b2bff" stopOpacity=".8" />
                       <stop offset="1" stopColor="#2e9c76" stopOpacity=".8" />
                     </linearGradient>
                     <filter id="shyenaSoftGlow">
@@ -365,7 +365,7 @@ function HomePage() {
                       {i % 2 === 0 && (
                         <circle
                           r="4"
-                          fill={i === 6 ? "#2e9c76" : "#5145ff"}
+                          fill={i === 6 ? "#2e9c76" : "#2b2bff"}
                           filter="url(#shyenaSoftGlow)"
                         >
                           <animate
@@ -407,7 +407,7 @@ function HomePage() {
                       h: 80,
                       title: "NEXUS",
                       sub: "System map",
-                      tone: "#5145ff",
+                      tone: "#2b2bff",
                     },
                     {
                       x: 345,
@@ -452,14 +452,14 @@ function HomePage() {
                         height={node.h}
                         rx="8"
                         fill="#fff"
-                        stroke={activeStage === node.title.toLowerCase() ? "#5145ff" : "#d8d2e5"}
+                        stroke={activeStage === node.title.toLowerCase() ? "#2b2bff" : "#e5e5e5"}
                         strokeWidth={activeStage === node.title.toLowerCase() ? 2 : 1.2}
                       />
                       <circle cx="14" cy="15" r="3" fill={node.tone} />
                       <text
                         x="14"
                         y="38"
-                        fill="#1a1527"
+                        fill="#171717"
                         fontSize="12"
                         fontFamily="ui-monospace,monospace"
                         fontWeight="700"
@@ -509,7 +509,7 @@ function HomePage() {
                         type="button"
                         aria-pressed={chosen}
                         onClick={() => setActiveStage(item.id)}
-                        className={`inline-flex min-h-9 items-center gap-2 rounded-md border px-3 text-[10px] font-semibold transition ${chosen ? "border-[#5145ff] bg-[#5145ff] text-white shadow-sm" : "border-[#d9d3e6] bg-white/95 text-[#514a61] hover:border-[#5145ff] hover:text-[#5145ff]"}`}
+                        className={`inline-flex min-h-9 items-center gap-2 rounded-md border px-3 text-[10px] font-semibold transition ${chosen ? "border-[#2b2bff] bg-[#2b2bff] text-white shadow-sm" : "border-[#d9d3e6] bg-white/95 text-[#514a61] hover:border-[#2b2bff] hover:text-[#2b2bff]"}`}
                       >
                         <Icon className="h-3 w-3" />
                         {item.name}
@@ -519,12 +519,12 @@ function HomePage() {
                 </div>
               </div>
               <div className="flex min-w-0 flex-col bg-white">
-                <div className="border-b border-[#e7e2ef] px-4 py-4 sm:px-5">
+                <div className="border-b border-[#e5e5e5] px-4 py-4 sm:px-5">
                   <div className="flex items-center justify-between gap-2">
                     <span className="font-mono text-[9px] uppercase tracking-[.16em] text-[#7e758e]">
                       Selected capability / {stage.n}
                     </span>
-                    <span className="rounded border border-[#d9d3ff] bg-[#f7f5ff] px-2 py-1 font-mono text-[9px] text-[#5145ff]">
+                    <span className="rounded border border-[#d9d3ff] bg-[var(--warp-surface-soft)] px-2 py-1 font-mono text-[9px] text-[#2b2bff]">
                       {stage.status}
                     </span>
                   </div>
@@ -599,7 +599,7 @@ function HomePage() {
                               style={{
                                 background:
                                   workflowStages.find((s) => s.name.toUpperCase() === event.name)
-                                    ?.color ?? "#5145ff",
+                                    ?.color ?? "#2b2bff",
                               }}
                             />
                             <span className="font-mono text-[9px] tracking-[.1em] text-[#81788e]">
@@ -615,9 +615,9 @@ function HomePage() {
                     ))}
                   </div>
                 </div>
-                <div className="border-t border-[#e7e2ef] bg-[#f8f6ff] px-4 py-3 sm:px-5">
+                <div className="border-t border-[#e5e5e5] bg-[#f8f6ff] px-4 py-3 sm:px-5">
                   <div className="flex items-center gap-2 text-[10px] text-[#514a61]">
-                    <LockKeyhole className="h-3.5 w-3.5 text-[#5145ff]" /> No verdict without
+                    <LockKeyhole className="h-3.5 w-3.5 text-[#2b2bff]" /> No verdict without
                     verified evidence.
                   </div>
                 </div>
@@ -639,16 +639,16 @@ function HomePage() {
             </span>
             <div className="flex flex-wrap gap-x-7 gap-y-3 text-xs font-semibold text-[#3f374f]">
               <span className="inline-flex items-center gap-2">
-                <Check className="h-3.5 w-3.5 text-[#5145ff]" /> Tool flexibility
+                <Check className="h-3.5 w-3.5 text-[#2b2bff]" /> Tool flexibility
               </span>
               <span className="inline-flex items-center gap-2">
-                <Check className="h-3.5 w-3.5 text-[#5145ff]" /> Traceable evidence
+                <Check className="h-3.5 w-3.5 text-[#2b2bff]" /> Traceable evidence
               </span>
               <span className="inline-flex items-center gap-2">
-                <Check className="h-3.5 w-3.5 text-[#5145ff]" /> Explicit guardrails
+                <Check className="h-3.5 w-3.5 text-[#2b2bff]" /> Explicit guardrails
               </span>
               <span className="inline-flex items-center gap-2">
-                <Check className="h-3.5 w-3.5 text-[#5145ff]" /> Human-governed release
+                <Check className="h-3.5 w-3.5 text-[#2b2bff]" /> Human-governed release
               </span>
             </div>
           </div>
@@ -658,7 +658,7 @@ function HomePage() {
       <section className="border-b border-[#e8e4f0] bg-[#fbfaff]">
         <div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[.78fr_1.22fr] lg:px-12 lg:py-28">
           <div>
-            <div className="font-mono text-[10px] uppercase tracking-[.18em] text-[#5145ff]">
+            <div className="font-mono text-[10px] uppercase tracking-[.18em] text-[#2b2bff]">
               01 / Configuration
             </div>
             <h2 className="mt-5 max-w-xl text-3xl font-medium leading-tight tracking-[-.055em] sm:text-5xl">
@@ -675,33 +675,33 @@ function HomePage() {
                 "Preserve evidence behind every verdict",
               ].map((item) => (
                 <div key={item} className="flex items-start gap-2.5">
-                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-[#5145ff]" />
+                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-[#2b2bff]" />
                   {item}
                 </div>
               ))}
             </div>
             <Link
               to="/platform"
-              className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-[#5145ff] hover:text-[#3025d7]"
+              className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-[#2b2bff] hover:text-[#3025d7]"
             >
               Explore the platform <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
           <div className="overflow-hidden rounded-xl border border-[#d9d3e6] bg-white shadow-[0_24px_60px_-45px_rgba(55,42,89,.35)]">
-            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#e7e2ef] px-4 py-3 sm:px-5">
+            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#e5e5e5] px-4 py-3 sm:px-5">
               <div className="flex items-center gap-2">
-                <GitBranch className="h-4 w-4 text-[#5145ff]" />
+                <GitBranch className="h-4 w-4 text-[#2b2bff]" />
                 <span className="font-mono text-xs text-[#302940]">assurance-config</span>
               </div>
               <span className="font-mono text-[9px] text-[#8c8399]">CONCEPTUAL CONFIGURATION</span>
             </div>
-            <div className="flex flex-wrap gap-1 border-b border-[#e7e2ef] bg-[#faf9fd] px-3 py-2">
+            <div className="flex flex-wrap gap-1 border-b border-[#e5e5e5] bg-[#faf9fd] px-3 py-2">
               {configTabs.map((tab) => (
                 <button
                   key={tab.id}
                   type="button"
                   onClick={() => setActiveConfig(tab.id)}
-                  className={`rounded-md px-3 py-2 text-[10px] font-semibold transition ${activeConfig === tab.id ? "bg-[#5145ff] text-white" : "text-[#655c75] hover:bg-[#efedff] hover:text-[#5145ff]"}`}
+                  className={`rounded-md px-3 py-2 text-[10px] font-semibold transition ${activeConfig === tab.id ? "bg-[#2b2bff] text-white" : "text-[#655c75] hover:bg-[#efedff] hover:text-[#2b2bff]"}`}
                 >
                   {tab.label}
                 </button>
@@ -710,7 +710,7 @@ function HomePage() {
             <div className="grid min-h-[300px] md:grid-cols-[minmax(0,1fr)_220px]">
               <div className="overflow-x-auto p-4 sm:p-5">
                 <div className="mb-4 flex items-center gap-2 font-mono text-[10px] text-[#82798f]">
-                  <span className="h-2 w-2 rounded-full bg-[#5145ff]" />
+                  <span className="h-2 w-2 rounded-full bg-[#2b2bff]" />
                   {config.file}
                 </div>
                 <pre className="font-mono text-[11px] leading-6 sm:text-xs">
@@ -719,7 +719,7 @@ function HomePage() {
                       key={i}
                       className={
                         kind === "key"
-                          ? "text-[#5145ff]"
+                          ? "text-[#2b2bff]"
                           : kind === "comment"
                             ? "text-[#948ba3]"
                             : kind === "value"
@@ -732,7 +732,7 @@ function HomePage() {
                   ))}
                 </pre>
               </div>
-              <aside className="border-t border-[#e7e2ef] bg-[#faf9fd] p-4 md:border-l md:border-t-0">
+              <aside className="border-t border-[#e5e5e5] bg-[#faf9fd] p-4 md:border-l md:border-t-0">
                 <div className="font-mono text-[9px] uppercase tracking-[.14em] text-[#82798f]">
                   Configuration intent
                 </div>
@@ -759,7 +759,7 @@ function HomePage() {
         <div className="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-12 lg:py-24">
           <div className="grid gap-8 lg:grid-cols-[.8fr_1.2fr] lg:items-end">
             <div>
-              <div className="font-mono text-[10px] uppercase tracking-[.18em] text-[#5145ff]">
+              <div className="font-mono text-[10px] uppercase tracking-[.18em] text-[#2b2bff]">
                 02 / Agentic SDLC coverage
               </div>
               <h2 className="mt-5 max-w-2xl text-3xl font-medium leading-tight tracking-[-.055em] sm:text-5xl">
@@ -786,7 +786,7 @@ function HomePage() {
                     type="button"
                     aria-pressed={selected}
                     onClick={() => setActiveCoverage(i)}
-                    className={`group min-w-[245px] max-w-[300px] flex-1 snap-start rounded-xl border p-5 text-left transition duration-200 sm:min-w-[270px] ${selected ? "border-[#5145ff] bg-[#17151b]" : "border-[#dcd6e8] bg-white hover:border-[#5145ff]"}`}
+                    className={`group min-w-[245px] max-w-[300px] flex-1 snap-start rounded-xl border p-5 text-left transition duration-200 sm:min-w-[270px] ${selected ? "border-[#2b2bff] bg-[#17151b]" : "border-[#dcd6e8] bg-white hover:border-[#2b2bff]"}`}
                   >
                     <div className="flex items-center justify-between gap-3">
                       <span className="font-mono text-[10px] text-[#85858c]">{n} / 06</span>
@@ -868,7 +868,7 @@ function HomePage() {
         <div className="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-12 lg:py-24">
           <div className="grid gap-8 lg:grid-cols-[.8fr_1.2fr] lg:items-end">
             <div>
-              <div className="font-mono text-[10px] uppercase tracking-[.18em] text-[#5145ff]">
+              <div className="font-mono text-[10px] uppercase tracking-[.18em] text-[#2b2bff]">
                 03 / Quality loop
               </div>
               <h2 className="mt-5 max-w-2xl text-3xl font-medium leading-tight tracking-[-.055em] sm:text-5xl">
@@ -886,7 +886,7 @@ function HomePage() {
                 <span className="font-mono text-[9px] uppercase tracking-[.14em] text-[#746b83]">
                   Signal / 01
                 </span>
-                <Activity className="h-4 w-4 text-[#5145ff]" />
+                <Activity className="h-4 w-4 text-[#2b2bff]" />
               </div>
               <h3 className="mt-5 text-lg font-semibold">Execution integrity</h3>
               <p className="mt-2 text-xs leading-5 text-[#6b6279]">
@@ -902,12 +902,12 @@ function HomePage() {
                 <path
                   d="M0 66 L32 60 L64 64 L96 40 L128 45 L160 28 L192 35 L224 22 L256 26 L288 14 L320 18"
                   fill="none"
-                  stroke="#5145ff"
+                  stroke="#2b2bff"
                   strokeWidth="2.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
-                <circle cx="288" cy="14" r="4" fill="#5145ff" />
+                <circle cx="288" cy="14" r="4" fill="#2b2bff" />
               </svg>
               <div className="mt-3 border-t border-[#eeeaf4] pt-3 font-mono text-[9px] text-[#8a8198]">
                 ILLUSTRATIVE TREND · NOT MEASURED
@@ -975,12 +975,12 @@ function HomePage() {
           </div>
           <div className="mt-5 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-[#ded8ed] bg-white/75 px-4 py-3 text-xs text-[#514a61]">
             <span className="inline-flex items-center gap-2">
-              <Sparkles className="h-4 w-4 text-[#5145ff]" /> Learn from failures. Never weaken a
+              <Sparkles className="h-4 w-4 text-[#2b2bff]" /> Learn from failures. Never weaken a
               gate just to pass.
             </span>
             <Link
               to="/govern"
-              className="inline-flex items-center gap-1.5 font-semibold text-[#5145ff]"
+              className="inline-flex items-center gap-1.5 font-semibold text-[#2b2bff]"
             >
               Explore governance <ArrowRight className="h-3.5 w-3.5" />
             </Link>
@@ -991,7 +991,7 @@ function HomePage() {
       <section className="border-b border-[#e8e4f0] bg-white">
         <div className="mx-auto grid max-w-[1440px] gap-10 px-5 py-20 sm:px-8 lg:grid-cols-[.75fr_1.25fr] lg:px-12 lg:py-24">
           <div>
-            <div className="font-mono text-[10px] uppercase tracking-[.18em] text-[#5145ff]">
+            <div className="font-mono text-[10px] uppercase tracking-[.18em] text-[#2b2bff]">
               04 / Open at every layer
             </div>
             <h2 className="mt-5 max-w-xl text-3xl font-medium leading-tight tracking-[-.055em] sm:text-5xl">
@@ -1004,7 +1004,7 @@ function HomePage() {
             </p>
             <Link
               to="/platform"
-              className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-[#5145ff]"
+              className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-[#2b2bff]"
             >
               Explore the approach <ArrowRight className="h-4 w-4" />
             </Link>
@@ -1047,7 +1047,7 @@ function HomePage() {
                   <h3 className="text-sm font-semibold">{item.title}</h3>
                   <p className="mt-1 text-xs leading-5 text-[#716780]">{item.text}</p>
                 </div>
-                <span className="inline-flex w-fit rounded border border-[#dcd6e8] bg-white px-2 py-1 font-mono text-[9px] text-[#5145ff]">
+                <span className="inline-flex w-fit rounded border border-[#dcd6e8] bg-white px-2 py-1 font-mono text-[9px] text-[#2b2bff]">
                   {item.tag}
                 </span>
               </div>
@@ -1060,7 +1060,7 @@ function HomePage() {
         <div className="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-12 lg:py-24">
           <div className="grid gap-8 lg:grid-cols-[.8fr_1.2fr] lg:items-end">
             <div>
-              <div className="font-mono text-[10px] uppercase tracking-[.18em] text-[#5145ff]">
+              <div className="font-mono text-[10px] uppercase tracking-[.18em] text-[#2b2bff]">
                 05 / Governance
               </div>
               <h2 className="mt-5 max-w-2xl text-3xl font-medium leading-tight tracking-[-.055em] sm:text-5xl">
@@ -1076,7 +1076,7 @@ function HomePage() {
           <div className="mt-10 overflow-hidden rounded-lg border border-[#dcd6e8] bg-white">
             <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#e8e3f0] px-4 py-3 sm:px-5">
               <div className="flex items-center gap-2">
-                <Workflow className="h-4 w-4 text-[#5145ff]" />
+                <Workflow className="h-4 w-4 text-[#2b2bff]" />
                 <span className="text-xs font-semibold">Factory control plane</span>
               </div>
               <span className="font-mono text-[9px] uppercase tracking-[.14em] text-[#8a8198]">
@@ -1090,7 +1090,7 @@ function HomePage() {
                     name: "Nexus",
                     task: "Map changed components",
                     state: "Complete",
-                    tone: "#5145ff",
+                    tone: "#2b2bff",
                   },
                   {
                     name: "Vera",
@@ -1147,7 +1147,7 @@ function HomePage() {
                     "Human approval recorded",
                   ].map((item) => (
                     <div key={item} className="flex items-center gap-2 text-xs text-[#514a61]">
-                      <LockKeyhole className="h-3.5 w-3.5 text-[#5145ff]" />
+                      <LockKeyhole className="h-3.5 w-3.5 text-[#2b2bff]" />
                       {item}
                     </div>
                   ))}
@@ -1162,7 +1162,7 @@ function HomePage() {
         <div className="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-12 lg:py-24">
           <div className="grid gap-8 lg:grid-cols-[.8fr_1.2fr] lg:items-end">
             <div>
-              <div className="font-mono text-[10px] uppercase tracking-[.18em] text-[#5145ff]">
+              <div className="font-mono text-[10px] uppercase tracking-[.18em] text-[#2b2bff]">
                 06 / Use Shyena where you work
               </div>
               <h2 className="mt-5 max-w-2xl text-3xl font-medium leading-tight tracking-[-.055em] sm:text-5xl">
@@ -1193,7 +1193,7 @@ function HomePage() {
               },
             ].map(({ icon: Icon, title, text }) => (
               <article key={title} className="rounded-lg border border-[#ded8ed] bg-[#fbfaff] p-5">
-                <Icon className="h-4 w-4 text-[#5145ff]" />
+                <Icon className="h-4 w-4 text-[#2b2bff]" />
                 <h3 className="mt-5 text-base font-semibold">{title}</h3>
                 <p className="mt-2 text-sm leading-6 text-[#6b6279]">{text}</p>
               </article>
@@ -1205,7 +1205,7 @@ function HomePage() {
       <section className="border-b border-[#e8e4f0] bg-[#f7f5ff]">
         <div className="mx-auto grid max-w-[1440px] gap-10 px-5 py-20 sm:px-8 lg:grid-cols-[.72fr_1.28fr] lg:px-12 lg:py-24">
           <div>
-            <div className="font-mono text-[10px] uppercase tracking-[.18em] text-[#5145ff]">
+            <div className="font-mono text-[10px] uppercase tracking-[.18em] text-[#2b2bff]">
               FAQ / The basics
             </div>
             <h2 className="mt-5 text-3xl font-medium leading-tight tracking-[-.055em] sm:text-5xl">
@@ -1229,7 +1229,7 @@ function HomePage() {
                     {question}
                   </span>
                   <ChevronDown
-                    className={`h-4 w-4 shrink-0 text-[#5145ff] transition-transform ${openFaq === i ? "rotate-180" : ""}`}
+                    className={`h-4 w-4 shrink-0 text-[#2b2bff] transition-transform ${openFaq === i ? "rotate-180" : ""}`}
                   />
                 </button>
                 {openFaq === i && (
@@ -1241,7 +1241,7 @@ function HomePage() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-[#211a32] text-white">
+      <section className="relative overflow-hidden bg-[var(--warp-ink)] text-white">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 opacity-20"
@@ -1266,7 +1266,7 @@ function HomePage() {
           <div className="flex shrink-0 flex-wrap gap-3">
             <Link
               to="/demo"
-              className="inline-flex h-12 items-center gap-2 rounded-md bg-[#f4d64f] px-5 text-sm font-semibold text-[#211a32] transition hover:bg-[#ffe978]"
+              className="inline-flex h-12 items-center gap-2 rounded-md bg-[var(--warp-lime)] px-5 text-sm font-semibold text-[#211a32] transition hover:bg-[#e4e96b]"
             >
               Book a demo <ArrowRight className="h-4 w-4" />
             </Link>
