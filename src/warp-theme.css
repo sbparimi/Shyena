@@ -546,3 +546,51 @@ body > div > footer[data-shyena-chrome="footer"] a:hover {
     scroll-behavior: auto !important;
   }
 }
+
+
+/* Visual QA remediation: preserve readable foregrounds on dark sections.
+   These rules intentionally target only known dark surfaces and legacy dark-text
+   utility classes, leaving light cards and terminal controls untouched. */
+#page-content.site-theme :is(
+  [class*="bg-[#07101f]"],
+  [class*="bg-[#0a071d]"],
+  [class*="bg-[#121212]"],
+  [class*="bg-[#17213f]"],
+  [class*="bg-[#1a1a1a]"],
+  [class*="bg-slate-950"],
+  [class*="bg-gray-950"],
+  [class*="bg-zinc-950"],
+  [class*="bg-black"]
+) :is(
+  [class*="text-[#1a1522]"],
+  [class*="text-[#1a1527]"],
+  [class*="text-[#17213f]"],
+  [class*="text-[#17233f]"],
+  [class*="text-[#0f172a]"],
+  [class*="text-[#211a32]"],
+  [class*="text-[#2d263d]"]
+) {
+  color: #f5f5f5 !important;
+}
+
+#page-content.site-theme :is(
+  [class*="bg-[#07101f]"],
+  [class*="bg-[#0a071d]"],
+  [class*="bg-[#121212]"],
+  [class*="bg-[#17213f]"],
+  [class*="bg-[#1a1a1a]"],
+  [class*="bg-slate-950"],
+  [class*="bg-gray-950"],
+  [class*="bg-zinc-950"],
+  [class*="bg-black"]
+) :is(p, li, label, small, figcaption) {
+  color: #e5e5e5 !important;
+}
+
+body > div > header[data-shyena-chrome="header"] .shyena-mobile-panel :where(a, span, svg) {
+  color: var(--warp-ink) !important;
+}
+
+body > div > header[data-shyena-chrome="header"] .shyena-mobile-panel a.is-active {
+  color: var(--warp-blue) !important;
+}
