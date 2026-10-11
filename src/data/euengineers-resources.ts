@@ -2,14 +2,10 @@
 export const EUENGINEERS_RESOURCES = [
   {
     slug: "european-engineers-collective-pre-vetted-ai-ml-data-engineers-0-agency-fees-netherlands",
-    title:
-      "European Engineers Collective | Pre-Vetted AI, ML & Data Engineers | 0% Agency Fees | Netherlands",
-    description:
-      "Title: European Engineers Collective | Pre-Vetted AI, ML & Data Engineers | 0% Agency Fees | Netherlands",
+    title: "European Engineers Collective | Pre-Vetted AI, ML & Data Engineers | 0% Agency Fees | Netherlands",
+    description: "Title: European Engineers Collective | Pre-Vetted AI, ML & Data Engineers | 0% Agency Fees | Netherlands",
     published: "",
-    sourceUrl:
-      "https://euengineers.eu/blog/ai/architecting-real-time-fraud-detection-agent-reliability-too-day-3",
-    markdown:
-      "Warning: This page maybe not yet fully loaded, consider explicitly specify a timeout.\n\nMarkdown Content:",
+    sourceUrl: "https://euengineers.eu/blog/ai/architecting-real-time-fraud-detection-agent-reliability-too-day-3",
+    markdown: "Article content could not be reliably extracted from the cached source; visit the original resource for the full article.",
   },
 ] as const;
