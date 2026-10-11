@@ -1256,25 +1256,25 @@ function HomePage() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-[var(--warp-ink)] text-white">
+      <section className="relative overflow-hidden bg-[var(--warp-surface-soft)] text-[var(--warp-ink)]">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 opacity-20"
           style={{
             backgroundImage:
-              "linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px)",
+              "linear-gradient(rgba(23,23,23,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(23,23,23,.055) 1px,transparent 1px)",
             backgroundSize: "42px 42px",
           }}
         />
         <div className="relative mx-auto flex max-w-[1440px] flex-col gap-8 px-5 py-16 sm:px-8 lg:flex-row lg:items-end lg:justify-between lg:px-12 lg:py-24">
           <div>
-            <div className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[.18em] text-[#c3bcff]">
+            <div className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[.18em] text-[var(--warp-blue)]">
               <Zap className="h-3.5 w-3.5" /> Start with one critical journey
             </div>
             <h2 className="mt-5 max-w-4xl text-3xl font-medium leading-tight tracking-[-.055em] sm:text-5xl">
               Make autonomous engineering accountable—from the first plan to production.
             </h2>
-            <p className="mt-4 max-w-2xl text-sm leading-7 text-[#d0c9dd]">
+            <p className="mt-4 max-w-2xl text-sm leading-7 text-[var(--warp-muted)]">
               Map the risk. Test the behaviour. Challenge the boundaries. Decide with evidence.
             </p>
           </div>
@@ -1287,7 +1287,7 @@ function HomePage() {
             </Link>
             <Link
               to="/contact"
-              className="inline-flex h-12 items-center gap-2 rounded-md border border-white/25 px-5 text-sm font-semibold text-white transition hover:bg-white/10"
+              className="inline-flex h-12 items-center gap-2 rounded-md border border-[var(--warp-border-strong)] px-5 text-sm font-medium text-[var(--warp-ink)] transition hover:bg-white"
             >
               Contact Shyena <ArrowUpRight className="h-4 w-4" />
             </Link>
