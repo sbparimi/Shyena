@@ -48,7 +48,6 @@
   color: var(--warp-ink);
   font-size: 1.02rem;
 }
-.site-theme:has(.shyena-article-visual) .aspect-\\[1200\\/420\\] {
   display: none !important;
 }
 
@@ -142,3 +141,4 @@
 .shyena-video-controls-host > div:last-child .border-slate-300 {
   border-color: rgba(255, 255, 255, 0.2) !important;
 }
+
