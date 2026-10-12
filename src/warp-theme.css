@@ -141,9 +141,7 @@ body {
 #page-content.site-theme :where(
   [class*="text-violet-"],
   [class*="text-purple-"],
-  [class*="text-[#5145ff]"],
-  [class*="text-[#e87512]"],
-  [class*="text-[#f18a32]"]
+  [class*="text-[#5145ff]"]
 ) {
   color: var(--warp-blue) !important;
 }
@@ -669,4 +667,82 @@ body > div > header[data-shyena-chrome="header"] .shyena-search-control :where(s
   [class*="text-white/30"], [class*="text-white/35"]
 ) {
   color: #bfc7d2 !important;
+}
+
+
+/*
+ * Production visual repair: dark page sections must not inherit the light-theme
+ * heading ink color. Keep this scoped to dark surfaces so light-page typography
+ * and intentional accent colors remain unchanged.
+ */
+#page-content.site-theme :is(
+  [class*="bg-[#07101f]"],
+  [class*="bg-[#05080d]"],
+  [class*="bg-[#080809]"],
+  [class*="bg-[#080711]"],
+  [class*="bg-[#090713]"],
+  [class*="bg-[#0b0920]"],
+  [class*="bg-slate-950"],
+  [class*="bg-gray-950"],
+  [class*="bg-zinc-950"],
+  [class*="bg-black"]
+) :is(h1, h2, h3, h4, h5, h6) {
+  color: #f8fafc !important;
+}
+
+#page-content.site-theme :is(
+  [class*="bg-[#07101f]"],
+  [class*="bg-[#05080d]"],
+  [class*="bg-[#080809]"],
+  [class*="bg-[#080711]"],
+  [class*="bg-[#090713]"],
+  [class*="bg-[#0b0920]"],
+  [class*="bg-slate-950"],
+  [class*="bg-gray-950"],
+  [class*="bg-zinc-950"],
+  [class*="bg-black"]
+) :is(p, li, label, small, figcaption, dt, dd, th, td) {
+  color: #e2e8f0 !important;
+}
+
+/* Accent words on dark surfaces must be light enough to meet text contrast. */
+#page-content.site-theme :is(
+  [class*="bg-[#07101f]"],
+  [class*="bg-[#05080d]"],
+  [class*="bg-[#080809]"],
+  [class*="bg-[#080711]"],
+  [class*="bg-[#090713]"],
+  [class*="bg-[#0b0920]"],
+  [class*="bg-slate-950"],
+  [class*="bg-gray-950"],
+  [class*="bg-zinc-950"],
+  [class*="bg-black"]
+) :is(h1, h2, h3, h4, h5, h6) :is(span, em, strong) {
+  color: #a5b4fc !important;
+}
+
+/* Preserve explicitly high-contrast orange metadata on dark surfaces. */
+#page-content.site-theme :is(
+  [class*="bg-[#07101f]"],
+  [class*="bg-[#05080d]"],
+  [class*="bg-[#080809]"],
+  [class*="bg-[#080711]"],
+  [class*="bg-[#090713]"],
+  [class*="bg-[#0b0920]"],
+  [class*="bg-slate-950"],
+  [class*="bg-gray-950"],
+  [class*="bg-zinc-950"],
+  [class*="bg-black"]
+) :is([class*="text-[#e87512]"], [class*="text-[#f18a32]"]) {
+  color: #ffb15c !important;
+}
+
+/* Skip navigation stays out of the visual header until keyboard focus. */
+a.shyena-skip-link:not(:focus):not(:focus-visible) {
+  transform: translateY(calc(-100% - 16px)) !important;
+  clip-path: inset(50%) !important;
+}
+a.shyena-skip-link:focus,
+a.shyena-skip-link:focus-visible {
+  clip-path: none !important;
 }
