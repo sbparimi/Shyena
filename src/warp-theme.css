@@ -7,17 +7,17 @@
  */
 :root {
   color-scheme: light;
-  --warp-canvas: #ffffff;
-  --warp-surface: #ffffff;
-  --warp-surface-soft: #f6f6f6;
-  --warp-ink: #171717;
-  --warp-muted: #555555;
-  --warp-subtle: #777777;
-  --warp-border: #e5e5e5;
-  --warp-border-strong: #b9b9b9;
+  --warp-canvas: #07101f;
+  --warp-surface: #0c1729;
+  --warp-surface-soft: #101e32;
+  --warp-ink: #f5f7fb;
+  --warp-muted: #cbd5e1;
+  --warp-subtle: #a7b2c3;
+  --warp-border: #263449;
+  --warp-border-strong: #475569;
   --warp-blue: #2b2bff;
   --warp-lime: #eff57a;
-  --warp-terminal: #111111;
+  --warp-terminal: #050b15;
   --background: var(--warp-canvas);
   --foreground: var(--warp-ink);
   --card: var(--warp-surface);
@@ -745,4 +745,112 @@ a.shyena-skip-link:not(:focus):not(:focus-visible) {
 a.shyena-skip-link:focus,
 a.shyena-skip-link:focus-visible {
   clip-path: none !important;
+}
+
+
+/*
+ * Unified Shyena brand theme across every route.
+ * Match the platform hero: white global navigation, deep-navy page canvas,
+ * blue-white typography, orange brand accents and restrained navy panels.
+ * Route components may keep their structure, but may not reintroduce unrelated
+ * light-purple, grey-card or white-page themes.
+ */
+:root {
+  color-scheme: dark;
+  --background: #07101f;
+  --foreground: #f5f7fb;
+  --card: #0c1729;
+  --card-foreground: #f5f7fb;
+  --popover: #0c1729;
+  --popover-foreground: #f5f7fb;
+  --secondary: #101e32;
+  --secondary-foreground: #f5f7fb;
+  --muted: #101e32;
+  --muted-foreground: #cbd5e1;
+  --border: #263449;
+  --input: #475569;
+  --primary: #f18a32;
+  --primary-foreground: #07101f;
+  --accent: #f18a32;
+  --accent-foreground: #07101f;
+}
+html, body, body > div, body > div > div {
+  background: #07101f !important;
+  color: #f5f7fb;
+  color-scheme: dark;
+}
+#page-content.site-theme,
+#page-content.site-theme .reference-page-theme,
+#page-content.site-theme .shyena-factory-home {
+  background: #07101f !important;
+  color: #f5f7fb !important;
+}
+/* Normalize legacy light backgrounds without affecting the shared white header. */
+#page-content.site-theme :is(
+  [class*="bg-white"], [class*="bg-gray-50"], [class*="bg-gray-100"],
+  [class*="bg-slate-50"], [class*="bg-slate-100"], [class*="bg-zinc-50"],
+  [class*="bg-neutral-50"], [class*="bg-[#f6f6f6]"], [class*="bg-[#f8f8f8]"],
+  [class*="bg-[#fafbfc]"], [class*="bg-[#fafafa]"], [class*="bg-[#fff8f2]"],
+  [class*="bg-[#fcfbff]"], [class*="bg-[#fbfaff]"], [class*="bg-[#f7f5ff]"],
+  [class*="bg-[#efedff]"], [class*="bg-[#f6f4ff]"], [class*="bg-[#ffffff]"],
+  [class*="bg-[#fff]"]
+) {
+  background-color: #0c1729 !important;
+  color: #f5f7fb !important;
+  border-color: #263449 !important;
+}
+#page-content.site-theme :is(
+  [class*="text-[#171717]"], [class*="text-[#262626]"],
+  [class*="text-[#17213f]"], [class*="text-[#17233f]"],
+  [class*="text-[#0f172a]"], [class*="text-[#1a1527]"],
+  [class*="text-[#211a32]"], [class*="text-[#2d263d]"],
+  [class*="text-[#302940]"], [class*="text-[#555]"],
+  [class*="text-[#555555]"], [class*="text-[#596273]"],
+  [class*="text-[#69707d]"], [class*="text-[#69707d]"],
+  [class*="text-[#575064]"], [class*="text-[#61586f]"],
+  [class*="text-[#6b6279]"], [class*="text-[#746b83]"],
+  [class*="text-[#756c83]"], [class*="text-[#81788e]"],
+  [class*="text-[#82798f]"], [class*="text-[#8a8299]"],
+  [class*="text-[#8d849a]"]
+) {
+  color: #cbd5e1 !important;
+}
+#page-content.site-theme :is(h1,h2,h3,h4,h5,h6) {
+  color: #f5f7fb !important;
+}
+#page-content.site-theme :is(section, article, aside, [role="tabpanel"], table, th, td) {
+  border-color: #263449 !important;
+}
+#page-content.site-theme :is(
+  [class*="border-[#e1e4e9]"], [class*="border-[#e6e8ed]"],
+  [class*="border-[#e8eaee]"], [class*="border-[#dfe3e8]"],
+  [class*="border-[#e5e5e5]"], [class*="border-[#e6e6e6]"],
+  [class*="border-gray-200"], [class*="border-slate-200"]
+) {
+  border-color: #263449 !important;
+}
+/* Keep the brand orange as the dominant action color, with the lime demo CTA
+   reserved for the shared header to preserve the screenshot's hierarchy. */
+#page-content.site-theme :is(
+  a[class*="bg-[#e87512]"], button[class*="bg-[#e87512]"],
+  a[class*="bg-[#f18a32]"], button[class*="bg-[#f18a32]"],
+  a[class*="bg-orange-"], button[class*="bg-orange-"]
+) {
+  background: #e87512 !important;
+  color: #ffffff !important;
+  border-color: #e87512 !important;
+}
+#page-content.site-theme :is(a,button):hover {
+  border-color: #ffb15c;
+}
+body > div > footer[data-shyena-chrome="footer"] {
+  background: #07101f !important;
+  color: #f5f7fb !important;
+  border-color: #263449 !important;
+}
+body > div > footer[data-shyena-chrome="footer"] :where(p,a,div,span) {
+  color: #cbd5e1;
+}
+body > div > footer[data-shyena-chrome="footer"] .shyena-footer-heading {
+  color: #f5f7fb !important;
 }
