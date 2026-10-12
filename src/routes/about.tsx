@@ -6,20 +6,20 @@ export const Route = createFileRoute("/about")({
   head: () => ({
     links: [{ rel: "canonical", href: `${SITE}/about` }],
     meta: [
-      { title: "About Shyena | AI Assurance" },
+      { title: "About Shyena | Quality Engineering & AIOps" },
       {
         name: "description",
         content:
-          "Meet the founder behind Shyena and its AI assurance, AI governance, EU AI Act and AI evaluation approach.",
+          "Meet the quality engineering and AIOps specialists combining engineering, infrastructure and AI assurance to solve agentic SDLC problems one business at a time.",
       },
       {
         name: "robots",
         content: "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
       },
-      { property: "og:title", content: "About Shyena | AI Assurance" },
+      { property: "og:title", content: "About Shyena | Quality Engineering & AIOps" },
       {
         property: "og:description",
-        content: "Founder-led AI assurance for AI systems that need evidence.",
+        content: "Quality engineering and AIOps specialists solving agentic SDLC challenges with your tools, stack and infrastructure.",
       },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "Shyena" },
@@ -28,7 +28,7 @@ export const Route = createFileRoute("/about")({
       { name: "twitter:title", content: "About Shyena | AI Assurance" },
       {
         name: "twitter:description",
-        content: "Founder-led AI assurance, evaluation and governance.",
+        content: "Quality engineering, AIOps, AI evaluation and operational assurance for agentic systems.",
       },
     ],
   }),
@@ -45,13 +45,13 @@ function AboutPage() {
               About Shyena
             </div>
             <h1 className="mt-5 font-[Sora] text-[clamp(3rem,6vw,6rem)] font-extrabold leading-[.9] tracking-[-.065em]">
-              Built to make AI quality measurable—not just chatbot conversations.
+              Engineering trustworthy AI systems from development to production.
             </h1>
             <p className="mt-7 max-w-3xl text-lg leading-8 text-white/60">
-              Shyena is a founder-led AI quality engineering and assurance offering covering models,
-              data pipelines, generative AI applications, AI-powered products and agentic workflows,
-              with realistic evaluation, security testing, traceable evidence and governance
-              workflows.
+              Shyena brings quality engineering specialists, AIOps specialists, software engineers and
+              infrastructure expertise together to solve the real problems of the agentic software
+              development lifecycle (SDLC). We connect the people, engineering practices and
+              infrastructure needed to build, test, operate and improve AI-enabled systems.
             </p>
           </div>
         </div>
@@ -61,28 +61,32 @@ function AboutPage() {
         <div className="mx-auto max-w-[1280px] px-5 py-16 sm:px-8 lg:px-10 lg:py-20">
           <div className="grid gap-8 lg:grid-cols-[.8fr_1.2fr] lg:items-start">
             <div>
-              <div className="text-sm font-semibold text-[#e87512]">Who's behind Shyena</div>
+              <div className="text-sm font-semibold text-[#e87512]">Who’s behind Shyena</div>
               <h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em]">
-                Parimi
+                Quality engineering meets AIOps.
               </h2>
-              <a
-                href="https://linkedin.com/in/sparimi"
-                target="_blank"
-                rel="noreferrer"
-                className="mt-4 inline-flex items-center gap-2 text-sm font-semibold underline decoration-[#e87512] decoration-2 underline-offset-4"
-              >
-                LinkedIn <span aria-hidden="true">↗</span>
-              </a>
             </div>
             <div className="rounded-2xl border border-[#e1e4e9] bg-[#fafbfc] p-7 sm:p-8">
               <p className="text-lg leading-8 text-[#4f5968]">
-                Parimi's background is in test leadership and AI quality engineering. Shyena is
-                built around turning complex model behaviour, data-driven predictions, generated
-                outputs and AI-enabled workflows into repeatable evaluation and release evidence.
+                We bring quality engineering and AIOps together with software and infrastructure engineering
+                to tackle the difficult parts of agentic SDLC: unreliable model behaviour, complex
+                tool use, integration failures, observability gaps, security boundaries and release
+                confidence.
               </p>
               <p className="mt-5 text-lg leading-8 text-[#4f5968]">
-                Being small is intentional: design and engineering decisions stay close to the work,
-                with direct access to the founder who built the platform.
+                We solve problems one business at a time, brick by brick. We learn your goals, legacy systems,
+                operating constraints and risk profile, then build and validate a practical solution
+                around the way your business actually works.
+              </p>
+            </div>
+            <div className="mt-6 rounded-2xl border border-[#e1e4e9] bg-[#fafbfc] p-7 sm:p-8">
+              <h3 className="text-xl font-bold">Built around your environment</h3>
+              <p className="mt-3 text-base leading-7 text-[#4f5968]">
+                Keep the tools, stack, integrations and legacy systems that already work. Shyena
+                can integrate with your existing infrastructure, run within infrastructure you
+                control, or support a greenfield implementation when a clean foundation is the
+                better choice. We adapt the engineering approach to your environment instead of
+                forcing a wholesale replacement.
               </p>
             </div>
           </div>
