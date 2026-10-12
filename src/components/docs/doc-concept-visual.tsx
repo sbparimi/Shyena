@@ -26,7 +26,7 @@ type Concept = {
   pieces: Array<{ label: string; icon: LucideIcon }>;
 };
 
-const CONCEPTS: Record<string, Concept> = {
+const CONCEPTS = {
   "Documentation Overview": {
     kicker: "ASSURANCE SYSTEM",
     message: "Every guide is one piece of the same evidence-backed AI assurance lifecycle.",
@@ -80,20 +80,6 @@ const CONCEPTS: Record<string, Concept> = {
       { label: "Trajectory", icon: Activity },
       { label: "Security", icon: ShieldCheck },
       { label: "Verdict", icon: CheckCircle2 },
-    ],
-  },
-  "RAG Reliability": {
-    kicker: "RAG / RELIABILITY",
-    message:
-      "Trace every answer from trusted sources through retrieval, context resolution and claim verification.",
-    thesis:
-      "A RAG verdict is only defensible when source authority, version conflicts, claim grounding, security and run evidence are checked independently.",
-    pieces: [
-      { label: "Sources", icon: Database },
-      { label: "Retrieval", icon: Search },
-      { label: "Context", icon: Network },
-      { label: "Verification", icon: ShieldCheck },
-      { label: "Evidence", icon: FileCheck2 },
     ],
   },
   "RAG Reliability": {
@@ -222,14 +208,14 @@ const CONCEPTS: Record<string, Concept> = {
       { label: "Impact", icon: CheckCircle2 },
     ],
   },
-};
+} satisfies Record<string, Concept>;
 
 const AGENTS = [
   { label: "Planner agent", icon: Bot },
   { label: "Evaluator agent", icon: Gauge },
   { label: "Evidence agent", icon: ShieldCheck },
 ];
-const FALLBACK = CONCEPTS["Documentation Overview"];
+const FALLBACK: Concept = CONCEPTS["Documentation Overview"];
 
 function Thesis({ concept }: { concept: Concept }) {
   return (
@@ -291,7 +277,7 @@ function RagEvaluationVisual() {
 }
 
 export function DocConceptVisual({ section }: { section: string }) {
-  const concept = CONCEPTS[section] ?? FALLBACK;
+  const concept = (CONCEPTS as Record<string, Concept | undefined>)[section] ?? FALLBACK;
   if (section === "The Evaluation Model") return <EvaluationModelVisual />;
   if (section === "RAG Reliability") return <RagEvaluationVisual />;
   const isInternal = section === "SAGE Content Engineering";

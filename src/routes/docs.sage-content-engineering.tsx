@@ -87,10 +87,7 @@ function SageContentEngineeringPage() {
             </Link>
           </Button>
           <Button asChild>
-            <Link
-              to="/blog/generated/$slug"
-              params={{ slug: "ai-agent-testing-is-a-systems-problem" }}
-            >
+            <Link to="/blog/$slug" params={{ slug: "ai-agent-testing-is-a-systems-problem" }}>
               Read the pilot article
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>

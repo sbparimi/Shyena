@@ -317,27 +317,29 @@ function BlogIndexPage() {
           className="mt-16 grid gap-5 lg:grid-cols-3"
           aria-label="Shyena assurance principles"
         >
-          {[
+          {(
             [
-              ShieldCheck,
-              "Evidence first",
-              "Claims should connect to observable execution evidence, not only generated language.",
-            ],
-            [
-              Target,
-              "Outcome focused",
-              "Test the business goal and critical invariants, not one ideal conversation transcript.",
-            ],
-            [
-              Sparkles,
-              "System aware",
-              "Treat orchestration, tools, retrieval, security and model behaviour as one system.",
-            ],
-          ].map(([Icon, title, description]) => (
-            <div key={title as string} className="border border-[#d2ccc0] bg-[#fff4cc] p-6">
+              [
+                ShieldCheck,
+                "Evidence first",
+                "Claims should connect to observable execution evidence, not only generated language.",
+              ],
+              [
+                Target,
+                "Outcome focused",
+                "Test the business goal and critical invariants, not one ideal conversation transcript.",
+              ],
+              [
+                Sparkles,
+                "System aware",
+                "Treat orchestration, tools, retrieval, security and model behaviour as one system.",
+              ],
+            ] as const
+          ).map(([Icon, title, description]) => (
+            <div key={title} className="border border-[#d2ccc0] bg-[#fff4cc] p-6">
               <Icon className="h-5 w-5 text-[#8c6500]" />
-              <h3 className="mt-5 text-lg font-bold">{title as string}</h3>
-              <p className="mt-2 text-sm leading-6 text-slate-700">{description as string}</p>
+              <h3 className="mt-5 text-lg font-bold">{title}</h3>
+              <p className="mt-2 text-sm leading-6 text-slate-700">{description}</p>
             </div>
           ))}
         </section>

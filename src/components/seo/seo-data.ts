@@ -594,3 +594,16 @@ export const seoPages: Record<string, SeoLandingConfig> = {
     ],
   },
 };
+
+/**
+ * Returns the landing-page config for a route path. A missing entry is a
+ * programming error, so it fails loudly at module load instead of rendering
+ * a page without metadata.
+ */
+export function getSeoPage(path: string): SeoLandingConfig {
+  const config = seoPages[path];
+  if (!config) {
+    throw new Error(`No SEO landing config registered for "${path}".`);
+  }
+  return config;
+}

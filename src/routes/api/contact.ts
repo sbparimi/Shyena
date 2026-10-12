@@ -68,20 +68,23 @@ export const Route = createFileRoute("/api/contact")({
           return Response.json({ error: "Invalid request body" }, { status: 400 });
         }
 
+        if (typeof body !== "object" || body === null || Array.isArray(body)) {
+          return Response.json({ error: "Invalid request body" }, { status: 400 });
+        }
         const input = body as Record<string, unknown>;
-        const inquiryReason = cleanText(input.inquiryReason, 80);
-        const firstName = cleanText(input.firstName, MAX_NAME_LENGTH);
-        const lastName = cleanText(input.lastName, MAX_NAME_LENGTH);
-        const email = cleanText(input.email, MAX_EMAIL_LENGTH).toLowerCase();
-        const phone = cleanText(input.phone, 60);
-        const company = cleanText(input.company, MAX_COMPANY_LENGTH);
-        const jobTitle = cleanText(input.jobTitle, 120);
-        const companySize = cleanText(input.companySize, 40);
-        const country = cleanText(input.country, 100);
-        const message = cleanText(input.message, MAX_MESSAGE_LENGTH);
+        const inquiryReason = cleanText(input["inquiryReason"], 80);
+        const firstName = cleanText(input["firstName"], MAX_NAME_LENGTH);
+        const lastName = cleanText(input["lastName"], MAX_NAME_LENGTH);
+        const email = cleanText(input["email"], MAX_EMAIL_LENGTH).toLowerCase();
+        const phone = cleanText(input["phone"], 60);
+        const company = cleanText(input["company"], MAX_COMPANY_LENGTH);
+        const jobTitle = cleanText(input["jobTitle"], 120);
+        const companySize = cleanText(input["companySize"], 40);
+        const country = cleanText(input["country"], 100);
+        const message = cleanText(input["message"], MAX_MESSAGE_LENGTH);
         const name = [firstName, lastName].filter(Boolean).join(" ");
 
-        const honeypot = cleanText(input.website, 200);
+        const honeypot = cleanText(input["website"], 200);
         if (honeypot)
           return Response.json({ error: "Unable to submit this request." }, { status: 400 });
         if (!inquiryReason || !firstName || !lastName || !email || !company || !message) {

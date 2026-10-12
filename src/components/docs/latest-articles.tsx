@@ -6,35 +6,35 @@ const LATEST_ARTICLES = [
     title: "DeepEval Rubric Scores: How to Make LLM Evaluation More Consistent",
     category: "Evaluation Model",
     readTime: "8 min",
-    to: "/blog/generated/deepeval-rubric-score",
+    slug: "deepeval-rubric-score",
     icon: Scale,
   },
   {
     title: "AI Agent Testing Is a Systems Problem, Not Just an LLM Evaluation Problem",
     category: "AI Agent Assurance",
     readTime: "6 min",
-    to: "/blog/generated/ai-agent-testing-is-a-systems-problem",
+    slug: "ai-agent-testing-is-a-systems-problem",
     icon: Sparkles,
   },
   {
     title: "Why Conversational AI Needs a Different Testing Model",
     category: "Testing Strategy",
     readTime: "6 min",
-    to: "/blog/why-conversational-ai-needs-a-different-testing-model",
+    slug: "why-conversational-ai-needs-a-different-testing-model",
     icon: Sparkles,
   },
   {
     title: "The Problem With Green Checkmarks on Broken Conversations",
     category: "Quality Assurance",
     readTime: "5 min",
-    to: "/blog/the-problem-with-green-checkmarks-on-broken-conversations",
+    slug: "the-problem-with-green-checkmarks-on-broken-conversations",
     icon: BookOpen,
   },
   {
     title: "AI Test Design for Business Workflows",
     category: "Testing Strategy",
     readTime: "7 min",
-    to: "/blog/ai-test-design-for-business-workflows",
+    slug: "ai-test-design-for-business-workflows",
     icon: BookOpen,
   },
 ] as const;
@@ -70,8 +70,9 @@ export function LatestArticles() {
           const Icon = article.icon;
           return (
             <Link
-              key={article.to}
-              to={article.to}
+              key={article.slug}
+              to="/blog/$slug"
+              params={{ slug: article.slug }}
               className="group relative flex min-h-56 flex-col overflow-hidden border border-[#d2ccc0] bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[#a87900] hover:shadow-[8px_8px_0_0_#fff0bf] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffb804]"
             >
               <div className="absolute left-0 top-0 h-1 w-full bg-[#ffb804] opacity-40 transition-opacity group-hover:opacity-100" />

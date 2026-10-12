@@ -28,5 +28,5 @@ export const Route = createFileRoute("/observability")({
     ],
     links: [{ rel: "canonical", href: "https://www.shyena.eu/observability" }],
   }),
-  component: () => <QualityIntelligencePage module="observability" />,
+  component: () => <QualityIntelligencePage />,
 });

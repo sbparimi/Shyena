@@ -120,27 +120,29 @@ function Page() {
 
       <section className="border-b border-[#e6e8ed] bg-[#fafbfc]">
         <div className="mx-auto grid max-w-[1240px] gap-4 px-5 py-14 sm:px-8 md:grid-cols-3 lg:px-10">
-          {[
+          {(
             [
-              Network,
-              "Map the full workflow",
-              "Trace user input through retrieval, model calls, classification, tools, APIs, data stores, human review and final business outcome.",
-            ],
-            [
-              CheckCircle2,
-              "Measure against evidence",
-              "Combine exact assertions and reference datasets with calibrated semantic evaluation. Report failures by criterion, not only as one average score.",
-            ],
-            [
-              ShieldCheck,
-              "Gate risky releases",
-              "Apply explicit thresholds for critical accuracy, authorization, execution integrity and privacy. Block releases when mandatory controls fail.",
-            ],
-          ].map(([Icon, title, body]) => (
-            <div key={title as string} className="rounded-2xl border border-[#e1e4e9] bg-white p-6">
+              [
+                Network,
+                "Map the full workflow",
+                "Trace user input through retrieval, model calls, classification, tools, APIs, data stores, human review and final business outcome.",
+              ],
+              [
+                CheckCircle2,
+                "Measure against evidence",
+                "Combine exact assertions and reference datasets with calibrated semantic evaluation. Report failures by criterion, not only as one average score.",
+              ],
+              [
+                ShieldCheck,
+                "Gate risky releases",
+                "Apply explicit thresholds for critical accuracy, authorization, execution integrity and privacy. Block releases when mandatory controls fail.",
+              ],
+            ] as const
+          ).map(([Icon, title, body]) => (
+            <div key={title} className="rounded-2xl border border-[#e1e4e9] bg-white p-6">
               <Icon className="h-5 w-5 text-[#e87512]" />
-              <h2 className="mt-5 text-lg font-bold">{title as string}</h2>
-              <p className="mt-2 text-sm leading-6 text-[#69707d]">{body as string}</p>
+              <h2 className="mt-5 text-lg font-bold">{title}</h2>
+              <p className="mt-2 text-sm leading-6 text-[#69707d]">{body}</p>
             </div>
           ))}
         </div>

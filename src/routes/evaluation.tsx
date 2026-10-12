@@ -28,5 +28,5 @@ export const Route = createFileRoute("/evaluation")({
     ],
     links: [{ rel: "canonical", href: "https://www.shyena.eu/evaluation" }],
   }),
-  component: () => <QualityIntelligencePage module="evaluation" />,
+  component: () => <QualityIntelligencePage />,
 });

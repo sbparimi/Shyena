@@ -49,7 +49,7 @@ function esc(s: string) {
 function rgb(c: RGB) {
   return c.map((v) => v / 255).join(" ");
 }
-function txt(x: number, y: number, s: string, size = 9, c: C[keyof C] = C.ink) {
+function txt(x: number, y: number, s: string, size = 9, c: RGB = C.ink) {
   return `${rgb(c)} rg BT /F1 ${size} Tf ${x} ${y} Td (${esc(s)}) Tj ET\n`;
 }
 function rect(x: number, y: number, w: number, h: number, c: RGB, r = 0) {
@@ -151,12 +151,14 @@ function pageDashboard() {
 function pageImpact() {
   let s = header("Change intelligence", "31 changed files → 14 journeys → 46 executable cases", 2);
   s += txt(36, 730, "CHANGE PROPAGATION", 8, C.orange);
-  [
-    ["pricing/margin-policy.ts", "Approval gate → quotation", "P1"],
-    ["quote-orchestrator.ts", "RFQ → pricing → approval → customer", "P1"],
-    ["supplier-price-client.ts", "Supplier API → commercial context", "P1"],
-    ["rfq-fixture.yaml", "Extraction → downstream fixtures", "P2"],
-  ].forEach((v, i) => {
+  (
+    [
+      ["pricing/margin-policy.ts", "Approval gate → quotation", "P1"],
+      ["quote-orchestrator.ts", "RFQ → pricing → approval → customer", "P1"],
+      ["supplier-price-client.ts", "Supplier API → commercial context", "P1"],
+      ["rfq-fixture.yaml", "Extraction → downstream fixtures", "P2"],
+    ] as const
+  ).forEach((v, i) => {
     const y = 690 - i * 48;
     s +=
       rect(36, y, 523, 34, C.white) +

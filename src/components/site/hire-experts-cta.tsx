@@ -80,8 +80,8 @@ function getCtaGroup(
 function createHireExpertsLink(href: string, skills: string[]): HTMLAnchorElement {
   const link = document.createElement("a");
   link.href = href;
-  link.dataset.hireExpertsSource = window.location.pathname;
-  link.dataset.shyenaHireExpertLink = "true";
+  link.dataset["hireExpertsSource"] = window.location.pathname;
+  link.dataset["shyenaHireExpertLink"] = "true";
   link.className =
     "inline-flex h-11 items-center justify-center gap-2 rounded-lg border border-[#17213f] bg-white px-4 text-xs font-semibold text-[#17213f] transition hover:border-[#ff5a0a] hover:text-[#ff5a0a]";
   link.title = skills.length
@@ -118,19 +118,20 @@ function addExpertCtas() {
     // "Talk to Experts" to the CTA it just created.
     const group = members[0]?.parentElement;
     if (
-      members.some((element) => element.dataset.shyenaHireExpertAttached === "true") ||
+      members.some((element) => element.dataset["shyenaHireExpertAttached"] === "true") ||
       group?.querySelector("[data-shyena-hire-expert-link='true']")
     )
       return;
 
     const lastCta = members[members.length - 1];
+    if (!lastCta) return;
     const wrapper = document.createElement("span");
-    wrapper.dataset.shyenaHireExperts = "true";
+    wrapper.dataset["shyenaHireExperts"] = "true";
     wrapper.className = "inline-flex items-center gap-2 align-middle ml-2 my-1";
     wrapper.appendChild(createHireExpertsLink(href, skills));
 
     members.forEach((element) => {
-      element.dataset.shyenaHireExpertAttached = "true";
+      element.dataset["shyenaHireExpertAttached"] = "true";
     });
     lastCta.insertAdjacentElement("afterend", wrapper);
   });

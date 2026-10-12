@@ -9,6 +9,7 @@
     "build:dev": "node scripts/validate-theme-contract.mjs && node scripts/generate-public-content.mjs && vite build --mode development",
     "preview": "vite preview",
     "lint": "eslint . && node scripts/validate-theme-contract.mjs",
+    "typecheck": "tsc --noEmit",
     "format": "prettier --write .",
     "content:generate": "node scripts/generate-public-content.mjs",
     "content:validate": "node scripts/validate-public-content.mjs"

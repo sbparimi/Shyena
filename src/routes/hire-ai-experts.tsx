@@ -2,6 +2,6 @@ import { createFileRoute, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/hire-ai-experts")({
   beforeLoad: () => {
-    throw redirect({ to: "/experts" });
+    throw redirect({ to: "/experts", statusCode: 301 });
   },
 });

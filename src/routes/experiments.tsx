@@ -26,5 +26,5 @@ export const Route = createFileRoute("/experiments")({
     ],
     links: [{ rel: "canonical", href: "https://www.shyena.eu/experiments" }],
   }),
-  component: () => <QualityIntelligencePage module="experiments" />,
+  component: () => <QualityIntelligencePage />,
 });

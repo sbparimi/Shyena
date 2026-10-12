@@ -214,15 +214,17 @@ function Graph({ phase, pulse }: { phase: number; pulse: number }) {
               <stop offset="1" stopColor="#f18a32" stopOpacity=".08" />
             </linearGradient>
           </defs>
-          {[
-            ["rfq", "agent"],
-            ["agent", "inventory"],
-            ["agent", "pricing"],
-            ["inventory", "margin"],
-            ["pricing", "margin"],
-            ["margin", "quote"],
-            ["quote", "customer"],
-          ].map(([a, b]) => {
+          {(
+            [
+              ["rfq", "agent"],
+              ["agent", "inventory"],
+              ["agent", "pricing"],
+              ["inventory", "margin"],
+              ["pricing", "margin"],
+              ["margin", "quote"],
+              ["quote", "customer"],
+            ] as const
+          ).map(([a, b]) => {
             const A = nodes.find((n) => n.id === a)!;
             const B = nodes.find((n) => n.id === b)!;
             const ax = (parseFloat(A.x) / 100) * 1000,
@@ -344,7 +346,8 @@ function TracePanel({ selected, onSelect }: { selected: number; onSelect: (n: nu
 }
 
 function Inspector({ selected, phase }: { selected: number; phase: number }) {
-  const item = trace[selected] || trace[0];
+  const item = trace[selected] ?? trace[0];
+  if (!item) return null;
   return (
     <div className="rounded-2xl border border-white/10 bg-[#0b1119] p-5">
       <div className="flex items-center justify-between">

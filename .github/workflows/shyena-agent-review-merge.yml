@@ -76,7 +76,7 @@ jobs:
         run: gh pr comment "$PR_NUMBER" --repo "$REPO" --body-file "$REVIEW"
 
       - name: Approve PR
-        if: startsWith(steps.review.outputs.response, 'DECISION: APPROVE')
+        if: "startsWith(steps.review.outputs.response, 'DECISION: APPROVE')"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
@@ -84,7 +84,7 @@ jobs:
         run: gh pr review "$PR_NUMBER" --repo "$REPO" --approve --body "Approved by the Shyena Independent PR Review Agent after forensic review."
 
       - name: Request changes
-        if: startsWith(steps.review.outputs.response, 'DECISION: REJECT')
+        if: "startsWith(steps.review.outputs.response, 'DECISION: REJECT')"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NUMBER: ${{ github.event.pull_request.number }}

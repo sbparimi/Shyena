@@ -28,5 +28,5 @@ export const Route = createFileRoute("/datasets")({
     ],
     links: [{ rel: "canonical", href: "https://www.shyena.eu/datasets" }],
   }),
-  component: () => <QualityIntelligencePage module="datasets" />,
+  component: () => <QualityIntelligencePage />,
 });

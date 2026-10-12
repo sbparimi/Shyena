@@ -7,6 +7,7 @@ import {
   HeadContent,
   Scripts,
   useLocation,
+  type ErrorComponentProps,
 } from "@tanstack/react-router";
 import { type ReactNode, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
@@ -33,16 +34,6 @@ const MANUAL_ARTICLE_VISUALS: Record<string, { concept: ArticleConcept; thesis: 
     concept: "false-pass",
     thesis:
       "A quality score cannot rescue an incomplete execution. Execution integrity must be checked first so a truncated, timed-out, or errored conversation can never masquerade as a passing journey.",
-  },
-  "how-to-test-an-ai-agent": {
-    concept: "agent",
-    thesis:
-      "AI assurance starts with the real flow and ends with evidence: generate a goal-driven journey, execute it against the live agent, evaluate deterministic and semantic behaviour, then preserve the trace behind the verdict.",
-  },
-  "AI platform-agent-security-testing-with-ziran": {
-    concept: "security",
-    thesis:
-      "Agent security testing is a prioritization problem as well as an attack problem: understand the changed surface, model exposure, select high-value campaigns, execute adaptively, and turn the resulting evidence into a security verdict.",
   },
   "what-llm-as-judge-actually-means-in-practice": {
     concept: "judge",
@@ -105,7 +96,7 @@ function NotFoundComponent() {
     </div>
   );
 }
-function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
+function ErrorComponent({ error, reset }: ErrorComponentProps) {
   console.error(error);
   const router = useRouter();
   useEffect(() => {
@@ -237,7 +228,7 @@ function ArticleVisualInjector() {
           );
           if (!target) return;
           const node = document.createElement("div");
-          node.dataset.shyenaInlineVisual = String(index);
+          node.dataset["shyenaInlineVisual"] = String(index);
           node.className = "shyena-inline-visual my-8 w-full";
           const paragraph = target.nextElementSibling;
           (paragraph || target).insertAdjacentElement("afterend", node);
@@ -273,7 +264,7 @@ function ArticleVisualInjector() {
         )}
       {inlineMounts.map((item) =>
         createPortal(
-          <div key={item.node.dataset.shyenaInlineVisual}>
+          <div key={item.node.dataset["shyenaInlineVisual"]}>
             <ArticleConceptDiagram concept={item.concept} />
             <p className="mt-3 text-center text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">
               {item.label}

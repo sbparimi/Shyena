@@ -1,3 +1,4 @@
+import type { ComponentPropsWithoutRef } from "react";
 import { Markdown } from "@tanstack/markdown/react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { createFileRoute, Link } from "@tanstack/react-router";
@@ -5,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { EUENGINEERS_RESOURCES } from "@/data/euengineers-resources";
 
 const markdownComponents = {
-  a(props) {
+  a(props: ComponentPropsWithoutRef<"a">) {
     const href = props.href || "";
     const external = /^https?:\/\//i.test(href);
     return (
@@ -17,7 +18,7 @@ const markdownComponents = {
       />
     );
   },
-  img(props) {
+  img(props: ComponentPropsWithoutRef<"img">) {
     return <img {...props} loading="lazy" decoding="async" />;
   },
 };
