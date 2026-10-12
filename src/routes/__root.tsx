@@ -378,7 +378,13 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <div className="flex min-h-screen flex-col">
-        <a className="shyena-skip-link" href="#page-content">Skip to main content</a>
+        <a
+          className="shyena-skip-link"
+          href="#page-content"
+          onClick={() => document.getElementById("page-content")?.focus()}
+        >
+          Skip to main content
+        </a>
         <SiteHeader />
         <main
           id="page-content"
