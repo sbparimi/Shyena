@@ -594,3 +594,37 @@ body > div > header[data-shyena-chrome="header"] .shyena-mobile-panel :where(a, 
 body > div > header[data-shyena-chrome="header"] .shyena-mobile-panel a.is-active {
   color: var(--warp-blue) !important;
 }
+
+
+/* WCAG 2.2 AA foundations: skip navigation, visible focus, motion and target sizing. */
+.shyena-skip-link {
+  position: fixed; z-index: 10000; inset-block-start: 8px; inset-inline-start: 8px;
+  transform: translateY(calc(-100% - 12px)); padding: 12px 16px;
+  border: 2px solid var(--warp-ink, #171717); border-radius: 4px;
+  background: var(--warp-lime, #e8ed75); color: var(--warp-ink, #171717) !important;
+  font-size: 16px; font-weight: 700; line-height: 1.4; text-decoration: underline;
+}
+.shyena-skip-link:focus, .shyena-skip-link:focus-visible {
+  transform: translateY(0); outline: 3px solid #1769aa; outline-offset: 3px;
+}
+#page-content:focus { outline: none; }
+:where(a, button, input, select, textarea, summary, [role="button"], [role="link"], [tabindex]:not([tabindex="-1"])):focus-visible {
+  outline: 3px solid #1769aa !important; outline-offset: 3px !important; scroll-margin-block: 6rem;
+}
+:where(button, [role="button"], input[type="checkbox"], input[type="radio"], input[type="range"], select) {
+  accent-color: #1769aa;
+}
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within { scroll-behavior: auto !important; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important; animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important; scroll-behavior: auto !important;
+  }
+}
+@media (forced-colors: active) {
+  :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible { outline: 3px solid Highlight !important; }
+  .shyena-skip-link { border: 2px solid ButtonText; background: Canvas; color: CanvasText !important; }
+}
+@media (max-width: 767px) {
+  #page-content.site-theme :where(a, button, [role="button"]) { scroll-margin-block: 5rem; }
+}
