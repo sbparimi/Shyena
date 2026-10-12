@@ -95,21 +95,21 @@ const surfaces = [
 
 export function QualityIntelligencePage() {
   return (
-    <main className="bg-white text-[#17213f]">
-      <section className="bg-[#07101f] text-white">
+    <main className="bg-white text-[var(--warp-ink)]">
+      <section className="bg-[var(--warp-canvas)] text-white">
         <div className="mx-auto grid max-w-[1400px] gap-12 px-5 py-16 sm:px-8 lg:grid-cols-[1.05fr_.95fr] lg:items-center lg:px-10 lg:py-24">
           <div>
-            <div className="font-mono text-[10px] font-bold uppercase tracking-[.22em] text-[#f18a32]">
+            <div className="font-mono text-[10px] font-bold uppercase tracking-[.22em] text-[var(--warp-accent-text)]">
               THE AGENTIC SDLC · PLAN TO PRODUCTION
             </div>
-            <h1 className="mt-5 font-[Sora] text-[clamp(3.2rem,7vw,7rem)] font-extrabold leading-[.86] tracking-[-.075em]">
+            <h1 className="mt-5 text-[clamp(3.2rem,7vw,7rem)] font-extrabold leading-[.86] tracking-[-.075em]">
               One engineering
               <br />
-              <span className="text-[#f18a32]">lifecycle.</span>
+              <span className="text-[var(--warp-accent-text)]">lifecycle.</span>
               <br />
               Governed by evidence.
             </h1>
-            <p className="mt-8 max-w-2xl text-lg leading-8 text-white/60 sm:text-xl">
+            <p className="mt-8 max-w-2xl text-lg leading-8 text-[var(--warp-muted)] sm:text-xl">
               Shyena connects coding agents, test engineering, security checks and release controls
               into one governed workflow—from planning and implementation through production
               feedback. Move beyond isolated agents and bots without losing traceability, policy
@@ -118,7 +118,7 @@ export function QualityIntelligencePage() {
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 to="/contact"
-                className="inline-flex h-12 items-center gap-2 rounded-lg bg-[#e87512] px-5 text-sm font-bold text-white"
+                className="inline-flex h-12 items-center gap-2 rounded-lg bg-[var(--warp-lime)] px-5 text-sm font-bold text-[var(--warp-on-accent)]"
               >
                 See it on your system <ArrowRight className="h-4 w-4" />
               </Link>
@@ -133,25 +133,27 @@ export function QualityIntelligencePage() {
               {surfaces.map((x) => (
                 <span
                   key={x}
-                  className="rounded-full border border-white/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[.12em] text-white/45"
+                  className="rounded-full border border-white/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[.12em] text-[var(--warp-subtle)]"
                 >
                   {x}
                 </span>
               ))}
             </div>
           </div>
-          <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#0c1729] shadow-[0_30px_90px_-45px_rgba(0,0,0,.9)]">
+          <div className="overflow-hidden rounded-2xl border border-white/10 bg-[var(--warp-surface)] shadow-[0_30px_90px_-45px_rgba(0,0,0,.9)]">
             <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
-              <span className="font-mono text-[10px] font-bold uppercase tracking-[.18em] text-white/45">
+              <span className="font-mono text-[10px] font-bold uppercase tracking-[.18em] text-[var(--warp-subtle)]">
                 Illustrative workflow
               </span>
-              <span className="flex items-center gap-2 text-[9px] font-bold text-[#f18a32]">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#f18a32]" />
+              <span className="flex items-center gap-2 text-[9px] font-bold text-[var(--warp-accent-text)]">
+                <span className="h-1.5 w-1.5 rounded-full bg-[var(--warp-lime)] text-[var(--warp-on-accent)]" />
                 SAMPLE OUTPUT
               </span>
             </div>
             <div className="space-y-3 p-5 font-mono text-[11px] leading-5 sm:p-7">
-              <div className="text-white/35">$ shyena sdlc inspect --change &lt;id&gt;</div>
+              <div className="text-[var(--warp-subtle)]">
+                $ shyena sdlc inspect --change &lt;id&gt;
+              </div>
               {[
                 ["--:--", "plan", "Intent and acceptance criteria resolved"],
                 ["--:--", "build", "Coding-agent change linked to repository diff"],
@@ -161,9 +163,15 @@ export function QualityIntelligencePage() {
                 ["--:--", "learn", "Production signals feed the next cycle"],
               ].map(([t, p, b], i) => (
                 <div key={p} className="grid grid-cols-[42px_64px_1fr] gap-2">
-                  <span className="text-white/25">{t}</span>
-                  <span className={i >= 3 ? "text-[#f18a32]" : "text-[#8fa1ff]"}>{p}</span>
-                  <span className={i >= 3 ? "text-white" : "text-white/60"}>{b}</span>
+                  <span className="text-[var(--warp-subtle)]">{t}</span>
+                  <span
+                    className={
+                      i >= 3 ? "text-[var(--warp-accent-text)]" : "text-[var(--warp-muted)]"
+                    }
+                  >
+                    {p}
+                  </span>
+                  <span className={i >= 3 ? "text-white" : "text-[var(--warp-muted)]"}>{b}</span>
                 </div>
               ))}
             </div>
@@ -171,8 +179,8 @@ export function QualityIntelligencePage() {
         </div>
       </section>
 
-      <section className="border-b border-[#e6e8ed] bg-[#fff8f2]">
-        <div className="mx-auto max-w-[1280px] px-5 py-4 text-center font-mono text-[10px] font-bold uppercase tracking-[.12em] text-[#a55410]">
+      <section className="border-b border-[var(--warp-border)] bg-[var(--warp-surface-soft)]">
+        <div className="mx-auto max-w-[1280px] px-5 py-4 text-center font-mono text-[10px] font-bold uppercase tracking-[.12em] text-[var(--warp-accent-text)]">
           PLAN · CODE · TEST · SECURE · RELEASE · OPERATE
         </div>
       </section>
@@ -180,11 +188,13 @@ export function QualityIntelligencePage() {
       <section>
         <div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
           <div className="max-w-4xl">
-            <div className="text-sm font-bold text-[#e87512]">The autonomous engineering loop</div>
-            <h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.05em] sm:text-6xl">
+            <div className="text-sm font-bold text-[var(--warp-accent-text)]">
+              The autonomous engineering loop
+            </div>
+            <h2 className="mt-3 text-4xl font-extrabold tracking-[-.05em] sm:text-6xl">
               Plan. Build. Verify. Ship. Learn.
             </h2>
-            <p className="mt-6 max-w-3xl text-lg leading-8 text-[#69707d]">
+            <p className="mt-6 max-w-3xl text-lg leading-8 text-[var(--warp-muted)]">
               Connect the work that coding agents do to the checks that prove it is safe to ship.
               Teams define outcomes, constraints and release policy; agents and existing tools can
               carry out bounded work while evidence and approval requirements remain explicit.
@@ -194,25 +204,29 @@ export function QualityIntelligencePage() {
             {lifecycle.map(([n, t, b]) => (
               <article
                 key={n}
-                className="rounded-2xl border border-[#e1e4e9] bg-[#fafbfc] p-6 sm:p-7"
+                className="rounded-2xl border border-[var(--warp-border)] bg-[var(--warp-surface-soft)] p-6 sm:p-7"
               >
-                <span className="font-mono text-[10px] font-bold text-[#e87512]">{n}</span>
+                <span className="font-mono text-[10px] font-bold text-[var(--warp-accent-text)]">
+                  {n}
+                </span>
                 <h3 className="mt-6 text-xl font-extrabold">{t}</h3>
-                <p className="mt-3 text-sm leading-6 text-[#69707d]">{b}</p>
+                <p className="mt-3 text-sm leading-6 text-[var(--warp-muted)]">{b}</p>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="border-y border-[#e6e8ed] bg-[#fafbfc]">
+      <section className="border-y border-[var(--warp-border)] bg-[var(--warp-surface-soft)]">
         <div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
           <div className="max-w-4xl">
-            <div className="text-sm font-bold text-[#e87512]">The Shyena product suite</div>
-            <h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.05em] sm:text-5xl">
+            <div className="text-sm font-bold text-[var(--warp-accent-text)]">
+              The Shyena product suite
+            </div>
+            <h2 className="mt-3 text-4xl font-extrabold tracking-[-.05em] sm:text-5xl">
               One Agentic SDLC. Four connected capabilities.
             </h2>
-            <p className="mt-5 text-lg leading-8 text-[#69707d]">
+            <p className="mt-5 text-lg leading-8 text-[var(--warp-muted)]">
               Nexus, Vera, Chakra and Govern connect system understanding, verification, security
               and release evidence. They are the assurance foundation around the wider engineering
               lifecycle—not four disconnected testing utilities.
@@ -222,20 +236,22 @@ export function QualityIntelligencePage() {
             {products.map((p, i) => (
               <article
                 key={p.name}
-                className="rounded-2xl border border-[#e1e4e9] bg-white p-7 sm:p-8"
+                className="rounded-2xl border border-[var(--warp-border)] bg-white p-7 sm:p-8"
               >
                 <div className="flex items-center justify-between">
-                  <span className="font-mono text-[10px] font-bold text-[#e87512]">0{i + 1}</span>
-                  <span className="rounded-full border border-[#dfe3e8] px-3 py-1 text-[10px] font-bold">
+                  <span className="font-mono text-[10px] font-bold text-[var(--warp-accent-text)]">
+                    0{i + 1}
+                  </span>
+                  <span className="rounded-full border border-[var(--warp-border)] px-3 py-1 text-[10px] font-bold">
                     {p.name}
                   </span>
                 </div>
-                <h3 className="mt-6 font-[Sora] text-2xl font-extrabold">{p.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-[#69707d]">{p.body}</p>
-                <ul className="mt-5 space-y-2 border-t border-[#e8eaee] pt-5">
+                <h3 className="mt-6 text-2xl font-extrabold">{p.title}</h3>
+                <p className="mt-3 text-sm leading-6 text-[var(--warp-muted)]">{p.body}</p>
+                <ul className="mt-5 space-y-2 border-t border-[var(--warp-border)] pt-5">
                   {p.items.map((x) => (
-                    <li key={x} className="flex gap-2 text-sm text-[#596273]">
-                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-[#e87512]" />
+                    <li key={x} className="flex gap-2 text-sm text-[var(--warp-muted)]">
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-[var(--warp-accent-text)]" />
                       {x}
                     </li>
                   ))}
@@ -253,10 +269,10 @@ export function QualityIntelligencePage() {
         <div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
           <div className="grid gap-10 lg:grid-cols-[.8fr_1.2fr]">
             <div>
-              <div className="text-sm font-bold text-[#e87512]">
+              <div className="text-sm font-bold text-[var(--warp-accent-text)]">
                 What autonomous engineering needs
               </div>
-              <h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em] sm:text-5xl">
+              <h2 className="mt-3 text-4xl font-extrabold tracking-[-.045em] sm:text-5xl">
                 More than coding agents.
               </h2>
             </div>
@@ -287,9 +303,12 @@ export function QualityIntelligencePage() {
                   "Connect test evidence to a release verdict instead of a dashboard full of disconnected green checks.",
                 ],
               ].map(([t, b]) => (
-                <article key={t} className="rounded-xl border border-[#e1e4e9] bg-[#fafbfc] p-6">
+                <article
+                  key={t}
+                  className="rounded-xl border border-[var(--warp-border)] bg-[var(--warp-surface-soft)] p-6"
+                >
                   <h3 className="text-base font-extrabold">{t}</h3>
-                  <p className="mt-2 text-sm leading-6 text-[#69707d]">{b}</p>
+                  <p className="mt-2 text-sm leading-6 text-[var(--warp-muted)]">{b}</p>
                 </article>
               ))}
             </div>
@@ -297,14 +316,14 @@ export function QualityIntelligencePage() {
         </div>
       </section>
 
-      <section className="border-y border-[#e6e8ed] bg-[#17213f] text-white">
+      <section className="border-y border-[var(--warp-border)] bg-[var(--warp-surface-soft)] text-white">
         <div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
           <div className="grid gap-10 lg:grid-cols-[.75fr_1.25fr] lg:items-center">
             <div>
-              <div className="text-sm font-bold text-[#f18a32]">
+              <div className="text-sm font-bold text-[var(--warp-accent-text)]">
                 Agent assurance within the SDLC
               </div>
-              <h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em] sm:text-5xl">
+              <h2 className="mt-3 text-4xl font-extrabold tracking-[-.045em] sm:text-5xl">
                 Verify the agent's work and behaviour.
               </h2>
             </div>
@@ -321,9 +340,9 @@ export function QualityIntelligencePage() {
               ].map((x) => (
                 <div
                   key={x}
-                  className="flex gap-3 rounded-xl border border-white/10 bg-white/5 p-4 text-sm text-white/70"
+                  className="flex gap-3 rounded-xl border border-white/10 bg-white/5 p-4 text-sm text-[var(--warp-muted)]"
                 >
-                  <ShieldCheck className="h-4 w-4 shrink-0 text-[#f18a32]" />
+                  <ShieldCheck className="h-4 w-4 shrink-0 text-[var(--warp-accent-text)]" />
                   {x}
                 </div>
               ))}
@@ -334,18 +353,20 @@ export function QualityIntelligencePage() {
 
       <section>
         <div className="mx-auto max-w-[1000px] px-5 py-20 text-center sm:px-8 lg:py-24">
-          <div className="text-sm font-bold text-[#e87512]">Start with one system</div>
-          <h2 className="mt-4 font-[Sora] text-4xl font-extrabold tracking-[-.05em] sm:text-6xl">
+          <div className="text-sm font-bold text-[var(--warp-accent-text)]">
+            Start with one system
+          </div>
+          <h2 className="mt-4 text-4xl font-extrabold tracking-[-.05em] sm:text-6xl">
             Connect one engineering workflow.
           </h2>
-          <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-[#69707d]">
+          <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-[var(--warp-muted)]">
             Start with one repository, one delivery workflow or one AI system. Map the lifecycle,
             identify where autonomous work needs verification, and connect the evidence required for
             a defensible release decision.
           </p>
           <Link
             to="/contact"
-            className="mt-8 inline-flex h-12 items-center gap-2 rounded-lg bg-[#e87512] px-6 text-sm font-bold text-white"
+            className="mt-8 inline-flex h-12 items-center gap-2 rounded-lg bg-[var(--warp-lime)] px-6 text-sm font-bold text-[var(--warp-on-accent)]"
           >
             Map your Agentic SDLC <ArrowRight className="h-4 w-4" />
           </Link>

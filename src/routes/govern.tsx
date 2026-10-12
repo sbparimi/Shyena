@@ -51,23 +51,23 @@ const requirements = [
 
 function GovernPage() {
   return (
-    <main className="overflow-hidden bg-white text-[#17213f]">
-      <section className="border-b border-[#e6e8ed] bg-[#07101f] text-white">
+    <main className="overflow-hidden bg-white text-[var(--warp-ink)]">
+      <section className="border-b border-[var(--warp-border)] bg-[var(--warp-canvas)] text-white">
         <div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 lg:px-10 lg:py-28">
           <div className="max-w-5xl">
-            <div className="font-mono text-[10px] font-bold uppercase tracking-[.2em] text-[#f18a32]">
+            <div className="font-mono text-[10px] font-bold uppercase tracking-[.2em] text-[var(--warp-accent-text)]">
               Govern · Prove
             </div>
-            <h1 className="mt-5 font-[Sora] text-[clamp(3rem,6vw,6rem)] font-extrabold leading-[.9] tracking-[-.065em]">
+            <h1 className="mt-5 text-[clamp(3rem,6vw,6rem)] font-extrabold leading-[.9] tracking-[-.065em]">
               Turn AI test evidence into governance evidence.
             </h1>
-            <p className="mt-7 max-w-3xl text-lg leading-8 text-white/60">
+            <p className="mt-7 max-w-3xl text-lg leading-8 text-[var(--warp-muted)]">
               Shyena maps every evaluation result, trace and finding to the obligations and controls
               your auditors, risk and compliance teams care about.
             </p>
             <Link
               to="/contact"
-              className="mt-9 inline-flex h-12 items-center gap-2 rounded-lg bg-[#e87512] px-6 text-sm font-semibold text-white"
+              className="mt-9 inline-flex h-12 items-center gap-2 rounded-lg bg-[var(--warp-lime)] px-6 text-sm font-semibold text-[var(--warp-on-accent)]"
             >
               Book an AI Act readiness call <ArrowRight className="h-4 w-4" />
             </Link>
@@ -75,7 +75,7 @@ function GovernPage() {
         </div>
       </section>
 
-      <section className="border-b border-[#e6e8ed] bg-white">
+      <section className="border-b border-[var(--warp-border)] bg-white">
         <div className="mx-auto max-w-[1280px] px-5 py-16 sm:px-8 lg:px-10 lg:py-20">
           <div className="grid gap-4 md:grid-cols-3">
             {[
@@ -92,30 +92,35 @@ function GovernPage() {
                 "High-risk obligations for AI systems covered by Annex I apply from this date under the amended timeline.",
               ],
             ].map(([date, body]) => (
-              <article key={date} className="rounded-2xl border border-[#e1e4e9] bg-[#fafbfc] p-7">
-                <div className="font-[Sora] text-2xl font-extrabold">{date}</div>
-                <p className="mt-3 text-sm leading-6 text-[#69707d]">{body}</p>
+              <article
+                key={date}
+                className="rounded-2xl border border-[var(--warp-border)] bg-[var(--warp-surface-soft)] p-7"
+              >
+                <div className=" text-2xl font-extrabold">{date}</div>
+                <p className="mt-3 text-sm leading-6 text-[var(--warp-muted)]">{body}</p>
               </article>
             ))}
           </div>
-          <p className="mt-5 text-xs leading-5 text-[#7a8290]">
+          <p className="mt-5 text-xs leading-5 text-[var(--warp-muted)]">
             Timeline reflects Regulation (EU) 2026/1744 and the current EU AI Act application dates.
             Specific obligations depend on the AI system's classification and role.
           </p>
         </div>
       </section>
 
-      <section className="border-b border-[#e6e8ed] bg-white">
+      <section className="border-b border-[var(--warp-border)] bg-white">
         <div className="mx-auto max-w-[1280px] px-5 py-16 sm:px-8 lg:px-10 lg:py-20">
           <div className="max-w-3xl">
-            <div className="text-sm font-semibold text-[#e87512]">Illustrative evidence map</div>
-            <h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em]">
+            <div className="text-sm font-semibold text-[var(--warp-accent-text)]">
+              Illustrative evidence map
+            </div>
+            <h2 className="mt-3 text-4xl font-extrabold tracking-[-.045em]">
               Requirement → evidence → status.
             </h2>
           </div>
-          <div className="mt-8 overflow-x-auto rounded-2xl border border-[#e1e4e9]">
+          <div className="mt-8 overflow-x-auto rounded-2xl border border-[var(--warp-border)]">
             <table className="w-full min-w-[650px] text-left text-sm">
-              <thead className="bg-[#fafbfc] text-xs uppercase tracking-[.12em] text-[#69707d]">
+              <thead className="bg-[var(--warp-surface-soft)] text-xs uppercase tracking-[.12em] text-[var(--warp-muted)]">
                 <tr>
                   <th className="px-5 py-4">Requirement</th>
                   <th className="px-5 py-4">Evidence</th>
@@ -128,28 +133,28 @@ function GovernPage() {
                   ["Release control", "Evaluation run", "PASS"],
                   ["Security control", "Attack evidence", "REVIEW"],
                 ].map((r) => (
-                  <tr key={r[0]} className="border-t border-[#e8eaee]">
+                  <tr key={r[0]} className="border-t border-[var(--warp-border)]">
                     <td className="px-5 py-4 font-semibold">{r[0]}</td>
-                    <td className="px-5 py-4 text-[#69707d]">{r[1]}</td>
-                    <td className="px-5 py-4 text-[#69707d]">{r[2]}</td>
+                    <td className="px-5 py-4 text-[var(--warp-muted)]">{r[1]}</td>
+                    <td className="px-5 py-4 text-[var(--warp-muted)]">{r[2]}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-          <div className="mt-3 text-xs text-[#8b929d]">
+          <div className="mt-3 text-xs text-[var(--warp-muted)]">
             Illustrative only — synthetic evidence, not a compliance assessment.
           </div>
         </div>
       </section>
 
-      <section className="bg-[#fafbfc]">
+      <section className="bg-[var(--warp-surface-soft)]">
         <div className="mx-auto max-w-[1280px] px-5 py-16 sm:px-8 lg:px-10 lg:py-20">
           <div className="max-w-3xl">
-            <div className="text-sm font-semibold text-[#e87512]">
+            <div className="text-sm font-semibold text-[var(--warp-accent-text)]">
               How a governance engagement runs
             </div>
-            <h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em]">
+            <h2 className="mt-3 text-4xl font-extrabold tracking-[-.045em]">
               Classify → evaluate → map → re-run.
             </h2>
           </div>
@@ -160,21 +165,23 @@ function GovernPage() {
               ["03", "Map evidence", "Connect findings and traces to requirements and controls."],
               ["04", "Re-run each release", "Preserve the evidence history as the system changes."],
             ].map(([n, t, b]) => (
-              <div key={n} className="rounded-xl border border-[#e1e4e9] bg-white p-5">
-                <span className="font-mono text-[9px] text-[#e87512]">{n}</span>
+              <div key={n} className="rounded-xl border border-[var(--warp-border)] bg-white p-5">
+                <span className="font-mono text-[9px] text-[var(--warp-accent-text)]">{n}</span>
                 <h3 className="mt-4 font-bold">{t}</h3>
-                <p className="mt-2 text-sm leading-6 text-[#69707d]">{b}</p>
+                <p className="mt-2 text-sm leading-6 text-[var(--warp-muted)]">{b}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-[#fafbfc]">
+      <section className="bg-[var(--warp-surface-soft)]">
         <div className="mx-auto max-w-[1280px] px-5 py-16 sm:px-8 lg:px-10 lg:py-20">
           <div className="max-w-3xl">
-            <div className="text-sm font-semibold text-[#e87512]">What Shyena maps evidence to</div>
-            <h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em]">
+            <div className="text-sm font-semibold text-[var(--warp-accent-text)]">
+              What Shyena maps evidence to
+            </div>
+            <h2 className="mt-3 text-4xl font-extrabold tracking-[-.045em]">
               A traceable evidence layer for governance work.
             </h2>
           </div>
@@ -182,9 +189,9 @@ function GovernPage() {
             {requirements.map((item) => (
               <div
                 key={item}
-                className="flex gap-3 rounded-xl border border-[#e1e4e9] bg-white p-5 text-sm leading-6"
+                className="flex gap-3 rounded-xl border border-[var(--warp-border)] bg-white p-5 text-sm leading-6"
               >
-                <Check className="mt-0.5 h-4 w-4 shrink-0 text-[#e87512]" />
+                <Check className="mt-0.5 h-4 w-4 shrink-0 text-[var(--warp-accent-text)]" />
                 {item}
               </div>
             ))}
@@ -192,11 +199,11 @@ function GovernPage() {
         </div>
       </section>
 
-      <section className="border-y border-[#e6e8ed] bg-white">
+      <section className="border-y border-[var(--warp-border)] bg-white">
         <div className="mx-auto max-w-[1280px] px-5 py-16 sm:px-8 lg:px-10 lg:py-20">
           <div className="max-w-3xl">
-            <div className="text-sm font-semibold text-[#e87512]">Deliverables</div>
-            <h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em]">
+            <div className="text-sm font-semibold text-[var(--warp-accent-text)]">Deliverables</div>
+            <h2 className="mt-3 text-4xl font-extrabold tracking-[-.045em]">
               Evidence that can be reconstructed.
             </h2>
           </div>
@@ -215,24 +222,27 @@ function GovernPage() {
                 "A dated history of evaluations and evidence used across releases and audit preparation.",
               ],
             ].map(([title, body]) => (
-              <article key={title} className="rounded-2xl border border-[#e1e4e9] bg-[#fafbfc] p-7">
+              <article
+                key={title}
+                className="rounded-2xl border border-[var(--warp-border)] bg-[var(--warp-surface-soft)] p-7"
+              >
                 <h3 className="text-xl font-bold">{title}</h3>
-                <p className="mt-3 text-sm leading-6 text-[#69707d]">{body}</p>
+                <p className="mt-3 text-sm leading-6 text-[var(--warp-muted)]">{body}</p>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-[#17213f] text-white">
+      <section className="bg-[var(--warp-surface-soft)] text-white">
         <div className="mx-auto max-w-[1000px] px-5 py-16 text-center sm:px-8 lg:py-20">
-          <p className="text-sm leading-6 text-white/55">
+          <p className="text-sm leading-6 text-[var(--warp-muted)]">
             Shyena provides technical evaluation and evidence. It is not legal advice and not a
             certification body.
           </p>
           <Link
             to="/contact"
-            className="mt-7 inline-flex h-11 items-center gap-2 rounded-lg bg-[#e87512] px-5 text-sm font-semibold text-white"
+            className="mt-7 inline-flex h-11 items-center gap-2 rounded-lg bg-[var(--warp-lime)] px-5 text-sm font-semibold text-[var(--warp-on-accent)]"
           >
             Book an AI Act readiness call <ArrowRight className="h-4 w-4" />
           </Link>

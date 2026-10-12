@@ -39,17 +39,17 @@ export const Route = createFileRoute("/security")({
 
 function SecurityPage() {
   return (
-    <div className="overflow-hidden bg-white text-[#17213f]">
-      <section className="border-b border-[#e6e8ed] bg-[#07101f] text-white">
+    <div className="overflow-hidden bg-white text-[var(--warp-ink)]">
+      <section className="border-b border-[var(--warp-border)] bg-[var(--warp-canvas)] text-white">
         <div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 lg:px-10 lg:py-28">
           <div className="max-w-5xl">
-            <div className="font-mono text-[10px] font-bold uppercase tracking-[.2em] text-[#f18a32]">
+            <div className="font-mono text-[10px] font-bold uppercase tracking-[.2em] text-[var(--warp-accent-text)]">
               Security & trust
             </div>
-            <h1 className="mt-5 font-[Sora] text-[clamp(3rem,6vw,6rem)] font-extrabold leading-[.9] tracking-[-.065em]">
+            <h1 className="mt-5 text-[clamp(3rem,6vw,6rem)] font-extrabold leading-[.9] tracking-[-.065em]">
               Keep the assurance boundary explicit.
             </h1>
-            <p className="mt-7 max-w-3xl text-lg leading-8 text-white/60">
+            <p className="mt-7 max-w-3xl text-lg leading-8 text-[var(--warp-muted)]">
               Shyena focuses on technical evaluation, evidence and governance workflows. Security
               and data-handling responsibilities remain explicit between Shyena, the customer and
               the infrastructure or model providers involved.
@@ -58,7 +58,7 @@ function SecurityPage() {
         </div>
       </section>
 
-      <section className="border-b border-[#e6e8ed] bg-white">
+      <section className="border-b border-[var(--warp-border)] bg-white">
         <div className="mx-auto max-w-[1280px] px-5 py-16 sm:px-8 lg:px-10 lg:py-20">
           <div className="grid gap-4 md:grid-cols-2">
             {[
@@ -83,35 +83,40 @@ function SecurityPage() {
                 "DPA available on request. Where personal data is processed on behalf of a customer, applicable data-processing terms should be agreed before processing begins.",
               ],
             ].map(([title, body]) => (
-              <article key={title} className="rounded-2xl border border-[#e1e4e9] bg-[#fafbfc] p-7">
-                <Check className="h-5 w-5 text-[#e87512]" />
+              <article
+                key={title}
+                className="rounded-2xl border border-[var(--warp-border)] bg-[var(--warp-surface-soft)] p-7"
+              >
+                <Check className="h-5 w-5 text-[var(--warp-accent-text)]" />
                 <h2 className="mt-5 text-xl font-bold">{title}</h2>
-                <p className="mt-3 text-sm leading-6 text-[#69707d]">{body}</p>
+                <p className="mt-3 text-sm leading-6 text-[var(--warp-muted)]">{body}</p>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-[#fafbfc]">
+      <section className="bg-[var(--warp-surface-soft)]">
         <div className="mx-auto max-w-[1280px] px-5 py-12 sm:px-8 lg:px-10">
-          <div className="rounded-2xl border border-[#e1e4e9] bg-white p-6">
+          <div className="rounded-2xl border border-[var(--warp-border)] bg-white p-6">
             <h2 className="text-xl font-bold">Certifications</h2>
-            <p className="mt-3 text-sm leading-6 text-[#69707d]">
+            <p className="mt-3 text-sm leading-6 text-[var(--warp-muted)]">
               Shyena does not currently hold SOC 2 or ISO 27001 certification.
             </p>
           </div>
         </div>
       </section>
 
-      <section className="bg-[#fafbfc]">
+      <section className="bg-[var(--warp-surface-soft)]">
         <div className="mx-auto max-w-[1280px] px-5 py-16 sm:px-8 lg:px-10 lg:py-20">
           <div className="max-w-3xl">
-            <div className="text-sm font-semibold text-[#e87512]">Governance positioning</div>
-            <h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em]">
+            <div className="text-sm font-semibold text-[var(--warp-accent-text)]">
+              Governance positioning
+            </div>
+            <h2 className="mt-3 text-4xl font-extrabold tracking-[-.045em]">
               Mapped evidence, not compliance promises.
             </h2>
-            <p className="mt-5 text-base leading-7 text-[#69707d]">
+            <p className="mt-5 text-base leading-7 text-[var(--warp-muted)]">
               Shyena can map evaluation evidence to relevant AI governance requirements, including
               the EU AI Act and ISO/IEC 42001. This is a technical evidence workflow, not legal
               advice, a certification service or a guarantee of regulatory compliance.
@@ -132,24 +137,27 @@ function SecurityPage() {
                 "Adversarial scenarios, control checks and reproducible findings can be preserved as evidence.",
               ],
             ].map(([title, body]) => (
-              <article key={title} className="rounded-2xl border border-[#e1e4e9] bg-white p-6">
+              <article
+                key={title}
+                className="rounded-2xl border border-[var(--warp-border)] bg-white p-6"
+              >
                 <h3 className="font-bold">{title}</h3>
-                <p className="mt-2 text-sm leading-6 text-[#69707d]">{body}</p>
+                <p className="mt-2 text-sm leading-6 text-[var(--warp-muted)]">{body}</p>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-[#17213f] text-white">
+      <section className="bg-[var(--warp-surface-soft)] text-white">
         <div className="mx-auto max-w-[1000px] px-5 py-16 text-center sm:px-8 lg:py-20">
-          <p className="text-sm leading-6 text-white/55">
+          <p className="text-sm leading-6 text-[var(--warp-muted)]">
             Shyena provides technical evaluation and evidence. It is not legal advice and not a
             certification body.
           </p>
           <Link
             to="/contact"
-            className="mt-7 inline-flex h-11 items-center gap-2 rounded-lg bg-[#e87512] px-5 text-sm font-semibold text-white"
+            className="mt-7 inline-flex h-11 items-center gap-2 rounded-lg bg-[var(--warp-lime)] px-5 text-sm font-semibold text-[var(--warp-on-accent)]"
           >
             Discuss your assurance scope <ArrowRight className="h-4 w-4" />
           </Link>

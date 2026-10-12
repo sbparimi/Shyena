@@ -6,6 +6,7 @@ import {
   type ArticleConcept,
 } from "@/components/blog/article-concept-diagrams";
 import { GeneratedMarkdown, getGeneratedArticle } from "@/content/generated-content-loader";
+import { INLINE_ARTICLE_VISUALS } from "@/content/article-visuals";
 
 const SITE_URL = "https://www.shyena.eu";
 const BRAND_LOGO = `${SITE_URL}/shyena-logo-lockup.svg?v=20260917`;
@@ -109,7 +110,7 @@ function ArticlePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />
-      <section className="relative overflow-hidden bg-[#f7f8fb] text-[#17213f]">
+      <section className="relative overflow-hidden bg-[var(--warp-surface-soft)] text-[var(--warp-ink)]">
         <div className="mx-auto w-full max-w-5xl px-5 pb-10 pt-12 sm:px-8 sm:pt-20">
           <div className="mb-10 flex items-center justify-center">
             <img
@@ -117,12 +118,12 @@ function ArticlePage() {
               alt="Shyena"
               className="h-14 w-11 object-contain"
             />
-            <span className="ml-3 font-[Sora] text-2xl font-extrabold tracking-[-.04em] text-[#0B1B3A]">
+            <span className="ml-3 text-2xl font-extrabold tracking-[-.04em] text-[var(--warp-ink)]">
               Shyena
             </span>
           </div>
           <div className="text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-[#f0d6c2] bg-white px-3.5 py-1.5 text-xs font-semibold text-[#e87512]">
+            <span className="inline-flex items-center gap-2 rounded-full border border-[var(--warp-border)] bg-white px-3.5 py-1.5 text-xs font-semibold text-[var(--warp-accent-text)]">
               {article.category || "Engineering"}
             </span>
             <h1 className="mt-6 text-3xl font-bold leading-[1.1] tracking-[-.035em] sm:text-5xl">
@@ -135,92 +136,98 @@ function ArticlePage() {
             </div>
           )}
           {article.thesis && (
-            <p className="mx-auto mt-10 max-w-3xl text-center text-base font-medium leading-relaxed text-[#4f5b70] sm:text-lg">
+            <p className="mx-auto mt-10 max-w-3xl text-center text-base font-medium leading-relaxed text-[var(--warp-muted)] sm:text-lg">
               {article.thesis}
             </p>
           )}
-          <div className="mt-5 text-center text-sm text-[#7b8494]">
+          <div className="mt-5 text-center text-sm text-[var(--warp-muted)]">
             {article.author || "Shyena Engineering"}
           </div>
         </div>
       </section>
 
       <article className="mx-auto w-full max-w-3xl px-5 pb-24 pt-12 sm:px-8">
-        <GeneratedMarkdown sourcePath={article.sourcePath} />
+        <GeneratedMarkdown
+          sourcePath={article.sourcePath}
+          inlineVisuals={INLINE_ARTICLE_VISUALS[article.slug]}
+        />
 
         <section
-          className="mt-16 rounded-2xl border border-[#e2e5eb] bg-white p-6 sm:p-8"
+          className="mt-16 rounded-2xl border border-[var(--warp-border)] bg-white p-6 sm:p-8"
           aria-labelledby="related-resources-heading"
         >
-          <div className="text-xs font-semibold uppercase tracking-[.16em] text-[#e87512]">
+          <div className="text-xs font-semibold uppercase tracking-[.16em] text-[var(--warp-accent-text)]">
             Continue the assurance journey
           </div>
-          <h2 id="related-resources-heading" className="mt-2 text-xl font-bold text-[#17213f]">
+          <h2
+            id="related-resources-heading"
+            className="mt-2 text-xl font-bold text-[var(--warp-ink)]"
+          >
             Explore the system behind the article.
           </h2>
           <div className="mt-5 grid gap-3 sm:grid-cols-2">
             <Link
               to="/vera"
-              className="group rounded-xl border border-[#e1e4e9] p-4 transition hover:-translate-y-0.5 hover:border-[#e87512]"
+              className="group rounded-xl border border-[var(--warp-border)] p-4 transition hover:-translate-y-0.5 hover:border-[var(--warp-border-strong)]"
             >
-              <div className="font-semibold text-[#17213f]">
+              <div className="font-semibold text-[var(--warp-ink)]">
                 Vera · Test &amp; Evaluate{" "}
                 <ArrowRight className="ml-1 inline h-4 w-4 transition-transform group-hover:translate-x-1" />
               </div>
-              <p className="mt-1 text-sm leading-5 text-[#69707d]">
+              <p className="mt-1 text-sm leading-5 text-[var(--warp-muted)]">
                 Run realistic agent journeys and evaluate behaviour.
               </p>
             </Link>
             <Link
               to="/nexus"
-              className="group rounded-xl border border-[#e1e4e9] p-4 transition hover:-translate-y-0.5 hover:border-[#e87512]"
+              className="group rounded-xl border border-[var(--warp-border)] p-4 transition hover:-translate-y-0.5 hover:border-[var(--warp-border-strong)]"
             >
-              <div className="font-semibold text-[#17213f]">
+              <div className="font-semibold text-[var(--warp-ink)]">
                 Nexus · Understand{" "}
                 <ArrowRight className="ml-1 inline h-4 w-4 transition-transform group-hover:translate-x-1" />
               </div>
-              <p className="mt-1 text-sm leading-5 text-[#69707d]">
+              <p className="mt-1 text-sm leading-5 text-[var(--warp-muted)]">
                 Map system logic and turn it into test intelligence.
               </p>
             </Link>
             <Link
               to="/chakra"
-              className="group rounded-xl border border-[#e1e4e9] p-4 transition hover:-translate-y-0.5 hover:border-[#e87512]"
+              className="group rounded-xl border border-[var(--warp-border)] p-4 transition hover:-translate-y-0.5 hover:border-[var(--warp-border-strong)]"
             >
-              <div className="font-semibold text-[#17213f]">
+              <div className="font-semibold text-[var(--warp-ink)]">
                 Chakra · Secure{" "}
                 <ArrowRight className="ml-1 inline h-4 w-4 transition-transform group-hover:translate-x-1" />
               </div>
-              <p className="mt-1 text-sm leading-5 text-[#69707d]">
+              <p className="mt-1 text-sm leading-5 text-[var(--warp-muted)]">
                 Test trust boundaries and adversarial paths.
               </p>
             </Link>
             <Link
               to="/docs/evaluation-model"
-              className="group rounded-xl border border-[#e1e4e9] p-4 transition hover:-translate-y-0.5 hover:border-[#e87512]"
+              className="group rounded-xl border border-[var(--warp-border)] p-4 transition hover:-translate-y-0.5 hover:border-[var(--warp-border-strong)]"
             >
-              <div className="font-semibold text-[#17213f]">
+              <div className="font-semibold text-[var(--warp-ink)]">
                 Evaluation model{" "}
                 <ArrowRight className="ml-1 inline h-4 w-4 transition-transform group-hover:translate-x-1" />
               </div>
-              <p className="mt-1 text-sm leading-5 text-[#69707d]">
+              <p className="mt-1 text-sm leading-5 text-[var(--warp-muted)]">
                 See how deterministic, semantic and integrity evidence combine.
               </p>
             </Link>
           </div>
         </section>
 
-        <div className="mt-8 overflow-hidden rounded-2xl border border-[#f0d6c2] bg-[#fff8f2] px-6 py-10 text-center sm:px-10">
+        <div className="mt-8 overflow-hidden rounded-2xl border border-[var(--warp-border)] bg-[var(--warp-surface-soft)] px-6 py-10 text-center sm:px-10">
           <img
             src="/shyena-mark.svg?v=20260917"
             alt=""
             aria-hidden="true"
             className="mx-auto h-12 w-10 object-contain"
           />
-          <h2 className="mt-4 text-xl font-bold text-[#17213f] sm:text-2xl">
+          <h2 className="mt-4 text-xl font-bold text-[var(--warp-ink)] sm:text-2xl">
             Make the release decision defensible.
           </h2>
-          <p className="mx-auto mt-3 max-w-lg text-[#69707d]">
+          <p className="mx-auto mt-3 max-w-lg text-[var(--warp-muted)]">
             Shyena connects live agent behaviour to evidence, evaluation and release governance.
           </p>
           <Button asChild size="lg" className="mt-6">
@@ -242,7 +249,7 @@ function ArticlePage() {
           </Button>
           <Link
             to="/docs"
-            className="inline-flex items-center gap-1 text-sm font-semibold text-[#e87512]"
+            className="inline-flex items-center gap-1 text-sm font-semibold text-[var(--warp-accent-text)]"
           >
             Documentation <ExternalLink className="h-3.5 w-3.5" />
           </Link>

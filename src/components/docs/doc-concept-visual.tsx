@@ -219,11 +219,11 @@ const FALLBACK: Concept = CONCEPTS["Documentation Overview"];
 
 function Thesis({ concept }: { concept: Concept }) {
   return (
-    <div className="mt-5 rounded-2xl border border-[#e7e1d2] bg-[#fbf8ef] px-5 py-5 sm:px-7">
-      <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-[#a87900]">
+    <div className="mt-5 rounded-2xl border border-[var(--warp-border)] bg-[var(--warp-surface-soft)] px-5 py-5 sm:px-7">
+      <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--warp-accent-text)]">
         THESIS
       </p>
-      <p className="mt-2 max-w-4xl text-base font-semibold leading-7 text-[#0e172b] sm:text-lg">
+      <p className="mt-2 max-w-4xl text-base font-semibold leading-7 text-[var(--warp-ink)] sm:text-lg">
         {concept.thesis}
       </p>
     </div>
@@ -234,7 +234,7 @@ function EvaluationModelVisual() {
   const concept = CONCEPTS["The Evaluation Model"];
   return (
     <>
-      <figure className="overflow-hidden rounded-[2rem] border border-[#ddd4c5] bg-[#fbf8ef] shadow-[0_24px_70px_-35px_rgba(20,35,56,.28)]">
+      <figure className="overflow-hidden rounded border border-[var(--warp-border)] bg-[var(--warp-surface-soft)] shadow-[0_24px_70px_-35px_rgba(20,35,56,.28)]">
         <img
           src="/evaluation-model-diagram.svg"
           alt="Shyena evaluation model showing input context, planner agent, deterministic, semantic, trajectory and security evaluation around the Shyena assurance core, producing verdict and release evidence."
@@ -244,7 +244,7 @@ function EvaluationModelVisual() {
           decoding="async"
           fetchPriority="high"
         />
-        <figcaption className="border-t border-[#e4ddd0] bg-white/70 px-5 py-3 font-mono text-[9px] uppercase tracking-[0.14em] text-[#71848e] sm:px-7">
+        <figcaption className="border-t border-[var(--warp-border)] bg-white/70 px-5 py-3 font-mono text-[9px] uppercase tracking-[0.14em] text-[var(--warp-muted)] sm:px-7">
           Evaluation assembly · facts → meaning → trajectory → security → evidence → decision
         </figcaption>
       </figure>
@@ -257,7 +257,7 @@ function RagEvaluationVisual() {
   const concept = CONCEPTS["RAG Reliability"];
   return (
     <>
-      <figure className="overflow-hidden rounded-[2rem] border border-[#ddd4c5] bg-[#fbf8ef] shadow-[0_24px_70px_-35px_rgba(20,35,56,.28)]">
+      <figure className="overflow-hidden rounded border border-[var(--warp-border)] bg-[var(--warp-surface-soft)] shadow-[0_24px_70px_-35px_rgba(20,35,56,.28)]">
         <img
           src="/rag-evaluation-architecture.svg"
           alt="RAG reliability architecture: source registry, version-aware indexing, vector and graph retrieval, context resolution, answer generation, claim verification, evidence store and release gate."
@@ -267,7 +267,7 @@ function RagEvaluationVisual() {
           decoding="async"
           fetchPriority="high"
         />
-        <figcaption className="border-t border-[#e4ddd0] bg-white/70 px-5 py-3 font-mono text-[9px] uppercase tracking-[0.14em] text-[#71848e] sm:px-7">
+        <figcaption className="border-t border-[var(--warp-border)] bg-white/70 px-5 py-3 font-mono text-[9px] uppercase tracking-[0.14em] text-[var(--warp-muted)] sm:px-7">
           Source authority → retrieval → claim verification → release evidence
         </figcaption>
       </figure>
@@ -286,21 +286,21 @@ export function DocConceptVisual({ section }: { section: string }) {
     <>
       <section
         aria-label={`${section} concept map`}
-        className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#090713] shadow-2xl shadow-black/20"
+        className="relative overflow-hidden rounded border border-white/10 bg-[var(--warp-canvas)] shadow-2xl shadow-black/20"
       >
         <div className="absolute inset-0 opacity-30 [background-image:linear-gradient(rgba(139,92,246,.11)_1px,transparent_1px),linear-gradient(90deg,rgba(139,92,246,.11)_1px,transparent_1px)] [background-size:44px_44px]" />
-        <div className="absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#7c3aed]/15 blur-3xl" />
+        <div className="absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--warp-lime)]/15 blur-3xl" />
         <div className="relative p-5 sm:p-7">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <p className="font-mono text-[10px] font-semibold tracking-[0.24em] text-[#a855f7]">
+              <p className="font-mono text-[10px] font-semibold tracking-[0.24em] text-[var(--warp-accent-text)]">
                 {concept.kicker}
               </p>
-              <p className="mt-2 max-w-md text-sm font-medium leading-relaxed text-[#e8e3f2]">
+              <p className="mt-2 max-w-md text-sm font-medium leading-relaxed text-[var(--warp-ink)]">
                 {concept.message}
               </p>
             </div>
-            <div className="hidden rounded-full border border-[#a855f7]/20 bg-[#7c3aed]/10 px-2.5 py-1 font-mono text-[9px] uppercase tracking-wider text-[#c4b5fd] sm:block">
+            <div className="hidden rounded-full border border-[var(--warp-border-strong)]/20 bg-[var(--warp-lime)]/10 px-2.5 py-1 font-mono text-[9px] uppercase tracking-wider text-[var(--warp-muted)] sm:block">
               {isInternal
                 ? "internal pipeline"
                 : isTokenomics
@@ -312,21 +312,21 @@ export function DocConceptVisual({ section }: { section: string }) {
             {AGENTS.map(({ label, icon: Icon }) => (
               <div
                 key={label}
-                className="flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.025] px-2.5 py-1.5 font-mono text-[8px] uppercase tracking-[0.12em] text-[#9f97b3]"
+                className="flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.025] px-2.5 py-1.5 font-mono text-[8px] uppercase tracking-[0.12em] text-[var(--warp-muted)]"
               >
-                <Icon className="h-3 w-3 text-[#c4b5fd]" />
+                <Icon className="h-3 w-3 text-[var(--warp-muted)]" />
                 {label}
               </div>
             ))}
           </div>
           <div className="relative mx-auto mt-5 min-h-[390px] max-w-[620px]">
-            <div className="absolute left-1/2 top-1/2 h-52 w-52 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#a855f7]/20 bg-[#120d28]/80 shadow-[0_0_70px_rgba(124,58,237,.22)] backdrop-blur-sm" />
-            <div className="absolute left-1/2 top-1/2 flex h-28 w-28 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-3xl border border-[#a855f7]/40 bg-[#1b1240] shadow-[0_0_35px_rgba(168,85,247,.24)]">
-              <Bot className="h-7 w-7 text-[#c4b5fd]" />
+            <div className="absolute left-1/2 top-1/2 h-52 w-52 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[var(--warp-border-strong)]/20 bg-[var(--warp-canvas)]/80 shadow-[0_0_70px_rgba(124,58,237,.22)] backdrop-blur-sm" />
+            <div className="absolute left-1/2 top-1/2 flex h-28 w-28 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-3xl border border-[var(--warp-border-strong)]/40 bg-[var(--warp-surface)] shadow-[0_0_35px_rgba(168,85,247,.24)]">
+              <Bot className="h-7 w-7 text-[var(--warp-muted)]" />
               <span className="mt-2 font-mono text-[10px] font-bold tracking-[0.18em] text-white">
                 {isInternal ? "SAGE" : isTokenomics ? "TOKENS" : "SHYENA"}
               </span>
-              <span className="mt-1 text-[9px] text-[#9f97b3]">
+              <span className="mt-1 text-[9px] text-[var(--warp-muted)]">
                 {isInternal
                   ? "content pipeline"
                   : isTokenomics
@@ -397,26 +397,26 @@ export function DocConceptVisual({ section }: { section: string }) {
               return (
                 <div
                   key={label}
-                  className={`absolute ${positions[index]} z-10 w-[116px] rounded-2xl border border-white/10 bg-[#15102d]/90 p-3 shadow-xl backdrop-blur-md animate-pulse sm:w-[132px]`}
+                  className={`absolute ${positions[index]} z-10 w-[116px] rounded-2xl border border-white/10 bg-[var(--warp-surface)]/90 p-3 shadow-xl backdrop-blur-md animate-pulse sm:w-[132px]`}
                   style={{ animationDuration: "3.8s", animationDelay: `${index * 320}ms` }}
                 >
                   <div className="flex items-center gap-2">
-                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-[#7c3aed]/15 text-[#c4b5fd]">
+                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-[var(--warp-lime)]/15 text-[var(--warp-muted)]">
                       <Icon className="h-3.5 w-3.5" />
                     </span>
-                    <span className="min-w-0 truncate text-[10px] font-semibold text-[#e8e3f2] sm:text-xs">
+                    <span className="min-w-0 truncate text-[10px] font-semibold text-[var(--warp-ink)] sm:text-xs">
                       {label}
                     </span>
                   </div>
-                  <div className="mt-2 flex items-center gap-1.5 font-mono text-[8px] uppercase tracking-wider text-[#817991]">
-                    <span className="h-1 w-1 rounded-full bg-[#a855f7]" />
+                  <div className="mt-2 flex items-center gap-1.5 font-mono text-[8px] uppercase tracking-wider text-[var(--warp-muted)]">
+                    <span className="h-1 w-1 rounded-full bg-[var(--warp-lime)] text-[var(--warp-on-accent)]" />
                     connected
                   </div>
                 </div>
               );
             })}
-            <div className="absolute bottom-0 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2 rounded-full border border-white/10 bg-[#0f0a21]/90 px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.16em] text-[#9f97b3] backdrop-blur-md">
-              <span className="h-1.5 w-1.5 animate-ping rounded-full bg-[#a855f7]" />
+            <div className="absolute bottom-0 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2 rounded-full border border-white/10 bg-[var(--warp-canvas)]/90 px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.16em] text-[var(--warp-muted)] backdrop-blur-md">
+              <span className="h-1.5 w-1.5 animate-ping rounded-full bg-[var(--warp-lime)] text-[var(--warp-on-accent)]" />
               {isInternal
                 ? "research → verified publication"
                 : isTokenomics

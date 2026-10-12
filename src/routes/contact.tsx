@@ -87,10 +87,10 @@ const FREE_EMAIL_DOMAINS = new Set([
   "126.com",
 ]);
 const FIELD_CLASS =
-  "h-12 rounded-xl border-[#e2e5ea] bg-white text-[#17213f] shadow-sm transition-all duration-200 placeholder:text-[#8b929d] focus-visible:border-[#e87512] focus-visible:ring-2 focus-visible:ring-[#e87512]/20";
+  "h-12 rounded-xl border-[var(--warp-border)] bg-white text-[var(--warp-ink)] shadow-sm transition-all duration-200 placeholder:text-[var(--warp-muted)] focus-visible:border-[var(--warp-border-strong)] focus-visible:ring-2 focus-visible:ring-[var(--warp-lime)]/20";
 const SELECT_CLASS =
-  "h-12 rounded-xl border-[#e2e5ea] bg-white text-[#17213f] shadow-sm transition-all duration-200 focus:border-[#e87512] focus:ring-2 focus:ring-[#e87512]/20";
-const LABEL_CLASS = "text-sm font-semibold text-[#17213f]";
+  "h-12 rounded-xl border-[var(--warp-border)] bg-white text-[var(--warp-ink)] shadow-sm transition-all duration-200 focus:border-[var(--warp-border-strong)] focus:ring-2 focus:ring-[var(--warp-lime)]/20";
+const LABEL_CLASS = "text-sm font-semibold text-[var(--warp-ink)]";
 
 function getEmailError(email: string) {
   const value = email.trim().toLowerCase();
@@ -198,26 +198,26 @@ function ContactPage() {
   }
 
   return (
-    <div data-page="contact" className="overflow-hidden bg-white text-[#17213f]">
-      <section className="relative border-b border-[#e2e5ea] bg-[#17213f] text-white">
+    <div data-page="contact" className="overflow-hidden bg-white text-[var(--warp-ink)]">
+      <section className="relative border-b border-[var(--warp-border)] bg-[var(--warp-surface-soft)] text-white">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_28%,rgba(232,117,18,0.16),transparent_30%)]" />
         <div className="relative mx-auto max-w-[1400px] px-5 py-16 sm:px-8 lg:px-10 lg:py-24">
           <div className="max-w-5xl">
             <div className="mb-7 inline-flex items-center gap-3 rounded-full border border-white/15 bg-white/5 px-4 py-2 font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-slate-300">
-              <span className="h-2 w-2 rounded-full bg-[#e87512]" />
+              <span className="h-2 w-2 rounded-full bg-[var(--warp-lime)] text-[var(--warp-on-accent)]" />
               Contact & demo
             </div>
-            <h1 className="font-[Sora] text-[clamp(3rem,7vw,6.5rem)] font-extrabold leading-[0.88] tracking-[-0.07em]">
+            <h1 className=" text-[clamp(3rem,7vw,6.5rem)] font-extrabold leading-[0.88] tracking-[-0.07em]">
               Assure what
               <br />
-              <span className="text-[#e87512]">you release.</span>
+              <span className="text-[var(--warp-accent-text)]">you release.</span>
             </h1>
             <p className="mt-8 max-w-3xl text-lg leading-8 text-slate-300 sm:text-xl">
               Bring an AI model, data pipeline, generative AI application, AI-powered product,
               agentic workflow, release concern or specialist requirement. We will use your context
               to make the first session specific to your system.
             </p>
-            <div className="mt-9 flex flex-wrap gap-3 text-[10px] font-bold uppercase tracking-[0.18em] text-[#8b929d]">
+            <div className="mt-9 flex flex-wrap gap-3 text-[10px] font-bold uppercase tracking-[0.18em] text-[var(--warp-muted)]">
               <span className="rounded-full border border-white/10 px-3 py-2">
                 NEXUS · Understand
               </span>
@@ -228,23 +228,23 @@ function ContactPage() {
         </div>
       </section>
 
-      <section className="bg-[#fafbfc]">
+      <section className="bg-[var(--warp-surface-soft)]">
         <div className="mx-auto grid max-w-[1440px] gap-12 px-6 py-14 sm:px-8 lg:grid-cols-[0.7fr_1.3fr] lg:px-10 lg:py-20">
           <aside className="lg:sticky lg:top-8 lg:self-start">
-            <p className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-[#e87512]">
+            <p className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-[var(--warp-accent-text)]">
               Start a conversation
             </p>
-            <h2 className="mt-5 font-[Sora] text-4xl font-extrabold leading-[0.95] tracking-[-0.045em] text-[#17213f] sm:text-5xl">
+            <h2 className="mt-5 text-4xl font-extrabold leading-[0.95] tracking-[-0.045em] text-[var(--warp-ink)] sm:text-5xl">
               A real assurance problem deserves a founder-led working session.
             </h2>
-            <p className="mt-6 text-base leading-7 text-[#596273]">
+            <p className="mt-6 text-base leading-7 text-[var(--warp-muted)]">
               Tell us enough about the system, risk, team or specialist capability so the first
               conversation starts with engineering context instead of a generic sales pitch.
             </p>
             <div className="mt-9 grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
-              <div className="mt-4 rounded-2xl border border-[#e2e5ea] bg-white p-5 shadow-sm">
-                <div className="text-sm font-semibold text-[#17213f]">Choose a session</div>
-                <div className="mt-3 grid gap-2 text-sm text-[#69707d]">
+              <div className="mt-4 rounded-2xl border border-[var(--warp-border)] bg-white p-5 shadow-sm">
+                <div className="text-sm font-semibold text-[var(--warp-ink)]">Choose a session</div>
+                <div className="mt-3 grid gap-2 text-sm text-[var(--warp-muted)]">
                   <span>Working session — bring one real journey or release concern.</span>
                   <span>
                     Engineering briefing — review the assurance architecture and evidence model.
@@ -252,50 +252,50 @@ function ContactPage() {
                   <span>Product session — see how Shyena fits your AI lifecycle.</span>
                 </div>
               </div>
-              <div className="rounded-2xl border border-[#e2e5ea] bg-white p-5 shadow-sm">
+              <div className="rounded-2xl border border-[var(--warp-border)] bg-white p-5 shadow-sm">
                 <div className="flex items-center gap-3">
-                  <Mail className="h-4 w-4 text-[#e87512]" />
+                  <Mail className="h-4 w-4 text-[var(--warp-accent-text)]" />
                   <span className="font-semibold">Direct contact</span>
                 </div>
                 <a
-                  className="mt-3 inline-block text-sm font-semibold underline decoration-[#e87512] decoration-2 underline-offset-4"
+                  className="mt-3 inline-block text-sm font-semibold underline decoration-[var(--warp-accent-text)] decoration-2 underline-offset-4"
                   href="mailto:contact@shyena.eu"
                 >
                   contact@shyena.eu
                 </a>
               </div>
-              <div className="rounded-2xl border border-[#e2e5ea] bg-white p-5 shadow-sm">
+              <div className="rounded-2xl border border-[var(--warp-border)] bg-white p-5 shadow-sm">
                 <div className="flex items-center gap-3">
-                  <Clock className="h-4 w-4 text-[#e87512]" />
+                  <Clock className="h-4 w-4 text-[var(--warp-accent-text)]" />
                   <span className="font-semibold">Response</span>
                 </div>
-                <p className="mt-2 text-sm leading-6 text-[#69707d]">
+                <p className="mt-2 text-sm leading-6 text-[var(--warp-muted)]">
                   The founder reads every message. We respond within one business day.
                 </p>
               </div>
             </div>
           </aside>
 
-          <div className="rounded-3xl border border-[#e2e5ea] bg-white p-5 shadow-[0_24px_80px_-35px_rgba(15,23,42,0.35)] sm:p-8 lg:p-10">
-            <div className="border-b border-[#e2e5ea] pb-7">
-              <p className="font-mono text-xs font-bold uppercase tracking-[0.18em] text-[#e87512]">
+          <div className="rounded-3xl border border-[var(--warp-border)] bg-white p-5 shadow-[0_24px_80px_-35px_rgba(15,23,42,0.35)] sm:p-8 lg:p-10">
+            <div className="border-b border-[var(--warp-border)] pb-7">
+              <p className="font-mono text-xs font-bold uppercase tracking-[0.18em] text-[var(--warp-accent-text)]">
                 Tell us about your requirement
               </p>
-              <h2 className="mt-3 font-[Sora] text-2xl font-extrabold tracking-tight">
+              <h2 className="mt-3 text-2xl font-extrabold tracking-tight">
                 Request a focused conversation
               </h2>
-              <p className="mt-2 text-sm leading-6 text-[#69707d]">
+              <p className="mt-2 text-sm leading-6 text-[var(--warp-muted)]">
                 Required: your name, company, work email and what you need help with. Optional
                 qualification details help us route the enquiry faster.
               </p>
             </div>
             {expertContext && (
-              <div className="mt-7 rounded-2xl border border-[#e87512]/40 bg-[#fff7ed] px-5 py-4">
-                <div className="text-[10px] font-extrabold uppercase tracking-[.16em] text-[#9a4d0b]">
+              <div className="mt-7 rounded-2xl border border-[var(--warp-border-strong)]/40 bg-[var(--warp-surface-soft)] px-5 py-4">
+                <div className="text-[10px] font-extrabold uppercase tracking-[.16em] text-[var(--warp-accent-text)]">
                   Expert connection selected
                 </div>
                 <div className="mt-1 text-base font-bold text-slate-900">{expertContext}</div>
-                <p className="mt-1 text-xs leading-5 text-[#596273]">
+                <p className="mt-1 text-xs leading-5 text-[var(--warp-muted)]">
                   The message field below has been prepared with this specialist's profile context.
                   You can edit it before submitting.
                 </p>
@@ -303,11 +303,11 @@ function ContactPage() {
             )}
             {status === "success" ? (
               <div className="flex flex-col items-center py-20 text-center">
-                <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#e87512] shadow-lg shadow-[#e87512]/20">
+                <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[var(--warp-lime)] shadow-lg shadow-[#e87512]/20 text-[var(--warp-on-accent)]">
                   <CheckCircle2 className="h-8 w-8" />
                 </span>
-                <h2 className="mt-6 font-[Sora] text-2xl font-extrabold">Request received</h2>
-                <p className="mt-3 max-w-md text-sm leading-7 text-[#69707d]">
+                <h2 className="mt-6 text-2xl font-extrabold">Request received</h2>
+                <p className="mt-3 max-w-md text-sm leading-7 text-[var(--warp-muted)]">
                   We will review your context and follow up at your work email within one business
                   day.
                 </p>
@@ -330,7 +330,8 @@ function ContactPage() {
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div className="space-y-2">
                     <Label htmlFor="inquiryReason" className={LABEL_CLASS}>
-                      What can we help with? <span className="text-[#e87512]">*</span>
+                      What can we help with?{" "}
+                      <span className="text-[var(--warp-accent-text)]">*</span>
                     </Label>
                     <Select
                       name="inquiryReason"
@@ -355,7 +356,7 @@ function ContactPage() {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="company" className={LABEL_CLASS}>
-                      Company <span className="text-[#e87512]">*</span>
+                      Company <span className="text-[var(--warp-accent-text)]">*</span>
                     </Label>
                     <Input
                       id="company"
@@ -369,7 +370,7 @@ function ContactPage() {
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div className="space-y-2">
                     <Label htmlFor="firstName" className={LABEL_CLASS}>
-                      First name <span className="text-[#e87512]">*</span>
+                      First name <span className="text-[var(--warp-accent-text)]">*</span>
                     </Label>
                     <Input
                       id="firstName"
@@ -382,7 +383,7 @@ function ContactPage() {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="lastName" className={LABEL_CLASS}>
-                      Last name <span className="text-[#e87512]">*</span>
+                      Last name <span className="text-[var(--warp-accent-text)]">*</span>
                     </Label>
                     <Input
                       id="lastName"
@@ -406,7 +407,7 @@ function ContactPage() {
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div className="space-y-2">
                     <Label htmlFor="email" className={LABEL_CLASS}>
-                      Work email <span className="text-[#e87512]">*</span>
+                      Work email <span className="text-[var(--warp-accent-text)]">*</span>
                     </Label>
                     <Input
                       id="email"
@@ -421,7 +422,7 @@ function ContactPage() {
                       aria-invalid={Boolean(emailError)}
                       aria-describedby="email-help email-error"
                     />
-                    <p id="email-help" className="text-xs text-[#8b929d]">
+                    <p id="email-help" className="text-xs text-[var(--warp-muted)]">
                       Company domains only. Gmail, Outlook, Yahoo and other personal providers are
                       blocked.
                     </p>
@@ -433,7 +434,7 @@ function ContactPage() {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="phone" className={LABEL_CLASS}>
-                      Phone <span className="text-[#8b929d]">(optional)</span>
+                      Phone <span className="text-[var(--warp-muted)]">(optional)</span>
                     </Label>
                     <Input
                       id="phone"
@@ -448,7 +449,7 @@ function ContactPage() {
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div className="space-y-2">
                     <Label htmlFor="jobTitle" className={LABEL_CLASS}>
-                      Job title <span className="text-[#8b929d]">(optional)</span>
+                      Job title <span className="text-[var(--warp-muted)]">(optional)</span>
                     </Label>
                     <Input
                       id="jobTitle"
@@ -460,7 +461,7 @@ function ContactPage() {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="companySize" className={LABEL_CLASS}>
-                      Company size <span className="text-[#8b929d]">(optional)</span>
+                      Company size <span className="text-[var(--warp-muted)]">(optional)</span>
                     </Label>
                     <Select
                       name="companySize"
@@ -482,7 +483,7 @@ function ContactPage() {
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="country" className={LABEL_CLASS}>
-                    Country <span className="text-[#8b929d]">(optional)</span>
+                    Country <span className="text-[var(--warp-muted)]">(optional)</span>
                   </Label>
                   <Input
                     id="country"
@@ -495,9 +496,9 @@ function ContactPage() {
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
                     <Label htmlFor="message" className={LABEL_CLASS}>
-                      Message <span className="text-[#e87512]">*</span>
+                      Message <span className="text-[var(--warp-accent-text)]">*</span>
                     </Label>
-                    <span className="text-xs text-[#8b929d]">{messageLength}/5000</span>
+                    <span className="text-xs text-[var(--warp-muted)]">{messageLength}/5000</span>
                   </div>
                   <Textarea
                     id="message"
@@ -507,7 +508,7 @@ function ContactPage() {
                     maxLength={5000}
                     value={initialMessage}
                     placeholder="Tell us about your AI system, model, data pipeline, business outcome, release risk, testing challenge or specialist requirement."
-                    className="min-h-40 rounded-xl border-[#e2e5ea] bg-white shadow-sm transition-all duration-200 placeholder:text-[#8b929d] focus-visible:border-[#e87512] focus-visible:ring-2 focus-visible:ring-[#e87512]/20"
+                    className="min-h-40 rounded-xl border-[var(--warp-border)] bg-white shadow-sm transition-all duration-200 placeholder:text-[var(--warp-muted)] focus-visible:border-[var(--warp-border-strong)] focus-visible:ring-2 focus-visible:ring-[var(--warp-lime)]/20"
                     onChange={(event) => {
                       setInitialMessage(event.currentTarget.value);
                       setMessageLength(event.currentTarget.value.length);
@@ -522,8 +523,8 @@ function ContactPage() {
                     {error}
                   </div>
                 )}
-                <div className="border-t border-[#e2e5ea] pt-6">
-                  <p className="text-xs leading-5 text-[#69707d]">
+                <div className="border-t border-[var(--warp-border)] pt-6">
+                  <p className="text-xs leading-5 text-[var(--warp-muted)]">
                     By submitting this form, you agree that Shyena may use the information provided
                     to respond to your enquiry. We only use the details needed to handle your
                     request.
@@ -532,7 +533,7 @@ function ContactPage() {
                 <Button
                   type="submit"
                   size="lg"
-                  className="group h-13 w-full rounded-xl border border-[#e87512] bg-[#e87512] font-extrabold text-[#17213f] shadow-lg shadow-[#e87512]/15 transition-all hover:-translate-y-0.5 hover:bg-[#d9670a]"
+                  className="group h-13 w-full rounded-xl border border-[var(--warp-border-strong)] bg-[var(--warp-lime)] font-extrabold text-[var(--warp-on-accent)] shadow-lg shadow-[#e87512]/15 transition-all hover:-translate-y-0.5 hover:bg-[var(--warp-lime)]"
                   disabled={status === "submitting"}
                 >
                   {status === "submitting"
@@ -542,7 +543,7 @@ function ContactPage() {
                       : "Request a demo"}
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Button>
-                <p className="text-center text-[11px] text-[#8b929d]">
+                <p className="text-center text-[11px] text-[var(--warp-muted)]">
                   We respond within one business day.
                 </p>
               </form>
@@ -551,36 +552,38 @@ function ContactPage() {
         </div>
       </section>
 
-      <section className="border-y border-[#e2e5ea] bg-white">
+      <section className="border-y border-[var(--warp-border)] bg-white">
         <div className="mx-auto max-w-[1440px] px-6 py-16 sm:px-8 lg:px-10 lg:py-24">
           <div className="max-w-4xl">
-            <p className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-[#e87512]">
+            <p className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-[var(--warp-accent-text)]">
               What happens next
             </p>
-            <h2 className="mt-5 font-[Sora] text-[clamp(3rem,5vw,5.5rem)] font-extrabold leading-[0.9] tracking-[-0.06em]">
+            <h2 className="mt-5 text-[clamp(3rem,5vw,5.5rem)] font-extrabold leading-[0.9] tracking-[-0.06em]">
               From conversation
               <br />
               to evidence.
             </h2>
           </div>
-          <div className="mt-12 grid overflow-hidden rounded-2xl border border-[#e2e5ea] md:grid-cols-3">
+          <div className="mt-12 grid overflow-hidden rounded-2xl border border-[var(--warp-border)] md:grid-cols-3">
             {NEXT_STEPS.map((step, index) => {
               const Icon = step.icon;
               return (
                 <article
                   key={step.title}
-                  className="group border-b border-[#e2e5ea] p-7 last:border-b-0 md:border-b-0 md:border-r md:p-9 md:last:border-r-0"
+                  className="group border-b border-[var(--warp-border)] p-7 last:border-b-0 md:border-b-0 md:border-r md:p-9 md:last:border-r-0"
                 >
                   <div className="flex items-center gap-4">
-                    <span className="font-mono text-xs tracking-[0.15em] text-[#8b929d]">
+                    <span className="font-mono text-xs tracking-[0.15em] text-[var(--warp-muted)]">
                       0{index + 1}
                     </span>
-                    <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#e87512] text-[#17213f] transition-transform duration-200 group-hover:scale-105">
+                    <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--warp-lime)] text-[var(--warp-on-accent)] transition-transform duration-200 group-hover:scale-105">
                       <Icon className="h-5 w-5" />
                     </span>
                   </div>
                   <h3 className="mt-7 text-xl font-extrabold tracking-tight">{step.title}</h3>
-                  <p className="mt-4 text-sm leading-7 text-[#596273]">{step.description}</p>
+                  <p className="mt-4 text-sm leading-7 text-[var(--warp-muted)]">
+                    {step.description}
+                  </p>
                 </article>
               );
             })}

@@ -181,7 +181,7 @@ function Graph({ phase, pulse }: { phase: number; pulse: number }) {
             ? ["agent", "pricing", "margin", "quote"]
             : ["agent", "pricing", "margin", "quote", "customer"];
   return (
-    <div className="relative h-[520px] overflow-hidden rounded-2xl border border-white/10 bg-[#060a10] shadow-[0_30px_100px_-50px_rgba(0,0,0,.95)] sm:h-[560px]">
+    <div className="relative h-[520px] overflow-hidden rounded-2xl border border-white/10 bg-[var(--warp-canvas)] shadow-[0_30px_100px_-50px_rgba(0,0,0,.95)] sm:h-[560px]">
       <div
         className="absolute inset-0 opacity-50"
         style={{
@@ -191,10 +191,10 @@ function Graph({ phase, pulse }: { phase: number; pulse: number }) {
         }}
       />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,rgba(241,138,50,.07),transparent_42%)]" />
-      <div className="absolute left-4 top-4 z-10 font-mono text-[8px] uppercase tracking-[.2em] text-white/30">
+      <div className="absolute left-4 top-4 z-10 font-mono text-[8px] uppercase tracking-[.2em] text-[var(--warp-subtle)]">
         SYSTEM UNDER TEST · RFQ TRANSACTION GRAPH
       </div>
-      <div className="absolute right-4 top-4 z-10 rounded border border-white/10 bg-black/30 px-2 py-1 font-mono text-[7px] text-white/35">
+      <div className="absolute right-4 top-4 z-10 rounded border border-white/10 bg-black/30 px-2 py-1 font-mono text-[7px] text-[var(--warp-subtle)]">
         ILLUSTRATIVE RUN · CINEMATIC ON
       </div>
       <div
@@ -267,21 +267,21 @@ function Graph({ phase, pulse }: { phase: number; pulse: number }) {
               style={{ left: n.x, top: n.y }}
             >
               <div
-                className={`min-w-[128px] rounded-xl border px-3 py-3 backdrop-blur-md ${red ? "border-red-400/45 bg-red-500/[.10] shadow-[0_0_45px_rgba(239,68,68,.16)]" : hot ? "border-[#f18a32]/45 bg-[#f18a32]/[.07] shadow-[0_0_45px_rgba(241,138,50,.12)]" : "border-white/10 bg-[#0c121a]/90"}`}
+                className={`min-w-[128px] rounded-xl border px-3 py-3 backdrop-blur-md ${red ? "border-red-400/45 bg-red-500/[.10] shadow-[0_0_45px_rgba(239,68,68,.16)]" : hot ? "border-[var(--warp-border-strong)]/45 bg-[var(--warp-lime)]/[.07] shadow-[0_0_45px_rgba(241,138,50,.12)]" : "border-white/10 bg-[var(--warp-canvas)]/90"}`}
               >
                 <div className="flex items-center justify-between">
                   <span
-                    className={`h-2 w-2 rounded-full ${red ? "bg-red-400 animate-pulse" : hot ? "bg-[#f18a32] animate-pulse" : "bg-white/20"}`}
+                    className={`h-2 w-2 rounded-full ${red ? "bg-red-400 animate-pulse" : hot ? "bg-[var(--warp-lime)] animate-pulse" : "bg-white/20"} text-[var(--warp-on-accent)]`}
                   />
-                  <span className="font-mono text-[6px] text-white/25">NODE</span>
+                  <span className="font-mono text-[6px] text-[var(--warp-subtle)]">NODE</span>
                 </div>
-                <div className="mt-3 font-mono text-[9px] font-bold tracking-[.1em] text-white/80">
+                <div className="mt-3 font-mono text-[9px] font-bold tracking-[.1em] text-[var(--warp-muted)]">
                   {n.label}
                 </div>
-                <div className="mt-1 text-[8px] text-white/30">{n.sub}</div>
+                <div className="mt-1 text-[8px] text-[var(--warp-subtle)]">{n.sub}</div>
                 {hot && (
                   <div
-                    className={`mt-2 font-mono text-[6px] uppercase tracking-[.12em] ${red ? "text-red-300" : "text-[#f18a32]"}`}
+                    className={`mt-2 font-mono text-[6px] uppercase tracking-[.12em] ${red ? "text-red-300" : "text-[var(--warp-accent-text)]"}`}
                   >
                     {red ? "CONTROL VIOLATION" : "ASSURANCE SIGNAL"}
                   </div>
@@ -290,7 +290,7 @@ function Graph({ phase, pulse }: { phase: number; pulse: number }) {
             </div>
           );
         })}
-        <div className="absolute bottom-4 left-4 right-4 z-10 flex flex-wrap gap-2 font-mono text-[7px] text-white/35">
+        <div className="absolute bottom-4 left-4 right-4 z-10 flex flex-wrap gap-2 font-mono text-[7px] text-[var(--warp-subtle)]">
           <span className="rounded border border-white/8 bg-black/25 px-2 py-1">
             CHANGE PR #284
           </span>
@@ -318,9 +318,9 @@ function Graph({ phase, pulse }: { phase: number; pulse: number }) {
 
 function TracePanel({ selected, onSelect }: { selected: number; onSelect: (n: number) => void }) {
   return (
-    <div className="rounded-2xl border border-white/10 bg-[#0b1119] p-4 sm:p-5">
+    <div className="rounded-2xl border border-white/10 bg-[var(--warp-canvas)] p-4 sm:p-5">
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2 font-mono text-[8px] font-bold uppercase tracking-[.18em] text-white/35">
+        <div className="flex items-center gap-2 font-mono text-[8px] font-bold uppercase tracking-[.18em] text-[var(--warp-subtle)]">
           <Terminal className="h-3.5 w-3.5" /> Live trajectory
         </div>
         <span className="font-mono text-[7px] text-emerald-300/70">TRACE trc_8f21</span>
@@ -330,11 +330,13 @@ function TracePanel({ selected, onSelect }: { selected: number; onSelect: (n: nu
           <button
             key={i}
             onClick={() => onSelect(i)}
-            className={`flex w-full gap-2 rounded-lg border px-2.5 py-2 text-left transition ${selected === i ? "border-[#f18a32]/35 bg-[#f18a32]/[.06]" : "border-white/5 bg-white/[.01] hover:bg-white/[.025]"}`}
+            className={`flex w-full gap-2 rounded-lg border px-2.5 py-2 text-left transition ${selected === i ? "border-[var(--warp-border-strong)]/35 bg-[var(--warp-lime)]/[.06]" : "border-white/5 bg-white/[.01] hover:bg-white/[.025]"}`}
           >
-            <span className="w-[42px] shrink-0 font-mono text-[7px] text-white/30">{t[0]}</span>
+            <span className="w-[42px] shrink-0 font-mono text-[7px] text-[var(--warp-subtle)]">
+              {t[0]}
+            </span>
             <span
-              className={`font-mono text-[8px] leading-4 ${i === 6 ? "text-red-300" : "text-white/60"}`}
+              className={`font-mono text-[8px] leading-4 ${i === 6 ? "text-red-300" : "text-[var(--warp-muted)]"}`}
             >
               {t[1]}
             </span>
@@ -349,20 +351,20 @@ function Inspector({ selected, phase }: { selected: number; phase: number }) {
   const item = trace[selected] ?? trace[0];
   if (!item) return null;
   return (
-    <div className="rounded-2xl border border-white/10 bg-[#0b1119] p-5">
+    <div className="rounded-2xl border border-white/10 bg-[var(--warp-canvas)] p-5">
       <div className="flex items-center justify-between">
-        <div className="font-mono text-[8px] font-bold uppercase tracking-[.18em] text-white/30">
+        <div className="font-mono text-[8px] font-bold uppercase tracking-[.18em] text-[var(--warp-subtle)]">
           Live inspector
         </div>
-        <span className="font-mono text-[7px] text-white/25">
+        <span className="font-mono text-[7px] text-[var(--warp-subtle)]">
           EVENT {String(selected + 1).padStart(2, "0")}
         </span>
       </div>
       <div className="mt-5 rounded-xl border border-white/8 bg-black/20 p-4">
-        <div className="font-mono text-[7px] uppercase tracking-[.12em] text-[#f18a32]">
+        <div className="font-mono text-[7px] uppercase tracking-[.12em] text-[var(--warp-accent-text)]">
           {item[0]}
         </div>
-        <pre className="mt-3 whitespace-pre-wrap font-mono text-[9px] leading-5 text-white/65">
+        <pre className="mt-3 whitespace-pre-wrap font-mono text-[9px] leading-5 text-[var(--warp-muted)]">
           {item[1]}
         </pre>
       </div>
@@ -374,9 +376,9 @@ function Inspector({ selected, phase }: { selected: number; phase: number }) {
           ["Replay", phase >= 6 ? "3/3" : "READY"],
         ].map(([a, b]) => (
           <div key={a} className="rounded-lg border border-white/7 bg-white/[.015] p-3">
-            <div className="font-mono text-[7px] text-white/25">{a}</div>
+            <div className="font-mono text-[7px] text-[var(--warp-subtle)]">{a}</div>
             <div
-              className={`mt-1 text-[10px] font-bold ${b === "BLOCK" ? "text-red-300" : "text-white/70"}`}
+              className={`mt-1 text-[10px] font-bold ${b === "BLOCK" ? "text-red-300" : "text-[var(--warp-muted)]"}`}
             >
               {b}
             </div>
@@ -389,12 +391,12 @@ function Inspector({ selected, phase }: { selected: number; phase: number }) {
 
 function Findings() {
   return (
-    <div className="rounded-2xl border border-white/10 bg-[#0b1119] p-5">
+    <div className="rounded-2xl border border-white/10 bg-[var(--warp-canvas)] p-5">
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2 font-mono text-[8px] font-bold uppercase tracking-[.18em] text-white/30">
+        <div className="flex items-center gap-2 font-mono text-[8px] font-bold uppercase tracking-[.18em] text-[var(--warp-subtle)]">
           <Bug className="h-3.5 w-3.5" /> Findings
         </div>
-        <span className="font-mono text-[7px] text-white/25">06 TOTAL</span>
+        <span className="font-mono text-[7px] text-[var(--warp-subtle)]">06 TOTAL</span>
       </div>
       <div className="mt-4 space-y-2">
         {findings.map((f) => (
@@ -402,17 +404,17 @@ function Findings() {
             key={f[0]}
             className="grid grid-cols-[52px_58px_1fr_auto] items-center gap-2 rounded-lg border border-white/6 bg-white/[.015] px-3 py-2.5"
           >
-            <span className="font-mono text-[7px] text-white/35">{f[0]}</span>
+            <span className="font-mono text-[7px] text-[var(--warp-subtle)]">{f[0]}</span>
             <span
-              className={`font-mono text-[6px] font-bold ${f[1] === "CRITICAL" ? "text-red-300" : f[1] === "HIGH" ? "text-amber-300" : "text-white/35"}`}
+              className={`font-mono text-[6px] font-bold ${f[1] === "CRITICAL" ? "text-red-300" : f[1] === "HIGH" ? "text-amber-300" : "text-[var(--warp-subtle)]"}`}
             >
               {f[1]}
             </span>
             <div>
-              <div className="text-[9px] font-semibold text-white/70">{f[2]}</div>
-              <div className="mt-0.5 text-[7px] leading-3 text-white/30">{f[3]}</div>
+              <div className="text-[9px] font-semibold text-[var(--warp-muted)]">{f[2]}</div>
+              <div className="mt-0.5 text-[7px] leading-3 text-[var(--warp-subtle)]">{f[3]}</div>
             </div>
-            <span className="font-mono text-[6px] text-white/30">{f[4]}</span>
+            <span className="font-mono text-[6px] text-[var(--warp-subtle)]">{f[4]}</span>
           </div>
         ))}
       </div>
@@ -446,57 +448,57 @@ export function AutonomousQACinematicDemo() {
   }, [sound]);
   const current = phases[phase];
   return (
-    <main className="min-h-screen bg-[#05080d] text-white">
+    <main className="min-h-screen bg-[var(--warp-canvas)] text-white">
       <audio ref={audioRef} src="/audio/shyena-demo-music.mp3" loop preload="none" />
-      <section className="relative overflow-hidden border-b border-white/10 bg-[#060b12]">
+      <section className="relative overflow-hidden border-b border-white/10 bg-[var(--warp-canvas)]">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_15%,rgba(241,138,50,.14),transparent_30%),radial-gradient(circle_at_20%_80%,rgba(52,211,153,.06),transparent_26%)]" />
         <div className="relative mx-auto max-w-[1380px] px-5 pb-10 pt-16 sm:px-8 lg:px-10 lg:pb-14 lg:pt-20">
-          <div className="flex flex-wrap items-center gap-3 font-mono text-[8px] font-bold uppercase tracking-[.22em] text-[#f18a32]">
+          <div className="flex flex-wrap items-center gap-3 font-mono text-[8px] font-bold uppercase tracking-[.22em] text-[var(--warp-accent-text)]">
             <span>SHYENA</span>
-            <span className="text-white/15">/</span>
+            <span className="text-[var(--warp-subtle)]">/</span>
             <span>ASSURANCE CONTROL ROOM</span>
-            <span className="rounded border border-white/10 px-2 py-1 text-white/35">
+            <span className="rounded border border-white/10 px-2 py-1 text-[var(--warp-subtle)]">
               SYNTHETIC RUN
             </span>
           </div>
           <div className="mt-6 grid gap-8 lg:grid-cols-[1.25fr_.75fr] lg:items-end">
             <div>
-              <h1 className="font-[Sora] text-[clamp(2.8rem,6vw,6.2rem)] font-extrabold leading-[.9] tracking-[-.065em]">
+              <h1 className=" text-[clamp(2.8rem,6vw,6.2rem)] font-extrabold leading-[.9] tracking-[-.065em]">
                 Watch an AI transaction
                 <br />
-                <span className="text-[#f18a32]">become evidence.</span>
+                <span className="text-[var(--warp-accent-text)]">become evidence.</span>
               </h1>
-              <p className="mt-6 max-w-3xl text-lg leading-8 text-white/50">
+              <p className="mt-6 max-w-3xl text-lg leading-8 text-[var(--warp-subtle)]">
                 A living assurance run around a synthetic RFQ: change enters, the transaction
                 executes, a control failure is reproduced, an adversarial path is tested and the
                 release decision is produced.
               </p>
             </div>
             <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
-              <div className="flex items-center justify-between font-mono text-[7px] uppercase tracking-[.16em] text-white/30">
+              <div className="flex items-center justify-between font-mono text-[7px] uppercase tracking-[.16em] text-[var(--warp-subtle)]">
                 <span>RUN STATUS</span>
                 <span className="text-emerald-300/80">{running ? "LIVE" : "PAUSED"}</span>
               </div>
               <div className="mt-4 grid grid-cols-3 gap-2">
                 <div>
-                  <div className="font-mono text-[7px] text-white/25">PHASE</div>
+                  <div className="font-mono text-[7px] text-[var(--warp-subtle)]">PHASE</div>
                   <div className="mt-1 text-lg font-extrabold">
                     {String(phase + 1).padStart(2, "0")}/10
                   </div>
                 </div>
                 <div>
-                  <div className="font-mono text-[7px] text-white/25">TRACE</div>
+                  <div className="font-mono text-[7px] text-[var(--warp-subtle)]">TRACE</div>
                   <div className="mt-1 text-lg font-extrabold">18</div>
                 </div>
                 <div>
-                  <div className="font-mono text-[7px] text-white/25">EVIDENCE</div>
+                  <div className="font-mono text-[7px] text-[var(--warp-subtle)]">EVIDENCE</div>
                   <div className="mt-1 text-lg font-extrabold">31</div>
                 </div>
               </div>
               <div className="mt-4 grid grid-cols-2 gap-2">
                 <button
                   onClick={() => setRunning((v) => !v)}
-                  className="flex h-9 items-center justify-center gap-2 rounded-lg bg-[#f18a32] text-[10px] font-bold text-black"
+                  className="flex h-9 items-center justify-center gap-2 rounded-lg bg-[var(--warp-lime)] text-[10px] font-bold text-[var(--warp-on-accent)]"
                 >
                   {running ? (
                     <>
@@ -510,7 +512,7 @@ export function AutonomousQACinematicDemo() {
                 </button>
                 <button
                   onClick={() => setSound((v) => !v)}
-                  className="flex h-9 items-center justify-center gap-2 rounded-lg border border-white/10 bg-white/[.04] text-[10px] font-bold text-white/65"
+                  className="flex h-9 items-center justify-center gap-2 rounded-lg border border-white/10 bg-white/[.04] text-[10px] font-bold text-[var(--warp-muted)]"
                 >
                   {sound ? (
                     <Volume2 className="h-3.5 w-3.5" />
@@ -524,12 +526,15 @@ export function AutonomousQACinematicDemo() {
           </div>
         </div>
       </section>
-      <section className="sticky top-0 z-30 border-b border-white/10 bg-[#060a0f]/95 backdrop-blur">
+      <section className="sticky top-0 z-30 border-b border-white/10 bg-[var(--warp-canvas)]/95 backdrop-blur">
         <div className="mx-auto flex max-w-[1380px] overflow-x-auto px-5 sm:px-8 lg:px-10">
           {phases.map((p, i) => {
             const active = i === phase;
-            const tone = p.color === "red" ? "text-red-300" : "text-[#f18a32]";
-            const bar = p.color === "red" ? "bg-red-400" : "bg-[#f18a32]";
+            const tone = p.color === "red" ? "text-red-300" : "text-[var(--warp-accent-text)]";
+            const bar =
+              p.color === "red"
+                ? "bg-red-400"
+                : "bg-[var(--warp-lime)] text-[var(--warp-on-accent)]";
             return (
               <button
                 key={p.id}
@@ -540,11 +545,13 @@ export function AutonomousQACinematicDemo() {
                 className={`relative min-w-[118px] flex-1 px-3 py-4 text-left ${active ? "bg-white/[.045]" : ""}`}
               >
                 <div
-                  className={`font-mono text-[7px] font-bold tracking-[.16em] ${active ? tone : "text-white/25"}`}
+                  className={`font-mono text-[7px] font-bold tracking-[.16em] ${active ? tone : "text-[var(--warp-subtle)]"}`}
                 >
                   {p.label}
                 </div>
-                <div className="mt-1 text-[9px] font-semibold text-white/55">{p.title}</div>
+                <div className="mt-1 text-[9px] font-semibold text-[var(--warp-muted)]">
+                  {p.title}
+                </div>
                 {active && <div className={`absolute bottom-0 left-0 right-0 h-0.5 ${bar}`} />}
               </button>
             );
@@ -554,14 +561,14 @@ export function AutonomousQACinematicDemo() {
       <section className="mx-auto max-w-[1380px] px-5 py-6 sm:px-8 lg:px-10 lg:py-8">
         <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
           <div>
-            <div className="font-mono text-[8px] uppercase tracking-[.18em] text-white/25">
+            <div className="font-mono text-[8px] uppercase tracking-[.18em] text-[var(--warp-subtle)]">
               CURRENT TRANSACTION
             </div>
             <div className="mt-1 flex flex-wrap items-center gap-2 text-sm font-bold">
-              RFQ-2026-184 <span className="text-white/20">·</span>
-              <span className="text-white/45">240 MT S355</span>
-              <span className="text-white/20">·</span>
-              <span className="text-white/45">Rotterdam</span>
+              RFQ-2026-184 <span className="text-[var(--warp-subtle)]">·</span>
+              <span className="text-[var(--warp-subtle)]">240 MT S355</span>
+              <span className="text-[var(--warp-subtle)]">·</span>
+              <span className="text-[var(--warp-subtle)]">Rotterdam</span>
             </div>
           </div>
           <div className="flex gap-2">
@@ -571,13 +578,13 @@ export function AutonomousQACinematicDemo() {
                 setPhase(4);
                 setSelected(6);
               }}
-              className="inline-flex h-9 items-center gap-2 rounded-lg border border-white/10 px-3 text-[10px] font-bold text-white/60 hover:bg-white/[.04]"
+              className="inline-flex h-9 items-center gap-2 rounded-lg border border-white/10 px-3 text-[10px] font-bold text-[var(--warp-muted)] hover:bg-white/[.04]"
             >
               <RotateCcw className="h-3.5 w-3.5" /> Replay failure {replay > 0 && `(${replay})`}
             </button>
             <Link
               to="/sample-report"
-              className="inline-flex h-9 items-center gap-2 rounded-lg bg-white/[.06] px-3 text-[10px] font-bold text-white/65"
+              className="inline-flex h-9 items-center gap-2 rounded-lg bg-white/[.06] px-3 text-[10px] font-bold text-[var(--warp-muted)]"
             >
               Open report <ArrowRight className="h-3.5 w-3.5" />
             </Link>
@@ -603,7 +610,7 @@ export function AutonomousQACinematicDemo() {
                 ["DATA BOUNDARY", "PASS"],
               ].map(([a, b]) => (
                 <div key={a} className="rounded-lg border border-white/7 bg-black/10 p-3">
-                  <div className="font-mono text-[6px] text-white/25">{a}</div>
+                  <div className="font-mono text-[6px] text-[var(--warp-subtle)]">{a}</div>
                   <div
                     className={`mt-2 text-xs font-extrabold ${b === "FAIL" ? "text-red-300" : "text-emerald-300"}`}
                   >
@@ -612,13 +619,13 @@ export function AutonomousQACinematicDemo() {
                 </div>
               ))}
             </div>
-            <p className="mt-4 text-[10px] leading-5 text-white/35">
+            <p className="mt-4 text-[10px] leading-5 text-[var(--warp-subtle)]">
               12 adversarial cases · 9 blocked · 2 review · 1 failed. The failed control is carried
               into the release evidence.
             </p>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-[#0b1119] p-5">
-            <div className="flex items-center gap-2 font-mono text-[8px] font-bold uppercase tracking-[.18em] text-white/30">
+          <div className="rounded-2xl border border-white/10 bg-[var(--warp-canvas)] p-5">
+            <div className="flex items-center gap-2 font-mono text-[8px] font-bold uppercase tracking-[.18em] text-[var(--warp-subtle)]">
               <FileCheck2 className="h-3.5 w-3.5" /> Evidence chain
             </div>
             <div className="mt-4 flex flex-wrap items-center gap-1.5">
@@ -637,33 +644,31 @@ export function AutonomousQACinematicDemo() {
               ].map((x, i) => (
                 <React.Fragment key={x}>
                   <span
-                    className={`rounded border px-2 py-1 font-mono text-[6px] ${i <= phase + 1 ? "border-[#f18a32]/25 bg-[#f18a32]/[.06] text-[#f18a32]" : "border-white/7 text-white/20"}`}
+                    className={`rounded border px-2 py-1 font-mono text-[6px] ${i <= phase + 1 ? "border-[var(--warp-border-strong)]/25 bg-[var(--warp-lime)]/[.06] text-[var(--warp-accent-text)]" : "border-white/7 text-[var(--warp-subtle)]"}`}
                   >
                     {x}
                   </span>
-                  {i < 10 && <ChevronRight className="h-3 w-3 text-white/10" />}
+                  {i < 10 && <ChevronRight className="h-3 w-3 text-[var(--warp-subtle)]" />}
                 </React.Fragment>
               ))}
             </div>
             <div className="mt-5 rounded-lg border border-red-400/15 bg-red-500/[.06] p-3">
               <div className="font-mono text-[7px] text-red-300/70">RELEASE GATE</div>
               <div className="mt-1 text-lg font-extrabold text-red-300">BLOCKED</div>
-              <div className="mt-1 text-[9px] text-white/35">
+              <div className="mt-1 text-[9px] text-[var(--warp-subtle)]">
                 F-001 + tool escalation failure require remediation and regression before release.
               </div>
             </div>
           </div>
         </div>
-        <div className="mt-5 rounded-2xl border border-white/10 bg-[#0b1119] p-5">
+        <div className="mt-5 rounded-2xl border border-white/10 bg-[var(--warp-canvas)] p-5">
           <div className="grid gap-5 lg:grid-cols-[1fr_auto] lg:items-center">
             <div>
-              <div className="font-mono text-[8px] font-bold uppercase tracking-[.18em] text-[#f18a32]">
+              <div className="font-mono text-[8px] font-bold uppercase tracking-[.18em] text-[var(--warp-accent-text)]">
                 AUTOMATIC ACTION
               </div>
-              <h2 className="mt-2 font-[Sora] text-xl font-bold">
-                The failure does not end at the red badge.
-              </h2>
-              <p className="mt-2 max-w-3xl text-sm leading-6 text-white/40">
+              <h2 className="mt-2 text-xl font-bold">The failure does not end at the red badge.</h2>
+              <p className="mt-2 max-w-3xl text-sm leading-6 text-[var(--warp-subtle)]">
                 Shyena links the failure to its root cause, reproduces it, creates permanent
                 negative-path coverage and carries the evidence into the release gate.
               </p>
@@ -678,27 +683,27 @@ export function AutonomousQACinematicDemo() {
           </div>
         </div>
       </section>
-      <section className="border-t border-white/10 bg-[#080d14]">
+      <section className="border-t border-white/10 bg-[var(--warp-canvas)]">
         <div className="mx-auto max-w-[1000px] px-5 py-16 text-center sm:px-8 lg:py-20">
-          <div className="font-mono text-[9px] font-bold uppercase tracking-[.2em] text-[#f18a32]">
+          <div className="font-mono text-[9px] font-bold uppercase tracking-[.2em] text-[var(--warp-accent-text)]">
             FROM TRANSACTION TO PROOF
           </div>
-          <h2 className="mt-4 font-[Sora] text-3xl font-extrabold tracking-[-.045em] sm:text-5xl">
+          <h2 className="mt-4 text-3xl font-extrabold tracking-[-.045em] sm:text-5xl">
             This is the product: the system moves, and Shyena proves what happened.
           </h2>
-          <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-white/40">
+          <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-[var(--warp-subtle)]">
             Explore the four assurance layers or bring one critical AI journey into the model.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link
               to="/platform"
-              className="inline-flex h-11 items-center gap-2 rounded-lg bg-[#f18a32] px-5 text-sm font-bold text-black"
+              className="inline-flex h-11 items-center gap-2 rounded-lg bg-[var(--warp-lime)] px-5 text-sm font-bold text-[var(--warp-on-accent)]"
             >
               Explore platform <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
               to="/contact"
-              className="inline-flex h-11 items-center gap-2 rounded-lg border border-white/15 px-5 text-sm font-bold text-white/70"
+              className="inline-flex h-11 items-center gap-2 rounded-lg border border-white/15 px-5 text-sm font-bold text-[var(--warp-muted)]"
             >
               Discuss an assurance engagement <ArrowRight className="h-4 w-4" />
             </Link>

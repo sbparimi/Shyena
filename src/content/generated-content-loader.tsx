@@ -1,4 +1,7 @@
+import { Children, isValidElement, type ReactNode } from "react";
 import { Markdown, type MarkdownComponents } from "@tanstack/markdown/react";
+import { ArticleConceptDiagram } from "@/components/blog/article-concept-diagrams";
+import type { InlineArticleVisual } from "@/content/article-visuals";
 import { generatedContent } from "@/content/generated-content";
 
 const blogSources = import.meta.glob("../../content/blog/*.md", {
@@ -49,7 +52,51 @@ function sourceFor(sourcePath: string) {
   return blogSources[normalized] ?? docSources[normalized];
 }
 
-export function GeneratedMarkdown({ sourcePath }: { sourcePath: string }) {
+function textOf(node: ReactNode): string {
+  return Children.toArray(node)
+    .map((child) => {
+      if (typeof child === "string" || typeof child === "number") return String(child);
+      if (isValidElement<{ children?: ReactNode }>(child)) return textOf(child.props.children);
+      return "";
+    })
+    .join("");
+}
+
+/**
+ * Renders a concept diagram after each section heading listed in `visuals`.
+ * Rendering it here (instead of inserting DOM nodes after hydration) keeps the
+ * server and client markup identical.
+ */
+function withInlineVisuals(visuals: readonly InlineArticleVisual[]): MarkdownComponents {
+  return {
+    ...components,
+    h2(props) {
+      const heading = textOf(props.children).toLowerCase();
+      const visual = visuals.find((item) => heading.includes(item.match.toLowerCase()));
+      return (
+        <>
+          <h2 {...props} />
+          {visual && (
+            <figure className="shyena-inline-visual my-8 w-full">
+              <ArticleConceptDiagram concept={visual.concept} />
+              <figcaption className="mt-3 text-center text-xs font-medium uppercase tracking-[0.16em] text-[var(--warp-muted)]">
+                {visual.label}
+              </figcaption>
+            </figure>
+          )}
+        </>
+      );
+    },
+  };
+}
+
+export function GeneratedMarkdown({
+  sourcePath,
+  inlineVisuals,
+}: {
+  sourcePath: string;
+  inlineVisuals?: readonly InlineArticleVisual[] | undefined;
+}) {
   const source = sourceFor(sourcePath);
   if (!source) {
     return (
@@ -61,7 +108,9 @@ export function GeneratedMarkdown({ sourcePath }: { sourcePath: string }) {
 
   return (
     <div className="generated-content">
-      <Markdown components={components}>{sanitizePublishedMarkdown(source)}</Markdown>
+      <Markdown components={inlineVisuals?.length ? withInlineVisuals(inlineVisuals) : components}>
+        {sanitizePublishedMarkdown(source)}
+      </Markdown>
     </div>
   );
 }

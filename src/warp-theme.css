@@ -1,4 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap");
 
 /*
  * Canonical Warp-inspired system for Shyena.
@@ -18,6 +17,9 @@
   --warp-blue: #2b2bff;
   --warp-lime: #eff57a;
   --warp-terminal: #050b15;
+  --warp-on-accent: #0b1220;
+  --warp-accent-text: #ffb15c;
+  --radius: 0.25rem;
   --background: var(--warp-canvas);
   --foreground: var(--warp-ink);
   --card: var(--warp-surface);
@@ -31,8 +33,8 @@
   --border: var(--warp-border);
   --input: var(--warp-border-strong);
   --ring: var(--warp-blue);
-  --primary: var(--warp-ink);
-  --primary-foreground: #ffffff;
+  --primary: var(--warp-lime);
+  --primary-foreground: var(--warp-on-accent);
   --accent: var(--warp-blue);
   --accent-foreground: #ffffff;
 }
@@ -100,7 +102,7 @@ body {
 
 #page-content.site-theme :where(a.inline-flex, button.inline-flex) {
   min-height: 40px;
-  border-radius: 5px !important;
+  border-radius: 4px !important;
   font-family: Inter, Arial, sans-serif !important;
   font-size: 12px !important;
   font-weight: 500 !important;
@@ -111,7 +113,7 @@ body {
 }
 
 #page-content.site-theme :where(a, button, input, textarea, select):focus-visible {
-  outline: 2px solid var(--warp-blue) !important;
+  outline: 2px solid var(--warp-accent-text) !important;
   outline-offset: 3px;
 }
 
@@ -120,10 +122,10 @@ body {
 }
 
 /* Use restrained panel corners throughout, not the old ultra-sharp global override. */
-#page-content.site-theme [class*="rounded-2xl"] { border-radius: 12px !important; }
-#page-content.site-theme [class*="rounded-xl"] { border-radius: 10px !important; }
-#page-content.site-theme [class*="rounded-lg"] { border-radius: 8px !important; }
-#page-content.site-theme [class*="rounded-md"] { border-radius: 6px !important; }
+#page-content.site-theme [class*="rounded-2xl"] { border-radius: 4px !important; }
+#page-content.site-theme [class*="rounded-xl"] { border-radius: 4px !important; }
+#page-content.site-theme [class*="rounded-lg"] { border-radius: 4px !important; }
+#page-content.site-theme [class*="rounded-md"] { border-radius: 4px !important; }
 
 #page-content.site-theme :where(
   [class*="bg-violet-50"],
@@ -143,7 +145,7 @@ body {
   [class*="text-purple-"],
   [class*="text-[#5145ff]"]
 ) {
-  color: var(--warp-blue) !important;
+  color: var(--warp-accent-text) !important;
 }
 
 #page-content.site-theme :where(
@@ -275,7 +277,7 @@ body > div > header[data-shyena-chrome="header"] :where(a, button) {
 }
 
 body > div > header[data-shyena-chrome="header"] nav a {
-  border-radius: 5px !important;
+  border-radius: 4px !important;
   font-family: Inter, Arial, sans-serif !important;
   font-size: 12px !important;
   font-weight: 500 !important;
@@ -292,14 +294,17 @@ body > div > header[data-shyena-chrome="header"] nav a[aria-current="page"] {
 
 body > div > header[data-shyena-chrome="header"] a.shyena-demo-cta {
   background: var(--warp-lime) !important;
-  color: var(--warp-ink) !important;
-  border: 1px solid var(--warp-ink) !important;
-  border-radius: 5px !important;
+  color: var(--warp-on-accent) !important;
+  border: 1px solid var(--warp-lime) !important;
+  border-radius: 4px !important;
+  font-family: var(--font-mono) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
 }
 
 body > div > header[data-shyena-chrome="header"] a.shyena-demo-cta:hover {
   background: #e4e96b !important;
-  color: var(--warp-ink) !important;
+  color: var(--warp-on-accent) !important;
 }
 
 body > div > header[data-shyena-chrome="header"] .shyena-search-control {
@@ -313,9 +318,9 @@ body > div > header[data-shyena-chrome="header"] .shyena-search-control:hover {
 }
 
 body > div > header[data-shyena-chrome="header"] .shyena-search-shortcut {
-  background: var(--warp-surface) !important;
-  color: var(--warp-subtle) !important;
-  border-color: var(--warp-border) !important;
+  background: #f2f2f2 !important;
+  color: #262626 !important;
+  border-color: #d4d4d4 !important;
 }
 
 body > div > header[data-shyena-chrome="header"] .shyena-mobile-menu,
@@ -358,7 +363,7 @@ body > div > footer[data-shyena-chrome="footer"] .shyena-footer-heading {
 }
 
 body > div > footer[data-shyena-chrome="footer"] a:hover {
-  color: var(--warp-blue) !important;
+  color: var(--warp-accent-text) !important;
 }
 
 /* Homepage: spacious typography, low-chrome panels, and an evidence-first workflow. */
@@ -374,11 +379,11 @@ body > div > footer[data-shyena-chrome="footer"] a:hover {
 }
 
 #page-content.site-theme .shyena-factory-home > section:first-child {
-  background: linear-gradient(180deg, #f8f8f8 0%, var(--warp-canvas) 360px) !important;
+  background: var(--warp-canvas) !important;
 }
 
 #page-content.site-theme .shyena-factory-home > section:first-child > div:first-child {
-  background-image: radial-gradient(circle, rgba(23, 23, 23, 0.16) 1px, transparent 1.2px) !important;
+  background-image: radial-gradient(circle, rgba(245, 247, 251, 0.08) 1px, transparent 1.2px) !important;
   background-size: 16px 16px !important;
   background-position: center top !important;
   mask-image: linear-gradient(to bottom, black 0%, transparent 95%) !important;
@@ -398,7 +403,7 @@ body > div > footer[data-shyena-chrome="footer"] a:hover {
 }
 
 #page-content.site-theme .shyena-factory-home h1 span {
-  color: var(--warp-blue) !important;
+  color: var(--warp-accent-text) !important;
 }
 
 #page-content.site-theme .shyena-factory-home h2 {
@@ -432,7 +437,7 @@ body > div > footer[data-shyena-chrome="footer"] a:hover {
   [class*="rounded-xl"][class*="border"],
   [class*="rounded-2xl"][class*="border"]
 ) {
-  border-radius: 10px !important;
+  border-radius: 4px !important;
   border-color: var(--warp-border) !important;
 }
 
@@ -459,17 +464,17 @@ body > div > footer[data-shyena-chrome="footer"] a:hover {
 
 #page-content.site-theme .shyena-factory-home .rail > button {
   flex: 0 0 270px;
-  border-radius: 10px !important;
+  border-radius: 4px !important;
 }
 
 #page-content.site-theme .shyena-factory-home .rail > button[aria-pressed="true"] {
-  background: var(--warp-ink) !important;
-  color: #ffffff !important;
-  border-color: var(--warp-ink) !important;
+  background: var(--warp-surface) !important;
+  color: var(--warp-ink) !important;
+  border-color: var(--warp-lime) !important;
 }
 
 #page-content.site-theme .shyena-factory-home .rail > button[aria-pressed="true"] :where(h3, p, span) {
-  color: #f5f5f5 !important;
+  color: var(--warp-ink) !important;
 }
 
 #page-content.site-theme .shyena-factory-home .rail > button[aria-pressed="false"] {
@@ -598,8 +603,8 @@ body > div > header[data-shyena-chrome="header"] .shyena-mobile-panel a.is-activ
 .shyena-skip-link {
   position: fixed; z-index: 10000; inset-block-start: 8px; inset-inline-start: 8px;
   transform: translateY(calc(-100% - 12px)); padding: 12px 16px;
-  border: 2px solid var(--warp-ink, #171717); border-radius: 4px;
-  background: var(--warp-lime, #e8ed75); color: var(--warp-ink, #171717) !important;
+  border: 2px solid var(--warp-on-accent, #0b1220); border-radius: 4px;
+  background: var(--warp-lime, #e8ed75); color: var(--warp-on-accent, #0b1220) !important;
   font-size: 16px; font-weight: 700; line-height: 1.4; text-decoration: underline;
 }
 .shyena-skip-link:focus, .shyena-skip-link:focus-visible {
@@ -641,15 +646,6 @@ body > div > header[data-shyena-chrome="header"] .shyena-nav a.is-active {
 body > div > header[data-shyena-chrome="header"] .shyena-search-control,
 body > div > header[data-shyena-chrome="header"] .shyena-search-control :where(span, svg, kbd) {
   color: #262626 !important;
-}
-#page-content.site-theme a[href="/platform"] {
-  background: #eff57a !important;
-  color: #171717 !important;
-  border: 1px solid #171717 !important;
-  opacity: 1 !important;
-}
-#page-content.site-theme a[href="/platform"] * {
-  color: #171717 !important;
 }
 
 
@@ -769,10 +765,10 @@ a.shyena-skip-link:focus-visible {
   --muted-foreground: #cbd5e1;
   --border: #263449;
   --input: #475569;
-  --primary: #f18a32;
-  --primary-foreground: #07101f;
-  --accent: #f18a32;
-  --accent-foreground: #07101f;
+  --primary: var(--warp-lime);
+  --primary-foreground: var(--warp-on-accent);
+  --accent: var(--warp-accent-text);
+  --accent-foreground: var(--warp-on-accent);
 }
 html, body, body > div, body > div > div {
   background: #07101f !important;
@@ -831,15 +827,23 @@ html, body, body > div, body > div > div {
 }
 /* Keep the brand orange as the dominant action color, with the lime demo CTA
    reserved for the shared header to preserve the screenshot's hierarchy. */
-#page-content.site-theme :is(
-  a[class*="bg-[#e87512]"], button[class*="bg-[#e87512]"],
-  a[class*="bg-[#f18a32]"], button[class*="bg-[#f18a32]"],
-  a[class*="bg-orange-"], button[class*="bg-orange-"]
-) {
-  background: #e87512 !important;
-  color: #ffffff !important;
-  border-color: #e87512 !important;
+/* One primary action style site-wide, as on warp.dev: lime fill, dark text, 4px radius,
+   uppercase mono label. Pages opt in with the warp-btn class (applied by the token codemod). */
+#page-content.site-theme :is(a, button)[class*="bg-orange-"],
+#page-content.site-theme :is(a, button)[class*="bg-[var(--warp-lime)]"]:not([class*="bg-[var(--warp-lime)]/"]),
+#page-content.site-theme .warp-btn {
+  background: var(--warp-lime) !important;
+  color: var(--warp-on-accent) !important;
+  border-color: var(--warp-lime) !important;
+  border-radius: 4px !important;
+  font-family: var(--font-mono) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
 }
+#page-content.site-theme .warp-btn * { color: var(--warp-on-accent) !important; }
+#page-content.site-theme .warp-btn:hover { background: #e4e96b !important; }
 #page-content.site-theme :is(a,button):hover {
   border-color: #ffb15c;
 }
@@ -866,6 +870,8 @@ body > div > footer[data-shyena-chrome="footer"] .shyena-footer-heading {
   [class*="text-zinc-800"], [class*="text-zinc-900"],
   [class*="text-neutral-500"], [class*="text-neutral-600"], [class*="text-neutral-700"],
   [class*="text-neutral-800"], [class*="text-neutral-900"],
+  [class*="text-slate-950"], [class*="text-gray-950"], [class*="text-zinc-950"],
+  [class*="text-neutral-950"],
   [class*="text-[#a55410]"]
 ) {
   color: #cbd5e1 !important;

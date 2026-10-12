@@ -41,15 +41,18 @@ const LATEST_ARTICLES = [
 
 export function LatestArticles() {
   return (
-    <section aria-labelledby="latest-thinking-heading" className="border-t-2 border-[#0e172b] pt-8">
-      <div className="flex flex-col gap-4 border-b border-[#d2ccc0] pb-6 sm:flex-row sm:items-end sm:justify-between">
+    <section
+      aria-labelledby="latest-thinking-heading"
+      className="border-t-2 border-[var(--warp-border-strong)] pt-8"
+    >
+      <div className="flex flex-col gap-4 border-b border-[var(--warp-border)] pb-6 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-[#a87900]">
+          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--warp-accent-text)]">
             Latest thinking
           </p>
           <h2
             id="latest-thinking-heading"
-            className="mt-2 text-3xl font-bold tracking-[-0.035em] text-[#0e172b] sm:text-4xl"
+            className="mt-2 text-3xl font-bold tracking-[-0.035em] text-[var(--warp-ink)] sm:text-4xl"
           >
             Top 5 articles
           </h2>
@@ -60,7 +63,7 @@ export function LatestArticles() {
         </div>
         <Link
           to="/blog"
-          className="inline-flex items-center gap-2 font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-slate-500 transition-colors hover:text-[#8c6500]"
+          className="inline-flex items-center gap-2 font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-slate-500 transition-colors hover:text-[var(--warp-accent-text)]"
         >
           All insights <ArrowRight className="h-3.5 w-3.5" />
         </Link>
@@ -73,24 +76,24 @@ export function LatestArticles() {
               key={article.slug}
               to="/blog/$slug"
               params={{ slug: article.slug }}
-              className="group relative flex min-h-56 flex-col overflow-hidden border border-[#d2ccc0] bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[#a87900] hover:shadow-[8px_8px_0_0_#fff0bf] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffb804]"
+              className="group relative flex min-h-56 flex-col overflow-hidden border border-[var(--warp-border)] bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--warp-border-strong)] hover:shadow-[8px_8px_0_0_#fff0bf] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--warp-lime)]"
             >
-              <div className="absolute left-0 top-0 h-1 w-full bg-[#ffb804] opacity-40 transition-opacity group-hover:opacity-100" />
+              <div className="absolute left-0 top-0 h-1 w-full bg-[var(--warp-lime)] opacity-40 transition-opacity group-hover:opacity-100 text-[var(--warp-on-accent)]" />
               <div className="flex items-center justify-between gap-4">
-                <span className="flex h-10 w-10 items-center justify-center border border-[#d2ccc0] bg-[#faf8f2] text-[#a87900] group-hover:border-[#ffb804] group-hover:bg-[#fff4cc]">
+                <span className="flex h-10 w-10 items-center justify-center border border-[var(--warp-border)] bg-[var(--warp-surface-soft)] text-[var(--warp-accent-text)] group-hover:border-[var(--warp-border-strong)] group-hover:bg-[var(--warp-surface-soft)]">
                   <Icon className="h-4 w-4" />
                 </span>
                 <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-slate-400">
                   0{index + 1} · {article.readTime}
                 </span>
               </div>
-              <div className="mt-5 font-mono text-[9px] font-semibold uppercase tracking-[0.13em] text-[#a87900]">
+              <div className="mt-5 font-mono text-[9px] font-semibold uppercase tracking-[0.13em] text-[var(--warp-accent-text)]">
                 {article.category}
               </div>
-              <h3 className="mt-3 text-lg font-bold leading-snug tracking-[-0.02em] text-[#0e172b] transition-colors group-hover:text-[#8c6500]">
+              <h3 className="mt-3 text-lg font-bold leading-snug tracking-[-0.02em] text-[var(--warp-ink)] transition-colors group-hover:text-[var(--warp-accent-text)]">
                 {article.title}
               </h3>
-              <div className="mt-auto flex items-center gap-2 pt-6 text-sm font-bold text-[#0e172b]">
+              <div className="mt-auto flex items-center gap-2 pt-6 text-sm font-bold text-[var(--warp-ink)]">
                 Read article{" "}
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </div>
@@ -98,16 +101,16 @@ export function LatestArticles() {
           );
         })}
       </div>
-      <div className="mt-5 border border-[#c6dfdc] bg-[#dff3f1] p-5 sm:flex sm:items-center sm:justify-between sm:gap-6">
+      <div className="mt-5 border border-[var(--warp-border)] bg-[var(--warp-surface-soft)] p-5 sm:flex sm:items-center sm:justify-between sm:gap-6">
         <div>
-          <p className="text-sm font-bold text-[#0e172b]">New to AI agent assurance?</p>
+          <p className="text-sm font-bold text-[var(--warp-ink)]">New to AI agent assurance?</p>
           <p className="mt-1 text-xs leading-5 text-slate-600">
             Start with the engineering guides, then use the latest insights for deeper context.
           </p>
         </div>
         <Link
           to="/docs/getting-started"
-          className="mt-4 inline-flex shrink-0 items-center gap-2 text-xs font-bold text-[#0e172b] hover:text-[#8c6500] sm:mt-0"
+          className="mt-4 inline-flex shrink-0 items-center gap-2 text-xs font-bold text-[var(--warp-ink)] hover:text-[var(--warp-accent-text)] sm:mt-0"
         >
           Start here <ArrowRight className="h-3.5 w-3.5" />
         </Link>

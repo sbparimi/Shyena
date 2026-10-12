@@ -11,14 +11,14 @@ export const Route = createFileRoute("/terms")({
 });
 function Terms() {
   return (
-    <main className="bg-white text-[#17213f]">
-      <section className="bg-[#07101f] text-white">
+    <main className="bg-white text-[var(--warp-ink)]">
+      <section className="bg-[var(--warp-canvas)] text-white">
         <div className="mx-auto max-w-[1000px] px-5 py-20 sm:px-8 lg:py-24">
-          <div className="font-mono text-[10px] font-bold uppercase tracking-[.2em] text-[#f18a32]">
+          <div className="font-mono text-[10px] font-bold uppercase tracking-[.2em] text-[var(--warp-accent-text)]">
             Legal
           </div>
-          <h1 className="mt-5 font-[Sora] text-5xl font-extrabold">Terms</h1>
-          <p className="mt-5 text-white/60">
+          <h1 className="mt-5 text-5xl font-extrabold">Terms</h1>
+          <p className="mt-5 text-[var(--warp-muted)]">
             Website and service terms will be published before contractual use.
           </p>
         </div>

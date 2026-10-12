@@ -36,20 +36,20 @@ function SageContentEngineeringPage() {
 
   return (
     <div className="pb-10">
-      <section className="relative overflow-hidden rounded-3xl border border-[#2b2350] bg-[#0b0818] text-white shadow-2xl sm:rounded-[2rem]">
+      <section className="relative overflow-hidden rounded-3xl border border-[var(--warp-border-strong)] bg-[var(--warp-canvas)] text-white shadow-2xl sm:rounded">
         <div className="absolute inset-0 opacity-30 [background-image:linear-gradient(rgba(139,92,246,.10)_1px,transparent_1px),linear-gradient(90deg,rgba(139,92,246,.10)_1px,transparent_1px)] [background-size:64px_64px]" />
         <div className="relative grid gap-8 px-6 py-10 sm:px-10 sm:py-14 lg:grid-cols-[minmax(0,1fr)_minmax(420px,0.9fr)] lg:items-center lg:px-12 lg:py-16">
           <div className="max-w-3xl">
-            <p className="font-mono text-xs uppercase tracking-[0.22em] text-[#a855f7]">
+            <p className="font-mono text-xs uppercase tracking-[0.22em] text-[var(--warp-accent-text)]">
               Docs / Content Engineering
             </p>
             <h1 className="mt-5 text-4xl font-bold leading-[1.03] tracking-tight sm:text-5xl lg:text-6xl">
               {doc.title}
             </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[#c9c4d8]">
+            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[var(--warp-muted)]">
               {doc.description}
             </p>
-            <div className="mt-7 flex flex-wrap gap-2 font-mono text-[9px] uppercase tracking-[0.16em] text-[#918aa8]">
+            <div className="mt-7 flex flex-wrap gap-2 font-mono text-[9px] uppercase tracking-[0.16em] text-[var(--warp-muted)]">
               <span className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5">
                 multi-agent workflow
               </span>
@@ -65,12 +65,12 @@ function SageContentEngineeringPage() {
         </div>
       </section>
 
-      <article className="mx-auto w-full max-w-5xl rounded-3xl border border-[#2b2350] bg-[#15102d] px-6 py-8 shadow-xl sm:px-10 sm:py-10 lg:px-12">
-        <div className="mb-10 rounded-2xl border border-[#3b2c66] bg-gradient-to-r from-[#1d153b] to-[#120d28] px-5 py-5 sm:px-6">
-          <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#a855f7]">
+      <article className="mx-auto w-full max-w-5xl rounded-3xl border border-[var(--warp-border-strong)] bg-[var(--warp-surface)] px-6 py-8 shadow-xl sm:px-10 sm:py-10 lg:px-12">
+        <div className="mb-10 rounded-2xl border border-[var(--warp-border-strong)] bg-gradient-to-r from-[var(--warp-surface)] to-[var(--warp-canvas)] px-5 py-5 sm:px-6">
+          <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--warp-accent-text)]">
             How to read this guide
           </p>
-          <p className="mt-2 max-w-4xl text-sm leading-6 text-[#c9c4d8]">
+          <p className="mt-2 max-w-4xl text-sm leading-6 text-[var(--warp-muted)]">
             The visual above is the operating model. The guide below explains how each agent
             contributes, what evidence is produced, and how content moves from research to verified
             publication.
@@ -79,7 +79,7 @@ function SageContentEngineeringPage() {
 
         <GeneratedMarkdown sourcePath={doc.sourcePath} />
 
-        <div className="mt-12 flex flex-wrap gap-3 border-t border-[#2b2350] pt-8">
+        <div className="mt-12 flex flex-wrap gap-3 border-t border-[var(--warp-border-strong)] pt-8">
           <Button asChild variant="outline">
             <Link to="/docs">
               <ArrowLeft className="mr-2 h-4 w-4" />
@@ -93,7 +93,7 @@ function SageContentEngineeringPage() {
             </Link>
           </Button>
         </div>
-        <div className="mt-8 text-xs text-[#918aa8]">
+        <div className="mt-8 text-xs text-[var(--warp-muted)]">
           <BookOpen className="mr-1 inline h-3.5 w-3.5" aria-hidden="true" />
           Published through the SAGE content pipeline.
         </div>
