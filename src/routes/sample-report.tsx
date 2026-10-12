@@ -57,22 +57,13 @@ function SampleReportPage() {
             <table className="w-full min-w-[620px] border-collapse text-left text-sm">
               <thead className="bg-[#f6f6f6]">
                 <tr>
-                  <th
-                    scope="col"
-                    className="border-b border-[#e5e5e5] p-4 font-semibold"
-                  >
+                  <th scope="col" className="border-b border-[#e5e5e5] p-4 font-semibold">
                     Evidence layer
                   </th>
-                  <th
-                    scope="col"
-                    className="border-b border-[#e5e5e5] p-4 font-semibold"
-                  >
+                  <th scope="col" className="border-b border-[#e5e5e5] p-4 font-semibold">
                     Status
                   </th>
-                  <th
-                    scope="col"
-                    className="border-b border-[#e5e5e5] p-4 font-semibold"
-                  >
+                  <th scope="col" className="border-b border-[#e5e5e5] p-4 font-semibold">
                     Expected evidence
                   </th>
                 </tr>
@@ -80,10 +71,7 @@ function SampleReportPage() {
               <tbody>
                 {evidence.map(([layer, status, detail]) => (
                   <tr key={layer}>
-                    <th
-                      scope="row"
-                      className="border-b border-[#e5e5e5] p-4 font-medium"
-                    >
+                    <th scope="row" className="border-b border-[#e5e5e5] p-4 font-medium">
                       {layer}
                     </th>
                     <td className="border-b border-[#e5e5e5] p-4 text-[#555]">{status}</td>

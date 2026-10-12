@@ -19,7 +19,8 @@ export const Route = createFileRoute("/about")({
       { property: "og:title", content: "About Shyena | AI Assurance" },
       {
         property: "og:description",
-        content: "Quality engineering and AIOps specialists solving Agentic SDLC challenges with your tools, stack and infrastructure.",
+        content:
+          "Quality engineering and AIOps specialists solving Agentic SDLC challenges with your tools, stack and infrastructure.",
       },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "Shyena" },
@@ -74,11 +75,23 @@ function AboutPage() {
           </div>
           <div className="mt-10 grid gap-4 md:grid-cols-3">
             {[
-              ["Quality engineering", "Prove that software, agents and AI-enabled workflows behave as intended—with meaningful tests and traceable evidence."],
-              ["AI agent engineering", "Connect planning, coding agents, tools, evaluations, security controls and release decisions into a governed lifecycle."],
-              ["AIOps and infrastructure", "Bring observability, runtime signals, operations and delivery infrastructure into the same engineering feedback loop."],
+              [
+                "Quality engineering",
+                "Prove that software, agents and AI-enabled workflows behave as intended—with meaningful tests and traceable evidence.",
+              ],
+              [
+                "AI agent engineering",
+                "Connect planning, coding agents, tools, evaluations, security controls and release decisions into a governed lifecycle.",
+              ],
+              [
+                "AIOps and infrastructure",
+                "Bring observability, runtime signals, operations and delivery infrastructure into the same engineering feedback loop.",
+              ],
             ].map(([title, body]) => (
-              <article key={title} className="rounded-2xl border border-white/10 bg-[#0c1729] p-6 sm:p-7">
+              <article
+                key={title}
+                className="rounded-2xl border border-white/10 bg-[#0c1729] p-6 sm:p-7"
+              >
                 <h3 className="text-xl font-bold text-white">{title}</h3>
                 <p className="mt-3 text-sm leading-6 text-white/75">{body}</p>
               </article>
@@ -113,7 +126,9 @@ function AboutPage() {
       <section className="border-b border-[#263449] bg-[#07101f] text-white">
         <div className="mx-auto max-w-[1280px] px-5 py-16 sm:px-8 lg:px-10 lg:py-20">
           <div className="max-w-4xl">
-            <div className="text-sm font-semibold text-[#f18a32]">Your environment, your choice</div>
+            <div className="text-sm font-semibold text-[#f18a32]">
+              Your environment, your choice
+            </div>
             <h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em]">
               Fit the solution to your infrastructure.
             </h2>
@@ -125,11 +140,23 @@ function AboutPage() {
           </div>
           <div className="mt-10 grid gap-4 md:grid-cols-3">
             {[
-              ["Extend what you have", "Integrate with your existing tools, platforms, APIs, legacy systems and delivery workflows."],
-              ["Run in your infrastructure", "Build and integrate within your own cloud, network, security boundaries and operational controls."],
-              ["Start greenfield", "Design a new environment and workflow where there is no suitable existing foundation."],
+              [
+                "Extend what you have",
+                "Integrate with your existing tools, platforms, APIs, legacy systems and delivery workflows.",
+              ],
+              [
+                "Run in your infrastructure",
+                "Build and integrate within your own cloud, network, security boundaries and operational controls.",
+              ],
+              [
+                "Start greenfield",
+                "Design a new environment and workflow where there is no suitable existing foundation.",
+              ],
             ].map(([title, body]) => (
-              <article key={title} className="rounded-2xl border border-white/10 bg-[#0c1729] p-6 sm:p-7">
+              <article
+                key={title}
+                className="rounded-2xl border border-white/10 bg-[#0c1729] p-6 sm:p-7"
+              >
                 <h3 className="text-xl font-bold text-white">{title}</h3>
                 <p className="mt-3 text-sm leading-6 text-white/75">{body}</p>
               </article>
