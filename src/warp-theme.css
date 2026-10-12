@@ -653,3 +653,20 @@ body > div > header[data-shyena-chrome="header"] .shyena-search-control :where(s
 #page-content.site-theme a[href="/platform"] * {
   color: #171717 !important;
 }
+
+
+/* Demo control-room: restore readable contrast for muted labels on dark surfaces. */
+#page-content.site-theme main[class*="bg-[#05080d]"] :is(
+  [class*="text-white/15"], [class*="text-white/20"], [class*="text-white/25"],
+  [class*="text-white/30"], [class*="text-white/35"], [class*="text-white/40"],
+  [class*="text-white/45"], [class*="text-white/50"], [class*="text-white/55"],
+  [class*="text-white/60"], [class*="text-white/65"], [class*="text-white/70"]
+) {
+  color: #d1d5db !important;
+}
+#page-content.site-theme main[class*="bg-[#05080d]"] :is(
+  [class*="text-white/15"], [class*="text-white/20"], [class*="text-white/25"],
+  [class*="text-white/30"], [class*="text-white/35"]
+) {
+  color: #bfc7d2 !important;
+}
