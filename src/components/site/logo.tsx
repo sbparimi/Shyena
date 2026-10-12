@@ -3,7 +3,7 @@ type LogoProps = {
   theme?: "light" | "dark";
 };
 
-export function Logo({ size = "header" }: LogoProps) {
+export function Logo({ size = "header", theme = "light" }: LogoProps) {
   const mark = size === "footer" ? "h-10 w-9" : "h-8 w-7 sm:h-9 sm:w-8";
   const word = size === "footer" ? "text-[29px]" : "text-[25px] sm:text-[28px]";
 
@@ -20,7 +20,7 @@ export function Logo({ size = "header" }: LogoProps) {
         className={`${mark} shrink-0 object-contain`}
       />
       <span
-        className={`font-[Sora] ${word} font-extrabold tracking-[-0.055em] ${"text-[var(--warp-ink)]"}`}
+        className={`shyena-wordmark font-[Sora] ${word} font-extrabold tracking-[-0.055em] ${theme === "light" ? "text-[#171717]" : "text-[#f5f7fb]"}`}
       >
         Shyena
       </span>
