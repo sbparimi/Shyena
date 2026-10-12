@@ -378,9 +378,11 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <div className="flex min-h-screen flex-col">
+        <a className="shyena-skip-link" href="#page-content">Skip to main content</a>
         <SiteHeader />
         <main
           id="page-content"
+          tabIndex={-1}
           className={`${isResourcePage ? "resource-surface " : ""}site-theme flex-1`}
         >
           <ArticleVisualInjector />
