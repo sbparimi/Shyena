@@ -628,3 +628,28 @@ body > div > header[data-shyena-chrome="header"] .shyena-mobile-panel a.is-activ
 @media (max-width: 767px) {
   #page-content.site-theme :where(a, button, [role="button"]) { scroll-margin-block: 5rem; }
 }
+
+
+/* Targeted contrast corrections found in the public visual audit. */
+body > div > header[data-shyena-chrome="header"] .shyena-nav a {
+  color: #262626 !important;
+  opacity: 1 !important;
+}
+body > div > header[data-shyena-chrome="header"] .shyena-nav a[aria-current="page"],
+body > div > header[data-shyena-chrome="header"] .shyena-nav a.is-active {
+  color: #2020cc !important;
+  background: #f2f2f2 !important;
+}
+body > div > header[data-shyena-chrome="header"] .shyena-search-control,
+body > div > header[data-shyena-chrome="header"] .shyena-search-control :where(span, svg, kbd) {
+  color: #262626 !important;
+}
+#page-content.site-theme a[href="/platform"] {
+  background: #eff57a !important;
+  color: #171717 !important;
+  border: 1px solid #171717 !important;
+  opacity: 1 !important;
+}
+#page-content.site-theme a[href="/platform"] * {
+  color: #171717 !important;
+}
