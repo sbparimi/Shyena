@@ -21,7 +21,6 @@ import {
 import { generatedContent } from "@/content/generated-content";
 import { SiteHeader } from "@/components/site/site-header";
 import { SiteFooter } from "@/components/site/site-footer";
-import { VideoExperience } from "@/components/site/video-experience";
 import { HireExpertsCtaInjector } from "@/components/site/hire-experts-cta";
 
 const MANUAL_ARTICLE_VISUALS: Record<string, { concept: ArticleConcept; thesis: string }> = {
@@ -396,7 +395,6 @@ function RootComponent() {
           <Outlet />
         </main>
         <SiteFooter />
-        <VideoExperience />
       </div>
     </QueryClientProvider>
   );
