@@ -91,10 +91,5 @@ jobs:
           REPO: ${{ github.repository }}
         run: gh pr review "$PR_NUMBER" --repo "$REPO" --request-changes --body "Rejected by the Shyena Independent PR Review Agent. See the forensic findings above."
 
-      - name: Merge approved PR
-        if: startsWith(steps.review.outputs.response, 'DECISION: APPROVE')
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PR_NUMBER: ${{ github.event.pull_request.number }}
-          REPO: ${{ github.repository }}
-        run: gh pr merge "$PR_NUMBER" --repo "$REPO" --squash --delete-branch
+      # Deliberately do not merge automatically. A human owner must explicitly approve
+      # merge/deployment after reviewing the remediation and test evidence.

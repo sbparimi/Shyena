@@ -373,7 +373,9 @@ function Marketplace() {
           <div className="flex flex-col gap-3 lg:flex-row">
             <div className="relative min-w-0 flex-1">
               <Search className="absolute left-3 top-3 h-4 w-4 text-[#9299a4]" />
+              <label className="sr-only" htmlFor="expert-search">Search skills, title, domain, or technology</label>
               <input
+                id="expert-search"
                 value={draft.search}
                 onChange={(e) => setDraft({ ...draft, search: e.target.value })}
                 onKeyDown={(e) => e.key === "Enter" && setFilters(draft)}
@@ -399,13 +401,17 @@ function Marketplace() {
             </button>
           </div>
           <div className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-5">
+            <label className="sr-only" htmlFor="expert-location">Location</label>
             <input
+              id="expert-location"
               value={draft.location}
               onChange={(e) => setDraft({ ...draft, location: e.target.value })}
               placeholder="Location"
               className="h-10 rounded-lg border border-[#e1e4e9] px-3 text-xs"
             />
+            <label className="sr-only" htmlFor="expert-skill">Core skill</label>
             <select
+              id="expert-skill"
               value={draft.skill}
               onChange={(e) => setDraft({ ...draft, skill: e.target.value })}
               className="h-10 rounded-lg border border-[#e1e4e9] px-3 text-xs"
@@ -415,7 +421,9 @@ function Marketplace() {
                 <option key={x}>{x}</option>
               ))}
             </select>
+            <label className="sr-only" htmlFor="expert-domain">Domain</label>
             <select
+              id="expert-domain"
               value={draft.domain}
               onChange={(e) => setDraft({ ...draft, domain: e.target.value })}
               className="h-10 rounded-lg border border-[#e1e4e9] px-3 text-xs"
@@ -425,7 +433,9 @@ function Marketplace() {
                 <option key={x}>{x}</option>
               ))}
             </select>
+            <label className="sr-only" htmlFor="expert-work-model">Work model</label>
             <select
+              id="expert-work-model"
               value={draft.remote}
               onChange={(e) => setDraft({ ...draft, remote: e.target.value })}
               className="h-10 rounded-lg border border-[#e1e4e9] px-3 text-xs"
@@ -435,7 +445,9 @@ function Marketplace() {
               <option>Hybrid</option>
               <option>On-site</option>
             </select>
+            <label className="sr-only" htmlFor="expert-available-by">Available by</label>
             <input
+              id="expert-available-by"
               type="date"
               value={draft.availableBy}
               onChange={(e) => setDraft({ ...draft, availableBy: e.target.value })}
@@ -482,8 +494,8 @@ function Marketplace() {
 
 function ExpertsPage() {
   return (
-    <main className="bg-white text-[#17213f]">
+    <div className="bg-white text-[#17213f]">
       <Marketplace />
-    </main>
+    </div>
   );
 }

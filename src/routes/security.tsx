@@ -39,7 +39,7 @@ export const Route = createFileRoute("/security")({
 
 function SecurityPage() {
   return (
-    <main className="overflow-hidden bg-white text-[#17213f]">
+    <div className="overflow-hidden bg-white text-[#17213f]">
       <section className="border-b border-[#e6e8ed] bg-[#07101f] text-white">
         <div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 lg:px-10 lg:py-28">
           <div className="max-w-5xl">
@@ -155,6 +155,6 @@ function SecurityPage() {
           </Link>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

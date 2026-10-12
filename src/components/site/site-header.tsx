@@ -60,7 +60,7 @@ export function SiteHeader() {
     >
       <div className="mx-auto flex h-[68px] w-full max-w-[1132px] items-center px-6">
         <Link to="/" aria-label="Shyena home" onClick={closeAll} className="shrink-0">
-          <Logo size="header" theme="dark" />
+          <Logo size="header" theme="light" />
         </Link>
         <nav
           aria-label="Primary navigation"
