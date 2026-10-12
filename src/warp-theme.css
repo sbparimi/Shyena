@@ -873,3 +873,17 @@ body > div > footer[data-shyena-chrome="footer"] .shyena-footer-heading {
 #page-content.site-theme :is([class*="text-[#a55410]"], [class*="text-[#e87512]"], [class*="text-[#f18a32]"]) {
   color: #ffb15c !important;
 }
+
+
+/* Header/footer wordmarks must use contrast appropriate to their actual surface. */
+body > div > header[data-shyena-chrome="header"] .shyena-wordmark {
+  color: #171717 !important;
+}
+body > div > footer[data-shyena-chrome="footer"] .shyena-wordmark {
+  color: #f5f7fb !important;
+}
+/* A skip-link activation transfers focus to main content, removing the overlay. */
+a.shyena-skip-link:not(:focus):not(:focus-visible) {
+  transform: translateY(calc(-100% - 16px)) !important;
+  clip-path: inset(50%) !important;
+}
