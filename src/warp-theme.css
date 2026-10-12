@@ -1,23 +1,24 @@
 @import url("https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap");
 
 /*
- * Canonical Warp-inspired system for Shyena.
- * Loaded last by src/routes/__root.tsx. This is the only global visual system.
- * Keep page structure/product copy in React; keep shared visual decisions here.
+ * Canonical Warp (warp.dev) visual system for the entire Shyena site.
+ * Keep this stylesheet last in src/routes/__root.tsx. It intentionally replaces
+ * legacy light/dark theme collisions with one reference-driven token system.
+ * Product names, copy, links, and capabilities remain owned by the application.
  */
 :root {
   color-scheme: light;
-  --warp-canvas: #07101f;
-  --warp-surface: #0c1729;
-  --warp-surface-soft: #101e32;
-  --warp-ink: #f5f7fb;
-  --warp-muted: #cbd5e1;
-  --warp-subtle: #a7b2c3;
-  --warp-border: #263449;
-  --warp-border-strong: #475569;
-  --warp-blue: #2b2bff;
-  --warp-lime: #eff57a;
-  --warp-terminal: #050b15;
+  --warp-canvas: #fdfdfd;
+  --warp-surface: #ffffff;
+  --warp-surface-soft: #f6f5fb;
+  --warp-ink: #1a1522;
+  --warp-muted: rgba(26, 21, 34, 0.68);
+  --warp-subtle: rgba(26, 21, 34, 0.52);
+  --warp-border: rgba(26, 21, 34, 0.16);
+  --warp-border-strong: rgba(26, 21, 34, 0.32);
+  --warp-blue: #2a1eff;
+  --warp-lime: #eef17c;
+  --warp-terminal: #1a1522;
   --background: var(--warp-canvas);
   --foreground: var(--warp-ink);
   --card: var(--warp-surface);
@@ -36,7 +37,6 @@
   --accent: var(--warp-blue);
   --accent-foreground: #ffffff;
 }
-
 html,
 body,
 body > div,
@@ -45,831 +45,487 @@ body > div > div {
   color: var(--warp-ink);
   color-scheme: light;
 }
-
 html { scroll-behavior: smooth; }
-
 body {
-  margin: 0;
+  font-family: Matter, Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
   color: var(--warp-ink);
-  font-family: Inter, Arial, sans-serif !important;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
-
 #page-content.site-theme {
   background: var(--warp-canvas) !important;
   color: var(--warp-ink) !important;
-  font-family: Inter, Arial, sans-serif !important;
+  font-family: Matter, Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
 }
-
 #page-content.site-theme :where(h1, h2, h3, h4, h5, h6) {
   color: var(--warp-ink) !important;
-  font-family: Inter, Arial, sans-serif !important;
+  font-family: "Azeret Mono", "SFMono-Regular", ui-monospace, monospace !important;
   font-weight: 500 !important;
   letter-spacing: -0.045em !important;
   text-wrap: balance;
 }
-
 #page-content.site-theme h1 {
-  font-size: clamp(2.45rem, 5.1vw, 4.25rem) !important;
-  line-height: 1.03 !important;
+  font-size: clamp(2rem, 3.8vw, 3.375rem) !important;
+  line-height: 1.05 !important;
+  letter-spacing: -0.055em !important;
 }
-
 #page-content.site-theme h2 {
-  font-size: clamp(1.8rem, 3.6vw, 2.7rem) !important;
-  line-height: 1.1 !important;
+  font-size: clamp(1.8rem, 3vw, 2.75rem) !important;
+  line-height: 1.12 !important;
 }
-
 #page-content.site-theme h3 {
-  font-size: clamp(1.05rem, 1.5vw, 1.3rem) !important;
+  font-size: clamp(1.05rem, 1.6vw, 1.35rem) !important;
   line-height: 1.3 !important;
   letter-spacing: -0.025em !important;
 }
-
 #page-content.site-theme :where(p, li, label, dt, dd, figcaption, small, td, th) {
   color: var(--warp-muted);
 }
-
 #page-content.site-theme :where(section, article, aside, [role="tabpanel"], hr, table, th, td) {
   border-color: var(--warp-border) !important;
 }
-
-#page-content.site-theme :where(a, button) {
+#page-content.site-theme section[class*="bg-white"],
+#page-content.site-theme section[class*="bg-slate-50"],
+#page-content.site-theme section[class*="bg-slate-100"],
+#page-content.site-theme section[class*="bg-gray-50"],
+#page-content.site-theme section[class*="bg-gray-100"],
+#page-content.site-theme section[class*="bg-lavender"],
+#page-content.site-theme section[class*="bg-[#fbfaff]"],
+#page-content.site-theme section[class*="bg-[#fcfbff]"],
+#page-content.site-theme section[class*="bg-[#f7f5ff]"],
+#page-content.site-theme section[class*="bg-[#fafbfc]"],
+#page-content.site-theme section[class*="bg-[#fff"] {
+  background-color: var(--warp-canvas) !important;
+  background-image: none !important;
+  color: var(--warp-ink) !important;
+}
+#page-content.site-theme article[class*="bg-white"],
+#page-content.site-theme article[class*="bg-slate-50"],
+#page-content.site-theme article[class*="bg-slate-100"],
+#page-content.site-theme article[class*="bg-gray-50"],
+#page-content.site-theme article[class*="bg-gray-100"],
+#page-content.site-theme [class*="rounded"][class*="bg-white"],
+#page-content.site-theme [class*="rounded"][class*="bg-slate-50"],
+#page-content.site-theme [class*="rounded"][class*="bg-gray-50"],
+#page-content.site-theme [class*="rounded"][class*="bg-[#fafbfc]"],
+#page-content.site-theme [class*="rounded"][class*="bg-[#fcfbff]"],
+#page-content.site-theme [class*="rounded"][class*="bg-[#f7f5ff]"] {
+  background: var(--warp-surface) !important;
+  background-image: none !important;
+  border-color: var(--warp-border) !important;
+  color: var(--warp-ink) !important;
+  box-shadow: none !important;
+}
+#page-content.site-theme [class*="text-[#1a1527]"],
+#page-content.site-theme [class*="text-[#17213f]"],
+#page-content.site-theme [class*="text-[#17233f]"],
+#page-content.site-theme [class*="text-[#2d263d]"],
+#page-content.site-theme [class*="text-[#211a32]"],
+#page-content.site-theme [class*="text-slate-950"],
+#page-content.site-theme [class*="text-slate-900"],
+#page-content.site-theme [class*="text-slate-800"],
+#page-content.site-theme [class*="text-slate-700"],
+#page-content.site-theme [class*="text-gray-950"],
+#page-content.site-theme [class*="text-gray-900"],
+#page-content.site-theme [class*="text-gray-800"],
+#page-content.site-theme [class*="text-gray-700"] {
+  color: var(--warp-ink) !important;
+}
+#page-content.site-theme [class*="text-[#575064]"],
+#page-content.site-theme [class*="text-[#625a75]"],
+#page-content.site-theme [class*="text-[#667085]"],
+#page-content.site-theme [class*="text-[#69707d]"],
+#page-content.site-theme [class*="text-[#7a8290]"],
+#page-content.site-theme [class*="text-[#8b929d]"],
+#page-content.site-theme [class*="text-slate-600"],
+#page-content.site-theme [class*="text-slate-500"],
+#page-content.site-theme [class*="text-gray-600"],
+#page-content.site-theme [class*="text-gray-500"] {
+  color: var(--warp-muted) !important;
+}
+#page-content.site-theme [class*="text-[#5145ff]"],
+#page-content.site-theme [class*="text-[#e87512]"],
+#page-content.site-theme [class*="text-[#f18a32]"],
+#page-content.site-theme [class*="text-violet-700"],
+#page-content.site-theme [class*="text-violet-600"],
+#page-content.site-theme [class*="text-purple-700"],
+#page-content.site-theme [class*="text-purple-600"] {
+  color: var(--warp-blue) !important;
+}
+#page-content.site-theme [class*="border-slate-"],
+#page-content.site-theme [class*="border-gray-"],
+#page-content.site-theme [class*="border-[#e"],
+#page-content.site-theme [class*="border-[#d"] {
+  border-color: var(--warp-border) !important;
+}
+#page-content.site-theme [class*="shadow-sm"],
+#page-content.site-theme [class*="shadow-md"],
+#page-content.site-theme [class*="shadow-lg"],
+#page-content.site-theme [class*="shadow-xl"],
+#page-content.site-theme [class*="shadow-2xl"] {
+  box-shadow: none !important;
+}
+#page-content.site-theme a,
+#page-content.site-theme button {
   -webkit-tap-highlight-color: transparent;
 }
-
-#page-content.site-theme :where(a.inline-flex, button.inline-flex) {
-  min-height: 40px;
-  border-radius: 5px !important;
-  font-family: Inter, Arial, sans-serif !important;
-  font-size: 12px !important;
-  font-weight: 500 !important;
-  letter-spacing: 0 !important;
-  text-transform: none !important;
-  box-shadow: none !important;
-  transition: color 160ms ease, background-color 160ms ease, border-color 160ms ease;
-}
-
-#page-content.site-theme :where(a, button, input, textarea, select):focus-visible {
+#page-content.site-theme a:focus-visible,
+#page-content.site-theme button:focus-visible,
+#page-content.site-theme input:focus-visible,
+#page-content.site-theme textarea:focus-visible,
+#page-content.site-theme select:focus-visible {
   outline: 2px solid var(--warp-blue) !important;
   outline-offset: 3px;
 }
-
-#page-content.site-theme [class*="shadow-"] {
+#page-content.site-theme :where(a.inline-flex, button.inline-flex) {
+  min-height: 40px;
+  border-radius: 4px !important;
+  font-family: "Azeret Mono", ui-monospace, monospace !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase;
   box-shadow: none !important;
+  transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease;
 }
-
-/* Use restrained panel corners throughout, not the old ultra-sharp global override. */
-#page-content.site-theme [class*="rounded-2xl"] { border-radius: 12px !important; }
-#page-content.site-theme [class*="rounded-xl"] { border-radius: 10px !important; }
-#page-content.site-theme [class*="rounded-lg"] { border-radius: 8px !important; }
-#page-content.site-theme [class*="rounded-md"] { border-radius: 6px !important; }
-
-#page-content.site-theme :where(
-  [class*="bg-violet-50"],
-  [class*="bg-purple-50"],
-  [class*="bg-[#efedff]"],
-  [class*="bg-[#f6f4ff]"],
-  [class*="bg-[#f7f5ff]"],
-  [class*="bg-[#fbfaff]"],
-  [class*="bg-[#fcfbff]"]
-) {
-  background: var(--warp-surface-soft) !important;
-  border-color: var(--warp-border) !important;
-}
-
-#page-content.site-theme :where(
-  [class*="text-violet-"],
-  [class*="text-purple-"],
-  [class*="text-[#5145ff]"]
-) {
-  color: var(--warp-blue) !important;
-}
-
-#page-content.site-theme :where(
-  [class*="border-violet-"],
-  [class*="border-purple-"],
-  [class*="border-[#d9d3ff]"],
-  [class*="border-[#ded8ed]"],
-  [class*="border-[#e8e4f0]"],
-  [class*="border-[#e7e2ef]"]
-) {
-  border-color: var(--warp-border) !important;
-}
-
-#page-content.site-theme :where(
-  [class*="text-[#0f172a]"],
-  [class*="text-[#17213f]"],
-  [class*="text-[#17233f]"],
-  [class*="text-[#1a1527]"],
-  [class*="text-[#211a32]"],
-  [class*="text-[#2d263d]"],
-  [class*="text-[#302940]"]
-) {
-  color: var(--warp-ink) !important;
-}
-
-#page-content.site-theme :where(
-  [class*="text-[#575064]"],
-  [class*="text-[#61586f]"],
-  [class*="text-[#6b6279]"],
-  [class*="text-[#746b83]"],
-  [class*="text-[#756c83]"],
-  [class*="text-[#81788e]"],
-  [class*="text-[#82798f]"],
-  [class*="text-[#8a8299]"],
-  [class*="text-[#8d849a]"]
-) {
-  color: var(--warp-muted) !important;
-}
-
-#page-content.site-theme :where(table, th, td) {
-  border-color: var(--warp-border) !important;
-}
-
-#page-content.site-theme pre,
-#page-content.site-theme code,
-#page-content.site-theme kbd,
-#page-content.site-theme .font-mono {
-  font-family: "Azeret Mono", ui-monospace, SFMono-Regular, monospace !important;
-}
-
-#page-content.site-theme input,
-#page-content.site-theme textarea,
-#page-content.site-theme select {
-  background: var(--warp-surface) !important;
-  color: var(--warp-ink) !important;
-  border-color: var(--warp-border-strong) !important;
-}
-
-#page-content.site-theme input::placeholder,
-#page-content.site-theme textarea::placeholder {
-  color: var(--warp-subtle) !important;
-}
-
-#page-content.site-theme .reference-page-theme {
-  background: var(--warp-canvas) !important;
-  color: var(--warp-ink) !important;
-}
-
-#page-content.site-theme .reference-page-theme input,
-#page-content.site-theme .reference-page-theme textarea,
-#page-content.site-theme .reference-page-theme select {
-  background: var(--warp-surface) !important;
-  color: var(--warp-ink) !important;
-  border-color: var(--warp-border-strong) !important;
-}
-
-/* Calls to action use the same pale-lime / black pairing across the site. */
 #page-content.site-theme .shyena-action-primary,
 #page-content.site-theme [data-shyena-button="primary"],
-#page-content.site-theme a[class*="bg-[#f4d64f]"],
-#page-content.site-theme a[class*="bg-[var(--warp-blue)]"],
-#page-content.site-theme button[class*="bg-[var(--warp-blue)]"] {
-  background: var(--warp-lime) !important;
-  color: var(--warp-ink) !important;
+#page-content.site-theme a[class*="bg-[#5145ff]"],
+#page-content.site-theme a[class*="bg-[#e87512]"],
+#page-content.site-theme button[class*="bg-[#5145ff]"] {
+  background: var(--warp-ink) !important;
+  color: #ffffff !important;
   border: 1px solid var(--warp-ink) !important;
   box-shadow: none !important;
 }
-
 #page-content.site-theme .shyena-action-primary:hover,
 #page-content.site-theme [data-shyena-button="primary"]:hover,
-#page-content.site-theme a[class*="bg-[var(--warp-blue)]"]:hover {
-  background: #e4e96b !important;
-  border-color: var(--warp-ink) !important;
-  color: var(--warp-ink) !important;
+#page-content.site-theme a[class*="bg-[#5145ff]"]:hover {
+  background: var(--warp-blue) !important;
+  color: #ffffff !important;
+  border-color: var(--warp-blue) !important;
 }
-
 #page-content.site-theme .shyena-action-secondary,
 #page-content.site-theme .shyena-action-dark,
 #page-content.site-theme [data-shyena-button="secondary"],
 #page-content.site-theme [data-shyena-button="ghost"],
-#page-content.site-theme [data-shyena-button="link"] {
-  background: transparent !important;
+#page-content.site-theme [data-shyena-button="link"],
+#page-content.site-theme a[class*="border"][class*="bg-transparent"],
+#page-content.site-theme button[class*="border"][class*="bg-transparent"] {
+  background: var(--warp-surface) !important;
   color: var(--warp-ink) !important;
-  border: 1px solid var(--warp-border-strong) !important;
+  border: 1px solid var(--warp-border) !important;
+  box-shadow: none !important;
 }
-
+#page-content.site-theme .shyena-action-secondary:hover,
+#page-content.site-theme .shyena-action-dark:hover,
+#page-content.site-theme [data-shyena-button="secondary"]:hover,
+#page-content.site-theme [data-shyena-button="ghost"]:hover,
+#page-content.site-theme [data-shyena-button="link"]:hover {
+  background: var(--warp-surface-soft) !important;
+  color: var(--warp-ink) !important;
+  border-color: var(--warp-border-strong) !important;
+}
 #page-content.site-theme [data-shyena-button="destructive"] {
   background: #dc2626 !important;
   color: #ffffff !important;
   border-color: #dc2626 !important;
 }
-
-/* Shared header and footer use semantic hooks instead of fragile utility selectors. */
-body > div > header[data-shyena-chrome="header"] {
-  background: rgba(255, 255, 255, 0.96) !important;
+#page-content.site-theme input,
+#page-content.site-theme textarea,
+#page-content.site-theme select,
+#page-content.site-theme .reference-page-theme input,
+#page-content.site-theme .reference-page-theme textarea,
+#page-content.site-theme .reference-page-theme select {
+  background: #ffffff !important;
   color: var(--warp-ink) !important;
-  border-color: var(--warp-border) !important;
-  box-shadow: none !important;
-  backdrop-filter: blur(16px);
+  border-color: var(--warp-border-strong) !important;
 }
-
-body > div > header[data-shyena-chrome="header"] > div.mx-auto {
-  max-width: 1132px !important;
-  height: 68px !important;
-}
-
-body > div > header[data-shyena-chrome="header"] :where(a, button) {
-  color: var(--warp-ink);
-}
-
-body > div > header[data-shyena-chrome="header"] nav a {
-  border-radius: 5px !important;
-  font-family: Inter, Arial, sans-serif !important;
-  font-size: 12px !important;
-  font-weight: 500 !important;
-  letter-spacing: 0 !important;
-  text-transform: none !important;
-}
-
-body > div > header[data-shyena-chrome="header"] nav a:hover,
-body > div > header[data-shyena-chrome="header"] nav a.is-active,
-body > div > header[data-shyena-chrome="header"] nav a[aria-current="page"] {
-  background: var(--warp-surface-soft) !important;
-  color: var(--warp-blue) !important;
-}
-
-body > div > header[data-shyena-chrome="header"] a.shyena-demo-cta {
-  background: var(--warp-lime) !important;
-  color: var(--warp-ink) !important;
-  border: 1px solid var(--warp-ink) !important;
-  border-radius: 5px !important;
-}
-
-body > div > header[data-shyena-chrome="header"] a.shyena-demo-cta:hover {
-  background: #e4e96b !important;
-  color: var(--warp-ink) !important;
-}
-
-body > div > header[data-shyena-chrome="header"] .shyena-search-control {
-  color: var(--warp-ink) !important;
-  background: transparent !important;
-}
-
-body > div > header[data-shyena-chrome="header"] .shyena-search-control:hover {
-  border-color: var(--warp-border) !important;
-  background: var(--warp-surface-soft) !important;
-}
-
-body > div > header[data-shyena-chrome="header"] .shyena-search-shortcut {
-  background: var(--warp-surface) !important;
+#page-content.site-theme input::placeholder,
+#page-content.site-theme textarea::placeholder {
   color: var(--warp-subtle) !important;
+}
+#page-content.site-theme pre {
+  overflow-x: auto;
+  background: var(--warp-terminal) !important;
+  color: #ffffff !important;
+  border: 1px solid var(--warp-border) !important;
+  border-radius: 6px !important;
+}
+#page-content.site-theme pre,
+#page-content.site-theme code,
+#page-content.site-theme kbd,
+#page-content.site-theme .font-mono {
+  font-family: "Azeret Mono", "SFMono-Regular", Consolas, monospace !important;
+}
+#page-content.site-theme table,
+#page-content.site-theme th,
+#page-content.site-theme td,
+#page-content.site-theme hr {
   border-color: var(--warp-border) !important;
 }
-
-body > div > header[data-shyena-chrome="header"] .shyena-mobile-menu,
-body > div > header[data-shyena-chrome="header"] .shyena-mobile-panel {
-  background: var(--warp-surface) !important;
-  color: var(--warp-ink) !important;
-  border-color: var(--warp-border) !important;
-}
-
-body > div > header[data-shyena-chrome="header"] .shyena-mobile-panel a {
-  border-color: var(--warp-border) !important;
-  background: var(--warp-canvas) !important;
-}
-
-body > div > header[data-shyena-chrome="header"] .shyena-mobile-panel a.is-active {
-  color: var(--warp-blue) !important;
-  background: var(--warp-surface-soft) !important;
-}
-
-body > div > footer[data-shyena-chrome="footer"] {
-  background: var(--warp-canvas) !important;
-  color: var(--warp-ink) !important;
-  border-color: var(--warp-border) !important;
-}
-
-body > div > footer[data-shyena-chrome="footer"] > div.mx-auto {
-  max-width: 1132px !important;
-}
-
-body > div > footer[data-shyena-chrome="footer"] :where(p, a, div, span) {
-  color: var(--warp-muted);
-}
-
-body > div > footer[data-shyena-chrome="footer"] .shyena-footer-heading {
-  color: var(--warp-ink) !important;
-  font-family: Inter, Arial, sans-serif !important;
-  font-size: 12px !important;
-  font-weight: 600 !important;
-  letter-spacing: 0 !important;
-}
-
-body > div > footer[data-shyena-chrome="footer"] a:hover {
-  color: var(--warp-blue) !important;
-}
-
-/* Homepage: spacious typography, low-chrome panels, and an evidence-first workflow. */
 #page-content.site-theme .shyena-factory-home {
   background: var(--warp-canvas) !important;
   color: var(--warp-ink) !important;
 }
-
 #page-content.site-theme .shyena-factory-home > section {
   background: var(--warp-canvas) !important;
   color: var(--warp-ink) !important;
   border-color: var(--warp-border) !important;
 }
-
 #page-content.site-theme .shyena-factory-home > section:first-child {
-  background: linear-gradient(180deg, #f8f8f8 0%, var(--warp-canvas) 360px) !important;
+  background: linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0) 420px) !important;
 }
-
 #page-content.site-theme .shyena-factory-home > section:first-child > div:first-child {
-  background-image: radial-gradient(circle, rgba(23, 23, 23, 0.16) 1px, transparent 1.2px) !important;
+  background-image: radial-gradient(circle, rgba(26, 21, 34, 0.2) 1px, transparent 1.2px) !important;
   background-size: 16px 16px !important;
   background-position: center top !important;
   mask-image: linear-gradient(to bottom, black 0%, transparent 95%) !important;
 }
-
-#page-content.site-theme .shyena-factory-home > section > div.mx-auto[class*="max-w-[1132px]"] {
+#page-content.site-theme .shyena-factory-home > section > div.mx-auto[class*="max-w-[1440px]"] {
   max-width: 1132px !important;
 }
-
 #page-content.site-theme .shyena-factory-home h1 {
   max-width: 1000px;
-  font-family: Inter, Arial, sans-serif !important;
-  font-size: clamp(2.45rem, 5.8vw, 5.15rem) !important;
+  font-family: "Azeret Mono", ui-monospace, monospace !important;
+  font-size: clamp(2rem, 3.8vw, 3.375rem) !important;
   font-weight: 500 !important;
-  line-height: 1.02 !important;
-  letter-spacing: -0.065em !important;
+  line-height: 1.05 !important;
+  letter-spacing: -0.055em !important;
 }
-
 #page-content.site-theme .shyena-factory-home h1 span {
   color: var(--warp-blue) !important;
 }
-
 #page-content.site-theme .shyena-factory-home h2 {
-  font-family: Inter, Arial, sans-serif !important;
-  font-size: clamp(1.8rem, 3.4vw, 2.7rem) !important;
-  line-height: 1.1 !important;
-  letter-spacing: -0.05em !important;
+  font-family: "Azeret Mono", ui-monospace, monospace !important;
+  font-size: clamp(1.8rem, 3vw, 2.75rem) !important;
+  line-height: 1.12 !important;
+  letter-spacing: -0.045em !important;
 }
-
 #page-content.site-theme .shyena-factory-home h3 {
-  font-family: Inter, Arial, sans-serif !important;
-  font-size: 1.05rem !important;
+  font-family: Matter, Inter, ui-sans-serif, system-ui, sans-serif !important;
+  font-size: 1.1rem !important;
   font-weight: 600 !important;
   line-height: 1.3 !important;
 }
-
-#page-content.site-theme .shyena-factory-home :where(
-  [class*="bg-white"],
-  [class*="bg-[#fcfbff]"],
-  [class*="bg-[#fbfaff]"],
-  [class*="bg-[#f7f5ff]"],
-  [class*="bg-[#efedff]"],
-  [class*="bg-[#f6f4ff]"]
-) {
-  background: var(--warp-surface) !important;
+#page-content.site-theme .shyena-factory-home [class*="bg-white"],
+#page-content.site-theme .shyena-factory-home [class*="bg-[#fcfbff]"],
+#page-content.site-theme .shyena-factory-home [class*="bg-[#fbfaff]"],
+#page-content.site-theme .shyena-factory-home [class*="bg-[#f7f5ff]"],
+#page-content.site-theme .shyena-factory-home [class*="bg-[#efedff]"],
+#page-content.site-theme .shyena-factory-home [class*="bg-[#f6f4ff]"] {
+  background: var(--warp-surface-soft) !important;
   color: var(--warp-ink) !important;
   border-color: var(--warp-border) !important;
 }
-
-#page-content.site-theme .shyena-factory-home :where(
-  [class*="rounded-xl"][class*="border"],
-  [class*="rounded-2xl"][class*="border"]
-) {
-  border-radius: 10px !important;
+#page-content.site-theme .shyena-factory-home [class*="rounded-xl"][class*="border"],
+#page-content.site-theme .shyena-factory-home [class*="rounded-2xl"][class*="border"] {
+  border-radius: 0 !important;
   border-color: var(--warp-border) !important;
 }
-
+#page-content.site-theme .shyena-factory-home [class*="rounded-lg"][class*="border"] {
+  border-radius: 6px !important;
+  border-color: var(--warp-border) !important;
+}
 #page-content.site-theme .shyena-factory-home svg rect[fill="#fff"],
 #page-content.site-theme .shyena-factory-home svg rect[fill="#ffffff"] {
-  fill: var(--warp-surface) !important;
+  fill: var(--warp-surface-soft) !important;
   stroke: var(--warp-border) !important;
 }
-
 #page-content.site-theme .shyena-factory-home svg text[fill="#1a1527"],
 #page-content.site-theme .shyena-factory-home svg text[fill="#777084"],
 #page-content.site-theme .shyena-factory-home svg text[fill="#898196"] {
   fill: var(--warp-muted) !important;
 }
-
+#page-content.site-theme .shyena-factory-home svg text[fill="#1a1527"] {
+  fill: var(--warp-ink) !important;
+}
 #page-content.site-theme .shyena-factory-home svg [stroke="#d8d2e5"],
 #page-content.site-theme .shyena-factory-home svg [stroke="#e7e2ef"] {
   stroke: var(--warp-border) !important;
 }
-
 #page-content.site-theme .shyena-factory-home svg defs stop[stop-color="#5145ff"] {
   stop-color: var(--warp-blue);
 }
-
-#page-content.site-theme .shyena-factory-home .rail > button {
-  flex: 0 0 270px;
-  border-radius: 10px !important;
+#page-content.site-theme .shyena-factory-home .font-mono {
+  letter-spacing: 0.04em;
 }
-
-#page-content.site-theme .shyena-factory-home .rail > button[aria-pressed="true"] {
-  background: var(--warp-ink) !important;
-  color: #ffffff !important;
-  border-color: var(--warp-ink) !important;
+#page-content.site-theme .shyena-concept-figure {
+  background: var(--warp-surface) !important;
+  border: 1px solid var(--warp-border) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
 }
-
-#page-content.site-theme .shyena-factory-home .rail > button[aria-pressed="true"] :where(h3, p, span) {
-  color: #f5f5f5 !important;
+#page-content.site-theme .shyena-concept-header {
+  background: var(--warp-surface-soft) !important;
+  color: var(--warp-ink) !important;
+  border-color: var(--warp-border) !important;
 }
-
-#page-content.site-theme .shyena-factory-home .rail > button[aria-pressed="false"] {
+#page-content.site-theme .shyena-concept-header strong {
+  color: var(--warp-ink) !important;
+}
+#page-content.site-theme .shyena-article-visual > div > p {
+  background: var(--warp-surface-soft) !important;
+  color: var(--warp-ink) !important;
+  border-color: var(--warp-blue) !important;
+}
+#page-content.site-theme .reference-page-theme {
+  background: var(--warp-canvas) !important;
+  color: var(--warp-ink) !important;
+}
+#page-content.site-theme [class*="bg-navy"],
+#page-content.site-theme [class*="bg-[#0b0920]"],
+#page-content.site-theme [class*="bg-[#17213f]"] {
   background: var(--warp-surface-soft) !important;
   color: var(--warp-ink) !important;
 }
-
-#page-content.site-theme .shyena-factory-home .rail > button[aria-pressed="false"] :where(h3, p, span) {
+#page-content.site-theme [class*="text-white"]:not(pre):not(code) {
   color: var(--warp-ink) !important;
 }
-
-#page-content.site-theme .shyena-factory-home .rail > button[aria-pressed="false"] p {
+#page-content.site-theme pre [class*="text-white"],
+#page-content.site-theme [class*="bg-[#080809]"] [class*="text-white"],
+#page-content.site-theme [class*="bg-[#1a1522]"] [class*="text-white"] {
+  color: #ffffff !important;
+}
+#page-content.site-theme [class*="bg-white/"] {
+  background: rgba(26, 21, 34, 0.035) !important;
+}
+#page-content.site-theme [class*="border-white/"] {
+  border-color: var(--warp-border) !important;
+}
+body > div > header,
+body > div > header.bg-white,
+body > div > header[class*="bg-white"] {
+  background: rgba(255, 255, 255, 0.96) !important;
+  color: var(--warp-ink) !important;
+  border-color: var(--warp-border) !important;
+  box-shadow: none !important;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+body > div > header > div.mx-auto {
+  max-width: 1132px !important;
+  height: 64px !important;
+}
+body > div > header nav a {
+  color: var(--warp-muted) !important;
+  border-radius: 4px !important;
+  font-family: "Azeret Mono", ui-monospace, monospace !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.025em !important;
+}
+body > div > header nav a:hover,
+body > div > header nav a[aria-current="page"] {
+  background: rgba(42, 30, 255, 0.07) !important;
+  color: var(--warp-blue) !important;
+}
+body > div > header button[aria-label="Search Shyena"] {
+  color: var(--warp-ink) !important;
+}
+body > div > header kbd {
+  background: var(--warp-surface) !important;
+  color: var(--warp-muted) !important;
+  border-color: var(--warp-border) !important;
+}
+body > div > header button[aria-label="Open menu"],
+body > div > header button[aria-label="Close menu"] {
+  background: var(--warp-surface) !important;
+  color: var(--warp-ink) !important;
+  border-color: var(--warp-border) !important;
+}
+body > div > header a[href="/demo"] {
+  background: var(--warp-lime) !important;
+  color: var(--warp-ink) !important;
+  border-color: var(--warp-ink) !important;
+  border-radius: 4px !important;
+  font-family: "Azeret Mono", ui-monospace, monospace !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.025em !important;
+  text-transform: uppercase;
+  box-shadow: none !important;
+}
+body > div > header a[href="/demo"]:hover {
+  background: #e4e76b !important;
+  color: var(--warp-ink) !important;
+}
+body > div > header [role="dialog"],
+body > div > header [role="dialog"] > div {
+  background: var(--warp-surface) !important;
+  color: var(--warp-ink) !important;
+  border-color: var(--warp-border) !important;
+}
+body > div > header input {
+  background: transparent !important;
+  color: var(--warp-ink) !important;
+  border-color: var(--warp-border) !important;
+}
+body > div > footer > div.mx-auto {
+  max-width: 1132px !important;
+}
+body > div > footer {
+  background: var(--warp-canvas) !important;
+  color: var(--warp-ink) !important;
+  border-color: var(--warp-border) !important;
+  box-shadow: none !important;
+}
+body > div > footer h3 {
+  color: var(--warp-ink) !important;
+  font-family: "Azeret Mono", ui-monospace, monospace !important;
+}
+body > div > footer p,
+body > div > footer a,
+body > div > footer div {
   color: var(--warp-muted) !important;
 }
-
-#page-content.site-theme .shyena-factory-home .rail::-webkit-scrollbar {
-  height: 5px;
+body > div > footer a:hover {
+  color: var(--warp-blue) !important;
 }
-
-#page-content.site-theme .shyena-factory-home .rail::-webkit-scrollbar-thumb {
-  background: #bfbfbf;
+body > div > footer :where(hr, [class*="border-t"]) {
+  border-color: var(--warp-border) !important;
 }
-
-/* Keep working terminal regions dark while the surrounding interface remains light. */
-#page-content.site-theme pre,
-#page-content.site-theme [class*="bg-[#080809]"],
-#page-content.site-theme [class*="bg-[#080711]"],
-#page-content.site-theme [class*="bg-[#090713]"],
-#page-content.site-theme [class*="bg-[#0b0920]"] {
-  background: var(--warp-terminal) !important;
-  color: #f5f5f5 !important;
-  border-color: #303030 !important;
+body > div > footer a[aria-label*="LinkedIn"],
+body > div > footer a[aria-label*="GitHub"] {
+  border-color: var(--warp-border) !important;
 }
-
+body > div > footer a[aria-label*="LinkedIn"]:hover,
+body > div > footer a[aria-label*="GitHub"]:hover {
+  border-color: var(--warp-blue) !important;
+}
+::selection {
+  background: rgba(42, 30, 255, 0.18);
+  color: var(--warp-ink);
+}
 @media (max-width: 767px) {
   #page-content.site-theme h1 {
-    font-size: clamp(2rem, 9vw, 3.1rem) !important;
-    line-height: 1.04 !important;
+    font-size: clamp(2rem, 8.2vw, 2.8rem) !important;
+    line-height: 1.05 !important;
   }
-
   #page-content.site-theme h2 {
-    font-size: clamp(1.6rem, 7.3vw, 2.25rem) !important;
+    font-size: clamp(1.65rem, 7vw, 2.15rem) !important;
   }
-
-  #page-content.site-theme .shyena-factory-home > section > div.mx-auto[class*="max-w-[1132px]"] {
+  #page-content.site-theme .shyena-factory-home > section > div.mx-auto[class*="max-w-[1440px]"] {
     max-width: calc(100% - 48px) !important;
     padding-left: 0 !important;
     padding-right: 0 !important;
   }
-
-  body > div > header[data-shyena-chrome="header"] > div.mx-auto {
+  body > div > header > div.mx-auto {
     padding-left: 24px !important;
     padding-right: 24px !important;
   }
-
   #page-content.site-theme :where(pre, table) {
     max-width: 100%;
   }
-
   #page-content.site-theme pre {
     overflow-x: auto;
   }
 }
-
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
   }
-}
-
-
-/* Visual QA remediation: preserve readable foregrounds on dark sections.
-   These rules intentionally target only known dark surfaces and legacy dark-text
-   utility classes, leaving light cards and terminal controls untouched. */
-#page-content.site-theme :is(
-  [class*="bg-[#07101f]"],
-  [class*="bg-[#0a071d]"],
-  [class*="bg-[#121212]"],
-  [class*="bg-[#17213f]"],
-  [class*="bg-[#1a1a1a]"],
-  [class*="bg-slate-950"],
-  [class*="bg-gray-950"],
-  [class*="bg-zinc-950"],
-  [class*="bg-black"]
-) :is(
-  [class*="text-[#1a1522]"],
-  [class*="text-[#1a1527]"],
-  [class*="text-[#17213f]"],
-  [class*="text-[#17233f]"],
-  [class*="text-[#0f172a]"],
-  [class*="text-[#211a32]"],
-  [class*="text-[#2d263d]"]
-) {
-  color: #f5f5f5 !important;
-}
-
-#page-content.site-theme :is(
-  [class*="bg-[#07101f]"],
-  [class*="bg-[#0a071d]"],
-  [class*="bg-[#121212]"],
-  [class*="bg-[#17213f]"],
-  [class*="bg-[#1a1a1a]"],
-  [class*="bg-slate-950"],
-  [class*="bg-gray-950"],
-  [class*="bg-zinc-950"],
-  [class*="bg-black"]
-) :is(p, li, label, small, figcaption) {
-  color: #e5e5e5 !important;
-}
-
-body > div > header[data-shyena-chrome="header"] .shyena-mobile-panel :where(a, span, svg) {
-  color: var(--warp-ink) !important;
-}
-
-body > div > header[data-shyena-chrome="header"] .shyena-mobile-panel a.is-active {
-  color: var(--warp-blue) !important;
-}
-
-
-/* WCAG 2.2 AA foundations: skip navigation, visible focus, motion and target sizing. */
-.shyena-skip-link {
-  position: fixed; z-index: 10000; inset-block-start: 8px; inset-inline-start: 8px;
-  transform: translateY(calc(-100% - 12px)); padding: 12px 16px;
-  border: 2px solid var(--warp-ink, #171717); border-radius: 4px;
-  background: var(--warp-lime, #e8ed75); color: var(--warp-ink, #171717) !important;
-  font-size: 16px; font-weight: 700; line-height: 1.4; text-decoration: underline;
-}
-.shyena-skip-link:focus, .shyena-skip-link:focus-visible {
-  transform: translateY(0); outline: 3px solid #1769aa; outline-offset: 3px;
-}
-#page-content:focus { outline: none; }
-:where(a, button, input, select, textarea, summary, [role="button"], [role="link"], [tabindex]:not([tabindex="-1"])):focus-visible {
-  outline: 3px solid #1769aa !important; outline-offset: 3px !important; scroll-margin-block: 6rem;
-}
-:where(button, [role="button"], input[type="checkbox"], input[type="radio"], input[type="range"], select) {
-  accent-color: #1769aa;
-}
-@media (prefers-reduced-motion: reduce) {
-  html:focus-within { scroll-behavior: auto !important; }
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important; animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important; scroll-behavior: auto !important;
-  }
-}
-@media (forced-colors: active) {
-  :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible { outline: 3px solid Highlight !important; }
-  .shyena-skip-link { border: 2px solid ButtonText; background: Canvas; color: CanvasText !important; }
-}
-@media (max-width: 767px) {
-  #page-content.site-theme :where(a, button, [role="button"]) { scroll-margin-block: 5rem; }
-}
-
-
-/* Targeted contrast corrections found in the public visual audit. */
-body > div > header[data-shyena-chrome="header"] .shyena-nav a {
-  color: #262626 !important;
-  opacity: 1 !important;
-}
-body > div > header[data-shyena-chrome="header"] .shyena-nav a[aria-current="page"],
-body > div > header[data-shyena-chrome="header"] .shyena-nav a.is-active {
-  color: #2020cc !important;
-  background: #f2f2f2 !important;
-}
-body > div > header[data-shyena-chrome="header"] .shyena-search-control,
-body > div > header[data-shyena-chrome="header"] .shyena-search-control :where(span, svg, kbd) {
-  color: #262626 !important;
-}
-#page-content.site-theme a[href="/platform"] {
-  background: #eff57a !important;
-  color: #171717 !important;
-  border: 1px solid #171717 !important;
-  opacity: 1 !important;
-}
-#page-content.site-theme a[href="/platform"] * {
-  color: #171717 !important;
-}
-
-
-/* Demo control-room: restore readable contrast for muted labels on dark surfaces. */
-#page-content.site-theme main[class*="bg-[#05080d]"] :is(
-  [class*="text-white/15"], [class*="text-white/20"], [class*="text-white/25"],
-  [class*="text-white/30"], [class*="text-white/35"], [class*="text-white/40"],
-  [class*="text-white/45"], [class*="text-white/50"], [class*="text-white/55"],
-  [class*="text-white/60"], [class*="text-white/65"], [class*="text-white/70"]
-) {
-  color: #d1d5db !important;
-}
-#page-content.site-theme main[class*="bg-[#05080d]"] :is(
-  [class*="text-white/15"], [class*="text-white/20"], [class*="text-white/25"],
-  [class*="text-white/30"], [class*="text-white/35"]
-) {
-  color: #bfc7d2 !important;
-}
-
-
-/*
- * Production visual repair: dark page sections must not inherit the light-theme
- * heading ink color. Keep this scoped to dark surfaces so light-page typography
- * and intentional accent colors remain unchanged.
- */
-#page-content.site-theme :is(
-  [class*="bg-[#07101f]"],
-  [class*="bg-[#05080d]"],
-  [class*="bg-[#080809]"],
-  [class*="bg-[#080711]"],
-  [class*="bg-[#090713]"],
-  [class*="bg-[#0b0920]"],
-  [class*="bg-slate-950"],
-  [class*="bg-gray-950"],
-  [class*="bg-zinc-950"],
-  [class*="bg-black"]
-) :is(h1, h2, h3, h4, h5, h6) {
-  color: #f8fafc !important;
-}
-
-#page-content.site-theme :is(
-  [class*="bg-[#07101f]"],
-  [class*="bg-[#05080d]"],
-  [class*="bg-[#080809]"],
-  [class*="bg-[#080711]"],
-  [class*="bg-[#090713]"],
-  [class*="bg-[#0b0920]"],
-  [class*="bg-slate-950"],
-  [class*="bg-gray-950"],
-  [class*="bg-zinc-950"],
-  [class*="bg-black"]
-) :is(p, li, label, small, figcaption, dt, dd, th, td) {
-  color: #e2e8f0 !important;
-}
-
-/* Accent words on dark surfaces must be light enough to meet text contrast. */
-#page-content.site-theme :is(
-  [class*="bg-[#07101f]"],
-  [class*="bg-[#05080d]"],
-  [class*="bg-[#080809]"],
-  [class*="bg-[#080711]"],
-  [class*="bg-[#090713]"],
-  [class*="bg-[#0b0920]"],
-  [class*="bg-slate-950"],
-  [class*="bg-gray-950"],
-  [class*="bg-zinc-950"],
-  [class*="bg-black"]
-) :is(h1, h2, h3, h4, h5, h6) :is(span, em, strong) {
-  color: #a5b4fc !important;
-}
-
-/* Preserve explicitly high-contrast orange metadata on dark surfaces. */
-#page-content.site-theme :is(
-  [class*="bg-[#07101f]"],
-  [class*="bg-[#05080d]"],
-  [class*="bg-[#080809]"],
-  [class*="bg-[#080711]"],
-  [class*="bg-[#090713]"],
-  [class*="bg-[#0b0920]"],
-  [class*="bg-slate-950"],
-  [class*="bg-gray-950"],
-  [class*="bg-zinc-950"],
-  [class*="bg-black"]
-) :is([class*="text-[#e87512]"], [class*="text-[#f18a32]"]) {
-  color: #ffb15c !important;
-}
-
-/* Skip navigation stays out of the visual header until keyboard focus. */
-a.shyena-skip-link:not(:focus):not(:focus-visible) {
-  transform: translateY(calc(-100% - 16px)) !important;
-  clip-path: inset(50%) !important;
-}
-a.shyena-skip-link:focus,
-a.shyena-skip-link:focus-visible {
-  clip-path: none !important;
-}
-
-
-/*
- * Unified Shyena brand theme across every route.
- * Match the platform hero: white global navigation, deep-navy page canvas,
- * blue-white typography, orange brand accents and restrained navy panels.
- * Route components may keep their structure, but may not reintroduce unrelated
- * light-purple, grey-card or white-page themes.
- */
-:root {
-  color-scheme: dark;
-  --background: #07101f;
-  --foreground: #f5f7fb;
-  --card: #0c1729;
-  --card-foreground: #f5f7fb;
-  --popover: #0c1729;
-  --popover-foreground: #f5f7fb;
-  --secondary: #101e32;
-  --secondary-foreground: #f5f7fb;
-  --muted: #101e32;
-  --muted-foreground: #cbd5e1;
-  --border: #263449;
-  --input: #475569;
-  --primary: #f18a32;
-  --primary-foreground: #07101f;
-  --accent: #f18a32;
-  --accent-foreground: #07101f;
-}
-html, body, body > div, body > div > div {
-  background: #07101f !important;
-  color: #f5f7fb;
-  color-scheme: dark;
-}
-#page-content.site-theme,
-#page-content.site-theme .reference-page-theme,
-#page-content.site-theme .shyena-factory-home {
-  background: #07101f !important;
-  color: #f5f7fb !important;
-}
-/* Normalize legacy light backgrounds without affecting the shared white header. */
-#page-content.site-theme :is(
-  [class*="bg-white"], [class*="bg-gray-50"], [class*="bg-gray-100"],
-  [class*="bg-slate-50"], [class*="bg-slate-100"], [class*="bg-zinc-50"],
-  [class*="bg-neutral-50"], [class*="bg-[#f6f6f6]"], [class*="bg-[#f8f8f8]"],
-  [class*="bg-[#fafbfc]"], [class*="bg-[#fafafa]"], [class*="bg-[#fff8f2]"],
-  [class*="bg-[#fcfbff]"], [class*="bg-[#fbfaff]"], [class*="bg-[#f7f5ff]"],
-  [class*="bg-[#efedff]"], [class*="bg-[#f6f4ff]"], [class*="bg-[#ffffff]"],
-  [class*="bg-[#fff]"]
-) {
-  background-color: #0c1729 !important;
-  color: #f5f7fb !important;
-  border-color: #263449 !important;
-}
-#page-content.site-theme :is(
-  [class*="text-[#171717]"], [class*="text-[#262626]"],
-  [class*="text-[#17213f]"], [class*="text-[#17233f]"],
-  [class*="text-[#0f172a]"], [class*="text-[#1a1527]"],
-  [class*="text-[#211a32]"], [class*="text-[#2d263d]"],
-  [class*="text-[#302940]"], [class*="text-[#555]"],
-  [class*="text-[#555555]"], [class*="text-[#596273]"],
-  [class*="text-[#69707d]"], [class*="text-[#69707d]"],
-  [class*="text-[#575064]"], [class*="text-[#61586f]"],
-  [class*="text-[#6b6279]"], [class*="text-[#746b83]"],
-  [class*="text-[#756c83]"], [class*="text-[#81788e]"],
-  [class*="text-[#82798f]"], [class*="text-[#8a8299]"],
-  [class*="text-[#8d849a]"]
-) {
-  color: #cbd5e1 !important;
-}
-#page-content.site-theme :is(h1,h2,h3,h4,h5,h6) {
-  color: #f5f7fb !important;
-}
-#page-content.site-theme :is(section, article, aside, [role="tabpanel"], table, th, td) {
-  border-color: #263449 !important;
-}
-#page-content.site-theme :is(
-  [class*="border-[#e1e4e9]"], [class*="border-[#e6e8ed]"],
-  [class*="border-[#e8eaee]"], [class*="border-[#dfe3e8]"],
-  [class*="border-[#e5e5e5]"], [class*="border-[#e6e6e6]"],
-  [class*="border-gray-200"], [class*="border-slate-200"]
-) {
-  border-color: #263449 !important;
-}
-/* Keep the brand orange as the dominant action color, with the lime demo CTA
-   reserved for the shared header to preserve the screenshot's hierarchy. */
-#page-content.site-theme :is(
-  a[class*="bg-[#e87512]"], button[class*="bg-[#e87512]"],
-  a[class*="bg-[#f18a32]"], button[class*="bg-[#f18a32]"],
-  a[class*="bg-orange-"], button[class*="bg-orange-"]
-) {
-  background: #e87512 !important;
-  color: #ffffff !important;
-  border-color: #e87512 !important;
-}
-#page-content.site-theme :is(a,button):hover {
-  border-color: #ffb15c;
-}
-body > div > footer[data-shyena-chrome="footer"] {
-  background: #07101f !important;
-  color: #f5f7fb !important;
-  border-color: #263449 !important;
-}
-body > div > footer[data-shyena-chrome="footer"] :where(p,a,div,span) {
-  color: #cbd5e1;
-}
-body > div > footer[data-shyena-chrome="footer"] .shyena-footer-heading {
-  color: #f5f7fb !important;
-}
-
-
-/* Legacy utility text colors are normalized too, including inline labels and badges. */
-#page-content.site-theme :is(
-  [class*="text-gray-500"], [class*="text-gray-600"], [class*="text-gray-700"],
-  [class*="text-gray-800"], [class*="text-gray-900"],
-  [class*="text-slate-500"], [class*="text-slate-600"], [class*="text-slate-700"],
-  [class*="text-slate-800"], [class*="text-slate-900"],
-  [class*="text-zinc-500"], [class*="text-zinc-600"], [class*="text-zinc-700"],
-  [class*="text-zinc-800"], [class*="text-zinc-900"],
-  [class*="text-neutral-500"], [class*="text-neutral-600"], [class*="text-neutral-700"],
-  [class*="text-neutral-800"], [class*="text-neutral-900"],
-  [class*="text-[#a55410]"]
-) {
-  color: #cbd5e1 !important;
-}
-#page-content.site-theme :is([class*="text-[#a55410]"], [class*="text-[#e87512]"], [class*="text-[#f18a32]"]) {
-  color: #ffb15c !important;
 }
