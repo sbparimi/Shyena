@@ -18,6 +18,12 @@
   --warp-terminal: #050b15;
   --warp-on-accent: #0b1220;
   --warp-accent-text: #ffb15c;
+  /* Light header chrome: the header sits on white, so it needs its own tokens. */
+  --warp-header-ink: #262626;
+  --warp-header-active-ink: #2020cc;
+  --warp-header-hover-bg: #ebebeb;
+  --warp-header-active-bg: #f2f2f2;
+  --warp-header-control-border: #d4d4d4;
   --radius: 0.25rem;
   --background: var(--warp-canvas);
   --foreground: var(--warp-ink);
@@ -290,6 +296,12 @@ body > div > header[data-shyena-chrome="header"] :where(a, button) {
 }
 
 body > div > header[data-shyena-chrome="header"] nav a {
+  color: var(--warp-header-ink) !important;
+  background: transparent !important;
+  opacity: 1 !important;
+  transition:
+    background-color 150ms ease,
+    color 150ms ease !important;
   border-radius: 4px !important;
   font-family: Inter, Arial, sans-serif !important;
   font-size: 12px !important;
@@ -298,11 +310,21 @@ body > div > header[data-shyena-chrome="header"] nav a {
   text-transform: none !important;
 }
 
-body > div > header[data-shyena-chrome="header"] nav a:hover,
+body > div > header[data-shyena-chrome="header"] nav a:hover {
+  background: var(--warp-header-hover-bg) !important;
+  color: var(--warp-header-ink) !important;
+}
+
 body > div > header[data-shyena-chrome="header"] nav a.is-active,
 body > div > header[data-shyena-chrome="header"] nav a[aria-current="page"] {
-  background: var(--warp-surface-soft) !important;
-  color: var(--warp-blue) !important;
+  background: var(--warp-header-active-bg) !important;
+  color: var(--warp-header-active-ink) !important;
+}
+
+body > div > header[data-shyena-chrome="header"] nav a.is-active:hover,
+body > div > header[data-shyena-chrome="header"] nav a[aria-current="page"]:hover {
+  background: var(--warp-header-hover-bg) !important;
+  color: var(--warp-header-active-ink) !important;
 }
 
 body > div > header[data-shyena-chrome="header"] a.shyena-demo-cta {
@@ -321,13 +343,20 @@ body > div > header[data-shyena-chrome="header"] a.shyena-demo-cta:hover {
 }
 
 body > div > header[data-shyena-chrome="header"] .shyena-search-control {
-  color: var(--warp-ink) !important;
+  color: var(--warp-header-ink) !important;
   background: transparent !important;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease !important;
+}
+
+body > div > header[data-shyena-chrome="header"] .shyena-search-control :where(span, svg) {
+  color: var(--warp-header-ink) !important;
 }
 
 body > div > header[data-shyena-chrome="header"] .shyena-search-control:hover {
-  border-color: var(--warp-border) !important;
-  background: var(--warp-surface-soft) !important;
+  border-color: var(--warp-header-control-border) !important;
+  background: var(--warp-header-hover-bg) !important;
 }
 
 body > div > header[data-shyena-chrome="header"] .shyena-search-shortcut {
@@ -705,21 +734,6 @@ body > div > header[data-shyena-chrome="header"] .shyena-mobile-panel a.is-activ
   #page-content.site-theme :where(a, button, [role="button"]) {
     scroll-margin-block: 5rem;
   }
-}
-
-/* Targeted contrast corrections found in the public visual audit. */
-body > div > header[data-shyena-chrome="header"] .shyena-nav a {
-  color: #262626 !important;
-  opacity: 1 !important;
-}
-body > div > header[data-shyena-chrome="header"] .shyena-nav a[aria-current="page"],
-body > div > header[data-shyena-chrome="header"] .shyena-nav a.is-active {
-  color: #2020cc !important;
-  background: #f2f2f2 !important;
-}
-body > div > header[data-shyena-chrome="header"] .shyena-search-control,
-body > div > header[data-shyena-chrome="header"] .shyena-search-control :where(span, svg, kbd) {
-  color: #262626 !important;
 }
 
 /* Demo control-room: restore readable contrast for muted labels on dark surfaces. */
