@@ -10,6 +10,6 @@ export const EUENGINEERS_RESOURCES = [
     sourceUrl:
       "https://euengineers.eu/blog/ai/architecting-real-time-fraud-detection-agent-reliability-too-day-3",
     markdown:
-      "Warning: This page maybe not yet fully loaded, consider explicitly specify a timeout.\nWarning: This is a cached snapshot of the original page, consider retry with caching opt-out.\n\nMarkdown Content:",
+      "Warning: This page maybe not yet fully loaded, consider explicitly specify a timeout.\n\nMarkdown Content:",
   },
 ] as const;
