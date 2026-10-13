@@ -301,8 +301,9 @@ body > div > header[data-shyena-chrome="header"] nav a {
 body > div > header[data-shyena-chrome="header"] nav a:hover,
 body > div > header[data-shyena-chrome="header"] nav a.is-active,
 body > div > header[data-shyena-chrome="header"] nav a[aria-current="page"] {
-  background: var(--warp-surface-soft) !important;
-  color: var(--warp-blue) !important;
+  /* Same fill and text as the "Book a demo" button. */
+  background: var(--warp-lime) !important;
+  color: var(--warp-on-accent) !important;
 }
 
 body > div > header[data-shyena-chrome="header"] a.shyena-demo-cta {
@@ -349,8 +350,8 @@ body > div > header[data-shyena-chrome="header"] .shyena-mobile-panel a {
 }
 
 body > div > header[data-shyena-chrome="header"] .shyena-mobile-panel a.is-active {
-  color: var(--warp-blue) !important;
-  background: var(--warp-surface-soft) !important;
+  color: var(--warp-on-accent) !important;
+  background: var(--warp-lime) !important;
 }
 
 body > div > footer[data-shyena-chrome="footer"] {
@@ -624,7 +625,7 @@ body > div > header[data-shyena-chrome="header"] .shyena-mobile-panel :where(a, 
 }
 
 body > div > header[data-shyena-chrome="header"] .shyena-mobile-panel a.is-active {
-  color: var(--warp-blue) !important;
+  color: var(--warp-on-accent) !important;
 }
 
 /* WCAG 2.2 AA foundations: skip navigation, visible focus, motion and target sizing. */
@@ -712,10 +713,11 @@ body > div > header[data-shyena-chrome="header"] .shyena-nav a {
   color: #262626 !important;
   opacity: 1 !important;
 }
+body > div > header[data-shyena-chrome="header"] .shyena-nav a:hover,
 body > div > header[data-shyena-chrome="header"] .shyena-nav a[aria-current="page"],
 body > div > header[data-shyena-chrome="header"] .shyena-nav a.is-active {
-  color: #2020cc !important;
-  background: #f2f2f2 !important;
+  color: var(--warp-on-accent) !important;
+  background: var(--warp-lime) !important;
 }
 body > div > header[data-shyena-chrome="header"] .shyena-search-control,
 body > div > header[data-shyena-chrome="header"] .shyena-search-control :where(span, svg, kbd) {
