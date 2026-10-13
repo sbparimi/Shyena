@@ -37,6 +37,27 @@ const FREE_EMAIL_DOMAINS = new Set([
   "126.com",
 ]);
 
+// Best-effort per-instance rate limit. On serverless/edge runtimes each instance keeps its own
+// counter, so this blunts bursts but is not a substitute for an edge WAF or CAPTCHA.
+const RATE_WINDOW_MS = 10 * 60 * 1000;
+const RATE_MAX_REQUESTS = 5;
+const hits = new Map<string, number[]>();
+
+function isRateLimited(key: string, now = Date.now()): boolean {
+  const recent = (hits.get(key) ?? []).filter((t) => now - t < RATE_WINDOW_MS);
+  recent.push(now);
+  hits.set(key, recent);
+  if (hits.size > 5000)
+    for (const [k, v] of hits) if (v.every((t) => now - t >= RATE_WINDOW_MS)) hits.delete(k);
+  return recent.length > RATE_MAX_REQUESTS;
+}
+
+function clientKey(request: Request): string {
+  const forwarded =
+    request.headers.get("cf-connecting-ip") ?? request.headers.get("x-forwarded-for");
+  return (forwarded?.split(",")[0] ?? "unknown").trim();
+}
+
 function cleanText(value: unknown, maxLength: number): string {
   return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
 }
@@ -61,6 +82,15 @@ export const Route = createFileRoute("/api/contact")({
   server: {
     handlers: {
       POST: async ({ request }) => {
+        if (isRateLimited(clientKey(request))) {
+          return Response.json(
+            { error: "Too many requests. Please try again in a few minutes." },
+            { status: 429, headers: { "Retry-After": "600" } },
+          );
+        }
+        if (Number(request.headers.get("content-length") ?? 0) > 20_000) {
+          return Response.json({ error: "Request too large" }, { status: 413 });
+        }
         let body: unknown;
         try {
           body = await request.json();

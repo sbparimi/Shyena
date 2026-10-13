@@ -11,7 +11,7 @@ export const Route = createFileRoute("/observability")({
       },
       {
         name: "robots",
-        content: "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
+        content: "noindex,follow",
       },
       { property: "og:title", content: "Production AI Observability | Shyena" },
       {
