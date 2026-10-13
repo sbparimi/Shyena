@@ -10,7 +10,13 @@ import {
   Workflow,
   X,
 } from "lucide-react";
-import { searchCandidates, submitHireRequest, type Candidate } from "@/lib/supabase";
+import { CtaLink } from "@/components/ui/cta-link";
+import {
+  getSampleCandidates,
+  searchCandidates,
+  submitHireRequest,
+  type Candidate,
+} from "@/lib/supabase";
 
 const capabilities = [
   [
@@ -117,6 +123,11 @@ function CandidateTile({
             </div>
           )}
           <div className="min-w-0">
+            {candidate.is_sample && (
+              <span className="mb-1 inline-block rounded-[4px] border border-[var(--warp-border-strong)] px-1.5 py-0.5 font-mono text-[9px] font-bold uppercase tracking-[.12em] text-[var(--warp-muted)]">
+                Sample profile
+              </span>
+            )}
             <h3 className="truncate text-lg font-extrabold">{candidate.full_name}</h3>
             <p className="mt-0.5 line-clamp-2 text-xs font-semibold leading-5 text-[var(--warp-muted)]">
               {candidate.headline}
@@ -197,12 +208,18 @@ function CandidateTile({
         </div>
       </div>
       <div className="border-t border-[var(--warp-border)] p-4">
-        <button
-          onClick={() => onHire(candidate)}
-          className="flex h-10 w-full items-center justify-center gap-2 rounded-lg bg-[var(--warp-surface-soft)] text-xs font-bold text-white transition hover:bg-[var(--warp-surface-soft)]"
-        >
-          Hire me <ArrowRight className="h-3.5 w-3.5" />
-        </button>
+        {candidate.is_sample ? (
+          <CtaLink to="/contact" className="h-10 w-full">
+            Request a similar expert <ArrowRight className="h-3.5 w-3.5" />
+          </CtaLink>
+        ) : (
+          <button
+            onClick={() => onHire(candidate)}
+            className="warp-btn inline-flex h-10 w-full items-center justify-center gap-2 px-4"
+          >
+            Hire me <ArrowRight className="h-3.5 w-3.5" />
+          </button>
+        )}
       </div>
     </article>
   );
@@ -330,9 +347,10 @@ function Marketplace() {
       setCandidates(rows);
       setTotal(rows[0]?.total_count ?? 0);
     } catch {
-      setError("Candidate directory is temporarily unavailable.");
-      setCandidates([]);
-      setTotal(0);
+      // Live directory slow or unreachable: show the labelled sample profiles, not an error.
+      const samples = getSampleCandidates({ ...filters, page: 1, pageSize: 24 });
+      setCandidates(samples);
+      setTotal(samples[0]?.total_count ?? 0);
     } finally {
       setLoading(false);
     }
@@ -492,11 +510,27 @@ function Marketplace() {
             </p>
           </div>
         ) : (
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {candidates.map((c) => (
-              <CandidateTile key={c.id} candidate={c} onHire={setHireCandidate} />
-            ))}
-          </div>
+          <>
+            {candidates.some((c) => c.is_sample) && (
+              <p
+                role="note"
+                className="mb-4 rounded-[4px] border border-[var(--warp-border-strong)] p-4 text-sm leading-6 text-[var(--warp-muted)]"
+              >
+                These are illustrative sample profiles of fictional specialists, shown to
+                demonstrate the capabilities the Shyena network covers. They are not real people and
+                cannot be hired. To be matched with real experts for your use case,{" "}
+                <Link to="/contact" className="font-semibold underline underline-offset-4">
+                  contact Shyena
+                </Link>
+                .
+              </p>
+            )}
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {candidates.map((c) => (
+                <CandidateTile key={c.id} candidate={c} onHire={setHireCandidate} />
+              ))}
+            </div>
+          </>
         )}
         {hireCandidate && (
           <HireModal candidate={hireCandidate} onClose={() => setHireCandidate(null)} />
