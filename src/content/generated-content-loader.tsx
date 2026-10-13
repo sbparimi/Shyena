@@ -17,6 +17,10 @@ const docSources = import.meta.glob("../../content/docs/*.md", {
 }) as Record<string, string>;
 
 const components = {
+  // The page template already renders the article title as the one <h1>.
+  h1(props) {
+    return <h2 {...props} />;
+  },
   a(props) {
     const href = props.href || "";
     const external = /^https?:\/\//i.test(href);

@@ -12,7 +12,8 @@
     "typecheck": "tsc --noEmit",
     "format": "prettier --write .",
     "content:generate": "node scripts/generate-public-content.mjs",
-    "content:validate": "node scripts/validate-public-content.mjs"
+    "content:validate": "node scripts/validate-public-content.mjs && node scripts/validate-sage-content.mjs",
+    "test:smoke": "node scripts/smoke-routes.mjs"
   },
   "dependencies": {
     "@radix-ui/react-label": "^2.1.8",

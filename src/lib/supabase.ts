@@ -1,5 +1,11 @@
-const SUPABASE_URL = "https://gzthuldvqufrvxeybvyo.supabase.co";
-const SUPABASE_KEY = "sb_publishable_ueUr_kwat_KK1jQoixQ4ug_QC8ZXqzh";
+// Prefer build-time configuration so the project can be rotated without a code change. The
+// fallbacks are the existing public (publishable) values and are safe to ship to the browser.
+const SUPABASE_URL =
+  (import.meta.env["VITE_SUPABASE_URL"] as string | undefined) ??
+  "https://gzthuldvqufrvxeybvyo.supabase.co";
+const SUPABASE_KEY =
+  (import.meta.env["VITE_SUPABASE_PUBLISHABLE_KEY"] as string | undefined) ??
+  "sb_publishable_ueUr_kwat_KK1jQoixQ4ug_QC8ZXqzh";
 
 export type Candidate = {
   id: string;
