@@ -2,6 +2,11 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { GeneratedMarkdown, getGeneratedArticle } from "@/content/generated-content-loader";
+import { INLINE_ARTICLE_VISUALS } from "@/content/article-visuals";
+import {
+  ArticleConceptDiagram,
+  type ArticleConcept,
+} from "@/components/blog/article-concept-diagrams";
 
 const SLUG = "ai-agent-testing-is-a-systems-problem";
 
@@ -58,11 +63,24 @@ function ArticlePage() {
               {article.author || "Shyena Engineering"}
             </p>
           </div>
+          {article.diagram && (
+            <div className="mt-10">
+              <ArticleConceptDiagram concept={article.diagram as ArticleConcept} />
+            </div>
+          )}
+          {article.thesis && (
+            <p className="mx-auto mt-8 max-w-3xl text-center text-base font-medium leading-relaxed text-[var(--warp-muted)] sm:text-lg">
+              {article.thesis}
+            </p>
+          )}
         </div>
       </section>
 
       <article className="mx-auto w-full max-w-3xl px-5 pb-24 pt-12 sm:px-8">
-        <GeneratedMarkdown sourcePath={article.sourcePath} />
+        <GeneratedMarkdown
+          sourcePath={article.sourcePath}
+          inlineVisuals={INLINE_ARTICLE_VISUALS[article.slug]}
+        />
 
         <div className="mt-16 rounded-2xl border border-navy-border bg-navy px-6 py-10 text-center sm:px-10">
           <h2 className="text-xl font-bold text-navy-foreground sm:text-2xl">
@@ -79,11 +97,7 @@ function ArticlePage() {
         </div>
 
         <div className="mt-10">
-          <Button
-            asChild
-            variant="ghost"
-            className="px-0 text-muted-foreground hover:text-foreground"
-          >
+          <Button asChild>
             <Link to="/blog">
               <ArrowLeft className="mr-2 h-4 w-4" />
               Back to Insights

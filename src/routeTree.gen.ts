@@ -11,24 +11,68 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as AiAgentEvaluationRouteImport } from './routes/ai-agent-evaluation'
+import { Route as AiAgentSecurityTestingRouteImport } from './routes/ai-agent-security-testing'
+import { Route as AiAgentTestingRouteImport } from './routes/ai-agent-testing'
+import { Route as AiAgentTestingPlatformRouteImport } from './routes/ai-agent-testing-platform'
+import { Route as AiAssuranceRouteImport } from './routes/ai-assurance'
+import { Route as AiProductionReadinessRouteImport } from './routes/ai-production-readiness'
+import { Route as AiRegressionTestingRouteImport } from './routes/ai-regression-testing'
+import { Route as AiReleaseAssuranceRouteImport } from './routes/ai-release-assurance'
+import { Route as AiTestingFrameworkRouteImport } from './routes/ai-testing-framework'
+import { Route as AutonomousAiTestingRouteImport } from './routes/autonomous-ai-testing'
+import { Route as AutonomousTestingRouteImport } from './routes/autonomous-testing'
 import { Route as ChakraRouteImport } from './routes/chakra'
 import { Route as CisRouteImport } from './routes/cis'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as ConversationalAiTestingRouteImport } from './routes/conversational-ai-testing'
+import { Route as CookiesRouteImport } from './routes/cookies'
+import { Route as CustomersRouteImport } from './routes/customers'
+import { Route as DatasetsRouteImport } from './routes/datasets'
+import { Route as DemoRouteImport } from './routes/demo'
+import { Route as DesignPartnersRouteImport } from './routes/design-partners'
+import { Route as DevelopersRouteImport } from './routes/developers'
 import { Route as DocsRouteImport } from './routes/docs'
+import { Route as EvaluationRouteImport } from './routes/evaluation'
+import { Route as EventsRouteImport } from './routes/events'
+import { Route as ExperimentsRouteImport } from './routes/experiments'
+import { Route as ExpertsRouteImport } from './routes/experts'
+import { Route as GovernRouteImport } from './routes/govern'
+import { Route as HireAiExpertsRouteImport } from './routes/hire-ai-experts'
+import { Route as IntegrationsRouteImport } from './routes/integrations'
+import { Route as LlmEvaluationRouteImport } from './routes/llm-evaluation'
+import { Route as MetricsRouteImport } from './routes/metrics'
 import { Route as NexusRouteImport } from './routes/nexus'
+import { Route as ObservabilityRouteImport } from './routes/observability'
+import { Route as PlatformRouteImport } from './routes/platform'
 import { Route as PricingRouteImport } from './routes/pricing'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ProductRouteImport } from './routes/product'
+import { Route as ResourcesRouteImport } from './routes/resources'
+import { Route as SampleReportRouteImport } from './routes/sample-report'
 import { Route as SecurityRouteImport } from './routes/security'
 import { Route as ServicesRouteImport } from './routes/services'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as VeraRouteImport } from './routes/vera'
-import { Route as ApiChatRouteImport } from './routes/api/chat'
+import { Route as ApiContactRouteImport } from './routes/api/contact'
+import { Route as ApiSampleReportPdfRouteImport } from './routes/api/sample-report-pdf'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
+import { Route as BlogAiAgentTestingIsASystemsProblemRouteImport } from './routes/blog/ai-agent-testing-is-a-systems-problem'
+import { Route as DocsIndexRouteImport } from './routes/docs.index'
+import { Route as DocsAiAssuranceTokenomicsRouteImport } from './routes/docs.ai-assurance-tokenomics'
+import { Route as DocsApiReferenceRouteImport } from './routes/docs.api-reference'
+import { Route as DocsEnvironmentsRouteImport } from './routes/docs.environments'
 import { Route as DocsEvaluationModelRouteImport } from './routes/docs.evaluation-model'
 import { Route as DocsGettingStartedRouteImport } from './routes/docs.getting-started'
+import { Route as DocsGraphragEvaluationRouteImport } from './routes/docs.graphrag-evaluation'
+import { Route as DocsIntegrationsRouteImport } from './routes/docs.integrations'
 import { Route as DocsReportingRouteImport } from './routes/docs.reporting'
+import { Route as DocsSageContentEngineeringRouteImport } from './routes/docs.sage-content-engineering'
 import { Route as DocsTroubleshootingRouteImport } from './routes/docs.troubleshooting'
 import { Route as DocsWritingTestSpecsRouteImport } from './routes/docs.writing-test-specs'
+import { Route as BlogGeneratedSlugRouteImport } from './routes/blog.generated.$slug'
+import { Route as DocsResourceSlugRouteImport } from './routes/docs.resource.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -38,6 +82,61 @@ const IndexRoute = IndexRouteImport.update({
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiAgentEvaluationRoute = AiAgentEvaluationRouteImport.update({
+  id: '/ai-agent-evaluation',
+  path: '/ai-agent-evaluation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiAgentSecurityTestingRoute = AiAgentSecurityTestingRouteImport.update({
+  id: '/ai-agent-security-testing',
+  path: '/ai-agent-security-testing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiAgentTestingRoute = AiAgentTestingRouteImport.update({
+  id: '/ai-agent-testing',
+  path: '/ai-agent-testing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiAgentTestingPlatformRoute = AiAgentTestingPlatformRouteImport.update({
+  id: '/ai-agent-testing-platform',
+  path: '/ai-agent-testing-platform',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiAssuranceRoute = AiAssuranceRouteImport.update({
+  id: '/ai-assurance',
+  path: '/ai-assurance',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiProductionReadinessRoute = AiProductionReadinessRouteImport.update({
+  id: '/ai-production-readiness',
+  path: '/ai-production-readiness',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiRegressionTestingRoute = AiRegressionTestingRouteImport.update({
+  id: '/ai-regression-testing',
+  path: '/ai-regression-testing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiReleaseAssuranceRoute = AiReleaseAssuranceRouteImport.update({
+  id: '/ai-release-assurance',
+  path: '/ai-release-assurance',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiTestingFrameworkRoute = AiTestingFrameworkRouteImport.update({
+  id: '/ai-testing-framework',
+  path: '/ai-testing-framework',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AutonomousAiTestingRoute = AutonomousAiTestingRouteImport.update({
+  id: '/autonomous-ai-testing',
+  path: '/autonomous-ai-testing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AutonomousTestingRoute = AutonomousTestingRouteImport.update({
+  id: '/autonomous-testing',
+  path: '/autonomous-testing',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ChakraRoute = ChakraRouteImport.update({
@@ -55,9 +154,89 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ConversationalAiTestingRoute = ConversationalAiTestingRouteImport.update({
+  id: '/conversational-ai-testing',
+  path: '/conversational-ai-testing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CookiesRoute = CookiesRouteImport.update({
+  id: '/cookies',
+  path: '/cookies',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CustomersRoute = CustomersRouteImport.update({
+  id: '/customers',
+  path: '/customers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DatasetsRoute = DatasetsRouteImport.update({
+  id: '/datasets',
+  path: '/datasets',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemoRoute = DemoRouteImport.update({
+  id: '/demo',
+  path: '/demo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DesignPartnersRoute = DesignPartnersRouteImport.update({
+  id: '/design-partners',
+  path: '/design-partners',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DevelopersRoute = DevelopersRouteImport.update({
+  id: '/developers',
+  path: '/developers',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DocsRoute = DocsRouteImport.update({
   id: '/docs',
   path: '/docs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EvaluationRoute = EvaluationRouteImport.update({
+  id: '/evaluation',
+  path: '/evaluation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventsRoute = EventsRouteImport.update({
+  id: '/events',
+  path: '/events',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExperimentsRoute = ExperimentsRouteImport.update({
+  id: '/experiments',
+  path: '/experiments',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExpertsRoute = ExpertsRouteImport.update({
+  id: '/experts',
+  path: '/experts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GovernRoute = GovernRouteImport.update({
+  id: '/govern',
+  path: '/govern',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HireAiExpertsRoute = HireAiExpertsRouteImport.update({
+  id: '/hire-ai-experts',
+  path: '/hire-ai-experts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IntegrationsRoute = IntegrationsRouteImport.update({
+  id: '/integrations',
+  path: '/integrations',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LlmEvaluationRoute = LlmEvaluationRouteImport.update({
+  id: '/llm-evaluation',
+  path: '/llm-evaluation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MetricsRoute = MetricsRouteImport.update({
+  id: '/metrics',
+  path: '/metrics',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NexusRoute = NexusRouteImport.update({
@@ -65,14 +244,39 @@ const NexusRoute = NexusRouteImport.update({
   path: '/nexus',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ObservabilityRoute = ObservabilityRouteImport.update({
+  id: '/observability',
+  path: '/observability',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlatformRoute = PlatformRouteImport.update({
+  id: '/platform',
+  path: '/platform',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PricingRoute = PricingRouteImport.update({
   id: '/pricing',
   path: '/pricing',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProductRoute = ProductRouteImport.update({
   id: '/product',
   path: '/product',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResourcesRoute = ResourcesRouteImport.update({
+  id: '/resources',
+  path: '/resources',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SampleReportRoute = SampleReportRouteImport.update({
+  id: '/sample-report',
+  path: '/sample-report',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SecurityRoute = SecurityRouteImport.update({
@@ -85,14 +289,24 @@ const ServicesRoute = ServicesRouteImport.update({
   path: '/services',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const VeraRoute = VeraRouteImport.update({
   id: '/vera',
   path: '/vera',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiChatRoute = ApiChatRouteImport.update({
-  id: '/api/chat',
-  path: '/api/chat',
+const ApiContactRoute = ApiContactRouteImport.update({
+  id: '/api/contact',
+  path: '/api/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiSampleReportPdfRoute = ApiSampleReportPdfRouteImport.update({
+  id: '/api/sample-report-pdf',
+  path: '/api/sample-report-pdf',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogIndexRoute = BlogIndexRouteImport.update({
@@ -105,6 +319,33 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
   path: '/blog/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogAiAgentTestingIsASystemsProblemRoute =
+  BlogAiAgentTestingIsASystemsProblemRouteImport.update({
+    id: '/blog/ai-agent-testing-is-a-systems-problem',
+    path: '/blog/ai-agent-testing-is-a-systems-problem',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DocsIndexRoute = DocsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => DocsRoute,
+} as any)
+const DocsAiAssuranceTokenomicsRoute =
+  DocsAiAssuranceTokenomicsRouteImport.update({
+    id: '/ai-assurance-tokenomics',
+    path: '/ai-assurance-tokenomics',
+    getParentRoute: () => DocsRoute,
+  } as any)
+const DocsApiReferenceRoute = DocsApiReferenceRouteImport.update({
+  id: '/api-reference',
+  path: '/api-reference',
+  getParentRoute: () => DocsRoute,
+} as any)
+const DocsEnvironmentsRoute = DocsEnvironmentsRouteImport.update({
+  id: '/environments',
+  path: '/environments',
+  getParentRoute: () => DocsRoute,
+} as any)
 const DocsEvaluationModelRoute = DocsEvaluationModelRouteImport.update({
   id: '/evaluation-model',
   path: '/evaluation-model',
@@ -115,11 +356,27 @@ const DocsGettingStartedRoute = DocsGettingStartedRouteImport.update({
   path: '/getting-started',
   getParentRoute: () => DocsRoute,
 } as any)
+const DocsGraphragEvaluationRoute = DocsGraphragEvaluationRouteImport.update({
+  id: '/graphrag-evaluation',
+  path: '/graphrag-evaluation',
+  getParentRoute: () => DocsRoute,
+} as any)
+const DocsIntegrationsRoute = DocsIntegrationsRouteImport.update({
+  id: '/integrations',
+  path: '/integrations',
+  getParentRoute: () => DocsRoute,
+} as any)
 const DocsReportingRoute = DocsReportingRouteImport.update({
   id: '/reporting',
   path: '/reporting',
   getParentRoute: () => DocsRoute,
 } as any)
+const DocsSageContentEngineeringRoute =
+  DocsSageContentEngineeringRouteImport.update({
+    id: '/sage-content-engineering',
+    path: '/sage-content-engineering',
+    getParentRoute: () => DocsRoute,
+  } as any)
 const DocsTroubleshootingRoute = DocsTroubleshootingRouteImport.update({
   id: '/troubleshooting',
   path: '/troubleshooting',
@@ -130,159 +387,467 @@ const DocsWritingTestSpecsRoute = DocsWritingTestSpecsRouteImport.update({
   path: '/writing-test-specs',
   getParentRoute: () => DocsRoute,
 } as any)
+const BlogGeneratedSlugRoute = BlogGeneratedSlugRouteImport.update({
+  id: '/blog/generated/$slug',
+  path: '/blog/generated/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocsResourceSlugRoute = DocsResourceSlugRouteImport.update({
+  id: '/resource/$slug',
+  path: '/resource/$slug',
+  getParentRoute: () => DocsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/ai-agent-evaluation': typeof AiAgentEvaluationRoute
+  '/ai-agent-security-testing': typeof AiAgentSecurityTestingRoute
+  '/ai-agent-testing': typeof AiAgentTestingRoute
+  '/ai-agent-testing-platform': typeof AiAgentTestingPlatformRoute
+  '/ai-assurance': typeof AiAssuranceRoute
+  '/ai-production-readiness': typeof AiProductionReadinessRoute
+  '/ai-regression-testing': typeof AiRegressionTestingRoute
+  '/ai-release-assurance': typeof AiReleaseAssuranceRoute
+  '/ai-testing-framework': typeof AiTestingFrameworkRoute
+  '/autonomous-ai-testing': typeof AutonomousAiTestingRoute
+  '/autonomous-testing': typeof AutonomousTestingRoute
   '/chakra': typeof ChakraRoute
   '/cis': typeof CisRoute
   '/contact': typeof ContactRoute
+  '/conversational-ai-testing': typeof ConversationalAiTestingRoute
+  '/cookies': typeof CookiesRoute
+  '/customers': typeof CustomersRoute
+  '/datasets': typeof DatasetsRoute
+  '/demo': typeof DemoRoute
+  '/design-partners': typeof DesignPartnersRoute
+  '/developers': typeof DevelopersRoute
   '/docs': typeof DocsRouteWithChildren
+  '/evaluation': typeof EvaluationRoute
+  '/events': typeof EventsRoute
+  '/experiments': typeof ExperimentsRoute
+  '/experts': typeof ExpertsRoute
+  '/govern': typeof GovernRoute
+  '/hire-ai-experts': typeof HireAiExpertsRoute
+  '/integrations': typeof IntegrationsRoute
+  '/llm-evaluation': typeof LlmEvaluationRoute
+  '/metrics': typeof MetricsRoute
   '/nexus': typeof NexusRoute
+  '/observability': typeof ObservabilityRoute
+  '/platform': typeof PlatformRoute
   '/pricing': typeof PricingRoute
+  '/privacy': typeof PrivacyRoute
   '/product': typeof ProductRoute
+  '/resources': typeof ResourcesRoute
+  '/sample-report': typeof SampleReportRoute
   '/security': typeof SecurityRoute
   '/services': typeof ServicesRoute
+  '/terms': typeof TermsRoute
   '/vera': typeof VeraRoute
-  '/api/chat': typeof ApiChatRoute
+  '/api/contact': typeof ApiContactRoute
+  '/api/sample-report-pdf': typeof ApiSampleReportPdfRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/blog/ai-agent-testing-is-a-systems-problem': typeof BlogAiAgentTestingIsASystemsProblemRoute
+  '/docs/ai-assurance-tokenomics': typeof DocsAiAssuranceTokenomicsRoute
+  '/docs/api-reference': typeof DocsApiReferenceRoute
+  '/docs/environments': typeof DocsEnvironmentsRoute
   '/docs/evaluation-model': typeof DocsEvaluationModelRoute
   '/docs/getting-started': typeof DocsGettingStartedRoute
+  '/docs/graphrag-evaluation': typeof DocsGraphragEvaluationRoute
+  '/docs/integrations': typeof DocsIntegrationsRoute
   '/docs/reporting': typeof DocsReportingRoute
+  '/docs/sage-content-engineering': typeof DocsSageContentEngineeringRoute
   '/docs/troubleshooting': typeof DocsTroubleshootingRoute
   '/docs/writing-test-specs': typeof DocsWritingTestSpecsRoute
   '/blog/': typeof BlogIndexRoute
+  '/docs/': typeof DocsIndexRoute
+  '/blog/generated/$slug': typeof BlogGeneratedSlugRoute
+  '/docs/resource/$slug': typeof DocsResourceSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/ai-agent-evaluation': typeof AiAgentEvaluationRoute
+  '/ai-agent-security-testing': typeof AiAgentSecurityTestingRoute
+  '/ai-agent-testing': typeof AiAgentTestingRoute
+  '/ai-agent-testing-platform': typeof AiAgentTestingPlatformRoute
+  '/ai-assurance': typeof AiAssuranceRoute
+  '/ai-production-readiness': typeof AiProductionReadinessRoute
+  '/ai-regression-testing': typeof AiRegressionTestingRoute
+  '/ai-release-assurance': typeof AiReleaseAssuranceRoute
+  '/ai-testing-framework': typeof AiTestingFrameworkRoute
+  '/autonomous-ai-testing': typeof AutonomousAiTestingRoute
+  '/autonomous-testing': typeof AutonomousTestingRoute
   '/chakra': typeof ChakraRoute
   '/cis': typeof CisRoute
   '/contact': typeof ContactRoute
-  '/docs': typeof DocsRouteWithChildren
+  '/conversational-ai-testing': typeof ConversationalAiTestingRoute
+  '/cookies': typeof CookiesRoute
+  '/customers': typeof CustomersRoute
+  '/datasets': typeof DatasetsRoute
+  '/demo': typeof DemoRoute
+  '/design-partners': typeof DesignPartnersRoute
+  '/developers': typeof DevelopersRoute
+  '/evaluation': typeof EvaluationRoute
+  '/events': typeof EventsRoute
+  '/experiments': typeof ExperimentsRoute
+  '/experts': typeof ExpertsRoute
+  '/govern': typeof GovernRoute
+  '/hire-ai-experts': typeof HireAiExpertsRoute
+  '/integrations': typeof IntegrationsRoute
+  '/llm-evaluation': typeof LlmEvaluationRoute
+  '/metrics': typeof MetricsRoute
   '/nexus': typeof NexusRoute
+  '/observability': typeof ObservabilityRoute
+  '/platform': typeof PlatformRoute
   '/pricing': typeof PricingRoute
+  '/privacy': typeof PrivacyRoute
   '/product': typeof ProductRoute
+  '/resources': typeof ResourcesRoute
+  '/sample-report': typeof SampleReportRoute
   '/security': typeof SecurityRoute
   '/services': typeof ServicesRoute
+  '/terms': typeof TermsRoute
   '/vera': typeof VeraRoute
-  '/api/chat': typeof ApiChatRoute
+  '/api/contact': typeof ApiContactRoute
+  '/api/sample-report-pdf': typeof ApiSampleReportPdfRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/blog/ai-agent-testing-is-a-systems-problem': typeof BlogAiAgentTestingIsASystemsProblemRoute
+  '/docs/ai-assurance-tokenomics': typeof DocsAiAssuranceTokenomicsRoute
+  '/docs/api-reference': typeof DocsApiReferenceRoute
+  '/docs/environments': typeof DocsEnvironmentsRoute
   '/docs/evaluation-model': typeof DocsEvaluationModelRoute
   '/docs/getting-started': typeof DocsGettingStartedRoute
+  '/docs/graphrag-evaluation': typeof DocsGraphragEvaluationRoute
+  '/docs/integrations': typeof DocsIntegrationsRoute
   '/docs/reporting': typeof DocsReportingRoute
+  '/docs/sage-content-engineering': typeof DocsSageContentEngineeringRoute
   '/docs/troubleshooting': typeof DocsTroubleshootingRoute
   '/docs/writing-test-specs': typeof DocsWritingTestSpecsRoute
   '/blog': typeof BlogIndexRoute
+  '/docs': typeof DocsIndexRoute
+  '/blog/generated/$slug': typeof BlogGeneratedSlugRoute
+  '/docs/resource/$slug': typeof DocsResourceSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/ai-agent-evaluation': typeof AiAgentEvaluationRoute
+  '/ai-agent-security-testing': typeof AiAgentSecurityTestingRoute
+  '/ai-agent-testing': typeof AiAgentTestingRoute
+  '/ai-agent-testing-platform': typeof AiAgentTestingPlatformRoute
+  '/ai-assurance': typeof AiAssuranceRoute
+  '/ai-production-readiness': typeof AiProductionReadinessRoute
+  '/ai-regression-testing': typeof AiRegressionTestingRoute
+  '/ai-release-assurance': typeof AiReleaseAssuranceRoute
+  '/ai-testing-framework': typeof AiTestingFrameworkRoute
+  '/autonomous-ai-testing': typeof AutonomousAiTestingRoute
+  '/autonomous-testing': typeof AutonomousTestingRoute
   '/chakra': typeof ChakraRoute
   '/cis': typeof CisRoute
   '/contact': typeof ContactRoute
+  '/conversational-ai-testing': typeof ConversationalAiTestingRoute
+  '/cookies': typeof CookiesRoute
+  '/customers': typeof CustomersRoute
+  '/datasets': typeof DatasetsRoute
+  '/demo': typeof DemoRoute
+  '/design-partners': typeof DesignPartnersRoute
+  '/developers': typeof DevelopersRoute
   '/docs': typeof DocsRouteWithChildren
+  '/evaluation': typeof EvaluationRoute
+  '/events': typeof EventsRoute
+  '/experiments': typeof ExperimentsRoute
+  '/experts': typeof ExpertsRoute
+  '/govern': typeof GovernRoute
+  '/hire-ai-experts': typeof HireAiExpertsRoute
+  '/integrations': typeof IntegrationsRoute
+  '/llm-evaluation': typeof LlmEvaluationRoute
+  '/metrics': typeof MetricsRoute
   '/nexus': typeof NexusRoute
+  '/observability': typeof ObservabilityRoute
+  '/platform': typeof PlatformRoute
   '/pricing': typeof PricingRoute
+  '/privacy': typeof PrivacyRoute
   '/product': typeof ProductRoute
+  '/resources': typeof ResourcesRoute
+  '/sample-report': typeof SampleReportRoute
   '/security': typeof SecurityRoute
   '/services': typeof ServicesRoute
+  '/terms': typeof TermsRoute
   '/vera': typeof VeraRoute
-  '/api/chat': typeof ApiChatRoute
+  '/api/contact': typeof ApiContactRoute
+  '/api/sample-report-pdf': typeof ApiSampleReportPdfRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/blog/ai-agent-testing-is-a-systems-problem': typeof BlogAiAgentTestingIsASystemsProblemRoute
+  '/docs/ai-assurance-tokenomics': typeof DocsAiAssuranceTokenomicsRoute
+  '/docs/api-reference': typeof DocsApiReferenceRoute
+  '/docs/environments': typeof DocsEnvironmentsRoute
   '/docs/evaluation-model': typeof DocsEvaluationModelRoute
   '/docs/getting-started': typeof DocsGettingStartedRoute
+  '/docs/graphrag-evaluation': typeof DocsGraphragEvaluationRoute
+  '/docs/integrations': typeof DocsIntegrationsRoute
   '/docs/reporting': typeof DocsReportingRoute
+  '/docs/sage-content-engineering': typeof DocsSageContentEngineeringRoute
   '/docs/troubleshooting': typeof DocsTroubleshootingRoute
   '/docs/writing-test-specs': typeof DocsWritingTestSpecsRoute
   '/blog/': typeof BlogIndexRoute
+  '/docs/': typeof DocsIndexRoute
+  '/blog/generated/$slug': typeof BlogGeneratedSlugRoute
+  '/docs/resource/$slug': typeof DocsResourceSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/about'
+    | '/ai-agent-evaluation'
+    | '/ai-agent-security-testing'
+    | '/ai-agent-testing'
+    | '/ai-agent-testing-platform'
+    | '/ai-assurance'
+    | '/ai-production-readiness'
+    | '/ai-regression-testing'
+    | '/ai-release-assurance'
+    | '/ai-testing-framework'
+    | '/autonomous-ai-testing'
+    | '/autonomous-testing'
     | '/chakra'
     | '/cis'
     | '/contact'
+    | '/conversational-ai-testing'
+    | '/cookies'
+    | '/customers'
+    | '/datasets'
+    | '/demo'
+    | '/design-partners'
+    | '/developers'
     | '/docs'
+    | '/evaluation'
+    | '/events'
+    | '/experiments'
+    | '/experts'
+    | '/govern'
+    | '/hire-ai-experts'
+    | '/integrations'
+    | '/llm-evaluation'
+    | '/metrics'
     | '/nexus'
+    | '/observability'
+    | '/platform'
     | '/pricing'
+    | '/privacy'
     | '/product'
+    | '/resources'
+    | '/sample-report'
     | '/security'
     | '/services'
+    | '/terms'
     | '/vera'
-    | '/api/chat'
+    | '/api/contact'
+    | '/api/sample-report-pdf'
     | '/blog/$slug'
+    | '/blog/ai-agent-testing-is-a-systems-problem'
+    | '/docs/ai-assurance-tokenomics'
+    | '/docs/api-reference'
+    | '/docs/environments'
     | '/docs/evaluation-model'
     | '/docs/getting-started'
+    | '/docs/graphrag-evaluation'
+    | '/docs/integrations'
     | '/docs/reporting'
+    | '/docs/sage-content-engineering'
     | '/docs/troubleshooting'
     | '/docs/writing-test-specs'
     | '/blog/'
+    | '/docs/'
+    | '/blog/generated/$slug'
+    | '/docs/resource/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
+    | '/ai-agent-evaluation'
+    | '/ai-agent-security-testing'
+    | '/ai-agent-testing'
+    | '/ai-agent-testing-platform'
+    | '/ai-assurance'
+    | '/ai-production-readiness'
+    | '/ai-regression-testing'
+    | '/ai-release-assurance'
+    | '/ai-testing-framework'
+    | '/autonomous-ai-testing'
+    | '/autonomous-testing'
     | '/chakra'
     | '/cis'
     | '/contact'
-    | '/docs'
+    | '/conversational-ai-testing'
+    | '/cookies'
+    | '/customers'
+    | '/datasets'
+    | '/demo'
+    | '/design-partners'
+    | '/developers'
+    | '/evaluation'
+    | '/events'
+    | '/experiments'
+    | '/experts'
+    | '/govern'
+    | '/hire-ai-experts'
+    | '/integrations'
+    | '/llm-evaluation'
+    | '/metrics'
     | '/nexus'
+    | '/observability'
+    | '/platform'
     | '/pricing'
+    | '/privacy'
     | '/product'
+    | '/resources'
+    | '/sample-report'
     | '/security'
     | '/services'
+    | '/terms'
     | '/vera'
-    | '/api/chat'
+    | '/api/contact'
+    | '/api/sample-report-pdf'
     | '/blog/$slug'
+    | '/blog/ai-agent-testing-is-a-systems-problem'
+    | '/docs/ai-assurance-tokenomics'
+    | '/docs/api-reference'
+    | '/docs/environments'
     | '/docs/evaluation-model'
     | '/docs/getting-started'
+    | '/docs/graphrag-evaluation'
+    | '/docs/integrations'
     | '/docs/reporting'
+    | '/docs/sage-content-engineering'
     | '/docs/troubleshooting'
     | '/docs/writing-test-specs'
     | '/blog'
+    | '/docs'
+    | '/blog/generated/$slug'
+    | '/docs/resource/$slug'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/ai-agent-evaluation'
+    | '/ai-agent-security-testing'
+    | '/ai-agent-testing'
+    | '/ai-agent-testing-platform'
+    | '/ai-assurance'
+    | '/ai-production-readiness'
+    | '/ai-regression-testing'
+    | '/ai-release-assurance'
+    | '/ai-testing-framework'
+    | '/autonomous-ai-testing'
+    | '/autonomous-testing'
     | '/chakra'
     | '/cis'
     | '/contact'
+    | '/conversational-ai-testing'
+    | '/cookies'
+    | '/customers'
+    | '/datasets'
+    | '/demo'
+    | '/design-partners'
+    | '/developers'
     | '/docs'
+    | '/evaluation'
+    | '/events'
+    | '/experiments'
+    | '/experts'
+    | '/govern'
+    | '/hire-ai-experts'
+    | '/integrations'
+    | '/llm-evaluation'
+    | '/metrics'
     | '/nexus'
+    | '/observability'
+    | '/platform'
     | '/pricing'
+    | '/privacy'
     | '/product'
+    | '/resources'
+    | '/sample-report'
     | '/security'
     | '/services'
+    | '/terms'
     | '/vera'
-    | '/api/chat'
+    | '/api/contact'
+    | '/api/sample-report-pdf'
     | '/blog/$slug'
+    | '/blog/ai-agent-testing-is-a-systems-problem'
+    | '/docs/ai-assurance-tokenomics'
+    | '/docs/api-reference'
+    | '/docs/environments'
     | '/docs/evaluation-model'
     | '/docs/getting-started'
+    | '/docs/graphrag-evaluation'
+    | '/docs/integrations'
     | '/docs/reporting'
+    | '/docs/sage-content-engineering'
     | '/docs/troubleshooting'
     | '/docs/writing-test-specs'
     | '/blog/'
+    | '/docs/'
+    | '/blog/generated/$slug'
+    | '/docs/resource/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  AiAgentEvaluationRoute: typeof AiAgentEvaluationRoute
+  AiAgentSecurityTestingRoute: typeof AiAgentSecurityTestingRoute
+  AiAgentTestingRoute: typeof AiAgentTestingRoute
+  AiAgentTestingPlatformRoute: typeof AiAgentTestingPlatformRoute
+  AiAssuranceRoute: typeof AiAssuranceRoute
+  AiProductionReadinessRoute: typeof AiProductionReadinessRoute
+  AiRegressionTestingRoute: typeof AiRegressionTestingRoute
+  AiReleaseAssuranceRoute: typeof AiReleaseAssuranceRoute
+  AiTestingFrameworkRoute: typeof AiTestingFrameworkRoute
+  AutonomousAiTestingRoute: typeof AutonomousAiTestingRoute
+  AutonomousTestingRoute: typeof AutonomousTestingRoute
   ChakraRoute: typeof ChakraRoute
   CisRoute: typeof CisRoute
   ContactRoute: typeof ContactRoute
+  ConversationalAiTestingRoute: typeof ConversationalAiTestingRoute
+  CookiesRoute: typeof CookiesRoute
+  CustomersRoute: typeof CustomersRoute
+  DatasetsRoute: typeof DatasetsRoute
+  DemoRoute: typeof DemoRoute
+  DesignPartnersRoute: typeof DesignPartnersRoute
+  DevelopersRoute: typeof DevelopersRoute
   DocsRoute: typeof DocsRouteWithChildren
+  EvaluationRoute: typeof EvaluationRoute
+  EventsRoute: typeof EventsRoute
+  ExperimentsRoute: typeof ExperimentsRoute
+  ExpertsRoute: typeof ExpertsRoute
+  GovernRoute: typeof GovernRoute
+  HireAiExpertsRoute: typeof HireAiExpertsRoute
+  IntegrationsRoute: typeof IntegrationsRoute
+  LlmEvaluationRoute: typeof LlmEvaluationRoute
+  MetricsRoute: typeof MetricsRoute
   NexusRoute: typeof NexusRoute
+  ObservabilityRoute: typeof ObservabilityRoute
+  PlatformRoute: typeof PlatformRoute
   PricingRoute: typeof PricingRoute
+  PrivacyRoute: typeof PrivacyRoute
   ProductRoute: typeof ProductRoute
+  ResourcesRoute: typeof ResourcesRoute
+  SampleReportRoute: typeof SampleReportRoute
   SecurityRoute: typeof SecurityRoute
   ServicesRoute: typeof ServicesRoute
+  TermsRoute: typeof TermsRoute
   VeraRoute: typeof VeraRoute
-  ApiChatRoute: typeof ApiChatRoute
+  ApiContactRoute: typeof ApiContactRoute
+  ApiSampleReportPdfRoute: typeof ApiSampleReportPdfRoute
   BlogSlugRoute: typeof BlogSlugRoute
+  BlogAiAgentTestingIsASystemsProblemRoute: typeof BlogAiAgentTestingIsASystemsProblemRoute
   BlogIndexRoute: typeof BlogIndexRoute
+  BlogGeneratedSlugRoute: typeof BlogGeneratedSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -299,6 +864,83 @@ declare module '@tanstack/react-router' {
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai-agent-evaluation': {
+      id: '/ai-agent-evaluation'
+      path: '/ai-agent-evaluation'
+      fullPath: '/ai-agent-evaluation'
+      preLoaderRoute: typeof AiAgentEvaluationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai-agent-security-testing': {
+      id: '/ai-agent-security-testing'
+      path: '/ai-agent-security-testing'
+      fullPath: '/ai-agent-security-testing'
+      preLoaderRoute: typeof AiAgentSecurityTestingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai-agent-testing': {
+      id: '/ai-agent-testing'
+      path: '/ai-agent-testing'
+      fullPath: '/ai-agent-testing'
+      preLoaderRoute: typeof AiAgentTestingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai-agent-testing-platform': {
+      id: '/ai-agent-testing-platform'
+      path: '/ai-agent-testing-platform'
+      fullPath: '/ai-agent-testing-platform'
+      preLoaderRoute: typeof AiAgentTestingPlatformRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai-assurance': {
+      id: '/ai-assurance'
+      path: '/ai-assurance'
+      fullPath: '/ai-assurance'
+      preLoaderRoute: typeof AiAssuranceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai-production-readiness': {
+      id: '/ai-production-readiness'
+      path: '/ai-production-readiness'
+      fullPath: '/ai-production-readiness'
+      preLoaderRoute: typeof AiProductionReadinessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai-regression-testing': {
+      id: '/ai-regression-testing'
+      path: '/ai-regression-testing'
+      fullPath: '/ai-regression-testing'
+      preLoaderRoute: typeof AiRegressionTestingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai-release-assurance': {
+      id: '/ai-release-assurance'
+      path: '/ai-release-assurance'
+      fullPath: '/ai-release-assurance'
+      preLoaderRoute: typeof AiReleaseAssuranceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai-testing-framework': {
+      id: '/ai-testing-framework'
+      path: '/ai-testing-framework'
+      fullPath: '/ai-testing-framework'
+      preLoaderRoute: typeof AiTestingFrameworkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/autonomous-ai-testing': {
+      id: '/autonomous-ai-testing'
+      path: '/autonomous-ai-testing'
+      fullPath: '/autonomous-ai-testing'
+      preLoaderRoute: typeof AutonomousAiTestingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/autonomous-testing': {
+      id: '/autonomous-testing'
+      path: '/autonomous-testing'
+      fullPath: '/autonomous-testing'
+      preLoaderRoute: typeof AutonomousTestingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/chakra': {
@@ -322,11 +964,123 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/conversational-ai-testing': {
+      id: '/conversational-ai-testing'
+      path: '/conversational-ai-testing'
+      fullPath: '/conversational-ai-testing'
+      preLoaderRoute: typeof ConversationalAiTestingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cookies': {
+      id: '/cookies'
+      path: '/cookies'
+      fullPath: '/cookies'
+      preLoaderRoute: typeof CookiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/customers': {
+      id: '/customers'
+      path: '/customers'
+      fullPath: '/customers'
+      preLoaderRoute: typeof CustomersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/datasets': {
+      id: '/datasets'
+      path: '/datasets'
+      fullPath: '/datasets'
+      preLoaderRoute: typeof DatasetsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/demo': {
+      id: '/demo'
+      path: '/demo'
+      fullPath: '/demo'
+      preLoaderRoute: typeof DemoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/design-partners': {
+      id: '/design-partners'
+      path: '/design-partners'
+      fullPath: '/design-partners'
+      preLoaderRoute: typeof DesignPartnersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/developers': {
+      id: '/developers'
+      path: '/developers'
+      fullPath: '/developers'
+      preLoaderRoute: typeof DevelopersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/docs': {
       id: '/docs'
       path: '/docs'
       fullPath: '/docs'
       preLoaderRoute: typeof DocsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/evaluation': {
+      id: '/evaluation'
+      path: '/evaluation'
+      fullPath: '/evaluation'
+      preLoaderRoute: typeof EvaluationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/events': {
+      id: '/events'
+      path: '/events'
+      fullPath: '/events'
+      preLoaderRoute: typeof EventsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/experiments': {
+      id: '/experiments'
+      path: '/experiments'
+      fullPath: '/experiments'
+      preLoaderRoute: typeof ExperimentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/experts': {
+      id: '/experts'
+      path: '/experts'
+      fullPath: '/experts'
+      preLoaderRoute: typeof ExpertsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/govern': {
+      id: '/govern'
+      path: '/govern'
+      fullPath: '/govern'
+      preLoaderRoute: typeof GovernRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hire-ai-experts': {
+      id: '/hire-ai-experts'
+      path: '/hire-ai-experts'
+      fullPath: '/hire-ai-experts'
+      preLoaderRoute: typeof HireAiExpertsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/integrations': {
+      id: '/integrations'
+      path: '/integrations'
+      fullPath: '/integrations'
+      preLoaderRoute: typeof IntegrationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/llm-evaluation': {
+      id: '/llm-evaluation'
+      path: '/llm-evaluation'
+      fullPath: '/llm-evaluation'
+      preLoaderRoute: typeof LlmEvaluationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/metrics': {
+      id: '/metrics'
+      path: '/metrics'
+      fullPath: '/metrics'
+      preLoaderRoute: typeof MetricsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/nexus': {
@@ -336,6 +1090,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NexusRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/observability': {
+      id: '/observability'
+      path: '/observability'
+      fullPath: '/observability'
+      preLoaderRoute: typeof ObservabilityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/platform': {
+      id: '/platform'
+      path: '/platform'
+      fullPath: '/platform'
+      preLoaderRoute: typeof PlatformRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/pricing': {
       id: '/pricing'
       path: '/pricing'
@@ -343,11 +1111,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PricingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/product': {
       id: '/product'
       path: '/product'
       fullPath: '/product'
       preLoaderRoute: typeof ProductRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/resources': {
+      id: '/resources'
+      path: '/resources'
+      fullPath: '/resources'
+      preLoaderRoute: typeof ResourcesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sample-report': {
+      id: '/sample-report'
+      path: '/sample-report'
+      fullPath: '/sample-report'
+      preLoaderRoute: typeof SampleReportRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/security': {
@@ -364,6 +1153,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/vera': {
       id: '/vera'
       path: '/vera'
@@ -371,11 +1167,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VeraRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/chat': {
-      id: '/api/chat'
-      path: '/api/chat'
-      fullPath: '/api/chat'
-      preLoaderRoute: typeof ApiChatRouteImport
+    '/api/contact': {
+      id: '/api/contact'
+      path: '/api/contact'
+      fullPath: '/api/contact'
+      preLoaderRoute: typeof ApiContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/sample-report-pdf': {
+      id: '/api/sample-report-pdf'
+      path: '/api/sample-report-pdf'
+      fullPath: '/api/sample-report-pdf'
+      preLoaderRoute: typeof ApiSampleReportPdfRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog/': {
@@ -392,6 +1195,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/ai-agent-testing-is-a-systems-problem': {
+      id: '/blog/ai-agent-testing-is-a-systems-problem'
+      path: '/blog/ai-agent-testing-is-a-systems-problem'
+      fullPath: '/blog/ai-agent-testing-is-a-systems-problem'
+      preLoaderRoute: typeof BlogAiAgentTestingIsASystemsProblemRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/docs/': {
+      id: '/docs/'
+      path: '/'
+      fullPath: '/docs/'
+      preLoaderRoute: typeof DocsIndexRouteImport
+      parentRoute: typeof DocsRoute
+    }
+    '/docs/ai-assurance-tokenomics': {
+      id: '/docs/ai-assurance-tokenomics'
+      path: '/ai-assurance-tokenomics'
+      fullPath: '/docs/ai-assurance-tokenomics'
+      preLoaderRoute: typeof DocsAiAssuranceTokenomicsRouteImport
+      parentRoute: typeof DocsRoute
+    }
+    '/docs/api-reference': {
+      id: '/docs/api-reference'
+      path: '/api-reference'
+      fullPath: '/docs/api-reference'
+      preLoaderRoute: typeof DocsApiReferenceRouteImport
+      parentRoute: typeof DocsRoute
+    }
+    '/docs/environments': {
+      id: '/docs/environments'
+      path: '/environments'
+      fullPath: '/docs/environments'
+      preLoaderRoute: typeof DocsEnvironmentsRouteImport
+      parentRoute: typeof DocsRoute
+    }
     '/docs/evaluation-model': {
       id: '/docs/evaluation-model'
       path: '/evaluation-model'
@@ -406,11 +1244,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DocsGettingStartedRouteImport
       parentRoute: typeof DocsRoute
     }
+    '/docs/graphrag-evaluation': {
+      id: '/docs/graphrag-evaluation'
+      path: '/graphrag-evaluation'
+      fullPath: '/docs/graphrag-evaluation'
+      preLoaderRoute: typeof DocsGraphragEvaluationRouteImport
+      parentRoute: typeof DocsRoute
+    }
+    '/docs/integrations': {
+      id: '/docs/integrations'
+      path: '/integrations'
+      fullPath: '/docs/integrations'
+      preLoaderRoute: typeof DocsIntegrationsRouteImport
+      parentRoute: typeof DocsRoute
+    }
     '/docs/reporting': {
       id: '/docs/reporting'
       path: '/reporting'
       fullPath: '/docs/reporting'
       preLoaderRoute: typeof DocsReportingRouteImport
+      parentRoute: typeof DocsRoute
+    }
+    '/docs/sage-content-engineering': {
+      id: '/docs/sage-content-engineering'
+      path: '/sage-content-engineering'
+      fullPath: '/docs/sage-content-engineering'
+      preLoaderRoute: typeof DocsSageContentEngineeringRouteImport
       parentRoute: typeof DocsRoute
     }
     '/docs/troubleshooting': {
@@ -427,23 +1286,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DocsWritingTestSpecsRouteImport
       parentRoute: typeof DocsRoute
     }
+    '/blog/generated/$slug': {
+      id: '/blog/generated/$slug'
+      path: '/blog/generated/$slug'
+      fullPath: '/blog/generated/$slug'
+      preLoaderRoute: typeof BlogGeneratedSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/docs/resource/$slug': {
+      id: '/docs/resource/$slug'
+      path: '/resource/$slug'
+      fullPath: '/docs/resource/$slug'
+      preLoaderRoute: typeof DocsResourceSlugRouteImport
+      parentRoute: typeof DocsRoute
+    }
   }
 }
 
 interface DocsRouteChildren {
+  DocsAiAssuranceTokenomicsRoute: typeof DocsAiAssuranceTokenomicsRoute
+  DocsApiReferenceRoute: typeof DocsApiReferenceRoute
+  DocsEnvironmentsRoute: typeof DocsEnvironmentsRoute
   DocsEvaluationModelRoute: typeof DocsEvaluationModelRoute
   DocsGettingStartedRoute: typeof DocsGettingStartedRoute
+  DocsGraphragEvaluationRoute: typeof DocsGraphragEvaluationRoute
+  DocsIntegrationsRoute: typeof DocsIntegrationsRoute
   DocsReportingRoute: typeof DocsReportingRoute
+  DocsSageContentEngineeringRoute: typeof DocsSageContentEngineeringRoute
   DocsTroubleshootingRoute: typeof DocsTroubleshootingRoute
   DocsWritingTestSpecsRoute: typeof DocsWritingTestSpecsRoute
+  DocsIndexRoute: typeof DocsIndexRoute
+  DocsResourceSlugRoute: typeof DocsResourceSlugRoute
 }
 
 const DocsRouteChildren: DocsRouteChildren = {
+  DocsAiAssuranceTokenomicsRoute: DocsAiAssuranceTokenomicsRoute,
+  DocsApiReferenceRoute: DocsApiReferenceRoute,
+  DocsEnvironmentsRoute: DocsEnvironmentsRoute,
   DocsEvaluationModelRoute: DocsEvaluationModelRoute,
   DocsGettingStartedRoute: DocsGettingStartedRoute,
+  DocsGraphragEvaluationRoute: DocsGraphragEvaluationRoute,
+  DocsIntegrationsRoute: DocsIntegrationsRoute,
   DocsReportingRoute: DocsReportingRoute,
+  DocsSageContentEngineeringRoute: DocsSageContentEngineeringRoute,
   DocsTroubleshootingRoute: DocsTroubleshootingRoute,
   DocsWritingTestSpecsRoute: DocsWritingTestSpecsRoute,
+  DocsIndexRoute: DocsIndexRoute,
+  DocsResourceSlugRoute: DocsResourceSlugRoute,
 }
 
 const DocsRouteWithChildren = DocsRoute._addFileChildren(DocsRouteChildren)
@@ -451,19 +1340,56 @@ const DocsRouteWithChildren = DocsRoute._addFileChildren(DocsRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  AiAgentEvaluationRoute: AiAgentEvaluationRoute,
+  AiAgentSecurityTestingRoute: AiAgentSecurityTestingRoute,
+  AiAgentTestingRoute: AiAgentTestingRoute,
+  AiAgentTestingPlatformRoute: AiAgentTestingPlatformRoute,
+  AiAssuranceRoute: AiAssuranceRoute,
+  AiProductionReadinessRoute: AiProductionReadinessRoute,
+  AiRegressionTestingRoute: AiRegressionTestingRoute,
+  AiReleaseAssuranceRoute: AiReleaseAssuranceRoute,
+  AiTestingFrameworkRoute: AiTestingFrameworkRoute,
+  AutonomousAiTestingRoute: AutonomousAiTestingRoute,
+  AutonomousTestingRoute: AutonomousTestingRoute,
   ChakraRoute: ChakraRoute,
   CisRoute: CisRoute,
   ContactRoute: ContactRoute,
+  ConversationalAiTestingRoute: ConversationalAiTestingRoute,
+  CookiesRoute: CookiesRoute,
+  CustomersRoute: CustomersRoute,
+  DatasetsRoute: DatasetsRoute,
+  DemoRoute: DemoRoute,
+  DesignPartnersRoute: DesignPartnersRoute,
+  DevelopersRoute: DevelopersRoute,
   DocsRoute: DocsRouteWithChildren,
+  EvaluationRoute: EvaluationRoute,
+  EventsRoute: EventsRoute,
+  ExperimentsRoute: ExperimentsRoute,
+  ExpertsRoute: ExpertsRoute,
+  GovernRoute: GovernRoute,
+  HireAiExpertsRoute: HireAiExpertsRoute,
+  IntegrationsRoute: IntegrationsRoute,
+  LlmEvaluationRoute: LlmEvaluationRoute,
+  MetricsRoute: MetricsRoute,
   NexusRoute: NexusRoute,
+  ObservabilityRoute: ObservabilityRoute,
+  PlatformRoute: PlatformRoute,
   PricingRoute: PricingRoute,
+  PrivacyRoute: PrivacyRoute,
   ProductRoute: ProductRoute,
+  ResourcesRoute: ResourcesRoute,
+  SampleReportRoute: SampleReportRoute,
   SecurityRoute: SecurityRoute,
   ServicesRoute: ServicesRoute,
+  TermsRoute: TermsRoute,
   VeraRoute: VeraRoute,
-  ApiChatRoute: ApiChatRoute,
+  ApiContactRoute: ApiContactRoute,
+  ApiSampleReportPdfRoute: ApiSampleReportPdfRoute,
   BlogSlugRoute: BlogSlugRoute,
+  BlogAiAgentTestingIsASystemsProblemRoute:
+    BlogAiAgentTestingIsASystemsProblemRoute,
   BlogIndexRoute: BlogIndexRoute,
+  BlogGeneratedSlugRoute: BlogGeneratedSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

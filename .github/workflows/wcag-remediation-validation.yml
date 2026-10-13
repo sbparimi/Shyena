@@ -8,7 +8,7 @@ on:
       - "scripts/**"
       - ".github/workflows/**"
       - "package.json"
-      - "package-lock.json"
+      - "bun.lock"
   workflow_dispatch:
 
 permissions:
@@ -31,8 +31,10 @@ jobs:
         with:
           node-version: 22
 
-      - name: Install dependencies
-        run: npm install
+      - uses: oven-sh/setup-bun@v2
+
+      - name: Install dependencies (locked)
+        run: bun install --frozen-lockfile
 
       - name: Validate theme contract
         run: node scripts/validate-theme-contract.mjs

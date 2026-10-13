@@ -1,3 +1,4 @@
+import type { ComponentPropsWithoutRef } from "react";
 import { Markdown } from "@tanstack/markdown/react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { createFileRoute, Link } from "@tanstack/react-router";
@@ -5,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { EUENGINEERS_RESOURCES } from "@/data/euengineers-resources";
 
 const markdownComponents = {
-  a(props) {
+  a(props: ComponentPropsWithoutRef<"a">) {
     const href = props.href || "";
     const external = /^https?:\/\//i.test(href);
     return (
@@ -17,7 +18,7 @@ const markdownComponents = {
       />
     );
   },
-  img(props) {
+  img(props: ComponentPropsWithoutRef<"img">) {
     return <img {...props} loading="lazy" decoding="async" />;
   },
 };
@@ -57,7 +58,7 @@ function ResourceArticle() {
   if (!article) {
     return (
       <div className="mx-auto max-w-3xl px-6 py-24 text-center">
-        <h1 className="text-3xl font-bold text-[#0e172b]">Resource not found</h1>
+        <h1 className="text-3xl font-bold text-[var(--warp-ink)]">Resource not found</h1>
         <Button asChild className="mt-8">
           <Link to="/docs">
             <ArrowLeft className="mr-2 h-4 w-4" />
@@ -70,7 +71,7 @@ function ResourceArticle() {
 
   return (
     <div className="bg-white text-slate-950">
-      <section className="border-b border-slate-300 bg-[#eaf5fa]">
+      <section className="border-b border-slate-300 bg-[var(--warp-surface-soft)]">
         <div className="mx-auto max-w-5xl px-5 py-14 sm:px-8 sm:py-20">
           <Link
             to="/docs"
@@ -79,10 +80,10 @@ function ResourceArticle() {
             <ArrowLeft className="h-4 w-4" /> Documentation
           </Link>
           <div className="mt-10 max-w-4xl">
-            <p className="font-mono text-xs uppercase tracking-[0.2em] text-[#a87900]">
+            <p className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--warp-accent-text)]">
               Engineering resource
             </p>
-            <h1 className="mt-4 text-4xl font-bold leading-tight tracking-tight text-[#0e172b] sm:text-6xl">
+            <h1 className="mt-4 text-4xl font-bold leading-tight tracking-tight text-[var(--warp-ink)] sm:text-6xl">
               {article.title}
             </h1>
             {article.description && (
@@ -100,11 +101,11 @@ function ResourceArticle() {
       </section>
 
       <article className="mx-auto max-w-4xl px-5 py-12 sm:px-8 sm:py-20">
-        <div className="generated-content prose prose-slate max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-a:text-[#8a6500] prose-img:mx-auto prose-img:max-h-[680px] prose-img:rounded-lg">
+        <div className="generated-content prose prose-slate max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-a:text-[var(--warp-accent-text)] prose-img:mx-auto prose-img:max-h-[680px] prose-img:rounded-lg">
           <Markdown components={markdownComponents}>{article.markdown}</Markdown>
         </div>
 
-        <div className="mt-16 border-y-2 border-slate-950 bg-[#f5f8fc] px-6 py-8 sm:px-8">
+        <div className="mt-16 border-y-2 border-slate-950 bg-[var(--warp-surface-soft)] px-6 py-8 sm:px-8">
           <p className="text-sm leading-7 text-slate-600">
             Originally published in the EU Engineers engineering library. This copy is maintained as
             part of the Shyena documentation knowledge base.

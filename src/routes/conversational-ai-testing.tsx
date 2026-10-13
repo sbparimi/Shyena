@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SeoLanding, seoHead, faqSchema } from "@/components/seo/seo-landing";
-import { seoPages } from "@/components/seo/seo-data";
-const config = seoPages["/conversational-ai-testing"];
+import { getSeoPage } from "@/components/seo/seo-data";
+const config = getSeoPage("/conversational-ai-testing");
 export const Route = createFileRoute("/conversational-ai-testing")({
   head: () => ({
     ...seoHead(config),

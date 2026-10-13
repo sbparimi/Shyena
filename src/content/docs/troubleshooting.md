@@ -245,16 +245,16 @@ An incomplete trace should not be silently treated as a successful execution. Ma
 
 ## 16. Troubleshooting decision table
 
-| Symptom | First check | Likely layer |
-| --- | --- | --- |
-| no run created | credentials / target | environment |
-| agent answer wrong | goal + transcript | behavior |
-| answer right, tool wrong | tool trace | execution |
-| exact value wrong | deterministic event | behavior/execution |
-| judge score unstable | calibration | evaluator |
-| retrieval poor | retrieved context | RAG |
-| unauthorized action | auth + tool event | security |
-| release blocked unexpectedly | gate ancestry | release policy |
+| Symptom                      | First check          | Likely layer       |
+| ---------------------------- | -------------------- | ------------------ |
+| no run created               | credentials / target | environment        |
+| agent answer wrong           | goal + transcript    | behavior           |
+| answer right, tool wrong     | tool trace           | execution          |
+| exact value wrong            | deterministic event  | behavior/execution |
+| judge score unstable         | calibration          | evaluator          |
+| retrieval poor               | retrieved context    | RAG                |
+| unauthorized action          | auth + tool event    | security           |
+| release blocked unexpectedly | gate ancestry        | release policy     |
 
 ## 17. Shyena-specific troubleshooting principle
 

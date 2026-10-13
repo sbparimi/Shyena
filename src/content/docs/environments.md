@@ -201,14 +201,14 @@ This makes results comparable. Forking the specification per environment quickly
 
 ## 13. Failure classification
 
-| Failure | Correct classification |
-| --- | --- |
-| credential missing | configuration failure |
-| environment unreachable | infrastructure / inconclusive |
-| agent chose wrong tool | behavioral / execution failure |
-| unauthorized mutation | critical security failure |
-| judge unavailable | evaluation infrastructure failure |
-| semantic threshold not met | behavioral failure |
+| Failure                    | Correct classification            |
+| -------------------------- | --------------------------------- |
+| credential missing         | configuration failure             |
+| environment unreachable    | infrastructure / inconclusive     |
+| agent chose wrong tool     | behavioral / execution failure    |
+| unauthorized mutation      | critical security failure         |
+| judge unavailable          | evaluation infrastructure failure |
+| semantic threshold not met | behavioral failure                |
 
 The classification is part of trustworthy reporting.
 

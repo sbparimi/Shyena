@@ -210,7 +210,7 @@ function Diagram({
             y="405"
             textAnchor="middle"
             fill="#475569"
-            fontFamily="JetBrains Mono,ui-monospace,monospace"
+            fontFamily="Azeret Mono,ui-monospace,monospace"
             fontSize="12"
             fontWeight="600"
           >

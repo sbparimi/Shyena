@@ -20,7 +20,7 @@ export function Logo({ size = "header", theme = "light" }: LogoProps) {
         className={`${mark} shrink-0 object-contain`}
       />
       <span
-        className={`shyena-wordmark font-[Sora] ${word} font-extrabold tracking-[-0.055em] ${theme === "light" ? "text-[#171717]" : "text-[#f5f7fb]"}`}
+        className={`shyena-wordmark ${word} font-extrabold tracking-[-0.055em] ${theme === "light" ? "text-[var(--warp-ink)]" : "text-[var(--warp-ink)]"}`}
       >
         Shyena
       </span>

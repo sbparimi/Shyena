@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, CheckCircle2, Network, ShieldCheck } from "lucide-react";
+import { CtaAnchor } from "@/components/ui/cta-link";
 
 const SITE = "https://www.shyena.eu";
 
@@ -82,19 +83,19 @@ const work = [
 
 function Page() {
   return (
-    <main className="bg-white text-[#17213f]">
-      <section className="bg-[#07101f] text-white">
+    <main className="bg-white text-[var(--warp-ink)]">
+      <section className="bg-[var(--warp-canvas)] text-white">
         <div className="mx-auto max-w-[1240px] px-5 py-20 sm:px-8 lg:px-10 lg:py-28">
           <div className="max-w-5xl">
-            <div className="font-mono text-[10px] font-bold uppercase tracking-[.2em] text-[#f18a32]">
+            <div className="font-mono text-[10px] font-bold uppercase tracking-[.2em] text-[var(--warp-accent-text)]">
               AI QUALITY ENGINEERING · SHYENA
             </div>
-            <h1 className="mt-5 font-[Sora] text-[clamp(3rem,6vw,6rem)] font-extrabold leading-[.92] tracking-[-.065em]">
+            <h1 className="mt-5 text-[clamp(3rem,6vw,6rem)] font-extrabold leading-[.92] tracking-[-.065em]">
               Test the AI.
               <br />
-              <span className="text-[#f18a32]">Prove the outcome.</span>
+              <span className="text-[var(--warp-accent-text)]">Prove the outcome.</span>
             </h1>
-            <p className="mt-7 max-w-3xl text-lg leading-8 text-white/60">
+            <p className="mt-7 max-w-3xl text-lg leading-8 text-[var(--warp-muted)]">
               Shyena helps teams assure AI across its lifecycle—from data and feature pipelines to
               predictive models, generative AI applications, RAG, document processing, computer
               vision and multi-step agent workflows. Validate accuracy, robustness, business rules,
@@ -103,44 +104,49 @@ function Page() {
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 to="/contact"
-                className="inline-flex h-11 items-center gap-2 rounded-lg bg-[#e87512] px-5 text-sm font-bold"
+                className="inline-flex h-11 items-center gap-2 rounded-lg bg-[var(--warp-lime)] px-5 text-sm font-bold text-[var(--warp-on-accent)]"
               >
                 Discuss an AI assurance assessment <ArrowRight className="h-4 w-4" />
               </Link>
-              <a
+              <CtaAnchor
                 href="#approach"
-                className="inline-flex h-11 items-center gap-2 rounded-lg border border-white/15 px-5 text-sm font-bold text-white/80"
+                className="inline-flex h-11 items-center gap-2 rounded-lg border border-white/15 px-5 text-sm font-bold text-[var(--warp-muted)]"
               >
                 See the practical approach <ArrowRight className="h-4 w-4" />
-              </a>
+              </CtaAnchor>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="border-b border-[#e6e8ed] bg-[#fafbfc]">
+      <section className="border-b border-[var(--warp-border)] bg-[var(--warp-surface-soft)]">
         <div className="mx-auto grid max-w-[1240px] gap-4 px-5 py-14 sm:px-8 md:grid-cols-3 lg:px-10">
-          {[
+          {(
             [
-              Network,
-              "Map the full workflow",
-              "Trace user input through retrieval, model calls, classification, tools, APIs, data stores, human review and final business outcome.",
-            ],
-            [
-              CheckCircle2,
-              "Measure against evidence",
-              "Combine exact assertions and reference datasets with calibrated semantic evaluation. Report failures by criterion, not only as one average score.",
-            ],
-            [
-              ShieldCheck,
-              "Gate risky releases",
-              "Apply explicit thresholds for critical accuracy, authorization, execution integrity and privacy. Block releases when mandatory controls fail.",
-            ],
-          ].map(([Icon, title, body]) => (
-            <div key={title as string} className="rounded-2xl border border-[#e1e4e9] bg-white p-6">
-              <Icon className="h-5 w-5 text-[#e87512]" />
-              <h2 className="mt-5 text-lg font-bold">{title as string}</h2>
-              <p className="mt-2 text-sm leading-6 text-[#69707d]">{body as string}</p>
+              [
+                Network,
+                "Map the full workflow",
+                "Trace user input through retrieval, model calls, classification, tools, APIs, data stores, human review and final business outcome.",
+              ],
+              [
+                CheckCircle2,
+                "Measure against evidence",
+                "Combine exact assertions and reference datasets with calibrated semantic evaluation. Report failures by criterion, not only as one average score.",
+              ],
+              [
+                ShieldCheck,
+                "Gate risky releases",
+                "Apply explicit thresholds for critical accuracy, authorization, execution integrity and privacy. Block releases when mandatory controls fail.",
+              ],
+            ] as const
+          ).map(([Icon, title, body]) => (
+            <div
+              key={title}
+              className="rounded-2xl border border-[var(--warp-border)] bg-white p-6"
+            >
+              <Icon className="h-5 w-5 text-[var(--warp-accent-text)]" />
+              <h2 className="mt-5 text-lg font-bold">{title}</h2>
+              <p className="mt-2 text-sm leading-6 text-[var(--warp-muted)]">{body}</p>
             </div>
           ))}
         </div>
@@ -150,19 +156,21 @@ function Page() {
         <div className="mx-auto max-w-[1240px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
           <div className="grid gap-12 lg:grid-cols-[.7fr_1.3fr]">
             <div>
-              <div className="text-sm font-bold text-[#e87512]">PRACTICAL DELIVERY MODEL</div>
-              <h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em]">
+              <div className="text-sm font-bold text-[var(--warp-accent-text)]">
+                PRACTICAL DELIVERY MODEL
+              </div>
+              <h2 className="mt-3 text-4xl font-extrabold tracking-[-.045em]">
                 From experiment to production evidence.
               </h2>
             </div>
-            <div className="space-y-5 text-sm leading-7 text-[#596273]">
+            <div className="space-y-5 text-sm leading-7 text-[var(--warp-muted)]">
               <p>
                 Start with one high-impact workflow and define what a correct outcome means with the
                 business owner or subject-matter expert. Build a versioned reference dataset,
                 identify critical and adversarial cases, run the system, compare results to the
                 expected contract, and turn every meaningful failure into a regression test.
               </p>
-              <div className="rounded-xl border border-[#e1e4e9] bg-[#fafbfc] p-5 font-mono text-[10px] text-[#596273]">
+              <div className="rounded-xl border border-[var(--warp-border)] bg-[var(--warp-surface-soft)] p-5 font-mono text-[10px] text-[var(--warp-muted)]">
                 BUSINESS GOAL → DATASET → SCENARIOS → EXECUTION TRACE → ASSERTIONS + EVALUATION →
                 THRESHOLDS → RELEASE DECISION
               </div>
@@ -177,14 +185,14 @@ function Page() {
         </div>
       </section>
 
-      <section className="border-y border-[#e6e8ed] bg-[#fafbfc]">
+      <section className="border-y border-[var(--warp-border)] bg-[var(--warp-surface-soft)]">
         <div className="mx-auto max-w-[1240px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
           <div className="max-w-3xl">
-            <div className="text-sm font-bold text-[#e87512]">WHAT WE VALIDATE</div>
-            <h2 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em]">
+            <div className="text-sm font-bold text-[var(--warp-accent-text)]">WHAT WE VALIDATE</div>
+            <h2 className="mt-3 text-4xl font-extrabold tracking-[-.045em]">
               One quality model. Different AI workloads.
             </h2>
-            <p className="mt-5 text-base leading-7 text-[#69707d]">
+            <p className="mt-5 text-base leading-7 text-[var(--warp-muted)]">
               Choose the tests that fit the system. A predictive model, a generative application, a
               vision pipeline and an autonomous workflow need different metrics, but each needs
               representative data, repeatable evaluations, clear thresholds and evidence that
@@ -193,9 +201,12 @@ function Page() {
           </div>
           <div className="mt-9 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {work.map(([title, body]) => (
-              <article key={title} className="rounded-2xl border border-[#e1e4e9] bg-white p-6">
+              <article
+                key={title}
+                className="rounded-2xl border border-[var(--warp-border)] bg-white p-6"
+              >
                 <h3 className="text-base font-bold">{title}</h3>
-                <p className="mt-3 text-sm leading-6 text-[#69707d]">{body}</p>
+                <p className="mt-3 text-sm leading-6 text-[var(--warp-muted)]">{body}</p>
               </article>
             ))}
           </div>
@@ -206,20 +217,22 @@ function Page() {
         <div className="mx-auto max-w-[1240px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
           <div className="grid gap-12 lg:grid-cols-2">
             <div>
-              <div className="text-sm font-bold text-[#e87512]">EXAMPLE: DOCUMENT INTAKE</div>
-              <h2 className="mt-3 font-[Sora] text-3xl font-extrabold tracking-[-.04em]">
+              <div className="text-sm font-bold text-[var(--warp-accent-text)]">
+                EXAMPLE: DOCUMENT INTAKE
+              </div>
+              <h2 className="mt-3 text-3xl font-extrabold tracking-[-.04em]">
                 Test the extracted facts, not the confidence of the explanation.
               </h2>
-              <p className="mt-4 text-sm leading-7 text-[#69707d]">
+              <p className="mt-4 text-sm leading-7 text-[var(--warp-muted)]">
                 For a tax or immigration document workflow, test document type classification,
                 required-field extraction, source grounding, missing or conflicting evidence,
                 low-quality scans, unsupported claims, routing and escalation. Compare extracted
                 values with expert-labelled ground truth and calculate field-level error rates.
               </p>
             </div>
-            <div className="rounded-2xl border border-[#e1e4e9] bg-[#fafbfc] p-6">
+            <div className="rounded-2xl border border-[var(--warp-border)] bg-[var(--warp-surface-soft)] p-6">
               <h3 className="font-bold">Illustrative release checks</h3>
-              <ul className="mt-4 space-y-3 text-sm leading-6 text-[#596273]">
+              <ul className="mt-4 space-y-3 text-sm leading-6 text-[var(--warp-muted)]">
                 <li>• Required fields meet agreed accuracy thresholds.</li>
                 <li>• Missing or ambiguous evidence triggers clarification or human review.</li>
                 <li>• Every extracted value is traceable to its source where required.</li>
@@ -227,7 +240,7 @@ function Page() {
                 <li>• Regression results are compared with a versioned baseline.</li>
                 <li>• Critical privacy, authorization and execution failures block release.</li>
               </ul>
-              <p className="mt-5 text-xs leading-5 text-[#818896]">
+              <p className="mt-5 text-xs leading-5 text-[var(--warp-muted)]">
                 Thresholds must be agreed with process owners and measured on representative,
                 labelled data. No performance figures are assumed here.
               </p>
@@ -236,20 +249,20 @@ function Page() {
         </div>
       </section>
 
-      <section className="bg-[#07101f] text-white">
+      <section className="bg-[var(--warp-canvas)] text-white">
         <div className="mx-auto flex max-w-[1240px] flex-col gap-6 px-5 py-16 sm:px-8 lg:flex-row lg:items-center lg:justify-between lg:px-10">
           <div>
-            <h2 className="font-[Sora] text-3xl font-extrabold tracking-[-.04em]">
+            <h2 className=" text-3xl font-extrabold tracking-[-.04em]">
               Make AI quality measurable.
             </h2>
-            <p className="mt-3 max-w-2xl text-sm leading-6 text-white/60">
+            <p className="mt-3 max-w-2xl text-sm leading-6 text-[var(--warp-muted)]">
               Define a critical workflow, build a representative baseline and connect test evidence
               to deployment decisions.
             </p>
           </div>
           <Link
             to="/contact"
-            className="inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-lg bg-[#e87512] px-5 text-sm font-bold"
+            className="inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-lg bg-[var(--warp-lime)] px-5 text-sm font-bold text-[var(--warp-on-accent)]"
           >
             Plan an assessment <ArrowRight className="h-4 w-4" />
           </Link>

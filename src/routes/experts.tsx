@@ -105,33 +105,33 @@ function CandidateTile({
     .slice(0, 2)
     .join("");
   return (
-    <article className="group flex min-h-[390px] flex-col overflow-hidden rounded-2xl border border-[#e1e4e9] bg-white shadow-[0_20px_55px_-45px_rgba(23,35,63,.55)] transition hover:-translate-y-1 hover:border-[#cfd5dd]">
-      <div className="h-1 bg-[#e87512]" />
+    <article className="group flex min-h-[390px] flex-col overflow-hidden rounded-2xl border border-[var(--warp-border)] bg-white shadow-[0_20px_55px_-45px_rgba(23,35,63,.55)] transition hover:-translate-y-1 hover:border-[var(--warp-border)]">
+      <div className="h-1 bg-[var(--warp-lime)] text-[var(--warp-on-accent)]" />
       <div className="flex-1 p-5">
         <div className="flex items-start gap-3">
           {candidate.avatar_url ? (
             <img src={candidate.avatar_url} alt="" className="h-12 w-12 rounded-xl object-cover" />
           ) : (
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#17213f] font-bold text-white">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[var(--warp-surface-soft)] font-bold text-white">
               {initials}
             </div>
           )}
           <div className="min-w-0">
             <h3 className="truncate text-lg font-extrabold">{candidate.full_name}</h3>
-            <p className="mt-0.5 line-clamp-2 text-xs font-semibold leading-5 text-[#69707d]">
+            <p className="mt-0.5 line-clamp-2 text-xs font-semibold leading-5 text-[var(--warp-muted)]">
               {candidate.headline}
             </p>
           </div>
         </div>
         <div className="mt-4 grid grid-cols-2 gap-2 text-[11px]">
-          <div className="rounded-lg bg-[#f7f8fa] p-2.5">
-            <div className="font-mono text-[8px] uppercase tracking-[.12em] text-[#9299a4]">
+          <div className="rounded-lg bg-[var(--warp-surface-soft)] p-2.5">
+            <div className="font-mono text-[8px] uppercase tracking-[.12em] text-[var(--warp-muted)]">
               Location
             </div>
             <div className="mt-1 font-semibold">{candidate.location}</div>
           </div>
-          <div className="rounded-lg bg-[#f7f8fa] p-2.5">
-            <div className="font-mono text-[8px] uppercase tracking-[.12em] text-[#9299a4]">
+          <div className="rounded-lg bg-[var(--warp-surface-soft)] p-2.5">
+            <div className="font-mono text-[8px] uppercase tracking-[.12em] text-[var(--warp-muted)]">
               Available
             </div>
             <div className="mt-1 font-semibold">
@@ -146,58 +146,60 @@ function CandidateTile({
           </div>
         </div>
         {candidate.years_experience !== null && (
-          <div className="mt-3 text-xs text-[#69707d]">
-            <span className="font-bold text-[#17213f]">{candidate.years_experience}+ years</span>{" "}
+          <div className="mt-3 text-xs text-[var(--warp-muted)]">
+            <span className="font-bold text-[var(--warp-ink)]">
+              {candidate.years_experience}+ years
+            </span>{" "}
             experience · {candidate.timezone ?? "Timezone not specified"}
           </div>
         )}
         <div className="mt-4 flex flex-wrap gap-1.5">
-          <span className="rounded-full bg-[#17213f] px-2 py-1 text-[10px] font-bold text-white">
+          <span className="rounded-full bg-[var(--warp-surface-soft)] px-2 py-1 text-[10px] font-bold text-white">
             AI & Data
           </span>
-          <span className="rounded-full border border-[#e87512]/30 bg-[#fff7f0] px-2 py-1 text-[10px] font-bold text-[#c85e08]">
+          <span className="rounded-full border border-[var(--warp-border-strong)]/30 bg-[var(--warp-surface-soft)] px-2 py-1 text-[10px] font-bold text-[var(--warp-accent-text)]">
             AI Evals
           </span>
-          <span className="rounded-full border border-[#e1e4e9] bg-[#fafbfc] px-2 py-1 text-[10px] font-semibold text-[#4c566b]">
+          <span className="rounded-full border border-[var(--warp-border)] bg-[var(--warp-surface-soft)] px-2 py-1 text-[10px] font-semibold text-[var(--warp-muted)]">
             AI Engineering
           </span>
         </div>
         <div className="mt-3">
-          <div className="font-mono text-[9px] font-bold uppercase tracking-[.14em] text-[#e87512]">
+          <div className="font-mono text-[9px] font-bold uppercase tracking-[.14em] text-[var(--warp-accent-text)]">
             Core skills
           </div>
           <div className="mt-2 flex flex-wrap gap-1.5">
             {candidate.core_skills.slice(0, 7).map((skill) => (
               <span
                 key={skill}
-                className="rounded-full border border-[#e1e4e9] bg-[#fafbfc] px-2 py-1 text-[10px] font-semibold text-[#4c566b]"
+                className="rounded-full border border-[var(--warp-border)] bg-[var(--warp-surface-soft)] px-2 py-1 text-[10px] font-semibold text-[var(--warp-muted)]"
               >
                 {skill}
               </span>
             ))}
             {candidate.core_skills.length > 7 && (
-              <span className="rounded-full bg-[#17213f] px-2 py-1 text-[10px] font-bold text-white">
+              <span className="rounded-full bg-[var(--warp-surface-soft)] px-2 py-1 text-[10px] font-bold text-white">
                 +{candidate.core_skills.length - 7}
               </span>
             )}
           </div>
         </div>
-        <div className="mt-4 flex items-center gap-2 text-[10px] font-bold text-[#69707d]">
+        <div className="mt-4 flex items-center gap-2 text-[10px] font-bold text-[var(--warp-muted)]">
           <span
             className={`h-2 w-2 rounded-full ${candidate.availability_status === "available" ? "bg-emerald-500" : candidate.availability_status === "soon" ? "bg-amber-500" : "bg-slate-400"}`}
           />
           {status}
           {candidate.remote_modes.length > 0 && (
-            <span className="text-[#a0a6b0]">
+            <span className="text-[var(--warp-muted)]">
               · {candidate.remote_modes.slice(0, 2).join(" / ")}
             </span>
           )}
         </div>
       </div>
-      <div className="border-t border-[#edf0f3] p-4">
+      <div className="border-t border-[var(--warp-border)] p-4">
         <button
           onClick={() => onHire(candidate)}
-          className="flex h-10 w-full items-center justify-center gap-2 rounded-lg bg-[#17213f] text-xs font-bold text-white transition hover:bg-[#263250]"
+          className="flex h-10 w-full items-center justify-center gap-2 rounded-lg bg-[var(--warp-surface-soft)] text-xs font-bold text-white transition hover:bg-[var(--warp-surface-soft)]"
         >
           Hire me <ArrowRight className="h-3.5 w-3.5" />
         </button>
@@ -226,11 +228,11 @@ function HireModal({ candidate, onClose }: { candidate: Candidate; onClose: () =
     }
   }
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-[#07101f]/75 p-4 backdrop-blur-sm">
-      <div className="relative w-full max-w-lg rounded-2xl bg-white p-6 text-[#17213f] shadow-2xl">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-[var(--warp-canvas)]/75 p-4 backdrop-blur-sm">
+      <div className="relative w-full max-w-lg rounded-2xl bg-white p-6 text-[var(--warp-ink)] shadow-2xl">
         <button
           onClick={onClose}
-          className="absolute right-4 top-4 rounded-lg p-2 text-[#69707d] hover:bg-[#f3f4f6]"
+          className="absolute right-4 top-4 rounded-lg p-2 text-[var(--warp-muted)] hover:bg-[var(--warp-surface-soft)]"
           aria-label="Close"
         >
           <X className="h-4 w-4" />
@@ -239,37 +241,37 @@ function HireModal({ candidate, onClose }: { candidate: Candidate; onClose: () =
           <div className="py-8 text-center">
             <CheckCircle2 className="mx-auto h-12 w-12 text-emerald-500" />
             <h3 className="mt-4 text-2xl font-extrabold">Request received</h3>
-            <p className="mt-2 text-sm leading-6 text-[#69707d]">
+            <p className="mt-2 text-sm leading-6 text-[var(--warp-muted)]">
               The hiring request for {candidate.full_name} has been recorded.
             </p>
             <button
               onClick={onClose}
-              className="mt-6 h-10 rounded-lg bg-[#17213f] px-5 text-sm font-bold text-white"
+              className="mt-6 h-10 rounded-lg bg-[var(--warp-surface-soft)] px-5 text-sm font-bold text-white"
             >
               Close
             </button>
           </div>
         ) : (
           <form onSubmit={submit}>
-            <div className="font-mono text-[9px] font-bold uppercase tracking-[.16em] text-[#e87512]">
+            <div className="font-mono text-[9px] font-bold uppercase tracking-[.16em] text-[var(--warp-accent-text)]">
               HIRE ASSURANCE EXPERTISE
             </div>
             <h3 className="mt-2 text-2xl font-extrabold">Request {candidate.full_name}</h3>
-            <p className="mt-2 text-sm text-[#69707d]">{candidate.headline}</p>
+            <p className="mt-2 text-sm text-[var(--warp-muted)]">{candidate.headline}</p>
             <div className="mt-5 grid gap-3">
               <input
                 required
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
                 placeholder="Your name"
-                className="h-11 rounded-lg border border-[#dfe3e8] px-3 text-sm"
+                className="h-11 rounded-lg border border-[var(--warp-border)] px-3 text-sm"
               />
               <input
                 required
                 value={form.company}
                 onChange={(e) => setForm({ ...form, company: e.target.value })}
                 placeholder="Company"
-                className="h-11 rounded-lg border border-[#dfe3e8] px-3 text-sm"
+                className="h-11 rounded-lg border border-[var(--warp-border)] px-3 text-sm"
               />
               <input
                 required
@@ -277,14 +279,14 @@ function HireModal({ candidate, onClose }: { candidate: Candidate; onClose: () =
                 value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
                 placeholder="Work email"
-                className="h-11 rounded-lg border border-[#dfe3e8] px-3 text-sm"
+                className="h-11 rounded-lg border border-[var(--warp-border)] px-3 text-sm"
               />
               <textarea
                 value={form.message}
                 onChange={(e) => setForm({ ...form, message: e.target.value })}
                 placeholder="What assurance capability do you need?"
                 rows={4}
-                className="rounded-lg border border-[#dfe3e8] p-3 text-sm"
+                className="rounded-lg border border-[var(--warp-border)] p-3 text-sm"
               />
             </div>
             {state === "error" && (
@@ -294,7 +296,7 @@ function HireModal({ candidate, onClose }: { candidate: Candidate; onClose: () =
             )}
             <button
               disabled={state === "saving"}
-              className="mt-5 h-11 w-full rounded-lg bg-[#e87512] text-sm font-bold text-white disabled:opacity-50"
+              className="mt-5 h-11 w-full rounded-lg bg-[var(--warp-lime)] text-sm font-bold text-[var(--warp-on-accent)] disabled:opacity-50"
             >
               {state === "saving" ? "Submitting..." : "Send hiring request"}
             </button>
@@ -347,45 +349,47 @@ function Marketplace() {
     [candidates],
   );
   return (
-    <section className="border-y border-[#e6e8ed] bg-[#fafbfc]">
+    <section className="border-y border-[var(--warp-border)] bg-[var(--warp-surface-soft)]">
       <div className="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-3xl">
-            <div className="font-mono text-[10px] font-bold uppercase tracking-[.18em] text-[#e87512]">
+            <div className="font-mono text-[10px] font-bold uppercase tracking-[.18em] text-[var(--warp-accent-text)]">
               ASSURANCE EXPERTISE DIRECTORY
             </div>
-            <h1 className="mt-3 font-[Sora] text-4xl font-extrabold tracking-[-.045em] sm:text-5xl">
+            <h1 className="mt-3 text-4xl font-extrabold tracking-[-.045em] sm:text-5xl">
               Find the capability your AI system needs.
             </h1>
-            <p className="mt-4 text-base leading-7 text-[#69707d]">
+            <p className="mt-4 text-base leading-7 text-[var(--warp-muted)]">
               Search published specialist profiles by capability, location, domain, work model and
               availability. Candidate resumes are stored as private PDF assets in Supabase Storage.
             </p>
           </div>
-          <div className="rounded-xl border border-[#e1e4e9] bg-white px-4 py-3 text-right">
-            <div className="font-mono text-[9px] uppercase tracking-[.12em] text-[#9299a4]">
+          <div className="rounded-xl border border-[var(--warp-border)] bg-white px-4 py-3 text-right">
+            <div className="font-mono text-[9px] uppercase tracking-[.12em] text-[var(--warp-muted)]">
               Profiles
             </div>
             <div className="mt-1 text-2xl font-extrabold">{total}</div>
           </div>
         </div>
-        <div className="mt-8 rounded-2xl border border-[#dfe3e8] bg-white p-4 shadow-sm">
+        <div className="mt-8 rounded-2xl border border-[var(--warp-border)] bg-white p-4 shadow-sm">
           <div className="flex flex-col gap-3 lg:flex-row">
             <div className="relative min-w-0 flex-1">
-              <Search className="absolute left-3 top-3 h-4 w-4 text-[#9299a4]" />
-              <label className="sr-only" htmlFor="expert-search">Search skills, title, domain, or technology</label>
+              <Search className="absolute left-3 top-3 h-4 w-4 text-[var(--warp-muted)]" />
+              <label className="sr-only" htmlFor="expert-search">
+                Search skills, title, domain, or technology
+              </label>
               <input
                 id="expert-search"
                 value={draft.search}
                 onChange={(e) => setDraft({ ...draft, search: e.target.value })}
                 onKeyDown={(e) => e.key === "Enter" && setFilters(draft)}
                 placeholder="Search skills, title, domain, technology..."
-                className="h-10 w-full rounded-lg border border-[#e1e4e9] pl-9 pr-3 text-sm outline-none focus:border-[#e87512]"
+                className="h-10 w-full rounded-lg border border-[var(--warp-border)] pl-9 pr-3 text-sm outline-none focus:border-[var(--warp-border-strong)]"
               />
             </div>
             <button
               onClick={() => setFilters(draft)}
-              className="inline-flex h-10 items-center justify-center gap-2 rounded-lg bg-[#17213f] px-4 text-xs font-bold text-white"
+              className="warp-btn inline-flex h-10 items-center justify-center gap-2 px-4"
             >
               <SlidersHorizontal className="h-3.5 w-3.5" />
               Apply filters
@@ -395,63 +399,73 @@ function Marketplace() {
                 setDraft(empty);
                 setFilters(empty);
               }}
-              className="h-10 rounded-lg border border-[#dfe3e8] px-4 text-xs font-bold"
+              className="warp-btn inline-flex h-10 items-center justify-center px-4"
             >
               Reset
             </button>
           </div>
           <div className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-5">
-            <label className="sr-only" htmlFor="expert-location">Location</label>
+            <label className="sr-only" htmlFor="expert-location">
+              Location
+            </label>
             <input
               id="expert-location"
               value={draft.location}
               onChange={(e) => setDraft({ ...draft, location: e.target.value })}
               placeholder="Location"
-              className="h-10 rounded-lg border border-[#e1e4e9] px-3 text-xs"
+              className="h-10 rounded-lg border border-[var(--warp-border)] px-3 text-xs"
             />
-            <label className="sr-only" htmlFor="expert-skill">Core skill</label>
+            <label className="sr-only" htmlFor="expert-skill">
+              Core skill
+            </label>
             <select
               id="expert-skill"
               value={draft.skill}
               onChange={(e) => setDraft({ ...draft, skill: e.target.value })}
-              className="h-10 rounded-lg border border-[#e1e4e9] px-3 text-xs"
+              className="h-10 rounded-lg border border-[var(--warp-border)] px-3 text-xs"
             >
               <option value="">Core skill</option>
               {skillOptions.map((x) => (
                 <option key={x}>{x}</option>
               ))}
             </select>
-            <label className="sr-only" htmlFor="expert-domain">Domain</label>
+            <label className="sr-only" htmlFor="expert-domain">
+              Domain
+            </label>
             <select
               id="expert-domain"
               value={draft.domain}
               onChange={(e) => setDraft({ ...draft, domain: e.target.value })}
-              className="h-10 rounded-lg border border-[#e1e4e9] px-3 text-xs"
+              className="h-10 rounded-lg border border-[var(--warp-border)] px-3 text-xs"
             >
               <option value="">Domain</option>
               {domainOptions.map((x) => (
                 <option key={x}>{x}</option>
               ))}
             </select>
-            <label className="sr-only" htmlFor="expert-work-model">Work model</label>
+            <label className="sr-only" htmlFor="expert-work-model">
+              Work model
+            </label>
             <select
               id="expert-work-model"
               value={draft.remote}
               onChange={(e) => setDraft({ ...draft, remote: e.target.value })}
-              className="h-10 rounded-lg border border-[#e1e4e9] px-3 text-xs"
+              className="h-10 rounded-lg border border-[var(--warp-border)] px-3 text-xs"
             >
               <option value="">Work model</option>
               <option>Remote</option>
               <option>Hybrid</option>
               <option>On-site</option>
             </select>
-            <label className="sr-only" htmlFor="expert-available-by">Available by</label>
+            <label className="sr-only" htmlFor="expert-available-by">
+              Available by
+            </label>
             <input
               id="expert-available-by"
               type="date"
               value={draft.availableBy}
               onChange={(e) => setDraft({ ...draft, availableBy: e.target.value })}
-              className="h-10 rounded-lg border border-[#e1e4e9] px-3 text-xs"
+              className="h-10 rounded-lg border border-[var(--warp-border)] px-3 text-xs"
             />
           </div>
         </div>
@@ -460,7 +474,7 @@ function Marketplace() {
             {Array.from({ length: 8 }).map((_, i) => (
               <div
                 key={i}
-                className="h-[390px] animate-pulse rounded-2xl border border-[#e1e4e9] bg-white"
+                className="h-[390px] animate-pulse rounded-2xl border border-[var(--warp-border)] bg-white"
               />
             ))}
           </div>
@@ -469,10 +483,10 @@ function Marketplace() {
             {error}
           </div>
         ) : candidates.length === 0 ? (
-          <div className="rounded-2xl border border-dashed border-[#cfd5dd] bg-white p-14 text-center">
-            <Users className="mx-auto h-9 w-9 text-[#9299a4]" />
+          <div className="rounded-2xl border border-dashed border-[var(--warp-border)] bg-white p-14 text-center">
+            <Users className="mx-auto h-9 w-9 text-[var(--warp-muted)]" />
             <h3 className="mt-4 text-xl font-extrabold">No published specialists yet</h3>
-            <p className="mx-auto mt-2 max-w-xl text-sm leading-6 text-[#69707d]">
+            <p className="mx-auto mt-2 max-w-xl text-sm leading-6 text-[var(--warp-muted)]">
               Candidate profiles will appear here once they are added to the Shyena assurance
               network and marked published.
             </p>
@@ -494,7 +508,7 @@ function Marketplace() {
 
 function ExpertsPage() {
   return (
-    <div className="bg-white text-[#17213f]">
+    <div className="bg-white text-[var(--warp-ink)]">
       <Marketplace />
     </div>
   );

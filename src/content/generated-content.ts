@@ -19,11 +19,47 @@ export const generatedContent = {
   articles: [
     {
       type: "blog",
+      sourcePath: "content/blog/agentic-ai-latency-engineering-guide.md",
+      title:
+        "Agentic AI Latency: How Engineering Leaders Should Measure and Diagnose Agent Response Time",
+      description:
+        "A practical engineering guide to measuring latency in multi-turn agentic AI, separating TTFT from response latency, tracing LLM, RAG, tool and orchestration delays, and finding the critical path.",
+      slug: "agentic-ai-latency-engineering-guide",
+      content_type: "technical-article",
+      category: "AI Engineering",
+      diagram: "latency",
+      thesis:
+        "Agentic AI latency is not one number. Engineering leaders need a consistent response boundary, separate responsiveness from completion, and trace the execution path to understand where latency originates.",
+      primary_keyword: "agentic AI latency",
+      search_intent: "informational",
+      author: "Shyena Engineering",
+      published: "true",
+    },
+    {
+      type: "blog",
+      sourcePath: "content/blog/agentic-sdlc-graphrag-evaluation.md",
+      title: "When Retrieval Looks Right but Answers Are Wrong: A RAG Reliability Blueprint",
+      description:
+        "An original engineering blueprint for tracing RAG failures from source ingestion to generated claims, with architecture diagrams, reproducible evaluation and release controls.",
+      slug: "agentic-sdlc-graphrag-evaluation",
+      content_type: "technical-article",
+      category: "Evaluation Model",
+      diagram: "evidence",
+      thesis:
+        "RAG reliability is an end-to-end systems property: source authority, claim grounding, abstention, security and operational cost must be measured independently and tied to reproducible evidence.",
+      primary_keyword: "RAG reliability engineering",
+      search_intent: "informational",
+      author: "Shyena Engineering",
+      published: "true",
+    },
+    {
+      type: "blog",
       sourcePath: "content/blog/ai-agent-testing-is-a-systems-problem.md",
       title: "AI Agent Testing: Why Response Quality Is Not Enough for Production Assurance",
       description:
         "An AI agent can produce a good answer and still fail the customer's journey. Learn how to test outcomes, orchestration, tools, deterministic contracts, security, and evidence as one assurance system.",
       slug: "ai-agent-testing-is-a-systems-problem",
+      content_type: "technical-article",
       category: "AI Agent Assurance",
       diagram: "systems",
       thesis:
@@ -35,16 +71,50 @@ export const generatedContent = {
     },
     {
       type: "blog",
-      sourcePath: "content/blog/why-conversational-ai-needs-a-different-testing-model.md",
-      title: "Why Conversational AI Needs a Different Testing Model",
+      sourcePath: "content/blog/ai-test-design-for-business-workflows.md",
+      title: "AI Test Design for Business Workflows",
       description:
-        "Why agent tests should validate goals and acceptable trajectories instead of replaying one fixed conversation transcript.",
-      slug: "why-conversational-ai-needs-a-different-testing-model",
+        "A practical method for translating business workflows into risk-based, traceable tests for software and AI-enabled systems.",
+      slug: "ai-test-design-for-business-workflows",
+      content_type: "technical-article",
       category: "Testing Strategy",
-      diagram: "trajectory",
+      diagram: "systems",
       thesis:
-        "Conversational testing should evaluate whether an agent achieves a defined goal within explicit behavioural boundaries, not whether it reproduces one preferred transcript.",
-      primary_keyword: "conversational AI testing",
+        "Strong test design starts with the business outcome, identifies the rules and failure paths that matter, and ties every assertion to observable evidence.",
+      primary_keyword: "AI test design for business workflows",
+      search_intent: "informational",
+      author: "Shyena Engineering",
+      published: "true",
+    },
+    {
+      type: "blog",
+      sourcePath: "content/blog/ai-test-engineering-tax-immigration.md",
+      title: "AI Test Engineering for Tax and Immigration Workflows",
+      description:
+        "A practical quality engineering playbook for validating document extraction, classification, AI-generated guidance and agentic workflows in regulated service delivery.",
+      slug: "ai-test-engineering-tax-immigration",
+      content_type: "technical-article",
+      category: "Quality Assurance",
+      diagram: "systems",
+      thesis:
+        "Production AI quality requires labelled ground truth, deterministic business rules, semantic evaluation, integration checks and auditable release evidence.",
+      primary_keyword: "AI test engineering tax immigration",
+      search_intent: "informational",
+      author: "Shyena Engineering",
+      published: "true",
+    },
+    {
+      type: "blog",
+      sourcePath: "content/blog/deepeval-rubric-score.md",
+      title: "DeepEval Rubric Scores: How to Make LLM Evaluation More Consistent",
+      description:
+        "A practical guide to DeepEval rubric scoring, including score bands, evaluation steps, thresholds, and how to use rubric-based semantic evaluation in an AI assurance workflow.",
+      slug: "deepeval-rubric-score",
+      category: "Evaluation Model",
+      diagram: "rubric",
+      thesis:
+        "Rubrics make semantic LLM evaluation more controllable by constraining a judge to explicit score bands and expected outcomes; they should strengthen evaluation consistency without replacing deterministic, execution, or security evidence.",
+      primary_keyword: "DeepEval rubric score",
       search_intent: "informational",
       author: "Shyena Engineering",
       published: "true",
@@ -56,6 +126,7 @@ export const generatedContent = {
       description:
         "Why semantic scores can look healthy while an agent journey has actually failed, and how an execution-integrity gate prevents false passes.",
       slug: "the-problem-with-green-checkmarks-on-broken-conversations",
+      content_type: "technical-article",
       category: "Quality Assurance",
       diagram: "false-pass",
       thesis:
@@ -72,11 +143,29 @@ export const generatedContent = {
       description:
         "LLM-as-judge is a semantic evaluation layer, not a universal truth oracle. Here is how to use rubrics, context and evidence without creating false confidence.",
       slug: "what-llm-as-judge-actually-means-in-practice",
+      content_type: "technical-article",
       category: "Evaluation Model",
       diagram: "judge",
       thesis:
         "LLM-as-judge is useful for semantic properties that require interpretation, but its authority should stop where deterministic, security or execution evidence can establish the truth more reliably.",
       primary_keyword: "LLM as judge",
+      search_intent: "informational",
+      author: "Shyena Engineering",
+      published: "true",
+    },
+    {
+      type: "blog",
+      sourcePath: "content/blog/why-conversational-ai-needs-a-different-testing-model.md",
+      title: "Why Conversational AI Needs a Different Testing Model",
+      description:
+        "Why agent tests should validate goals and acceptable trajectories instead of replaying one fixed conversation transcript.",
+      slug: "why-conversational-ai-needs-a-different-testing-model",
+      content_type: "technical-article",
+      category: "Testing Strategy",
+      diagram: "trajectory",
+      thesis:
+        "Conversational testing should evaluate whether an agent achieves a defined goal within explicit behavioural boundaries, not whether it reproduces one preferred transcript.",
+      primary_keyword: "conversational AI testing",
       search_intent: "informational",
       author: "Shyena Engineering",
       published: "true",
@@ -90,7 +179,11 @@ export const generatedContent = {
       description:
         "Connecting tokens, agent behaviour, assurance effort, value and business impact.",
       slug: "ai-assurance-tokenomics",
+      content_type: "documentation",
       category: "AI Assurance Economics",
+      diagram: "tokenomics",
+      thesis:
+        "AI execution cost is an assurance signal: Shyena connects token consumption to observable agent behaviour, assurance effort, trustworthy business outcomes and release decisions.",
       primary_keyword: "AI assurance tokenomics",
       search_intent: "informational",
       author: "Shyena Engineering",
@@ -103,7 +196,11 @@ export const generatedContent = {
       description:
         "How Shyena researches, verifies, drafts, reviews, and publishes technical content through an evidence-aware content engineering pipeline.",
       slug: "sage-content-engineering",
+      content_type: "documentation",
       category: "Content Engineering",
+      diagram: "sage-content-engineering",
+      thesis:
+        "SAGE treats technical content as an engineered, evidence-backed artifact: research establishes claims, verification makes them defensible, review challenges them, and controlled publication preserves traceability.",
       primary_keyword: "AI content engineering",
       search_intent: "informational",
       author: "Shyena Engineering",

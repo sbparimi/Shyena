@@ -98,13 +98,13 @@ Current LLM evaluation guidance distinguishes test cases, metrics and datasets, 
 
 A journey should answer five questions.
 
-| Question | Specification element |
-| --- | --- |
-| Who is acting? | Persona |
-| What is the desired outcome? | Goal |
-| What can the agent do? | Allowed actions |
-| What must never happen? | Invariants / forbidden actions |
-| How do we know it worked? | Assertions + evidence requirements |
+| Question                     | Specification element              |
+| ---------------------------- | ---------------------------------- |
+| Who is acting?               | Persona                            |
+| What is the desired outcome? | Goal                               |
+| What can the agent do?       | Allowed actions                    |
+| What must never happen?      | Invariants / forbidden actions     |
+| How do we know it worked?    | Assertions + evidence requirements |
 
 The result is an executable contract instead of an informal prompt.
 

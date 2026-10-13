@@ -63,8 +63,8 @@ const cards = [
 ] as const;
 function ResourceBrandVisual({ Icon }: { Icon: typeof BookOpen }) {
   return (
-    <div className="relative flex h-40 items-center justify-center overflow-hidden bg-[#f7f8fb]">
-      <div className="absolute right-5 top-4 text-[9px] font-semibold uppercase tracking-[.18em] text-[#9aa4b5]">
+    <div className="relative flex h-40 items-center justify-center overflow-hidden bg-[var(--warp-surface-soft)]">
+      <div className="absolute right-5 top-4 text-[9px] font-semibold uppercase tracking-[.18em] text-[var(--warp-muted)]">
         SHYENA
       </div>
       <img
@@ -73,7 +73,10 @@ function ResourceBrandVisual({ Icon }: { Icon: typeof BookOpen }) {
         aria-hidden="true"
         className="h-20 w-16 object-contain opacity-95"
       />
-      <Icon className="absolute bottom-4 right-5 h-5 w-5 text-[#e87512]" aria-hidden="true" />
+      <Icon
+        className="absolute bottom-4 right-5 h-5 w-5 text-[var(--warp-accent-text)]"
+        aria-hidden="true"
+      />
     </div>
   );
 }
@@ -98,57 +101,59 @@ function ResourcesPage() {
     },
   };
   return (
-    <main className="overflow-x-hidden bg-white text-[#17213f]">
+    <main className="overflow-x-hidden bg-white text-[var(--warp-ink)]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
-      <section className="border-b border-[#e6e8ed]">
+      <section className="border-b border-[var(--warp-border)]">
         <div className="mx-auto max-w-[1280px] px-5 py-14 sm:px-8 lg:px-10 lg:py-18">
-          <div className="text-xs font-semibold uppercase tracking-[.16em] text-[#e87512]">
+          <div className="text-xs font-semibold uppercase tracking-[.16em] text-[var(--warp-accent-text)]">
             Resources
           </div>
-          <h1 className="mt-4 font-[Sora] text-[clamp(2.7rem,6vw,5rem)] font-extrabold leading-[.96] tracking-[-.055em]">
+          <h1 className="mt-4 text-[clamp(2.7rem,6vw,5rem)] font-extrabold leading-[.96] tracking-[-.055em]">
             Learn, explore and stay ahead.
           </h1>
-          <p className="mt-5 max-w-2xl text-lg leading-8 text-[#69707d]">
+          <p className="mt-5 max-w-2xl text-lg leading-8 text-[var(--warp-muted)]">
             Guides, tutorials, case studies and insights to help you build better AI systems.
           </p>
-          <div className="mt-8 flex flex-wrap gap-5 border-b border-[#e6e8ed] pb-3 text-sm font-semibold">
-            <span className="border-b-2 border-[#ff5a0a] pb-3 text-[#ff5a0a]">All</span>
-            <Link to="/blog" className="pb-3 text-[#69707d] hover:text-[#17213f]">
+          <div className="mt-8 flex flex-wrap gap-5 border-b border-[var(--warp-border)] pb-3 text-sm font-semibold">
+            <span className="border-b-2 border-[var(--warp-border-strong)] pb-3 text-[var(--warp-accent-text)]">
+              All
+            </span>
+            <Link to="/blog" className="pb-3 text-[var(--warp-muted)] hover:text-[var(--warp-ink)]">
               Blog
             </Link>
-            <Link to="/blog" className="pb-3 text-[#69707d] hover:text-[#17213f]">
+            <Link to="/blog" className="pb-3 text-[var(--warp-muted)] hover:text-[var(--warp-ink)]">
               Case studies
             </Link>
-            <Link to="/blog" className="pb-3 text-[#69707d] hover:text-[#17213f]">
+            <Link to="/blog" className="pb-3 text-[var(--warp-muted)] hover:text-[var(--warp-ink)]">
               Guides
             </Link>
-            <Link to="/blog" className="pb-3 text-[#69707d] hover:text-[#17213f]">
+            <Link to="/blog" className="pb-3 text-[var(--warp-muted)] hover:text-[var(--warp-ink)]">
               Webinars
             </Link>
           </div>
         </div>
       </section>
-      <section className="bg-[#fafbfc]">
+      <section className="bg-[var(--warp-surface-soft)]">
         <div className="mx-auto max-w-[1280px] px-5 py-12 sm:px-8 lg:px-10 lg:py-16">
           <div className="grid gap-4 lg:grid-cols-3">
             {cards.map(([type, title, text, cta, Icon]) => (
               <article
                 key={title}
-                className="overflow-hidden rounded-xl border border-[#e0e3e8] bg-white transition hover:-translate-y-0.5 hover:border-[#f0c6a5] hover:shadow-[0_22px_50px_-34px_rgba(23,33,63,.4)]"
+                className="overflow-hidden rounded-xl border border-[var(--warp-border)] bg-white transition hover:-translate-y-0.5 hover:border-[var(--warp-border)] hover:shadow-[0_22px_50px_-34px_rgba(23,33,63,.4)]"
               >
                 <ResourceBrandVisual Icon={Icon} />
                 <div className="p-6">
-                  <div className="text-[10px] font-bold uppercase tracking-[.14em] text-[#e87512]">
+                  <div className="text-[10px] font-bold uppercase tracking-[.14em] text-[var(--warp-accent-text)]">
                     {type}
                   </div>
-                  <h2 className="mt-3 text-xl font-extrabold text-[#17213f]">{title}</h2>
-                  <p className="mt-2 text-sm leading-6 text-[#69707d]">{text}</p>
+                  <h2 className="mt-3 text-xl font-extrabold text-[var(--warp-ink)]">{title}</h2>
+                  <p className="mt-2 text-sm leading-6 text-[var(--warp-muted)]">{text}</p>
                   <Link
                     to="/blog"
-                    className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-[#ff5a0a]"
+                    className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-[var(--warp-accent-text)]"
                   >
                     {cta}
                     <ArrowRight className="h-4 w-4" />

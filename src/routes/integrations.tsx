@@ -17,16 +17,16 @@ export const Route = createFileRoute("/integrations")({
 });
 function Page() {
   return (
-    <main className="bg-white text-[#17213f]">
-      <section className="bg-[#07101f] text-white">
+    <main className="bg-white text-[var(--warp-ink)]">
+      <section className="bg-[var(--warp-canvas)] text-white">
         <div className="mx-auto max-w-[1100px] px-5 py-20 sm:px-8 lg:py-28">
-          <div className="font-mono text-[10px] font-bold uppercase tracking-[.2em] text-[#f18a32]">
+          <div className="font-mono text-[10px] font-bold uppercase tracking-[.2em] text-[var(--warp-accent-text)]">
             INTEGRATIONS
           </div>
-          <h1 className="mt-5 font-[Sora] text-[clamp(3rem,6vw,5.5rem)] font-extrabold leading-[.92] tracking-[-.06em]">
+          <h1 className="mt-5 text-[clamp(3rem,6vw,5.5rem)] font-extrabold leading-[.92] tracking-[-.06em]">
             Integrate AI assurance with the systems your business depends on.
           </h1>
-          <p className="mt-7 max-w-3xl text-lg leading-8 text-white/60">
+          <p className="mt-7 max-w-3xl text-lg leading-8 text-[var(--warp-muted)]">
             Shyena structures assurance around AI applications, prompts, models, retrieval, tools,
             APIs, document pipelines, handovers and the enterprise systems they affect. Exact
             integration scope is confirmed against the customer environment.
@@ -34,7 +34,7 @@ function Page() {
           <div className="mt-8">
             <Link
               to="/ai-assurance"
-              className="inline-flex h-11 items-center gap-2 rounded-lg bg-[#e87512] px-5 text-sm font-bold"
+              className="inline-flex h-11 items-center gap-2 rounded-lg bg-[var(--warp-lime)] px-5 text-sm font-bold text-[var(--warp-on-accent)]"
             >
               AI testing and assurance <ArrowRight className="h-4 w-4" />
             </Link>
@@ -43,9 +43,7 @@ function Page() {
       </section>
       <section>
         <div className="mx-auto max-w-[1100px] px-5 py-20 sm:px-8 lg:py-24">
-          <h2 className="font-[Sora] text-4xl font-extrabold tracking-[-.045em]">
-            Assurance touchpoints
-          </h2>
+          <h2 className=" text-4xl font-extrabold tracking-[-.045em]">Assurance touchpoints</h2>
           <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {[
               "Flows and routing",
@@ -60,9 +58,9 @@ function Page() {
             ].map((x) => (
               <div
                 key={x}
-                className="rounded-xl border border-[#e1e4e9] bg-[#fafbfc] p-5 text-sm font-semibold"
+                className="rounded-xl border border-[var(--warp-border)] bg-[var(--warp-surface-soft)] p-5 text-sm font-semibold"
               >
-                <CheckCircle2 className="h-4 w-4 text-[#e87512]" />
+                <CheckCircle2 className="h-4 w-4 text-[var(--warp-accent-text)]" />
                 <div className="mt-3">{x}</div>
               </div>
             ))}

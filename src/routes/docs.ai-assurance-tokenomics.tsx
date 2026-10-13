@@ -95,7 +95,9 @@ function Section({
       id={id}
       className="scroll-mt-28 border-t border-slate-200 pt-12 first:border-0 first:pt-0"
     >
-      <h2 className="text-2xl font-bold tracking-tight text-[#0e172b] sm:text-3xl">{title}</h2>
+      <h2 className="text-2xl font-bold tracking-tight text-[var(--warp-ink)] sm:text-3xl">
+        {title}
+      </h2>
       <div className="mt-5 space-y-5 text-[17px] leading-8 text-slate-700">{children}</div>
     </section>
   );
@@ -103,14 +105,14 @@ function Section({
 
 function Quote({ children }: { children: React.ReactNode }) {
   return (
-    <blockquote className="border-l-2 border-[#c89b3c] bg-[#fbf8ef] px-6 py-5 text-xl font-medium leading-8 text-[#0e172b]">
+    <blockquote className="border-l-2 border-[var(--warp-border-strong)] bg-[var(--warp-surface-soft)] px-6 py-5 text-xl font-medium leading-8 text-[var(--warp-ink)]">
       {children}
     </blockquote>
   );
 }
 function CodeLine({ children }: { children: React.ReactNode }) {
   return (
-    <div className="overflow-x-auto rounded-md border border-slate-200 bg-[#f7f7f5] px-5 py-4 font-mono text-sm leading-7 text-[#17233a]">
+    <div className="overflow-x-auto rounded-md border border-slate-200 bg-[var(--warp-surface-soft)] px-5 py-4 font-mono text-sm leading-7 text-[var(--warp-ink)]">
       {children}
     </div>
   );
@@ -126,8 +128,8 @@ function Metric({
 }) {
   return (
     <div className="border border-slate-200 bg-white p-5">
-      <Icon className="h-5 w-5 text-[#b4872c]" />
-      <h3 className="mt-4 font-semibold text-[#0e172b]">{title}</h3>
+      <Icon className="h-5 w-5 text-[var(--warp-accent-text)]" />
+      <h3 className="mt-4 font-semibold text-[var(--warp-ink)]">{title}</h3>
       <p className="mt-2 text-sm leading-6 text-slate-600">{children}</p>
     </div>
   );
@@ -136,11 +138,11 @@ function Metric({
 function Article() {
   return (
     <div className="bg-white text-slate-950">
-      <section className="border-b border-slate-200 bg-[#f7f4ec]">
+      <section className="border-b border-slate-200 bg-[var(--warp-surface-soft)]">
         <div className="mx-auto max-w-7xl px-5 py-8 sm:px-8">
           <Link
             to="/docs"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-slate-600 hover:text-[#0e172b]"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-slate-600 hover:text-[var(--warp-ink)]"
           >
             <ArrowLeft className="h-4 w-4" />
             Documentation
@@ -150,10 +152,10 @@ function Article() {
       <header className="border-b border-slate-200 bg-white">
         <div className="mx-auto max-w-6xl px-5 py-14 sm:px-8 sm:py-20">
           <div className="max-w-4xl">
-            <p className="font-mono text-xs uppercase tracking-[0.22em] text-[#a87900]">
+            <p className="font-mono text-xs uppercase tracking-[0.22em] text-[var(--warp-accent-text)]">
               AI Assurance / Economics
             </p>
-            <h1 className="mt-5 text-5xl font-bold leading-[1.02] tracking-[-0.045em] text-[#0e172b] sm:text-7xl">
+            <h1 className="mt-5 text-5xl font-bold leading-[1.02] tracking-[-0.045em] text-[var(--warp-ink)] sm:text-7xl">
               AI Assurance Tokenomics
             </h1>
             <div className="mt-12">
@@ -165,7 +167,7 @@ function Article() {
       <main className="mx-auto max-w-6xl px-5 py-14 sm:px-8 sm:py-20">
         <div className="grid gap-12 lg:grid-cols-[240px_minmax(0,1fr)] lg:items-start lg:gap-16">
           <aside className="lg:sticky lg:top-24">
-            <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#a87900]">
+            <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--warp-accent-text)]">
               On this page
             </p>
             <nav className="mt-4 space-y-3 border-l border-slate-200 pl-4 text-sm">
@@ -173,7 +175,7 @@ function Article() {
                 <a
                   key={act.number}
                   href={`#act-${act.number}`}
-                  className="block font-semibold text-slate-600 hover:text-[#0e172b]"
+                  className="block font-semibold text-slate-600 hover:text-[var(--warp-ink)]"
                 >
                   {act.label} — {act.title}
                 </a>

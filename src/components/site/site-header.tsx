@@ -91,7 +91,7 @@ export function SiteHeader() {
             </kbd>
           </button>
           <Link
-            to="/demo"
+            to="/contact"
             onClick={closeAll}
             className="group inline-flex h-10 items-center justify-center gap-2 rounded-sm border px-4 text-[12px] font-medium transition shyena-demo-cta"
           >
@@ -123,7 +123,7 @@ export function SiteHeader() {
               </Link>
             ))}
             <Link
-              to="/demo"
+              to="/contact"
               onClick={closeAll}
               className="mt-2 flex min-h-12 items-center justify-center rounded-sm border px-4 text-[12px] font-medium shyena-demo-cta"
             >
@@ -134,7 +134,7 @@ export function SiteHeader() {
       )}
       {searchOpen && (
         <div
-          className="fixed inset-0 z-[100] bg-[#07101f]/45 p-4 backdrop-blur-sm sm:p-8"
+          className="fixed inset-0 z-[100] bg-[var(--warp-canvas)]/45 p-4 backdrop-blur-sm sm:p-8"
           role="dialog"
           aria-modal="true"
           aria-label="Search Shyena"
@@ -145,24 +145,24 @@ export function SiteHeader() {
             onClick={() => setSearchOpen(false)}
             className="absolute inset-0 cursor-default"
           />
-          <div className="relative mx-auto mt-[8vh] w-full max-w-2xl overflow-hidden rounded-2xl border border-[#dfe3ea] bg-white shadow-[0_40px_100px_-35px_rgba(7,16,31,.55)]">
-            <div className="flex h-14 items-center gap-3 border-b border-[#e8eaf0] px-4">
-              <Search className="h-5 w-5 text-[#8c94a0]" />
+          <div className="relative mx-auto mt-[8vh] w-full max-w-2xl overflow-hidden rounded-2xl border border-[var(--warp-border)] bg-white shadow-[0_40px_100px_-35px_rgba(7,16,31,.55)]">
+            <div className="flex h-14 items-center gap-3 border-b border-[var(--warp-border)] px-4">
+              <Search className="h-5 w-5 text-[var(--warp-muted)]" />
               <input
                 autoFocus
                 placeholder="Search Shyena..."
                 aria-label="Search Shyena"
-                className="h-full flex-1 bg-transparent text-sm text-[#17233f] outline-none placeholder:text-[#a0a6b0]"
+                className="h-full flex-1 bg-transparent text-sm text-[var(--warp-ink)] outline-none placeholder:text-[var(--warp-muted)]"
               />
               <button
                 type="button"
                 onClick={() => setSearchOpen(false)}
-                className="rounded-lg p-2 text-[#7b8390] hover:bg-[#f5f6f8]"
+                className="rounded-lg p-2 text-[var(--warp-muted)] hover:bg-[var(--warp-surface-soft)]"
               >
                 <X className="h-4 w-4" />
               </button>
             </div>
-            <div className="p-4 text-sm text-[#69707d]">
+            <div className="p-4 text-sm text-[var(--warp-muted)]">
               Use the navigation above to explore Shyena.
             </div>
           </div>

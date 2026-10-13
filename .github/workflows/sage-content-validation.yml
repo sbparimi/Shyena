@@ -7,7 +7,6 @@ on:
       - "src/content/docs/**"
       - "src/components/docs/doc-concept-visual.tsx"
       - "public/rag-*.svg"
-      - "src/lib/sage/**"
       - "scripts/validate-sage-content.mjs"
       - "package.json"
       - ".github/workflows/sage-content-validation.yml"

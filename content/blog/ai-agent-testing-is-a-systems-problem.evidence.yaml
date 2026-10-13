@@ -6,6 +6,8 @@ claims:
     status: inferred
     basis: "The article explicitly describes model, orchestrator, tools, retrieval, deterministic services, and user-facing behavior as separate system layers."
     source_required: true
+    sources:
+      - "https://www.anthropic.com/engineering/building-effective-agents"
   - id: CLM-002
     claim: "Deterministic assertions and semantic evaluation answer different classes of questions."
     status: opinion

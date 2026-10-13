@@ -31,9 +31,9 @@ export function DocsSidebar() {
           type="button"
           onClick={() => setOpen((value) => !value)}
           aria-expanded={open}
-          className="flex w-full items-center gap-2 border-b border-slate-300 pb-3 text-left text-xs font-bold uppercase tracking-[0.16em] text-slate-950 hover:text-[#a87900]"
+          className="flex w-full items-center gap-2 border-b border-slate-300 pb-3 text-left text-xs font-bold uppercase tracking-[0.16em] text-slate-950 hover:text-[var(--warp-accent-text)]"
         >
-          <BookOpen className="h-4 w-4 text-[#a87900]" />
+          <BookOpen className="h-4 w-4 text-[var(--warp-accent-text)]" />
           <span className="flex-1">Documentation</span>
           {open ? (
             <ChevronDown className="h-4 w-4 text-slate-500" />
@@ -53,13 +53,13 @@ export function DocsSidebar() {
                     className={cn(
                       "relative flex items-center border-b border-slate-200 px-3 py-2.5 text-sm transition-colors",
                       active
-                        ? "bg-[#fff4cc] font-semibold text-slate-950"
+                        ? "bg-[var(--warp-surface-soft)] font-semibold text-slate-950"
                         : "text-slate-600 hover:bg-slate-50 hover:text-slate-950",
                     )}
                   >
                     {active && (
                       <span
-                        className="absolute bottom-0 left-0 top-0 w-1 bg-[#ffb703]"
+                        className="absolute bottom-0 left-0 top-0 w-1 bg-[var(--warp-lime)] text-[var(--warp-on-accent)]"
                         aria-hidden="true"
                       />
                     )}
@@ -69,14 +69,14 @@ export function DocsSidebar() {
               })}
             </nav>
             <div className="mt-5 border-t border-slate-300 pt-4">
-              <p className="px-3 font-mono text-[10px] uppercase tracking-[0.14em] text-[#a87900]">
+              <p className="px-3 font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--warp-accent-text)]">
                 Deeper research
               </p>
               <a
                 href={ARXIV_EVALUATION_SEARCH}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-2 block border border-slate-300 bg-[#f5f8fc] px-3 py-3 text-sm font-semibold text-slate-950 transition-colors hover:border-[#ffb703] hover:bg-[#fff4cc]"
+                className="mt-2 block border border-slate-300 bg-[var(--warp-surface-soft)] px-3 py-3 text-sm font-semibold text-slate-950 transition-colors hover:border-[var(--warp-border-strong)] hover:bg-[var(--warp-surface-soft)]"
               >
                 AI evaluation research on arXiv
               </a>

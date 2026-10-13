@@ -42,7 +42,7 @@ export function SiteFooter() {
             <Link to="/" aria-label="Shyena home" className="inline-flex">
               <Logo size="footer" theme="dark" />
             </Link>
-            <p className="mt-5 max-w-sm text-sm leading-6 text-[#667085]">
+            <p className="mt-5 max-w-sm text-sm leading-6 text-[var(--warp-muted)]">
               The governed Agentic SDLC—from planning and coding agents through testing, security,
               release evidence and operational learning.
             </p>
@@ -50,14 +50,14 @@ export function SiteFooter() {
               <a
                 href="https://www.linkedin.com/company/shyena-ai/"
                 aria-label="Shyena on LinkedIn"
-                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[#e1e4e9] text-[#596273] transition hover:border-[#17213f] hover:text-[#17213f]"
+                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[var(--warp-border)] text-[var(--warp-muted)] transition hover:border-[var(--warp-border-strong)] hover:text-[var(--warp-ink)]"
               >
                 <Linkedin className="h-4 w-4" />
               </a>
               <a
                 href="https://github.com/sbparimi/Shyena"
                 aria-label="Shyena on GitHub"
-                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[#e1e4e9] text-[#596273] transition hover:border-[#17213f] hover:text-[#17213f]"
+                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[var(--warp-border)] text-[var(--warp-muted)] transition hover:border-[var(--warp-border-strong)] hover:text-[var(--warp-ink)]"
               >
                 <Github className="h-4 w-4" />
               </a>
@@ -74,7 +74,7 @@ export function SiteFooter() {
                     <li key={`${column.title}-${link.label}`}>
                       <Link
                         to={link.to}
-                        className="text-sm text-[#667085] transition-colors hover:text-[#5145ff]"
+                        className="text-sm text-[var(--warp-muted)] transition-colors hover:text-[var(--warp-accent-text)]"
                       >
                         {link.label}
                       </Link>
@@ -85,21 +85,21 @@ export function SiteFooter() {
             ))}
           </div>
         </div>
-        <div className="mt-8 border-t border-[#e5e7eb] pt-5 text-xs leading-5 text-[#7a8290]">
+        <div className="mt-8 border-t border-[var(--warp-border)] pt-5 text-xs leading-5 text-[var(--warp-muted)]">
           <div>Shyena · Netherlands</div>
         </div>
-        <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-[#7a8290]">
-          <Link to="/privacy" className="hover:text-[#5145ff]">
+        <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-[var(--warp-muted)]">
+          <Link to="/privacy" className="hover:text-[var(--warp-accent-text)]">
             Privacy Policy
           </Link>
-          <Link to="/cookies" className="hover:text-[#5145ff]">
+          <Link to="/cookies" className="hover:text-[var(--warp-accent-text)]">
             Cookie notice
           </Link>
-          <Link to="/terms" className="hover:text-[#5145ff]">
+          <Link to="/terms" className="hover:text-[var(--warp-accent-text)]">
             Terms
           </Link>
         </div>
-        <div className="mt-6 flex flex-col gap-4 border-t border-[#e5e7eb] pt-6 text-xs text-[#7a8290] sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-6 flex flex-col gap-4 border-t border-[var(--warp-border)] pt-6 text-xs text-[var(--warp-muted)] sm:flex-row sm:items-center sm:justify-between">
           <div>© {new Date().getFullYear()} Shyena. All rights reserved.</div>
           <div className="flex items-center gap-2">
             Built for a more trustworthy AI future <ArrowRight className="h-3.5 w-3.5" />

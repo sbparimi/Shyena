@@ -7,17 +7,6 @@ const SITE = "https://www.shyena.eu";
 export const Route = createFileRoute("/autonomous-testing")({
   head: () => ({
     meta: [
-      { title: "Autonomous Testing | Shyena" },
-      {
-        name: "description",
-        content:
-          "Autonomous quality engineering that explores applications, engineers tests, executes journeys, investigates failures and produces release evidence.",
-      },
-    ],
-    links: [{ rel: "canonical", href: "https://www.shyena.eu/autonomous-testing" }],
-  }),
-  head: () => ({
-    meta: [
       { title: "Autonomous AI Testing & Quality Engineering | Shyena" },
       {
         name: "description",
@@ -139,10 +128,10 @@ function AutonomousTestingPage() {
         <div className="mx-auto max-w-[1440px] px-5 py-12 sm:px-8 sm:py-16 lg:px-10 lg:py-20">
           <div className="grid gap-8 lg:grid-cols-[1fr_1fr] lg:items-center">
             <div>
-              <div className="font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-[#a87900] sm:text-xs">
+              <div className="font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-[var(--warp-accent-text)] sm:text-xs">
                 ERP testing
               </div>
-              <h2 className="mt-4 max-w-3xl font-[Sora] text-[clamp(2.2rem,5vw,4.5rem)] font-extrabold leading-[0.94] tracking-[-0.055em]">
+              <h2 className="mt-4 max-w-3xl text-[clamp(2.2rem,5vw,4.5rem)] font-extrabold leading-[0.94] tracking-[-0.055em]">
                 Oracle Fusion. Business-process aware testing.
               </h2>
               <p className="mt-5 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">
@@ -151,7 +140,7 @@ function AutonomousTestingPage() {
                 Projects.
               </p>
             </div>
-            <div className="border border-slate-300 bg-[#f8fafc] p-6 sm:p-8">
+            <div className="border border-slate-300 bg-[var(--warp-surface-soft)] p-6 sm:p-8">
               <div className="grid grid-cols-2 gap-px border border-slate-300 bg-slate-300">
                 <div className="bg-white p-5">
                   <div className="font-mono text-[10px] text-slate-400">UNDERSTAND</div>

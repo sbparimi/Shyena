@@ -14,8 +14,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-      - name: Install dependencies
-        run: npm install
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: oven-sh/setup-bun@v2
+      - name: Install dependencies (locked)
+        run: bun install --frozen-lockfile
       - name: Validate content contract
         run: npm run content:validate
       - name: Generate content registry
@@ -24,3 +28,12 @@ jobs:
         run: npm run lint
       - name: Production build
         run: npm run build
+      - name: Type check
+        run: npm run typecheck
+      - name: Unit tests
+        run: npm test
+      - name: Route smoke test
+        run: |
+          npx vite dev --host 127.0.0.1 --port 3000 > /tmp/dev.log 2>&1 &
+          for i in $(seq 1 40); do curl -sf http://127.0.0.1:3000/ > /dev/null && break; sleep 2; done
+          node scripts/smoke-routes.mjs http://127.0.0.1:3000

@@ -75,7 +75,7 @@ evaluation_steps=[
 ]
 ```
 
-DeepEval's documentation notes that providing explicit evaluation steps avoids regenerating the steps from the criteria on every run and gives you more control over the metric.
+DeepEval's documentation notes that providing explicit evaluation steps avoids regenerating the steps from the criteria on every run and gives you more control over the metric. `criteria` and `evaluation_steps` are alternatives: supply one or the other, not both. Once you lock the steps, the criterion is expressed through them.
 
 ### 3. Rubric
 
@@ -88,11 +88,12 @@ from deepeval.test_case import LLMTestCase, SingleTurnParams
 
 metric = GEval(
     name="Response Correctness",
-    criteria="Determine whether the actual output is factually correct based on the expected output.",
     evaluation_params=[
         SingleTurnParams.ACTUAL_OUTPUT,
         SingleTurnParams.EXPECTED_OUTPUT,
     ],
+    # Pass evaluation_steps OR criteria, not both. Steps are used here so the
+    # judge's procedure is fixed rather than regenerated on every run.
     evaluation_steps=[
         "Check for factual contradictions.",
         "Check for missing critical information.",
@@ -356,4 +357,12 @@ It is:
 
 For AI agents, that is the difference between measuring answer quality and building an assurance system.
 
-**Source:** [DeepEval — G-Eval and Rubric](https://deepeval.com/docs/metrics-llm-evals)
+## Limits of this approach
+
+G-Eval uses an LLM as the judge, so even with locked evaluation steps and a rubric its scores remain non-deterministic and depend on the judge model. For checks that must be exactly repeatable, DeepEval documents a decision-tree metric (`DAGMetric`) that branches on explicit conditions. Rubric thresholds should be calibrated against human-labelled examples, and agreement between the judge and human reviewers should be measured before a score gates a release. The rubric bands and the 0.8 threshold shown above are illustrative, not validated values.
+
+## References
+
+1. DeepEval documentation, "G-Eval" (LLM-as-a-judge metrics, criteria, evaluation steps, rubric): <https://deepeval.com/docs/metrics-llm-evals>
+2. Liu, Y. et al. (2023). "G-Eval: NLG Evaluation using GPT-4 with Better Human Alignment." EMNLP 2023. <https://arxiv.org/abs/2303.16634>
+3. Zheng, L. et al. (2023). "Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena." NeurIPS 2023. <https://arxiv.org/abs/2306.05685>

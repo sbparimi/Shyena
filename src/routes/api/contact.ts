@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { clientKey, createRateLimiter } from "@/lib/rate-limit";
 
 const MAX_NAME_LENGTH = 120;
 const MAX_EMAIL_LENGTH = 254;
@@ -37,6 +38,8 @@ const FREE_EMAIL_DOMAINS = new Set([
   "126.com",
 ]);
 
+const isRateLimited = createRateLimiter(10 * 60 * 1000, 5);
+
 function cleanText(value: unknown, maxLength: number): string {
   return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
 }
@@ -61,6 +64,15 @@ export const Route = createFileRoute("/api/contact")({
   server: {
     handlers: {
       POST: async ({ request }) => {
+        if (isRateLimited(clientKey(request.headers))) {
+          return Response.json(
+            { error: "Too many requests. Please try again in a few minutes." },
+            { status: 429, headers: { "Retry-After": "600" } },
+          );
+        }
+        if (Number(request.headers.get("content-length") ?? 0) > 20_000) {
+          return Response.json({ error: "Request too large" }, { status: 413 });
+        }
         let body: unknown;
         try {
           body = await request.json();
@@ -68,20 +80,23 @@ export const Route = createFileRoute("/api/contact")({
           return Response.json({ error: "Invalid request body" }, { status: 400 });
         }
 
+        if (typeof body !== "object" || body === null || Array.isArray(body)) {
+          return Response.json({ error: "Invalid request body" }, { status: 400 });
+        }
         const input = body as Record<string, unknown>;
-        const inquiryReason = cleanText(input.inquiryReason, 80);
-        const firstName = cleanText(input.firstName, MAX_NAME_LENGTH);
-        const lastName = cleanText(input.lastName, MAX_NAME_LENGTH);
-        const email = cleanText(input.email, MAX_EMAIL_LENGTH).toLowerCase();
-        const phone = cleanText(input.phone, 60);
-        const company = cleanText(input.company, MAX_COMPANY_LENGTH);
-        const jobTitle = cleanText(input.jobTitle, 120);
-        const companySize = cleanText(input.companySize, 40);
-        const country = cleanText(input.country, 100);
-        const message = cleanText(input.message, MAX_MESSAGE_LENGTH);
+        const inquiryReason = cleanText(input["inquiryReason"], 80);
+        const firstName = cleanText(input["firstName"], MAX_NAME_LENGTH);
+        const lastName = cleanText(input["lastName"], MAX_NAME_LENGTH);
+        const email = cleanText(input["email"], MAX_EMAIL_LENGTH).toLowerCase();
+        const phone = cleanText(input["phone"], 60);
+        const company = cleanText(input["company"], MAX_COMPANY_LENGTH);
+        const jobTitle = cleanText(input["jobTitle"], 120);
+        const companySize = cleanText(input["companySize"], 40);
+        const country = cleanText(input["country"], 100);
+        const message = cleanText(input["message"], MAX_MESSAGE_LENGTH);
         const name = [firstName, lastName].filter(Boolean).join(" ");
 
-        const honeypot = cleanText(input.website, 200);
+        const honeypot = cleanText(input["website"], 200);
         if (honeypot)
           return Response.json({ error: "Unable to submit this request." }, { status: 400 });
         if (!inquiryReason || !firstName || !lastName || !email || !company || !message) {
