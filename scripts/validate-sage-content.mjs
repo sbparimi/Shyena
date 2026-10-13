@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import * as yaml from "js-yaml";
 
 const root = path.resolve("content");
 const failures = [];
@@ -32,24 +33,37 @@ function validate(file) {
     failures.push(`${file}: blocked placeholder content`);
 }
 
-// Evidence gate: a claim marked source_required must list at least one source,
-// and the declared unverified_material_claims count must match reality.
-function validateEvidence(file) {
-  const text = fs.readFileSync(file, "utf8");
-  const blocks = text.split(/^\s*- id:\s*/m).slice(1);
+// Evidence gate: a claim marked source_required must list at least one source, and the declared
+// unverified_material_claims count must match reality.
+export function checkEvidence(text, file, failures) {
+  let doc;
+  try {
+    doc = yaml.load(text);
+  } catch (error) {
+    failures.push(`${file}: invalid YAML (${error.message.split("\n")[0]})`);
+    return;
+  }
+  const claims = Array.isArray(doc?.claims) ? doc.claims : [];
   let unsourced = 0;
-  for (const block of blocks) {
-    const id = block.split("\n")[0].trim();
-    if (/source_required:\s*true/.test(block) && !/^\s*sources:\s*\n\s*- /m.test(block)) {
+  for (const claim of claims) {
+    const sources = Array.isArray(claim.sources) ? claim.sources.filter(Boolean) : [];
+    if (claim.source_required === true && sources.length === 0) {
       unsourced += 1;
-      failures.push(`${file}: claim ${id} requires a source but lists none`);
+      failures.push(`${file}: claim ${claim.id} requires a source but lists none`);
     }
   }
-  const declared = text.match(/^unverified_material_claims:\s*(\d+)/m);
-  if (declared && Number(declared[1]) !== unsourced)
+  if (
+    doc &&
+    doc.unverified_material_claims !== undefined &&
+    doc.unverified_material_claims !== unsourced
+  )
     failures.push(
-      `${file}: unverified_material_claims is ${declared[1]} but ${unsourced} claims lack sources`,
+      `${file}: unverified_material_claims is ${doc.unverified_material_claims} but ${unsourced} claims lack sources`,
     );
+}
+
+function validateEvidence(file) {
+  checkEvidence(fs.readFileSync(file, "utf8"), file, failures);
 }
 
 function walkEvidence(dir) {
@@ -61,13 +75,17 @@ function walkEvidence(dir) {
   }
 }
 
-walk(root);
-walkEvidence(root);
+const isMain =
+  process.argv[1] && path.resolve(process.argv[1]) === new URL(import.meta.url).pathname;
+if (isMain) {
+  walk(root);
+  walkEvidence(root);
 
-if (failures.length) {
-  console.error("SAGE content validation failed:");
-  failures.forEach((failure) => console.error(`- ${failure}`));
-  process.exit(1);
+  if (failures.length) {
+    console.error("SAGE content validation failed:");
+    failures.forEach((failure) => console.error(`- ${failure}`));
+    process.exit(1);
+  }
+
+  console.log("SAGE content validation passed.");
 }
-
-console.log("SAGE content validation passed.");

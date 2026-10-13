@@ -1,3 +1,4 @@
+import { CtaLink } from "@/components/ui/cta-link";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 
@@ -28,18 +29,12 @@ export function SeoLanding({ config }: { config: SeoLandingConfig }) {
               {config.description}
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link
-                to="/contact"
-                className="inline-flex items-center gap-3 bg-[var(--warp-lime)] px-6 py-4 text-xs font-extrabold uppercase tracking-[.12em] text-[var(--warp-on-accent)] warp-btn"
-              >
+              <CtaLink to="/contact">
                 Request a working session <ArrowRight className="h-4 w-4" />
-              </Link>
-              <Link
-                to="/docs"
-                className="inline-flex items-center gap-3 border border-white/20 px-6 py-4 text-xs font-extrabold uppercase tracking-[.12em] text-white"
-              >
+              </CtaLink>
+              <CtaLink to="/docs">
                 Read the engineering docs <ArrowRight className="h-4 w-4" />
-              </Link>
+              </CtaLink>
             </div>
           </div>
         </div>
@@ -115,12 +110,9 @@ export function SeoLanding({ config }: { config: SeoLandingConfig }) {
             Bring one business journey and see how Shyena maps, tests, evaluates, secures and
             connects the evidence to release decisions.
           </p>
-          <Link
-            to="/contact"
-            className="mt-8 inline-flex items-center gap-3 bg-[var(--warp-lime)] px-6 py-4 text-xs font-extrabold uppercase tracking-[.12em] text-[var(--warp-on-accent)] warp-btn"
-          >
+          <CtaLink to="/contact" className="mt-8">
             Request a demo <ArrowRight className="h-4 w-4" />
-          </Link>
+          </CtaLink>
         </div>
       </section>
     </div>

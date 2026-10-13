@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, CheckCircle2, MessageSquare, Scale, ShieldX, XCircle } from "lucide-react";
+import { CtaLink } from "@/components/ui/cta-link";
 
 /**
  * Homepage section for the capability that is live today: testing Cognigy-built
@@ -127,12 +128,12 @@ export function LiveTodayCognigy() {
         </div>
 
         <div className="mt-8 flex flex-wrap gap-3">
-          <Link
+          <CtaLink
             to="/contact"
-            className="warp-btn inline-flex h-11 items-center gap-2 bg-[var(--warp-lime)] px-5 text-[var(--warp-on-accent)]"
+            className="inline-flex h-11 items-center gap-2 bg-[var(--warp-lime)] px-5 text-[var(--warp-on-accent)]"
           >
             Test one of your journeys <ArrowRight className="h-4 w-4" aria-hidden="true" />
-          </Link>
+          </CtaLink>
           <Link
             to="/vera"
             className="inline-flex h-11 items-center gap-2 border border-[var(--warp-border-strong)] px-5 text-sm font-medium text-[var(--warp-ink)]"

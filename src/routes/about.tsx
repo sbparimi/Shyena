@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { CtaLink } from "@/components/ui/cta-link";
 
 const SITE = "https://www.shyena.eu";
 
@@ -209,12 +210,12 @@ function AboutPage() {
             >
               Explore Govern <ArrowRightIcon />
             </Link>
-            <Link
+            <CtaLink
               to="/services"
-              className="warp-btn inline-flex h-11 items-center gap-2 rounded-lg border border-white/15 px-5 text-sm font-semibold text-white"
+              className="inline-flex h-11 items-center gap-2 rounded-lg border border-white/15 px-5 text-sm font-semibold text-white"
             >
               View services <ArrowRightIcon />
-            </Link>
+            </CtaLink>
           </div>
         </div>
       </section>

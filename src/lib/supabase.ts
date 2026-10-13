@@ -27,6 +27,39 @@ export type Candidate = {
   total_count: number;
 };
 
+// Columns the directory actually renders. Selecting them explicitly keeps new or private columns
+// added to the table later from being sent to the browser. total_count comes from the RPC only.
+const CANDIDATE_COLUMNS = [
+  "id",
+  "full_name",
+  "headline",
+  "bio",
+  "location",
+  "timezone",
+  "available_from",
+  "availability_status",
+  "core_skills",
+  "specialties",
+  "domains",
+  "certifications",
+  "years_experience",
+  "remote_modes",
+  "resume_path",
+  "avatar_url",
+].join(",");
+
+// Profiles hidden from the public directory (comma-separated names). Defaults to the site owner.
+const HIDDEN_NAMES = new Set(
+  ((import.meta.env["VITE_DIRECTORY_HIDDEN_NAMES"] as string | undefined) ?? "suresh parimi")
+    .split(",")
+    .map((name) => name.trim().toLowerCase())
+    .filter(Boolean),
+);
+
+function isHidden(candidate: Candidate): boolean {
+  return HIDDEN_NAMES.has(candidate.full_name.trim().toLowerCase());
+}
+
 async function supabaseFetch(path: string, init: RequestInit = {}) {
   const headers = new Headers(init.headers);
   headers.set("apikey", SUPABASE_KEY);
@@ -48,7 +81,7 @@ async function directCandidateSearch(filters: {
   pageSize?: number;
 }) {
   const response = await supabaseFetch(
-    "/rest/v1/assurance_candidates?select=*&profile_status=eq.published&order=full_name.asc",
+    `/rest/v1/assurance_candidates?select=${CANDIDATE_COLUMNS}&profile_status=eq.published&order=full_name.asc`,
   );
   const rows = (await response.json()) as Candidate[];
   const term = (filters.search ?? "").trim().toLowerCase();
@@ -59,7 +92,7 @@ async function directCandidateSearch(filters: {
   const availableBy = filters.availableBy ?? "";
 
   const filtered = rows.filter((candidate) => {
-    if (candidate.full_name.trim().toLowerCase() === "suresh parimi") return false;
+    if (isHidden(candidate)) return false;
     const searchable = [
       candidate.full_name,
       candidate.headline,
@@ -122,9 +155,7 @@ export async function searchCandidates(filters: {
     });
     const rows = (await response.json()) as Candidate[];
     if (rows.length > 0) {
-      return rows.filter(
-        (candidate) => candidate.full_name.trim().toLowerCase() !== "suresh parimi",
-      );
+      return rows.filter((candidate) => !isHidden(candidate));
     }
   } catch {
     // Fall through to the direct published-profile query.

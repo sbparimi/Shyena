@@ -18,6 +18,7 @@ import {
   XCircle,
   Zap,
 } from "lucide-react";
+import { CtaLink } from "@/components/ui/cta-link";
 
 type Node = { id: string; label: string; sub: string; x: string; y: string; tone?: string };
 const nodes: Node[] = [
@@ -557,12 +558,12 @@ export function AutonomousQACinematicDemo() {
             >
               <RotateCcw className="h-3.5 w-3.5" /> Replay failure {replay > 0 && `(${replay})`}
             </button>
-            <Link
+            <CtaLink
               to="/sample-report"
-              className="warp-btn inline-flex h-9 items-center gap-2 rounded-lg bg-white/[.06] px-3 text-[10px] font-bold text-[var(--warp-muted)]"
+              className="inline-flex h-9 items-center gap-2 rounded-lg bg-white/[.06] px-3 text-[10px] font-bold text-[var(--warp-muted)]"
             >
               Open report <ArrowRight className="h-3.5 w-3.5" />
-            </Link>
+            </CtaLink>
           </div>
         </div>
         <Graph phase={phase} pulse={pulse} />
@@ -677,12 +678,12 @@ export function AutonomousQACinematicDemo() {
             >
               Explore platform <ArrowRight className="h-4 w-4" />
             </Link>
-            <Link
+            <CtaLink
               to="/contact"
-              className="warp-btn inline-flex h-11 items-center gap-2 rounded-lg border border-white/15 px-5 text-sm font-bold text-[var(--warp-muted)]"
+              className="inline-flex h-11 items-center gap-2 rounded-lg border border-white/15 px-5 text-sm font-bold text-[var(--warp-muted)]"
             >
               Discuss an assurance engagement <ArrowRight className="h-4 w-4" />
-            </Link>
+            </CtaLink>
           </div>
         </div>
       </section>

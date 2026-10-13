@@ -2,6 +2,7 @@ import { Children, isValidElement, type ReactNode } from "react";
 import { Markdown, type MarkdownComponents } from "@tanstack/markdown/react";
 import { ArticleConceptDiagram } from "@/components/blog/article-concept-diagrams";
 import type { InlineArticleVisual } from "@/content/article-visuals";
+import { stripLeadingTitle } from "@/lib/markdown";
 import { generatedContent } from "@/content/generated-content";
 
 const blogSources = import.meta.glob("../../content/blog/*.md", {
@@ -17,10 +18,6 @@ const docSources = import.meta.glob("../../content/docs/*.md", {
 }) as Record<string, string>;
 
 const components = {
-  // The page template already renders the article title as the one <h1>.
-  h1(props) {
-    return <h2 {...props} />;
-  },
   a(props) {
     const href = props.href || "";
     const external = /^https?:\/\//i.test(href);
@@ -45,7 +42,9 @@ const components = {
  * public source links remain the authoritative citations for readers.
  */
 function sanitizePublishedMarkdown(source: string) {
-  return source
+  // Drop the leading "# Title" (after any frontmatter): the page template already renders the title as
+  // the one <h1>, so repeating it in the body would duplicate the headline.
+  return stripLeadingTitle(source)
     .replace(/cite[^]*/g, "")
     .replace(/url[^]*/g, "")
     .replace(/\n{3,}/g, "\n\n");

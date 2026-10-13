@@ -8,6 +8,7 @@ import {
   SAMPLE_TRACE,
   type GateStatus,
 } from "@/content/sample-rfq-run";
+import { CtaAnchor, CtaLink } from "@/components/ui/cta-link";
 
 export const Route = createFileRoute("/sample-report")({
   head: () => ({
@@ -230,19 +231,19 @@ function SampleReportPage() {
         </section>
 
         <div className="flex flex-wrap gap-3">
-          <a
+          <CtaAnchor
             href="/api/sample-report-pdf"
             download="shyena-sample-assurance-report.pdf"
-            className="warp-btn inline-flex min-h-11 items-center gap-2 bg-[var(--warp-lime)] px-4 text-[var(--warp-on-accent)]"
+            className="inline-flex min-h-11 items-center gap-2 bg-[var(--warp-lime)] px-4 text-[var(--warp-on-accent)]"
           >
             <Download className="h-4 w-4" aria-hidden="true" /> Download the PDF report
-          </a>
-          <Link
+          </CtaAnchor>
+          <CtaLink
             to="/contact"
-            className="warp-btn inline-flex min-h-11 items-center gap-2 border border-[var(--warp-border-strong)] px-4 text-sm font-medium text-[var(--warp-ink)]"
+            className="inline-flex min-h-11 items-center gap-2 border border-[var(--warp-border-strong)] px-4 text-sm font-medium text-[var(--warp-ink)]"
           >
             Run this on your system <ArrowRight className="h-4 w-4" aria-hidden="true" />
-          </Link>
+          </CtaLink>
           <Link
             to="/docs/reporting"
             className="inline-flex min-h-11 items-center gap-2 px-3 text-sm font-medium text-[var(--warp-muted)]"

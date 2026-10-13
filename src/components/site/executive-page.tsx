@@ -1,5 +1,6 @@
 import { Link, useLocation } from "@tanstack/react-router";
 import { ArrowRight, CheckCircle2, ShieldCheck } from "lucide-react";
+import { CtaAnchor, CtaLink } from "@/components/ui/cta-link";
 
 export type ExecutivePageProps = {
   eyebrow: string;
@@ -60,20 +61,20 @@ export function ExecutivePage({
                 </h1>
                 <p className="mt-5 max-w-2xl text-lg leading-8 text-[var(--warp-muted)]">{intro}</p>
                 <div className="mt-7 flex flex-wrap gap-3">
-                  <Link
+                  <CtaLink
                     to={primaryHref}
-                    className="warp-btn inline-flex h-11 items-center gap-2 rounded-lg bg-[var(--warp-lime)] px-5 text-sm font-semibold text-[var(--warp-on-accent)] transition hover:bg-[var(--warp-lime)]"
+                    className="inline-flex h-11 items-center gap-2 rounded-lg bg-[var(--warp-lime)] px-5 text-sm font-semibold text-[var(--warp-on-accent)] transition hover:bg-[var(--warp-lime)]"
                   >
                     {primaryLabel}
                     <ArrowRight className="h-4 w-4" />
-                  </Link>
-                  <a
+                  </CtaLink>
+                  <CtaAnchor
                     href={secondaryHref}
-                    className="warp-btn inline-flex h-11 items-center gap-2 rounded-lg border border-[var(--warp-border)] bg-white px-5 text-sm font-semibold text-[var(--warp-ink)] transition hover:border-[var(--warp-border-strong)]"
+                    className="inline-flex h-11 items-center gap-2 rounded-lg border border-[var(--warp-border)] bg-white px-5 text-sm font-semibold text-[var(--warp-ink)] transition hover:border-[var(--warp-border-strong)]"
                   >
                     {secondaryLabel}
                     <ArrowRight className="h-4 w-4" />
-                  </a>
+                  </CtaAnchor>
                 </div>
                 <div className="mt-7 border-t border-[var(--warp-border)] pt-4 text-xs font-medium text-[var(--warp-muted)]">
                   {audience}

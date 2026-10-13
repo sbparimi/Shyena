@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Check, ShieldCheck } from "lucide-react";
+import { CtaLink } from "@/components/ui/cta-link";
 
 const SITE = "https://www.shyena.eu";
 const FAQ = [
@@ -66,12 +67,12 @@ function Page() {
               >
                 Book a 30-min call <ArrowRight className="h-4 w-4" />
               </Link>
-              <Link
+              <CtaLink
                 to="/sample-report"
-                className="warp-btn inline-flex h-11 items-center gap-2 rounded-lg border border-white/15 px-5 text-sm font-bold text-[var(--warp-muted)]"
+                className="inline-flex h-11 items-center gap-2 rounded-lg border border-white/15 px-5 text-sm font-bold text-[var(--warp-muted)]"
               >
                 See sample evidence <ArrowRight className="h-4 w-4" />
-              </Link>
+              </CtaLink>
             </div>
           </div>
         </div>

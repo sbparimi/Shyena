@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, CheckCircle2, Network, ShieldCheck } from "lucide-react";
+import { CtaAnchor } from "@/components/ui/cta-link";
 
 const SITE = "https://www.shyena.eu";
 
@@ -107,12 +108,12 @@ function Page() {
               >
                 Discuss an AI assurance assessment <ArrowRight className="h-4 w-4" />
               </Link>
-              <a
+              <CtaAnchor
                 href="#approach"
-                className="warp-btn inline-flex h-11 items-center gap-2 rounded-lg border border-white/15 px-5 text-sm font-bold text-[var(--warp-muted)]"
+                className="inline-flex h-11 items-center gap-2 rounded-lg border border-white/15 px-5 text-sm font-bold text-[var(--warp-muted)]"
               >
                 See the practical approach <ArrowRight className="h-4 w-4" />
-              </a>
+              </CtaAnchor>
             </div>
           </div>
         </div>

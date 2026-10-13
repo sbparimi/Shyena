@@ -1,3 +1,4 @@
+import { stripLeadingTitle } from "@/lib/markdown";
 import { ArrowLeft, ArrowRight, BookOpen, ExternalLink } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { Markdown } from "@tanstack/markdown/react";
@@ -67,7 +68,7 @@ export function KnowledgeDocPage({
         </div>
 
         <div className="max-w-4xl text-[15px] leading-7 [&_h1]:mt-0 [&_h1]:text-3xl [&_h1]:font-bold [&_h1]:tracking-tight [&_h1]:text-[var(--warp-ink)] [&_h2]:mt-14 [&_h2]:scroll-mt-28 [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:tracking-tight [&_h2]:text-[var(--warp-ink)] [&_h3]:mt-9 [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:text-[var(--warp-ink)] [&_p]:mt-5 [&_p]:text-[var(--warp-muted)] [&_ul]:mt-5 [&_ul]:list-disc [&_ul]:space-y-2 [&_ul]:pl-6 [&_ol]:mt-5 [&_ol]:list-decimal [&_ol]:space-y-2 [&_ol]:pl-6 [&_li]:text-[var(--warp-muted)] [&_strong]:font-semibold [&_strong]:text-[var(--warp-ink)] [&_a]:text-[var(--warp-accent-text)] [&_a]:underline [&_a]:underline-offset-4 [&_code]:rounded [&_code]:bg-[var(--warp-surface-soft)] [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-[0.9em] [&_code]:text-[var(--warp-muted)] [&_pre]:mt-6 [&_pre]:overflow-x-auto [&_pre]:rounded-2xl [&_pre]:border [&_pre]:border-[var(--warp-border)] [&_pre]:bg-[var(--warp-surface-soft)] [&_pre]:p-5 [&_pre]:text-[13px] [&_pre]:leading-6 [&_pre]:text-[var(--warp-ink)] [&_blockquote]:mt-6 [&_blockquote]:border-l-2 [&_blockquote]:border-[var(--warp-border-strong)]/50 [&_blockquote]:pl-5 [&_blockquote]:italic [&_blockquote]:text-[var(--warp-muted)] [&_table]:mt-6 [&_table]:w-full [&_table]:border-collapse [&_th]:border [&_th]:border-[var(--warp-border)] [&_th]:bg-[var(--warp-surface-soft)] [&_th]:px-3 [&_th]:py-2 [&_th]:text-left [&_th]:text-xs [&_th]:font-semibold [&_th]:uppercase [&_th]:tracking-wide [&_th]:text-[var(--warp-muted)] [&_td]:border [&_td]:border-[var(--warp-border)] [&_td]:px-3 [&_td]:py-2 [&_td]:align-top [&_td]:text-[var(--warp-muted)] [&_hr]:my-10 [&_hr]:border-[var(--warp-border)] [&_img]:rounded-2xl [&_img]:border [&_img]:border-[var(--warp-border)]">
-          <Markdown components={{ h1: (props) => <h2 {...props} /> }}>{source}</Markdown>
+          <Markdown>{stripLeadingTitle(source)}</Markdown>
         </div>
 
         <div className="mt-14 flex flex-col gap-3 border-t border-[var(--warp-border)] pt-8 sm:flex-row sm:items-center sm:justify-between">

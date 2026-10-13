@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, Check, Play, ShieldCheck } from "lucide-react";
+import { CtaLink } from "@/components/ui/cta-link";
 
 const products = [
   {
@@ -122,12 +123,12 @@ export function QualityIntelligencePage() {
               >
                 See it on your system <ArrowRight className="h-4 w-4" />
               </Link>
-              <Link
+              <CtaLink
                 to="/sample-report"
-                className="warp-btn inline-flex h-12 items-center gap-2 rounded-lg border border-white/15 px-5 text-sm font-bold text-white/85"
+                className="inline-flex h-12 items-center gap-2 rounded-lg border border-white/15 px-5 text-sm font-bold text-white/85"
               >
                 See a sample run <ArrowRight className="h-4 w-4" />
-              </Link>
+              </CtaLink>
             </div>
             <div className="mt-8 flex flex-wrap gap-2">
               {surfaces.map((x) => (
