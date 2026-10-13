@@ -7,6 +7,8 @@ const SUPABASE_KEY =
   (import.meta.env["VITE_SUPABASE_PUBLISHABLE_KEY"] as string | undefined) ??
   "sb_publishable_ueUr_kwat_KK1jQoixQ4ug_QC8ZXqzh";
 
+import { SAMPLE_CANDIDATES } from "@/data/sample-experts";
+
 export type Candidate = {
   id: string;
   full_name: string;
@@ -25,6 +27,8 @@ export type Candidate = {
   resume_path: string | null;
   avatar_url: string | null;
   total_count: number;
+  /** True for illustrative sample profiles (fictional people); never sent to or from Supabase. */
+  is_sample?: boolean;
 };
 
 // Columns the directory actually renders. Selecting them explicitly keeps new or private columns
@@ -70,7 +74,14 @@ async function supabaseFetch(path: string, init: RequestInit = {}) {
   return response;
 }
 
-async function directCandidateSearch(filters: {
+async function loadPublished(): Promise<Candidate[]> {
+  const response = await supabaseFetch(
+    `/rest/v1/assurance_candidates?select=${CANDIDATE_COLUMNS}&profile_status=eq.published&order=full_name.asc`,
+  );
+  return (await response.json()) as Candidate[];
+}
+
+type DirectoryFilters = {
   search?: string;
   location?: string;
   skill?: string;
@@ -79,11 +90,9 @@ async function directCandidateSearch(filters: {
   remote?: string;
   page?: number;
   pageSize?: number;
-}) {
-  const response = await supabaseFetch(
-    `/rest/v1/assurance_candidates?select=${CANDIDATE_COLUMNS}&profile_status=eq.published&order=full_name.asc`,
-  );
-  const rows = (await response.json()) as Candidate[];
+};
+
+function filterCandidates(rows: Candidate[], filters: DirectoryFilters) {
   const term = (filters.search ?? "").trim().toLowerCase();
   const location = (filters.location ?? "").trim().toLowerCase();
   const skill = (filters.skill ?? "").trim().toLowerCase();
@@ -129,6 +138,10 @@ async function directCandidateSearch(filters: {
   }));
 }
 
+export function getSampleCandidates(filters: DirectoryFilters = {}) {
+  return filterCandidates(SAMPLE_CANDIDATES, filters);
+}
+
 export async function searchCandidates(filters: {
   search?: string;
   location?: string;
@@ -160,7 +173,15 @@ export async function searchCandidates(filters: {
   } catch {
     // Fall through to the direct published-profile query.
   }
-  return directCandidateSearch(filters);
+  try {
+    const published = await loadPublished();
+    // Live directory reachable and has profiles: filter them (an empty match is a real answer).
+    if (published.length > 0) return filterCandidates(published, filters);
+  } catch {
+    // Live directory unreachable: fall through to the labelled sample profiles.
+  }
+  // Nothing published yet, or unreachable: show the clearly labelled sample profiles.
+  return filterCandidates(SAMPLE_CANDIDATES, filters);
 }
 
 export async function submitHireRequest(payload: {
