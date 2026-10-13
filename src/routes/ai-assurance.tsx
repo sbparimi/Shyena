@@ -109,7 +109,7 @@ function Page() {
               </Link>
               <a
                 href="#approach"
-                className="inline-flex h-11 items-center gap-2 rounded-lg border border-white/15 px-5 text-sm font-bold text-[var(--warp-muted)]"
+                className="warp-btn inline-flex h-11 items-center gap-2 rounded-lg border border-white/15 px-5 text-sm font-bold text-[var(--warp-muted)]"
               >
                 See the practical approach <ArrowRight className="h-4 w-4" />
               </a>

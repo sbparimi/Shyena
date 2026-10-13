@@ -71,11 +71,7 @@ export function KnowledgeDocPage({
         </div>
 
         <div className="mt-14 flex flex-col gap-3 border-t border-[var(--warp-border)] pt-8 sm:flex-row sm:items-center sm:justify-between">
-          <Button
-            asChild
-            variant="ghost"
-            className="px-0 text-[var(--warp-muted)] hover:text-[var(--warp-ink)]"
-          >
+          <Button asChild>
             <Link to="/docs">
               <ArrowLeft className="mr-2 h-4 w-4" />
               Back to Docs

@@ -39,14 +39,14 @@ A CI job should fail only for release-blocking conditions. Test infrastructure f
 
 Use risk-based execution:
 
-| Change | Minimum assurance |
-| --- | --- |
-| copy / prompt-only | targeted semantic regression |
-| flow / routing | affected journeys + deterministic path checks |
-| tool change | tool and argument checks + critical journeys |
-| policy / auth | negative tests + security assurance |
-| model change | representative semantic suite + calibration |
-| production release | full release-gate suite |
+| Change             | Minimum assurance                             |
+| ------------------ | --------------------------------------------- |
+| copy / prompt-only | targeted semantic regression                  |
+| flow / routing     | affected journeys + deterministic path checks |
+| tool change        | tool and argument checks + critical journeys  |
+| policy / auth      | negative tests + security assurance           |
+| model change       | representative semantic suite + calibration   |
+| production release | full release-gate suite                       |
 
 ## 4. Webhooks
 

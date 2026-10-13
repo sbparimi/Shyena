@@ -8,15 +8,15 @@ The fictional Northstar Metrics SDK is an illustrative versioned-documentation a
 
 ## System boundaries
 
-| Layer | Responsibility | Evidence to preserve |
-| --- | --- | --- |
-| Source registry | Track authority, version, freshness and access | Source ID, revision, metadata |
-| Indexing | Parse, chunk, embed and link entities | Index version, chunk IDs, entity links |
-| Retrieval | Select passages and traverse relationships | Query, candidates, scores, graph paths |
-| Context resolution | Apply authority and version rules | Selected context and conflicts |
-| Answer generation | Produce an answer from approved context | Model, prompt revision, raw output |
-| Claim verification | Check facts, grounding and contradictions | Claims, source links, assertion results |
-| Evidence and gate | Preserve the run and apply policy | Manifest, verdict, policy revision |
+| Layer              | Responsibility                                 | Evidence to preserve                    |
+| ------------------ | ---------------------------------------------- | --------------------------------------- |
+| Source registry    | Track authority, version, freshness and access | Source ID, revision, metadata           |
+| Indexing           | Parse, chunk, embed and link entities          | Index version, chunk IDs, entity links  |
+| Retrieval          | Select passages and traverse relationships     | Query, candidates, scores, graph paths  |
+| Context resolution | Apply authority and version rules              | Selected context and conflicts          |
+| Answer generation  | Produce an answer from approved context        | Model, prompt revision, raw output      |
+| Claim verification | Check facts, grounding and contradictions      | Claims, source links, assertion results |
+| Evidence and gate  | Preserve the run and apply policy              | Manifest, verdict, policy revision      |
 
 ## Define the contract first
 

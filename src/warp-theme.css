@@ -1,4 +1,3 @@
-
 /*
  * Canonical Warp-inspired system for Shyena.
  * Loaded last by src/routes/__root.tsx. This is the only global visual system.
@@ -48,7 +47,9 @@ body > div > div {
   color-scheme: light;
 }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   margin: 0;
@@ -109,7 +110,10 @@ body {
   letter-spacing: 0 !important;
   text-transform: none !important;
   box-shadow: none !important;
-  transition: color 160ms ease, background-color 160ms ease, border-color 160ms ease;
+  transition:
+    color 160ms ease,
+    background-color 160ms ease,
+    border-color 160ms ease;
 }
 
 #page-content.site-theme :where(a, button, input, textarea, select):focus-visible {
@@ -122,66 +126,75 @@ body {
 }
 
 /* Use restrained panel corners throughout, not the old ultra-sharp global override. */
-#page-content.site-theme [class*="rounded-2xl"] { border-radius: 4px !important; }
-#page-content.site-theme [class*="rounded-xl"] { border-radius: 4px !important; }
-#page-content.site-theme [class*="rounded-lg"] { border-radius: 4px !important; }
-#page-content.site-theme [class*="rounded-md"] { border-radius: 4px !important; }
+#page-content.site-theme [class*="rounded-2xl"] {
+  border-radius: 4px !important;
+}
+#page-content.site-theme [class*="rounded-xl"] {
+  border-radius: 4px !important;
+}
+#page-content.site-theme [class*="rounded-lg"] {
+  border-radius: 4px !important;
+}
+#page-content.site-theme [class*="rounded-md"] {
+  border-radius: 4px !important;
+}
 
-#page-content.site-theme :where(
-  [class*="bg-violet-50"],
-  [class*="bg-purple-50"],
-  [class*="bg-[#efedff]"],
-  [class*="bg-[#f6f4ff]"],
-  [class*="bg-[#f7f5ff]"],
-  [class*="bg-[#fbfaff]"],
-  [class*="bg-[#fcfbff]"]
-) {
+#page-content.site-theme
+  :where(
+    [class*="bg-violet-50"],
+    [class*="bg-purple-50"],
+    [class*="bg-[#efedff]"],
+    [class*="bg-[#f6f4ff]"],
+    [class*="bg-[#f7f5ff]"],
+    [class*="bg-[#fbfaff]"],
+    [class*="bg-[#fcfbff]"]
+  ) {
   background: var(--warp-surface-soft) !important;
   border-color: var(--warp-border) !important;
 }
 
-#page-content.site-theme :where(
-  [class*="text-violet-"],
-  [class*="text-purple-"],
-  [class*="text-[#5145ff]"]
-) {
+#page-content.site-theme
+  :where([class*="text-violet-"], [class*="text-purple-"], [class*="text-[#5145ff]"]) {
   color: var(--warp-accent-text) !important;
 }
 
-#page-content.site-theme :where(
-  [class*="border-violet-"],
-  [class*="border-purple-"],
-  [class*="border-[#d9d3ff]"],
-  [class*="border-[#ded8ed]"],
-  [class*="border-[#e8e4f0]"],
-  [class*="border-[#e7e2ef]"]
-) {
+#page-content.site-theme
+  :where(
+    [class*="border-violet-"],
+    [class*="border-purple-"],
+    [class*="border-[#d9d3ff]"],
+    [class*="border-[#ded8ed]"],
+    [class*="border-[#e8e4f0]"],
+    [class*="border-[#e7e2ef]"]
+  ) {
   border-color: var(--warp-border) !important;
 }
 
-#page-content.site-theme :where(
-  [class*="text-[#0f172a]"],
-  [class*="text-[#17213f]"],
-  [class*="text-[#17233f]"],
-  [class*="text-[#1a1527]"],
-  [class*="text-[#211a32]"],
-  [class*="text-[#2d263d]"],
-  [class*="text-[#302940]"]
-) {
+#page-content.site-theme
+  :where(
+    [class*="text-[#0f172a]"],
+    [class*="text-[#17213f]"],
+    [class*="text-[#17233f]"],
+    [class*="text-[#1a1527]"],
+    [class*="text-[#211a32]"],
+    [class*="text-[#2d263d]"],
+    [class*="text-[#302940]"]
+  ) {
   color: var(--warp-ink) !important;
 }
 
-#page-content.site-theme :where(
-  [class*="text-[#575064]"],
-  [class*="text-[#61586f]"],
-  [class*="text-[#6b6279]"],
-  [class*="text-[#746b83]"],
-  [class*="text-[#756c83]"],
-  [class*="text-[#81788e]"],
-  [class*="text-[#82798f]"],
-  [class*="text-[#8a8299]"],
-  [class*="text-[#8d849a]"]
-) {
+#page-content.site-theme
+  :where(
+    [class*="text-[#575064]"],
+    [class*="text-[#61586f]"],
+    [class*="text-[#6b6279]"],
+    [class*="text-[#746b83]"],
+    [class*="text-[#756c83]"],
+    [class*="text-[#81788e]"],
+    [class*="text-[#82798f]"],
+    [class*="text-[#8a8299]"],
+    [class*="text-[#8d849a]"]
+  ) {
   color: var(--warp-muted) !important;
 }
 
@@ -383,7 +396,11 @@ body > div > footer[data-shyena-chrome="footer"] a:hover {
 }
 
 #page-content.site-theme .shyena-factory-home > section:first-child > div:first-child {
-  background-image: radial-gradient(circle, rgba(245, 247, 251, 0.08) 1px, transparent 1.2px) !important;
+  background-image: radial-gradient(
+    circle,
+    rgba(245, 247, 251, 0.08) 1px,
+    transparent 1.2px
+  ) !important;
   background-size: 16px 16px !important;
   background-position: center top !important;
   mask-image: linear-gradient(to bottom, black 0%, transparent 95%) !important;
@@ -420,23 +437,24 @@ body > div > footer[data-shyena-chrome="footer"] a:hover {
   line-height: 1.3 !important;
 }
 
-#page-content.site-theme .shyena-factory-home :where(
-  [class*="bg-white"],
-  [class*="bg-[#fcfbff]"],
-  [class*="bg-[#fbfaff]"],
-  [class*="bg-[#f7f5ff]"],
-  [class*="bg-[#efedff]"],
-  [class*="bg-[#f6f4ff]"]
-) {
+#page-content.site-theme
+  .shyena-factory-home
+  :where(
+    [class*="bg-white"],
+    [class*="bg-[#fcfbff]"],
+    [class*="bg-[#fbfaff]"],
+    [class*="bg-[#f7f5ff]"],
+    [class*="bg-[#efedff]"],
+    [class*="bg-[#f6f4ff]"]
+  ) {
   background: var(--warp-surface) !important;
   color: var(--warp-ink) !important;
   border-color: var(--warp-border) !important;
 }
 
-#page-content.site-theme .shyena-factory-home :where(
-  [class*="rounded-xl"][class*="border"],
-  [class*="rounded-2xl"][class*="border"]
-) {
+#page-content.site-theme
+  .shyena-factory-home
+  :where([class*="rounded-xl"][class*="border"], [class*="rounded-2xl"][class*="border"]) {
   border-radius: 4px !important;
   border-color: var(--warp-border) !important;
 }
@@ -473,7 +491,11 @@ body > div > footer[data-shyena-chrome="footer"] a:hover {
   border-color: var(--warp-lime) !important;
 }
 
-#page-content.site-theme .shyena-factory-home .rail > button[aria-pressed="true"] :where(h3, p, span) {
+#page-content.site-theme
+  .shyena-factory-home
+  .rail
+  > button[aria-pressed="true"]
+  :where(h3, p, span) {
   color: var(--warp-ink) !important;
 }
 
@@ -482,7 +504,11 @@ body > div > footer[data-shyena-chrome="footer"] a:hover {
   color: var(--warp-ink) !important;
 }
 
-#page-content.site-theme .shyena-factory-home .rail > button[aria-pressed="false"] :where(h3, p, span) {
+#page-content.site-theme
+  .shyena-factory-home
+  .rail
+  > button[aria-pressed="false"]
+  :where(h3, p, span) {
   color: var(--warp-ink) !important;
 }
 
@@ -550,43 +576,46 @@ body > div > footer[data-shyena-chrome="footer"] a:hover {
   }
 }
 
-
 /* Visual QA remediation: preserve readable foregrounds on dark sections.
    These rules intentionally target only known dark surfaces and legacy dark-text
    utility classes, leaving light cards and terminal controls untouched. */
-#page-content.site-theme :is(
-  [class*="bg-[#07101f]"],
-  [class*="bg-[#0a071d]"],
-  [class*="bg-[#121212]"],
-  [class*="bg-[#17213f]"],
-  [class*="bg-[#1a1a1a]"],
-  [class*="bg-slate-950"],
-  [class*="bg-gray-950"],
-  [class*="bg-zinc-950"],
-  [class*="bg-black"]
-) :is(
-  [class*="text-[#1a1522]"],
-  [class*="text-[#1a1527]"],
-  [class*="text-[#17213f]"],
-  [class*="text-[#17233f]"],
-  [class*="text-[#0f172a]"],
-  [class*="text-[#211a32]"],
-  [class*="text-[#2d263d]"]
-) {
+#page-content.site-theme
+  :is(
+    [class*="bg-[#07101f]"],
+    [class*="bg-[#0a071d]"],
+    [class*="bg-[#121212]"],
+    [class*="bg-[#17213f]"],
+    [class*="bg-[#1a1a1a]"],
+    [class*="bg-slate-950"],
+    [class*="bg-gray-950"],
+    [class*="bg-zinc-950"],
+    [class*="bg-black"]
+  )
+  :is(
+    [class*="text-[#1a1522]"],
+    [class*="text-[#1a1527]"],
+    [class*="text-[#17213f]"],
+    [class*="text-[#17233f]"],
+    [class*="text-[#0f172a]"],
+    [class*="text-[#211a32]"],
+    [class*="text-[#2d263d]"]
+  ) {
   color: #f5f5f5 !important;
 }
 
-#page-content.site-theme :is(
-  [class*="bg-[#07101f]"],
-  [class*="bg-[#0a071d]"],
-  [class*="bg-[#121212]"],
-  [class*="bg-[#17213f]"],
-  [class*="bg-[#1a1a1a]"],
-  [class*="bg-slate-950"],
-  [class*="bg-gray-950"],
-  [class*="bg-zinc-950"],
-  [class*="bg-black"]
-) :is(p, li, label, small, figcaption) {
+#page-content.site-theme
+  :is(
+    [class*="bg-[#07101f]"],
+    [class*="bg-[#0a071d]"],
+    [class*="bg-[#121212]"],
+    [class*="bg-[#17213f]"],
+    [class*="bg-[#1a1a1a]"],
+    [class*="bg-slate-950"],
+    [class*="bg-gray-950"],
+    [class*="bg-zinc-950"],
+    [class*="bg-black"]
+  )
+  :is(p, li, label, small, figcaption) {
   color: #e5e5e5 !important;
 }
 
@@ -598,40 +627,85 @@ body > div > header[data-shyena-chrome="header"] .shyena-mobile-panel a.is-activ
   color: var(--warp-blue) !important;
 }
 
-
 /* WCAG 2.2 AA foundations: skip navigation, visible focus, motion and target sizing. */
 .shyena-skip-link {
-  position: fixed; z-index: 10000; inset-block-start: 8px; inset-inline-start: 8px;
-  transform: translateY(calc(-100% - 12px)); padding: 12px 16px;
-  border: 2px solid var(--warp-on-accent, #0b1220); border-radius: 4px;
-  background: var(--warp-lime, #e8ed75); color: var(--warp-on-accent, #0b1220) !important;
-  font-size: 16px; font-weight: 700; line-height: 1.4; text-decoration: underline;
+  position: fixed;
+  z-index: 10000;
+  inset-block-start: 8px;
+  inset-inline-start: 8px;
+  transform: translateY(calc(-100% - 12px));
+  padding: 12px 16px;
+  border: 2px solid var(--warp-on-accent, #0b1220);
+  border-radius: 4px;
+  background: var(--warp-lime, #e8ed75);
+  color: var(--warp-on-accent, #0b1220) !important;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.4;
+  text-decoration: underline;
 }
-.shyena-skip-link:focus, .shyena-skip-link:focus-visible {
-  transform: translateY(0); outline: 3px solid #1769aa; outline-offset: 3px;
+.shyena-skip-link:focus,
+.shyena-skip-link:focus-visible {
+  transform: translateY(0);
+  outline: 3px solid #1769aa;
+  outline-offset: 3px;
 }
-#page-content:focus { outline: none; }
-:where(a, button, input, select, textarea, summary, [role="button"], [role="link"], [tabindex]:not([tabindex="-1"])):focus-visible {
-  outline: 3px solid #1769aa !important; outline-offset: 3px !important; scroll-margin-block: 6rem;
+#page-content:focus {
+  outline: none;
 }
-:where(button, [role="button"], input[type="checkbox"], input[type="radio"], input[type="range"], select) {
+:where(
+  a,
+  button,
+  input,
+  select,
+  textarea,
+  summary,
+  [role="button"],
+  [role="link"],
+  [tabindex]:not([tabindex="-1"])
+):focus-visible {
+  outline: 3px solid #1769aa !important;
+  outline-offset: 3px !important;
+  scroll-margin-block: 6rem;
+}
+:where(
+  button,
+  [role="button"],
+  input[type="checkbox"],
+  input[type="radio"],
+  input[type="range"],
+  select
+) {
   accent-color: #1769aa;
 }
 @media (prefers-reduced-motion: reduce) {
-  html:focus-within { scroll-behavior: auto !important; }
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important; animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important; scroll-behavior: auto !important;
+  html:focus-within {
+    scroll-behavior: auto !important;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 @media (forced-colors: active) {
-  :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible { outline: 3px solid Highlight !important; }
-  .shyena-skip-link { border: 2px solid ButtonText; background: Canvas; color: CanvasText !important; }
+  :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+    outline: 3px solid Highlight !important;
+  }
+  .shyena-skip-link {
+    border: 2px solid ButtonText;
+    background: Canvas;
+    color: CanvasText !important;
+  }
 }
 @media (max-width: 767px) {
-  #page-content.site-theme :where(a, button, [role="button"]) { scroll-margin-block: 5rem; }
+  #page-content.site-theme :where(a, button, [role="button"]) {
+    scroll-margin-block: 5rem;
+  }
 }
-
 
 /* Targeted contrast corrections found in the public visual audit. */
 body > div > header[data-shyena-chrome="header"] .shyena-nav a {
@@ -648,88 +722,110 @@ body > div > header[data-shyena-chrome="header"] .shyena-search-control :where(s
   color: #262626 !important;
 }
 
-
 /* Demo control-room: restore readable contrast for muted labels on dark surfaces. */
-#page-content.site-theme main[class*="bg-[#05080d]"] :is(
-  [class*="text-white/15"], [class*="text-white/20"], [class*="text-white/25"],
-  [class*="text-white/30"], [class*="text-white/35"], [class*="text-white/40"],
-  [class*="text-white/45"], [class*="text-white/50"], [class*="text-white/55"],
-  [class*="text-white/60"], [class*="text-white/65"], [class*="text-white/70"]
-) {
+#page-content.site-theme
+  main[class*="bg-[#05080d]"]
+  :is(
+    [class*="text-white/15"],
+    [class*="text-white/20"],
+    [class*="text-white/25"],
+    [class*="text-white/30"],
+    [class*="text-white/35"],
+    [class*="text-white/40"],
+    [class*="text-white/45"],
+    [class*="text-white/50"],
+    [class*="text-white/55"],
+    [class*="text-white/60"],
+    [class*="text-white/65"],
+    [class*="text-white/70"]
+  ) {
   color: #d1d5db !important;
 }
-#page-content.site-theme main[class*="bg-[#05080d]"] :is(
-  [class*="text-white/15"], [class*="text-white/20"], [class*="text-white/25"],
-  [class*="text-white/30"], [class*="text-white/35"]
-) {
+#page-content.site-theme
+  main[class*="bg-[#05080d]"]
+  :is(
+    [class*="text-white/15"],
+    [class*="text-white/20"],
+    [class*="text-white/25"],
+    [class*="text-white/30"],
+    [class*="text-white/35"]
+  ) {
   color: #bfc7d2 !important;
 }
-
 
 /*
  * Production visual repair: dark page sections must not inherit the light-theme
  * heading ink color. Keep this scoped to dark surfaces so light-page typography
  * and intentional accent colors remain unchanged.
  */
-#page-content.site-theme :is(
-  [class*="bg-[#07101f]"],
-  [class*="bg-[#05080d]"],
-  [class*="bg-[#080809]"],
-  [class*="bg-[#080711]"],
-  [class*="bg-[#090713]"],
-  [class*="bg-[#0b0920]"],
-  [class*="bg-slate-950"],
-  [class*="bg-gray-950"],
-  [class*="bg-zinc-950"],
-  [class*="bg-black"]
-) :is(h1, h2, h3, h4, h5, h6) {
+#page-content.site-theme
+  :is(
+    [class*="bg-[#07101f]"],
+    [class*="bg-[#05080d]"],
+    [class*="bg-[#080809]"],
+    [class*="bg-[#080711]"],
+    [class*="bg-[#090713]"],
+    [class*="bg-[#0b0920]"],
+    [class*="bg-slate-950"],
+    [class*="bg-gray-950"],
+    [class*="bg-zinc-950"],
+    [class*="bg-black"]
+  )
+  :is(h1, h2, h3, h4, h5, h6) {
   color: #f8fafc !important;
 }
 
-#page-content.site-theme :is(
-  [class*="bg-[#07101f]"],
-  [class*="bg-[#05080d]"],
-  [class*="bg-[#080809]"],
-  [class*="bg-[#080711]"],
-  [class*="bg-[#090713]"],
-  [class*="bg-[#0b0920]"],
-  [class*="bg-slate-950"],
-  [class*="bg-gray-950"],
-  [class*="bg-zinc-950"],
-  [class*="bg-black"]
-) :is(p, li, label, small, figcaption, dt, dd, th, td) {
+#page-content.site-theme
+  :is(
+    [class*="bg-[#07101f]"],
+    [class*="bg-[#05080d]"],
+    [class*="bg-[#080809]"],
+    [class*="bg-[#080711]"],
+    [class*="bg-[#090713]"],
+    [class*="bg-[#0b0920]"],
+    [class*="bg-slate-950"],
+    [class*="bg-gray-950"],
+    [class*="bg-zinc-950"],
+    [class*="bg-black"]
+  )
+  :is(p, li, label, small, figcaption, dt, dd, th, td) {
   color: #e2e8f0 !important;
 }
 
 /* Accent words on dark surfaces must be light enough to meet text contrast. */
-#page-content.site-theme :is(
-  [class*="bg-[#07101f]"],
-  [class*="bg-[#05080d]"],
-  [class*="bg-[#080809]"],
-  [class*="bg-[#080711]"],
-  [class*="bg-[#090713]"],
-  [class*="bg-[#0b0920]"],
-  [class*="bg-slate-950"],
-  [class*="bg-gray-950"],
-  [class*="bg-zinc-950"],
-  [class*="bg-black"]
-) :is(h1, h2, h3, h4, h5, h6) :is(span, em, strong) {
+#page-content.site-theme
+  :is(
+    [class*="bg-[#07101f]"],
+    [class*="bg-[#05080d]"],
+    [class*="bg-[#080809]"],
+    [class*="bg-[#080711]"],
+    [class*="bg-[#090713]"],
+    [class*="bg-[#0b0920]"],
+    [class*="bg-slate-950"],
+    [class*="bg-gray-950"],
+    [class*="bg-zinc-950"],
+    [class*="bg-black"]
+  )
+  :is(h1, h2, h3, h4, h5, h6)
+  :is(span, em, strong) {
   color: #a5b4fc !important;
 }
 
 /* Preserve explicitly high-contrast orange metadata on dark surfaces. */
-#page-content.site-theme :is(
-  [class*="bg-[#07101f]"],
-  [class*="bg-[#05080d]"],
-  [class*="bg-[#080809]"],
-  [class*="bg-[#080711]"],
-  [class*="bg-[#090713]"],
-  [class*="bg-[#0b0920]"],
-  [class*="bg-slate-950"],
-  [class*="bg-gray-950"],
-  [class*="bg-zinc-950"],
-  [class*="bg-black"]
-) :is([class*="text-[#e87512]"], [class*="text-[#f18a32]"]) {
+#page-content.site-theme
+  :is(
+    [class*="bg-[#07101f]"],
+    [class*="bg-[#05080d]"],
+    [class*="bg-[#080809]"],
+    [class*="bg-[#080711]"],
+    [class*="bg-[#090713]"],
+    [class*="bg-[#0b0920]"],
+    [class*="bg-slate-950"],
+    [class*="bg-gray-950"],
+    [class*="bg-zinc-950"],
+    [class*="bg-black"]
+  )
+  :is([class*="text-[#e87512]"], [class*="text-[#f18a32]"]) {
   color: #ffb15c !important;
 }
 
@@ -742,7 +838,6 @@ a.shyena-skip-link:focus,
 a.shyena-skip-link:focus-visible {
   clip-path: none !important;
 }
-
 
 /*
  * Unified Shyena brand theme across every route.
@@ -770,7 +865,10 @@ a.shyena-skip-link:focus-visible {
   --accent: var(--warp-accent-text);
   --accent-foreground: var(--warp-on-accent);
 }
-html, body, body > div, body > div > div {
+html,
+body,
+body > div,
+body > div > div {
   background: #07101f !important;
   color: #f5f7fb;
   color-scheme: dark;
@@ -782,47 +880,77 @@ html, body, body > div, body > div > div {
   color: #f5f7fb !important;
 }
 /* Normalize legacy light backgrounds without affecting the shared white header. */
-#page-content.site-theme :is(
-  [class*="bg-white"], [class*="bg-gray-50"], [class*="bg-gray-100"],
-  [class*="bg-slate-50"], [class*="bg-slate-100"], [class*="bg-zinc-50"],
-  [class*="bg-neutral-50"], [class*="bg-[#f6f6f6]"], [class*="bg-[#f8f8f8]"],
-  [class*="bg-[#fafbfc]"], [class*="bg-[#fafafa]"], [class*="bg-[#fff8f2]"],
-  [class*="bg-[#fcfbff]"], [class*="bg-[#fbfaff]"], [class*="bg-[#f7f5ff]"],
-  [class*="bg-[#efedff]"], [class*="bg-[#f6f4ff]"], [class*="bg-[#ffffff]"],
-  [class*="bg-[#fff]"]
-) {
+#page-content.site-theme
+  :is(
+    [class*="bg-white"],
+    [class*="bg-gray-50"],
+    [class*="bg-gray-100"],
+    [class*="bg-slate-50"],
+    [class*="bg-slate-100"],
+    [class*="bg-zinc-50"],
+    [class*="bg-neutral-50"],
+    [class*="bg-[#f6f6f6]"],
+    [class*="bg-[#f8f8f8]"],
+    [class*="bg-[#fafbfc]"],
+    [class*="bg-[#fafafa]"],
+    [class*="bg-[#fff8f2]"],
+    [class*="bg-[#fcfbff]"],
+    [class*="bg-[#fbfaff]"],
+    [class*="bg-[#f7f5ff]"],
+    [class*="bg-[#efedff]"],
+    [class*="bg-[#f6f4ff]"],
+    [class*="bg-[#ffffff]"],
+    [class*="bg-[#fff]"]
+  ) {
   background-color: #0c1729 !important;
   color: #f5f7fb !important;
   border-color: #263449 !important;
 }
-#page-content.site-theme :is(
-  [class*="text-[#171717]"], [class*="text-[#262626]"],
-  [class*="text-[#17213f]"], [class*="text-[#17233f]"],
-  [class*="text-[#0f172a]"], [class*="text-[#1a1527]"],
-  [class*="text-[#211a32]"], [class*="text-[#2d263d]"],
-  [class*="text-[#302940]"], [class*="text-[#555]"],
-  [class*="text-[#555555]"], [class*="text-[#596273]"],
-  [class*="text-[#69707d]"], [class*="text-[#69707d]"],
-  [class*="text-[#575064]"], [class*="text-[#61586f]"],
-  [class*="text-[#6b6279]"], [class*="text-[#746b83]"],
-  [class*="text-[#756c83]"], [class*="text-[#81788e]"],
-  [class*="text-[#82798f]"], [class*="text-[#8a8299]"],
-  [class*="text-[#8d849a]"]
-) {
+#page-content.site-theme
+  :is(
+    [class*="text-[#171717]"],
+    [class*="text-[#262626]"],
+    [class*="text-[#17213f]"],
+    [class*="text-[#17233f]"],
+    [class*="text-[#0f172a]"],
+    [class*="text-[#1a1527]"],
+    [class*="text-[#211a32]"],
+    [class*="text-[#2d263d]"],
+    [class*="text-[#302940]"],
+    [class*="text-[#555]"],
+    [class*="text-[#555555]"],
+    [class*="text-[#596273]"],
+    [class*="text-[#69707d]"],
+    [class*="text-[#69707d]"],
+    [class*="text-[#575064]"],
+    [class*="text-[#61586f]"],
+    [class*="text-[#6b6279]"],
+    [class*="text-[#746b83]"],
+    [class*="text-[#756c83]"],
+    [class*="text-[#81788e]"],
+    [class*="text-[#82798f]"],
+    [class*="text-[#8a8299]"],
+    [class*="text-[#8d849a]"]
+  ) {
   color: #cbd5e1 !important;
 }
-#page-content.site-theme :is(h1,h2,h3,h4,h5,h6) {
+#page-content.site-theme :is(h1, h2, h3, h4, h5, h6) {
   color: #f5f7fb !important;
 }
 #page-content.site-theme :is(section, article, aside, [role="tabpanel"], table, th, td) {
   border-color: #263449 !important;
 }
-#page-content.site-theme :is(
-  [class*="border-[#e1e4e9]"], [class*="border-[#e6e8ed]"],
-  [class*="border-[#e8eaee]"], [class*="border-[#dfe3e8]"],
-  [class*="border-[#e5e5e5]"], [class*="border-[#e6e6e6]"],
-  [class*="border-gray-200"], [class*="border-slate-200"]
-) {
+#page-content.site-theme
+  :is(
+    [class*="border-[#e1e4e9]"],
+    [class*="border-[#e6e8ed]"],
+    [class*="border-[#e8eaee]"],
+    [class*="border-[#dfe3e8]"],
+    [class*="border-[#e5e5e5]"],
+    [class*="border-[#e6e6e6]"],
+    [class*="border-gray-200"],
+    [class*="border-slate-200"]
+  ) {
   border-color: #263449 !important;
 }
 /* Keep the brand orange as the dominant action color, with the lime demo CTA
@@ -830,7 +958,11 @@ html, body, body > div, body > div > div {
 /* One primary action style site-wide, as on warp.dev: lime fill, dark text, 4px radius,
    uppercase mono label. Pages opt in with the warp-btn class (applied by the token codemod). */
 #page-content.site-theme :is(a, button)[class*="bg-orange-"],
-#page-content.site-theme :is(a, button)[class*="bg-[var(--warp-lime)]"]:not([class*="bg-[var(--warp-lime)]/"]),
+#page-content.site-theme
+  :is(a, button)[class*="bg-[var(--warp-lime)]"]:not([class*="bg-[var(--warp-lime)]/"]),
+#page-content.site-theme :is(a, button)[data-shyena-button="primary"],
+#page-content.site-theme :is(a, button)[data-shyena-button="outline"],
+#page-content.site-theme :is(a, button)[data-shyena-button="secondary"],
 #page-content.site-theme .warp-btn {
   background: var(--warp-lime) !important;
   color: var(--warp-on-accent) !important;
@@ -840,11 +972,19 @@ html, body, body > div, body > div > div {
   font-size: 12px !important;
   font-weight: 600 !important;
   letter-spacing: 0.6px;
-  text-transform: uppercase;
+  text-transform: uppercase !important;
 }
-#page-content.site-theme .warp-btn * { color: var(--warp-on-accent) !important; }
-#page-content.site-theme .warp-btn:hover { background: #e4e96b !important; }
-#page-content.site-theme :is(a,button):hover {
+#page-content.site-theme :is(a, button)[data-shyena-button] *,
+#page-content.site-theme .warp-btn * {
+  color: inherit !important;
+}
+#page-content.site-theme :is(a, button)[data-shyena-button="primary"]:hover,
+#page-content.site-theme :is(a, button)[data-shyena-button="outline"]:hover,
+#page-content.site-theme :is(a, button)[data-shyena-button="secondary"]:hover,
+#page-content.site-theme .warp-btn:hover {
+  background: #e4e96b !important;
+}
+#page-content.site-theme :is(a, button):hover {
   border-color: #ffb15c;
 }
 body > div > footer[data-shyena-chrome="footer"] {
@@ -852,34 +992,48 @@ body > div > footer[data-shyena-chrome="footer"] {
   color: #f5f7fb !important;
   border-color: #263449 !important;
 }
-body > div > footer[data-shyena-chrome="footer"] :where(p,a,div,span) {
+body > div > footer[data-shyena-chrome="footer"] :where(p, a, div, span) {
   color: #cbd5e1;
 }
 body > div > footer[data-shyena-chrome="footer"] .shyena-footer-heading {
   color: #f5f7fb !important;
 }
 
-
 /* Legacy utility text colors are normalized too, including inline labels and badges. */
-#page-content.site-theme :is(
-  [class*="text-gray-500"], [class*="text-gray-600"], [class*="text-gray-700"],
-  [class*="text-gray-800"], [class*="text-gray-900"],
-  [class*="text-slate-500"], [class*="text-slate-600"], [class*="text-slate-700"],
-  [class*="text-slate-800"], [class*="text-slate-900"],
-  [class*="text-zinc-500"], [class*="text-zinc-600"], [class*="text-zinc-700"],
-  [class*="text-zinc-800"], [class*="text-zinc-900"],
-  [class*="text-neutral-500"], [class*="text-neutral-600"], [class*="text-neutral-700"],
-  [class*="text-neutral-800"], [class*="text-neutral-900"],
-  [class*="text-slate-950"], [class*="text-gray-950"], [class*="text-zinc-950"],
-  [class*="text-neutral-950"],
-  [class*="text-[#a55410]"]
-) {
+#page-content.site-theme
+  :is(
+    [class*="text-gray-500"],
+    [class*="text-gray-600"],
+    [class*="text-gray-700"],
+    [class*="text-gray-800"],
+    [class*="text-gray-900"],
+    [class*="text-slate-500"],
+    [class*="text-slate-600"],
+    [class*="text-slate-700"],
+    [class*="text-slate-800"],
+    [class*="text-slate-900"],
+    [class*="text-zinc-500"],
+    [class*="text-zinc-600"],
+    [class*="text-zinc-700"],
+    [class*="text-zinc-800"],
+    [class*="text-zinc-900"],
+    [class*="text-neutral-500"],
+    [class*="text-neutral-600"],
+    [class*="text-neutral-700"],
+    [class*="text-neutral-800"],
+    [class*="text-neutral-900"],
+    [class*="text-slate-950"],
+    [class*="text-gray-950"],
+    [class*="text-zinc-950"],
+    [class*="text-neutral-950"],
+    [class*="text-[#a55410]"]
+  ) {
   color: #cbd5e1 !important;
 }
-#page-content.site-theme :is([class*="text-[#a55410]"], [class*="text-[#e87512]"], [class*="text-[#f18a32]"]) {
+#page-content.site-theme
+  :is([class*="text-[#a55410]"], [class*="text-[#e87512]"], [class*="text-[#f18a32]"]) {
   color: #ffb15c !important;
 }
-
 
 /* Header/footer wordmarks must use contrast appropriate to their actual surface. */
 body > div > header[data-shyena-chrome="header"] .shyena-wordmark {

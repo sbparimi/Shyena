@@ -20,7 +20,10 @@
   color: var(--warp-ink);
 }
 .site-theme .shyena-concept-header span {
-  font: 500 0.68rem/1.2 "Azeret Mono", ui-monospace, monospace;
+  font:
+    500 0.68rem/1.2 "Azeret Mono",
+    ui-monospace,
+    monospace;
   letter-spacing: 0.08em;
   color: var(--warp-accent-text);
 }

@@ -389,7 +389,7 @@ function Marketplace() {
             </div>
             <button
               onClick={() => setFilters(draft)}
-              className="inline-flex h-10 items-center justify-center gap-2 rounded-lg bg-[var(--warp-surface-soft)] px-4 text-xs font-bold text-white"
+              className="warp-btn inline-flex h-10 items-center justify-center gap-2 px-4"
             >
               <SlidersHorizontal className="h-3.5 w-3.5" />
               Apply filters
@@ -399,7 +399,7 @@ function Marketplace() {
                 setDraft(empty);
                 setFilters(empty);
               }}
-              className="h-10 rounded-lg border border-[var(--warp-border)] px-4 text-xs font-bold"
+              className="warp-btn inline-flex h-10 items-center justify-center px-4"
             >
               Reset
             </button>

@@ -211,7 +211,7 @@ function AboutPage() {
             </Link>
             <Link
               to="/services"
-              className="inline-flex h-11 items-center gap-2 rounded-lg border border-white/15 px-5 text-sm font-semibold text-white"
+              className="warp-btn inline-flex h-11 items-center gap-2 rounded-lg border border-white/15 px-5 text-sm font-semibold text-white"
             >
               View services <ArrowRightIcon />
             </Link>

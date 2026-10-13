@@ -124,7 +124,7 @@ export function QualityIntelligencePage() {
               </Link>
               <Link
                 to="/sample-report"
-                className="inline-flex h-12 items-center gap-2 rounded-lg border border-white/15 px-5 text-sm font-bold text-white/85"
+                className="warp-btn inline-flex h-12 items-center gap-2 rounded-lg border border-white/15 px-5 text-sm font-bold text-white/85"
               >
                 See a sample run <ArrowRight className="h-4 w-4" />
               </Link>

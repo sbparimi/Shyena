@@ -239,7 +239,7 @@ function SampleReportPage() {
           </a>
           <Link
             to="/contact"
-            className="inline-flex min-h-11 items-center gap-2 border border-[var(--warp-border-strong)] px-4 text-sm font-medium text-[var(--warp-ink)]"
+            className="warp-btn inline-flex min-h-11 items-center gap-2 border border-[var(--warp-border-strong)] px-4 text-sm font-medium text-[var(--warp-ink)]"
           >
             Run this on your system <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>

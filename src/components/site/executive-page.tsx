@@ -62,14 +62,14 @@ export function ExecutivePage({
                 <div className="mt-7 flex flex-wrap gap-3">
                   <Link
                     to={primaryHref}
-                    className="inline-flex h-11 items-center gap-2 rounded-lg bg-[var(--warp-lime)] px-5 text-sm font-semibold text-[var(--warp-on-accent)] transition hover:bg-[var(--warp-lime)]"
+                    className="warp-btn inline-flex h-11 items-center gap-2 rounded-lg bg-[var(--warp-lime)] px-5 text-sm font-semibold text-[var(--warp-on-accent)] transition hover:bg-[var(--warp-lime)]"
                   >
                     {primaryLabel}
                     <ArrowRight className="h-4 w-4" />
                   </Link>
                   <a
                     href={secondaryHref}
-                    className="inline-flex h-11 items-center gap-2 rounded-lg border border-[var(--warp-border)] bg-white px-5 text-sm font-semibold text-[var(--warp-ink)] transition hover:border-[var(--warp-border-strong)]"
+                    className="warp-btn inline-flex h-11 items-center gap-2 rounded-lg border border-[var(--warp-border)] bg-white px-5 text-sm font-semibold text-[var(--warp-ink)] transition hover:border-[var(--warp-border-strong)]"
                   >
                     {secondaryLabel}
                     <ArrowRight className="h-4 w-4" />

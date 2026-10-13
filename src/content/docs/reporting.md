@@ -27,17 +27,17 @@ A dashboard is the navigation layer; the evidence chain is the authoritative art
 
 Every report should include:
 
-| Field | Purpose |
-| --- | --- |
-| release ID | identifies what is being shipped |
-| agent/application version | identifies the system under test |
-| test specification version | identifies the contract |
-| environment | establishes execution conditions |
-| run IDs | links to raw evidence |
-| evaluator version | identifies judgment configuration |
-| gate results | establishes pass/fail semantics |
-| exceptions | documents accepted deviations |
-| final verdict | states release disposition |
+| Field                      | Purpose                           |
+| -------------------------- | --------------------------------- |
+| release ID                 | identifies what is being shipped  |
+| agent/application version  | identifies the system under test  |
+| test specification version | identifies the contract           |
+| environment                | establishes execution conditions  |
+| run IDs                    | links to raw evidence             |
+| evaluator version          | identifies judgment configuration |
+| gate results               | establishes pass/fail semantics   |
+| exceptions                 | documents accepted deviations     |
+| final verdict              | states release disposition        |
 
 ## 3. Evidence hierarchy
 

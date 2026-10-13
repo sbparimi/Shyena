@@ -262,14 +262,14 @@ function HomePage() {
               <div className="mt-6 flex flex-wrap gap-3">
                 <Link
                   to="/platform"
-                  className="group inline-flex h-12 items-center gap-2 rounded-md bg-[var(--warp-lime)] px-5 text-sm font-semibold text-[var(--warp-on-accent)] shadow-[0_8px_22px_-14px_rgba(81,69,255,.8)] transition hover:-translate-y-0.5 hover:bg-[var(--warp-lime)]"
+                  className="warp-btn group inline-flex h-12 items-center gap-2 rounded-md bg-[var(--warp-lime)] px-5 text-sm font-semibold text-[var(--warp-on-accent)] shadow-[0_8px_22px_-14px_rgba(81,69,255,.8)] transition hover:-translate-y-0.5 hover:bg-[var(--warp-lime)]"
                 >
                   Explore the platform{" "}
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                 </Link>
                 <Link
                   to="/demo"
-                  className="inline-flex h-12 items-center gap-2 rounded-md border border-[var(--warp-border)] bg-white/80 px-5 text-sm font-semibold text-[var(--warp-ink)] transition hover:border-[var(--warp-border)] hover:bg-[var(--warp-surface-soft)]"
+                  className="warp-btn inline-flex h-12 items-center gap-2 rounded-md border border-[var(--warp-border)] bg-white/80 px-5 text-sm font-semibold text-[var(--warp-ink)] transition hover:border-[var(--warp-border)] hover:bg-[var(--warp-surface-soft)]"
                 >
                   <Activity className="h-4 w-4 text-[var(--warp-accent-text)]" /> See an example run
                 </Link>
@@ -687,7 +687,7 @@ function HomePage() {
             </div>
             <Link
               to="/platform"
-              className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-[var(--warp-accent-text)] hover:text-[var(--warp-accent-text)]"
+              className="warp-btn mt-8 inline-flex items-center gap-2 text-sm font-semibold text-[var(--warp-accent-text)] hover:text-[var(--warp-accent-text)]"
             >
               Explore the platform <ArrowRight className="h-4 w-4" />
             </Link>
@@ -1289,7 +1289,7 @@ function HomePage() {
             </Link>
             <Link
               to="/demo"
-              className="inline-flex h-12 items-center gap-2 rounded-md border border-[var(--warp-border-strong)] px-5 text-sm font-medium text-[var(--warp-ink)] transition hover:bg-[var(--warp-surface-soft)]"
+              className="warp-btn inline-flex h-12 items-center gap-2 rounded-md border border-[var(--warp-border-strong)] px-5 text-sm font-medium text-[var(--warp-ink)] transition hover:bg-[var(--warp-surface-soft)]"
             >
               See an example run <ArrowUpRight className="h-4 w-4" />
             </Link>

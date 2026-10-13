@@ -57,7 +57,7 @@ function ArticlePage() {
       <div className="mx-auto w-full max-w-3xl px-5 py-24 text-center sm:px-8">
         <h1 className="text-3xl font-bold">Article not found</h1>
         <p className="mt-4 text-muted-foreground">This article is not published yet.</p>
-        <Button asChild className="mt-8" variant="outline">
+        <Button asChild className="mt-8">
           <Link to="/blog">
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Insights
@@ -237,11 +237,7 @@ function ArticlePage() {
           </Button>
         </div>
         <div className="mt-10 flex flex-wrap items-center justify-between gap-4">
-          <Button
-            asChild
-            variant="ghost"
-            className="px-0 text-muted-foreground hover:text-foreground"
-          >
+          <Button asChild>
             <Link to="/blog">
               <ArrowLeft className="mr-2 h-4 w-4" />
               Back to Insights

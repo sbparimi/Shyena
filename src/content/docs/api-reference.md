@@ -65,7 +65,7 @@ Use versioned envelopes:
   "occurred_at": "2026-09-01T08:12:00Z",
   "data": {
     "name": "lookup_order",
-    "arguments": {"order_id": "12345"}
+    "arguments": { "order_id": "12345" }
   }
 }
 ```

@@ -71,13 +71,13 @@ Run the journey against the real target and evaluate both outcome and execution.
 
 A useful evaluation separates:
 
-| Layer | Question |
-| --- | --- |
-| **Deterministic** | Did required facts, states, assertions, and invariants hold? |
-| **Semantic** | Did the agent satisfy qualitative behavior and communication criteria? |
-| **Trajectory** | Did routing, tool use, state transitions, and execution path behave correctly? |
-| **Security** | Did the agent respect authorization, safety, and control boundaries? |
-| **Verdict** | Is the evidence sufficient to accept this version? |
+| Layer             | Question                                                                       |
+| ----------------- | ------------------------------------------------------------------------------ |
+| **Deterministic** | Did required facts, states, assertions, and invariants hold?                   |
+| **Semantic**      | Did the agent satisfy qualitative behavior and communication criteria?         |
+| **Trajectory**    | Did routing, tool use, state transitions, and execution path behave correctly? |
+| **Security**      | Did the agent respect authorization, safety, and control boundaries?           |
+| **Verdict**       | Is the evidence sufficient to accept this version?                             |
 
 A high semantic score must not compensate for a critical security or execution-integrity failure.
 
@@ -179,13 +179,13 @@ The core regression question is:
 
 Expand by business risk, not test count.
 
-| Suite | Purpose | Use |
-| --- | --- | --- |
-| **Smoke** | Validate critical execution surface | Relevant builds |
-| **Journey** | Protect business-critical workflows | Release validation |
-| **Behavior** | Evaluate quality, policy, and interaction | Regression / scheduled runs |
-| **Trajectory** | Validate tools, state, routing, orchestration, and side effects | High-risk changes |
-| **Security** | Exercise adversarial and authorization boundaries | Security / release validation |
+| Suite          | Purpose                                                         | Use                           |
+| -------------- | --------------------------------------------------------------- | ----------------------------- |
+| **Smoke**      | Validate critical execution surface                             | Relevant builds               |
+| **Journey**    | Protect business-critical workflows                             | Release validation            |
+| **Behavior**   | Evaluate quality, policy, and interaction                       | Regression / scheduled runs   |
+| **Trajectory** | Validate tools, state, routing, orchestration, and side effects | High-risk changes             |
+| **Security**   | Exercise adversarial and authorization boundaries               | Security / release validation |
 
 Keep a small, stable release-gate suite and a larger diagnostic suite.
 

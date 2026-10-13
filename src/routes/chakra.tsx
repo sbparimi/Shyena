@@ -76,7 +76,7 @@ function Page() {
               </Link>
               <Link
                 to="/sample-report"
-                className="inline-flex h-11 items-center gap-2 rounded-lg border border-white/15 px-5 text-sm font-bold text-[var(--warp-muted)]"
+                className="warp-btn inline-flex h-11 items-center gap-2 rounded-lg border border-white/15 px-5 text-sm font-bold text-[var(--warp-muted)]"
               >
                 See sample evidence <ArrowRight className="h-4 w-4" />
               </Link>

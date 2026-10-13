@@ -487,7 +487,7 @@ export function AutonomousQACinematicDemo() {
                 </button>
                 <button
                   onClick={() => setSound((v) => !v)}
-                  className="flex h-9 items-center justify-center gap-2 rounded-lg border border-white/10 bg-white/[.04] text-[10px] font-bold text-[var(--warp-muted)]"
+                  className="warp-btn flex h-9 items-center justify-center gap-2 rounded-lg border border-white/10 bg-white/[.04] text-[10px] font-bold text-[var(--warp-muted)]"
                 >
                   {sound ? (
                     <Volume2 className="h-3.5 w-3.5" />
@@ -553,13 +553,13 @@ export function AutonomousQACinematicDemo() {
                 setPhase(4);
                 setSelected(6);
               }}
-              className="inline-flex h-9 items-center gap-2 rounded-lg border border-white/10 px-3 text-[10px] font-bold text-[var(--warp-muted)] hover:bg-white/[.04]"
+              className="warp-btn inline-flex h-9 items-center gap-2 rounded-lg border border-white/10 px-3 text-[10px] font-bold text-[var(--warp-muted)] hover:bg-white/[.04]"
             >
               <RotateCcw className="h-3.5 w-3.5" /> Replay failure {replay > 0 && `(${replay})`}
             </button>
             <Link
               to="/sample-report"
-              className="inline-flex h-9 items-center gap-2 rounded-lg bg-white/[.06] px-3 text-[10px] font-bold text-[var(--warp-muted)]"
+              className="warp-btn inline-flex h-9 items-center gap-2 rounded-lg bg-white/[.06] px-3 text-[10px] font-bold text-[var(--warp-muted)]"
             >
               Open report <ArrowRight className="h-3.5 w-3.5" />
             </Link>
@@ -679,7 +679,7 @@ export function AutonomousQACinematicDemo() {
             </Link>
             <Link
               to="/contact"
-              className="inline-flex h-11 items-center gap-2 rounded-lg border border-white/15 px-5 text-sm font-bold text-[var(--warp-muted)]"
+              className="warp-btn inline-flex h-11 items-center gap-2 rounded-lg border border-white/15 px-5 text-sm font-bold text-[var(--warp-muted)]"
             >
               Discuss an assurance engagement <ArrowRight className="h-4 w-4" />
             </Link>

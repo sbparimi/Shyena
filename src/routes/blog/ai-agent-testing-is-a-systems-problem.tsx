@@ -97,11 +97,7 @@ function ArticlePage() {
         </div>
 
         <div className="mt-10">
-          <Button
-            asChild
-            variant="ghost"
-            className="px-0 text-muted-foreground hover:text-foreground"
-          >
+          <Button asChild>
             <Link to="/blog">
               <ArrowLeft className="mr-2 h-4 w-4" />
               Back to Insights

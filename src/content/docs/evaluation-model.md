@@ -24,12 +24,12 @@ Release verdict
 
 The layers answer different questions and should not be interchangeable.
 
-| Layer | Primary question | Typical evidence |
-| --- | --- | --- |
-| Deterministic | Is an exact condition true? | route, tool, value, state, status |
-| Semantic | Does behavior satisfy a meaning-based criterion? | conversation, retrieved context, explanation |
-| Execution integrity | Did the system execute the intended path safely? | trace, orchestration events, timing, tool sequence |
-| Security | Can control boundaries be bypassed? | attack trace, denied/allowed actions, policy events |
+| Layer               | Primary question                                 | Typical evidence                                    |
+| ------------------- | ------------------------------------------------ | --------------------------------------------------- |
+| Deterministic       | Is an exact condition true?                      | route, tool, value, state, status                   |
+| Semantic            | Does behavior satisfy a meaning-based criterion? | conversation, retrieved context, explanation        |
+| Execution integrity | Did the system execute the intended path safely? | trace, orchestration events, timing, tool sequence  |
+| Security            | Can control boundaries be bypassed?              | attack trace, denied/allowed actions, policy events |
 
 Modern agent evaluation frameworks similarly distinguish end-to-end output evaluation from component and trajectory evaluation. citeturn959821search1turn959821search2
 
@@ -263,13 +263,13 @@ That lets a security result participate in the same release evidence chain as fu
 
 Use a small, auditable set:
 
-| Verdict | Meaning |
-| --- | --- |
-| PASS | All hard gates satisfied; required semantic thresholds met |
-| FAIL | One or more release-blocking conditions failed |
+| Verdict      | Meaning                                                      |
+| ------------ | ------------------------------------------------------------ |
+| PASS         | All hard gates satisfied; required semantic thresholds met   |
+| FAIL         | One or more release-blocking conditions failed               |
 | INCONCLUSIVE | Evidence is insufficient or environment execution is invalid |
-| NOT RUN | Test was selected but execution did not occur |
-| QUARANTINED | Known instability prevents use as a release signal |
+| NOT RUN      | Test was selected but execution did not occur                |
+| QUARANTINED  | Known instability prevents use as a release signal           |
 
 Do not silently convert infrastructure failures into behavioral failures.
 
