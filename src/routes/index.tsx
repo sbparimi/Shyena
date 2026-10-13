@@ -269,7 +269,7 @@ function HomePage() {
                 </Link>
                 <Link
                   to="/demo"
-                  className="inline-flex h-12 items-center gap-2 rounded-md border border-[var(--warp-border)] bg-white/80 px-5 text-sm font-semibold text-[var(--warp-ink)] transition hover:border-[var(--warp-border)] hover:bg-white"
+                  className="inline-flex h-12 items-center gap-2 rounded-md border border-[var(--warp-border)] bg-white/80 px-5 text-sm font-semibold text-[var(--warp-ink)] transition hover:border-[var(--warp-border)] hover:bg-[var(--warp-surface-soft)]"
                 >
                   <Activity className="h-4 w-4 text-[var(--warp-accent-text)]" /> See an example run
                 </Link>
@@ -1282,16 +1282,16 @@ function HomePage() {
           </div>
           <div className="flex shrink-0 flex-wrap gap-3">
             <Link
-              to="/demo"
+              to="/contact"
               className="inline-flex h-12 items-center gap-2 rounded-md bg-[var(--warp-lime)] px-5 text-sm font-semibold text-[var(--warp-on-accent)] transition hover:bg-[var(--warp-lime)]"
             >
               Book a demo <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
-              to="/contact"
-              className="inline-flex h-12 items-center gap-2 rounded-md border border-[var(--warp-border-strong)] px-5 text-sm font-medium text-[var(--warp-ink)] transition hover:bg-white"
+              to="/demo"
+              className="inline-flex h-12 items-center gap-2 rounded-md border border-[var(--warp-border-strong)] px-5 text-sm font-medium text-[var(--warp-ink)] transition hover:bg-[var(--warp-surface-soft)]"
             >
-              Contact Shyena <ArrowUpRight className="h-4 w-4" />
+              See an example run <ArrowUpRight className="h-4 w-4" />
             </Link>
           </div>
         </div>

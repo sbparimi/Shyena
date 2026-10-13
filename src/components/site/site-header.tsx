@@ -91,7 +91,7 @@ export function SiteHeader() {
             </kbd>
           </button>
           <Link
-            to="/demo"
+            to="/contact"
             onClick={closeAll}
             className="group inline-flex h-10 items-center justify-center gap-2 rounded-sm border px-4 text-[12px] font-medium transition shyena-demo-cta"
           >
@@ -123,7 +123,7 @@ export function SiteHeader() {
               </Link>
             ))}
             <Link
-              to="/demo"
+              to="/contact"
               onClick={closeAll}
               className="mt-2 flex min-h-12 items-center justify-center rounded-sm border px-4 text-[12px] font-medium shyena-demo-cta"
             >

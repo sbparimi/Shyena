@@ -33,7 +33,7 @@ export function CtaBand() {
               asChild
               size="lg"
               variant="outline"
-              className="h-12 w-full min-w-[190px] rounded-xl border-white/30 bg-transparent px-7 text-sm font-semibold normal-case tracking-normal text-white hover:border-white/50 hover:bg-white/10 hover:text-white sm:w-auto"
+              className="h-12 w-full min-w-[190px] rounded-xl border-white/30 bg-transparent px-7 text-sm font-semibold normal-case tracking-normal text-white hover:border-white/50 hover:bg-[var(--warp-surface-soft)] hover:text-white sm:w-auto"
             >
               <Link to="/vera">See how it works</Link>
             </Button>

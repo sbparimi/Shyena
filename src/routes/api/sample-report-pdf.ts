@@ -1,4 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
+import {
+  SAMPLE_FINDINGS,
+  SAMPLE_GATE,
+  SAMPLE_REMEDIATION,
+  SAMPLE_RUN,
+} from "@/content/sample-rfq-run";
 
 type RGB = [number, number, number];
 const C = {
@@ -17,7 +23,7 @@ const C = {
 const pages = [
   {
     title: "Executive dashboard",
-    subtitle: "Synthetic Vanilla Steel RFQ / quotation assurance run",
+    subtitle: "Synthetic steel RFQ quotation agent · illustrative data",
     kind: "dashboard",
   },
   {
@@ -43,8 +49,22 @@ const pages = [
   { title: "Release gate", subtitle: "Evidence-backed release decision", kind: "release" },
 ];
 
+/** The built-in Helvetica font has no Unicode map, so typographic symbols become ASCII. */
+const ASCII_FALLBACK: Record<string, string> = {
+  "·": "|",
+  "→": "->",
+  "—": "-",
+  "–": "-",
+  "…": "...",
+};
+
 function esc(s: string) {
-  return s.replaceAll("\\", "\\\\").replaceAll("(", "\\(").replaceAll(")", "\\)");
+  return s
+    .replace(/[·→—–…]/g, (ch) => ASCII_FALLBACK[ch] ?? "")
+    .replace(/[^\x20-\x7e]/g, "")
+    .replaceAll("\\", "\\\\")
+    .replaceAll("(", "\\(")
+    .replaceAll(")", "\\)");
 }
 function rgb(c: RGB) {
   return c.map((v) => v / 255).join(" ");
@@ -88,26 +108,29 @@ function header(title: string, subtitle: string, page: number) {
 }
 function footer() {
   return (
-    txt(
-      36,
-      24,
-      "Synthetic demonstration · Vanilla Steel is fictional · no customer or production data",
-      7,
-      C.muted,
-    ) + txt(455, 24, "SHYENA", 7, C.orange)
+    txt(36, 24, "Synthetic demonstration · no customer, company or production data", 7, C.muted) +
+    txt(455, 24, "SHYENA", 7, C.orange)
   );
 }
 function pageDashboard() {
   let s = header(
     "Autonomous QA Release Assurance",
-    "RFQ-2026-184 · PR #284 · UAT · Run SHY-284-RFQ",
+    `${SAMPLE_RUN.transaction.id} · ${SAMPLE_RUN.change} · ${SAMPLE_RUN.environment} · Run ${SAMPLE_RUN.runId}`,
     1,
   );
   s +=
     card(36, 675, 120, 62, "Verdict", "BLOCK", C.red) +
-    card(166, 675, 120, 62, "Journeys", "46", C.ink) +
-    card(296, 675, 120, 62, "Findings", "6", C.red) +
-    card(426, 675, 133, 62, "P1 findings", "3", C.orange);
+    card(166, 675, 120, 62, "Journeys", String(SAMPLE_RUN.impact.executableCases), C.ink) +
+    card(296, 675, 120, 62, "Findings", String(SAMPLE_FINDINGS.length), C.red) +
+    card(
+      426,
+      675,
+      133,
+      62,
+      "P1 findings",
+      String(SAMPLE_FINDINGS.filter((f) => f.priority === "P1").length),
+      C.orange,
+    );
   s +=
     txt(36, 642, "EXECUTION OUTCOME", 8, C.orange) + txt(36, 622, "46 impacted cases", 14, C.ink);
   s +=
@@ -292,14 +315,7 @@ function pageDefects() {
       txt(425, y, String(v[1]), 9, C.ink);
   });
   s += txt(36, 510, "FINDINGS", 8, C.orange);
-  [
-    ["F-001", "P1", "Approval bypass", "3/3"],
-    ["F-002", "P1", "Stale commercial context", "2/3"],
-    ["F-003", "P1", "Tool argument drift", "3/3"],
-    ["F-004", "P2", "Policy citation gap", "3/3"],
-    ["F-005", "P2", "Recovery UX", "2/3"],
-    ["F-006", "P2", "Regression coverage gap", "ACTION"],
-  ].forEach((v, i) => {
+  SAMPLE_FINDINGS.map((f) => [f.id, f.priority, f.title, f.reproduction]).forEach((v, i) => {
     const y = 475 - i * 45;
     s +=
       rect(36, y, 523, 31, C.white) +
@@ -313,14 +329,11 @@ function pageDefects() {
 function pageRelease() {
   let s = header("Release gate", "Evidence-backed decision and remediation requirements", 6);
   s += txt(36, 730, "GATE STATUS", 8, C.orange);
-  [
-    ["Smoke suite", "8/8 PASS", C.green],
-    ["Release suite", "16/18 PASS · 2 REVIEW", C.amber],
-    ["Impacted E2E", "39/46 PASS · 3 FAIL", C.red],
-    ["Agent evaluation", "5 PASS · 3 REVIEW · 1 FAIL", C.red],
-    ["Security", "4 PASS · 1 REVIEW · 1 FAIL", C.red],
-    ["Critical controls", "7 PASS · 2 FAIL", C.red],
-  ].forEach((v, i) => {
+  SAMPLE_GATE.map((row) => [
+    row.label,
+    row.result,
+    row.status === "pass" ? C.green : row.status === "review" ? C.amber : C.red,
+  ]).forEach((v, i) => {
     const y = 690 - i * 43;
     s +=
       rect(36, y, 523, 29, C.white) +
@@ -329,14 +342,8 @@ function pageRelease() {
   });
   s += rect(36, 405, 523, 82, [...C.red.map((n, i) => n)] as RGB);
   s +=
-    txt(55, 450, "RELEASE BLOCKED", 18, C.white) +
-    txt(
-      55,
-      428,
-      "Approval integrity and customer identity regressions require remediation.",
-      8,
-      C.white,
-    );
+    txt(55, 450, SAMPLE_RUN.verdict, 18, C.white) +
+    txt(55, 428, SAMPLE_RUN.verdictReason, 8, C.white);
   s += txt(36, 370, "REMEDIATION LOOP", 8, C.orange);
   [
     "1  Fix component",
@@ -386,7 +393,7 @@ function buildPdf() {
     objects.push(
       "<< /Length " +
         new TextEncoder().encode(stream).length +
-        " >>\\nstream\\n" +
+        " >>\nstream\n" +
         stream +
         "endstream",
     );
@@ -404,22 +411,22 @@ function buildPdf() {
     "] /Count " +
     pageIds.length +
     " >>";
-  let pdf = "%PDF-1.4\\n";
+  let pdf = "%PDF-1.4\n";
   const offsets = [0];
   for (let i = 0; i < objects.length; i++) {
     offsets.push(new TextEncoder().encode(pdf).length);
-    pdf += i + 1 + " 0 obj\\n" + objects[i] + "\\nendobj\\n";
+    pdf += i + 1 + " 0 obj\n" + objects[i] + "\nendobj\n";
   }
   const xref = new TextEncoder().encode(pdf).length;
-  pdf += "xref\\n0 " + (objects.length + 1) + "\\n0000000000 65535 f \\n";
+  pdf += "xref\n0 " + (objects.length + 1) + "\n0000000000 65535 f \n";
   for (let i = 1; i < offsets.length; i++)
-    pdf += String(offsets[i]).padStart(10, "0") + " 00000 n \\n";
+    pdf += String(offsets[i]).padStart(10, "0") + " 00000 n \n";
   pdf +=
-    "trailer\\n<< /Size " +
+    "trailer\n<< /Size " +
     (objects.length + 1) +
-    " /Root 1 0 R >>\\nstartxref\\n" +
+    " /Root 1 0 R >>\nstartxref\n" +
     xref +
-    "\\n%%EOF\\n";
+    "\n%%EOF\n";
   return new TextEncoder().encode(pdf);
 }
 
