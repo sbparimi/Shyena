@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import {
-  Activity, ArrowDownRight, ArrowRight, Bot, Check, CheckCircle2, ChevronRight,
-  Circle, Clock3, Github, GitPullRequest, Link2, ListChecks, Play, Plus,
+  Activity, ArrowRight, Bot, Check, CheckCircle2, ChevronRight,
+  Circle, Clock3, GitPullRequest, Link2, ListChecks, Play,
   RefreshCw, Settings2, ShieldCheck, Sparkles, Users, Workflow, XCircle,
 } from "lucide-react";
 
